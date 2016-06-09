@@ -143,7 +143,7 @@
     </games>
   </profile>
   <profile preselected="false">
-    <name>tetete</name>
+    <name>turi</name>
     <image />
     <configuration>
       <rotationSpeed>1</rotationSpeed>
@@ -152,37 +152,9 @@
       <selectionSensor />
     </configuration>
     <communication>
-      <name xmlns="Επικοινωνία" />
-      <enabled xmlns="true" />
-      <image />
-      <rows>1</rows>
-      <columns>1</columns>
-      <categories />
-    </communication>
-    <entertainment>
-      <name xmlns="Ψυχαγωγία" />
-      <enabled xmlns="true" />
-      <image />
-    </entertainment>
-    <games>
-      <name xmlns="Παιχνίδια" />
-      <enabled xmlns="true" />
-      <image />
-    </games>
-  </profile>
-  <profile preselected="false">
-    <name>kukuuuu</name>
-    <image />
-    <configuration>
-      <rotationSpeed>1</rotationSpeed>
-      <defaultGridRow>2</defaultGridRow>
-      <defaultGridColumn>2</defaultGridColumn>
-      <selectionSensor />
-    </configuration>
-    <communication>
-      <name xmlns="Επικοινωνία" />
-      <enabled xmlns="true" />
-      <image>/home/christina/Projects/talkAndPlay/target/classes/org/scify/talkandplay/resources/default/communication_module.png</image>
+      <name>Επικοινωνία</name>
+      <enabled>true</enabled>
+      <image>/home/xrist/Projects/talkAndPlay/target/classes/org/scify/talkandplay/resources/defaultImgs/communication_module.png</image>
       <rows>1</rows>
       <columns>1</columns>
       <categories />
@@ -190,19 +162,19 @@
     <entertainment>
       <name>Ψυχαγωγία</name>
       <enabled>true</enabled>
-      <image>/home/christina/Projects/talkAndPlay/target/classes/org/scify/talkandplay/resources/default/entertainment_module.png</image>
+      <image>/home/xrist/Projects/talkAndPlay/target/classes/org/scify/talkandplay/resources/defaultImgs/entertainment_module.png</image>
       <musicPath />
       <videoPath />
     </entertainment>
     <games>
       <name>Παιχνίδια</name>
       <enabled>true</enabled>
-      <image>/home/christina/Projects/talkAndPlay/target/classes/org/scify/talkandplay/resources/default/games_module.png</image>
+      <image>/home/xrist/Projects/talkAndPlay/target/classes/org/scify/talkandplay/resources/defaultImgs/games_module.png</image>
     </games>
   </profile>
   <profile preselected="false">
-    <name>Γράψε όνομα χρήστη εδώ</name>
-    <image />
+    <name>turaki</name>
+    <image>/home/xrist/Desktop/talkandplay/cheese.png</image>
     <configuration>
       <rotationSpeed>1</rotationSpeed>
       <defaultGridRow>2</defaultGridRow>
@@ -210,9 +182,9 @@
       <selectionSensor />
     </configuration>
     <communication>
-      <name xmlns="Επικοινωνία" />
-      <enabled xmlns="true" />
-      <image>/home/xrist/Projects/talkAndPlay/target/classes/org/scify/talkandplay/resources/default/communication_module.png</image>
+      <name>Επικοινωνία</name>
+      <enabled>true</enabled>
+      <image>/home/xrist/Projects/talkAndPlay/target/classes/org/scify/talkandplay/resources/defaultImgs/communication_module.png</image>
       <rows>1</rows>
       <columns>1</columns>
       <categories />
@@ -220,14 +192,14 @@
     <entertainment>
       <name>Ψυχαγωγία</name>
       <enabled>true</enabled>
-      <image>/home/xrist/Projects/talkAndPlay/target/classes/org/scify/talkandplay/resources/default/entertainment_module.png</image>
+      <image>/home/xrist/Projects/talkAndPlay/target/classes/org/scify/talkandplay/resources/defaultImgs/entertainment_module.png</image>
       <musicPath />
       <videoPath />
     </entertainment>
     <games>
       <name>Παιχνίδια</name>
       <enabled>true</enabled>
-      <image>/home/xrist/Projects/talkAndPlay/target/classes/org/scify/talkandplay/resources/default/games_module.png</image>
+      <image>/home/xrist/Projects/talkAndPlay/target/classes/org/scify/talkandplay/resources/defaultImgs/games_module.png</image>
     </games>
   </profile>
 </profiles>
