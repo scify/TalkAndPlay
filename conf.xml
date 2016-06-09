@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profiles>
+  <profile preselected="false">
+    <name>dddd</name>
+    <image>/home/christina/Desktop/talkandplay/cat.png</image>
+    <configuration>
+      <rotationSpeed>1</rotationSpeed>
+      <defaultGridRow>2</defaultGridRow>
+      <defaultGridColumn>2</defaultGridColumn>
+      <selectionSensor>
+        <type>keyboard</type>
+        <keyCode>86</keyCode>
+        <keyChar>v</keyChar>
+      </selectionSensor>
+    </configuration>
+    <communication>
+      <name>Επικοινωνία</name>
+      <enabled>true</enabled>
+      <image>/home/christina/Desktop/talkandplay/emoticon.png</image>
+      <rows>3</rows>
+      <columns>3</columns>
+      <categories>
+        <category name="Φαγητό">
+          <rows>3</rows>
+          <columns>3</columns>
+          <image>/home/christina/Desktop/talkandplay/food-1.png</image>
+          <categories>
+            <category name="Γλυκά">
+              <rows>3</rows>
+              <columns>4</columns>
+              <image>/home/christina/Desktop/talkandplay/cupcake.png</image>
+            </category>
+          </categories>
+        </category>
+        <category name="Ποτό">
+          <rows>4</rows>
+          <columns>4</columns>
+          <image>/home/christina/Desktop/talkandplay/glass-1.png</image>
+          <categories>
+            <category name="Κοκτέιλς">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>/home/christina/Desktop/talkandplay/cocktail.png</image>
+            </category>
+          </categories>
+        </category>
+      </categories>
+    </communication>
+    <entertainment>
+      <name>Ψυχαγωγία</name>
+      <enabled>true</enabled>
+      <image>/home/christina/Desktop/talkandplay/music-player.png</image>
+    </entertainment>
+    <games>
+      <name>Παιχνίδια</name>
+      <enabled>true</enabled>
+      <image>/home/christina/Desktop/talkandplay/game-controller.png</image>
+    </games>
+  </profile>
+  <profile preselected="false">
+    <name>test</name>
+    <image>/home/christina/Desktop/talkandplay/fish.png</image>
+    <configuration>
+      <rotationSpeed>1</rotationSpeed>
+      <defaultGridRow>2</defaultGridRow>
+      <defaultGridColumn>2</defaultGridColumn>
+      <selectionSensor>
+        <type>mouse</type>
+        <button>1</button>
+        <clickCount>2</clickCount>
+      </selectionSensor>
+    </configuration>
+    <communication>
+      <name>Επικοινωνία</name>
+      <enabled>true</enabled>
+      <image>/home/christina/Desktop/talkandplay/emoticon.png</image>
+      <rows>2</rows>
+      <columns>3</columns>
+      <categories>
+        <category name="Food">
+          <rows>2</rows>
+          <columns>3</columns>
+          <order>0</order>
+          <image>/home/christina/Desktop/talkandplay/food-2.png</image>
+          <sound>/home/christina/Desktop/talkandplay/pretty_kitty_cats.mp3</sound>
+        </category>
+        <category name="Drink">
+          <rows>2</rows>
+          <columns>3</columns>
+          <order>0</order>
+          <image>/home/christina/Desktop/talkandplay/glass-1.png</image>
+          <categories>
+            <category name="Κοκτέιλς">
+              <rows>2</rows>
+              <columns>3</columns>
+              <image>/home/christina/Desktop/talkandplay/cocktail.png</image>
+            </category>
+          </categories>
+        </category>
+        <category name="Sweets">
+          <rows>2</rows>
+          <columns>3</columns>
+          <order>0</order>
+          <image>/home/christina/Desktop/talkandplay/cupcake.png</image>
+        </category>
+        <category name="Feelings!">
+          <rows>2</rows>
+          <columns>3</columns>
+          <order>0</order>
+          <image>/home/christina/Desktop/talkandplay/happy.png</image>
+          <categories>
+            <category name="Moustache!">
+              <rows>2</rows>
+              <columns>3</columns>
+              <order>0</order>
+              <image>/home/christina/Desktop/talkandplay/hipster.png</image>
+            </category>
+          </categories>
+        </category>
+        <category name="Test1">
+          <rows>2</rows>
+          <columns>3</columns>
+          <order>0</order>
+          <image>/home/christina/Desktop/talkandplay/glass.png</image>
+        </category>
+        <category name="Test2">
+          <rows>2</rows>
+          <columns>3</columns>
+          <order>0</order>
+          <image>/home/christina/Desktop/talkandplay/cheese.png</image>
+        </category>
+      </categories>
+    </communication>
+    <entertainment>
+      <name>Ψυχαγωγία</name>
+      <enabled>true</enabled>
+      <image>/home/christina/Desktop/talkandplay/music-player.png</image>
+    </entertainment>
+    <games>
+      <name>Παιχνίδια</name>
+      <enabled>true</enabled>
+      <image>/home/christina/Desktop/talkandplay/joystick.png</image>
+    </games>
+  </profile>
+  <profile preselected="false">
+    <name>tetete</name>
+    <image />
+    <configuration>
+      <rotationSpeed>1</rotationSpeed>
+      <defaultGridRow>2</defaultGridRow>
+      <defaultGridColumn>2</defaultGridColumn>
+      <selectionSensor />
+    </configuration>
+    <communication>
+      <name xmlns="Επικοινωνία" />
+      <enabled xmlns="true" />
+      <image />
+      <rows>1</rows>
+      <columns>1</columns>
+      <categories />
+    </communication>
+    <entertainment>
+      <name xmlns="Ψυχαγωγία" />
+      <enabled xmlns="true" />
+      <image />
+    </entertainment>
+    <games>
+      <name xmlns="Παιχνίδια" />
+      <enabled xmlns="true" />
+      <image />
+    </games>
+  </profile>
+  <profile preselected="false">
+    <name>kukuuuu</name>
+    <image />
+    <configuration>
+      <rotationSpeed>1</rotationSpeed>
+      <defaultGridRow>2</defaultGridRow>
+      <defaultGridColumn>2</defaultGridColumn>
+      <selectionSensor />
+    </configuration>
+    <communication>
+      <name xmlns="Επικοινωνία" />
+      <enabled xmlns="true" />
+      <image>/home/christina/Projects/JThinkFreedom/talkAndPlay/target/classes/org/scify/jthinkfreedom/talkandplay/resources/default/communication_module.png</image>
+      <rows>1</rows>
+      <columns>1</columns>
+      <categories />
+    </communication>
+    <entertainment>
+      <name>Ψυχαγωγία</name>
+      <enabled>true</enabled>
+      <image>/home/christina/Projects/JThinkFreedom/talkAndPlay/target/classes/org/scify/jthinkfreedom/talkandplay/resources/default/entertainment_module.png</image>
+      <musicPath />
+      <videoPath />
+    </entertainment>
+    <games>
+      <name>Παιχνίδια</name>
+      <enabled>true</enabled>
+      <image>/home/christina/Projects/JThinkFreedom/talkAndPlay/target/classes/org/scify/jthinkfreedom/talkandplay/resources/default/games_module.png</image>
+    </games>
+  </profile>
+  <profile preselected="false">
+    <name>Γράψε όνομα χρήστη εδώ</name>
+    <image />
+    <configuration>
+      <rotationSpeed>1</rotationSpeed>
+      <defaultGridRow>2</defaultGridRow>
+      <defaultGridColumn>2</defaultGridColumn>
+      <selectionSensor />
+    </configuration>
+    <communication>
+      <name xmlns="Επικοινωνία" />
+      <enabled xmlns="true" />
+      <image>/home/xrist/Projects/JThinkFreedom/talkAndPlay/target/classes/org/scify/jthinkfreedom/talkandplay/resources/default/communication_module.png</image>
+      <rows>1</rows>
+      <columns>1</columns>
+      <categories />
+    </communication>
+    <entertainment>
+      <name>Ψυχαγωγία</name>
+      <enabled>true</enabled>
+      <image>/home/xrist/Projects/JThinkFreedom/talkAndPlay/target/classes/org/scify/jthinkfreedom/talkandplay/resources/default/entertainment_module.png</image>
+      <musicPath />
+      <videoPath />
+    </entertainment>
+    <games>
+      <name>Παιχνίδια</name>
+      <enabled>true</enabled>
+      <image>/home/xrist/Projects/JThinkFreedom/talkAndPlay/target/classes/org/scify/jthinkfreedom/talkandplay/resources/default/games_module.png</image>
+    </games>
+  </profile>
+</profiles>
+
