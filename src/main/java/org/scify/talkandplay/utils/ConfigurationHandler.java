@@ -143,6 +143,8 @@ public class ConfigurationHandler {
             entertainmentModule.setImage(profile.getChild("entertainment").getChildText("image"));
             entertainmentModule.setSound(getSound(profile.getChild("communication").getChildText("sound")));
             entertainmentModule.setEnabled("true".equals(profile.getChild("entertainment").getChildText("enabled")));
+            entertainmentModule.setMusicPath(profile.getChild("entertainment").getChildText("musicPath"));
+            entertainmentModule.setVideosPath(profile.getChild("entertainment").getChildText("videoPath"));
 
             //set the game module settings
             GameModule gameModule = new GameModule();

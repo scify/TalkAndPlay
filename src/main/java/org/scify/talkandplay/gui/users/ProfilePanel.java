@@ -78,10 +78,6 @@ public class ProfilePanel extends javax.swing.JPanel {
         
         profilePanel.add(imageLabel);
         profilePanel.add(nameLabel);
-        /*
-         nameLabel.setText(profile.getName());
-         imageLabel.setIcon(guiHelper.getRoundIcon((profile.getImage())));
-         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);*/
     }
     
     public void repaintPanel(User user) {
@@ -101,7 +97,6 @@ public class ProfilePanel extends javax.swing.JPanel {
         //  nameLabel.setText(profile);
     }
     
-    private Font originalFont;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel profilePanel;
     // End of variables declaration//GEN-END:variables

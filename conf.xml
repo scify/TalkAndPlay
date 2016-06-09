@@ -135,6 +135,12 @@
       <name>Ψυχαγωγία</name>
       <enabled>true</enabled>
       <image>/home/christina/Desktop/talkandplay/music-player.png</image>
+      <music>
+        <image></image>
+        <path></path>
+      </music>
+      <musicPath>/home/xrist/Music</musicPath>
+      <videoPath>/home/xrist/Videos</videoPath>
     </entertainment>
     <games>
       <name>Παιχνίδια</name>
@@ -193,7 +199,7 @@
       <name>Ψυχαγωγία</name>
       <enabled>true</enabled>
       <image>/home/xrist/Projects/talkAndPlay/target/classes/org/scify/talkandplay/resources/defaultImgs/entertainment_module.png</image>
-      <musicPath />
+      <musicPath>/home/xrist/Music</musicPath>
       <videoPath />
     </entertainment>
     <games>

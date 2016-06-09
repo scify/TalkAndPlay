@@ -78,7 +78,7 @@ public class MainPanel extends javax.swing.JPanel {
         if (users.size() > 5) {
             profilePanel.setLayout(new GridLayout(0, 6));
         } else {
-            profilePanel.setLayout(new GridLayout(0, users.size()+1));
+            profilePanel.setLayout(new GridLayout(0, users.size() + 1));
         }
 
         profilesPanel = new ArrayList<>();
@@ -87,15 +87,17 @@ public class MainPanel extends javax.swing.JPanel {
 
             profilePanel.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    GridFrame imagesFrame;
-                    try {
-                        imagesFrame = new GridFrame(profile.getName());
-                        imagesFrame.setLocationRelativeTo(null);
-                        imagesFrame.setTitle("Talk&Play");
-                        imagesFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                        imagesFrame.setVisible(true);
-                    } catch (IOException ex) {
-                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    if (evt.getClickCount() == 2) {
+                        GridFrame imagesFrame;
+                        try {
+                            imagesFrame = new GridFrame(profile.getName());
+                            imagesFrame.setLocationRelativeTo(null);
+                            imagesFrame.setTitle("Talk&Play");
+                            imagesFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                            imagesFrame.setVisible(true);
+                        } catch (IOException ex) {
+                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 }
             });

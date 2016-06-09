@@ -236,11 +236,11 @@ public class GridFrame extends javax.swing.JFrame {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
                     timer.cancel();
-                    mediaPlayerService.playSound(user.getEntertainmentModule().getSound());
-                    JOptionPane.showMessageDialog(gridFrame,
-                            "Υπό κατασκευή",
-                            "",
-                            JOptionPane.INFORMATION_MESSAGE);
+                    EntertainmentPanel entPanel = new EntertainmentPanel(user, gridFrame);
+                    gridFrame.remove(gridPanel);
+                    gridFrame.add(entPanel);
+                    gridFrame.revalidate();
+                    gridFrame.repaint();
                 }
             }
         });
