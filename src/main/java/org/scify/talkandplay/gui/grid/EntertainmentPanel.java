@@ -148,22 +148,16 @@ public class EntertainmentPanel extends javax.swing.JPanel {
 
     }
 
-    private void playMusic(String path) {
+    private void playMusic(String path) { 
+        
         JFrame frame = new JFrame("My First Media Player");
-        frame.setBounds(100, 100, 600, 400);
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        frame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                mediaPlayerComponent.release();
-                System.exit(0);
-            }
-        });
-frame.add(mediaPlayerComponent);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setContentPane(mediaPlayerComponent);
         frame.setVisible(true);
-        mediaPanel.removeAll();
+        
+       /* mediaPanel.removeAll();
         mediaPanel.setLayout(new BorderLayout());
-
         mediaPanel.add(mediaPlayerComponent, BorderLayout.CENTER);
 
         JPanel controlsPane = new JPanel();
@@ -181,7 +175,7 @@ frame.add(mediaPlayerComponent);
 
         addMediaButtonListeners();
         mediaPanel.revalidate();
-        mediaPanel.repaint();
+        mediaPanel.repaint();*/
         mediaPlayerComponent.getMediaPlayer().playMedia(path);
     }
 
