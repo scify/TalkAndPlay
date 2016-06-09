@@ -182,7 +182,7 @@
     <communication>
       <name xmlns="Επικοινωνία" />
       <enabled xmlns="true" />
-      <image>/home/christina/Projects/JThinkFreedom/talkAndPlay/target/classes/org/scify/jthinkfreedom/talkandplay/resources/default/communication_module.png</image>
+      <image>/home/christina/Projects/talkAndPlay/target/classes/org/scify/talkandplay/resources/default/communication_module.png</image>
       <rows>1</rows>
       <columns>1</columns>
       <categories />
@@ -190,14 +190,14 @@
     <entertainment>
       <name>Ψυχαγωγία</name>
       <enabled>true</enabled>
-      <image>/home/christina/Projects/JThinkFreedom/talkAndPlay/target/classes/org/scify/jthinkfreedom/talkandplay/resources/default/entertainment_module.png</image>
+      <image>/home/christina/Projects/talkAndPlay/target/classes/org/scify/talkandplay/resources/default/entertainment_module.png</image>
       <musicPath />
       <videoPath />
     </entertainment>
     <games>
       <name>Παιχνίδια</name>
       <enabled>true</enabled>
-      <image>/home/christina/Projects/JThinkFreedom/talkAndPlay/target/classes/org/scify/jthinkfreedom/talkandplay/resources/default/games_module.png</image>
+      <image>/home/christina/Projects/talkAndPlay/target/classes/org/scify/talkandplay/resources/default/games_module.png</image>
     </games>
   </profile>
   <profile preselected="false">
@@ -212,7 +212,7 @@
     <communication>
       <name xmlns="Επικοινωνία" />
       <enabled xmlns="true" />
-      <image>/home/xrist/Projects/JThinkFreedom/talkAndPlay/target/classes/org/scify/jthinkfreedom/talkandplay/resources/default/communication_module.png</image>
+      <image>/home/xrist/Projects/talkAndPlay/target/classes/org/scify/talkandplay/resources/default/communication_module.png</image>
       <rows>1</rows>
       <columns>1</columns>
       <categories />
@@ -220,14 +220,14 @@
     <entertainment>
       <name>Ψυχαγωγία</name>
       <enabled>true</enabled>
-      <image>/home/xrist/Projects/JThinkFreedom/talkAndPlay/target/classes/org/scify/jthinkfreedom/talkandplay/resources/default/entertainment_module.png</image>
+      <image>/home/xrist/Projects/talkAndPlay/target/classes/org/scify/talkandplay/resources/default/entertainment_module.png</image>
       <musicPath />
       <videoPath />
     </entertainment>
     <games>
       <name>Παιχνίδια</name>
       <enabled>true</enabled>
-      <image>/home/xrist/Projects/JThinkFreedom/talkAndPlay/target/classes/org/scify/jthinkfreedom/talkandplay/resources/default/games_module.png</image>
+      <image>/home/xrist/Projects/talkAndPlay/target/classes/org/scify/talkandplay/resources/default/games_module.png</image>
     </games>
   </profile>
 </profiles>
