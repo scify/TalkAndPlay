@@ -95,7 +95,7 @@ public class UserService {
         //add communication module settings
         Element communication = new Element("communication");
         Element categories = new Element("categories");
-        
+
         //add the first category settings
         communication.addContent(new Element("name").setText("Επικοινωνία"));
         communication.addContent(new Element("enabled").setText("true"));
@@ -111,6 +111,20 @@ public class UserService {
         entertainment.addContent(new Element("image").setText(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/entertainment_module.png").getPath()));
         entertainment.addContent(new Element("musicPath"));
         entertainment.addContent(new Element("videoPath"));
+
+        //add music module settings
+        Element music = new Element("music");
+        music.addContent(new Element("name").setText("Μουσική"));
+        music.addContent(new Element("enabled").setText("true"));
+        music.addContent(new Element("image").setText(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/music_module.png").getPath()));
+        entertainment.addContent(music);
+        
+        //add video module settings
+        Element video = new Element("video");
+        video.addContent(new Element("name").setText("Βίντεο"));
+        video.addContent(new Element("enabled").setText("true"));
+        video.addContent(new Element("image").setText(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/video_module.png").getPath()));
+        entertainment.addContent(video);
 
         //add game module settings
         Element games = new Element("games");

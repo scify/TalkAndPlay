@@ -36,6 +36,7 @@ public class GridFrame extends javax.swing.JFrame {
     private AudioMediaPlayerComponent audioPlayer;
     private Timer timer;
     private int selectedImage;
+    private String clickedImage;
     private ArrayList<JPanel> panelList;
     private JPanel communicationPanel;
     private JPanel entertainmentPanel;
@@ -107,11 +108,16 @@ public class GridFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initAudioPlayer() {
-        final GridFrame currentFrame = this;
         audioPlayer.getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
             @Override
             public void finished(MediaPlayer mediaPlayer) {
-                currentFrame.showNextGrid();
+                if ("communication".equals(clickedImage)) {
+                    showCommunication();
+                } else if ("entertainment".equals(clickedImage)) {
+                    showEntertainment();
+                } else if ("games".equals(clickedImage)) {
+                    showGames();
+                }
             }
         });
     }
@@ -225,6 +231,7 @@ public class GridFrame extends javax.swing.JFrame {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
                     timer.cancel();
+                    clickedImage = "communication";
                     audioPlayer.getMediaPlayer().playMedia(user.getCommunicationModule().getSound());
                 }
             }
@@ -236,11 +243,8 @@ public class GridFrame extends javax.swing.JFrame {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
                     timer.cancel();
-                    EntertainmentPanel entPanel = new EntertainmentPanel(user, gridFrame);
-                    gridFrame.remove(gridPanel);
-                    gridFrame.add(entPanel);
-                    gridFrame.revalidate();
-                    gridFrame.repaint();
+                    clickedImage = "entertainment";
+                    audioPlayer.getMediaPlayer().playMedia(user.getEntertainmentModule().getSound());
                 }
             }
         });
@@ -251,6 +255,7 @@ public class GridFrame extends javax.swing.JFrame {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
                     timer.cancel();
+                    clickedImage = "games";
                     mediaPlayerService.playSound(user.getGameModule().getSound());
                     JOptionPane.showMessageDialog(gridFrame,
                             "Υπό κατασκευή",
@@ -261,7 +266,7 @@ public class GridFrame extends javax.swing.JFrame {
         });
     }
 
-    private void showNextGrid() {
+    private void showCommunication() {
         timer.cancel();
         remove(gridPanel);
         try {
@@ -270,6 +275,24 @@ public class GridFrame extends javax.swing.JFrame {
             Logger.getLogger(GridFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    private void showEntertainment() {
+        timer.cancel();
+        remove(gridPanel);
+        EntertainmentPanel entertainmentPanel = new EntertainmentPanel(user, this);
+
+    }
+
+    private void showGames() {
+        timer.cancel();
+        remove(gridPanel);
+        try {
+            CommunicationPanel communicationPanel = new CommunicationPanel(user.getName(), this);
+        } catch (IOException ex) {
+            Logger.getLogger(GridFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel gridPanel;
     private javax.swing.JLabel logoLabel;

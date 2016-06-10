@@ -1,34 +1,53 @@
 package org.scify.talkandplay.gui.grid;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.io.File;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.border.EmptyBorder;
+import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.models.User;
-import uk.co.caprica.vlcj.component.EmbeddedMediaListPlayerComponent;
-import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
+import org.scify.talkandplay.models.sensors.MouseSensor;
+import org.scify.talkandplay.models.sensors.Sensor;
+import org.scify.talkandplay.services.SensorService;
+import uk.co.caprica.vlcj.component.AudioMediaListPlayerComponent;
+import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
+import uk.co.caprica.vlcj.player.MediaPlayer;
+import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 
 public class EntertainmentPanel extends javax.swing.JPanel {
 
     private User user;
-    private JFrame parent;
-    private JButton pauseButton, skipButton, rewindButton, replayButton;
+    private Timer timer;
 
-    private final EmbeddedMediaPlayerComponent mediaPlayerComponent;
+    private GridFrame parent;
+    private List<JPanel> panelList;
+    private int selectedImage;
+    private String clickedImage;
 
-    public EntertainmentPanel(User user, JFrame parent) {
+    private GuiHelper guiHelper;
+    private SensorService sensorService;
+
+    private AudioMediaPlayerComponent audioPlayer;
+
+    protected final int BORDER_SIZE = 5;
+    protected final int IMAGE_PADDING = 10;
+
+    public EntertainmentPanel(User user, GridFrame parent) {
         this.parent = parent;
         this.user = user;
-        this.mediaPlayerComponent = new EmbeddedMediaListPlayerComponent();
+        this.audioPlayer = new AudioMediaListPlayerComponent();
+        this.guiHelper = new GuiHelper();
+        this.sensorService = new SensorService(user);
         initComponents();
+        initAudioPlayer();
         initCustomComponents();
     }
 
@@ -41,181 +60,165 @@ public class EntertainmentPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        selectMusicButton = new javax.swing.JButton();
-        selectVideoButton = new javax.swing.JButton();
-        mediaPanel = new javax.swing.JPanel();
+        imagesPanel = new javax.swing.JPanel();
 
-        selectMusicButton.setText("Select music");
-        selectMusicButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectMusicButtonActionPerformed(evt);
-            }
-        });
-
-        selectVideoButton.setText("Select video");
-        selectVideoButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectVideoButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout mediaPanelLayout = new javax.swing.GroupLayout(mediaPanel);
-        mediaPanel.setLayout(mediaPanelLayout);
-        mediaPanelLayout.setHorizontalGroup(
-            mediaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        javax.swing.GroupLayout imagesPanelLayout = new javax.swing.GroupLayout(imagesPanel);
+        imagesPanel.setLayout(imagesPanelLayout);
+        imagesPanelLayout.setHorizontalGroup(
+            imagesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 414, Short.MAX_VALUE)
         );
-        mediaPanelLayout.setVerticalGroup(
-            mediaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        imagesPanelLayout.setVerticalGroup(
+            imagesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 258, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mediaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(selectMusicButton)
-                            .addComponent(selectVideoButton))
-                        .addGap(0, 284, Short.MAX_VALUE)))
-                .addContainerGap())
+            .addComponent(imagesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(selectMusicButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(selectVideoButton)
-                .addGap(222, 222, 222)
-                .addComponent(mediaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(imagesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void selectMusicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectMusicButtonActionPerformed
-        if (user.getEntertainmentModule().getMusicPath() != null && !user.getEntertainmentModule().getMusicPath().isEmpty() && (new File(user.getEntertainmentModule().getMusicPath())).exists()) {
-            // userImage = "";
-            JFileChooser chooser = new JFileChooser();
-
-            chooser.setDialogTitle("Διαλέξτε μουσική");
-            chooser.setAcceptAllFileFilterUsed(false);
-            chooser.setFileFilter(new FileNameExtensionFilter("Sound Files", "mp3", "wav", "aiff"));
-            chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            chooser.setCurrentDirectory(new File(user.getEntertainmentModule().getMusicPath()));
-            if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                //userImage = chooser.getSelectedFile().getAbsolutePath();
-                // imageLabel.setIcon(guiHelper.getIcon(userImage));
-                playMusic(chooser.getSelectedFile().getAbsolutePath());
+    private void initAudioPlayer() {
+        audioPlayer.getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
+            @Override
+            public void finished(MediaPlayer mediaPlayer) {
+                if ("music".equals(clickedImage)) {
+                    showMusic();
+                } else if ("video".equals(clickedImage)) {
+                    showVideo();
+                }
             }
+        });
+    }
+
+    private void initCustomComponents() {
+        selectedImage = 0;
+        imagesPanel.removeAll();
+        imagesPanel.setBorder(new EmptyBorder(0, 10, 10, 10));
+        imagesPanel.setLayout(new GridLayout(1, 3, IMAGE_PADDING, IMAGE_PADDING));
+        panelList = new ArrayList<>();
+
+        createMusicItem();
+        createVideoItem();
+        createBackItem();
+
+        setTimer();
+
+        imagesPanel.revalidate();
+        imagesPanel.repaint();
+        parent.add(imagesPanel);
+        parent.revalidate();
+        parent.repaint();
+    }
+
+    private JPanel createMusicItem() {
+        JPanel panel = guiHelper.createImagePanel(user.getEntertainmentModule().getMusicModule().getImage(), user.getEntertainmentModule().getMusicModule().getName(), parent);
+        panelList.add(panel);
+        imagesPanel.add(panel);
+
+        panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor)) {
+                    timer.cancel();
+                    clickedImage = "music";
+                    audioPlayer.getMediaPlayer().playMedia(user.getEntertainmentModule().getMusicModule().getSound());
+                }
+            }
+        });
+        return panel;
+    }
+
+    private JPanel createVideoItem() {
+        JPanel panel = guiHelper.createImagePanel(user.getEntertainmentModule().getVideoModule().getImage(), user.getEntertainmentModule().getVideoModule().getName(), parent);
+        panelList.add(panel);
+        imagesPanel.add(panel);
+
+        panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor)) {
+                    timer.cancel();
+                    clickedImage = "video";
+                    audioPlayer.getMediaPlayer().playMedia(user.getEntertainmentModule().getMusicModule().getSound());
+                }
+            }
+        });
+        return panel;
+    }
+
+    private JPanel createBackItem() {
+        JPanel panel = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"))), "Πίσω", parent);
+        panelList.add(panel);
+        imagesPanel.add(panel);
+
+        panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor)) {
+                    timer.cancel();
+                    parent.repaintMenu(imagesPanel);
+                }
+            }
+        });
+        return panel;
+    }
+
+    private void setTimer() {
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (selectedImage == 0) {
+                    panelList.get(panelList.size() - 1).setBorder(null);
+                    panelList.get(selectedImage).setBorder(BorderFactory.createLineBorder(Color.BLUE, BORDER_SIZE));
+                    selectedImage++;
+                } else if (selectedImage == panelList.size() - 1) {
+                    panelList.get(selectedImage - 1).setBorder(null);
+                    panelList.get(selectedImage).setBorder(BorderFactory.createLineBorder(Color.BLUE, BORDER_SIZE));
+                    selectedImage = 0;
+                } else if (selectedImage < panelList.size() - 1 && selectedImage > 0) {
+                    panelList.get(selectedImage - 1).setBorder(null);
+                    panelList.get(selectedImage).setBorder(BorderFactory.createLineBorder(Color.BLUE, BORDER_SIZE));
+                    selectedImage++;
+                }
+            }
+        }, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+    }
+
+    private void showMusic() {
+        timer.cancel();
+        if (user.getEntertainmentModule().getMusicModule().getFolderPath() != null
+                && !user.getEntertainmentModule().getMusicModule().getFolderPath().isEmpty()
+                && (new File(user.getEntertainmentModule().getMusicModule().getFolderPath())).exists()) {
+            parent.remove(imagesPanel);
+            MusicPanel musicPanel = new MusicPanel(user, parent);
         } else {
             JOptionPane.showMessageDialog(parent,
                     "Ο φάκελος Μουσική δεν έχει οριστεί σωστά.",
                     "Σφάλμα",
                     JOptionPane.ERROR_MESSAGE);
+            setTimer();
         }
-    }//GEN-LAST:event_selectMusicButtonActionPerformed
-
-    private void selectVideoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectVideoButtonActionPerformed
-        if (user.getEntertainmentModule().getMusicPath() != null && !user.getEntertainmentModule().getMusicPath().isEmpty() && (new File(user.getEntertainmentModule().getMusicPath())).exists()) {
-            // userImage = "";
-            JFileChooser chooser = new JFileChooser();
-
-            chooser.setDialogTitle("Διαλέξτε βίντεο");
-            chooser.setAcceptAllFileFilterUsed(false);
-            chooser.setFileFilter(new FileNameExtensionFilter("Video Files", "avi", "mp4"));
-            chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            chooser.setCurrentDirectory(new File(user.getEntertainmentModule().getVideosPath()));
-            if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                //userImage = chooser.getSelectedFile().getAbsolutePath();
-                // imageLabel.setIcon(guiHelper.getIcon(userImage));
-                playMusic(chooser.getSelectedFile().getAbsolutePath());
-            }
-        } else {
-            JOptionPane.showMessageDialog(parent,
-                    "Ο φάκελος Video δεν έχει οριστεί σωστά.",
-                    "Σφάλμα",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_selectVideoButtonActionPerformed
-
-    private void initCustomComponents() {
 
     }
 
-    private void playMusic(String path) { 
-        
-        JFrame frame = new JFrame("My First Media Player");
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setContentPane(mediaPlayerComponent);
-        frame.setVisible(true);
-        
-       /* mediaPanel.removeAll();
-        mediaPanel.setLayout(new BorderLayout());
-        mediaPanel.add(mediaPlayerComponent, BorderLayout.CENTER);
-
-        JPanel controlsPane = new JPanel();
-        pauseButton = new JButton("Pause");
-        controlsPane.add(pauseButton);
-        rewindButton = new JButton("Rewind");
-        controlsPane.add(rewindButton);
-        skipButton = new JButton("Skip");
-        controlsPane.add(skipButton);
-        replayButton = new JButton("Replay");
-        controlsPane.add(replayButton);
-
-        mediaPanel.add(controlsPane, BorderLayout.SOUTH);
-        mediaPlayerComponent.getMediaPlayer().setRepeat(true);
-
-        addMediaButtonListeners();
-        mediaPanel.revalidate();
-        mediaPanel.repaint();*/
-        mediaPlayerComponent.getMediaPlayer().playMedia(path);
-    }
-
-    private void playVideo(String path) {
-        mediaPanel.removeAll();
-
-        mediaPanel.add(mediaPlayerComponent, BorderLayout.CENTER);
-
-        mediaPanel.revalidate();
-        mediaPanel.repaint();
-        mediaPlayerComponent.getMediaPlayer().playMedia(path);
-    }
-
-    private void addMediaButtonListeners() {
-        pauseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mediaPlayerComponent.getMediaPlayer().pause();
-            }
-        });
-
-        rewindButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mediaPlayerComponent.getMediaPlayer().skip(-10000);
-            }
-        });
-
-        skipButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mediaPlayerComponent.getMediaPlayer().skip(10000);
-            }
-        });
+    private void showVideo() {
+        timer.cancel();
+        remove(imagesPanel);
+        // CommunicationPanel communicationPanel = new CommunicationPanel(user.getName(), this);
 
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel mediaPanel;
-    private javax.swing.JButton selectMusicButton;
-    private javax.swing.JButton selectVideoButton;
+    private javax.swing.JPanel imagesPanel;
     // End of variables declaration//GEN-END:variables
 }

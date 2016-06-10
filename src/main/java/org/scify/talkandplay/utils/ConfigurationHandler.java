@@ -17,6 +17,8 @@ import org.scify.talkandplay.models.modules.EntertainmentModule;
 import org.scify.talkandplay.models.modules.GameModule;
 import org.scify.talkandplay.models.Tile;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.models.modules.MusicModule;
+import org.scify.talkandplay.models.modules.VideoModule;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
@@ -121,41 +123,14 @@ public class ConfigurationHandler {
             Element configuration = (Element) profile.getChild("configuration");
             user.setConfiguration(getConfiguration(configuration));
 
-            //set the communication module settings
-            List<Category> categoriesArray = new ArrayList<>();
+            Element communication = (Element) profile.getChild("communication");
+            user.setCommunicationModule(getCommunicationModule(communication));
 
-            Element categories = (Element) profile.getChild("communication").getChild("categories");
-            categoriesArray = getCategories(categories, categoriesArray, null);
+            Element entertainment = (Element) profile.getChild("entertainment");
+            user.setEntertainmentModule(getEntertainmentModule(entertainment));
 
-            CommunicationModule communicationModule = new CommunicationModule();
-            communicationModule.setName(profile.getChild("communication").getChildText("name"));
-            communicationModule.setImage(profile.getChild("communication").getChildText("image"));
-            communicationModule.setSound(getSound(profile.getChild("communication").getChildText("sound")));
-            communicationModule.setRows(Integer.parseInt(profile.getChild("communication").getChildText("rows")));
-            communicationModule.setColumns(Integer.parseInt(profile.getChild("communication").getChildText("columns")));
-
-            communicationModule.setEnabled("true".equals(profile.getChild("communication").getChildText("enabled")));
-            communicationModule.setCategories(categoriesArray);
-
-            //set the entertainment module settings
-            EntertainmentModule entertainmentModule = new EntertainmentModule();
-            entertainmentModule.setName(profile.getChild("entertainment").getChildText("name"));
-            entertainmentModule.setImage(profile.getChild("entertainment").getChildText("image"));
-            entertainmentModule.setSound(getSound(profile.getChild("communication").getChildText("sound")));
-            entertainmentModule.setEnabled("true".equals(profile.getChild("entertainment").getChildText("enabled")));
-            entertainmentModule.setMusicPath(profile.getChild("entertainment").getChildText("musicPath"));
-            entertainmentModule.setVideosPath(profile.getChild("entertainment").getChildText("videoPath"));
-
-            //set the game module settings
-            GameModule gameModule = new GameModule();
-            gameModule.setName(profile.getChild("games").getChildText("name"));
-            gameModule.setImage(profile.getChild("games").getChildText("image"));
-            gameModule.setSound(getSound(profile.getChild("communication").getChildText("sound")));
-            gameModule.setEnabled("true".equals(profile.getChild("games").getChildText("enabled")));
-
-            user.setCommunicationModule(communicationModule);
-            user.setEntertainmentModule(entertainmentModule);
-            user.setGameModule(gameModule);
+            Element games = (Element) profile.getChild("games");
+            user.setGameModule(getGameModule(games));
 
             list.add(user);
         }
@@ -204,6 +179,69 @@ public class ConfigurationHandler {
         configuration.setSelectionSensor(selectionSensor);
 
         return configuration;
+    }
+
+    private CommunicationModule getCommunicationModule(Element communicationNode) {
+        //set the communication module settings
+        List<Category> categoriesArray = new ArrayList<>();
+
+        Element categories = (Element) communicationNode.getChild("categories");
+        categoriesArray = getCategories(categories, categoriesArray, null);
+
+        CommunicationModule communicationModule = new CommunicationModule();
+        communicationModule.setName(communicationNode.getChildText("name"));
+        communicationModule.setImage(communicationNode.getChildText("image"));
+        communicationModule.setSound(getSound(communicationNode.getChildText("sound")));
+        communicationModule.setRows(Integer.parseInt(communicationNode.getChildText("rows")));
+        communicationModule.setColumns(Integer.parseInt(communicationNode.getChildText("columns")));
+
+        communicationModule.setEnabled("true".equals(communicationNode.getChildText("enabled")));
+        communicationModule.setCategories(categoriesArray);
+
+        return communicationModule;
+    }
+
+    private EntertainmentModule getEntertainmentModule(Element entertainmentNode) {
+        //set the entertainment module settings
+        EntertainmentModule entertainmentModule = new EntertainmentModule();
+        entertainmentModule.setName(entertainmentNode.getChildText("name"));
+        entertainmentModule.setImage(entertainmentNode.getChildText("image"));
+        entertainmentModule.setSound(getSound(entertainmentNode.getChildText("sound")));
+        entertainmentModule.setEnabled("true".equals(entertainmentNode.getChildText("enabled")));
+
+        //set the music module
+        Element musicNode = (Element) entertainmentNode.getChild("music");
+        MusicModule musicModule = new MusicModule();
+        musicModule.setName(musicNode.getChildText("name"));
+        musicModule.setImage(musicNode.getChildText("image"));
+        musicModule.setSound(getSound(musicNode.getChildText("sound")));
+        musicModule.setFolderPath(musicNode.getChildText("folderPath"));
+        musicModule.setEnabled("true".equals(musicNode.getChildText("name")));
+
+        //set the video module
+        Element videoNode = (Element) entertainmentNode.getChild("video");
+        VideoModule videoModule = new VideoModule();
+        videoModule.setName(videoNode.getChildText("name"));
+        videoModule.setImage(videoNode.getChildText("image"));
+        videoModule.setSound(getSound(videoNode.getChildText("sound")));
+        videoModule.setFolderPath(videoNode.getChildText("folderPath"));
+        videoModule.setEnabled("true".equals(videoNode.getChildText("name")));
+
+        entertainmentModule.setMusicModule(musicModule);
+        entertainmentModule.setVideoModule(videoModule);
+
+        return entertainmentModule;
+    }
+
+    private GameModule getGameModule(Element gameNode) {
+        //set the game module settings
+        GameModule gameModule = new GameModule();
+        gameModule.setName(gameNode.getChildText("name"));
+        gameModule.setImage(gameNode.getChildText("image"));
+        gameModule.setSound(getSound(gameNode.getChildText("sound")));
+        gameModule.setEnabled("true".equals(gameNode.getChildText("enabled")));
+
+        return gameModule;
     }
 
     /**

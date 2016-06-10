@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.Tile;
@@ -115,6 +116,7 @@ public class CommunicationPanel extends javax.swing.JPanel {
     }
 
     private void initCustomComponents() throws IOException {
+        imagesPanel.setBorder(new EmptyBorder(0, 10, 10, 10));
         gridLayout = new GridLayout();
         gridLayout.setHgap(IMAGE_PADDING);
         gridLayout.setVgap(IMAGE_PADDING);
@@ -248,9 +250,7 @@ public class CommunicationPanel extends javax.swing.JPanel {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
                     timer.cancel();
-                    System.out.println("stopped at "+stopped);
                     stopped = 0;
-                    System.out.println("isRoot " + isRoot + " category " + category.getName() + " category.parent " + category.getParentCategory());
                     if (isRoot) {
                         parent.repaintMenu(imagesPanel);
                     } else if (!isRoot && category.getParentCategory() == null) {

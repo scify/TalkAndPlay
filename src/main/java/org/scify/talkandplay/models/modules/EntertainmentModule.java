@@ -2,26 +2,26 @@ package org.scify.talkandplay.models.modules;
 
 public class EntertainmentModule extends Module {
 
-    private String musicPath;
-    private String videosPath;
+    private MusicModule musicModule;
+    private VideoModule videoModule;
 
     public EntertainmentModule() {
     }
 
-    public String getMusicPath() {
-        return musicPath;
+    public MusicModule getMusicModule() {
+        return musicModule;
     }
 
-    public void setMusicPath(String musicPath) {
-        this.musicPath = musicPath;
+    public void setMusicModule(MusicModule musicModule) {
+        this.musicModule = musicModule;
     }
 
-    public String getVideosPath() {
-        return videosPath;
+    public VideoModule getVideoModule() {
+        return videoModule;
     }
 
-    public void setVideosPath(String videosPath) {
-        this.videosPath = videosPath;
+    public void setVideoModule(VideoModule videoModule) {
+        this.videoModule = videoModule;
     }
 
 }
