@@ -7,6 +7,7 @@ import javax.swing.UIManager;
 import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.utils.ConfigurationHandler;
+import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
 
 /**
  *
@@ -15,7 +16,7 @@ import org.scify.talkandplay.utils.ConfigurationHandler;
 public class ApplicationLauncher {
 
     public static void main(String[] args){
-        
+
         setUIFont(new javax.swing.plaf.FontUIResource("DejaVu Sans", Font.PLAIN, 12));
         ConfigurationHandler conf = new ConfigurationHandler();
         MainFrame mainFrame = new MainFrame(conf);

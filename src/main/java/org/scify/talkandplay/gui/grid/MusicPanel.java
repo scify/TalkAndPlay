@@ -15,12 +15,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import org.scify.talkandplay.models.User;
-import uk.co.caprica.vlcj.component.AudioMediaListPlayerComponent;
-import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
-import uk.co.caprica.vlcj.player.MediaPlayer;
-import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 
 /**
  *
@@ -32,9 +27,10 @@ public class MusicPanel extends javax.swing.JPanel {
     private GridFrame parent;
     private Timer timer;
     private int selectedFile;
+    private String currentFile;
     private List<JLabel> fileLabels;
 
-    private AudioMediaPlayerComponent audioPlayer;
+    int currSec = 0;
 
     /**
      * Creates new form MusicPanel
@@ -42,28 +38,10 @@ public class MusicPanel extends javax.swing.JPanel {
     public MusicPanel(User user, GridFrame parent) {
         this.user = user;
         this.parent = parent;
-        this.audioPlayer = new AudioMediaListPlayerComponent();
         this.fileLabels = new ArrayList<>();
 
         initComponents();
-        initAudioPlayer();
         initCustomComponents();
-    }
-
-    private void initAudioPlayer() {
-        audioPlayer.getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
-            @Override
-            public void finished(MediaPlayer mediaPlayer) {
-                setTimer();
-            }
-
-            @Override
-            public void positionChanged(MediaPlayer mp, float f) {
-                int iPos = (int) (f * 100.0);
-                mediaSlider.setValue(iPos);
-            }
-        });
-
     }
 
     /**
@@ -76,84 +54,18 @@ public class MusicPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         musicPanel = new javax.swing.JPanel();
-        mediaPlayerPanel = new javax.swing.JPanel();
-        mediaSlider = new javax.swing.JSlider();
-        prevButton = new javax.swing.JButton();
-        nextButton = new javax.swing.JButton();
-        playButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        endLabel = new javax.swing.JLabel();
         filesPanel = new javax.swing.JPanel();
-
-        mediaSlider.setToolTipText("");
-        mediaSlider.setValue(0);
-
-        prevButton.setText("<<");
-        prevButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                prevButtonActionPerformed(evt);
-            }
-        });
-
-        nextButton.setText(">>");
-
-        playButton.setText("Play");
-        playButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                playButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("00:00:00");
-
-        endLabel.setText("jLabel2");
-
-        javax.swing.GroupLayout mediaPlayerPanelLayout = new javax.swing.GroupLayout(mediaPlayerPanel);
-        mediaPlayerPanel.setLayout(mediaPlayerPanelLayout);
-        mediaPlayerPanelLayout.setHorizontalGroup(
-            mediaPlayerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mediaPlayerPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(mediaPlayerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mediaPlayerPanelLayout.createSequentialGroup()
-                        .addComponent(prevButton)
-                        .addGap(62, 62, 62)
-                        .addComponent(playButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(nextButton))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mediaPlayerPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(mediaSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(endLabel)))
-                .addContainerGap())
-        );
-        mediaPlayerPanelLayout.setVerticalGroup(
-            mediaPlayerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mediaPlayerPanelLayout.createSequentialGroup()
-                .addContainerGap(110, Short.MAX_VALUE)
-                .addGroup(mediaPlayerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mediaSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(endLabel))
-                .addGap(12, 12, 12)
-                .addGroup(mediaPlayerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(prevButton)
-                    .addComponent(nextButton)
-                    .addComponent(playButton))
-                .addContainerGap())
-        );
+        mediaPlayerPanel = new javax.swing.JPanel();
 
         javax.swing.GroupLayout filesPanelLayout = new javax.swing.GroupLayout(filesPanel);
         filesPanel.setLayout(filesPanelLayout);
         filesPanelLayout.setHorizontalGroup(
             filesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 169, Short.MAX_VALUE)
+            .addGap(0, 200, Short.MAX_VALUE)
         );
         filesPanelLayout.setVerticalGroup(
             filesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 311, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout musicPanelLayout = new javax.swing.GroupLayout(musicPanel);
@@ -163,18 +75,14 @@ public class MusicPanel extends javax.swing.JPanel {
             .addGroup(musicPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(filesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(mediaPlayerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(69, 69, 69)
+                .addComponent(mediaPlayerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         musicPanelLayout.setVerticalGroup(
             musicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(musicPanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(musicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(filesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mediaPlayerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+            .addComponent(mediaPlayerPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+            .addComponent(filesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -189,20 +97,17 @@ public class MusicPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void prevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_prevButtonActionPerformed
-
-    private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
-        audioPlayer.getMediaPlayer().pause();
-    }//GEN-LAST:event_playButtonActionPerformed
-
     private void initCustomComponents() {
+
+        final MediaPlayerPanel playerPanel = new MediaPlayerPanel(this);
+        mediaPlayerPanel.add(playerPanel);
+
         File musicFolder = new File(user.getEntertainmentModule().getMusicModule().getFolderPath());
 
         filesPanel.setLayout(new BoxLayout(filesPanel, BoxLayout.PAGE_AXIS));
 
         JLabel fileLabel;
+
         for (final File file : musicFolder.listFiles()) {
             fileLabel = new JLabel(file.getName());
             fileLabels.add(fileLabel);
@@ -210,12 +115,8 @@ public class MusicPanel extends javax.swing.JPanel {
             fileLabel.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
                     timer.cancel();
-                    int seconds = (int) (audioPlayer.getMediaPlayer().getLength() / 1000) % 60;
-                    int minutes = (int) ((audioPlayer.getMediaPlayer().getLength() / (1000 * 60)) % 60);
-                    int hours = (int) ((audioPlayer.getMediaPlayer().getLength() / (1000 * 60 * 60)) % 24);
-                    endLabel.setText(String.valueOf(hours)+":"+String.valueOf(minutes)+":"+String.valueOf(seconds));
-                    
-                    audioPlayer.getMediaPlayer().playMedia(user.getEntertainmentModule().getMusicModule().getFolderPath() + File.separator + file.getName());
+                    currentFile = file.getName();
+                    playerPanel.playMedia(getFilePath(file.getName()));
                 }
             });
         }
@@ -229,17 +130,20 @@ public class MusicPanel extends javax.swing.JPanel {
         //addListeners();
         filesPanel.revalidate();
         filesPanel.repaint();
+        mediaPlayerPanel.revalidate();
+        mediaPlayerPanel.repaint();
+        musicPanel.revalidate();
+        musicPanel.repaint();
         parent.add(musicPanel);
         parent.revalidate();
         parent.repaint();
     }
 
-    private void setTimer() {
+    public void setTimer() {
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                System.out.println(selectedFile);
                 if (selectedFile == 0) {
                     fileLabels.get(fileLabels.size() - 1).setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
                     fileLabels.get(selectedFile).setFont(new Font("DejaVu Sans", Font.BOLD, 12));
@@ -257,25 +161,46 @@ public class MusicPanel extends javax.swing.JPanel {
         }, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
     }
 
-    /* private void addListeners() {
-     filesList.addListSelectionListener(new ListSelectionListener() {
-     @Override
-     public void valueChanged(ListSelectionEvent lse) {
-     timer.cancel();
-     audioPlayer.getMediaPlayer().playMedia(user.getEntertainmentModule().getMusicModule().getFolderPath() + File.separator + model.get(filesList.getSelectedIndex()).toString());
-     }
-     });
-     }*/
+    public String getFilePath(String fileName) {
+        return user.getEntertainmentModule().getMusicModule().getFolderPath() + File.separator + fileName;
+    }
+
+    public String getPreviousFile() {
+        timer.cancel();
+        for (int i = 0; i < fileLabels.size(); i++) {
+            if (fileLabels.get(i).getText().equals(currentFile)) {
+                if (i == 0) {
+                    currentFile = fileLabels.get(fileLabels.size() - 1).getText();
+                } else {
+                    currentFile = fileLabels.get(i - 1).getText();
+                }
+                break;
+            }
+        }
+
+        return currentFile;
+    }
+
+    public String getNextFile() {
+        timer.cancel();
+        for (int i = 0; i < fileLabels.size(); i++) {
+            if (fileLabels.get(i).getText().equals(currentFile)) {
+                System.out.println(fileLabels.get(i).getText() + "=" + currentFile);
+                if (i == fileLabels.size() - 1) {
+                    currentFile = fileLabels.get(0).getText();
+                } else {
+                    currentFile = fileLabels.get(i + 1).getText();
+                }
+                break;
+            }
+        }
+        return currentFile;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel endLabel;
     private javax.swing.JPanel filesPanel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel mediaPlayerPanel;
-    private javax.swing.JSlider mediaSlider;
     private javax.swing.JPanel musicPanel;
-    private javax.swing.JButton nextButton;
-    private javax.swing.JButton playButton;
-    private javax.swing.JButton prevButton;
     // End of variables declaration//GEN-END:variables
 }

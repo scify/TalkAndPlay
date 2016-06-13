@@ -22,10 +22,8 @@ import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.CategoryService;
-import org.scify.talkandplay.services.MediaPlayerService;
 import org.scify.talkandplay.services.SensorService;
 import org.scify.talkandplay.services.UserService;
-import uk.co.caprica.vlcj.component.AudioMediaListPlayerComponent;
 import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
@@ -42,7 +40,6 @@ public class CommunicationPanel extends javax.swing.JPanel {
     private CategoryService categoryService;
     private UserService userService;
     private SensorService sensorService;
-    private MediaPlayerService mediaPlayerService;
 
     private AudioMediaPlayerComponent audioPlayer;
     private Category rootCategory;
@@ -57,8 +54,7 @@ public class CommunicationPanel extends javax.swing.JPanel {
     public CommunicationPanel(String userName, GridFrame parent) throws IOException {
         this.categoryService = new CategoryService();
         this.userService = new UserService();
-        this.mediaPlayerService = new MediaPlayerService();
-        this.audioPlayer = new AudioMediaListPlayerComponent();
+        this.audioPlayer = new AudioMediaPlayerComponent();
         this.user = userService.getUser(userName);
         this.sensorService = new SensorService(this.user);
         this.rootCategory = categoryService.getCategoriesWithRootParent(user);

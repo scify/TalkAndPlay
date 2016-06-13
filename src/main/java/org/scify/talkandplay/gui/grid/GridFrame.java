@@ -18,10 +18,8 @@ import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
-import org.scify.talkandplay.services.MediaPlayerService;
 import org.scify.talkandplay.services.SensorService;
 import org.scify.talkandplay.services.UserService;
-import uk.co.caprica.vlcj.component.AudioMediaListPlayerComponent;
 import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
@@ -32,7 +30,6 @@ public class GridFrame extends javax.swing.JFrame {
     private GuiHelper guiHelper;
     private UserService userService;
     private SensorService sensorService;
-    private MediaPlayerService mediaPlayerService;
     private AudioMediaPlayerComponent audioPlayer;
     private Timer timer;
     private int selectedImage;
@@ -56,8 +53,7 @@ public class GridFrame extends javax.swing.JFrame {
         this.userService = new UserService();
         this.user = userService.getUser(userName);
         this.sensorService = new SensorService(user);
-        this.mediaPlayerService = new MediaPlayerService();
-        this.audioPlayer = new AudioMediaListPlayerComponent();
+        this.audioPlayer = new AudioMediaPlayerComponent();
         this.guiHelper = new GuiHelper();
         this.guiHelper = guiHelper;
         this.panelList = new ArrayList<>();
@@ -256,7 +252,6 @@ public class GridFrame extends javax.swing.JFrame {
                 if (sensorService.shouldSelect(sensor)) {
                     timer.cancel();
                     clickedImage = "games";
-                    mediaPlayerService.playSound(user.getGameModule().getSound());
                     JOptionPane.showMessageDialog(gridFrame,
                             "Υπό κατασκευή",
                             "",

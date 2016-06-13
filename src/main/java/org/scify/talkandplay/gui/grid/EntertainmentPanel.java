@@ -17,7 +17,6 @@ import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.SensorService;
-import uk.co.caprica.vlcj.component.AudioMediaListPlayerComponent;
 import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
@@ -43,7 +42,7 @@ public class EntertainmentPanel extends javax.swing.JPanel {
     public EntertainmentPanel(User user, GridFrame parent) {
         this.parent = parent;
         this.user = user;
-        this.audioPlayer = new AudioMediaListPlayerComponent();
+        this.audioPlayer = new AudioMediaPlayerComponent();
         this.guiHelper = new GuiHelper();
         this.sensorService = new SensorService(user);
         initComponents();
@@ -207,14 +206,12 @@ public class EntertainmentPanel extends javax.swing.JPanel {
                     JOptionPane.ERROR_MESSAGE);
             setTimer();
         }
-
     }
 
     private void showVideo() {
         timer.cancel();
         remove(imagesPanel);
         // CommunicationPanel communicationPanel = new CommunicationPanel(user.getName(), this);
-
     }
 
 
