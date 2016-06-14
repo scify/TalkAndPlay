@@ -157,7 +157,7 @@
         <name>Βίντεο</name>        
         <image>/home/christina/Desktop/talkandplay/video-camera.png</image>
         <enabled>true</enabled>
-        <folderPath></folderPath>
+        <folderPath>/home/christina/Videos</folderPath>
       </video>
     </entertainment>
     <games>

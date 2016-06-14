@@ -3,6 +3,8 @@ package org.scify.talkandplay.gui.grid;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -41,13 +43,6 @@ public class GridFrame extends javax.swing.JFrame {
 
     protected final int BORDER_SIZE = 5;
     protected final int IMAGE_PADDING = 10;
-
-    /**
-     * Creates new form ImagesFrame
-     */
-    public GridFrame() {
-        initComponents();
-    }
 
     public GridFrame(String userName) throws IOException {
         this.userService = new UserService();
@@ -104,7 +99,14 @@ public class GridFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initAudioPlayer() {
+
         audioPlayer.getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
+            @Override
+            public void playing(MediaPlayer mediaPlayer) {
+                audioPlayer.getMediaPlayer().mute(false);
+                audioPlayer.getMediaPlayer().setVolume(100);
+            }
+
             @Override
             public void finished(MediaPlayer mediaPlayer) {
                 if ("communication".equals(clickedImage)) {
@@ -116,9 +118,24 @@ public class GridFrame extends javax.swing.JFrame {
                 }
             }
         });
+
+        //close the media player when the windows closes
+        //also release resources
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                timer.cancel();
+                audioPlayer.getMediaPlayer().stop();
+                audioPlayer.getMediaPlayer().release();
+                e.getWindow().dispose();
+            }
+        });
     }
 
     private void initCustomComponents() {
+
+        GridLayout gridLayout = new GridLayout(1, 3, IMAGE_PADDING, IMAGE_PADDING);
+        gridPanel.setLayout(gridLayout);
         repaintMenu(gridPanel);
         setKeyboardListeners();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -126,8 +143,8 @@ public class GridFrame extends javax.swing.JFrame {
     }
 
     public void repaintMenu(JPanel panel) {
-        GridLayout gridLayout = new GridLayout(1, 3, IMAGE_PADDING, IMAGE_PADDING);
-        gridPanel.setLayout(gridLayout);
+        panelList = new ArrayList<>();
+        selectedImage = 0;
         gridPanel.removeAll();
 
         if (user.getCommunicationModule().isEnabled()) {
@@ -150,14 +167,13 @@ public class GridFrame extends javax.swing.JFrame {
 
         setTimer();
 
+        setMouseListeners();
         gridPanel.revalidate();
         gridPanel.repaint();
         remove(panel);
         add(gridPanel);
         revalidate();
         repaint();
-        pack();
-        setMouseListeners();
     }
 
     private void setTimer() {
@@ -165,7 +181,6 @@ public class GridFrame extends javax.swing.JFrame {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-
                 if (selectedImage == 0) {
                     panelList.get(panelList.size() - 1).setBorder(null);
                     panelList.get(selectedImage).setBorder(BorderFactory.createLineBorder(Color.BLUE, BORDER_SIZE));
@@ -186,29 +201,32 @@ public class GridFrame extends javax.swing.JFrame {
     /**
      * The keyboard listeners for the whole JFrame
      */
-    private void setKeyboardListeners() {
+    private void setKeyboardListeners() {       
         setFocusable(true);
         final GridFrame gridFrame = this;
 
         addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent evt) {
+                System.out.println("key");
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
-                    //ugly, fix
+
+                    timer.cancel();
+                    System.out.println(selectedImage);
                     if (selectedImage == 0) {
-                        timer.cancel();
-                        getContentPane().remove(gridPanel);
-                        try {
-                            getContentPane().add(new CommunicationPanel(user.getName(), gridFrame));
-                        } catch (IOException ex) {
-                            Logger.getLogger(GridFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    } else if (selectedImage == 1 || selectedImage == 2) {
+                        clickedImage = "communication";
+                        audioPlayer.getMediaPlayer().playMedia(user.getCommunicationModule().getSound());
+                    } else if (selectedImage == 1) {
+                        clickedImage = "entertainment";
+                        audioPlayer.getMediaPlayer().playMedia(user.getEntertainmentModule().getSound());
+                    } else if (selectedImage == 2) {
+                        clickedImage = "games";
                         JOptionPane.showMessageDialog(gridFrame,
                                 "Υπό κατασκευή",
                                 "",
                                 JOptionPane.INFORMATION_MESSAGE);
+                        setTimer();
                     }
                 }
             }
@@ -250,7 +268,7 @@ public class GridFrame extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    timer.cancel();
+                    // timer.cancel();
                     clickedImage = "games";
                     JOptionPane.showMessageDialog(gridFrame,
                             "Υπό κατασκευή",
@@ -275,7 +293,6 @@ public class GridFrame extends javax.swing.JFrame {
         timer.cancel();
         remove(gridPanel);
         EntertainmentPanel entertainmentPanel = new EntertainmentPanel(user, this);
-
     }
 
     private void showGames() {

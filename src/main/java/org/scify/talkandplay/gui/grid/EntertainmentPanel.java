@@ -2,6 +2,8 @@ package org.scify.talkandplay.gui.grid;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,12 +89,27 @@ public class EntertainmentPanel extends javax.swing.JPanel {
     private void initAudioPlayer() {
         audioPlayer.getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
             @Override
+            public void playing(MediaPlayer mediaPlayer) {
+                audioPlayer.getMediaPlayer().mute(false);
+                audioPlayer.getMediaPlayer().setVolume(100);
+            }
+
+            @Override
             public void finished(MediaPlayer mediaPlayer) {
                 if ("music".equals(clickedImage)) {
                     showMusic();
                 } else if ("video".equals(clickedImage)) {
                     showVideo();
                 }
+            }
+        });
+
+        parent.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                audioPlayer.getMediaPlayer().stop();
+                audioPlayer.getMediaPlayer().stop();
+                e.getWindow().dispose();
             }
         });
     }
@@ -210,8 +227,18 @@ public class EntertainmentPanel extends javax.swing.JPanel {
 
     private void showVideo() {
         timer.cancel();
-        remove(imagesPanel);
-        // CommunicationPanel communicationPanel = new CommunicationPanel(user.getName(), this);
+        if (user.getEntertainmentModule().getVideoModule().getFolderPath() != null
+                && !user.getEntertainmentModule().getVideoModule().getFolderPath().isEmpty()
+                && (new File(user.getEntertainmentModule().getVideoModule().getFolderPath())).exists()) {
+            parent.remove(imagesPanel);
+            VideoPanel videoPanel = new VideoPanel(user, parent);
+        } else {
+            JOptionPane.showMessageDialog(parent,
+                    "Ο φάκελος Βίντεο δεν έχει οριστεί σωστά.",
+                    "Σφάλμα",
+                    JOptionPane.ERROR_MESSAGE);
+            setTimer();
+        }
     }
 
 

@@ -2,7 +2,6 @@ package org.scify.talkandplay.gui;
 
 import org.scify.talkandplay.gui.configuration.GeneralSettingsPanel;
 import org.scify.talkandplay.gui.configuration.CommunicationModuleSettingsPanel;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -20,6 +19,7 @@ public class ConfigurationFrame extends javax.swing.JFrame {
     private CommunicationModuleSettingsPanel communicationModuleSettingsPanel;
     private MainFrame mainFrame;
     private int selectedUser;
+    private GridBagConstraints gbc;
 
     /**
      * Creates new form ConfigurationScreen
@@ -178,7 +178,6 @@ public class ConfigurationFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_usersListValueChanged
 
-
     private void initCustomComponents() {
         // Grid bag layout manager fill from left to right
         gbc = new GridBagConstraints();
@@ -219,8 +218,7 @@ public class ConfigurationFrame extends javax.swing.JFrame {
         }
     }
 
-    private Font originalFont;
-    private GridBagConstraints gbc;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPane;
     private javax.swing.JScrollPane jScrollPane3;

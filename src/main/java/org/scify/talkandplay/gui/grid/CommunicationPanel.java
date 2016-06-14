@@ -2,6 +2,8 @@ package org.scify.talkandplay.gui.grid;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +14,10 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.models.Category;
-import org.scify.talkandplay.models.Tile;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
@@ -105,8 +105,27 @@ public class CommunicationPanel extends javax.swing.JPanel {
         final CommunicationPanel currentPanel = this;
         audioPlayer.getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
             @Override
+            public void playing(MediaPlayer mediaPlayer) {
+                //audioPlayer.getMediaPlayer().setVolume(100);
+                audioPlayer.getMediaPlayer().mute(false);
+            }
+
+            @Override
             public void finished(MediaPlayer mediaPlayer) {
-                currentPanel.showNextGrid(currentCategory);
+                if (currentCategory.getSubCategories().size() > 0) {
+                    currentPanel.showNextGrid(currentCategory);
+                } else {
+                    setTimer();
+                }
+            }
+        });
+
+        parent.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                audioPlayer.getMediaPlayer().stop();
+                audioPlayer.getMediaPlayer().stop();
+                e.getWindow().dispose();
             }
         });
     }
@@ -200,32 +219,7 @@ public class CommunicationPanel extends javax.swing.JPanel {
                 }
             }
         });
-        return panel;
-    }
 
-    /**
-     * Create the JPanel that holds a tile
-     *
-     * @param tile
-     * @return
-     * @throws IOException
-     */
-    private JPanel createTileItem(final Tile tile) throws IOException {
-        JPanel panel = guiHelper.createImagePanel(tile.getImage(), tile.getName(), parent);
-        panelList.add(panel);
-        imagesPanel.add(panel);
-        final CommunicationPanel currentPanel = this;
-
-        panel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                if (evt.getClickCount() == 2 && !evt.isConsumed()) {
-                    JOptionPane.showMessageDialog(currentPanel,
-                            "A sound is played",
-                            "Meow",
-                            JOptionPane.INFORMATION_MESSAGE);
-                }
-            }
-        });
         return panel;
     }
 

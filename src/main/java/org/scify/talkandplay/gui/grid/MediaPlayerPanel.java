@@ -1,5 +1,7 @@
 package org.scify.talkandplay.gui.grid;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import org.scify.talkandplay.gui.helpers.Time;
@@ -15,12 +17,14 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
 
     private AudioMediaPlayerComponent audioPlayer;
     private JPanel parent;
+    private GridFrame gridFrame;
 
     /**
      * Creates new form MediaPlayerPanel
      */
-    public MediaPlayerPanel(JPanel parent) {
+    public MediaPlayerPanel(JPanel parent, GridFrame gridFrame) {
         this.parent = parent;
+        this.gridFrame = gridFrame;
         this.audioPlayer = new AudioMediaPlayerComponent();
         initComponents();
         initAudioPlayer();
@@ -32,6 +36,12 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
         audioPlayer.getMediaPlayer().mute(false);
 
         audioPlayer.getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
+            @Override
+            public void playing(MediaPlayer mediaPlayer) {
+                audioPlayer.getMediaPlayer().mute(false);
+                audioPlayer.getMediaPlayer().setVolume(100);
+            }
+            
             @Override
             public void finished(MediaPlayer mediaPlayer) {
                 if (parent instanceof MusicPanel) {
@@ -55,6 +65,15 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
                 });
             }
         });
+        
+        gridFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                audioPlayer.getMediaPlayer().stop();
+                audioPlayer.getMediaPlayer().stop();
+                e.getWindow().dispose();
+            }
+        });
     }
 
     private void initCustomComponents() {
@@ -62,7 +81,6 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
     }
 
     public void playMedia(String path) {
-
         System.out.println("Now playing " + path);
 
         audioPlayer.getMediaPlayer().prepareMedia(path);
