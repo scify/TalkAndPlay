@@ -99,6 +99,7 @@ public class VideoPanel extends javax.swing.JPanel {
         filesPanel.setLayout(new BoxLayout(filesPanel, BoxLayout.PAGE_AXIS));
 
         JLabel fileLabel;
+        final VideoFrame videoFrame = new VideoFrame(user, getFilePath(currentFile));
 
         for (final File file : videoFolder.listFiles()) {
             fileLabel = new JLabel(file.getName());
@@ -108,10 +109,11 @@ public class VideoPanel extends javax.swing.JPanel {
                 public void mouseClicked(MouseEvent e) {
                     timer.cancel();
                     currentFile = file.getName();
-                    playerPanel.playMedia(getFilePath(file.getName()));
+                    videoFrame.playMedia(file.getName());
                 }
             });
         }
+        videoFrame.setFiles(fileLabels);
 
         if (fileLabels.size() == 0) {
             JLabel noFilesLabel = new JLabel("Δεν υπάρχουν αρχεία");

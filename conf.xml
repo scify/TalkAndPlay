@@ -17,6 +17,7 @@
       <name>Επικοινωνία</name>
       <enabled>true</enabled>
       <image>/home/christina/Desktop/talkandplay/emoticon.png</image>
+      <sound>/home/christina/Desktop/talkandplay/sounds/cupcake.mp3</sound>
       <rows>3</rows>
       <columns>3</columns>
       <categories>

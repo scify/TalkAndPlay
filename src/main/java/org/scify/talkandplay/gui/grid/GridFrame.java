@@ -2,7 +2,6 @@ package org.scify.talkandplay.gui.grid;
 
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -12,6 +11,7 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -43,6 +43,7 @@ public class GridFrame extends javax.swing.JFrame {
 
     protected final int BORDER_SIZE = 5;
     protected final int IMAGE_PADDING = 10;
+    private static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
 
     public GridFrame(String userName) throws IOException {
         this.userService = new UserService();
@@ -137,7 +138,6 @@ public class GridFrame extends javax.swing.JFrame {
         GridLayout gridLayout = new GridLayout(1, 3, IMAGE_PADDING, IMAGE_PADDING);
         gridPanel.setLayout(gridLayout);
         repaintMenu(gridPanel);
-        setKeyboardListeners();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
     }
@@ -161,13 +161,14 @@ public class GridFrame extends javax.swing.JFrame {
 
         if (user.getGameModule().isEnabled()) {
             gamesPanel = guiHelper.createImagePanel(user.getGameModule().getImage(), user.getGameModule().getName(), this);
+            gamesPanel.setFocusable(true);
             gridPanel.add(gamesPanel);
             panelList.add(gamesPanel);
         }
 
         setTimer();
 
-        setMouseListeners();
+        setListeners();
         gridPanel.revalidate();
         gridPanel.repaint();
         remove(panel);
@@ -181,6 +182,7 @@ public class GridFrame extends javax.swing.JFrame {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+                panelList.get(selectedImage).requestFocusInWindow();
                 if (selectedImage == 0) {
                     panelList.get(panelList.size() - 1).setBorder(null);
                     panelList.get(selectedImage).setBorder(BorderFactory.createLineBorder(Color.BLUE, BORDER_SIZE));
@@ -199,50 +201,26 @@ public class GridFrame extends javax.swing.JFrame {
     }
 
     /**
-     * The keyboard listeners for the whole JFrame
-     */
-    private void setKeyboardListeners() {       
-        setFocusable(true);
-        final GridFrame gridFrame = this;
-
-        addKeyListener(new java.awt.event.KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent evt) {
-                System.out.println("key");
-                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
-                if (sensorService.shouldSelect(sensor)) {
-
-                    timer.cancel();
-                    System.out.println(selectedImage);
-                    if (selectedImage == 0) {
-                        clickedImage = "communication";
-                        audioPlayer.getMediaPlayer().playMedia(user.getCommunicationModule().getSound());
-                    } else if (selectedImage == 1) {
-                        clickedImage = "entertainment";
-                        audioPlayer.getMediaPlayer().playMedia(user.getEntertainmentModule().getSound());
-                    } else if (selectedImage == 2) {
-                        clickedImage = "games";
-                        JOptionPane.showMessageDialog(gridFrame,
-                                "Υπό κατασκευή",
-                                "",
-                                JOptionPane.INFORMATION_MESSAGE);
-                        setTimer();
-                    }
-                }
-            }
-        });
-    }
-
-    /**
      * The mouse listeners for each of the three modules
      */
-    private void setMouseListeners() {
+    private void setListeners() {
         final GridFrame gridFrame = this;
+        setFocusable(true);
 
         //launch the communication grid        
         communicationPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor)) {
+                    timer.cancel();
+                    clickedImage = "communication";
+                    audioPlayer.getMediaPlayer().playMedia(user.getCommunicationModule().getSound());
+                }
+            }
+        });
+        communicationPanel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
                     timer.cancel();
                     clickedImage = "communication";
@@ -261,12 +239,35 @@ public class GridFrame extends javax.swing.JFrame {
                     audioPlayer.getMediaPlayer().playMedia(user.getEntertainmentModule().getSound());
                 }
             }
+        });        
+        entertainmentPanel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
+                if (sensorService.shouldSelect(sensor)) {
+                    timer.cancel();
+                    clickedImage = "entertainment";
+                    audioPlayer.getMediaPlayer().playMedia(user.getCommunicationModule().getSound());
+                }
+            }
         });
-
+        
         //launch the games grid        
         gamesPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor)) {
+                    // timer.cancel();
+                    clickedImage = "games";
+                    JOptionPane.showMessageDialog(gridFrame,
+                            "Υπό κατασκευή",
+                            "",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
+        gamesPanel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
                     // timer.cancel();
                     clickedImage = "games";

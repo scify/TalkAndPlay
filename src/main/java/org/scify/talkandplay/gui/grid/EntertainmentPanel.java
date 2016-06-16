@@ -2,6 +2,8 @@ package org.scify.talkandplay.gui.grid;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -16,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.SensorService;
@@ -149,6 +152,19 @@ public class EntertainmentPanel extends javax.swing.JPanel {
                 }
             }
         });
+
+        panel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
+                if (sensorService.shouldSelect(sensor)) {
+                    timer.cancel();
+                    clickedImage = "music";
+                    audioPlayer.getMediaPlayer().playMedia(user.getEntertainmentModule().getMusicModule().getSound());
+                }
+            }
+        });
+
         return panel;
     }
 
@@ -163,10 +179,23 @@ public class EntertainmentPanel extends javax.swing.JPanel {
                 if (sensorService.shouldSelect(sensor)) {
                     timer.cancel();
                     clickedImage = "video";
-                    audioPlayer.getMediaPlayer().playMedia(user.getEntertainmentModule().getMusicModule().getSound());
+                    audioPlayer.getMediaPlayer().playMedia(user.getEntertainmentModule().getVideoModule().getSound());
                 }
             }
         });
+
+        panel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
+                if (sensorService.shouldSelect(sensor)) {
+                    timer.cancel();
+                    clickedImage = "video";
+                    audioPlayer.getMediaPlayer().playMedia(user.getEntertainmentModule().getVideoModule().getSound());
+                }
+            }
+        });
+
         return panel;
     }
 
@@ -184,6 +213,18 @@ public class EntertainmentPanel extends javax.swing.JPanel {
                 }
             }
         });
+
+        panel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
+                if (sensorService.shouldSelect(sensor)) {
+                    timer.cancel();
+                    parent.repaintMenu(imagesPanel);
+                }
+            }
+        });
+
         return panel;
     }
 
@@ -192,6 +233,7 @@ public class EntertainmentPanel extends javax.swing.JPanel {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+                panelList.get(selectedImage).requestFocusInWindow();
                 if (selectedImage == 0) {
                     panelList.get(panelList.size() - 1).setBorder(null);
                     panelList.get(selectedImage).setBorder(BorderFactory.createLineBorder(Color.BLUE, BORDER_SIZE));

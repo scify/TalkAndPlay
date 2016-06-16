@@ -2,6 +2,8 @@ package org.scify.talkandplay.gui.grid;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -19,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.CategoryService;
@@ -213,14 +216,26 @@ public class CommunicationPanel extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    timer.cancel();
-                    currentCategory = category;
-                    audioPlayer.getMediaPlayer().playMedia(category.getSound());
+                    categoryItemAction(category);
                 }
             }
         });
-
+        panel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
+                if (sensorService.shouldSelect(sensor)) {
+                    categoryItemAction(category);
+                }
+            }
+        });
         return panel;
+    }
+
+    private void categoryItemAction(Category category) {
+        timer.cancel();
+        currentCategory = category;
+        audioPlayer.getMediaPlayer().playMedia(category.getSound());
     }
 
     /**
@@ -239,27 +254,40 @@ public class CommunicationPanel extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    timer.cancel();
-                    stopped = 0;
-                    if (isRoot) {
-                        parent.repaintMenu(imagesPanel);
-                    } else if (!isRoot && category.getParentCategory() == null) {
-                        try {
-                            drawImages(rootCategory);
-                        } catch (IOException ex) {
-                            Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    } else {
-                        try {
-                            drawImages(category.getParentCategory());
-                        } catch (IOException ex) {
-                            Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
+                    backItemAction(category, isRoot);
+                }
+            }
+        });
+        panel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
+                if (sensorService.shouldSelect(sensor)) {
+                    backItemAction(category, isRoot);
                 }
             }
         });
         return panel;
+    }
+
+    private void backItemAction(final Category category, final boolean isRoot) {
+        timer.cancel();
+        stopped = 0;
+        if (isRoot) {
+            parent.repaintMenu(imagesPanel);
+        } else if (!isRoot && category.getParentCategory() == null) {
+            try {
+                drawImages(rootCategory);
+            } catch (IOException ex) {
+                Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                drawImages(category.getParentCategory());
+            } catch (IOException ex) {
+                Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     /**
@@ -278,16 +306,30 @@ public class CommunicationPanel extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    timer.cancel();
-                    try {
-                        drawImages(category);
-                    } catch (IOException ex) {
-                        Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    moreItemAction(category);
                 }
             }
         });
+        panel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
+                if (sensorService.shouldSelect(sensor)) {
+                    moreItemAction(category);
+                }
+            }
+        });
+
         return panel;
+    }
+
+    private void moreItemAction(Category category) {
+        timer.cancel();
+        try {
+            drawImages(category);
+        } catch (IOException ex) {
+            Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -306,16 +348,30 @@ public class CommunicationPanel extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    timer.cancel();
-                    try {
-                        drawImages(category);
-                    } catch (IOException ex) {
-                        Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    lessItemAction(category);
                 }
             }
         });
+        panel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
+                if (sensorService.shouldSelect(sensor)) {
+                    lessItemAction(category);
+                }
+            }
+        });
+
         return panel;
+    }
+
+    private void lessItemAction(Category category) {
+        timer.cancel();
+        try {
+            drawImages(category);
+        } catch (IOException ex) {
+            Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void showNextGrid(Category category) {
@@ -352,6 +408,7 @@ public class CommunicationPanel extends javax.swing.JPanel {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+                panelList.get(selectedImage).requestFocusInWindow();
                 if (selectedImage == 0) {
                     panelList.get(panelList.size() - 1).setBorder(null);
                     panelList.get(selectedImage).setBorder(BorderFactory.createLineBorder(Color.BLUE, BORDER_SIZE));

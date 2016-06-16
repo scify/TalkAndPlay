@@ -158,20 +158,20 @@ public class ConfigurationHandler {
         Element selectionSensorEl = configurationNode.getChild("selectionSensor");
         if ("mouse".equals(selectionSensorEl.getChildText("type"))) {
             selectionSensor = new MouseSensor(Integer.parseInt(selectionSensorEl.getChildText("button")),
-                    Integer.parseInt(selectionSensorEl.getChildText("clickCount")), selectionSensorEl.getChildText("mouse"));
+                    Integer.parseInt(selectionSensorEl.getChildText("clickCount")), selectionSensorEl.getChildText("type"));
         } else if ("keyboard".equals(selectionSensorEl.getChildText("type"))) {
             selectionSensor = new KeyboardSensor(Integer.parseInt(selectionSensorEl.getChildText("keyCode")),
-                    selectionSensorEl.getChildText("keyChar").charAt(0), selectionSensorEl.getChildText("mouse"));
+                    selectionSensorEl.getChildText("keyChar").charAt(0), selectionSensorEl.getChildText("type"));
         }
 
         Element navigationSensorEl = configurationNode.getChild("navigationSensor");
         if (navigationSensorEl != null) {
             if ("mouse".equals(navigationSensorEl.getChildText("type"))) {
                 navigationSensor = new MouseSensor(Integer.parseInt(navigationSensorEl.getChildText("button")),
-                        Integer.parseInt(navigationSensorEl.getChildText("clickCount")), navigationSensorEl.getChildText("mouse"));
+                        Integer.parseInt(navigationSensorEl.getChildText("clickCount")), navigationSensorEl.getChildText("type"));
             } else if ("keyboard".equals(navigationSensorEl.getChildText("type"))) {
                 navigationSensor = new KeyboardSensor(Integer.parseInt(navigationSensorEl.getChildText("keyCode")),
-                        navigationSensorEl.getChildText("keyChar").charAt(0), navigationSensorEl.getChildText("mouse"));
+                        navigationSensorEl.getChildText("keyChar").charAt(0), navigationSensorEl.getChildText("type"));
             }
             configuration.setNavigationSensor(navigationSensor);
         }
