@@ -165,6 +165,27 @@
       <name>Παιχνίδια</name>
       <enabled>true</enabled>
       <image>/home/christina/Desktop/talkandplay/joystick.png</image>
+
+      
+        <stimulusReactionGame>
+          <name></name>
+          <image></image>
+          <sound></sound>
+          <enabled></enabled>
+          <gameImages>
+            <image>
+              <name></name>
+              <path></path>
+              <order></order>
+            </image>
+          </gameImages>
+        </stimulusReactionGame>
+
+
+      <sequenceGames></sequenceGames>  
+      <similarityGames></similarityGames>
+
+
     </games>
   </profile>
 </profiles>

@@ -17,6 +17,10 @@ import org.scify.talkandplay.models.modules.EntertainmentModule;
 import org.scify.talkandplay.models.modules.GameModule;
 import org.scify.talkandplay.models.Tile;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.models.games.GameImage;
+import org.scify.talkandplay.models.games.SequenceGame;
+import org.scify.talkandplay.models.games.SimilarityGame;
+import org.scify.talkandplay.models.games.StimulusReactionGame;
 import org.scify.talkandplay.models.modules.MusicModule;
 import org.scify.talkandplay.models.modules.VideoModule;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
@@ -240,6 +244,29 @@ public class ConfigurationHandler {
         gameModule.setImage(gameNode.getChildText("image"));
         gameModule.setSound(getSound(gameNode.getChildText("sound")));
         gameModule.setEnabled("true".equals(gameNode.getChildText("enabled")));
+
+        List<StimulusReactionGame> stimulusReactionGames = new ArrayList();
+        List<SequenceGame> sequenceGames = new ArrayList();
+        List<SimilarityGame> similarityGames = new ArrayList();
+
+        //set the stimulusReactionGames
+        List stimulusReactionGameNode = gameNode.getChildren("stimulusReactionGame");
+        for (int i = 0; i < stimulusReactionGameNode.size(); i++) {
+            StimulusReactionGame stimulusReactionGame = new StimulusReactionGame();
+
+            List imagesNode = ((Element) stimulusReactionGameNode.get(i)).getChildren("images");
+            for (int j = 0; j < imagesNode.size(); j++) {
+                GameImage image = new GameImage(((Element) imagesNode.get(j)).getChildText("name"),
+                        ((Element) imagesNode.get(j)).getChildText("image"),
+                        ((Element) imagesNode.get(j)).getChildText("sound"),
+                        Integer.parseInt(((Element) imagesNode.get(j)).getChildText("order")));
+                stimulusReactionGame.getImages().add(image);
+            }
+
+            stimulusReactionGames.add(stimulusReactionGame);
+        }
+
+        gameModule.setStimulusReactionGames(stimulusReactionGames);
 
         return gameModule;
     }
