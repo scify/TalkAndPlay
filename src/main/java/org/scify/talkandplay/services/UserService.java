@@ -230,4 +230,12 @@ public class UserService {
         }
     }
 
+    
+    public boolean hasBrokenFiles(User user){
+        boolean flag = false;
+        
+       // for(File file : configurationHandler.getFiles())
+        
+        return flag;
+    }
 }

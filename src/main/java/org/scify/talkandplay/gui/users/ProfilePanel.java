@@ -3,33 +3,37 @@ package org.scify.talkandplay.gui.users;
 import java.awt.Component;
 import java.awt.Font;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.MainPanel;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.services.UserService;
 
 public class ProfilePanel extends javax.swing.JPanel {
-    
+
     private MainPanel parent;
-    private User profile;
+    private User user;
     private GuiHelper guiHelper;
+    private UserService userService;
 
     /**
      * Creates new form ProfilePanel
      */
     public User getUser() {
-        return profile;
+        return user;
     }
-    
+
     public ProfilePanel() {
         initComponents();
     }
-    
-    public ProfilePanel(MainPanel parent, User profile) {
+
+    public ProfilePanel(MainPanel parent, User user) {
         this.parent = parent;
-        this.profile = profile;
+        this.user = user;
         this.guiHelper = new GuiHelper();
+        this.userService = new UserService();
         initComponents();
         initCustomComponents();
     }
@@ -68,35 +72,41 @@ public class ProfilePanel extends javax.swing.JPanel {
     private void initCustomComponents() {
         profilePanel.setLayout(new BoxLayout(profilePanel, BoxLayout.Y_AXIS));
         profilePanel.setBorder(new EmptyBorder(0, 0, 0, 20));
-        JLabel imageLabel = new JLabel(guiHelper.getRoundIcon((profile.getImage())));
-        JLabel nameLabel = new JLabel(profile.getName());
+        JLabel imageLabel = new JLabel(guiHelper.getRoundIcon((user.getImage())));
+        JLabel nameLabel;
         
+        if (userService.hasBrokenFiles(user)) {
+            nameLabel = new JLabel(user.getName(), new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/warning.png")), JLabel.RIGHT);
+        } else {
+            nameLabel = new JLabel(user.getName());
+        }
+
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nameLabel.setBorder(new EmptyBorder(5, 0, 0, 0));
         nameLabel.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
-        
+
         profilePanel.add(imageLabel);
         profilePanel.add(nameLabel);
     }
-    
+
     public void repaintPanel(User user) {
         /* nameLabel.setText(user.getName());
          imageLabel.setIcon(guiHelper.getIcon((user.getImage())));*/
     }
-    
+
     public User getProfile() {
-        return profile;
+        return user;
     }
-    
-    public void setProfile(User profile) {
-        this.profile = profile;
+
+    public void setProfile(User user) {
+        this.user = user;
     }
-    
-    public void update(String profile) {
-        //  nameLabel.setText(profile);
+
+    public void update(String user) {
+        //  nameLabel.setText(user);
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel profilePanel;
     // End of variables declaration//GEN-END:variables

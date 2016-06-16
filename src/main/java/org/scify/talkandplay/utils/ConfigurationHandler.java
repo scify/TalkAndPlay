@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
@@ -39,6 +40,7 @@ public class ConfigurationHandler {
     private List<User> profiles;
     private File file;
     private String projectPath;
+    private Map<String, List<File>> userFiles;
 
     private static String DEFAULT_SOUND;
 
