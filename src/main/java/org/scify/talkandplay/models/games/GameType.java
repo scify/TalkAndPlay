@@ -7,23 +7,25 @@ import java.util.List;
  *
  * @author christina
  */
-public class Game {
+public class GameType {
 
     private String name;
     private String image;
     private String sound;
+    private String type;
     private boolean enabled;
 
     private List<Game> games;
 
-    public Game() {
+    public GameType() {
         this.games = new ArrayList();
     }
 
-    public Game(String name, String image, boolean enabled) {
+    public GameType(String name, String image, boolean enabled, String type) {
         this.name = name;
         this.image = image;
         this.enabled = enabled;
+        this.type = type;
         this.games = new ArrayList();
     }
 
@@ -57,6 +59,14 @@ public class Game {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public List<Game> getGames() {

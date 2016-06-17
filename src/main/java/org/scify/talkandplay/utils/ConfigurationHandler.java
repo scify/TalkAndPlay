@@ -19,6 +19,7 @@ import org.scify.talkandplay.models.modules.GameModule;
 import org.scify.talkandplay.models.Tile;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.games.GameImage;
+import org.scify.talkandplay.models.games.GameType;
 import org.scify.talkandplay.models.games.SequenceGame;
 import org.scify.talkandplay.models.games.SimilarityGame;
 import org.scify.talkandplay.models.games.StimulusReactionGame;
@@ -247,28 +248,74 @@ public class ConfigurationHandler {
         gameModule.setSound(getSound(gameNode.getChildText("sound")));
         gameModule.setEnabled("true".equals(gameNode.getChildText("enabled")));
 
-        List<StimulusReactionGame> stimulusReactionGames = new ArrayList();
-        List<SequenceGame> sequenceGames = new ArrayList();
-        List<SimilarityGame> similarityGames = new ArrayList();
+        //set the stimulus reaction games
+        Element stimulusReactionGamesNode = gameNode.getChild("stimulusReactionGames");
+        if (stimulusReactionGamesNode != null) {
+            GameType stimulusReactionType = new GameType(stimulusReactionGamesNode.getChildText("name"),
+                    stimulusReactionGamesNode.getChildText("image"),
+                    "true".equals(stimulusReactionGamesNode.getChildText("enabled")),
+                    "stimulusReactionGame");
 
-        //set the stimulusReactionGames
-        List stimulusReactionGameNode = gameNode.getChildren("stimulusReactionGame");
-        for (int i = 0; i < stimulusReactionGameNode.size(); i++) {
-            StimulusReactionGame stimulusReactionGame = new StimulusReactionGame();
+            List gamesList = stimulusReactionGamesNode.getChild("games").getChildren();
 
-            List imagesNode = ((Element) stimulusReactionGameNode.get(i)).getChildren("images");
-            for (int j = 0; j < imagesNode.size(); j++) {
-                GameImage image = new GameImage(((Element) imagesNode.get(j)).getChildText("name"),
-                        ((Element) imagesNode.get(j)).getChildText("image"),
-                        ((Element) imagesNode.get(j)).getChildText("sound"),
-                        Integer.parseInt(((Element) imagesNode.get(j)).getChildText("order")));
-                stimulusReactionGame.getImages().add(image);
+            for (int i = 0; i < gamesList.size(); i++) {
+                StimulusReactionGame game = new StimulusReactionGame(((Element) gamesList.get(i)).getChildText("name"),
+                        ((Element) gamesList.get(i)).getChildText("image"),
+                        "true".equals(((Element) gamesList.get(i)).getChildText("enabled")),
+                        Integer.parseInt(((Element) gamesList.get(i)).getChildText("difficulty")));
+
+                List imagesList = ((Element) gamesList.get(i)).getChild("gameImages").getChildren();
+
+                for (int j = 0; j < imagesList.size(); j++) {
+                    GameImage image = new GameImage(((Element) imagesList.get(j)).getChildText("name"),
+                            ((Element) imagesList.get(j)).getChildText("path"),
+                            Integer.parseInt(((Element) imagesList.get(j)).getChildText("order")));
+                    game.getImages().add(image);
+                }
+                stimulusReactionType.getGames().add(game);
             }
-
-            stimulusReactionGames.add(stimulusReactionGame);
+            gameModule.getGameTypes().add(stimulusReactionType);
         }
 
-        gameModule.setStimulusReactionGames(stimulusReactionGames);
+        //set the sequence games
+        Element sequenceGamesNode = gameNode.getChild("sequenceGames");
+        if (sequenceGamesNode != null) {
+            GameType sequenceGames = new GameType(sequenceGamesNode.getChildText("name"),
+                    sequenceGamesNode.getChildText("image"),
+                    "true".equals(sequenceGamesNode.getChildText("enabled")),
+                    "sequenceGame");
+
+            List gamesList = sequenceGamesNode.getChild("games").getChildren();
+
+            for (int i = 0; i < gamesList.size(); i++) {
+                SequenceGame game = new SequenceGame(((Element) gamesList.get(i)).getChildText("name"),
+                        ((Element) gamesList.get(i)).getChildText("image"),
+                        "true".equals(((Element) gamesList.get(i)).getChildText("enabled")),
+                        Integer.parseInt(((Element) gamesList.get(i)).getChildText("difficulty")));
+                sequenceGames.getGames().add(game);
+            }
+            gameModule.getGameTypes().add(sequenceGames);
+        }
+
+        //set the similar games
+        Element similarGamesNode = gameNode.getChild("similarityGames");
+        if (similarGamesNode != null) {
+            GameType sequenceGames = new GameType(similarGamesNode.getChildText("name"),
+                    similarGamesNode.getChildText("image"),
+                    "true".equals(similarGamesNode.getChildText("enabled")),
+                    "similarityGame");
+
+            List stimulusReactionGamesList = similarGamesNode.getChild("games").getChildren();
+
+            for (int i = 0; i < stimulusReactionGamesList.size(); i++) {
+                SimilarityGame game = new SimilarityGame(((Element) stimulusReactionGamesList.get(i)).getChildText("name"),
+                        ((Element) stimulusReactionGamesList.get(i)).getChildText("image"),
+                        "true".equals(((Element) stimulusReactionGamesList.get(i)).getChildText("enabled")),
+                        Integer.parseInt(((Element) stimulusReactionGamesList.get(i)).getChildText("difficulty")));
+                sequenceGames.getGames().add(game);
+            }
+            gameModule.getGameTypes().add(sequenceGames);
+        }
 
         return gameModule;
     }

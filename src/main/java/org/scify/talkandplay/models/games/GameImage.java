@@ -14,10 +14,9 @@ public class GameImage {
     public GameImage() {
     }
 
-    public GameImage(String name, String image, String sound, int order) {
+    public GameImage(String name, String image, int order) {
         this.name = name;
         this.image = image;
-        this.sound = sound;
         this.order = order;
     }
 

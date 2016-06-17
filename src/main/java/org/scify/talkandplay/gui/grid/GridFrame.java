@@ -134,7 +134,6 @@ public class GridFrame extends javax.swing.JFrame {
     }
 
     private void initCustomComponents() {
-
         GridLayout gridLayout = new GridLayout(1, 3, IMAGE_PADDING, IMAGE_PADDING);
         gridPanel.setLayout(gridLayout);
         repaintMenu(gridPanel);
@@ -239,29 +238,26 @@ public class GridFrame extends javax.swing.JFrame {
                     audioPlayer.getMediaPlayer().playMedia(user.getEntertainmentModule().getSound());
                 }
             }
-        });        
+        });
         entertainmentPanel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
                     timer.cancel();
                     clickedImage = "entertainment";
-                    audioPlayer.getMediaPlayer().playMedia(user.getCommunicationModule().getSound());
+                    audioPlayer.getMediaPlayer().playMedia(user.getEntertainmentModule().getSound());
                 }
             }
         });
-        
+
         //launch the games grid        
         gamesPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    // timer.cancel();
+                    timer.cancel();
                     clickedImage = "games";
-                    JOptionPane.showMessageDialog(gridFrame,
-                            "Υπό κατασκευή",
-                            "",
-                            JOptionPane.INFORMATION_MESSAGE);
+                    audioPlayer.getMediaPlayer().playMedia(user.getGameModule().getSound());
                 }
             }
         });
@@ -271,10 +267,7 @@ public class GridFrame extends javax.swing.JFrame {
                 if (sensorService.shouldSelect(sensor)) {
                     // timer.cancel();
                     clickedImage = "games";
-                    JOptionPane.showMessageDialog(gridFrame,
-                            "Υπό κατασκευή",
-                            "",
-                            JOptionPane.INFORMATION_MESSAGE);
+                    audioPlayer.getMediaPlayer().playMedia(user.getGameModule().getSound());
                 }
             }
         });
@@ -299,11 +292,7 @@ public class GridFrame extends javax.swing.JFrame {
     private void showGames() {
         timer.cancel();
         remove(gridPanel);
-        try {
-            CommunicationPanel communicationPanel = new CommunicationPanel(user.getName(), this);
-        } catch (IOException ex) {
-            Logger.getLogger(GridFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        GamesPanel gamesPanel = new GamesPanel(user, this);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -165,27 +165,73 @@
       <name>Παιχνίδια</name>
       <enabled>true</enabled>
       <image>/home/christina/Desktop/talkandplay/joystick.png</image>
-
-      
-        <stimulusReactionGame>
-          <name></name>
-          <image></image>
-          <sound></sound>
-          <enabled></enabled>
-          <gameImages>
-            <image>
-              <name></name>
-              <path></path>
-              <order></order>
-            </image>
-          </gameImages>
-        </stimulusReactionGame>
-
-
-      <sequenceGames></sequenceGames>  
-      <similarityGames></similarityGames>
-
-
+      <stimulusReactionGames>
+        <name>Ερέθισμα-Αντίδραση</name>
+        <enabled>true</enabled>
+        <image>/home/christina/Desktop/talkandplay/games/stimulusReaction.png</image>
+        <games>
+          <game>
+            <name>Game 1</name>
+            <image></image>
+            <sound></sound>
+            <enabled>true</enabled>
+            <difficulty>4</difficulty>            
+            <gameImages>
+              <image>
+                <name>gdfgfdgfd</name>
+                <path>/home/christina/Desktop/talkandplay/games/circle.png</path>
+                <order>1</order>
+              </image>
+              <image>
+                <name></name>
+                <path>/home/christina/Desktop/talkandplay/games/happiness.png</path>
+                <order>2</order>
+              </image>
+              <image>
+                <name></name>
+                <path>/home/christina/Desktop/talkandplay/games/smile.png</path>
+                <order>3</order>
+              </image>
+            </gameImages>
+          </game>
+           <game>
+            <name>Game 2</name>
+            <image></image>
+            <sound></sound>
+            <enabled>true</enabled>
+            <difficulty>4</difficulty>
+            <gameImages>
+              <image>
+                <name>gdfgfdgfd</name>
+                <path>/home/christina/Desktop/talkandplay/games/flying-balloon.png</path>
+                <order>1</order>
+              </image>
+              <image>
+                <name></name>
+                <path>/home/christina/Desktop/talkandplay/games/ballons.png</path>
+                <order>2</order>
+              </image>
+              <image>
+                <name></name>
+                <path>/home/christina/Desktop/talkandplay/games/ballons-1.png</path>
+                <order>3</order>
+              </image>
+            </gameImages>
+          </game>
+        </games>
+      </stimulusReactionGames>
+      <sequenceGames>
+        <name>Χρονικής Αλληλουχίας</name>
+        <enabled>true</enabled>
+        <image>/home/christina/Desktop/talkandplay/games/sequence.png</image>
+        <games></games>
+      </sequenceGames>  
+      <similarityGames>
+        <name>Βρες το όμοιο</name>
+        <enabled>true</enabled>
+        <image>/home/christina/Desktop/talkandplay/games/similar.png</image>
+        <games></games>
+      </similarityGames>
     </games>
   </profile>
 </profiles>

@@ -1,13 +1,11 @@
 package org.scify.talkandplay.gui;
 
 import java.awt.Font;
-import java.io.IOException;
 import java.util.List;
 import javax.swing.UIManager;
-import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.models.games.Game;
 import org.scify.talkandplay.utils.ConfigurationHandler;
-import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
 
 /**
  *
@@ -15,8 +13,9 @@ import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
  */
 public class ApplicationLauncher {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
+        // testConfig();
         setUIFont(new javax.swing.plaf.FontUIResource("DejaVu Sans", Font.PLAIN, 12));
         ConfigurationHandler conf = new ConfigurationHandler();
         MainFrame mainFrame = new MainFrame(conf);
@@ -37,7 +36,7 @@ public class ApplicationLauncher {
         }
     }
 
-    private void testConfig() {
+    private static void testConfig() {
 
         ConfigurationHandler conf = new ConfigurationHandler();
         List<User> profiles = conf.getProfiles();
@@ -46,9 +45,14 @@ public class ApplicationLauncher {
 
             System.out.println("Profile: " + user.getName());
 
-            for (Category cat : user.getCommunicationModule().getCategories()) {
-                System.out.println("cat name:" + cat.getName());
-            }
+          /*  for (Game game : user.getGameModule().getGames()) {
+
+                System.out.println(game.getName());
+
+                for (Game game1 : game.getGames()) {
+                    System.out.println(game1.getName());
+                }
+            }*/
         }
     }
 }
