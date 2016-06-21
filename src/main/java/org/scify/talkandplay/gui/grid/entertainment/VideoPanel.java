@@ -1,4 +1,4 @@
-package org.scify.talkandplay.gui.grid;
+package org.scify.talkandplay.gui.grid.entertainment;
 
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -10,6 +10,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import org.scify.talkandplay.gui.grid.GridFrame;
+import org.scify.talkandplay.gui.grid.MediaPlayerPanel;
 import org.scify.talkandplay.models.User;
 
 /**

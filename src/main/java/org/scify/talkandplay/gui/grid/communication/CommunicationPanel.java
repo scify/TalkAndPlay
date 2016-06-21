@@ -1,4 +1,4 @@
-package org.scify.talkandplay.gui.grid;
+package org.scify.talkandplay.gui.grid.communication;
 
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.User;

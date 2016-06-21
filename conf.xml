@@ -174,6 +174,8 @@
             <name>Game 1</name>
             <image></image>
             <sound></sound>
+            <winSound></winSound>
+            <errorSound></errorSound>
             <enabled>true</enabled>
             <difficulty>4</difficulty>            
             <gameImages>
@@ -198,6 +200,8 @@
             <name>Game 2</name>
             <image></image>
             <sound></sound>
+            <winSound>/home/christina/Desktop/talkandplay/games/win.mp3</winSound>
+            <errorSound>/home/christina/Desktop/talkandplay/games/error.mp3</errorSound>
             <enabled>true</enabled>
             <difficulty>4</difficulty>
             <gameImages>

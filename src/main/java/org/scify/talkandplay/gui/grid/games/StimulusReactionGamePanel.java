@@ -1,4 +1,4 @@
-package org.scify.talkandplay.gui.grid;
+package org.scify.talkandplay.gui.grid.games;
 
 import java.awt.FlowLayout;
 import java.awt.event.KeyAdapter;
@@ -6,7 +6,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Random;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.games.GameImage;
@@ -126,19 +128,17 @@ public class StimulusReactionGamePanel extends javax.swing.JPanel {
         imagesPanel.add(panel);
         imagesPanel.revalidate();
         imagesPanel.repaint();
-        
+
         panel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
                     selected++;
-                    System.out.println(selected);
                     if (selected < game.getImages().size()) {
                         createGameItem(game.getImages().get(selected));
                     } else {
-                        //congrats
+                        congratulate();
                     }
-                    //audioPlayer.getMediaPlayer().playMedia(user.getEntertainmentModule().getMusicModule().getSound());
                 }
             }
         });
@@ -155,6 +155,21 @@ public class StimulusReactionGamePanel extends javax.swing.JPanel {
         });
 
         return panel;
+    }
+
+    private void congratulate() {
+        System.out.println(game.getWinSound());
+        audioPlayer.getMediaPlayer().playMedia(game.getWinSound());
+
+        JPanel nextGame = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/more-icon.png"))), "Επόμενο παιχνίδι", parent);
+        JPanel back = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"))), "Πίσω", parent);
+
+        //add listeners
+        
+        imagesPanel.add(nextGame);
+        imagesPanel.add(back);
+        imagesPanel.revalidate();
+        imagesPanel.repaint();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -3,10 +3,6 @@ package org.scify.talkandplay.models.games;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author christina
- */
 public class StimulusReactionGame extends Game {
 
     private int difficulty;

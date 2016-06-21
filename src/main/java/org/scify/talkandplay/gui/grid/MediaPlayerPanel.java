@@ -1,5 +1,6 @@
 package org.scify.talkandplay.gui.grid;
 
+import org.scify.talkandplay.gui.grid.entertainment.MusicPanel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JPanel;

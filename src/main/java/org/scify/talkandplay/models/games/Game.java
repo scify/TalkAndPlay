@@ -12,6 +12,8 @@ public class Game {
     private String name;
     private String image;
     private String sound;
+    private String winSound;
+    private String errorSound;
     private boolean enabled;
 
     private List<Game> games;
@@ -49,6 +51,22 @@ public class Game {
 
     public void setSound(String sound) {
         this.sound = sound;
+    }
+
+    public String getWinSound() {
+        return winSound;
+    }
+
+    public void setWinSound(String winSound) {
+        this.winSound = winSound;
+    }
+
+    public String getErrorSound() {
+        return errorSound;
+    }
+
+    public void setErrorSound(String errorSound) {
+        this.errorSound = errorSound;
     }
 
     public boolean isEnabled() {

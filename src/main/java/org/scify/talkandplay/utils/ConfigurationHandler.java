@@ -263,6 +263,8 @@ public class ConfigurationHandler {
                         ((Element) gamesList.get(i)).getChildText("image"),
                         "true".equals(((Element) gamesList.get(i)).getChildText("enabled")),
                         Integer.parseInt(((Element) gamesList.get(i)).getChildText("difficulty")));
+                game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
+                game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
 
                 List imagesList = ((Element) gamesList.get(i)).getChild("gameImages").getChildren();
 

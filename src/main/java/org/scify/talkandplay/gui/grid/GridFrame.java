@@ -1,5 +1,8 @@
 package org.scify.talkandplay.gui.grid;
 
+import org.scify.talkandplay.gui.grid.games.GamesPanel;
+import org.scify.talkandplay.gui.grid.entertainment.EntertainmentPanel;
+import org.scify.talkandplay.gui.grid.communication.CommunicationPanel;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;

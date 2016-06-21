@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.scify.talkandplay.gui.grid;
+package org.scify.talkandplay.gui.grid.entertainment;
 
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
