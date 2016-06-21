@@ -6,10 +6,14 @@
 package org.scify.talkandplay.gui.grid.entertainment;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
@@ -30,6 +34,8 @@ public class VideoFrame extends javax.swing.JFrame {
     private String currentFile;
     private List<JLabel> files;
     private User user;
+    private Timer timer;
+    private float direction = -0.05f;
 
     public VideoFrame(User user, String currentFile) {
         this.mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
@@ -266,6 +272,7 @@ public class VideoFrame extends javax.swing.JFrame {
         playButton.setText("Pause");
 
         mediaPlayerComponent.getMediaPlayer().playMedia(getFilePath(file));
+      //  setTimer();
         setVisible(true);
     }
 
@@ -277,6 +284,16 @@ public class VideoFrame extends javax.swing.JFrame {
         this.files = files;
     }
 
+    private void setTimer() {
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                controlsPanel.setVisible(false);
+            }
+            
+        }, 5 * 1000);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;

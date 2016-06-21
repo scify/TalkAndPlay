@@ -1,11 +1,17 @@
 package org.scify.talkandplay.gui.grid.games;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
@@ -30,6 +36,12 @@ public class StimulusReactionGamePanel extends javax.swing.JPanel {
     private StimulusReactionGame game;
     private GuiHelper guiHelper;
     private SensorService sensorService;
+    private List<JPanel> panelList;
+    private Timer timer;
+    private int selectedImage;
+
+    protected final int BORDER_SIZE = 5;
+    protected final int IMAGE_PADDING = 10;
 
     private int selected;
 
@@ -105,6 +117,7 @@ public class StimulusReactionGamePanel extends javax.swing.JPanel {
 
     private void initCustomComponents() {
         imagesPanel.setLayout(new FlowLayout());
+        panelList = new ArrayList<>();
 
         //select a random game
         Random randomGenerator = new Random();
@@ -134,10 +147,10 @@ public class StimulusReactionGamePanel extends javax.swing.JPanel {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
                     selected++;
-                    if (selected < game.getImages().size()) {
-                        createGameItem(game.getImages().get(selected));
+                    if (selected == game.getImages().size() - 1) {
+                        congratulate(game.getImages().get(selected));
                     } else {
-                        congratulate();
+                        createGameItem(game.getImages().get(selected));
                     }
                 }
             }
@@ -157,20 +170,89 @@ public class StimulusReactionGamePanel extends javax.swing.JPanel {
         return panel;
     }
 
-    private void congratulate() {
-        System.out.println(game.getWinSound());
+    private void congratulate(GameImage image) {
         audioPlayer.getMediaPlayer().playMedia(game.getWinSound());
 
+        JPanel finalImage = guiHelper.createImagePanel(image.getImage(), "test", parent);
         JPanel nextGame = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/more-icon.png"))), "Επόμενο παιχνίδι", parent);
         JPanel back = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"))), "Πίσω", parent);
 
-        //add listeners
-        
+        nextGame.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor)) {
+                    parent.remove(imagesPanel);
+                    StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
+                }
+            }
+        });
+        nextGame.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
+                if (sensorService.shouldSelect(sensor)) {
+                    parent.remove(imagesPanel);
+                    StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
+                }
+            }
+        });
+
+        back.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor)) {
+                    parent.remove(imagesPanel);
+                    GamesPanel gamesPanel = new GamesPanel(user, parent);
+                }
+            }
+        });
+
+        back.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
+                if (sensorService.shouldSelect(sensor)) {
+                    parent.remove(imagesPanel);
+                    GamesPanel gamesPanel = new GamesPanel(user, parent);
+                }
+            }
+        });
+
+        panelList.add(nextGame);
+        panelList.add(back);
+
+        imagesPanel.removeAll();
+        imagesPanel.add(finalImage);
         imagesPanel.add(nextGame);
         imagesPanel.add(back);
         imagesPanel.revalidate();
         imagesPanel.repaint();
+        setTimer();
     }
+
+    private void setTimer() {
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                panelList.get(selectedImage).requestFocusInWindow();
+                if (selectedImage == 0) {
+                    panelList.get(panelList.size() - 1).setBorder(null);
+                    panelList.get(selectedImage).setBorder(BorderFactory.createLineBorder(Color.BLUE, BORDER_SIZE));
+                    selectedImage++;
+                } else if (selectedImage == panelList.size() - 1) {
+                    panelList.get(selectedImage - 1).setBorder(null);
+                    panelList.get(selectedImage).setBorder(BorderFactory.createLineBorder(Color.BLUE, BORDER_SIZE));
+                    selectedImage = 0;
+                } else if (selectedImage < panelList.size() - 1 && selectedImage > 0) {
+                    panelList.get(selectedImage - 1).setBorder(null);
+                    panelList.get(selectedImage).setBorder(BorderFactory.createLineBorder(Color.BLUE, BORDER_SIZE));
+                    selectedImage++;
+                }
+            }
+        }, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel imagesPanel;

@@ -118,6 +118,7 @@ public class MusicPanel extends javax.swing.JPanel {
                 public void mouseClicked(MouseEvent e) {
                     timer.cancel();
                     currentFile = file.getName();
+                    setSelected();
                     playerPanel.playMedia(getFilePath(file.getName()));
                 }
             });
@@ -199,7 +200,6 @@ public class MusicPanel extends javax.swing.JPanel {
         timer.cancel();
         for (int i = 0; i < fileLabels.size(); i++) {
             if (fileLabels.get(i).getText().equals(currentFile)) {
-                System.out.println(fileLabels.get(i).getText() + "=" + currentFile);
                 if (i == fileLabels.size() - 1) {
                     currentFile = fileLabels.get(0).getText();
                 } else {
@@ -209,6 +209,17 @@ public class MusicPanel extends javax.swing.JPanel {
             }
         }
         return currentFile;
+    }
+
+    public void setSelected() {
+        for (int i = 0; i < fileLabels.size(); i++) {
+            if (fileLabels.get(i).getText().equals(currentFile)) {
+                fileLabels.get(i).setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+            } else {
+                fileLabels.get(i).setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
+
+            }
+        }
     }
 
 

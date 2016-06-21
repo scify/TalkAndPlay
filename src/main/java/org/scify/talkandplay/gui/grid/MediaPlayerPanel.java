@@ -37,16 +37,24 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
         audioPlayer.getMediaPlayer().mute(false);
 
         audioPlayer.getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
+
+            @Override
+            public void opening(MediaPlayer mediaPlayer) {
+                System.out.println("dsdas");
+            }
+
             @Override
             public void playing(MediaPlayer mediaPlayer) {
                 audioPlayer.getMediaPlayer().mute(false);
-                audioPlayer.getMediaPlayer().setVolume(100);
+                // audioPlayer.getMediaPlayer().setVolume(100);
             }
-            
+
             @Override
             public void finished(MediaPlayer mediaPlayer) {
                 if (parent instanceof MusicPanel) {
-                    ((MusicPanel) parent).setTimer();
+                    String nextFile = ((MusicPanel) parent).getNextFile();
+                    ((MusicPanel) parent).setSelected();
+                    playMedia(((MusicPanel) parent).getFilePath(nextFile));
                 }
             }
 
@@ -66,7 +74,7 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
                 });
             }
         });
-        
+
         gridFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -83,7 +91,7 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
 
     public void playMedia(String path) {
         System.out.println("Now playing " + path);
-
+        mediaSlider.setValue(0);
         audioPlayer.getMediaPlayer().prepareMedia(path);
         audioPlayer.getMediaPlayer().parseMedia();
 
@@ -92,7 +100,6 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
         int hrs = (int) ((audioPlayer.getMediaPlayer().getMediaMeta().getLength() / (1000 * 60 * 60)) % 24);
 
         endLabel.setText(Time.getTime(hrs, mins, secs));
-
         audioPlayer.getMediaPlayer().playMedia(path);
         playButton.setText("Pause");
     }

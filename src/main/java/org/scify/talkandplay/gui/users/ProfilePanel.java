@@ -6,6 +6,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
+import org.scify.talkandplay.gui.MainFrame;
 import org.scify.talkandplay.gui.MainPanel;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.models.User;
@@ -13,7 +14,7 @@ import org.scify.talkandplay.services.UserService;
 
 public class ProfilePanel extends javax.swing.JPanel {
 
-    private MainPanel parent;
+    private MainFrame parent;
     private User user;
     private GuiHelper guiHelper;
     private UserService userService;
@@ -29,8 +30,8 @@ public class ProfilePanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    public ProfilePanel(MainPanel parent, User user) {
-        this.parent = parent;
+    public ProfilePanel(MainFrame mainFrame, User user) {
+        this.parent = mainFrame;
         this.user = user;
         this.guiHelper = new GuiHelper();
         this.userService = new UserService();
@@ -73,21 +74,33 @@ public class ProfilePanel extends javax.swing.JPanel {
         profilePanel.setLayout(new BoxLayout(profilePanel, BoxLayout.Y_AXIS));
         profilePanel.setBorder(new EmptyBorder(0, 0, 0, 20));
         JLabel imageLabel = new JLabel(guiHelper.getRoundIcon((user.getImage())));
+        JLabel editLabel = new JLabel("Επεξεργασία");
         JLabel nameLabel;
-        
+
         if (userService.hasBrokenFiles(user)) {
             nameLabel = new JLabel(user.getName(), new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/warning.png")), JLabel.RIGHT);
         } else {
             nameLabel = new JLabel(user.getName());
         }
 
+        editLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                parent.changePanel(new UserFormPanel(parent, user));
+
+            }
+        });
+
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nameLabel.setBorder(new EmptyBorder(5, 0, 0, 0));
         nameLabel.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
+        editLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        editLabel.setBorder(new EmptyBorder(5, 0, 0, 0));
+        editLabel.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
 
         profilePanel.add(imageLabel);
         profilePanel.add(nameLabel);
+        profilePanel.add(editLabel);
     }
 
     public void repaintPanel(User user) {

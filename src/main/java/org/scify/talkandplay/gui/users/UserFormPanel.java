@@ -22,16 +22,27 @@ import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.UserService;
 
-public class CreateUserPanel extends javax.swing.JPanel {
+public class UserFormPanel extends javax.swing.JPanel {
 
     private String userImage;
     private MainFrame parent;
     private UserService userService;
     private GuiHelper guiHelper;
+    private User user;
 
-    public CreateUserPanel(MainFrame parent) {
+    public UserFormPanel(MainFrame parent) {
         this.guiHelper = new GuiHelper();
         this.parent = parent;
+        this.userService = new UserService();
+        this.user = null;
+        initComponents();
+        initCustomComponents();
+    }
+
+    public UserFormPanel(MainFrame parent, User user) {
+        this.guiHelper = new GuiHelper();
+        this.parent = parent;
+        this.user = user;
         this.userService = new UserService();
         initComponents();
         initCustomComponents();
@@ -61,6 +72,7 @@ public class CreateUserPanel extends javax.swing.JPanel {
         blackRadioButton = new javax.swing.JRadioButton();
         createUserButton = new javax.swing.JButton();
         errorLabel = new javax.swing.JLabel();
+        editUserButton = new javax.swing.JButton();
 
         jToolBar1.setRollover(true);
 
@@ -128,6 +140,17 @@ public class CreateUserPanel extends javax.swing.JPanel {
         errorLabel.setForeground(new java.awt.Color(153, 0, 0));
         errorLabel.setText("error");
 
+        editUserButton.setBackground(new java.awt.Color(75, 161, 69));
+        editUserButton.setFont(editUserButton.getFont());
+        editUserButton.setForeground(new java.awt.Color(255, 255, 255));
+        editUserButton.setText("Αποθήκευση χρήστη");
+        editUserButton.setBorder(null);
+        editUserButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editUserButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout createUserPanelLayout = new javax.swing.GroupLayout(createUserPanel);
         createUserPanel.setLayout(createUserPanelLayout);
         createUserPanelLayout.setHorizontalGroup(
@@ -140,6 +163,8 @@ public class CreateUserPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
                 .addGroup(createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createUserPanelLayout.createSequentialGroup()
+                        .addComponent(editUserButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(createUserButton)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createUserPanelLayout.createSequentialGroup()
@@ -182,7 +207,9 @@ public class CreateUserPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(errorLabel)
                         .addGap(18, 18, 18)
-                        .addComponent(createUserButton)))
+                        .addGroup(createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(createUserButton)
+                            .addComponent(editUserButton))))
                 .addGap(39, 39, 39))
         );
 
@@ -219,7 +246,7 @@ public class CreateUserPanel extends javax.swing.JPanel {
                 userService.save(createdUser);
                 parent.changePanel(new MainPanel(parent));
             } catch (Exception ex) {
-                Logger.getLogger(CreateUserPanel.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserFormPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_createUserButtonActionPerformed
@@ -250,6 +277,34 @@ public class CreateUserPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_nameTextFieldFocusLost
 
+    private void editUserButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editUserButtonMouseClicked
+        String name = nameTextField.getText();
+
+        if (!user.getName().equals(name)) {
+            List<User> users = userService.getUsers();
+            for (User user : users) {
+                if (user.getName().equals(name)) {
+                    errorLabel.setText("Το όνομα χρήστη υπάρχει ήδη");
+                    errorLabel.setVisible(true);
+                    return;
+                }
+            }
+        }
+        
+        if (!name.isEmpty()) {
+
+            User editedUser = new User(name, userImage);
+            editedUser.getConfiguration().setRotationSpeed(rotationSpeedSlider.getValue());
+            try {
+                // Save to xml file
+                userService.update(editedUser, user.getName());
+                parent.changePanel(new MainPanel(parent));
+            } catch (Exception ex) {
+                Logger.getLogger(UserFormPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_editUserButtonMouseClicked
+
     private void initCustomComponents() {
         errorLabel.setVisible(false);
         nameTextField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.GRAY));
@@ -260,9 +315,22 @@ public class CreateUserPanel extends javax.swing.JPanel {
         backgroundColorLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 14));
         whiteRadioButton.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
         blackRadioButton.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-        createUserButton.setFont(new Font("DejaVu Sans", Font.PLAIN, 18));
-        createUserButton.setBorder(new LineBorder(new Color(75, 161, 69), 20));
-        createUserButton.setMargin(new Insets(10, 10, 10, 10));
+
+        if (user != null) {
+            createUserButton.setVisible(false);
+            editUserButton.setFont(new Font("DejaVu Sans", Font.PLAIN, 18));
+            editUserButton.setBorder(new LineBorder(new Color(75, 161, 69), 20));
+            editUserButton.setMargin(new Insets(10, 10, 10, 10));
+
+            nameTextField.setText(user.getName());
+            imageLabel.setIcon(guiHelper.getIcon(user.getImage()));
+            rotationSpeedSlider.setValue(user.getConfiguration().getRotationSpeed());
+        } else {
+            editUserButton.setVisible(false);
+            createUserButton.setFont(new Font("DejaVu Sans", Font.PLAIN, 18));
+            createUserButton.setBorder(new LineBorder(new Color(75, 161, 69), 20));
+            createUserButton.setMargin(new Insets(10, 10, 10, 10));
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -273,6 +341,7 @@ public class CreateUserPanel extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JButton createUserButton;
     private javax.swing.JPanel createUserPanel;
+    private javax.swing.JButton editUserButton;
     private javax.swing.JLabel errorLabel;
     private javax.swing.JLabel imageLabel;
     private javax.swing.JButton jButton1;

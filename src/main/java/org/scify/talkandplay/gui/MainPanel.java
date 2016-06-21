@@ -23,7 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.grid.GridFrame;
-import org.scify.talkandplay.gui.users.CreateUserPanel;
+import org.scify.talkandplay.gui.users.UserFormPanel;
 import org.scify.talkandplay.gui.users.ProfilePanel;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.utils.ConfigurationHandler;
@@ -83,7 +83,7 @@ public class MainPanel extends javax.swing.JPanel {
 
         profilesPanel = new ArrayList<>();
         for (final User profile : users) {
-            ProfilePanel profilePanel = new ProfilePanel(this, profile);
+            ProfilePanel profilePanel = new ProfilePanel(parent, profile);
 
             profilePanel.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -162,11 +162,7 @@ public class MainPanel extends javax.swing.JPanel {
 
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                parent.changePanel(new CreateUserPanel(parent));
-
-                /*CreateUserScreen cus = new CreateUserScreen(currentFame);
-                 cus.setLocationRelativeTo(null);
-                 cus.setVisible(true);*/
+                parent.changePanel(new UserFormPanel(parent));
             }
         });
     }
