@@ -1,25 +1,25 @@
 package org.scify.talkandplay.gui.grid.games;
 
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.models.games.GameImage;
 import org.scify.talkandplay.models.games.GameType;
+import org.scify.talkandplay.models.games.SequenceGame;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
@@ -28,28 +28,31 @@ import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 
-public class GamesPanel extends javax.swing.JPanel {
+public class SequenceGamePanel extends javax.swing.JPanel {
 
     private User user;
     private GridFrame parent;
-    private List<JPanel> panelList;
     private AudioMediaPlayerComponent audioPlayer;
-    private Timer timer;
-    private int selectedImage;
-    private String clickedImage;
-
+    private SequenceGame game;
     private GuiHelper guiHelper;
     private SensorService sensorService;
+    private List<JPanel> panelList;
+    private JPanel mainPanel, imagesPanel, correctImagesPanel;
+    private Timer timer;
+    private int selectedImage;
 
     protected final int BORDER_SIZE = 5;
     protected final int IMAGE_PADDING = 10;
 
-    public GamesPanel(User user, GridFrame parent) {
+    private int correctImages;
+
+    public SequenceGamePanel(User user, GridFrame parent) {
         this.user = user;
         this.parent = parent;
         this.audioPlayer = new AudioMediaPlayerComponent();
         this.guiHelper = new GuiHelper();
         this.sensorService = new SensorService(user);
+        this.correctImages = 1;
         initComponents();
         initAudioPlayer();
         initCustomComponents();
@@ -64,28 +67,15 @@ public class GamesPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        imagesPanel = new javax.swing.JPanel();
-
-        javax.swing.GroupLayout imagesPanelLayout = new javax.swing.GroupLayout(imagesPanel);
-        imagesPanel.setLayout(imagesPanelLayout);
-        imagesPanelLayout.setHorizontalGroup(
-            imagesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
-        );
-        imagesPanelLayout.setVerticalGroup(
-            imagesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 327, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(imagesPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 518, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(imagesPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 235, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -99,15 +89,7 @@ public class GamesPanel extends javax.swing.JPanel {
 
             @Override
             public void finished(MediaPlayer mediaPlayer) {
-                if ("stimulusReactionGame".equals(clickedImage)) {
-                    showStimulusReactionGame();
-                } else if ("sequenceGame".equals(clickedImage)) {
-                    showSequenceGame();
-                } else if ("similarityGame".equals(clickedImage)) {
-                    JOptionPane.showMessageDialog(parent,
-                            "Υπό κατασκευή");
-                    // showSimilarityGame();
-                }
+                setTimer();
             }
         });
 
@@ -122,38 +104,69 @@ public class GamesPanel extends javax.swing.JPanel {
     }
 
     private void initCustomComponents() {
-        selectedImage = 0;
-        imagesPanel.removeAll();
-        imagesPanel.setBorder(new EmptyBorder(0, 10, 10, 10));
-        imagesPanel.setLayout(new GridLayout(1, 3, IMAGE_PADDING, IMAGE_PADDING));
+
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+
+        imagesPanel = new JPanel();
+        correctImagesPanel = new JPanel();
+        imagesPanel.setLayout(new BoxLayout(imagesPanel, BoxLayout.LINE_AXIS));
+        correctImagesPanel.setLayout(new BoxLayout(correctImagesPanel, BoxLayout.LINE_AXIS));
+
+        mainPanel.revalidate();
+        mainPanel.repaint();
+
         panelList = new ArrayList<>();
 
+        //select a random game
+        Random randomGenerator = new Random();
         for (GameType gameType : user.getGameModule().getGameTypes()) {
-            createGameItem(gameType);
+            if ("sequenceGame".equals(gameType.getType())) {
+                game = (SequenceGame) gameType.getGames().get(randomGenerator.nextInt(gameType.getGames().size()));
+            }
         }
-        createBackItem();
 
-        setTimer();
+        //draw the images in a random order
+        List<GameImage> tmpImages = game.getImages();
+        int i;
+        while (!tmpImages.isEmpty()) {
+            i = randomGenerator.nextInt(game.getImages().size());
+            JPanel panel = createGameItem(game.getImages().get(i));
+            imagesPanel.add(panel);
+            panelList.add(panel);
+            tmpImages.remove(i);
+        }
 
-        imagesPanel.revalidate();
-        imagesPanel.repaint();
-        parent.add(imagesPanel);
+        mainPanel.add(imagesPanel);
+        mainPanel.add(correctImagesPanel);
+        mainPanel.revalidate();
+        mainPanel.repaint();
+        parent.add(mainPanel);
         parent.revalidate();
         parent.repaint();
+        setTimer();
     }
 
-    private JPanel createGameItem(final GameType gameType) {
-        JPanel panel = guiHelper.createImagePanel(gameType.getImage(), gameType.getName(), parent);
-        panelList.add(panel);
-        imagesPanel.add(panel);
+    private JPanel createGameItem(final GameImage image) {
+        final JPanel panel = guiHelper.createImagePanel(image.getImage(), "", parent);
 
         panel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    timer.cancel();
-                    clickedImage = gameType.getType();
-                    audioPlayer.getMediaPlayer().playMedia(user.getEntertainmentModule().getMusicModule().getSound());
+                    System.out.println("corrects " +correctImages+" "+image.getOrder());
+                    if (correctImages == image.getOrder()) {
+                        correctImages++;
+                        imagesPanel.remove(panel);
+                        selectedImage = 0;
+                        panel.setBorder(null);
+                        panelList.remove(panel);
+                        correctImagesPanel.add(panel);
+                    }
+                    else{
+                        timer.cancel();
+                        audioPlayer.getMediaPlayer().playMedia(game.getErrorSound());
+                    }
                 }
             }
         });
@@ -163,8 +176,7 @@ public class GamesPanel extends javax.swing.JPanel {
             public void keyPressed(KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
-                    timer.cancel();
-                    clickedImage = gameType.getType();
+                    // clickedImage = gameType.getType();
                     audioPlayer.getMediaPlayer().playMedia(user.getEntertainmentModule().getMusicModule().getSound());
                 }
             }
@@ -173,33 +185,62 @@ public class GamesPanel extends javax.swing.JPanel {
         return panel;
     }
 
-    private JPanel createBackItem() {
-        JPanel panel = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"))), "Πίσω", parent);
-        panelList.add(panel);
-        imagesPanel.add(panel);
+    private void congratulate(GameImage image) {
+        audioPlayer.getMediaPlayer().playMedia(game.getWinSound());
 
-        panel.addMouseListener(new java.awt.event.MouseAdapter() {
+        JPanel finalImage = guiHelper.createImagePanel(image.getImage(), "test", parent);
+        JPanel nextGame = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/more-icon.png"))), "Επόμενο παιχνίδι", parent);
+        JPanel back = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"))), "Πίσω", parent);
+
+        nextGame.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    timer.cancel();
-                    parent.repaintMenu(imagesPanel);
+                    parent.remove(mainPanel);
+                    SequenceGamePanel gamePanel = new SequenceGamePanel(user, parent);
                 }
             }
         });
-
-        panel.addKeyListener(new KeyAdapter() {
+        nextGame.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
-                    timer.cancel();
-                    parent.repaintMenu(imagesPanel);
+                    parent.remove(mainPanel);
+                    SequenceGamePanel gamePanel = new SequenceGamePanel(user, parent);
                 }
             }
         });
 
-        return panel;
+        back.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor)) {
+                    parent.remove(mainPanel);
+                    GamesPanel gamesPanel = new GamesPanel(user, parent);
+                }
+            }
+        });
+        back.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
+                if (sensorService.shouldSelect(sensor)) {
+                    parent.remove(mainPanel);
+                    GamesPanel gamesPanel = new GamesPanel(user, parent);
+                }
+            }
+        });
+
+        panelList.add(nextGame);
+        panelList.add(back);
+        /*
+         wrapperPanel.removeAll();
+         wrapperPanel.add(finalImage);
+         wrapperPanel.add(nextGame);
+         wrapperPanel.add(back);
+         wrapperPanel.revalidate();*/
+        setTimer();
     }
 
     private void setTimer() {
@@ -208,10 +249,12 @@ public class GamesPanel extends javax.swing.JPanel {
             @Override
             public void run() {
                 panelList.get(selectedImage).requestFocusInWindow();
-                if (selectedImage == 0) {
+                if (selectedImage == 0 && selectedImage != panelList.size() - 1) {
                     panelList.get(panelList.size() - 1).setBorder(null);
                     panelList.get(selectedImage).setBorder(BorderFactory.createLineBorder(Color.BLUE, BORDER_SIZE));
                     selectedImage++;
+                } else if (selectedImage == 0 && selectedImage == panelList.size() - 1) {
+                    panelList.get(selectedImage).setBorder(BorderFactory.createLineBorder(Color.BLUE, BORDER_SIZE));
                 } else if (selectedImage == panelList.size() - 1) {
                     panelList.get(selectedImage - 1).setBorder(null);
                     panelList.get(selectedImage).setBorder(BorderFactory.createLineBorder(Color.BLUE, BORDER_SIZE));
@@ -225,20 +268,7 @@ public class GamesPanel extends javax.swing.JPanel {
         }, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
     }
 
-    private void showStimulusReactionGame() {
-        timer.cancel();
-        parent.remove(imagesPanel);
-        StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
-    }
-
-    private void showSequenceGame() {
-        timer.cancel();
-        parent.remove(imagesPanel);
-        SequenceGamePanel gamePanel = new SequenceGamePanel(user, parent);
-    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel imagesPanel;
     // End of variables declaration//GEN-END:variables
 }

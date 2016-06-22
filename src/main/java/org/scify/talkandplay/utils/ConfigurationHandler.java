@@ -282,7 +282,7 @@ public class ConfigurationHandler {
         //set the sequence games
         Element sequenceGamesNode = gameNode.getChild("sequenceGames");
         if (sequenceGamesNode != null) {
-            GameType sequenceGames = new GameType(sequenceGamesNode.getChildText("name"),
+            GameType sequenceGameType = new GameType(sequenceGamesNode.getChildText("name"),
                     sequenceGamesNode.getChildText("image"),
                     "true".equals(sequenceGamesNode.getChildText("enabled")),
                     "sequenceGame");
@@ -294,9 +294,21 @@ public class ConfigurationHandler {
                         ((Element) gamesList.get(i)).getChildText("image"),
                         "true".equals(((Element) gamesList.get(i)).getChildText("enabled")),
                         Integer.parseInt(((Element) gamesList.get(i)).getChildText("difficulty")));
-                sequenceGames.getGames().add(game);
+                game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
+                game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
+
+                List imagesList = ((Element) gamesList.get(i)).getChild("gameImages").getChildren();
+
+                for (int j = 0; j < imagesList.size(); j++) {
+                    GameImage image = new GameImage(((Element) imagesList.get(j)).getChildText("name"),
+                            ((Element) imagesList.get(j)).getChildText("path"),
+                            Integer.parseInt(((Element) imagesList.get(j)).getChildText("order")));
+                    game.setEnabled("true".equals(((Element) imagesList.get(j)).getChildText("enabled")));
+                    game.getImages().add(image);
+                }
+                sequenceGameType.getGames().add(game);
             }
-            gameModule.getGameTypes().add(sequenceGames);
+            gameModule.getGameTypes().add(sequenceGameType);
         }
 
         //set the similar games

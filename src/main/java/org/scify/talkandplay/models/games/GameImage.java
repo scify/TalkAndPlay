@@ -10,6 +10,7 @@ public class GameImage {
     private String image;
     private String sound;
     private int order;
+    private boolean enabled;
 
     public GameImage() {
     }
@@ -51,5 +52,14 @@ public class GameImage {
     public void setOrder(int order) {
         this.order = order;
     }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
 
 }

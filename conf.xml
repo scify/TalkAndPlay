@@ -228,7 +228,37 @@
         <name>Χρονικής Αλληλουχίας</name>
         <enabled>true</enabled>
         <image>/home/christina/Desktop/talkandplay/games/sequence.png</image>
-        <games></games>
+        <games>
+          <game>
+            <name>Game 1</name>
+            <image></image>
+            <sound></sound>
+            <winSound>/home/christina/Desktop/talkandplay/games/win.mp3</winSound>
+            <errorSound>/home/christina/Desktop/talkandplay/games/error.mp3</errorSound>
+            <enabled>true</enabled>
+            <difficulty>4</difficulty>            
+            <gameImages>
+              <image>
+                <name>gdfgfdgfd</name>
+                <path>/home/christina/Desktop/talkandplay/games/cat.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name></name>
+                <path>/home/christina/Desktop/talkandplay/games/aquarium.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>             
+              <image>
+                <name></name>
+                <path>/home/christina/Desktop/talkandplay/games/fishbones.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+        </games>
       </sequenceGames>  
       <similarityGames>
         <name>Βρες το όμοιο</name>

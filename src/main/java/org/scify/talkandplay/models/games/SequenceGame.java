@@ -1,5 +1,6 @@
 package org.scify.talkandplay.models.games;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +19,7 @@ public class SequenceGame extends Game{
         super(name, image, enabled);
         this.difficulty = difficulty;
         this.images = images;
+        this.images = new ArrayList();
     }
 
     public int getDifficulty() {
