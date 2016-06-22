@@ -6,8 +6,9 @@
 package org.scify.talkandplay.gui.grid.entertainment;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -19,6 +20,10 @@ import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import org.scify.talkandplay.gui.helpers.Time;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.models.sensors.KeyboardSensor;
+import org.scify.talkandplay.models.sensors.MouseSensor;
+import org.scify.talkandplay.models.sensors.Sensor;
+import org.scify.talkandplay.services.SensorService;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
@@ -31,14 +36,15 @@ import uk.co.caprica.vlcj.player.embedded.DefaultAdaptiveRuntimeFullScreenStrate
 public class VideoFrame extends javax.swing.JFrame {
 
     private final EmbeddedMediaPlayerComponent mediaPlayerComponent;
+    private SensorService sensorService;
     private String currentFile;
-    private List<JLabel> files;
     private User user;
     private Timer timer;
-    private float direction = -0.05f;
+    private boolean hiddenControls = false;
 
     public VideoFrame(User user, String currentFile) {
         this.mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
+        this.sensorService = new SensorService(user);
         this.currentFile = currentFile;
         this.user = user;
         setTitle("Video Player");
@@ -176,8 +182,9 @@ public class VideoFrame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_backButtonMouseClicked
 
+    
     private void nextButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextButtonMouseClicked
-        for (int i = 0; i < files.size(); i++) {
+     /*   for (int i = 0; i < files.size(); i++) {
             if (files.get(i).getText().equals(currentFile)) {
                 if (i == files.size() - 1) {
                     currentFile = files.get(0).getText();
@@ -187,11 +194,11 @@ public class VideoFrame extends javax.swing.JFrame {
                 break;
             }
         }
-        playMedia(currentFile);
+        playMedia(currentFile);*/
     }//GEN-LAST:event_nextButtonMouseClicked
 
     private void previousButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previousButtonMouseClicked
-        for (int i = 0; i < files.size(); i++) {
+     /*   for (int i = 0; i < files.size(); i++) {
             if (files.get(i).getText().equals(currentFile)) {
                 if (i == 0) {
                     currentFile = files.get(files.size() - 1).getText();
@@ -202,7 +209,7 @@ public class VideoFrame extends javax.swing.JFrame {
             }
         }
 
-        playMedia(currentFile);
+        playMedia(currentFile);*/
     }//GEN-LAST:event_previousButtonMouseClicked
 
     private void initMediaPlayer() {
@@ -243,6 +250,36 @@ public class VideoFrame extends javax.swing.JFrame {
                 e.getWindow().dispose();
             }
         });
+
+        mediaPlayerComponent.getVideoSurface().addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor)) {
+                    System.out.println("hiddenControls "+hiddenControls);
+                    //if (hiddenControls) {
+                        System.out.println("clicky");
+                        mediaPlayerComponent.getMediaPlayer().pause();
+                        controlsPanel.setVisible(true);
+                        controlsPanel.setBackground(Color.yellow);
+                        hiddenControls = false;
+                        pack();
+                   // }
+                }
+            }
+        });
+
+        mediaPlayerComponent.getVideoSurface().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
+                if (sensorService.shouldSelect(sensor)) {
+                    if (hiddenControls) {
+                        controlsPanel.setVisible(true);
+                        hiddenControls = false;
+                    }
+                }
+            }
+        });
     }
 
     private void initCustomComponents() {
@@ -254,8 +291,7 @@ public class VideoFrame extends javax.swing.JFrame {
                 new DefaultAdaptiveRuntimeFullScreenStrategy(this)
         );
         mediaPlayerComponent.getMediaPlayer().setFullScreen(true);
-        // playMedia(currentFile);
-
+        // playMedia(currentFile);     
     }
 
     public void playMedia(String file) {
@@ -272,7 +308,7 @@ public class VideoFrame extends javax.swing.JFrame {
         playButton.setText("Pause");
 
         mediaPlayerComponent.getMediaPlayer().playMedia(getFilePath(file));
-      //  setTimer();
+        setTimer();
         setVisible(true);
     }
 
@@ -280,9 +316,6 @@ public class VideoFrame extends javax.swing.JFrame {
         return user.getEntertainmentModule().getVideoModule().getFolderPath() + File.separator + fileName;
     }
 
-    public void setFiles(List<JLabel> files) {
-        this.files = files;
-    }
 
     private void setTimer() {
         timer = new Timer();
@@ -290,10 +323,12 @@ public class VideoFrame extends javax.swing.JFrame {
             @Override
             public void run() {
                 controlsPanel.setVisible(false);
+                hiddenControls = true;
             }
-            
+
         }, 5 * 1000);
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
