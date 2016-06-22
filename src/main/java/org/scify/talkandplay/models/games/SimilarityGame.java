@@ -1,5 +1,6 @@
 package org.scify.talkandplay.models.games;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,12 +13,14 @@ public class SimilarityGame extends Game {
     private List<GameImage> images;
 
     public SimilarityGame() {
+        this.images = new ArrayList();
     }
 
     public SimilarityGame(String name, String image, boolean enabled, int difficulty) {
         super(name, image, enabled);
         this.difficulty = difficulty;
         this.images = images;
+        this.images = new ArrayList();
     }
 
     public int getDifficulty() {

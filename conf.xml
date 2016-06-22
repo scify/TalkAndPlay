@@ -264,7 +264,101 @@
         <name>Βρες το όμοιο</name>
         <enabled>true</enabled>
         <image>/home/christina/Desktop/talkandplay/games/similar.png</image>
-        <games></games>
+        <games>          
+          <game>
+            <name>Game 1</name>
+            <image></image>
+            <sound></sound>
+            <winSound>/home/christina/Desktop/talkandplay/games/win.mp3</winSound>
+            <errorSound>/home/christina/Desktop/talkandplay/games/error.mp3</errorSound>
+            <enabled>true</enabled>
+            <difficulty>4</difficulty>            
+            <gameImages>
+              <image>
+                <name></name>
+                <path>/home/christina/Desktop/talkandplay/games/similarity/like.png</path>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name></name>
+                <path>/home/christina/Desktop/talkandplay/games/similarity/favorite.png</path>
+                <enabled>true</enabled>
+              </image>             
+              <image>
+                <name></name>
+                <path>/home/christina/Desktop/talkandplay/games/similarity/shapes-2.png</path>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name></name>
+                <path>/home/christina/Desktop/talkandplay/games/similarity/favorite-1.png</path>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>  
+          <game>
+          <name>Game 2</name>
+            <image></image>
+            <sound></sound>
+            <winSound>/home/christina/Desktop/talkandplay/games/win.mp3</winSound>
+            <errorSound>/home/christina/Desktop/talkandplay/games/error.mp3</errorSound>
+            <enabled>true</enabled>
+            <difficulty>4</difficulty>            
+            <gameImages>
+              <image>
+                <name></name>
+                <path>/home/christina/Desktop/talkandplay/games/similarity/shapes.png</path>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name></name>
+                <path>/home/christina/Desktop/talkandplay/games/similarity/shapes-1.png</path>
+                <enabled>true</enabled>
+              </image>             
+              <image>
+                <name></name>
+                <path>/home/christina/Desktop/talkandplay/games/similarity/square.png</path>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name></name>
+                <path>/home/christina/Desktop/talkandplay/games/similarity/square-1.png</path>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>       
+          <game>
+          <name>Game 3</name>
+            <image></image>
+            <sound></sound>
+            <winSound>/home/christina/Desktop/talkandplay/games/win.mp3</winSound>
+            <errorSound>/home/christina/Desktop/talkandplay/games/error.mp3</errorSound>
+            <enabled>true</enabled>
+            <difficulty>4</difficulty>            
+            <gameImages>
+              <image>
+                <name></name>
+                <path>/home/christina/Desktop/talkandplay/games/similarity/star.png</path>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name></name>
+                <path>/home/christina/Desktop/talkandplay/games/similarity/star-1.png</path>
+                <enabled>true</enabled>
+              </image>             
+              <image>
+                <name></name>
+                <path>/home/christina/Desktop/talkandplay/games/similarity/star-2.png</path>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name></name>
+                <path>/home/christina/Desktop/talkandplay/games/similarity/star-3.png</path>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>           
+        </games>
       </similarityGames>
     </games>
   </profile>

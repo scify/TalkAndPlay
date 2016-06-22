@@ -314,21 +314,32 @@ public class ConfigurationHandler {
         //set the similar games
         Element similarGamesNode = gameNode.getChild("similarityGames");
         if (similarGamesNode != null) {
-            GameType sequenceGames = new GameType(similarGamesNode.getChildText("name"),
+            GameType similarityGameType = new GameType(similarGamesNode.getChildText("name"),
                     similarGamesNode.getChildText("image"),
                     "true".equals(similarGamesNode.getChildText("enabled")),
                     "similarityGame");
 
-            List stimulusReactionGamesList = similarGamesNode.getChild("games").getChildren();
+            List gamesList = similarGamesNode.getChild("games").getChildren();
 
-            for (int i = 0; i < stimulusReactionGamesList.size(); i++) {
-                SimilarityGame game = new SimilarityGame(((Element) stimulusReactionGamesList.get(i)).getChildText("name"),
-                        ((Element) stimulusReactionGamesList.get(i)).getChildText("image"),
-                        "true".equals(((Element) stimulusReactionGamesList.get(i)).getChildText("enabled")),
-                        Integer.parseInt(((Element) stimulusReactionGamesList.get(i)).getChildText("difficulty")));
-                sequenceGames.getGames().add(game);
+            for (int i = 0; i < gamesList.size(); i++) {
+                SimilarityGame game = new SimilarityGame(((Element) gamesList.get(i)).getChildText("name"),
+                        ((Element) gamesList.get(i)).getChildText("image"),
+                        "true".equals(((Element) gamesList.get(i)).getChildText("enabled")),
+                        Integer.parseInt(((Element) gamesList.get(i)).getChildText("difficulty")));
+                game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
+                game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
+
+                List imagesList = ((Element) gamesList.get(i)).getChild("gameImages").getChildren();
+
+                for (int j = 0; j < imagesList.size(); j++) {
+                    GameImage image = new GameImage(((Element) imagesList.get(j)).getChildText("name"),
+                            ((Element) imagesList.get(j)).getChildText("path"), 0);
+                    game.setEnabled("true".equals(((Element) imagesList.get(j)).getChildText("enabled")));
+                    game.getImages().add(image);
+                }
+                similarityGameType.getGames().add(game);
             }
-            gameModule.getGameTypes().add(sequenceGames);
+            gameModule.getGameTypes().add(similarityGameType);
         }
 
         return gameModule;
