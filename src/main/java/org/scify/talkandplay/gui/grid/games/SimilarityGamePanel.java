@@ -42,6 +42,7 @@ public class SimilarityGamePanel extends javax.swing.JPanel {
     private JPanel mainPanel, imagesPanel, correctImagesPanel;
     private Timer timer;
     private int selectedImage;
+    private boolean endGame = false;
 
     protected final int BORDER_SIZE = 5;
     protected final int IMAGE_PADDING = 10;
@@ -90,7 +91,9 @@ public class SimilarityGamePanel extends javax.swing.JPanel {
 
             @Override
             public void finished(MediaPlayer mediaPlayer) {
-                setTimer();
+                if (!endGame) {
+                    setTimer();
+                }
             }
         });
 
@@ -130,8 +133,6 @@ public class SimilarityGamePanel extends javax.swing.JPanel {
 
         //draw the images in a random order
         List<GameImage> tmpImages = new ArrayList<GameImage>(game.getImages());
-        System.out.println("size "+game.getImages().size());
-        System.out.println("tmpImages "+tmpImages.size());
         while (!tmpImages.isEmpty()) {
             i = randomGenerator.nextInt(tmpImages.size());
             JPanel panel = createGameItem(tmpImages.get(i));
@@ -140,7 +141,6 @@ public class SimilarityGamePanel extends javax.swing.JPanel {
             tmpImages.remove(i);
         }
 
-        System.out.println("size "+game.getImages().size());
         mainPanel.add(correctImagesPanel);
         mainPanel.add(Box.createRigidArea(new Dimension(100, 0)));
         mainPanel.add(imagesPanel);
@@ -160,14 +160,13 @@ public class SimilarityGamePanel extends javax.swing.JPanel {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
 
                 if (sensorService.shouldSelect(sensor)) {
-
                     for (int i = 0; i < game.getImages().size(); i++) {
-                        System.out.println("game.getImages().get(i).getImage() " + game.getImages().get(i).getImage());
-                        System.out.println("image.getImage() " + image.getImage());
-                        System.out.println("correctImage " + correctImage);
                         if (game.getImages().get(i).getImage().equals(image.getImage()) && game.getImages().get(i).getImage().equals(correctImage)) {
-                            audioPlayer.getMediaPlayer().playMedia(game.getWinSound());
+                            timer.cancel();
+                            endGame = true;
+                            congratulate();
                         } else if (game.getImages().get(i).getImage().equals(image.getImage()) && !game.getImages().get(i).getImage().equals(correctImage)) {
+                            timer.cancel();
                             audioPlayer.getMediaPlayer().playMedia(game.getErrorSound());
                         }
                     }
@@ -189,10 +188,9 @@ public class SimilarityGamePanel extends javax.swing.JPanel {
         return panel;
     }
 
-    private void congratulate(GameImage image) {
+    private void congratulate() {
         audioPlayer.getMediaPlayer().playMedia(game.getWinSound());
 
-        JPanel finalImage = guiHelper.createImagePanel(image.getImage(), "test", parent);
         JPanel nextGame = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/more-icon.png"))), "Επόμενο παιχνίδι", parent);
         JPanel back = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"))), "Πίσω", parent);
 
@@ -236,14 +234,14 @@ public class SimilarityGamePanel extends javax.swing.JPanel {
             }
         });
 
+        mainPanel.removeAll();
+        mainPanel.add(nextGame);
+        mainPanel.add(back);
+        panelList = new ArrayList();
+
         panelList.add(nextGame);
         panelList.add(back);
-        /*
-         wrapperPanel.removeAll();
-         wrapperPanel.add(finalImage);
-         wrapperPanel.add(nextGame);
-         wrapperPanel.add(back);
-         wrapperPanel.revalidate();*/
+
         setTimer();
     }
 
