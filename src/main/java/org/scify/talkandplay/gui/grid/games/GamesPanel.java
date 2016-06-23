@@ -141,7 +141,7 @@ public class GamesPanel extends javax.swing.JPanel {
     }
 
     private JPanel createGameItem(final GameType gameType) {
-        JPanel panel = guiHelper.createImagePanel(gameType.getImage(), gameType.getName(), parent);
+        JPanel panel = guiHelper.createImagePanel(gameType.getImage(), gameType.getName());
         panelList.add(panel);
         imagesPanel.add(panel);
 
@@ -172,7 +172,7 @@ public class GamesPanel extends javax.swing.JPanel {
     }
 
     private JPanel createBackItem() {
-        JPanel panel = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"))), "Πίσω", parent);
+        JPanel panel = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"))), "Πίσω");
         panelList.add(panel);
         imagesPanel.add(panel);
 
@@ -181,7 +181,7 @@ public class GamesPanel extends javax.swing.JPanel {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
                     timer.cancel();
-                    parent.repaintMenu(imagesPanel);
+                  //  parent.repaintMenu(imagesPanel);
                 }
             }
         });
@@ -192,7 +192,7 @@ public class GamesPanel extends javax.swing.JPanel {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
                     timer.cancel();
-                    parent.repaintMenu(imagesPanel);
+                  //  parent.repaintMenu(imagesPanel);
                 }
             }
         });

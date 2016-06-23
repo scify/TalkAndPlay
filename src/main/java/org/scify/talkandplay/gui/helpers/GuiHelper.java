@@ -94,7 +94,7 @@ public class GuiHelper {
 
     }
 
-    public JPanel createImagePanel(String imagePath, String text, JFrame frame) {
+    public JPanel createImagePanel(String imagePath, String text) {
         JPanel panel = new JPanel(new BorderLayout());
 
         java.awt.Image image;
@@ -104,15 +104,12 @@ public class GuiHelper {
 
             return decorateImageIcon(imageIcon, text);
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(frame,
-                    "Η εικόνα της καρτέλας " + text + " δεν βρέθηκε",
-                    "Σφάλμα",
-                    JOptionPane.ERROR_MESSAGE);
+            System.out.println("Image not found");
             return panel;
         }
     }
 
-    public JPanel createResourceImagePanel(ImageIcon imageIcon, String text, JFrame frame) {
+    public JPanel createResourceImagePanel(ImageIcon imageIcon, String text) {
         return decorateImageIcon(imageIcon, text);
     }
 

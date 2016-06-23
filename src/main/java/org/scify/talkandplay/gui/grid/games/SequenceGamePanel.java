@@ -148,7 +148,7 @@ public class SequenceGamePanel extends javax.swing.JPanel {
     }
 
     private JPanel createGameItem(final GameImage image) {
-        final JPanel panel = guiHelper.createImagePanel(image.getImage(), "", parent);
+        final JPanel panel = guiHelper.createImagePanel(image.getImage(), "");
 
         panel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -188,9 +188,9 @@ public class SequenceGamePanel extends javax.swing.JPanel {
     private void congratulate(GameImage image) {
         audioPlayer.getMediaPlayer().playMedia(game.getWinSound());
 
-        JPanel finalImage = guiHelper.createImagePanel(image.getImage(), "test", parent);
-        JPanel nextGame = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/more-icon.png"))), "Επόμενο παιχνίδι", parent);
-        JPanel back = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"))), "Πίσω", parent);
+        JPanel finalImage = guiHelper.createImagePanel(image.getImage(), "test");
+        JPanel nextGame = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/more-icon.png"))), "Επόμενο παιχνίδι");
+        JPanel back = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"))), "Πίσω");
 
         nextGame.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -234,12 +234,6 @@ public class SequenceGamePanel extends javax.swing.JPanel {
 
         panelList.add(nextGame);
         panelList.add(back);
-        /*
-         wrapperPanel.removeAll();
-         wrapperPanel.add(finalImage);
-         wrapperPanel.add(nextGame);
-         wrapperPanel.add(back);
-         wrapperPanel.revalidate();*/
         setTimer();
     }
 

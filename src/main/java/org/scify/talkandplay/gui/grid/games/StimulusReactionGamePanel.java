@@ -136,7 +136,7 @@ public class StimulusReactionGamePanel extends javax.swing.JPanel {
     }
 
     private JPanel createGameItem(GameImage image) {
-        JPanel panel = guiHelper.createImagePanel(image.getImage(), "test", parent);
+        JPanel panel = guiHelper.createImagePanel(image.getImage(), "test");
         imagesPanel.removeAll();
         imagesPanel.add(panel);
         imagesPanel.revalidate();
@@ -173,9 +173,9 @@ public class StimulusReactionGamePanel extends javax.swing.JPanel {
     private void congratulate(GameImage image) {
         audioPlayer.getMediaPlayer().playMedia(game.getWinSound());
 
-        JPanel finalImage = guiHelper.createImagePanel(image.getImage(), "test", parent);
-        JPanel nextGame = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/more-icon.png"))), "Επόμενο παιχνίδι", parent);
-        JPanel back = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"))), "Πίσω", parent);
+        JPanel finalImage = guiHelper.createImagePanel(image.getImage(), "test");
+        JPanel nextGame = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/more-icon.png"))), "Επόμενο παιχνίδι");
+        JPanel back = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"))), "Πίσω");
 
         nextGame.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

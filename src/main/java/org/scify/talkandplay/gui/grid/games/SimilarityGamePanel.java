@@ -153,7 +153,7 @@ public class SimilarityGamePanel extends javax.swing.JPanel {
     }
 
     private JPanel createGameItem(final GameImage image) {
-        final JPanel panel = guiHelper.createImagePanel(image.getImage(), "", parent);
+        final JPanel panel = guiHelper.createImagePanel(image.getImage(), "");
 
         panel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -191,8 +191,8 @@ public class SimilarityGamePanel extends javax.swing.JPanel {
     private void congratulate() {
         audioPlayer.getMediaPlayer().playMedia(game.getWinSound());
 
-        JPanel nextGame = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/more-icon.png"))), "Επόμενο παιχνίδι", parent);
-        JPanel back = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"))), "Πίσω", parent);
+        JPanel nextGame = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/more-icon.png"))), "Επόμενο παιχνίδι");
+        JPanel back = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"))), "Πίσω");
 
         nextGame.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

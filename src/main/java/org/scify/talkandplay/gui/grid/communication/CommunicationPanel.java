@@ -1,73 +1,46 @@
 package org.scify.talkandplay.gui.grid.communication;
 
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import org.scify.talkandplay.gui.grid.BaseGridPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
-import org.scify.talkandplay.gui.helpers.GuiHelper;
+import org.scify.talkandplay.gui.grid.TileAction;
 import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.User;
-import org.scify.talkandplay.models.sensors.KeyboardSensor;
-import org.scify.talkandplay.models.sensors.MouseSensor;
-import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.CategoryService;
 import org.scify.talkandplay.services.SensorService;
-import org.scify.talkandplay.services.UserService;
-import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
-import uk.co.caprica.vlcj.player.MediaPlayer;
-import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 
-public class CommunicationPanel extends javax.swing.JPanel {
+public class CommunicationPanel extends BaseGridPanel {
 
     private User user;
-    private Timer timer;
-    private int selectedImage;
     private List<JPanel> panelList;
-    private GridLayout gridLayout;
-    private GridFrame parent;
 
     private CategoryService categoryService;
-    private UserService userService;
     private SensorService sensorService;
 
-    private AudioMediaPlayerComponent audioPlayer;
     private Category rootCategory;
     private Category currentCategory;
-    private GuiHelper guiHelper;
+
+    final CommunicationPanel currentPanel = this;
+
     private int rows, columns, grid;
     private int stopped = 0;
 
-    protected final int BORDER_SIZE = 5;
-    protected final int IMAGE_PADDING = 10;
-
-    public CommunicationPanel(String userName, GridFrame parent) throws IOException {
+    public CommunicationPanel(User user, GridFrame parent) throws IOException {
+        super(user, parent);
         this.categoryService = new CategoryService();
-        this.userService = new UserService();
-        this.audioPlayer = new AudioMediaPlayerComponent();
-        this.user = userService.getUser(userName);
+        this.user = user;
         this.sensorService = new SensorService(this.user);
         this.rootCategory = categoryService.getCategoriesWithRootParent(user);
         this.currentCategory = new Category();
-        this.parent = parent;
-        this.guiHelper = new GuiHelper();
 
         initComponents();
-        initAudioPlayer();
         initCustomComponents();
     }
 
@@ -80,72 +53,33 @@ public class CommunicationPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        imagesPanel = new javax.swing.JPanel();
-
-        javax.swing.GroupLayout imagesPanelLayout = new javax.swing.GroupLayout(imagesPanel);
-        imagesPanel.setLayout(imagesPanelLayout);
-        imagesPanelLayout.setHorizontalGroup(
-            imagesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
-        );
-        imagesPanelLayout.setVerticalGroup(
-            imagesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 327, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(imagesPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 535, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(imagesPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 327, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void initAudioPlayer() {
-        final CommunicationPanel currentPanel = this;
-        audioPlayer.getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
-            @Override
-            public void playing(MediaPlayer mediaPlayer) {
-                //audioPlayer.getMediaPlayer().setVolume(100);
-                audioPlayer.getMediaPlayer().mute(false);
-            }
-
-            @Override
-            public void finished(MediaPlayer mediaPlayer) {
-                if (currentCategory.getSubCategories().size() > 0) {
-                    currentPanel.showNextGrid(currentCategory);
-                } else {
-                    setTimer();
-                }
-            }
-        });
-
-        parent.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                audioPlayer.getMediaPlayer().stop();
-                audioPlayer.getMediaPlayer().stop();
-                e.getWindow().dispose();
-            }
-        });
-    }
-
     private void initCustomComponents() throws IOException {
-        imagesPanel.setBorder(new EmptyBorder(0, 10, 10, 10));
-        gridLayout = new GridLayout();
-        gridLayout.setHgap(IMAGE_PADDING);
-        gridLayout.setVgap(IMAGE_PADDING);
+        setBorder(new EmptyBorder(0, 10, 10, 10));
 
         drawImages(rootCategory);
     }
 
+    /**
+     * Draw the categories and their sub categories. This klassy piece of code
+     * does work.
+     *
+     * @param category
+     * @throws IOException
+     */
     private void drawImages(Category category) throws IOException {
-        selectedImage = 0;
-        imagesPanel.removeAll();
+        removeAll();
         panelList = new ArrayList<>();
         int emptiesCount = 0;
 
@@ -159,44 +93,56 @@ public class CommunicationPanel extends javax.swing.JPanel {
                     if (i > category.getSubCategories().size() - 1) {
                         emptiesCount++;
                     } else {
-                        imagesPanel.add(createCategoryItem(category.getSubCategories().get(i)));
+                        JPanel panel = createCategoryItem(category.getSubCategories().get(i));
+                        add(panel);
+                        panelList.add(panel);
                     }
                 }
                 if (i <= category.getSubCategories().size() - 1) {
                     stopped = i;
-                    imagesPanel.add(createMoreItem(category));
+                    JPanel panel = createMoreItem(category);
+                    add(panel);
+                    panelList.add(panel);
                 } else {
                     stopped = 0;
                 }
             } else {
                 for (Category childCategory : category.getSubCategories()) {
-                    imagesPanel.add(createCategoryItem(childCategory));
+                    JPanel panel = createCategoryItem(childCategory);
+                    add(panel);
+                    panelList.add(panel);
                 }
             }
-        } else if (category.getTiles().size() > 0) {
-            //draw the tile images
         }
 
         //if parent is null, display the first menu
         if (emptiesCount == 0 && null == category.getParentCategory()) {
-            imagesPanel.add(createBackItem(category, true));
+            JPanel panel = createBackItem(category, true);
+            add(panel);
+            panelList.add(panel);
         } else if (emptiesCount == 0 && null != category.getParentCategory()) {
-            imagesPanel.add(createBackItem(category, false));
+            JPanel panel = createBackItem(category, false);
+            add(panel);
+            panelList.add(panel);
         }
 
         //check if there's empty space that should be filled with
         //mock JLabels in order to keep the grid size
         if (emptiesCount > 0) {
-            imagesPanel.add(createLessItem(category));
+            add(createLessItem(category));
             for (int i = 0; i < emptiesCount; i++) {
-                imagesPanel.add(new JLabel());
+                add(new JLabel());
             }
         }
-        setTimer();
 
-        imagesPanel.revalidate();
-        imagesPanel.repaint();
-        parent.add(imagesPanel);
+        timer.setList(panelList);
+        timer.start();
+
+        revalidate();
+        repaint();
+
+        parent.clearGrid();
+        parent.addGrid(this);
         parent.revalidate();
         parent.repaint();
     }
@@ -209,34 +155,29 @@ public class CommunicationPanel extends javax.swing.JPanel {
      * @throws IOException
      */
     private JPanel createCategoryItem(final Category category) throws IOException {
-        JPanel panel = guiHelper.createImagePanel(category.getImage(), category.getName(), parent);
-        panelList.add(panel);
-        imagesPanel.add(panel);
 
-        panel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor)) {
-                    categoryItemAction(category);
-                }
-            }
-        });
-        panel.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent evt) {
-                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
-                if (sensorService.shouldSelect(sensor)) {
-                    categoryItemAction(category);
-                }
-            }
-        });
+        JPanel panel = tileCreator.create(category.getName(),
+                category.getImage(),
+                category.getSound(),
+                new TileAction() {
+                    @Override
+                    public void act() {
+                        timer.cancel();
+                        currentCategory = category;
+                    }
+
+                    @Override
+                    public void audioFinished() {
+                        if (currentCategory.getSubCategories().size() > 0) {
+                            currentPanel.showNextGrid(currentCategory);
+                        } else {
+                            timer.setList(panelList);
+                            timer.start();
+                        }
+                    }
+                });
+
         return panel;
-    }
-
-    private void categoryItemAction(Category category) {
-        timer.cancel();
-        currentCategory = category;
-        audioPlayer.getMediaPlayer().playMedia(category.getSound());
     }
 
     /**
@@ -247,48 +188,39 @@ public class CommunicationPanel extends javax.swing.JPanel {
      * @throws IOException
      */
     private JPanel createBackItem(final Category category, final boolean isRoot) throws IOException {
-        JPanel panel = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"))), "Πίσω", parent);
-        panelList.add(panel);
-        imagesPanel.add(panel);
 
-        panel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor)) {
-                    backItemAction(category, isRoot);
-                }
-            }
-        });
-        panel.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent evt) {
-                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
-                if (sensorService.shouldSelect(sensor)) {
-                    backItemAction(category, isRoot);
-                }
-            }
-        });
+        JPanel panel = tileCreator.create("Πίσω",
+                getClass().getResource("/org/scify/talkandplay/resources/back-icon.png").getFile(),
+                null,
+                new TileAction() {
+                    @Override
+                    public void act() {
+                        timer.cancel();
+                        stopped = 0;
+                        if (isRoot) {
+                           showMainMenu();
+                        } else if (!isRoot && category.getParentCategory() == null) {
+                            try {
+                                drawImages(rootCategory);
+                            } catch (IOException ex) {
+                                Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            try {
+                                drawImages(category.getParentCategory());
+                            } catch (IOException ex) {
+                                Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void audioFinished() {
+                        return;
+                    }
+                });
+
         return panel;
-    }
-
-    private void backItemAction(final Category category, final boolean isRoot) {
-        timer.cancel();
-        stopped = 0;
-        if (isRoot) {
-            parent.repaintMenu(imagesPanel);
-        } else if (!isRoot && category.getParentCategory() == null) {
-            try {
-                drawImages(rootCategory);
-            } catch (IOException ex) {
-                Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            try {
-                drawImages(category.getParentCategory());
-            } catch (IOException ex) {
-                Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
     }
 
     /**
@@ -299,38 +231,28 @@ public class CommunicationPanel extends javax.swing.JPanel {
      * @throws IOException
      */
     private JPanel createMoreItem(final Category category) throws IOException {
-        JPanel panel = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/more-icon.png"))), "Περισσότερα", parent);
-        panelList.add(panel);
-        imagesPanel.add(panel);
 
-        panel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor)) {
-                    moreItemAction(category);
-                }
-            }
-        });
-        panel.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent evt) {
-                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
-                if (sensorService.shouldSelect(sensor)) {
-                    moreItemAction(category);
-                }
-            }
-        });
+        JPanel panel = tileCreator.create("Περισσότερα",
+                getClass().getResource("/org/scify/talkandplay/resources/more-icon.png").getFile(),
+                null,
+                new TileAction() {
+                    @Override
+                    public void act() {
+                        timer.cancel();
+                        try {
+                            drawImages(category);
+                        } catch (IOException ex) {
+                            Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+
+                    @Override
+                    public void audioFinished() {
+                        return;
+                    }
+                });
 
         return panel;
-    }
-
-    private void moreItemAction(Category category) {
-        timer.cancel();
-        try {
-            drawImages(category);
-        } catch (IOException ex) {
-            Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**
@@ -341,38 +263,28 @@ public class CommunicationPanel extends javax.swing.JPanel {
      * @throws IOException
      */
     private JPanel createLessItem(final Category category) throws IOException {
-        JPanel panel = guiHelper.createResourceImagePanel((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/less-icon.png"))), "Λιγότερα", parent);
-        panelList.add(panel);
-        imagesPanel.add(panel);
 
-        panel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor)) {
-                    lessItemAction(category);
-                }
-            }
-        });
-        panel.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent evt) {
-                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
-                if (sensorService.shouldSelect(sensor)) {
-                    lessItemAction(category);
-                }
-            }
-        });
+        JPanel panel = tileCreator.create("Λιγότερα",
+                getClass().getResource("/org/scify/talkandplay/resources/less-icon.png").getFile(),
+                null,
+                new TileAction() {
+                    @Override
+                    public void act() {
+                        timer.cancel();
+                        try {
+                            drawImages(category);
+                        } catch (IOException ex) {
+                            Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+
+                    @Override
+                    public void audioFinished() {
+                        return;
+                    }
+                });
 
         return panel;
-    }
-
-    private void lessItemAction(Category category) {
-        timer.cancel();
-        try {
-            drawImages(category);
-        } catch (IOException ex) {
-            Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     private void showNextGrid(Category category) {
@@ -399,37 +311,10 @@ public class CommunicationPanel extends javax.swing.JPanel {
             columns = user.getConfiguration().getDefaultGridColumn();
             grid = rows * columns;
         }
-        gridLayout.setColumns(columns);
-        gridLayout.setRows(0);
-        imagesPanel.setLayout(gridLayout);
+        initLayout(0, columns);
     }
-
-    private void setTimer() {
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                panelList.get(selectedImage).requestFocusInWindow();
-                if (selectedImage == 0) {
-                    panelList.get(panelList.size() - 1).setBorder(null);
-                    panelList.get(selectedImage).setBorder(BorderFactory.createLineBorder(Color.BLUE, BORDER_SIZE));
-                    selectedImage++;
-                } else if (selectedImage == panelList.size() - 1) {
-                    panelList.get(selectedImage - 1).setBorder(null);
-                    panelList.get(selectedImage).setBorder(BorderFactory.createLineBorder(Color.BLUE, BORDER_SIZE));
-                    selectedImage = 0;
-                } else if (selectedImage < panelList.size() - 1 && selectedImage > 0) {
-                    panelList.get(selectedImage - 1).setBorder(null);
-                    panelList.get(selectedImage).setBorder(BorderFactory.createLineBorder(Color.BLUE, BORDER_SIZE));
-                    selectedImage++;
-                }
-            }
-        }, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
-    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel imagesPanel;
     // End of variables declaration//GEN-END:variables
 
 }
