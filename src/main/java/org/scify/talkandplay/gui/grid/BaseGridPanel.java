@@ -1,9 +1,11 @@
 package org.scify.talkandplay.gui.grid;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.UserService;
@@ -20,6 +22,7 @@ public class BaseGridPanel extends javax.swing.JPanel {
     protected User user;
     protected UserService userService;
     protected ArrayList<JPanel> panelList;
+    protected int empties;
 
     protected TimerManager timer;
     protected TileCreator tileCreator;
@@ -31,9 +34,11 @@ public class BaseGridPanel extends javax.swing.JPanel {
         this.parent = parent;
         this.timer = new TimerManager(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         this.tileCreator = new TileCreator(user);
+        this.empties = user.getConfiguration().getDefaultGridRow() * user.getConfiguration().getDefaultGridColumn();
 
         initComponents();
         initListeners();
+        setBackground(Color.white);
     }
 
     private void initListeners() {
@@ -57,6 +62,13 @@ public class BaseGridPanel extends javax.swing.JPanel {
         parent.addGrid(new GridPanel(user, parent));
         parent.revalidate();
         parent.repaint();
+    }
+
+    protected void fillWithEmpties() {
+        empties = empties - panelList.size();
+        for (int i = 0; i < empties; i++) {
+            add(new JLabel());
+        }
     }
 
     /**

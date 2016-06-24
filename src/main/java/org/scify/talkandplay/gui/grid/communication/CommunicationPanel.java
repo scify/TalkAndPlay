@@ -198,7 +198,7 @@ public class CommunicationPanel extends BaseGridPanel {
                         timer.cancel();
                         stopped = 0;
                         if (isRoot) {
-                           showMainMenu();
+                            showMainMenu();
                         } else if (!isRoot && category.getParentCategory() == null) {
                             try {
                                 drawImages(rootCategory);
@@ -316,5 +316,4 @@ public class CommunicationPanel extends BaseGridPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
 }

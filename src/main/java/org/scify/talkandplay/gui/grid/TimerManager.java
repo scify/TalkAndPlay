@@ -1,6 +1,5 @@
 package org.scify.talkandplay.gui.grid;
 
-import static com.sun.java.swing.plaf.motif.MotifBorders.FrameBorder.BORDER_SIZE;
 import java.awt.Color;
 import java.util.List;
 import java.util.Timer;
@@ -16,6 +15,10 @@ public class TimerManager {
     private long nextExecutionTime;
     private long period;
 
+    private static final int BORDER_SIZE = 10;
+    private static final String BORDER_COLOR = "#2258FF";
+    private static final String BACKGROUND_COLOR = "#E9E6FF";
+
     public TimerManager(List<JPanel> panelList, long nextExecutionTime, long period) {
         this.panelList = panelList;
         this.nextExecutionTime = nextExecutionTime;
@@ -30,16 +33,25 @@ public class TimerManager {
             public void run() {
                 panelList.get(selected).requestFocusInWindow();
                 if (selected == 0) {
-                    panelList.get(panelList.size() - 1).setBorder(null);
-                    panelList.get(selected).setBorder(BorderFactory.createLineBorder(Color.BLUE, BORDER_SIZE));
+                    panelList.get(panelList.size() - 1).setBorder(BorderFactory.createLineBorder(Color.white, BORDER_SIZE));
+                    panelList.get(panelList.size() - 1).setBackground(Color.white);
+                    panelList.get(selected).setBorder(BorderFactory.createLineBorder(Color.decode(BORDER_COLOR), BORDER_SIZE));
+                    panelList.get(selected).setBackground(Color.decode(BACKGROUND_COLOR));
                     selected++;
+                } else if (selected == 0 && selected == panelList.size() - 1) {
+                    panelList.get(selected).setBorder(BorderFactory.createLineBorder(Color.decode(BORDER_COLOR), BORDER_SIZE));
+                    panelList.get(selected).setBackground(Color.decode(BACKGROUND_COLOR));
                 } else if (selected == panelList.size() - 1) {
-                    panelList.get(selected - 1).setBorder(null);
-                    panelList.get(selected).setBorder(BorderFactory.createLineBorder(Color.BLUE, BORDER_SIZE));
+                    panelList.get(selected - 1).setBorder(BorderFactory.createLineBorder(Color.white, BORDER_SIZE));
+                    panelList.get(selected - 1).setBackground(Color.white);
+                    panelList.get(selected).setBorder(BorderFactory.createLineBorder(Color.decode(BORDER_COLOR), BORDER_SIZE));
+                    panelList.get(selected).setBackground(Color.decode(BACKGROUND_COLOR));
                     selected = 0;
                 } else if (selected < panelList.size() - 1 && selected > 0) {
-                    panelList.get(selected - 1).setBorder(null);
-                    panelList.get(selected).setBorder(BorderFactory.createLineBorder(Color.BLUE, BORDER_SIZE));
+                    panelList.get(selected - 1).setBorder(BorderFactory.createLineBorder(Color.white, BORDER_SIZE));
+                    panelList.get(selected - 1).setBackground(Color.white);
+                    panelList.get(selected).setBorder(BorderFactory.createLineBorder(Color.decode(BORDER_COLOR), BORDER_SIZE));
+                    panelList.get(selected).setBackground(Color.decode(BACKGROUND_COLOR));
                     selected++;
                 }
             }

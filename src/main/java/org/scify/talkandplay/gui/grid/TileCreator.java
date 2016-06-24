@@ -49,7 +49,6 @@ public class TileCreator {
 
             @Override
             public void finished(MediaPlayer mediaPlayer) {
-
                 tileAction.audioFinished();
             }
         });
@@ -109,5 +108,14 @@ public class TileCreator {
     public void freePlayerResources() {
         audioPlayer.getMediaPlayer().stop();
         audioPlayer.getMediaPlayer().release();
+    }
+
+    /**
+     * Play a sound on demand
+     *
+     * @param sound
+     */
+    public void playAudio(String sound) {
+        audioPlayer.getMediaPlayer().playMedia(sound);
     }
 }

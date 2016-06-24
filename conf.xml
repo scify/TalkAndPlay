@@ -52,16 +52,16 @@
       <enabled>true</enabled>
       <image>/home/christina/Desktop/talkandplay/music-player.png</image>
       <music>
-        <name>Μουσική</name>        
+        <name>Μουσική</name>
         <image>/home/christina/Desktop/talkandplay/music-player.png</image>
         <enabled>true</enabled>
-        <folderPath></folderPath>
+        <folderPath />
       </music>
       <video>
-        <name>Βίντεο</name>        
+        <name>Βίντεο</name>
         <image>/home/christina/Desktop/talkandplay/video-camera.png</image>
         <enabled>true</enabled>
-        <folderPath></folderPath>
+        <folderPath />
       </video>
     </entertainment>
     <games>
@@ -76,7 +76,7 @@
     <configuration>
       <rotationSpeed>1</rotationSpeed>
       <defaultGridRow>2</defaultGridRow>
-      <defaultGridColumn>2</defaultGridColumn>
+      <defaultGridColumn>4</defaultGridColumn>
       <selectionSensor>
         <type>mouse</type>
         <button>1</button>
@@ -86,9 +86,9 @@
     <communication>
       <name>Επικοινωνία</name>
       <enabled>true</enabled>
-      <image>/home/christina/Desktop/talkandplay/emoticon.png</image>
+      <image>/home/christina/Downloads/demo_imgs/cat_1.jpg</image>
       <rows>2</rows>
-      <columns>3</columns>
+      <columns>4</columns>
       <categories>
         <category name="Food">
           <rows>2</rows>
@@ -149,13 +149,13 @@
       <enabled>true</enabled>
       <image>/home/christina/Desktop/talkandplay/music-player.png</image>
       <music>
-        <name>Μουσική</name>        
+        <name>Μουσική</name>
         <image>/home/christina/Desktop/talkandplay/music-player.png</image>
         <enabled>true</enabled>
         <folderPath>/home/christina/Music</folderPath>
       </music>
       <video>
-        <name>Βίντεο</name>        
+        <name>Βίντεο</name>
         <image>/home/christina/Desktop/talkandplay/video-camera.png</image>
         <enabled>true</enabled>
         <folderPath>/home/christina/Videos</folderPath>
@@ -172,12 +172,12 @@
         <games>
           <game>
             <name>Game 1</name>
-            <image></image>
-            <sound></sound>
-            <winSound></winSound>
-            <errorSound></errorSound>
+            <image />
+            <sound />
+            <winSound />
+            <errorSound />
             <enabled>true</enabled>
-            <difficulty>4</difficulty>            
+            <difficulty>4</difficulty>
             <gameImages>
               <image>
                 <name>gdfgfdgfd</name>
@@ -185,21 +185,21 @@
                 <order>1</order>
               </image>
               <image>
-                <name></name>
+                <name />
                 <path>/home/christina/Desktop/talkandplay/games/happiness.png</path>
                 <order>2</order>
               </image>
               <image>
-                <name></name>
+                <name />
                 <path>/home/christina/Desktop/talkandplay/games/smile.png</path>
                 <order>3</order>
               </image>
             </gameImages>
           </game>
-           <game>
+          <game>
             <name>Game 2</name>
-            <image></image>
-            <sound></sound>
+            <image />
+            <sound />
             <winSound>/home/christina/Desktop/talkandplay/games/win.mp3</winSound>
             <errorSound>/home/christina/Desktop/talkandplay/games/error.mp3</errorSound>
             <enabled>true</enabled>
@@ -211,12 +211,12 @@
                 <order>1</order>
               </image>
               <image>
-                <name></name>
+                <name />
                 <path>/home/christina/Desktop/talkandplay/games/ballons.png</path>
                 <order>2</order>
               </image>
               <image>
-                <name></name>
+                <name />
                 <path>/home/christina/Desktop/talkandplay/games/ballons-1.png</path>
                 <order>3</order>
               </image>
@@ -231,12 +231,12 @@
         <games>
           <game>
             <name>Game 1</name>
-            <image></image>
-            <sound></sound>
+            <image />
+            <sound />
             <winSound>/home/christina/Desktop/talkandplay/games/win.mp3</winSound>
             <errorSound>/home/christina/Desktop/talkandplay/games/error.mp3</errorSound>
             <enabled>true</enabled>
-            <difficulty>4</difficulty>            
+            <difficulty>4</difficulty>
             <gameImages>
               <image>
                 <name>gdfgfdgfd</name>
@@ -245,13 +245,13 @@
                 <enabled>true</enabled>
               </image>
               <image>
-                <name></name>
+                <name />
                 <path>/home/christina/Desktop/talkandplay/games/aquarium.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
-              </image>             
+              </image>
               <image>
-                <name></name>
+                <name />
                 <path>/home/christina/Desktop/talkandplay/games/fishbones.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
@@ -259,105 +259,105 @@
             </gameImages>
           </game>
         </games>
-      </sequenceGames>  
+      </sequenceGames>
       <similarityGames>
         <name>Βρες το όμοιο</name>
         <enabled>true</enabled>
         <image>/home/christina/Desktop/talkandplay/games/similar.png</image>
-        <games>          
+        <games>
           <game>
             <name>Game 1</name>
-            <image></image>
-            <sound></sound>
+            <image />
+            <sound />
             <winSound>/home/christina/Desktop/talkandplay/games/win.mp3</winSound>
             <errorSound>/home/christina/Desktop/talkandplay/games/error.mp3</errorSound>
             <enabled>true</enabled>
-            <difficulty>4</difficulty>            
+            <difficulty>4</difficulty>
             <gameImages>
               <image>
-                <name></name>
+                <name />
                 <path>/home/christina/Desktop/talkandplay/games/similarity/like.png</path>
                 <enabled>true</enabled>
               </image>
               <image>
-                <name></name>
+                <name />
                 <path>/home/christina/Desktop/talkandplay/games/similarity/favorite.png</path>
                 <enabled>true</enabled>
-              </image>             
+              </image>
               <image>
-                <name></name>
+                <name />
                 <path>/home/christina/Desktop/talkandplay/games/similarity/shapes-2.png</path>
                 <enabled>true</enabled>
               </image>
               <image>
-                <name></name>
+                <name />
                 <path>/home/christina/Desktop/talkandplay/games/similarity/favorite-1.png</path>
                 <enabled>true</enabled>
               </image>
             </gameImages>
-          </game>  
+          </game>
           <game>
-          <name>Game 2</name>
-            <image></image>
-            <sound></sound>
+            <name>Game 2</name>
+            <image />
+            <sound />
             <winSound>/home/christina/Desktop/talkandplay/games/win.mp3</winSound>
             <errorSound>/home/christina/Desktop/talkandplay/games/error.mp3</errorSound>
             <enabled>true</enabled>
-            <difficulty>4</difficulty>            
+            <difficulty>4</difficulty>
             <gameImages>
               <image>
-                <name></name>
+                <name />
                 <path>/home/christina/Desktop/talkandplay/games/similarity/shapes.png</path>
                 <enabled>true</enabled>
               </image>
               <image>
-                <name></name>
+                <name />
                 <path>/home/christina/Desktop/talkandplay/games/similarity/shapes-1.png</path>
                 <enabled>true</enabled>
-              </image>             
+              </image>
               <image>
-                <name></name>
+                <name />
                 <path>/home/christina/Desktop/talkandplay/games/similarity/square.png</path>
                 <enabled>true</enabled>
               </image>
               <image>
-                <name></name>
+                <name />
                 <path>/home/christina/Desktop/talkandplay/games/similarity/square-1.png</path>
                 <enabled>true</enabled>
               </image>
             </gameImages>
-          </game>       
+          </game>
           <game>
-          <name>Game 3</name>
-            <image></image>
-            <sound></sound>
+            <name>Game 3</name>
+            <image />
+            <sound />
             <winSound>/home/christina/Desktop/talkandplay/games/win.mp3</winSound>
             <errorSound>/home/christina/Desktop/talkandplay/games/error.mp3</errorSound>
             <enabled>true</enabled>
-            <difficulty>4</difficulty>            
+            <difficulty>4</difficulty>
             <gameImages>
               <image>
-                <name></name>
+                <name />
                 <path>/home/christina/Desktop/talkandplay/games/similarity/star.png</path>
                 <enabled>true</enabled>
               </image>
               <image>
-                <name></name>
+                <name />
                 <path>/home/christina/Desktop/talkandplay/games/similarity/star-1.png</path>
                 <enabled>true</enabled>
-              </image>             
+              </image>
               <image>
-                <name></name>
+                <name />
                 <path>/home/christina/Desktop/talkandplay/games/similarity/star-2.png</path>
                 <enabled>true</enabled>
               </image>
               <image>
-                <name></name>
+                <name />
                 <path>/home/christina/Desktop/talkandplay/games/similarity/star-3.png</path>
                 <enabled>true</enabled>
               </image>
             </gameImages>
-          </game>           
+          </game>
         </games>
       </similarityGames>
     </games>

@@ -1,5 +1,6 @@
 package org.scify.talkandplay.gui.grid;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -31,7 +32,7 @@ public class GridPanel extends BaseGridPanel {
      */
     private void draw() {
         panelList = new ArrayList<>();
-        initLayout(1, 3);
+        initLayout(0, user.getConfiguration().getDefaultGridColumn());
 
         if (user.getCommunicationModule().isEnabled()) {
             JPanel communicationPanel = tileCreator.create(user.getCommunicationModule().getName(),
@@ -48,6 +49,7 @@ public class GridPanel extends BaseGridPanel {
                             showCommunication();
                         }
                     });
+            communicationPanel.setBackground(Color.white);
             add(communicationPanel);
             panelList.add(communicationPanel);
         }
@@ -67,6 +69,7 @@ public class GridPanel extends BaseGridPanel {
                             showEntertainment();
                         }
                     });
+            entertainmentPanel.setBackground(Color.white);
             add(entertainmentPanel);
             panelList.add(entertainmentPanel);
         }
@@ -86,9 +89,12 @@ public class GridPanel extends BaseGridPanel {
                             showGames();
                         }
                     });
+            gamesPanel.setBackground(Color.white);
             add(gamesPanel);
             panelList.add(gamesPanel);
         }
+
+        fillWithEmpties();
 
         timer.setList(panelList);
         timer.start();

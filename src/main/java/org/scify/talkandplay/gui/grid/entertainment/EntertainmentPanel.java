@@ -43,7 +43,7 @@ public class EntertainmentPanel extends BaseGridPanel {
     private void initCustomComponents() {
         removeAll();
         setBorder(new EmptyBorder(0, 10, 10, 10));
-        initLayout(1, 3);
+        initLayout(0, user.getConfiguration().getDefaultGridColumn());
 
         panelList = new ArrayList<>();
 
@@ -57,6 +57,8 @@ public class EntertainmentPanel extends BaseGridPanel {
         panelList.add(musicPanel);
         panelList.add(videoPanel);
         panelList.add(backPanel);
+        
+        fillWithEmpties();        
 
         timer.setList(panelList);
         timer.start();

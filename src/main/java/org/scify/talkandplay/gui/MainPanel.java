@@ -168,8 +168,6 @@ public class MainPanel extends javax.swing.JPanel {
     }
 
     public void updateProfilesPanel(User user, String oldName) {
-        System.out.println("user: " + user.getName() + ", " + oldName);
-
         for (ProfilePanel p : profilesPanel) {
             if (p.getUser().getName().equals(oldName)) {
                 p.repaintPanel(user);

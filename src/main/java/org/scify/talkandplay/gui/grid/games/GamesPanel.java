@@ -40,7 +40,7 @@ public class GamesPanel extends BaseGridPanel {
 
     private void initCustomComponents() {
         removeAll();
-        initLayout(1, 3);
+        initLayout(0, user.getConfiguration().getDefaultGridColumn());
 
         panelList = new ArrayList<>();
 
@@ -49,9 +49,12 @@ public class GamesPanel extends BaseGridPanel {
             add(gamePanel);
             panelList.add(gamePanel);
         }
+
         JPanel backPanel = createBackItem();
         add(backPanel);
         panelList.add(backPanel);
+
+        fillWithEmpties();
 
         timer.setList(panelList);
         timer.start();
@@ -73,6 +76,13 @@ public class GamesPanel extends BaseGridPanel {
                     @Override
                     public void act() {
                         timer.cancel();
+                        if ("stimulusReactionGame".equals(gameType.getType())) {
+                            showStimulusReactionGame();
+                        } else if ("sequenceGame".equals(gameType.getType())) {
+                            showSequenceGame();
+                        } else if ("similarityGame".equals(gameType.getType())) {
+                            showSimilarityGame();
+                        }
                     }
 
                     @Override
@@ -112,20 +122,14 @@ public class GamesPanel extends BaseGridPanel {
 
     private void showStimulusReactionGame() {
         StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
-        parent.clearGrid();
-        parent.addGrid(gamePanel);
     }
 
     private void showSequenceGame() {
         SequenceGamePanel gamePanel = new SequenceGamePanel(user, parent);
-        parent.clearGrid();
-        parent.addGrid(gamePanel);
     }
 
     private void showSimilarityGame() {
         SimilarityGamePanel gamePanel = new SimilarityGamePanel(user, parent);
-        parent.clearGrid();
-        parent.addGrid(gamePanel);
     }
 
 

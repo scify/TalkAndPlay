@@ -3,6 +3,7 @@ package org.scify.talkandplay.gui.helpers;
 import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -11,11 +12,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -119,10 +120,13 @@ public class GuiHelper {
         JLabel imgLabel = new JLabel(imageIcon);
         JLabel txtLabel = new JLabel(text);
         txtLabel.setFont(new Font("Courier New", Font.PLAIN, 40));
-        panel.setBackground(Color.LIGHT_GRAY);
+        panel.setBackground(Color.white);
+        panel.setBorder(new EmptyBorder(20, 20, 20, 20));
         panel.add(imgLabel, BorderLayout.CENTER);
         panel.add(txtLabel, BorderLayout.NORTH);
         txtLabel.setHorizontalAlignment(JLabel.CENTER);
+       panel.setBorder(BorderFactory.createLineBorder(Color.white, 10));
+
         return panel;
     }
 
