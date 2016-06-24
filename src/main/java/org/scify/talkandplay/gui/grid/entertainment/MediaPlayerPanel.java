@@ -1,10 +1,11 @@
-package org.scify.talkandplay.gui.grid;
+package org.scify.talkandplay.gui.grid.entertainment;
 
 import org.scify.talkandplay.gui.grid.entertainment.MusicPanel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.helpers.Time;
 import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.MediaPlayer;

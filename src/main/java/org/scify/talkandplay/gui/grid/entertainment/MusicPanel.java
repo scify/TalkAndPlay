@@ -16,7 +16,6 @@ import java.util.TimerTask;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import org.scify.talkandplay.gui.grid.GridFrame;
-import org.scify.talkandplay.gui.grid.MediaPlayerPanel;
 import org.scify.talkandplay.models.User;
 
 /**

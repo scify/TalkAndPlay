@@ -1,9 +1,7 @@
 package org.scify.talkandplay.gui.grid.entertainment;
 
-import java.awt.GridLayout;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -13,8 +11,6 @@ import org.scify.talkandplay.gui.grid.TileAction;
 import org.scify.talkandplay.models.User;
 
 public class EntertainmentPanel extends BaseGridPanel {
-
-    private List<JPanel> panelList;
 
     public EntertainmentPanel(User user, GridFrame parent) {
         super(user, parent);
@@ -48,7 +44,7 @@ public class EntertainmentPanel extends BaseGridPanel {
         removeAll();
         setBorder(new EmptyBorder(0, 10, 10, 10));
         initLayout(1, 3);
-        
+
         panelList = new ArrayList<>();
 
         JPanel musicPanel = createMusicItem();
@@ -67,7 +63,6 @@ public class EntertainmentPanel extends BaseGridPanel {
 
         revalidate();
         repaint();
-        
         parent.clearGrid();
         parent.addGrid(this);
         parent.revalidate();
@@ -133,7 +128,6 @@ public class EntertainmentPanel extends BaseGridPanel {
     }
 
     private void showMusic() {
-        timer.cancel();
         if (user.getEntertainmentModule().getMusicModule().getFolderPath() != null
                 && !user.getEntertainmentModule().getMusicModule().getFolderPath().isEmpty()
                 && (new File(user.getEntertainmentModule().getMusicModule().getFolderPath())).exists()) {
@@ -150,7 +144,6 @@ public class EntertainmentPanel extends BaseGridPanel {
     }
 
     private void showVideo() {
-        timer.cancel();
         if (user.getEntertainmentModule().getVideoModule().getFolderPath() != null
                 && !user.getEntertainmentModule().getVideoModule().getFolderPath().isEmpty()
                 && (new File(user.getEntertainmentModule().getVideoModule().getFolderPath())).exists()) {

@@ -7,8 +7,8 @@ import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.UserService;
 
 /**
- * The base panel that holds the grid All panels that contain a grid inherit
- * from this.
+ * The base panel that holds the grid.
+ * All panels that contain a grid inherit from this.
  *
  * @author christina
  */
