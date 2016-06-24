@@ -1,14 +1,16 @@
 package org.scify.talkandplay.gui.grid;
 
 import java.awt.GridLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.UserService;
 
 /**
- * The base panel that holds the grid.
- * All panels that contain a grid inherit from this.
+ * The base panel that holds the grid. All panels that contain a grid inherit
+ * from this.
  *
  * @author christina
  */
@@ -31,10 +33,21 @@ public class BaseGridPanel extends javax.swing.JPanel {
         this.tileCreator = new TileCreator(user);
 
         initComponents();
+        initListeners();
+    }
+
+    private void initListeners() {
+        parent.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                timer.cancel();
+                tileCreator.freePlayerResources();
+                e.getWindow().dispose();
+            }
+        });
     }
 
     protected void initLayout(int rows, int columns) {
-
         GridLayout gridLayout = new GridLayout(rows, columns, IMAGE_PADDING, IMAGE_PADDING);
         setLayout(gridLayout);
     }
