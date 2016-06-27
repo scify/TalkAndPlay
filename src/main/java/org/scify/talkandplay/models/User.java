@@ -3,8 +3,6 @@ package org.scify.talkandplay.models;
 import org.scify.talkandplay.models.modules.CommunicationModule;
 import org.scify.talkandplay.models.modules.EntertainmentModule;
 import org.scify.talkandplay.models.modules.GameModule;
-import java.util.ArrayList;
-import java.util.List;
 
 public class User {
 

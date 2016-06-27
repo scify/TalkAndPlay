@@ -7,6 +7,9 @@ public class Configuration {
     private int rotationSpeed;
     private int defaultGridRow;
     private int defaultGridColumn;
+    private boolean sound;
+    private boolean image;
+    private boolean text;
 
     private Sensor selectionSensor;
     private Sensor navigationSensor;
@@ -52,6 +55,30 @@ public class Configuration {
 
     public void setNavigationSensor(Sensor navigationSensor) {
         this.navigationSensor = navigationSensor;
+    }
+
+    public boolean hasSound() {
+        return sound;
+    }
+
+    public void setSound(boolean sound) {
+        this.sound = sound;
+    }
+
+    public boolean hasImage() {
+        return image;
+    }
+
+    public void setImage(boolean image) {
+        this.image = image;
+    }
+
+    public boolean hasText() {
+        return text;
+    }
+
+    public void setText(boolean text) {
+        this.text = text;
     }
 
 }

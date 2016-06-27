@@ -1,8 +1,13 @@
 package org.scify.talkandplay.gui;
 
-import java.awt.GridLayout;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.utils.ConfigurationHandler;
 
 public class MainFrame extends javax.swing.JFrame {
@@ -30,6 +35,7 @@ public class MainFrame extends javax.swing.JFrame {
         contentPanel = new javax.swing.JPanel();
         logoLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        titlePanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Talk&Play");
@@ -46,6 +52,19 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
         jLabel1.setText("SciFY 2016");
 
+        titlePanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout titlePanelLayout = new javax.swing.GroupLayout(titlePanel);
+        titlePanel.setLayout(titlePanelLayout);
+        titlePanelLayout.setHorizontalGroup(
+            titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        titlePanelLayout.setVerticalGroup(
+            titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout contentPaneLayout = new javax.swing.GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
@@ -55,20 +74,24 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
                         .addGap(736, 752, Short.MAX_VALUE)
                         .addComponent(jLabel1))
-                    .addGroup(contentPaneLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(logoLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(contentPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(contentPaneLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(logoLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(titlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentPaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(logoLabel)
-                .addGap(18, 18, 18)
-                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+                .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(contentPaneLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(logoLabel))
+                    .addComponent(titlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
+                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addContainerGap())
@@ -95,10 +118,27 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     public void changePanel(JPanel newPanel) {
+        if (newPanel instanceof MainPanel) {
+            titlePanel.removeAll();
+            titlePanel.setBackground(Color.white);
+        }
         contentPanel.removeAll();
         contentPanel.add(newPanel);
         revalidate();
         repaint();
+    }
+
+    public void setPanelTitle(String title) {
+        titlePanel.removeAll();
+        titlePanel.setBackground(Color.decode(UIConstants.getMainColor()));
+        titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.LINE_AXIS));
+        JLabel titleLabel = new JLabel(title);
+        titleLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 20));
+        titleLabel.setForeground(Color.white);
+        titleLabel.setHorizontalAlignment(JLabel.CENTER);
+        titlePanel.add(Box.createHorizontalGlue());
+        titlePanel.add(titleLabel);
+        titlePanel.add(Box.createHorizontalGlue());
     }
 
     /*
@@ -122,5 +162,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JLabel logoLabel;
+    private javax.swing.JPanel titlePanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -57,8 +57,11 @@ public class UserService {
         //add the configurations
         Element configuration = new Element("configuration");
         configuration.addContent(new Element("rotationSpeed").setText(String.valueOf(user.getConfiguration().getRotationSpeed())));
-        configuration.addContent(new Element("defaultGridRow").setText("2"));
-        configuration.addContent(new Element("defaultGridColumn").setText("2"));
+        configuration.addContent(new Element("defaultGridRow").setText(String.valueOf(user.getConfiguration().getDefaultGridRow())));
+        configuration.addContent(new Element("defaultGridColumn").setText(String.valueOf(user.getConfiguration().getDefaultGridColumn())));
+        configuration.addContent(new Element("sound").setText(String.valueOf(user.getConfiguration().hasSound())));
+        configuration.addContent(new Element("image").setText(String.valueOf(user.getConfiguration().hasImage())));
+        configuration.addContent(new Element("text").setText(String.valueOf(user.getConfiguration().hasText())));
 
         //add the selection sensor
         Element selectionSensor = new Element("selectionSensor");
@@ -118,7 +121,7 @@ public class UserService {
         music.addContent(new Element("enabled").setText("true"));
         music.addContent(new Element("image").setText(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/music_module.png").getPath()));
         entertainment.addContent(music);
-        
+
         //add video module settings
         Element video = new Element("video");
         video.addContent(new Element("name").setText("Βίντεο"));
@@ -160,6 +163,10 @@ public class UserService {
                 profile.getChild("configuration").getChild("rotationSpeed").setText(String.valueOf(user.getConfiguration().getRotationSpeed()));
                 profile.getChild("configuration").getChild("defaultGridRow").setText(String.valueOf(user.getConfiguration().getDefaultGridRow()));
                 profile.getChild("configuration").getChild("defaultGridColumn").setText(String.valueOf(user.getConfiguration().getDefaultGridColumn()));
+                profile.getChild("configuration").getChild("sound").setText(String.valueOf(user.getConfiguration().hasSound()));
+                profile.getChild("configuration").getChild("image").setText(String.valueOf(user.getConfiguration().hasImage()));
+                profile.getChild("configuration").getChild("text").setText(String.valueOf(user.getConfiguration().hasText()));
+
                 profile.setAttribute(new Attribute("preselected", String.valueOf(user.isPreselected())));
 
                 Element selectionSensor = new Element("selectionSensor");
@@ -192,7 +199,8 @@ public class UserService {
 
                     profile.getChild("configuration").removeChild("navigationSensor");
                     profile.getChild("configuration").addContent(navigationSensor);
-
+                } else {
+                    profile.getChild("configuration").removeChild("navigationSensor");
                 }
 
                 if (user.getImage() == null) {
@@ -230,12 +238,10 @@ public class UserService {
         }
     }
 
-    
-    public boolean hasBrokenFiles(User user){
+    public boolean hasBrokenFiles(User user) {
         boolean flag = false;
-        
-       // for(File file : configurationHandler.getFiles())
-        
+
+        // for(File file : configurationHandler.getFiles())
         return flag;
     }
 }

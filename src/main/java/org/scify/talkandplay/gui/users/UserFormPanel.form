@@ -57,80 +57,90 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="49" pref="404" max="32767" attributes="0"/>
+                  <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="editUserButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="createUserButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="backButton" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="errorLabel" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="autoScanCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="manualScanCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="11" pref="661" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-                                  <Component id="uploadImageLabel" min="-2" pref="106" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="sensorLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="nameLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="rotationSpeedSlider" min="-2" max="-2" attributes="0"/>
-                              <Component id="rotationSpeedLabel" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                      <Component id="defaultGridSizeLabel" min="-2" max="-2" attributes="0"/>
-                                      <Component id="tilesLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                                      <Component id="rowsTextField" min="-2" pref="41" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="xLabel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="columnsTextField" min="-2" pref="41" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="errorLabel" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="soundCheckBox" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                  <Component id="textCheckBox" min="-2" max="-2" attributes="0"/>
+                                  <Component id="editUserButton" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="imageCheckBox" min="-2" max="-2" attributes="0"/>
+                                  <Component id="createUserButton" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="backButton" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="nameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="nameTextField" alignment="0" min="-2" pref="245" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Component id="nameTextField" min="-2" pref="223" max="-2" attributes="0"/>
+                              </Group>
                               <Component id="imageLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="selectionSensorTextField1" max="32767" attributes="0"/>
-                                      <Component id="navigationSensorTextField" pref="178" max="32767" attributes="0"/>
-                                      <Component id="selectionSensorTextField2" alignment="0" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                                  <Component id="uploadImageLabel" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="sensorLabel" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="manualScanRadioButton" min="-2" max="-2" attributes="0"/>
+                                              <Component id="autoScanRadioButton" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="navigationSensorTextField" min="-2" pref="178" max="-2" attributes="0"/>
+                                      <Component id="selectionSensorTextField1" min="-2" pref="178" max="-2" attributes="0"/>
+                                      <Component id="selectionSensorTextField2" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="rotationSpeedSlider" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="defaultGridSizeLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rotationSpeedLabel" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                          <Component id="soundCheckBox" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="textCheckBox" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="imageCheckBox" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="tilesLabel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="rowsTextField" min="-2" pref="41" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="xLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="columnsTextField" min="-2" pref="41" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="209" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -142,60 +152,77 @@
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="rotationSpeedLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="sensorLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="rotationSpeedSlider" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                          <Component id="defaultGridSizeLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="autoScanRadioButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="selectionSensorTextField1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                          <Component id="manualScanRadioButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="navigationSensorTextField" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="columnsTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="xLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="rowsTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="tilesLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="soundCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="textCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="imageCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="selectionSensorTextField2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="nameLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="nameTextField" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="rotationSpeedLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="rotationSpeedSlider" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="errorLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="createUserButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="editUserButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="backButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="errorLabel" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                          <Component id="imageLabel" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="defaultGridSizeLabel" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="uploadImageLabel" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="xLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="columnsTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="rowsTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="tilesLabel" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="soundCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="textCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="imageCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace pref="152" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="nameLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="nameTextField" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                          <Component id="imageLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="uploadImageLabel" min="-2" pref="90" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="sensorLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="autoScanCheckBox" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="selectionSensorTextField1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="12" max="32767" attributes="0"/>
-                          <Component id="manualScanCheckBox" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="navigationSensorTextField" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="selectionSensorTextField2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -402,36 +429,60 @@
             <Property name="text" type="java.lang.String" value="&#x395;&#x3b9;&#x3ba;&#x3cc;&#x3bd;&#x3b1;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="autoScanCheckBox">
+        <Component class="javax.swing.JTextField" name="selectionSensorTextField1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x38c;&#x3c1;&#x3b9;&#x3c3;&#x3b5; &#x3ba;&#x3bf;&#x3c5;&#x3bc;&#x3c0;&#x3af; &#x3b5;&#x3c0;&#x3b9;&#x3bb;&#x3bf;&#x3b3;&#x3ae;&#x3c2;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="selectionSensorTextField1MouseClicked"/>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="selectionSensorTextField1FocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="selectionSensorTextField1FocusLost"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="selectionSensorTextField1KeyPressed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="navigationSensorTextField">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x38c;&#x3c1;&#x3b9;&#x3c3;&#x3b5; &#x3ba;&#x3bf;&#x3c5;&#x3bc;&#x3c0;&#x3af; &#x3c0;&#x3bb;&#x3bf;&#x3ae;&#x3b3;&#x3b7;&#x3c3;&#x3b7;&#x3c2;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="navigationSensorTextFieldMouseClicked"/>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="navigationSensorTextFieldFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="navigationSensorTextFieldFocusLost"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="navigationSensorTextFieldKeyPressed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="selectionSensorTextField2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x38c;&#x3c1;&#x3b9;&#x3c3;&#x3b5; &#x3ba;&#x3bf;&#x3c5;&#x3bc;&#x3c0;&#x3af; &#x3b5;&#x3c0;&#x3b9;&#x3bb;&#x3bf;&#x3b3;&#x3ae;&#x3c2;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="selectionSensorTextField2MouseClicked"/>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="selectionSensorTextField2FocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="selectionSensorTextField2FocusLost"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="selectionSensorTextField2KeyPressed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="autoScanRadioButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x391;&#x3c5;&#x3c4;&#x3cc;&#x3bc;&#x3b1;&#x3c4;&#x3b1;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="autoScanRadioButtonActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="manualScanCheckBox">
+        <Component class="javax.swing.JRadioButton" name="manualScanRadioButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x3a7;&#x3b5;&#x3b9;&#x3c1;&#x3bf;&#x3ba;&#x3af;&#x3bd;&#x3b7;&#x3c4;&#x3b1;"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="selectionSensorTextField1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#x38c;&#x3c1;&#x3b9;&#x3c3;&#x3b5; &#x3ba;&#x3bf;&#x3c5;&#x3bc;&#x3c0;&#x3af; &#x3b5;&#x3c0;&#x3b9;&#x3bb;&#x3bf;&#x3b3;&#x3ae;&#x3c2;"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="navigationSensorTextField">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#x38c;&#x3c1;&#x3b9;&#x3c3;&#x3b5; &#x3ba;&#x3bf;&#x3c5;&#x3bc;&#x3c0;&#x3af; &#x3b5;&#x3bd;&#x3b1;&#x3bb;&#x3bb;&#x3b1;&#x3b3;&#x3ae;&#x3c2;"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="selectionSensorTextField2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#x38c;&#x3c1;&#x3b9;&#x3c3;&#x3b5; &#x3ba;&#x3bf;&#x3c5;&#x3bc;&#x3c0;&#x3af; &#x3b5;&#x3c0;&#x3b9;&#x3bb;&#x3bf;&#x3b3;&#x3ae;&#x3c2;"/>
-          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manualScanRadioButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

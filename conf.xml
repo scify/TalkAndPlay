@@ -71,17 +71,25 @@
     </games>
   </profile>
   <profile preselected="false">
-    <name>test</name>
-    <image>/home/christina/Desktop/talkandplay/fish.png</image>
+    <name>testaki</name>
+    <image>/home/christina/Downloads/demo_imgs/edfsaf.jpg</image>
     <configuration>
       <rotationSpeed>1</rotationSpeed>
-      <defaultGridRow>2</defaultGridRow>
-      <defaultGridColumn>4</defaultGridColumn>
+      <defaultGridRow>3</defaultGridRow>
+      <defaultGridColumn>3</defaultGridColumn>
+      <sound>false</sound>
+      <image>false</image>
+      <text>false</text>
       <selectionSensor>
-        <type>mouse</type>
-        <button>1</button>
-        <clickCount>2</clickCount>
+        <type>keyboard</type>
+        <keyCode>51</keyCode>
+        <keyChar>3</keyChar>
       </selectionSensor>
+      <navigationSensor>
+        <type>mouse</type>
+        <button>3</button>
+        <clickCount>2</clickCount>
+      </navigationSensor>
     </configuration>
     <communication>
       <name>Επικοινωνία</name>
