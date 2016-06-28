@@ -37,6 +37,7 @@ public class GridPanel extends BaseGridPanel {
         if (user.getCommunicationModule().isEnabled()) {
             JPanel communicationPanel = tileCreator.create(user.getCommunicationModule().getName(),
                     user.getCommunicationModule().getImage(),
+                    user.getCommunicationModule().getImageURL(),
                     user.getCommunicationModule().getSound(),
                     new TileAction() {
                         @Override
@@ -57,6 +58,7 @@ public class GridPanel extends BaseGridPanel {
         if (user.getEntertainmentModule().isEnabled()) {
             JPanel entertainmentPanel = tileCreator.create(user.getEntertainmentModule().getName(),
                     user.getEntertainmentModule().getImage(),
+                    user.getEntertainmentModule().getImageURL(),
                     user.getEntertainmentModule().getSound(),
                     new TileAction() {
                         @Override
@@ -77,6 +79,7 @@ public class GridPanel extends BaseGridPanel {
         if (user.getGameModule().isEnabled()) {
             JPanel gamesPanel = tileCreator.create(user.getGameModule().getName(),
                     user.getGameModule().getImage(),
+                    user.getGameModule().getImageURL(),
                     user.getGameModule().getSound(),
                     new TileAction() {
                         @Override

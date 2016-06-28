@@ -74,22 +74,17 @@
     <name>testaki</name>
     <image>/home/christina/Downloads/demo_imgs/edfsaf.jpg</image>
     <configuration>
-      <rotationSpeed>1</rotationSpeed>
+      <rotationSpeed>5</rotationSpeed>
       <defaultGridRow>3</defaultGridRow>
-      <defaultGridColumn>3</defaultGridColumn>
+      <defaultGridColumn>4</defaultGridColumn>
       <sound>false</sound>
-      <image>false</image>
+      <image>true</image>
       <text>false</text>
       <selectionSensor>
-        <type>keyboard</type>
-        <keyCode>51</keyCode>
-        <keyChar>3</keyChar>
-      </selectionSensor>
-      <navigationSensor>
         <type>mouse</type>
-        <button>3</button>
-        <clickCount>2</clickCount>
-      </navigationSensor>
+        <button>1</button>
+        <clickCount>1</clickCount>
+      </selectionSensor>
     </configuration>
     <communication>
       <name>Επικοινωνία</name>
@@ -368,6 +363,53 @@
           </game>
         </games>
       </similarityGames>
+    </games>
+  </profile>
+  <profile preselected="false">
+    <name>kota</name>
+    <image>/home/christina/Downloads/demo_imgs/250px-WhiteCat.jpg</image>
+    <configuration>
+      <rotationSpeed>1</rotationSpeed>
+      <defaultGridRow>3</defaultGridRow>
+      <defaultGridColumn>3</defaultGridColumn>
+      <sound>false</sound>
+      <image>true</image>
+      <text>true</text>
+      <selectionSensor>
+        <type>mouse</type>
+        <button>3</button>
+        <clickCount>2</clickCount>
+      </selectionSensor>
+    </configuration>
+    <communication>
+      <name>Επικοινωνία</name>
+      <enabled>true</enabled>
+      <image></image>
+      <rows>1</rows>
+      <columns>1</columns>
+      <categories />
+    </communication>
+    <entertainment>
+      <name>Ψυχαγωγία</name>
+      <enabled>true</enabled>
+      <image></image>
+      <musicPath />
+      <videoPath />
+      <music>
+        <name>Μουσική</name>
+        <enabled>true</enabled>
+        <image></image>
+      </music>
+      <video>
+        <name>Βίντεο</name>
+        <enabled>true</enabled>
+        <image></image>
+      </video>
+    </entertainment>
+    <games>
+      <name>Παιχνίδια</name>
+      <enabled>true</enabled>
+      <image></image>
     </games>
   </profile>
 </profiles>

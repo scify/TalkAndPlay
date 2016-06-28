@@ -1,5 +1,6 @@
 package org.scify.talkandplay.gui.grid;
 
+import java.net.URL;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.models.User;
@@ -64,9 +65,25 @@ public class TileCreator {
      * @param tileAction
      * @return JPanel panel
      */
-    public JPanel create(String name, String image, final String sound, final TileAction tileAction) {
+    public JPanel create(String name, String image, String sound, TileAction tileAction) {
         JPanel panel = guiHelper.createImagePanel(image, name);
+        addListeners(panel, sound, tileAction);
+        return panel;
+    }
 
+    public JPanel create(String name, String image, URL imageURL, String sound, TileAction tileAction) {
+        JPanel panel;
+        if (image==null || image.isEmpty()) {
+            panel = guiHelper.createImagePanel(imageURL, name);
+        } else {
+            panel = guiHelper.createImagePanel(image, name);
+        }
+
+        addListeners(panel, sound, tileAction);
+        return panel;
+    }
+
+    private void addListeners(JPanel panel, final String sound, final TileAction tileAction) {
         panel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
@@ -84,8 +101,6 @@ public class TileCreator {
                 }
             }
         });
-
-        return panel;
     }
 
     /**

@@ -161,6 +161,9 @@ public class ConfigurationHandler {
         configuration.setRotationSpeed(Integer.parseInt(configurationNode.getChildText("rotationSpeed")));
         configuration.setDefaultGridRow(Integer.parseInt(configurationNode.getChildText("defaultGridRow")));
         configuration.setDefaultGridColumn(Integer.parseInt(configurationNode.getChildText("defaultGridColumn")));
+        configuration.setSound("true".equals(configurationNode.getChildText("sound")));
+        configuration.setImage("true".equals(configurationNode.getChildText("image")));
+        configuration.setText("true".equals(configurationNode.getChildText("text")));
 
         Element selectionSensorEl = configurationNode.getChild("selectionSensor");
         if ("mouse".equals(selectionSensorEl.getChildText("type"))) {
@@ -197,10 +200,15 @@ public class ConfigurationHandler {
 
         CommunicationModule communicationModule = new CommunicationModule();
         communicationModule.setName(communicationNode.getChildText("name"));
-        communicationModule.setImage(communicationNode.getChildText("image"));
         communicationModule.setSound(getSound(communicationNode.getChildText("sound")));
         communicationModule.setRows(Integer.parseInt(communicationNode.getChildText("rows")));
         communicationModule.setColumns(Integer.parseInt(communicationNode.getChildText("columns")));
+
+        if (communicationNode.getChildText("image").isEmpty()) {
+            communicationModule.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/communication_module.png"));
+        } else {
+            communicationModule.setImage(communicationNode.getChildText("image"));
+        }
 
         communicationModule.setEnabled("true".equals(communicationNode.getChildText("enabled")));
         communicationModule.setCategories(categoriesArray);
@@ -212,9 +220,14 @@ public class ConfigurationHandler {
         //set the entertainment module settings
         EntertainmentModule entertainmentModule = new EntertainmentModule();
         entertainmentModule.setName(entertainmentNode.getChildText("name"));
-        entertainmentModule.setImage(entertainmentNode.getChildText("image"));
         entertainmentModule.setSound(getSound(entertainmentNode.getChildText("sound")));
         entertainmentModule.setEnabled("true".equals(entertainmentNode.getChildText("enabled")));
+
+        if (entertainmentNode.getChildText("image").isEmpty()) {
+            entertainmentModule.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/entertainment_module.png"));
+        } else {
+            entertainmentModule.setImage(entertainmentNode.getChildText("image"));
+        }
 
         //set the music module
         Element musicNode = (Element) entertainmentNode.getChild("music");
@@ -244,9 +257,14 @@ public class ConfigurationHandler {
         //set the game module settings
         GameModule gameModule = new GameModule();
         gameModule.setName(gameNode.getChildText("name"));
-        gameModule.setImage(gameNode.getChildText("image"));
         gameModule.setSound(getSound(gameNode.getChildText("sound")));
         gameModule.setEnabled("true".equals(gameNode.getChildText("enabled")));
+
+        if (gameNode.getChildText("image").isEmpty()) {
+            gameModule.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/games_module.png"));
+        } else {
+            gameModule.setImage(gameNode.getChildText("image"));
+        }
 
         //set the stimulus reaction games
         Element stimulusReactionGamesNode = gameNode.getChild("stimulusReactionGames");

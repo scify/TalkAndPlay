@@ -1,11 +1,16 @@
 package org.scify.talkandplay.models.modules;
 
+import java.net.URL;
+
 public class Module {
 
     private String name;
     private String image;
     private String sound;
     private boolean enabled;
+
+    //used only to display default ImageIcons from the app jar
+    private URL imageURL;
 
     public Module() {
     }
@@ -40,6 +45,14 @@ public class Module {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public URL getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(URL imageURL) {
+        this.imageURL = imageURL;
     }
 
 }

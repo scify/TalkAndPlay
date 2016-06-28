@@ -1,49 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.scify.talkandplay.gui.configuration;
 
-import java.awt.Color;
-import java.awt.Font;
-import javax.swing.UIManager;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.plaf.ColorUIResource;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import org.scify.talkandplay.gui.MainFrame;
 
-/**
- *
- * @author christina
- */
 public class ConfigurationPanel extends javax.swing.JPanel {
+
+    private MainFrame parent;
 
     /**
      * Creates new form ConfigurationPanel
      */
-    public ConfigurationPanel() {
+    public ConfigurationPanel(MainFrame parent) {
+        this.parent = parent;
         initComponents();
         initCustomComponents();
     }
 
     private void initCustomComponents() {
-        
-        tabsPane.addTab("Επικοινωνία", new CommunicationPanel());
-        tabsPane.addTab("Ψυχαγωγία", null);
-        tabsPane.addTab("Παιχνίδια", null);
-        
-        tabsPane.setFont(new Font("DejaVu Sans", Font.PLAIN, 18));
-        
-        tabsPane.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent ce) {
-                System.out.println(tabsPane.getSelectedIndex());
-               tabsPane.setForeground(Color.decode("#4BA145"));
-               tabsPane.setForegroundAt(tabsPane.getSelectedIndex(), Color.white);
-            }
-        });
-    }
+        parent.setPanelTitle("Προτιμήσεις χρήστη");
 
+        setLayout(new GridLayout(0, 2, 10, 10));
+
+        add(new InfoPanel());
+        add(new TabsPanel());
+        revalidate();
+        repaint();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,47 +37,19 @@ public class ConfigurationPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        contentPanel = new javax.swing.JPanel();
-        tabsPane = new javax.swing.JTabbedPane();
-
-        contentPanel.setBackground(new java.awt.Color(255, 255, 255));
-        contentPanel.setForeground(new java.awt.Color(255, 255, 255));
-
-        tabsPane.setBackground(new java.awt.Color(255, 255, 255));
-        tabsPane.setForeground(new java.awt.Color(51, 51, 51));
-
-        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
-        contentPanel.setLayout(contentPanelLayout);
-        contentPanelLayout.setHorizontalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                .addContainerGap(309, Short.MAX_VALUE)
-                .addComponent(tabsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
-        );
-        contentPanelLayout.setVerticalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addComponent(tabsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 393, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 307, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel contentPanel;
-    private javax.swing.JTabbedPane tabsPane;
     // End of variables declaration//GEN-END:variables
 }

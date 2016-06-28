@@ -3,15 +3,19 @@ package org.scify.talkandplay.gui.users;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
+import java.text.NumberFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.NumberFormatter;
+import org.apache.commons.lang3.StringUtils;
 import org.scify.talkandplay.gui.MainFrame;
 import org.scify.talkandplay.gui.MainPanel;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
@@ -66,7 +70,7 @@ public class UserFormPanel extends javax.swing.JPanel {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
-        createUserPanel = new javax.swing.JPanel();
+        userPanel = new javax.swing.JPanel();
         nameTextField = new javax.swing.JTextField();
         uploadImageLabel = new javax.swing.JLabel();
         rotationSpeedSlider = new javax.swing.JSlider();
@@ -96,7 +100,7 @@ public class UserFormPanel extends javax.swing.JPanel {
 
         jButton1.setText("jButton1");
 
-        createUserPanel.setBackground(new java.awt.Color(255, 255, 255));
+        userPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         nameTextField.setBackground(new java.awt.Color(255, 255, 255));
         nameTextField.setForeground(new java.awt.Color(51, 51, 51));
@@ -272,83 +276,83 @@ public class UserFormPanel extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout createUserPanelLayout = new javax.swing.GroupLayout(createUserPanel);
-        createUserPanel.setLayout(createUserPanelLayout);
-        createUserPanelLayout.setHorizontalGroup(
-            createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(createUserPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout userPanelLayout = new javax.swing.GroupLayout(userPanel);
+        userPanel.setLayout(userPanelLayout);
+        userPanelLayout.setHorizontalGroup(
+            userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userPanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(createUserPanelLayout.createSequentialGroup()
+                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(userPanelLayout.createSequentialGroup()
                         .addComponent(nameLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(errorLabel)
-                            .addGroup(createUserPanelLayout.createSequentialGroup()
-                                .addComponent(editUserButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(createUserButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(backButton)))
+                        .addComponent(editUserButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(createUserButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(backButton)
                         .addGap(56, 56, 56))
-                    .addGroup(createUserPanelLayout.createSequentialGroup()
-                        .addGroup(createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(createUserPanelLayout.createSequentialGroup()
+                    .addGroup(userPanelLayout.createSequentialGroup()
+                        .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(userPanelLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(imageLabel)
-                            .addGroup(createUserPanelLayout.createSequentialGroup()
+                            .addGroup(userPanelLayout.createSequentialGroup()
                                 .addGap(49, 49, 49)
                                 .addComponent(uploadImageLabel)))
                         .addGap(89, 89, 89)
-                        .addGroup(createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(createUserPanelLayout.createSequentialGroup()
-                                .addGroup(createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(userPanelLayout.createSequentialGroup()
+                                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(sensorLabel)
-                                    .addGroup(createUserPanelLayout.createSequentialGroup()
+                                    .addGroup(userPanelLayout.createSequentialGroup()
                                         .addGap(6, 6, 6)
-                                        .addGroup(createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(manualScanRadioButton)
                                             .addComponent(autoScanRadioButton))))
                                 .addGap(54, 54, 54))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createUserPanelLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userPanelLayout.createSequentialGroup()
                                 .addGap(21, 21, 21)
-                                .addGroup(createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(navigationSensorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(selectionSensorTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(selectionSensorTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(128, 128, 128)
-                        .addGroup(createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createUserPanelLayout.createSequentialGroup()
+                        .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userPanelLayout.createSequentialGroup()
                                 .addComponent(rotationSpeedSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(141, 141, 141))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createUserPanelLayout.createSequentialGroup()
-                                .addGroup(createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(defaultGridSizeLabel)
-                                    .addComponent(rotationSpeedLabel)
-                                    .addGroup(createUserPanelLayout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(soundCheckBox)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(textCheckBox)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(imageCheckBox))
-                                    .addComponent(tilesLabel))
-                                .addGap(115, 115, 115))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createUserPanelLayout.createSequentialGroup()
+                                .addGap(26, 26, 26))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(defaultGridSizeLabel)
+                                .addComponent(rotationSpeedLabel)
+                                .addGroup(userPanelLayout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addComponent(soundCheckBox)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(textCheckBox)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(imageCheckBox))
+                                .addComponent(tilesLabel))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userPanelLayout.createSequentialGroup()
                                 .addComponent(rowsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(xLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(columnsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(209, 209, 209))))))
+                                .addGap(94, 94, 94)))
+                        .addGap(0, 115, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(errorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        createUserPanelLayout.setVerticalGroup(
-            createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(createUserPanelLayout.createSequentialGroup()
+        userPanelLayout.setVerticalGroup(
+            userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userPanelLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(createUserPanelLayout.createSequentialGroup()
+                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(userPanelLayout.createSequentialGroup()
                         .addComponent(sensorLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(autoScanRadioButton)
@@ -359,63 +363,57 @@ public class UserFormPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(navigationSensorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(selectionSensorTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(createUserPanelLayout.createSequentialGroup()
-                        .addGroup(createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(createUserPanelLayout.createSequentialGroup()
+                        .addComponent(selectionSensorTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(userPanelLayout.createSequentialGroup()
+                        .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(userPanelLayout.createSequentialGroup()
                                 .addComponent(nameLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(createUserPanelLayout.createSequentialGroup()
+                            .addGroup(userPanelLayout.createSequentialGroup()
                                 .addComponent(rotationSpeedLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(rotationSpeedSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(createUserPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(errorLabel)
+                        .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(userPanelLayout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(imageLabel))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(defaultGridSizeLabel)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(uploadImageLabel)
+                            .addGroup(userPanelLayout.createSequentialGroup()
+                                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(xLabel)
+                                    .addComponent(columnsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(rowsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addComponent(tilesLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(createUserButton)
-                                    .addComponent(editUserButton)
-                                    .addComponent(backButton))
-                                .addGap(14, 14, 14))
-                            .addGroup(createUserPanelLayout.createSequentialGroup()
-                                .addGroup(createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(createUserPanelLayout.createSequentialGroup()
-                                        .addGap(40, 40, 40)
-                                        .addComponent(imageLabel))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createUserPanelLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(defaultGridSizeLabel)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(uploadImageLabel)
-                                    .addGroup(createUserPanelLayout.createSequentialGroup()
-                                        .addGroup(createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(xLabel)
-                                            .addComponent(columnsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(rowsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(30, 30, 30)
-                                        .addComponent(tilesLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(createUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(soundCheckBox)
-                                            .addComponent(textCheckBox)
-                                            .addComponent(imageCheckBox))))
-                                .addContainerGap(152, Short.MAX_VALUE))))))
+                                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(soundCheckBox)
+                                    .addComponent(textCheckBox)
+                                    .addComponent(imageCheckBox))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addComponent(errorLabel)
+                .addGap(70, 70, 70)
+                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(createUserButton)
+                    .addComponent(editUserButton)
+                    .addComponent(backButton)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(createUserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(userPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(createUserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(userPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -427,6 +425,12 @@ public class UserFormPanel extends javax.swing.JPanel {
         ButtonGroup scanButtons = new ButtonGroup();
         scanButtons.add(autoScanRadioButton);
         scanButtons.add(manualScanRadioButton);
+
+        NumberFormatter formatter = new NumberFormatter(NumberFormat.getInstance());
+        formatter.setValueClass(Integer.class);
+        formatter.setMinimum(2);
+        formatter.setMaximum(6);
+        formatter.setAllowsInvalid(false);
 
         if (user != null) {
             parent.setPanelTitle("Επεξεργασία χρήστη");
@@ -451,15 +455,19 @@ public class UserFormPanel extends javax.swing.JPanel {
             //check if auto or manual scanning is set
             if (user.getConfiguration().getNavigationSensor() == null) {
                 autoScanRadioButton.setSelected(true);
-                selectionSensorTextField1.setEnabled(true);
-                selectionSensorTextField2.setEnabled(false);
-                navigationSensorTextField.setEnabled(false);
+
+                enableTextField(selectionSensorTextField1);
+                disableTextField(selectionSensorTextField2);
+                disableTextField(navigationSensorTextField);
+
                 selectionSensorTextField1.setText(setSensorText(user.getConfiguration().getSelectionSensor()));
             } else {
                 manualScanRadioButton.setSelected(true);
-                selectionSensorTextField1.setEnabled(false);
-                selectionSensorTextField2.setEnabled(true);
-                navigationSensorTextField.setEnabled(true);
+
+                enableTextField(selectionSensorTextField2);
+                enableTextField(navigationSensorTextField);
+                disableTextField(selectionSensorTextField1);
+
                 selectionSensorTextField2.setText(setSensorText(user.getConfiguration().getSelectionSensor()));
                 navigationSensorTextField.setText(setSensorText(user.getConfiguration().getNavigationSensor()));
             }
@@ -472,9 +480,9 @@ public class UserFormPanel extends javax.swing.JPanel {
             createUserButton.setMargin(new Insets(10, 10, 10, 10));
 
             autoScanRadioButton.setSelected(true);
-            selectionSensorTextField1.setEnabled(true);
-            selectionSensorTextField2.setEnabled(false);
-            navigationSensorTextField.setEnabled(false);
+            enableTextField(selectionSensorTextField1);
+            disableTextField(selectionSensorTextField2);
+            disableTextField(navigationSensorTextField);
         }
 
         backButton.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
@@ -482,51 +490,72 @@ public class UserFormPanel extends javax.swing.JPanel {
         backButton.setMargin(new Insets(10, 10, 10, 10));
     }
 
-    private String setSensorText(Sensor s) {
-        String text = "";
+    private boolean validateUser() {
 
-        if (s instanceof MouseSensor) {
-            MouseSensor sensor = (MouseSensor) s;
-            text += sensor.getClickCount();
-
-            if (sensor.getButton() == 1 && sensor.getClickCount() == 1) {
-                text += " αριστερό κλικ";
-            } else if (sensor.getButton() == 1 && sensor.getClickCount() > 1) {
-                text += " αριστερά κλικ";
-            } else if (sensor.getButton() == 2 && sensor.getClickCount() == 1) {
-                text += " μεσαίο κλικ";
-            } else if (sensor.getButton() == 2 && sensor.getClickCount() > 1) {
-                text += " μεσαία κλικ";
-            } else if (sensor.getButton() == 3 && sensor.getClickCount() == 1) {
-                text += " δεξί κλικ";
-            } else if (sensor.getButton() == 3 && sensor.getClickCount() > 1) {
-                text += " δεξιά κλικ";
-            }
-
-        } else if (s instanceof KeyboardSensor) {
-            KeyboardSensor sensor = (KeyboardSensor) s;
-            text += "πλήκτρο ";
-            text += sensor.getKeyChar();
-        }
-
-        return text;
-    }
-
-
-    private void createUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserButtonActionPerformed
         String name = nameTextField.getText();
 
-        List<User> users = userService.getUsers();
-        for (User user : users) {
-            if (user.getName().equals(name)) {
-                errorLabel.setText("Το όνομα χρήστη υπάρχει ήδη");
-                errorLabel.setVisible(true);
-                return;
+        //name should not be empty
+        if (name.isEmpty() || "Όνομα χρήστη".equals(name)) {
+            errorLabel.setText("Το όνομα χρήστη δεν πρέπει να είναι κενό");
+            errorLabel.setVisible(true);
+            return false;
+        }
+
+        //name should be unique
+        if (user == null || !name.equals(user.getName())) {
+            List<User> users = userService.getUsers();
+            for (User user : users) {
+                if (user.getName().equals(name)) {
+                    errorLabel.setText("Το όνομα χρήστη υπάρχει ήδη");
+                    errorLabel.setVisible(true);
+                    return false;
+                }
             }
         }
-        if (!name.isEmpty()) {
-            User createdUser = new User(name, userImage);
+
+        //rows, columns should not be empty, should be integers
+        if (rowsTextField.getText().isEmpty() || !StringUtils.isNumeric(rowsTextField.getText())
+                || (StringUtils.isNumeric(rowsTextField.getText()) && (Integer.parseInt(rowsTextField.getText()) < 2 || Integer.parseInt(rowsTextField.getText()) > 6))
+                || columnsTextField.getText().isEmpty() || !StringUtils.isNumeric(columnsTextField.getText())
+                || (StringUtils.isNumeric(columnsTextField.getText()) && (Integer.parseInt(columnsTextField.getText()) < 2 || Integer.parseInt(columnsTextField.getText()) > 6))) {
+            errorLabel.setText("Οι κολώνες και οι στήλες του πίνακα πρέπει να είναι ακέραιοι, μεταξύ των ψηφίων 2 και 6.");
+            errorLabel.setVisible(true);
+            return false;
+        }
+
+        //sensors should not be null
+        if (autoScanRadioButton.isSelected() && selectionSensor == null) {
+            errorLabel.setText("Το κουμπί επιλογής δεν πρέπει να είναι κενό");
+            errorLabel.setVisible(true);
+            return false;
+        } else if (manualScanRadioButton.isSelected() && (selectionSensor == null || navigationSensor == null)) {
+            errorLabel.setText("Τα κουμπιά επιλογής και πλοήγησης δεν πρέπει να είναι κενά");
+            errorLabel.setVisible(true);
+            return false;
+        }
+
+        //image or text should be selected
+        if (!imageCheckBox.isSelected() && !textCheckBox.isSelected()) {
+            errorLabel.setText("Οι λέξεις θα πρέπει να έχουν τουλάχιστον ένα από τα δύο: λεκτικό, εικόνα");
+            errorLabel.setVisible(true);
+            return false;
+        }
+
+        return true;
+    }
+
+    private void createUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserButtonActionPerformed
+
+        if (validateUser()) {
+            User createdUser = new User(nameTextField.getText(), userImage);
             createdUser.getConfiguration().setRotationSpeed(rotationSpeedSlider.getValue());
+            createdUser.getConfiguration().setNavigationSensor(navigationSensor);
+            createdUser.getConfiguration().setSelectionSensor(selectionSensor);
+            createdUser.getConfiguration().setDefaultGridRow(Integer.parseInt(rowsTextField.getText()));
+            createdUser.getConfiguration().setDefaultGridColumn(Integer.parseInt(columnsTextField.getText()));
+            createdUser.getConfiguration().setSound(soundCheckBox.isSelected());
+            createdUser.getConfiguration().setImage(imageCheckBox.isSelected());
+            createdUser.getConfiguration().setText(textCheckBox.isSelected());
             try {
                 userService.save(createdUser);
                 parent.changePanel(new MainPanel(parent));
@@ -551,34 +580,20 @@ public class UserFormPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_uploadImageLabelMouseClicked
 
     private void nameTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameTextFieldFocusGained
-        if ("Γράψε όνομα χρήστη εδώ".equals(nameTextField.getText())) {
+        if ("Όνομα χρήστη".equals(nameTextField.getText())) {
             nameTextField.setText("");
         }
     }//GEN-LAST:event_nameTextFieldFocusGained
 
     private void nameTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameTextFieldFocusLost
         if (nameTextField.getText().isEmpty()) {
-            nameTextField.setText("Γράψε όνομα χρήστη εδώ");
+            nameTextField.setText("Όνομα χρήστη");
         }
     }//GEN-LAST:event_nameTextFieldFocusLost
 
     private void editUserButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editUserButtonMouseClicked
-        String name = nameTextField.getText();
-
-        if (!user.getName().equals(name)) {
-            List<User> users = userService.getUsers();
-            for (User user : users) {
-                if (user.getName().equals(name)) {
-                    errorLabel.setText("Το όνομα χρήστη υπάρχει ήδη");
-                    errorLabel.setVisible(true);
-                    return;
-                }
-            }
-        }
-
-        if (!name.isEmpty()) {
-
-            User editedUser = new User(name, userImage);
+        if (validateUser()) {
+            User editedUser = new User(nameTextField.getText(), userImage);
             editedUser.getConfiguration().setRotationSpeed(rotationSpeedSlider.getValue());
             editedUser.getConfiguration().setNavigationSensor(navigationSensor);
             editedUser.getConfiguration().setSelectionSensor(selectionSensor);
@@ -608,9 +623,9 @@ public class UserFormPanel extends javax.swing.JPanel {
             selectionSensorTextField2.setEnabled(false);
             navigationSensorTextField.setEnabled(false);
 
-            selectionSensorTextField1.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.decode(UIConstants.getMainColor())));
-            selectionSensorTextField2.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.decode(UIConstants.getDisabledColor())));
-            navigationSensorTextField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.decode(UIConstants.getDisabledColor())));
+            disableTextField(selectionSensorTextField2);
+            disableTextField(navigationSensorTextField);
+            enableTextField(selectionSensorTextField1);
         }
     }//GEN-LAST:event_autoScanRadioButtonActionPerformed
 
@@ -620,9 +635,9 @@ public class UserFormPanel extends javax.swing.JPanel {
             selectionSensorTextField2.setEnabled(true);
             navigationSensorTextField.setEnabled(true);
 
-            selectionSensorTextField1.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.decode(UIConstants.getDisabledColor())));
-            selectionSensorTextField2.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.decode(UIConstants.getMainColor())));
-            navigationSensorTextField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.decode(UIConstants.getMainColor())));
+            disableTextField(selectionSensorTextField1);
+            enableTextField(selectionSensorTextField2);
+            enableTextField(navigationSensorTextField);
         }
     }//GEN-LAST:event_manualScanRadioButtonActionPerformed
 
@@ -664,6 +679,7 @@ public class UserFormPanel extends javax.swing.JPanel {
 
     private void selectionSensorTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectionSensorTextField1MouseClicked
         selectionSensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+        navigationSensor = null;
     }//GEN-LAST:event_selectionSensorTextField1MouseClicked
 
     private void navigationSensorTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_navigationSensorTextFieldMouseClicked
@@ -676,6 +692,7 @@ public class UserFormPanel extends javax.swing.JPanel {
 
     private void selectionSensorTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_selectionSensorTextField1KeyPressed
         selectionSensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
+        navigationSensor = null;
     }//GEN-LAST:event_selectionSensorTextField1KeyPressed
 
     private void navigationSensorTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_navigationSensorTextFieldKeyPressed
@@ -705,15 +722,9 @@ public class UserFormPanel extends javax.swing.JPanel {
         columnsTextField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.GRAY));
         columnsTextField.setHorizontalAlignment(JTextField.CENTER);
 
-        //set the green border
-        selectionSensorTextField1.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.decode(UIConstants.getMainColor())));
-        selectionSensorTextField2.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.decode(UIConstants.getDisabledColor())));
-        navigationSensorTextField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.decode(UIConstants.getDisabledColor())));
-
-        //set the padding
-        selectionSensorTextField1.setBorder(BorderFactory.createCompoundBorder(selectionSensorTextField1.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-        selectionSensorTextField2.setBorder(BorderFactory.createCompoundBorder(selectionSensorTextField2.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-        navigationSensorTextField.setBorder(BorderFactory.createCompoundBorder(navigationSensorTextField.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        disableTextField(selectionSensorTextField2);
+        disableTextField(navigationSensorTextField);
+        enableTextField(selectionSensorTextField1);
 
         //set the text color
         selectionSensorTextField1.setForeground(Color.decode(UIConstants.getMainColor()));
@@ -725,6 +736,51 @@ public class UserFormPanel extends javax.swing.JPanel {
         navigationSensorTextField.setHorizontalAlignment(JTextField.CENTER);
     }
 
+    private void disableTextField(JTextField textField) {
+        textField.setEnabled(false);
+        textField.setForeground(Color.decode(UIConstants.getDisabledColor()));
+        textField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.decode(UIConstants.getDisabledColor())));
+        textField.setBorder(BorderFactory.createCompoundBorder(textField.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+    }
+
+    private void enableTextField(JTextField textField) {
+        textField.setEnabled(true);
+        textField.setForeground(Color.decode(UIConstants.getMainColor()));
+        textField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.decode(UIConstants.getMainColor())));
+        textField.setBorder(BorderFactory.createCompoundBorder(textField.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+    }
+
+    private String setSensorText(Sensor s) {
+        String text = "";
+
+        if (s instanceof MouseSensor) {
+            MouseSensor sensor = (MouseSensor) s;
+            text += sensor.getClickCount();
+
+            if (sensor.getButton() == 1 && sensor.getClickCount() == 1) {
+                text += " αριστερό κλικ";
+            } else if (sensor.getButton() == 1 && sensor.getClickCount() > 1) {
+                text += " αριστερά κλικ";
+            } else if (sensor.getButton() == 2 && sensor.getClickCount() == 1) {
+                text += " μεσαίο κλικ";
+            } else if (sensor.getButton() == 2 && sensor.getClickCount() > 1) {
+                text += " μεσαία κλικ";
+            } else if (sensor.getButton() == 3 && sensor.getClickCount() == 1) {
+                text += " δεξί κλικ";
+            } else if (sensor.getButton() == 3 && sensor.getClickCount() > 1) {
+                text += " δεξιά κλικ";
+            }
+
+        } else if (s instanceof KeyboardSensor) {
+            KeyboardSensor sensor = (KeyboardSensor) s;
+            text += "πλήκτρο ";
+            text += sensor.getKeyChar();
+        }
+
+        return text;
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton autoScanRadioButton;
     private javax.swing.JButton backButton;
@@ -733,7 +789,6 @@ public class UserFormPanel extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JTextField columnsTextField;
     private javax.swing.JButton createUserButton;
-    private javax.swing.JPanel createUserPanel;
     private javax.swing.JLabel defaultGridSizeLabel;
     private javax.swing.JButton editUserButton;
     private javax.swing.JLabel errorLabel;
@@ -755,6 +810,7 @@ public class UserFormPanel extends javax.swing.JPanel {
     private javax.swing.JCheckBox textCheckBox;
     private javax.swing.JLabel tilesLabel;
     private javax.swing.JLabel uploadImageLabel;
+    private javax.swing.JPanel userPanel;
     private javax.swing.JLabel xLabel;
     // End of variables declaration//GEN-END:variables
 }

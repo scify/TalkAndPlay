@@ -113,7 +113,7 @@ public class ProfilePanel extends javax.swing.JPanel {
         
          configLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                parent.changePanel(new ConfigurationPanel());
+                parent.changePanel(new ConfigurationPanel(parent));
 
             }
         });

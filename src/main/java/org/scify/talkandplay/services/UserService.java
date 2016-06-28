@@ -102,7 +102,7 @@ public class UserService {
         //add the first category settings
         communication.addContent(new Element("name").setText("Επικοινωνία"));
         communication.addContent(new Element("enabled").setText("true"));
-        communication.addContent(new Element("image").setText(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/communication_module.png").getPath()));
+        communication.addContent(new Element("image"));
         communication.addContent(new Element("rows").setText("1"));
         communication.addContent(new Element("columns").setText("1"));
         communication.addContent(categories);
@@ -111,7 +111,7 @@ public class UserService {
         Element entertainment = new Element("entertainment");
         entertainment.addContent(new Element("name").setText("Ψυχαγωγία"));
         entertainment.addContent(new Element("enabled").setText("true"));
-        entertainment.addContent(new Element("image").setText(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/entertainment_module.png").getPath()));
+        entertainment.addContent(new Element("image"));
         entertainment.addContent(new Element("musicPath"));
         entertainment.addContent(new Element("videoPath"));
 
@@ -119,21 +119,21 @@ public class UserService {
         Element music = new Element("music");
         music.addContent(new Element("name").setText("Μουσική"));
         music.addContent(new Element("enabled").setText("true"));
-        music.addContent(new Element("image").setText(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/music_module.png").getPath()));
+        music.addContent(new Element("image"));
         entertainment.addContent(music);
 
         //add video module settings
         Element video = new Element("video");
         video.addContent(new Element("name").setText("Βίντεο"));
         video.addContent(new Element("enabled").setText("true"));
-        video.addContent(new Element("image").setText(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/video_module.png").getPath()));
+        video.addContent(new Element("image"));
         entertainment.addContent(video);
 
         //add game module settings
         Element games = new Element("games");
         games.addContent(new Element("name").setText("Παιχνίδια"));
         games.addContent(new Element("enabled").setText("true"));
-        games.addContent(new Element("image").setText(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/games_module.png").getPath()));
+        games.addContent(new Element("image"));
 
         profile.addContent(communication);
         profile.addContent(entertainment);

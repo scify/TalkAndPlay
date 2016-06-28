@@ -3,15 +3,13 @@ package org.scify.talkandplay.gui.helpers;
 import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
+import java.net.URL;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -49,14 +47,14 @@ public class GuiHelper {
      * @return
      */
     public ImageIcon getRoundIcon(String path) {
-        if (path == null || path.isEmpty() || !new File(path).exists()) {
-            path = getClass().getResource("/org/scify/talkandplay/resources/no-photo.png").getPath();
-        }
-
         //first scale the image to the desired dimensions
         BufferedImage master = new BufferedImage(DEFAULT_WIDTH, DEFAULT_HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = master.createGraphics();
-        g2d.drawImage(new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(DEFAULT_WIDTH, DEFAULT_WIDTH, Image.SCALE_SMOOTH)).getImage(), 0, 0, null);
+        if (path == null || path.isEmpty() || !new File(path).exists()) {
+            g2d.drawImage(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/no-photo.png")).getImage().getScaledInstance(DEFAULT_WIDTH, DEFAULT_WIDTH, Image.SCALE_SMOOTH)).getImage(), 0, 0, null);
+        } else {
+            g2d.drawImage(new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(DEFAULT_WIDTH, DEFAULT_WIDTH, Image.SCALE_SMOOTH)).getImage(), 0, 0, null);
+        }
         g2d.dispose();
 
         //find the diameter and create an oval
@@ -83,7 +81,6 @@ public class GuiHelper {
     }
 
     public static void applyQualityRenderingHints(Graphics2D g2d) {
-
         g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
@@ -96,18 +93,16 @@ public class GuiHelper {
     }
 
     public JPanel createImagePanel(String imagePath, String text) {
-        JPanel panel = new JPanel(new BorderLayout());
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(300, 300, java.awt.Image.SCALE_SMOOTH));
 
-        java.awt.Image image;
-        try {
-            image = ImageIO.read(new File(imagePath));
-            ImageIcon imageIcon = new ImageIcon(image.getScaledInstance(300, 300, java.awt.Image.SCALE_SMOOTH));
+        return decorateImageIcon(imageIcon, text);
+    }
 
-            return decorateImageIcon(imageIcon, text);
-        } catch (IOException ex) {
-            System.out.println("Image not found");
-            return panel;
-        }
+    public JPanel createImagePanel(URL imagePath, String text) {
+
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(300, 300, java.awt.Image.SCALE_SMOOTH));
+
+        return decorateImageIcon(imageIcon, text);
     }
 
     public JPanel createResourceImagePanel(ImageIcon imageIcon, String text) {
@@ -125,7 +120,7 @@ public class GuiHelper {
         panel.add(imgLabel, BorderLayout.CENTER);
         panel.add(txtLabel, BorderLayout.NORTH);
         txtLabel.setHorizontalAlignment(JLabel.CENTER);
-       panel.setBorder(BorderFactory.createLineBorder(Color.white, 10));
+        panel.setBorder(BorderFactory.createLineBorder(Color.white, 10));
 
         return panel;
     }
