@@ -14,10 +14,12 @@ import java.net.URL;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -39,6 +41,7 @@ public class GuiHelper {
         button.setMargin(new Insets(10, 10, 10, 10));
     }
 
+    
     /**
      * Get the icon for a user, or no photo
      *

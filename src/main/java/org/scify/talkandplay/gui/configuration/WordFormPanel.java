@@ -1,35 +1,54 @@
 package org.scify.talkandplay.gui.configuration;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.gui.helpers.UIConstants;
+import org.scify.talkandplay.models.Category;
+import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.services.CategoryService;
 
 public class WordFormPanel extends javax.swing.JPanel {
 
     private GuiHelper guiHelper;
+    private User user;
     private List<String> categories;
+    private String imagePath;
+    private String soundPath;
+    private CategoryService categoryService;
+    private ConfigurationPanel parent;
 
-    public WordFormPanel(List<String> categories) {
+    public WordFormPanel(User user, ConfigurationPanel parent) {
         this.guiHelper = new GuiHelper();
-        this.categories = categories;
+        this.user = user;
+        this.imagePath = null;
+        this.soundPath = null;
+        this.categoryService = new CategoryService();
+        this.parent = parent;
+
         initComponents();
         initCustomComponents();
     }
 
     private void initCustomComponents() {
         //setBorder(new LineBorder(Color.decode(UIConstants.getMainColor()), 1));
+
+        categories = categoryService.getLinearCategories(user);
         setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 10, 10), new LineBorder(Color.decode(UIConstants.getMainColor()), 1)));
         setUI();
-
     }
 
     /**
@@ -55,6 +74,7 @@ public class WordFormPanel extends javax.swing.JPanel {
         categoriesComboBox = new javax.swing.JComboBox();
         uploadImageLabel = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
+        errorLabel = new javax.swing.JLabel();
 
         backButton.setBackground(new java.awt.Color(75, 161, 69));
         backButton.setFont(backButton.getFont());
@@ -79,6 +99,11 @@ public class WordFormPanel extends javax.swing.JPanel {
         step3ExplLabel.setText("Εάν δεν ανεβάσεις ηχητικό, θα παίζει προκαθορισμένος ήχος.");
 
         uploadSoundLabel.setText("uploadSound");
+        uploadSoundLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                uploadSoundLabelMouseClicked(evt);
+            }
+        });
 
         step4Label.setText("4. Επίλεξε πού ανήκει η λέξη");
 
@@ -93,12 +118,26 @@ public class WordFormPanel extends javax.swing.JPanel {
         categoriesComboBox.setBorder(null);
 
         uploadImageLabel.setText("uploadImg");
+        uploadImageLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                uploadImageLabelMouseClicked(evt);
+            }
+        });
 
         saveButton.setBackground(new java.awt.Color(75, 161, 69));
         saveButton.setFont(saveButton.getFont());
         saveButton.setForeground(new java.awt.Color(255, 255, 255));
         saveButton.setText("Αποθήκευση λέξης");
         saveButton.setBorder(null);
+        saveButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                saveButtonMouseClicked(evt);
+            }
+        });
+
+        errorLabel.setBackground(new java.awt.Color(255, 255, 255));
+        errorLabel.setForeground(new java.awt.Color(153, 0, 0));
+        errorLabel.setText("error");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -137,7 +176,9 @@ public class WordFormPanel extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(uploadImageLabel)
                                     .addComponent(wordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addComponent(categoriesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(errorLabel)
+                            .addComponent(categoriesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(172, 172, 172)
                         .addComponent(uploadSoundLabel))
@@ -171,13 +212,93 @@ public class WordFormPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(categoriesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(errorLabel)
+                .addGap(2, 2, 2)
                 .addComponent(saveButton)
                 .addGap(36, 36, 36))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void saveButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButtonMouseClicked
+
+        if (validateCategory()) {
+
+            Category category = new Category();
+            category.setName(wordTextField.getText());
+            category.setRows(user.getConfiguration().getDefaultGridRow());
+            category.setColumns(user.getConfiguration().getDefaultGridColumn());
+            category.setImage(imagePath);
+            category.setSound(soundPath);
+            category.setParentCategory(new Category(categoriesComboBox.getSelectedItem().toString()));
+
+            try {
+                categoryService.save(category, user);
+                parent.redrawCategoriesList();
+            } catch (Exception ex) {
+                Logger.getLogger(WordFormPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_saveButtonMouseClicked
+
+    private void uploadImageLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_uploadImageLabelMouseClicked
+        JFileChooser chooser = new JFileChooser();
+
+        chooser.setDialogTitle("Διαλέξτε εικόνα");
+        chooser.setAcceptAllFileFilterUsed(false);
+        chooser.setFileFilter(new FileNameExtensionFilter("Image Files", "png", "jpg", "jpeg", "JPG", "JPEG", "gif"));
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            imagePath = chooser.getSelectedFile().getAbsolutePath();
+            uploadImageLabel.setIcon(new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
+
+        }
+    }//GEN-LAST:event_uploadImageLabelMouseClicked
+
+    private void uploadSoundLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_uploadSoundLabelMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_uploadSoundLabelMouseClicked
+
+    private boolean validateCategory() {
+
+        String name = wordTextField.getText();
+
+        //word should not be null
+        if (name == null || name.isEmpty()) {
+            errorLabel.setText("Η λέξη δεν πρέπει να είναι κενή");
+            errorLabel.setVisible(true);
+            return false;
+        }
+
+        //word should be unique
+        for (String category : categories) {
+            if (category.equals(name)) {
+                errorLabel.setText("Η λέξη πρέπει να είναι μοναδική");
+                errorLabel.setVisible(true);
+                return false;
+            }
+        }
+
+        //image should be uploaded
+        if (imagePath == null) {
+            //TODO this is not correct, image might not be visible due to settings
+            errorLabel.setText("Η λέξη πρέπει να έχει εικόνα");
+            errorLabel.setVisible(true);
+            return false;
+        }
+
+        if (categoriesComboBox.getSelectedIndex() == 0) {
+            errorLabel.setText("Η λέξη πρέπει να ανήκει σε κάποια λέξη");
+            errorLabel.setVisible(true);
+            return false;
+        }
+
+        return true;
+    }
+
     private void setUI() {
+        errorLabel.setVisible(false);
+
         titleLabel.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 16));
         titleLabel.setForeground(Color.decode(UIConstants.getMainColor()));
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -228,6 +349,7 @@ public class WordFormPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JComboBox categoriesComboBox;
+    private javax.swing.JLabel errorLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton saveButton;
     private javax.swing.JLabel step1Label;

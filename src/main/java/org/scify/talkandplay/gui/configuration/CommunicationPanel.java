@@ -2,24 +2,25 @@ package org.scify.talkandplay.gui.configuration;
 
 import java.awt.Font;
 import java.util.List;
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.services.UserService;
 
 public class CommunicationPanel extends javax.swing.JPanel {
 
     private User user;
     private JLabel label;
+    private UserService userService;
 
     private static final int MARGIN = 20;
 
     public CommunicationPanel(User user) {
         this.user = user;
+        this.userService = new UserService();
 
         initComponents();
         initCustomComponents();
@@ -46,7 +47,6 @@ public class CommunicationPanel extends javax.swing.JPanel {
      * @param margin
      */
     private void drawCategories(List<Category> categories, int margin) {
-
         if (categories == null || categories.isEmpty()) {
             return;
         } else {
@@ -54,7 +54,7 @@ public class CommunicationPanel extends javax.swing.JPanel {
             for (Category category : categories) {
                 label = new JLabel(category.getName());
                 label.setBorder(new EmptyBorder(8, margin, 0, 0));
-                
+
                 if (category.getSubCategories().size() > 0) {
                     label.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 14));
                 } else {
@@ -66,6 +66,21 @@ public class CommunicationPanel extends javax.swing.JPanel {
             }
             margin -= MARGIN;
         }
+    }
+
+    public void redrawCategoriesList() {
+        removeAll();
+
+        System.out.println("sdfdfdsfs");
+        label = new JLabel(user.getCommunicationModule().getName());
+        label.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 16));
+
+        add(label);
+        user = userService.getUser(user.getName());
+        drawCategories(user.getCommunicationModule().getCategories(), MARGIN);
+
+        revalidate();
+        repaint();
     }
 
     /**

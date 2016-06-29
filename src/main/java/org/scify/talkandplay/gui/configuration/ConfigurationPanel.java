@@ -51,7 +51,7 @@ public class ConfigurationPanel extends javax.swing.JPanel {
         gbc.gridwidth = 1;
 
         gbc.weightx = 1;
-        infoPanel = new InfoPanel(this, categoryService.getLinearCategories(user));
+        infoPanel = new InfoPanel(this,  user);
         add(infoPanel, gbc);
 
         gbc.gridx = 1;
@@ -74,6 +74,10 @@ public class ConfigurationPanel extends javax.swing.JPanel {
         add(panel, gbc);
         revalidate();
         repaint();
+    }
+    
+    public void redrawCategoriesList(){
+        tabsPanel.redrawCategoriesList();
     }
 
     /**

@@ -3,18 +3,18 @@ package org.scify.talkandplay.gui.configuration;
 import java.awt.GridLayout;
 import java.util.List;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
-import org.scify.talkandplay.models.Category;
+import org.scify.talkandplay.models.User;
 
 public class InfoPanel extends javax.swing.JPanel {
 
     private GuiHelper guiHelper;
     private ConfigurationPanel parent;
-    private List<String> categories;
+    private User user;
 
-    public InfoPanel(ConfigurationPanel parent, List<String> categories) {
+    public InfoPanel(ConfigurationPanel parent, User user) {
         this.guiHelper = new GuiHelper();
         this.parent = parent;
-        this.categories = categories;
+        this.user = user;
 
         initComponents();
         initCustomComponents();
@@ -91,7 +91,7 @@ public class InfoPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addWordButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addWordButtonMouseClicked
-        parent.addPanel(new WordFormPanel(categories));
+        parent.addPanel(new WordFormPanel(user, parent));
     }//GEN-LAST:event_addWordButtonMouseClicked
 
     private void initCustomComponents() {
