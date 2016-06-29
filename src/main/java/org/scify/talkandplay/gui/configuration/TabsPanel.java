@@ -44,7 +44,7 @@ public class TabsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initCustomComponents() {
-        setLayout(new GridLayout(1, 1, 0, 0));
+        setLayout(new GridLayout(0, 1, 0, 0));
 
         tabsPanel.addTab("Επικοινωνία", new CommunicationPanel());
         tabsPanel.addTab("Ψυχαγωγία", null);

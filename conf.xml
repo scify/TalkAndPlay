@@ -85,6 +85,11 @@
         <button>1</button>
         <clickCount>1</clickCount>
       </selectionSensor>
+      <navigationSensor>
+        <type>keyboard</type>
+        <keyCode>32</keyCode>
+        <keyChar />
+      </navigationSensor>
     </configuration>
     <communication>
       <name>Επικοινωνία</name>
@@ -376,15 +381,20 @@
       <image>true</image>
       <text>true</text>
       <selectionSensor>
-        <type>mouse</type>
-        <button>3</button>
-        <clickCount>2</clickCount>
+        <type>keyboard</type>
+        <keyCode>70</keyCode>
+        <keyChar>f</keyChar>
       </selectionSensor>
+      <navigationSensor>
+        <type>keyboard</type>
+        <keyCode>51</keyCode>
+        <keyChar>3</keyChar>
+      </navigationSensor>
     </configuration>
     <communication>
       <name>Επικοινωνία</name>
       <enabled>true</enabled>
-      <image></image>
+      <image />
       <rows>1</rows>
       <columns>1</columns>
       <categories />
@@ -392,24 +402,71 @@
     <entertainment>
       <name>Ψυχαγωγία</name>
       <enabled>true</enabled>
-      <image></image>
+      <image />
       <musicPath />
       <videoPath />
       <music>
         <name>Μουσική</name>
         <enabled>true</enabled>
-        <image></image>
+        <image />
       </music>
       <video>
         <name>Βίντεο</name>
         <enabled>true</enabled>
-        <image></image>
+        <image />
       </video>
     </entertainment>
     <games>
       <name>Παιχνίδια</name>
       <enabled>true</enabled>
-      <image></image>
+      <image />
+    </games>
+  </profile>
+  <profile preselected="false">
+    <name>kokoko</name>
+    <image />
+    <configuration>
+      <rotationSpeed>1</rotationSpeed>
+      <defaultGridRow>3</defaultGridRow>
+      <defaultGridColumn>3</defaultGridColumn>
+      <sound>false</sound>
+      <image>false</image>
+      <text>true</text>
+      <selectionSensor>
+        <type>keyboard</type>
+        <keyCode>32</keyCode>
+        <keyChar />
+      </selectionSensor>
+    </configuration>
+    <communication>
+      <name>Επικοινωνία</name>
+      <enabled>true</enabled>
+      <image />
+      <rows>1</rows>
+      <columns>1</columns>
+      <categories />
+    </communication>
+    <entertainment>
+      <name>Ψυχαγωγία</name>
+      <enabled>true</enabled>
+      <image />
+      <musicPath />
+      <videoPath />
+      <music>
+        <name>Μουσική</name>
+        <enabled>true</enabled>
+        <image />
+      </music>
+      <video>
+        <name>Βίντεο</name>
+        <enabled>true</enabled>
+        <image />
+      </video>
+    </entertainment>
+    <games>
+      <name>Παιχνίδια</name>
+      <enabled>true</enabled>
+      <image />
     </games>
   </profile>
 </profiles>

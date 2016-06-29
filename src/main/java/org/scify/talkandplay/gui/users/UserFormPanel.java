@@ -3,18 +3,23 @@ package org.scify.talkandplay.gui.users;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
-import java.text.NumberFormat;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.text.NumberFormatter;
 import org.apache.commons.lang3.StringUtils;
 import org.scify.talkandplay.gui.MainFrame;
 import org.scify.talkandplay.gui.MainPanel;
@@ -105,14 +110,6 @@ public class UserFormPanel extends javax.swing.JPanel {
         nameTextField.setBackground(new java.awt.Color(255, 255, 255));
         nameTextField.setForeground(new java.awt.Color(51, 51, 51));
         nameTextField.setText("Όνομα χρήστη");
-        nameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                nameTextFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                nameTextFieldFocusLost(evt);
-            }
-        });
 
         uploadImageLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         uploadImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/no-photo.png"))); // NOI18N
@@ -169,11 +166,6 @@ public class UserFormPanel extends javax.swing.JPanel {
         backButton.setForeground(new java.awt.Color(255, 255, 255));
         backButton.setText("Πίσω");
         backButton.setBorder(null);
-        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                backButtonMouseClicked(evt);
-            }
-        });
 
         nameLabel.setText("1. Γράψε όνομα χρήστη");
 
@@ -201,80 +193,16 @@ public class UserFormPanel extends javax.swing.JPanel {
         imageCheckBox.setText("Εικόνα");
 
         selectionSensorTextField1.setText("Όρισε κουμπί επιλογής");
-        selectionSensorTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                selectionSensorTextField1MouseClicked(evt);
-            }
-        });
-        selectionSensorTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                selectionSensorTextField1FocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                selectionSensorTextField1FocusLost(evt);
-            }
-        });
-        selectionSensorTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                selectionSensorTextField1KeyPressed(evt);
-            }
-        });
 
         navigationSensorTextField.setText("Όρισε κουμπί πλοήγησης");
-        navigationSensorTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                navigationSensorTextFieldMouseClicked(evt);
-            }
-        });
-        navigationSensorTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                navigationSensorTextFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                navigationSensorTextFieldFocusLost(evt);
-            }
-        });
-        navigationSensorTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                navigationSensorTextFieldKeyPressed(evt);
-            }
-        });
 
         selectionSensorTextField2.setText("Όρισε κουμπί επιλογής");
-        selectionSensorTextField2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                selectionSensorTextField2MouseClicked(evt);
-            }
-        });
-        selectionSensorTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                selectionSensorTextField2FocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                selectionSensorTextField2FocusLost(evt);
-            }
-        });
-        selectionSensorTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                selectionSensorTextField2KeyPressed(evt);
-            }
-        });
 
         autoScanRadioButton.setBackground(new java.awt.Color(255, 255, 255));
         autoScanRadioButton.setText("Αυτόματα");
-        autoScanRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                autoScanRadioButtonActionPerformed(evt);
-            }
-        });
 
         manualScanRadioButton.setBackground(new java.awt.Color(255, 255, 255));
         manualScanRadioButton.setText("Χειροκίνητα");
-        manualScanRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manualScanRadioButtonActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout userPanelLayout = new javax.swing.GroupLayout(userPanel);
         userPanel.setLayout(userPanelLayout);
@@ -421,16 +349,8 @@ public class UserFormPanel extends javax.swing.JPanel {
         errorLabel.setVisible(false);
 
         setUI();
-
-        ButtonGroup scanButtons = new ButtonGroup();
-        scanButtons.add(autoScanRadioButton);
-        scanButtons.add(manualScanRadioButton);
-
-        NumberFormatter formatter = new NumberFormatter(NumberFormat.getInstance());
-        formatter.setValueClass(Integer.class);
-        formatter.setMinimum(2);
-        formatter.setMaximum(6);
-        formatter.setAllowsInvalid(false);
+        setFocusListeners();
+        setActionListeners();
 
         if (user != null) {
             parent.setPanelTitle("Επεξεργασία χρήστη");
@@ -534,6 +454,25 @@ public class UserFormPanel extends javax.swing.JPanel {
             return false;
         }
 
+        //selection and navigation sensors should not be the same
+        if (manualScanRadioButton.isSelected()) {
+
+            if (selectionSensor instanceof MouseSensor && navigationSensor instanceof MouseSensor
+                    && ((MouseSensor) selectionSensor).getButton() == ((MouseSensor) navigationSensor).getButton()
+                    && ((MouseSensor) selectionSensor).getClickCount() == ((MouseSensor) navigationSensor).getClickCount()) {
+                errorLabel.setText("Τα κουμπιά επιλογής και πλοήγησης πρέπει να είναι διαφορετικά");
+                errorLabel.setVisible(true);
+                return false;
+            }
+
+            if (selectionSensor instanceof KeyboardSensor && navigationSensor instanceof KeyboardSensor
+                    && ((KeyboardSensor) selectionSensor).getKeyCode() == ((KeyboardSensor) navigationSensor).getKeyCode()) {
+                errorLabel.setText("Τα κουμπιά επιλογής και πλοήγησης πρέπει να είναι διαφορετικά");
+                errorLabel.setVisible(true);
+                return false;
+            }
+        }
+
         //image or text should be selected
         if (!imageCheckBox.isSelected() && !textCheckBox.isSelected()) {
             errorLabel.setText("Οι λέξεις θα πρέπει να έχουν τουλάχιστον ένα από τα δύο: λεκτικό, εικόνα");
@@ -579,18 +518,6 @@ public class UserFormPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_uploadImageLabelMouseClicked
 
-    private void nameTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameTextFieldFocusGained
-        if ("Όνομα χρήστη".equals(nameTextField.getText())) {
-            nameTextField.setText("");
-        }
-    }//GEN-LAST:event_nameTextFieldFocusGained
-
-    private void nameTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameTextFieldFocusLost
-        if (nameTextField.getText().isEmpty()) {
-            nameTextField.setText("Όνομα χρήστη");
-        }
-    }//GEN-LAST:event_nameTextFieldFocusLost
-
     private void editUserButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editUserButtonMouseClicked
         if (validateUser()) {
             User editedUser = new User(nameTextField.getText(), userImage);
@@ -613,97 +540,157 @@ public class UserFormPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_editUserButtonMouseClicked
 
-    private void backButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseClicked
-        parent.changePanel(new MainPanel(parent));
-    }//GEN-LAST:event_backButtonMouseClicked
+    /**
+     * The action listeners for the text fields and radio buttons
+     */
+    private void setActionListeners() {
+        selectionSensorTextField1.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent me) {
+                if (selectionSensorTextField1.isEnabled()) {
+                    selectionSensor = new MouseSensor(me.getButton(), me.getClickCount(), "mouse");
+                    navigationSensor = null;
+                    selectionSensorTextField1.setText(setSensorText(selectionSensor));
+                }
+            }
+        });
+        selectionSensorTextField1.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent ke) {
+                if (selectionSensorTextField1.isEnabled()) {
+                    selectionSensor = new KeyboardSensor(ke.getKeyCode(), String.valueOf(ke.getKeyChar()), "keyboard");
+                    navigationSensor = null;
+                    selectionSensorTextField1.setText(setSensorText(selectionSensor));
+                }
+            }
+        });
 
-    private void autoScanRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autoScanRadioButtonActionPerformed
-        if (autoScanRadioButton.isSelected()) {
-            selectionSensorTextField1.setEnabled(true);
-            selectionSensorTextField2.setEnabled(false);
-            navigationSensorTextField.setEnabled(false);
+        navigationSensorTextField.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent me) {
+                if (navigationSensorTextField.isEnabled()) {
+                    navigationSensor = new MouseSensor(me.getButton(), me.getClickCount(), "mouse");
+                    navigationSensorTextField.setText(setSensorText(navigationSensor));
+                }
+            }
+        });
+        navigationSensorTextField.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent ke) {
+                if (navigationSensorTextField.isEnabled()) {
+                    navigationSensor = new KeyboardSensor(ke.getKeyCode(), String.valueOf(ke.getKeyChar()), "keyboard");
+                    navigationSensorTextField.setText(setSensorText(navigationSensor));
+                }
+            }
+        });
 
-            disableTextField(selectionSensorTextField2);
-            disableTextField(navigationSensorTextField);
-            enableTextField(selectionSensorTextField1);
-        }
-    }//GEN-LAST:event_autoScanRadioButtonActionPerformed
+        selectionSensorTextField2.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent me) {
+                if (selectionSensorTextField2.isEnabled()) {
+                    selectionSensor = new MouseSensor(me.getButton(), me.getClickCount(), "mouse");
+                    selectionSensorTextField2.setText(setSensorText(selectionSensor));
+                }
+            }
+        });
+        selectionSensorTextField2.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent ke) {
+                if (selectionSensorTextField2.isEnabled()) {
+                    selectionSensor = new KeyboardSensor(ke.getKeyCode(), String.valueOf(ke.getKeyChar()), "keyboard");
+                    selectionSensorTextField2.setText(setSensorText(selectionSensor));
+                }
+            }
+        });
 
-    private void manualScanRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manualScanRadioButtonActionPerformed
-        if (manualScanRadioButton.isSelected()) {
-            selectionSensorTextField1.setEnabled(false);
-            selectionSensorTextField2.setEnabled(true);
-            navigationSensorTextField.setEnabled(true);
+        backButton.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent me) {
+                parent.changePanel(new MainPanel(parent));
+            }
+        });
 
-            disableTextField(selectionSensorTextField1);
-            enableTextField(selectionSensorTextField2);
-            enableTextField(navigationSensorTextField);
-        }
-    }//GEN-LAST:event_manualScanRadioButtonActionPerformed
+        autoScanRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                if (autoScanRadioButton.isSelected()) {
+                    disableTextField(selectionSensorTextField2);
+                    disableTextField(navigationSensorTextField);
+                    enableTextField(selectionSensorTextField1);
+                }
+            }
+        });
 
-    private void selectionSensorTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_selectionSensorTextField1FocusLost
-        if (selectionSensor == null) {
-            selectionSensorTextField1.setText("Όρισε κουμπί επιλογής");
-        } else {
-            selectionSensorTextField1.setText(setSensorText(selectionSensor));
-        }
-    }//GEN-LAST:event_selectionSensorTextField1FocusLost
+        manualScanRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                if (manualScanRadioButton.isSelected()) {
+                    disableTextField(selectionSensorTextField1);
+                    enableTextField(selectionSensorTextField2);
+                    enableTextField(navigationSensorTextField);
+                }
+            }
+        });
 
-    private void selectionSensorTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_selectionSensorTextField1FocusGained
-        selectionSensorTextField1.setText("");
-    }//GEN-LAST:event_selectionSensorTextField1FocusGained
+    }
 
-    private void navigationSensorTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_navigationSensorTextFieldFocusLost
-        if (navigationSensor == null) {
-            navigationSensorTextField.setText("Όρισε κουμπί πλοήγησης");
-        } else {
-            navigationSensorTextField.setText(setSensorText(navigationSensor));
-        }
-    }//GEN-LAST:event_navigationSensorTextFieldFocusLost
+    private void setFocusListeners() {
+        selectionSensorTextField1.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent fe) {
+                selectionSensorTextField1.setText("");
+            }
 
-    private void navigationSensorTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_navigationSensorTextFieldFocusGained
-        navigationSensorTextField.setText("");
-    }//GEN-LAST:event_navigationSensorTextFieldFocusGained
+            public void focusLost(FocusEvent fe) {
+                if (selectionSensor == null) {
+                    selectionSensorTextField1.setText("Όρισε κουμπί επιλογής");
+                } else {
+                    selectionSensorTextField1.setText(setSensorText(selectionSensor));
+                }
+            }
+        });
 
-    private void selectionSensorTextField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_selectionSensorTextField2FocusGained
-        selectionSensorTextField2.setText("");
-    }//GEN-LAST:event_selectionSensorTextField2FocusGained
+        navigationSensorTextField.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent fe) {
+                navigationSensorTextField.setText("");
+            }
 
-    private void selectionSensorTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_selectionSensorTextField2FocusLost
-        if (selectionSensor == null) {
-            selectionSensorTextField2.setText("Όρισε κουμπί επιλογής");
-        } else {
-            selectionSensorTextField2.setText(setSensorText(selectionSensor));
-        }
-    }//GEN-LAST:event_selectionSensorTextField2FocusLost
+            public void focusLost(FocusEvent fe) {
+                if (navigationSensor == null) {
+                    navigationSensorTextField.setText("Όρισε κουμπί πλοήγησης");
+                } else {
+                    navigationSensorTextField.setText(setSensorText(navigationSensor));
+                }
+            }
+        });
 
-    private void selectionSensorTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectionSensorTextField1MouseClicked
-        selectionSensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
-        navigationSensor = null;
-    }//GEN-LAST:event_selectionSensorTextField1MouseClicked
+        selectionSensorTextField2.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent fe) {
+                selectionSensorTextField2.setText("");
+            }
 
-    private void navigationSensorTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_navigationSensorTextFieldMouseClicked
-        navigationSensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
-    }//GEN-LAST:event_navigationSensorTextFieldMouseClicked
+            public void focusLost(FocusEvent fe) {
+                if (selectionSensor == null) {
+                    selectionSensorTextField2.setText("Όρισε κουμπί επιλογής");
+                } else {
+                    selectionSensorTextField2.setText(setSensorText(selectionSensor));
+                }
+            }
+        });
 
-    private void selectionSensorTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectionSensorTextField2MouseClicked
-        selectionSensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
-    }//GEN-LAST:event_selectionSensorTextField2MouseClicked
+        nameTextField.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent fe) {
+                if ("Όνομα χρήστη".equals(nameTextField.getText())) {
+                    nameTextField.setText("");
+                }
+            }
 
-    private void selectionSensorTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_selectionSensorTextField1KeyPressed
-        selectionSensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
-        navigationSensor = null;
-    }//GEN-LAST:event_selectionSensorTextField1KeyPressed
-
-    private void navigationSensorTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_navigationSensorTextFieldKeyPressed
-        navigationSensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
-    }//GEN-LAST:event_navigationSensorTextFieldKeyPressed
-
-    private void selectionSensorTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_selectionSensorTextField2KeyPressed
-        selectionSensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
-    }//GEN-LAST:event_selectionSensorTextField2KeyPressed
+            public void focusLost(FocusEvent fe) {
+                if (nameTextField.getText().isEmpty()) {
+                    nameTextField.setText("Όνομα χρήστη");
+                }
+            }
+        });
+    }
 
     private void setUI() {
+
+        ButtonGroup scanButtons = new ButtonGroup();
+        scanButtons.add(autoScanRadioButton);
+        scanButtons.add(manualScanRadioButton);
+
         //set the titles of the form
         nameLabel.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 14));
         imageLabel.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 14));
@@ -774,7 +761,13 @@ public class UserFormPanel extends javax.swing.JPanel {
         } else if (s instanceof KeyboardSensor) {
             KeyboardSensor sensor = (KeyboardSensor) s;
             text += "πλήκτρο ";
-            text += sensor.getKeyChar();
+            if (sensor.getKeyCode() == 10) {
+                text += "enter";
+            } else if (sensor.getKeyCode() == 32) {
+                text += "space";
+            } else {
+                text += sensor.getKeyChar();
+            }
         }
 
         return text;

@@ -171,7 +171,7 @@ public class ConfigurationHandler {
                     Integer.parseInt(selectionSensorEl.getChildText("clickCount")), selectionSensorEl.getChildText("type"));
         } else if ("keyboard".equals(selectionSensorEl.getChildText("type"))) {
             selectionSensor = new KeyboardSensor(Integer.parseInt(selectionSensorEl.getChildText("keyCode")),
-                    selectionSensorEl.getChildText("keyChar").charAt(0), selectionSensorEl.getChildText("type"));
+                    selectionSensorEl.getChildText("keyChar"), selectionSensorEl.getChildText("type"));
         }
 
         Element navigationSensorEl = configurationNode.getChild("navigationSensor");
@@ -181,7 +181,7 @@ public class ConfigurationHandler {
                         Integer.parseInt(navigationSensorEl.getChildText("clickCount")), navigationSensorEl.getChildText("type"));
             } else if ("keyboard".equals(navigationSensorEl.getChildText("type"))) {
                 navigationSensor = new KeyboardSensor(Integer.parseInt(navigationSensorEl.getChildText("keyCode")),
-                        navigationSensorEl.getChildText("keyChar").charAt(0), navigationSensorEl.getChildText("type"));
+                        navigationSensorEl.getChildText("keyChar"), navigationSensorEl.getChildText("type"));
             }
             configuration.setNavigationSensor(navigationSensor);
         }

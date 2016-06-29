@@ -1,5 +1,6 @@
 package org.scify.talkandplay.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.Box;
@@ -43,7 +44,7 @@ public class MainFrame extends javax.swing.JFrame {
         contentPane.setBackground(new java.awt.Color(255, 255, 255));
         contentPane.setPreferredSize(new java.awt.Dimension(800, 720));
 
-        contentPanel.setBackground(new java.awt.Color(255, 255, 255));
+        contentPanel.setBackground(new java.awt.Color(255, 255, 204));
 
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/tp_logo_small.png"))); // NOI18N
 
@@ -70,17 +71,15 @@ public class MainFrame extends javax.swing.JFrame {
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentPaneLayout.createSequentialGroup()
-                .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                        .addGap(736, 752, Short.MAX_VALUE)
-                        .addComponent(jLabel1))
-                    .addComponent(contentPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(736, 752, Short.MAX_VALUE)
+                .addComponent(jLabel1)
                 .addContainerGap())
             .addGroup(contentPaneLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addComponent(logoLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(titlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,7 +112,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void initCustomComponents() {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        contentPanel.add(new MainPanel(this));
+        
+        contentPanel.add(new MainPanel(this), BorderLayout.CENTER);
+        
+        contentPanel.revalidate();
+        contentPanel.repaint();
+        revalidate();
+        repaint();
         pack();
     }
 

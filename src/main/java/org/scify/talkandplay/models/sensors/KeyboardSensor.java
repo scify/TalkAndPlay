@@ -9,13 +9,13 @@ package org.scify.talkandplay.models.sensors;
 public class KeyboardSensor extends Sensor {
 
     private int keyCode;
-    private char keyChar;
+    private String keyChar;
 
     public KeyboardSensor() {
         super();
     }
 
-    public KeyboardSensor(int keyCode, char keyChar, String name) {
+    public KeyboardSensor(int keyCode, String keyChar, String name) {
         super(name);
         this.keyCode = keyCode;
         this.keyChar = keyChar;
@@ -29,11 +29,11 @@ public class KeyboardSensor extends Sensor {
         this.keyCode = keyCode;
     }
 
-    public char getKeyChar() {
+    public String getKeyChar() {
         return keyChar;
     }
 
-    public void setKeyChar(char keyChar) {
+    public void setKeyChar(String keyChar) {
         this.keyChar = keyChar;
     }
 

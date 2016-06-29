@@ -1,7 +1,9 @@
 package org.scify.talkandplay.gui.configuration;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import javax.swing.JButton;
 import org.scify.talkandplay.gui.MainFrame;
 
 public class ConfigurationPanel extends javax.swing.JPanel {
@@ -20,12 +22,63 @@ public class ConfigurationPanel extends javax.swing.JPanel {
     private void initCustomComponents() {
         parent.setPanelTitle("Προτιμήσεις χρήστη");
 
-        setLayout(new GridLayout(0, 2, 10, 10));
+            JButton button;
+    contentPanel.setLayout(new GridBagLayout());
+    GridBagConstraints c = new GridBagConstraints();
+    c.fill = GridBagConstraints.HORIZONTAL;
 
-        add(new InfoPanel());
+    button = new JButton("Button 1");
+    c.weightx = 0.5;
+    c.gridx = 0;
+    c.gridy = 0;
+    contentPanel.add(button, c);
+
+    button = new JButton("Button 2");
+    c.gridx = 1;
+    c.gridy = 0;
+    contentPanel.add(button, c);
+
+    button = new JButton("Button 3");
+    c.gridx = 2;
+    c.gridy = 0;
+    contentPanel.add(button, c);
+
+    button = new JButton("Long-Named Button 4");
+    c.ipady = 40;      //make this component tall
+    c.weightx = 0.0;
+    c.gridwidth = 3;
+    c.gridx = 0;
+    c.gridy = 1;
+    contentPanel.add(button, c);
+
+    button = new JButton("5");
+    c.ipady = 0;       //reset to default
+    c.weighty = 1.0;   //request any extra vertical space
+    c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+    c.insets = new Insets(10,0,0,0);  //top padding
+    c.gridx = 1;       //aligned with button 2
+    c.gridwidth = 2;   //2 columns wide
+    c.gridy = 2;       //third row
+    contentPanel.add(button, c);
+        
+        /*
+        GridBagConstraints gbc = new GridBagConstraints();
+        setLayout(new GridBagLayout());
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        gbc.weightx = 0.5;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        add(new InfoPanel(), gbc);
+
+        gbc.weightx = 0.5;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
         add(new TabsPanel());
-        revalidate();
-        repaint();
+*/
+        //  setLayout(new GridLayout(0, 2, 10, 10));
+        contentPanel.revalidate();
+        contentPanel.repaint();
     }
 
     /**
@@ -37,19 +90,35 @@ public class ConfigurationPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        contentPanel = new javax.swing.JPanel();
+
+        contentPanel.setBackground(new java.awt.Color(255, 255, 204));
+
+        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
+        contentPanel.setLayout(contentPanelLayout);
+        contentPanelLayout.setHorizontalGroup(
+            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 393, Short.MAX_VALUE)
+        );
+        contentPanelLayout.setVerticalGroup(
+            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 307, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 393, Short.MAX_VALUE)
+            .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 307, Short.MAX_VALUE)
+            .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel contentPanel;
     // End of variables declaration//GEN-END:variables
 }

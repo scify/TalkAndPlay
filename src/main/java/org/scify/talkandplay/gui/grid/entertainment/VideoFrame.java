@@ -182,34 +182,34 @@ public class VideoFrame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_backButtonMouseClicked
 
-    
+
     private void nextButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextButtonMouseClicked
-     /*   for (int i = 0; i < files.size(); i++) {
-            if (files.get(i).getText().equals(currentFile)) {
-                if (i == files.size() - 1) {
-                    currentFile = files.get(0).getText();
-                } else {
-                    currentFile = files.get(i + 1).getText();
-                }
-                break;
-            }
-        }
-        playMedia(currentFile);*/
+        /*   for (int i = 0; i < files.size(); i++) {
+         if (files.get(i).getText().equals(currentFile)) {
+         if (i == files.size() - 1) {
+         currentFile = files.get(0).getText();
+         } else {
+         currentFile = files.get(i + 1).getText();
+         }
+         break;
+         }
+         }
+         playMedia(currentFile);*/
     }//GEN-LAST:event_nextButtonMouseClicked
 
     private void previousButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previousButtonMouseClicked
-     /*   for (int i = 0; i < files.size(); i++) {
-            if (files.get(i).getText().equals(currentFile)) {
-                if (i == 0) {
-                    currentFile = files.get(files.size() - 1).getText();
-                } else {
-                    currentFile = files.get(i - 1).getText();
-                }
-                break;
-            }
-        }
+        /*   for (int i = 0; i < files.size(); i++) {
+         if (files.get(i).getText().equals(currentFile)) {
+         if (i == 0) {
+         currentFile = files.get(files.size() - 1).getText();
+         } else {
+         currentFile = files.get(i - 1).getText();
+         }
+         break;
+         }
+         }
 
-        playMedia(currentFile);*/
+         playMedia(currentFile);*/
     }//GEN-LAST:event_previousButtonMouseClicked
 
     private void initMediaPlayer() {
@@ -255,15 +255,15 @@ public class VideoFrame extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    System.out.println("hiddenControls "+hiddenControls);
+                    System.out.println("hiddenControls " + hiddenControls);
                     //if (hiddenControls) {
-                        System.out.println("clicky");
-                        mediaPlayerComponent.getMediaPlayer().pause();
-                        controlsPanel.setVisible(true);
-                        controlsPanel.setBackground(Color.yellow);
-                        hiddenControls = false;
-                        pack();
-                   // }
+                    System.out.println("clicky");
+                    mediaPlayerComponent.getMediaPlayer().pause();
+                    controlsPanel.setVisible(true);
+                    controlsPanel.setBackground(Color.yellow);
+                    hiddenControls = false;
+                    pack();
+                    // }
                 }
             }
         });
@@ -271,7 +271,7 @@ public class VideoFrame extends javax.swing.JFrame {
         mediaPlayerComponent.getVideoSurface().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent evt) {
-                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), evt.getKeyChar(), "keyboard");
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
                     if (hiddenControls) {
                         controlsPanel.setVisible(true);
@@ -315,7 +315,6 @@ public class VideoFrame extends javax.swing.JFrame {
     public String getFilePath(String fileName) {
         return user.getEntertainmentModule().getVideoModule().getFolderPath() + File.separator + fileName;
     }
-
 
     private void setTimer() {
         timer = new Timer();

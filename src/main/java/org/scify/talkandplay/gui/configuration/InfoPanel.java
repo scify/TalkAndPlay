@@ -83,7 +83,7 @@ public class InfoPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initCustomComponents() {
-        setLayout(new GridLayout(0, 2, 0, 0));
+        setLayout(new GridLayout(0, 1, 0, 0));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
