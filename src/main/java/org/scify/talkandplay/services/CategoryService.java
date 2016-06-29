@@ -104,6 +104,26 @@ public class CategoryService {
         return communication;
     }
 
+    public List<String> getLinearCategories(User user) {
+        List<String> categories = new ArrayList();
+        categories.add(user.getCommunicationModule().getName());
+
+        getLinearCategories(categories, user.getCommunicationModule().getCategories());
+
+        return categories;
+    }
+
+    private void getLinearCategories(List<String> categories, List<Category> subCategories) {
+        if (subCategories.size() == 0) {
+            return;
+        } else {
+            for (Category category : subCategories) {
+                categories.add(category.getName());
+                getLinearCategories(categories, category.getSubCategories());
+            }
+        }
+    }
+
     /**
      * Save a new category
      *

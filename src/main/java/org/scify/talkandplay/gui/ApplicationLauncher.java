@@ -6,7 +6,6 @@ import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.UIManager;
-import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.utils.ConfigurationHandler;
 
@@ -25,16 +24,20 @@ public class ApplicationLauncher {
 
     public static void setUI(javax.swing.plaf.FontUIResource f) {
 
-        
-       ArrayList<Object> gradients = new ArrayList<Object>(5);
-gradients.add(0.00f);
-gradients.add(0.00f);
-gradients.add(new Color(0xFFFFFF));
-gradients.add(new Color(0xFFFFFF));
-gradients.add(new Color(0xFFFFFF));
+        ArrayList<Object> gradients = new ArrayList<Object>(5);
+        gradients.add(0.00f);
+        gradients.add(0.00f);
+        gradients.add(new Color(0xFFFFFF));
+        gradients.add(new Color(0xFFFFFF));
+        gradients.add(new Color(0xFFFFFF));
 
         UIManager.put("CheckBox.border", Color.black);
         UIManager.put("CheckBox.gradient", gradients);
+
+        //combobox
+        UIManager.put("ComboBox.selectionBackground", Color.decode("#4BA145"));
+        UIManager.put("ComboBox.selectionForeground", Color.white);
+        UIManager.put("ComboBox.buttonDarkShadow", Color.black);
 
         //tabs
         UIManager.put("TabbedPane.borderColor", Color.decode("#4BA145"));

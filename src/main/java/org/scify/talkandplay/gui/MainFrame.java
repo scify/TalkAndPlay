@@ -44,7 +44,7 @@ public class MainFrame extends javax.swing.JFrame {
         contentPane.setBackground(new java.awt.Color(255, 255, 255));
         contentPane.setPreferredSize(new java.awt.Dimension(800, 720));
 
-        contentPanel.setBackground(new java.awt.Color(255, 255, 204));
+        contentPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/tp_logo_small.png"))); // NOI18N
 

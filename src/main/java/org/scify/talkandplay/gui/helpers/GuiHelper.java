@@ -6,15 +6,18 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -24,6 +27,17 @@ public class GuiHelper {
 
     private static final int DEFAULT_WIDTH = 150;
     private static final int DEFAULT_HEIGHT = 150;
+
+    /**
+     * Draw the default button
+     *
+     * @param button
+     */
+    public void drawButton(JButton button) {
+        button.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
+        button.setBorder(new LineBorder(new Color(75, 161, 69), 20));
+        button.setMargin(new Insets(10, 10, 10, 10));
+    }
 
     /**
      * Get the icon for a user, or no photo

@@ -356,9 +356,7 @@ public class UserFormPanel extends javax.swing.JPanel {
             parent.setPanelTitle("Επεξεργασία χρήστη");
 
             createUserButton.setVisible(false);
-            editUserButton.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
-            editUserButton.setBorder(new LineBorder(new Color(75, 161, 69), 20));
-            editUserButton.setMargin(new Insets(10, 10, 10, 10));
+            guiHelper.drawButton(editUserButton);
 
             nameTextField.setText(user.getName());
             uploadImageLabel.setIcon(guiHelper.getIcon(user.getImage()));
@@ -395,9 +393,7 @@ public class UserFormPanel extends javax.swing.JPanel {
             parent.setPanelTitle("Προσθήκη χρήστη");
 
             editUserButton.setVisible(false);
-            createUserButton.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
-            createUserButton.setBorder(new LineBorder(new Color(75, 161, 69), 20));
-            createUserButton.setMargin(new Insets(10, 10, 10, 10));
+            guiHelper.drawButton(createUserButton);
 
             autoScanRadioButton.setSelected(true);
             enableTextField(selectionSensorTextField1);
@@ -405,9 +401,7 @@ public class UserFormPanel extends javax.swing.JPanel {
             disableTextField(navigationSensorTextField);
         }
 
-        backButton.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
-        backButton.setBorder(new LineBorder(new Color(75, 161, 69), 20));
-        backButton.setMargin(new Insets(10, 10, 10, 10));
+        guiHelper.drawButton(backButton);
     }
 
     private boolean validateUser() {

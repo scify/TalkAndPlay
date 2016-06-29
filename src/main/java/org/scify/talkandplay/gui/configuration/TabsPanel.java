@@ -2,16 +2,17 @@ package org.scify.talkandplay.gui.configuration;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridLayout;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import org.scify.talkandplay.gui.helpers.UIConstants;
+import org.scify.talkandplay.models.User;
 
 public class TabsPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form TabsPanel
-     */
-    public TabsPanel() {
+    private User user;
+
+    public TabsPanel(User user) {
+        this.user = user;
         initComponents();
         initCustomComponents();
     }
@@ -29,34 +30,35 @@ public class TabsPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
+        tabsPanel.setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+            .addComponent(tabsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 884, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(tabsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(tabsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void initCustomComponents() {
-        setLayout(new GridLayout(0, 1, 0, 0));
+        // setLayout(new GridLayout(0, 1, 0, 0));
 
-        tabsPanel.addTab("Επικοινωνία", new CommunicationPanel());
+        tabsPanel.addTab("Επικοινωνία", new CommunicationPanel(user));
         tabsPanel.addTab("Ψυχαγωγία", null);
         tabsPanel.addTab("Παιχνίδια", null);
 
-        tabsPanel.setFont(new Font("DejaVu Sans", Font.PLAIN, 18));
+        tabsPanel.setSelectedIndex(0);
+
+        tabsPanel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
 
         tabsPanel.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent ce) {
-                System.out.println(tabsPanel.getSelectedIndex());
-                tabsPanel.setForeground(Color.decode("#4BA145"));
+                tabsPanel.setForeground(Color.decode(UIConstants.getMainColor()));
                 tabsPanel.setForegroundAt(tabsPanel.getSelectedIndex(), Color.white);
             }
         });

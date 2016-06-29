@@ -1,21 +1,71 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.scify.talkandplay.gui.configuration;
 
-/**
- *
- * @author christina
- */
+import java.awt.Font;
+import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import org.scify.talkandplay.gui.helpers.UIConstants;
+import org.scify.talkandplay.models.Category;
+import org.scify.talkandplay.models.User;
+
 public class CommunicationPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form CommunicationPanel
-     */
-    public CommunicationPanel() {
+    private User user;
+    private JLabel label;
+
+    private static final int MARGIN = 20;
+
+    public CommunicationPanel(User user) {
+        this.user = user;
+
         initComponents();
+        initCustomComponents();
+    }
+
+    private void initCustomComponents() {
+        int margin = 0;
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        setBorder(new EmptyBorder(20, 20, 20, 20));
+
+        label = new JLabel(user.getCommunicationModule().getName());
+        label.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 16));
+
+        add(label);
+
+        drawCategories(user.getCommunicationModule().getCategories(), MARGIN);
+
+    }
+
+    /**
+     * Recursively draw the categories
+     *
+     * @param categories
+     * @param margin
+     */
+    private void drawCategories(List<Category> categories, int margin) {
+
+        if (categories == null || categories.isEmpty()) {
+            return;
+        } else {
+            margin += MARGIN;
+            for (Category category : categories) {
+                label = new JLabel(category.getName());
+                label.setBorder(new EmptyBorder(8, margin, 0, 0));
+                
+                if (category.getSubCategories().size() > 0) {
+                    label.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 14));
+                } else {
+                    label.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 14));
+                }
+
+                add(label);
+                drawCategories(category.getSubCategories(), margin);
+            }
+            margin -= MARGIN;
+        }
     }
 
     /**
@@ -26,6 +76,8 @@ public class CommunicationPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
