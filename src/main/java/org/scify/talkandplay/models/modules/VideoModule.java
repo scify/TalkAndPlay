@@ -3,6 +3,7 @@ package org.scify.talkandplay.models.modules;
 public class VideoModule extends Module {
 
     private String folderPath;
+    private int playlistSize;
 
     public VideoModule() {
     }
@@ -13,5 +14,13 @@ public class VideoModule extends Module {
 
     public void setFolderPath(String folderPath) {
         this.folderPath = folderPath;
+    }
+
+    public int getPlaylistSize() {
+        return playlistSize;
+    }
+
+    public void setPlaylistSize(int playlistSize) {
+        this.playlistSize = playlistSize;
     }
 }

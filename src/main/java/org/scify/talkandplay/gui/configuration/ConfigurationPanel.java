@@ -51,14 +51,14 @@ public class ConfigurationPanel extends javax.swing.JPanel {
         gbc.gridwidth = 1;
 
         gbc.weightx = 1;
-        infoPanel = new InfoPanel(this,  user);
+      /*  infoPanel = new InfoPanel(this,  user);
         add(infoPanel, gbc);
-
+*/
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.weightx = 1;
         gbc.gridwidth = 2;   
-        tabsPanel = new TabsPanel(user);
+        tabsPanel = new TabsPanel(user, this);
         add(tabsPanel, gbc);
 
         revalidate();
@@ -78,6 +78,10 @@ public class ConfigurationPanel extends javax.swing.JPanel {
     
     public void redrawCategoriesList(){
         tabsPanel.redrawCategoriesList();
+    }
+    
+    public MainFrame getParent(){
+        return this.parent;
     }
 
     /**

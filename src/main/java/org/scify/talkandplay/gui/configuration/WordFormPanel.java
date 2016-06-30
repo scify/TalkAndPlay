@@ -1,9 +1,12 @@
 package org.scify.talkandplay.gui.configuration;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,18 +28,20 @@ public class WordFormPanel extends javax.swing.JPanel {
 
     private GuiHelper guiHelper;
     private User user;
+    private Category category;
     private List<String> categories;
     private String imagePath;
     private String soundPath;
     private CategoryService categoryService;
     private ConfigurationPanel parent;
 
-    public WordFormPanel(User user, ConfigurationPanel parent) {
+    public WordFormPanel(User user, Category category, ConfigurationPanel parent) {
         this.guiHelper = new GuiHelper();
         this.user = user;
         this.imagePath = null;
         this.soundPath = null;
         this.categoryService = new CategoryService();
+        this.category = category;
         this.parent = parent;
 
         initComponents();
@@ -44,11 +49,10 @@ public class WordFormPanel extends javax.swing.JPanel {
     }
 
     private void initCustomComponents() {
-        //setBorder(new LineBorder(Color.decode(UIConstants.getMainColor()), 1));
-
         categories = categoryService.getLinearCategories(user);
         setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 10, 10), new LineBorder(Color.decode(UIConstants.getMainColor()), 1)));
         setUI();
+        setListeners();
     }
 
     /**
@@ -75,6 +79,15 @@ public class WordFormPanel extends javax.swing.JPanel {
         uploadImageLabel = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
         errorLabel = new javax.swing.JLabel();
+        editStepsPanel = new javax.swing.JPanel();
+        step5Label = new javax.swing.JLabel();
+        rowsTextField = new javax.swing.JTextField();
+        xLabel = new javax.swing.JLabel();
+        columnsTextField = new javax.swing.JTextField();
+        step6Label = new javax.swing.JLabel();
+        imageCheckBox = new javax.swing.JCheckBox();
+        textCheckBox = new javax.swing.JCheckBox();
+        soundCheckBox = new javax.swing.JCheckBox();
 
         backButton.setBackground(new java.awt.Color(75, 161, 69));
         backButton.setFont(backButton.getFont());
@@ -118,11 +131,6 @@ public class WordFormPanel extends javax.swing.JPanel {
         categoriesComboBox.setBorder(null);
 
         uploadImageLabel.setText("uploadImg");
-        uploadImageLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                uploadImageLabelMouseClicked(evt);
-            }
-        });
 
         saveButton.setBackground(new java.awt.Color(75, 161, 69));
         saveButton.setFont(saveButton.getFont());
@@ -138,6 +146,75 @@ public class WordFormPanel extends javax.swing.JPanel {
         errorLabel.setBackground(new java.awt.Color(255, 255, 255));
         errorLabel.setForeground(new java.awt.Color(153, 0, 0));
         errorLabel.setText("error");
+
+        editStepsPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        step5Label.setText("5. Καθόρισε μέγεθος πίνακα");
+
+        rowsTextField.setText("3");
+
+        xLabel.setText("x");
+
+        columnsTextField.setText("3");
+
+        step6Label.setText("6. Εμφάνιση πίνακα");
+
+        imageCheckBox.setBackground(new java.awt.Color(255, 255, 255));
+        imageCheckBox.setText("Εικόνα");
+
+        textCheckBox.setBackground(new java.awt.Color(255, 255, 255));
+        textCheckBox.setText("Λεκτικό");
+
+        soundCheckBox.setBackground(new java.awt.Color(255, 255, 255));
+        soundCheckBox.setText("Ήχος");
+
+        javax.swing.GroupLayout editStepsPanelLayout = new javax.swing.GroupLayout(editStepsPanel);
+        editStepsPanel.setLayout(editStepsPanelLayout);
+        editStepsPanelLayout.setHorizontalGroup(
+            editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editStepsPanelLayout.createSequentialGroup()
+                .addGroup(editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(editStepsPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(step5Label))
+                    .addGroup(editStepsPanelLayout.createSequentialGroup()
+                        .addGap(155, 155, 155)
+                        .addComponent(rowsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(xLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(columnsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(editStepsPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(step6Label))
+                    .addGroup(editStepsPanelLayout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(soundCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(imageCheckBox)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        editStepsPanelLayout.setVerticalGroup(
+            editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editStepsPanelLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(step5Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(xLabel)
+                    .addComponent(columnsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rowsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(step6Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(soundCheckBox)
+                    .addComponent(textCheckBox)
+                    .addComponent(imageCheckBox))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -180,12 +257,16 @@ public class WordFormPanel extends javax.swing.JPanel {
                             .addComponent(errorLabel)
                             .addComponent(categoriesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
-                        .addComponent(uploadSoundLabel))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(166, 166, 166)
-                        .addComponent(saveButton)))
+                        .addComponent(saveButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(169, 169, 169)
+                        .addComponent(uploadSoundLabel)))
                 .addContainerGap(26, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(editStepsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,21 +279,23 @@ public class WordFormPanel extends javax.swing.JPanel {
                 .addComponent(wordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(step2Label)
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
                 .addComponent(uploadImageLabel)
-                .addGap(2, 2, 2)
+                .addGap(20, 20, 20)
                 .addComponent(step3Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(step3ExplLabel)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addComponent(uploadSoundLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(step4Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(categoriesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(editStepsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(errorLabel)
                 .addGap(2, 2, 2)
                 .addComponent(saveButton)
@@ -240,20 +323,6 @@ public class WordFormPanel extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_saveButtonMouseClicked
-
-    private void uploadImageLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_uploadImageLabelMouseClicked
-        JFileChooser chooser = new JFileChooser();
-
-        chooser.setDialogTitle("Διαλέξτε εικόνα");
-        chooser.setAcceptAllFileFilterUsed(false);
-        chooser.setFileFilter(new FileNameExtensionFilter("Image Files", "png", "jpg", "jpeg", "JPG", "JPEG", "gif"));
-        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            imagePath = chooser.getSelectedFile().getAbsolutePath();
-            uploadImageLabel.setIcon(new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
-
-        }
-    }//GEN-LAST:event_uploadImageLabelMouseClicked
 
     private void uploadSoundLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_uploadSoundLabelMouseClicked
         // TODO add your handling code here:
@@ -304,11 +373,13 @@ public class WordFormPanel extends javax.swing.JPanel {
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
 
         guiHelper.drawButton(saveButton);
-        setStepLabelFont(step1Label);
-        setStepLabelFont(step2Label);
-        setStepLabelFont(step3Label);
-        setStepLabelFont(step4Label);
-        setStepExplLabelFont(step3ExplLabel);
+        guiHelper.setStepLabelFont(step1Label);
+        guiHelper.setStepLabelFont(step2Label);
+        guiHelper.setStepLabelFont(step3Label);
+        guiHelper.setStepLabelFont(step4Label);
+        guiHelper.setStepLabelFont(step5Label);
+        guiHelper.setStepLabelFont(step6Label);
+        guiHelper.setStepExplLabelFont(step3ExplLabel);
 
         wordTextField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.GRAY));
         wordTextField.setFont(new Font(UIConstants.getMainFont(), Font.ITALIC, 14));
@@ -335,32 +406,120 @@ public class WordFormPanel extends javax.swing.JPanel {
 
         categoriesComboBox.setBorder(new LineBorder(Color.decode(UIConstants.getMainColor()), 1));
         categoriesComboBox.setFont(new Font(UIConstants.getMainColor(), Font.PLAIN, 14));
-        // categoriesComboBox.set
+
+        if (category == null) {
+            editStepsPanel.setVisible(false);
+        } else {
+            editStepsPanel.setVisible(true);
+            System.out.println(category.getName());
+            wordTextField.setText(category.getName());
+            uploadImageLabel.setIcon(new ImageIcon(new ImageIcon(category.getImage()).getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
+            // uploadSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")).getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
+//            categoriesComboBox.setSelectedItem(category.getParentCategory().getName());
+            rowsTextField.setText(String.valueOf(category.getRows()));
+            columnsTextField.setText(String.valueOf(category.getColumns()));
+            // soundCheckBox.setSelected(category.);
+        }
     }
 
-    private void setStepLabelFont(JLabel label) {
-        label.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 14));
-    }
+    private void setListeners() {
+        uploadImageLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent me) {
+                if (imagePath == null) {
+                    uploadImageLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")).getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
+                }
+            }
 
-    private void setStepExplLabelFont(JLabel label) {
-        label.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 12));
+            @Override
+            public void mouseEntered(MouseEvent me) {
+                if (imagePath == null) {
+                    uploadImageLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon-hover.png")).getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
+                }
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                JFileChooser chooser = new JFileChooser();
+
+                chooser.setDialogTitle("Διαλέξτε εικόνα");
+                chooser.setAcceptAllFileFilterUsed(false);
+                chooser.setFileFilter(new FileNameExtensionFilter("Image Files", "png", "jpg", "jpeg", "JPG", "JPEG", "gif"));
+                chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    imagePath = chooser.getSelectedFile().getAbsolutePath();
+                    uploadImageLabel.setIcon(new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
+
+                }
+            }
+        });
+
+        uploadSoundLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent me) {
+                uploadSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")).getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent me) {
+                uploadSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon-hover.png")).getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                JFileChooser chooser = new JFileChooser();
+
+                chooser.setDialogTitle("Διαλέξτε εικόνα");
+                chooser.setAcceptAllFileFilterUsed(false);
+                chooser.setFileFilter(new FileNameExtensionFilter("Sound Files", "mp3", "wav", "wma", "mid"));
+                chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    soundPath = chooser.getSelectedFile().getAbsolutePath();
+                    uploadImageLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon.png")).getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
+                }
+            }
+
+        });
+
+        wordTextField.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent fe) {
+                if ("Λέξη".equals(wordTextField.getText())) {
+                    wordTextField.setText("");
+                }
+            }
+
+            public void focusLost(FocusEvent fe) {
+                if (wordTextField.getText().isEmpty()) {
+                    wordTextField.setText("Λέξη");
+                }
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JComboBox categoriesComboBox;
+    private javax.swing.JTextField columnsTextField;
+    private javax.swing.JPanel editStepsPanel;
     private javax.swing.JLabel errorLabel;
+    private javax.swing.JCheckBox imageCheckBox;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField rowsTextField;
     private javax.swing.JButton saveButton;
+    private javax.swing.JCheckBox soundCheckBox;
     private javax.swing.JLabel step1Label;
     private javax.swing.JLabel step2Label;
     private javax.swing.JLabel step3ExplLabel;
     private javax.swing.JLabel step3Label;
     private javax.swing.JTextArea step4ExplTextArea;
     private javax.swing.JLabel step4Label;
+    private javax.swing.JLabel step5Label;
+    private javax.swing.JLabel step6Label;
+    private javax.swing.JCheckBox textCheckBox;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JLabel uploadImageLabel;
     private javax.swing.JLabel uploadSoundLabel;
     private javax.swing.JTextField wordTextField;
+    private javax.swing.JLabel xLabel;
     // End of variables declaration//GEN-END:variables
 }

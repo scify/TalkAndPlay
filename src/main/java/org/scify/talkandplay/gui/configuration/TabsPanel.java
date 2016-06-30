@@ -10,10 +10,14 @@ import org.scify.talkandplay.models.User;
 public class TabsPanel extends javax.swing.JPanel {
 
     private User user;
+    private ConfigurationPanel parent;
     private CommunicationPanel communicationPanel;
+    private EntertainmentPanel entertainmentPanel;
 
-    public TabsPanel(User user) {
+    public TabsPanel(User user, ConfigurationPanel parent) {
         this.user = user;
+        this.parent = parent;
+
         initComponents();
         initCustomComponents();
     }
@@ -47,9 +51,10 @@ public class TabsPanel extends javax.swing.JPanel {
 
     private void initCustomComponents() {
         // setLayout(new GridLayout(0, 1, 0, 0));
-        communicationPanel = new CommunicationPanel(user);
+        communicationPanel = new CommunicationPanel(user, parent);
+        entertainmentPanel = new EntertainmentPanel(user);
 
-        tabsPanel.addTab("Επικοινωνία", communicationPanel);
+        tabsPanel.addTab("Επικοινωνία", null);
         tabsPanel.addTab("Ψυχαγωγία", null);
         tabsPanel.addTab("Παιχνίδια", null);
 

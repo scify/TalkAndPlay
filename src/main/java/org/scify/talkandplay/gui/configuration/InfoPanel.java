@@ -1,7 +1,7 @@
 package org.scify.talkandplay.gui.configuration;
 
 import java.awt.GridLayout;
-import java.util.List;
+import org.scify.talkandplay.gui.MainPanel;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.models.User;
 
@@ -33,6 +33,7 @@ public class InfoPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         addWordButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -51,6 +52,17 @@ public class InfoPanel extends javax.swing.JPanel {
             }
         });
 
+        backButton.setBackground(new java.awt.Color(75, 161, 69));
+        backButton.setFont(backButton.getFont());
+        backButton.setForeground(new java.awt.Color(255, 255, 255));
+        backButton.setText("Πίσω");
+        backButton.setBorder(null);
+        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -62,7 +74,10 @@ public class InfoPanel extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(addWordButton))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(addWordButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(backButton)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -74,7 +89,9 @@ public class InfoPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addGap(60, 60, 60)
-                .addComponent(addWordButton)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addWordButton)
+                    .addComponent(backButton))
                 .addContainerGap(478, Short.MAX_VALUE))
         );
 
@@ -91,16 +108,22 @@ public class InfoPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addWordButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addWordButtonMouseClicked
-        parent.addPanel(new WordFormPanel(user, parent));
+        parent.addPanel(new WordFormPanel(user, null, parent));
     }//GEN-LAST:event_addWordButtonMouseClicked
+
+    private void backButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseClicked
+        parent.getParent().changePanel(new MainPanel(parent.getParent()));
+    }//GEN-LAST:event_backButtonMouseClicked
 
     private void initCustomComponents() {
         setLayout(new GridLayout(0, 1, 0, 0));
         guiHelper.drawButton(addWordButton);
+        guiHelper.drawButton(backButton);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addWordButton;
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

@@ -116,6 +116,37 @@
               <columns>4</columns>
               <image>/home/christina/Downloads/2013-01-10.jpg</image>
               <order>0</order>
+              <categories />
+            </category>
+            <category name="dsdsada">
+              <rows>3</rows>
+              <columns>4</columns>
+              <image>/home/christina/Downloads/demo_imgs/7887736_f260.jpg</image>
+              <order>0</order>
+            </category>
+            <category name="EDW">
+              <rows>3</rows>
+              <columns>4</columns>
+              <image>/home/christina/Downloads/demo_imgs/7887736_f260.jpg</image>
+              <order>0</order>
+            </category>
+            <category name="sds">
+              <rows>3</rows>
+              <columns>4</columns>
+              <image>/home/christina/Downloads/Assistive Technologies.png</image>
+              <order>0</order>
+            </category>
+            <category name="KOTA">
+              <rows>3</rows>
+              <columns>4</columns>
+              <image>/home/christina/Downloads/2013-01-10.jpg</image>
+              <order>0</order>
+            </category>
+            <category name="KOTA!">
+              <rows>3</rows>
+              <columns>4</columns>
+              <image>/home/christina/Downloads/2013-01-10.jpg</image>
+              <order>0</order>
             </category>
           </categories>
         </category>
@@ -171,6 +202,14 @@
           <columns>3</columns>
           <order>0</order>
           <image>/home/christina/Desktop/talkandplay/cheese.png</image>
+          <categories>
+            <category name="KOTA!!">
+              <rows>3</rows>
+              <columns>4</columns>
+              <image>/home/christina/Downloads/2013-01-10.jpg</image>
+              <order>0</order>
+            </category>
+          </categories>
         </category>
       </categories>
     </communication>
@@ -425,17 +464,17 @@
       <name>Ψυχαγωγία</name>
       <enabled>true</enabled>
       <image />
-      <musicPath />
-      <videoPath />
       <music>
         <name>Μουσική</name>
         <enabled>true</enabled>
         <image />
+        <path />
       </music>
       <video>
         <name>Βίντεο</name>
         <enabled>true</enabled>
         <image />
+        <path />
       </video>
     </entertainment>
     <games>
@@ -472,17 +511,19 @@
       <name>Ψυχαγωγία</name>
       <enabled>true</enabled>
       <image />
-      <musicPath />
-      <videoPath />
       <music>
         <name>Μουσική</name>
         <enabled>true</enabled>
+        <path>/home/christina/Music</path>
         <image />
+        <playlistSize>10</playlistSize>
       </music>
       <video>
         <name>Βίντεο</name>
         <enabled>true</enabled>
+        <path>/home/christina/Videos</path>
         <image />
+        <playlistSize>10</playlistSize>
       </video>
     </entertainment>
     <games>

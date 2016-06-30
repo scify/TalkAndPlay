@@ -17,15 +17,29 @@ public class CategoryService {
         configurationHandler = new ConfigurationHandler();
     }
 
-    public Category getCategory(String categoryName, String userName) {
-        List<Category> categories = getCategories(userName);
-        Category category = null;
+    public Category getCategory(String categoryName, User user) {
+        Category category =null;
+        category =getCategory(user.getCommunicationModule().getCategories(), categoryName, category, user.getCommunicationModule().getName());
+        System.out.println(category);
+        return category;
+    }
 
-        for (Category cat : categories) {
-            if (cat.getName().equals(categoryName)) {
-                category = cat;
+    private Category getCategory(List<Category> categories, String categoryName, Category category, String parent) {
+
+        if (categories.size() == 0) {
+            return null;
+        } else {
+            for (Category cat : categories) {
+                if (cat.getName().equals(categoryName)) {
+                    category = cat;
+                    category.setParentCategory(new Category(parent));
+                    return category;
+                } else {
+                    getCategory(cat.getSubCategories(), categoryName, category, cat.getName());
+                }
             }
         }
+        
         return category;
     }
 

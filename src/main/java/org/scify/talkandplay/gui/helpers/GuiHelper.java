@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -41,7 +42,6 @@ public class GuiHelper {
         button.setMargin(new Insets(10, 10, 10, 10));
     }
 
-    
     /**
      * Get the icon for a user, or no photo
      *
@@ -55,6 +55,29 @@ public class GuiHelper {
         } else {
             return new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/no-photo.png")).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
         }
+    }
+
+    /**
+     * Set the style of the steps labels (like titles)
+     *
+     * @param label
+     */
+    public void setStepLabelFont(JLabel label) {
+        label.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 14));
+    }
+
+    public void setStepExplLabelFont(JLabel label) {
+        label.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 12));
+    }
+
+    /**
+     * Set the style of the custom text fields
+     * @param textField 
+     */
+    public void setCustomTextField(JTextField textField) {
+        textField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.GRAY));
+        textField.setFont(new Font(UIConstants.getMainFont(), Font.ITALIC, 14));
+        textField.setHorizontalAlignment(JTextField.CENTER);
     }
 
     /**

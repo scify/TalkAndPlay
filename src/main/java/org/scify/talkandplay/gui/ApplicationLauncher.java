@@ -6,6 +6,7 @@ import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.UIManager;
+import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.utils.ConfigurationHandler;
 
@@ -14,7 +15,7 @@ public class ApplicationLauncher {
     public static void main(String[] args) {
 
         // testConfig();
-        setUI(new javax.swing.plaf.FontUIResource("DejaVu Sans", Font.PLAIN, 12));
+        setUI();
         ConfigurationHandler conf = new ConfigurationHandler();
         MainFrame mainFrame = new MainFrame(conf);
         mainFrame.setLocationRelativeTo(null);
@@ -22,7 +23,7 @@ public class ApplicationLauncher {
 
     }
 
-    public static void setUI(javax.swing.plaf.FontUIResource f) {
+    public static void setUI() {
 
         ArrayList<Object> gradients = new ArrayList<Object>(5);
         gradients.add(0.00f);
@@ -53,7 +54,7 @@ public class ApplicationLauncher {
             Object key = keys.nextElement();
             Object value = UIManager.get(key);
             if (value != null && value instanceof javax.swing.plaf.FontUIResource) {
-                UIManager.put(key, f);
+                UIManager.put(key, new Font(UIConstants.getMainFont(), Font.PLAIN, 12));
             }
         }
     }
