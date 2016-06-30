@@ -21,6 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.users.UserFormPanel;
@@ -106,6 +107,7 @@ public class MainPanel extends javax.swing.JPanel {
         }
 
         repaintProfiles();
+    
     }
 
     public void removeUser(User selectedUser) {

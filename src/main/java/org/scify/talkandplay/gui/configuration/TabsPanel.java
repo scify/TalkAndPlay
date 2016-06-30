@@ -41,31 +41,35 @@ public class TabsPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 884, Short.MAX_VALUE)
+            .addComponent(tabsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tabsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void initCustomComponents() {
-        // setLayout(new GridLayout(0, 1, 0, 0));
+
         communicationPanel = new CommunicationPanel(user, parent);
         entertainmentPanel = new EntertainmentPanel(user);
 
-        tabsPanel.addTab("Επικοινωνία", null);
-        tabsPanel.addTab("Ψυχαγωγία", null);
+        tabsPanel.addTab("Επικοινωνία", communicationPanel);
+        tabsPanel.addTab("Ψυχαγωγία", entertainmentPanel);
         tabsPanel.addTab("Παιχνίδια", null);
 
         tabsPanel.setSelectedIndex(0);
-
+        tabsPanel.setForegroundAt(0, Color.white);
         tabsPanel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
 
         tabsPanel.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent ce) {
-                tabsPanel.setForeground(Color.decode(UIConstants.getMainColor()));
+                for (int i = 0; i < tabsPanel.getTabCount(); i++) {
+                    tabsPanel.setForegroundAt(i, Color.decode(UIConstants.getMainColor()));
+                }
                 tabsPanel.setForegroundAt(tabsPanel.getSelectedIndex(), Color.white);
             }
         });

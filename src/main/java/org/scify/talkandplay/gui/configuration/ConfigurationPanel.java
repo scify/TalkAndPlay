@@ -5,22 +5,19 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.MainFrame;
+import org.scify.talkandplay.gui.MainPanel;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.CategoryService;
-import org.scify.talkandplay.services.UserService;
 
 public class ConfigurationPanel extends javax.swing.JPanel {
-
+    
     private MainFrame parent;
     private User user;
     private InfoPanel infoPanel;
     private TabsPanel tabsPanel;
     private GridBagConstraints gbc;
     private CategoryService categoryService;
-
-    /**
-     * Creates new form ConfigurationPanel
-     */
+    
     public ConfigurationPanel(User user, MainFrame parent) {
         this.user = user;
         this.parent = parent;
@@ -29,13 +26,13 @@ public class ConfigurationPanel extends javax.swing.JPanel {
         initComponents();
         initCustomComponents();
     }
-
+    
     private void initCustomComponents() {
         parent.setPanelTitle("Προτιμήσεις χρήστη");
         gbc = new GridBagConstraints();
         setLayout(new GridBagLayout());
         gbc.fill = GridBagConstraints.HORIZONTAL;
-
+        
         gbc.gridx = 0;
         gbc.gridy = 0;
         add(new JLabel(), gbc);
@@ -45,26 +42,23 @@ public class ConfigurationPanel extends javax.swing.JPanel {
         gbc.gridx = 2;
         gbc.gridy = 0;
         add(new JLabel(), gbc);
-
+        
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
-
+        
         gbc.weightx = 1;
-      /*  infoPanel = new InfoPanel(this,  user);
+        infoPanel = new InfoPanel(this, user);
         add(infoPanel, gbc);
-*/
+        
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.weightx = 1;
-        gbc.gridwidth = 2;   
+        gbc.gridwidth = 2;
         tabsPanel = new TabsPanel(user, this);
         add(tabsPanel, gbc);
-
-        revalidate();
-        repaint();
     }
-
+    
     public void addPanel(JPanel panel) {
         remove(infoPanel);
         gbc.gridx = 0;
@@ -76,12 +70,12 @@ public class ConfigurationPanel extends javax.swing.JPanel {
         repaint();
     }
     
-    public void redrawCategoriesList(){
+    public void redrawCategoriesList() {
         tabsPanel.redrawCategoriesList();
     }
     
-    public MainFrame getParent(){
-        return this.parent;
+    public void goBack() {
+        parent.changePanel(new MainPanel(parent));
     }
 
     /**

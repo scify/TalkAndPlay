@@ -112,7 +112,7 @@ public class InfoPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_addWordButtonMouseClicked
 
     private void backButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseClicked
-        parent.getParent().changePanel(new MainPanel(parent.getParent()));
+        parent.goBack();
     }//GEN-LAST:event_backButtonMouseClicked
 
     private void initCustomComponents() {

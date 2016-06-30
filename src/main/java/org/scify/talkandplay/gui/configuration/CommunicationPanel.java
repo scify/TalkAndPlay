@@ -71,7 +71,7 @@ public class CommunicationPanel extends javax.swing.JPanel {
                 panel.setBackground(Color.white);
 
                 JLabel label = new JLabel(category.getName());
-                label.setBorder(new EmptyBorder(0, margin, 0, 0));
+              //  label.setBorder(new EmptyBorder(0, margin, 0, 0));
 
                 JLabel editLabel = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/edit-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
                 JLabel deleteLabel = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/delete-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));

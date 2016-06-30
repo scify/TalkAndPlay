@@ -42,6 +42,8 @@ public class ApplicationLauncher {
 
         //tabs
         UIManager.put("TabbedPane.borderColor", Color.decode("#4BA145"));
+        UIManager.put("TabbedPane.foreground", Color.decode("#4BA145"));
+        UIManager.put("TabbedPane.selectedForeground", Color.white);
         UIManager.put("TabbedPane.darkShadow", Color.decode("#4BA145"));
         UIManager.put("TabbedPane.light", Color.white);
         UIManager.put("TabbedPane.selectHighlight", Color.decode("#4BA145"));
