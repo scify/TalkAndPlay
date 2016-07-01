@@ -40,6 +40,21 @@ public class ApplicationLauncher {
         UIManager.put("ComboBox.selectionForeground", Color.white);
         UIManager.put("ComboBox.buttonDarkShadow", Color.black);
 
+        UIManager.put("ScrollBar.background", Color.white);
+        UIManager.put("ScrollBar.thumbShadow", Color.decode(UIConstants.getMainColor()));
+        UIManager.put("ScrollBar.track", Color.decode(UIConstants.getMainColor()));
+        UIManager.put("ScrollBar.trackHighlight", Color.decode(UIConstants.getMainColor()));
+
+        /*
+         ScrollBar.background
+         ScrollBar.foreground
+         ScrollBar.thumb
+         ScrollBar.thumbDarkShadow
+         ScrollBar.thumbHighlight
+         ScrollBar.thumbShadow
+         ScrollBar.track
+         ScrollBar.trackHighlight
+         */
         //tabs
         UIManager.put("TabbedPane.borderColor", Color.decode("#4BA145"));
         UIManager.put("TabbedPane.foreground", Color.decode("#4BA145"));

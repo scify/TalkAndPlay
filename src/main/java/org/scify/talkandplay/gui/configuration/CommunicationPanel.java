@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BoxLayout;
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -31,6 +33,9 @@ public class CommunicationPanel extends javax.swing.JPanel {
     private CategoryService categoryService;
     private List<JPanel> panels;
     private ConfigurationPanel parent;
+    private int row;
+
+    private GridBagConstraints c;
 
     private static final int MARGIN = 20;
 
@@ -46,10 +51,22 @@ public class CommunicationPanel extends javax.swing.JPanel {
 
     private void initCustomComponents() {
         panels = new ArrayList();
-        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        //  setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        contentPanel.setLayout(new GridBagLayout());
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.SOUTHWEST;
+        
+        row = 1;
+        c.weightx = 1;
+        //c.weighty = 0.0;
+        c.gridx = 0;
+        c.gridy = row;
+        row++;
+
         setBorder(new EmptyBorder(20, 0, 0, 0));
 
-        add(titlePanel());
+        contentPanel.add(titlePanel(), c);
 
         drawCategories(user.getCommunicationModule().getCategories(), MARGIN);
     }
@@ -71,7 +88,7 @@ public class CommunicationPanel extends javax.swing.JPanel {
                 panel.setBackground(Color.white);
 
                 JLabel label = new JLabel(category.getName());
-              //  label.setBorder(new EmptyBorder(0, margin, 0, 0));
+                label.setBorder(new EmptyBorder(0, margin, 0, 0));
 
                 JLabel editLabel = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/edit-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
                 JLabel deleteLabel = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/delete-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
@@ -93,9 +110,16 @@ public class CommunicationPanel extends javax.swing.JPanel {
 
                 panel.add(label, BorderLayout.LINE_START);
                 panel.add(controlsPanel, BorderLayout.LINE_END);
-                add(panel);
-                panels.add(panel);
 
+                //   c.weightx = 0.1;
+                c.weighty = 0.0;
+                c.gridy = row;
+                 c.ipady = 20;
+                contentPanel.add(panel, c);
+
+                // add(panel);
+                panels.add(panel);
+                row++;
                 drawCategories(category.getSubCategories(), margin);
             }
             margin -= MARGIN;
@@ -103,10 +127,9 @@ public class CommunicationPanel extends javax.swing.JPanel {
     }
 
     public void redrawCategoriesList() {
-        removeAll();
-
-        add(titlePanel());
-
+        contentPanel.removeAll();
+        contentPanel.add(titlePanel(), c);
+                
         user = userService.getUser(user.getName());
         drawCategories(user.getCommunicationModule().getCategories(), MARGIN);
 
@@ -147,7 +170,7 @@ public class CommunicationPanel extends javax.swing.JPanel {
         editLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                 parent.addPanel(new WordFormPanel(user, categoryService.getCategory(category, user), parent));
+                parent.addPanel(new WordFormPanel(user, categoryService.getCategory(category, user), parent));
             }
         });
 
@@ -176,21 +199,43 @@ public class CommunicationPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        contentPanel = new javax.swing.JPanel();
+
         setBackground(new java.awt.Color(255, 255, 255));
+
+        jScrollPane1.setBorder(null);
+
+        contentPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
+        contentPanel.setLayout(contentPanelLayout);
+        contentPanelLayout.setHorizontalGroup(
+            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        contentPanelLayout.setVerticalGroup(
+            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(contentPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel contentPanel;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

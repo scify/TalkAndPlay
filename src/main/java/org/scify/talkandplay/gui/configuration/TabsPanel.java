@@ -1,7 +1,9 @@
 package org.scify.talkandplay.gui.configuration;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JScrollPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import org.scify.talkandplay.gui.helpers.UIConstants;
@@ -54,7 +56,7 @@ public class TabsPanel extends javax.swing.JPanel {
     private void initCustomComponents() {
 
         communicationPanel = new CommunicationPanel(user, parent);
-        entertainmentPanel = new EntertainmentPanel(user);
+        entertainmentPanel = new EntertainmentPanel(user, parent);
 
         tabsPanel.addTab("Επικοινωνία", communicationPanel);
         tabsPanel.addTab("Ψυχαγωγία", entertainmentPanel);
@@ -71,6 +73,13 @@ public class TabsPanel extends javax.swing.JPanel {
                     tabsPanel.setForegroundAt(i, Color.decode(UIConstants.getMainColor()));
                 }
                 tabsPanel.setForegroundAt(tabsPanel.getSelectedIndex(), Color.white);
+
+                if (tabsPanel.getSelectedIndex() == 0) {
+                    parent.showInfoPanel();
+                }
+                if (tabsPanel.getSelectedIndex() == 1) {
+                    parent.hideInfoPanel();
+                }
             }
         });
     }

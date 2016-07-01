@@ -73,7 +73,7 @@ public class ConfigurationHandler {
 
     public List<User> getProfiles() {
         try {
-            profiles = parseXML();
+            profiles = refreshXMLFile();
             return profiles;
         } catch (Exception ex) {
             return null;
@@ -82,7 +82,7 @@ public class ConfigurationHandler {
 
     public User getUser(String name) {
         for (User user : getProfiles()) {
-            if (user.getName().equals(name)) {
+            if (user.getName().equals(name)) {              
                 return user;
             }
         }
@@ -393,16 +393,34 @@ public class ConfigurationHandler {
                     category.setParentCategory(new Category(parent.getName()));
                 }
 
-                if (categoryEl.getAttributeValue("editable") != null) {
-                    category.setEditable(Boolean.parseBoolean(categoryEl.getAttributeValue("editable")));
+                if (categoryEl.getChildText("editable") != null) {
+                    category.setEditable(Boolean.parseBoolean(categoryEl.getChildText("editable")));
                 } else {
                     category.setEditable(true);
                 }
 
-                if (categoryEl.getAttributeValue("order") != null) {
-                    category.setOrder(Integer.parseInt(categoryEl.getAttributeValue("order")));
+                if (categoryEl.getChildText("order") != null) {
+                    category.setOrder(Integer.parseInt(categoryEl.getChildText("order")));
                 } else {
                     category.setOrder(0);
+                }
+
+                if (categoryEl.getChildText("hasSound") != null) {
+                    category.setHasSound("true".equals(categoryEl.getChildText("hasSound")));
+                } else {
+                    category.setHasSound(true);
+                }
+
+                if (categoryEl.getChildText("hasImage") != null) {
+                    category.setHasImage("true".equals(categoryEl.getChildText("hasImage")));
+                } else {
+                    category.setHasImage(true);
+                }
+
+                if (categoryEl.getChildText("hasText") != null) {
+                    category.setHasText("true".equals(categoryEl.getChildText("hasText")));
+                } else {
+                    category.setHasText(true);
                 }
 
                 //set the tiles

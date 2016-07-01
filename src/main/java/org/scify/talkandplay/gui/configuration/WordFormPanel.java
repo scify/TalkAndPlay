@@ -50,7 +50,8 @@ public class WordFormPanel extends javax.swing.JPanel {
 
     private void initCustomComponents() {
         categories = categoryService.getLinearCategories(user);
-        setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 10, 10), new LineBorder(Color.decode(UIConstants.getMainColor()), 1)));
+       // setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 10, 10), new LineBorder(Color.decode(UIConstants.getMainColor()), 1)));
+        setBorder(new LineBorder(Color.decode(UIConstants.getMainColor()), 1));
         setUI();
         setListeners();
     }
@@ -75,7 +76,6 @@ public class WordFormPanel extends javax.swing.JPanel {
         step4Label = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         step4ExplTextArea = new javax.swing.JTextArea();
-        categoriesComboBox = new javax.swing.JComboBox();
         uploadImageLabel = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
         errorLabel = new javax.swing.JLabel();
@@ -88,6 +88,8 @@ public class WordFormPanel extends javax.swing.JPanel {
         imageCheckBox = new javax.swing.JCheckBox();
         textCheckBox = new javax.swing.JCheckBox();
         soundCheckBox = new javax.swing.JCheckBox();
+        closeLabel = new javax.swing.JLabel();
+        categoriesComboBox = new javax.swing.JComboBox();
 
         backButton.setBackground(new java.awt.Color(75, 161, 69));
         backButton.setFont(backButton.getFont());
@@ -126,9 +128,6 @@ public class WordFormPanel extends javax.swing.JPanel {
         step4ExplTextArea.setText("Επίλεξε την λέξη στην οποία υπάγεται η λέξη που προσθέτεις εδώ, ή επίλεξε “ΕΠΙΚΟΙΝΩΝΙΑ” εάν πρόκειται για εντελώς νέα κατηγορία λέξεων.\n");
         step4ExplTextArea.setBorder(null);
         jScrollPane1.setViewportView(step4ExplTextArea);
-
-        categoriesComboBox.setBackground(new java.awt.Color(255, 255, 255));
-        categoriesComboBox.setBorder(null);
 
         uploadImageLabel.setText("uploadImg");
 
@@ -178,13 +177,6 @@ public class WordFormPanel extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(step5Label))
                     .addGroup(editStepsPanelLayout.createSequentialGroup()
-                        .addGap(155, 155, 155)
-                        .addComponent(rowsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(xLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(columnsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(editStepsPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(step6Label))
                     .addGroup(editStepsPanelLayout.createSequentialGroup()
@@ -193,13 +185,19 @@ public class WordFormPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textCheckBox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(imageCheckBox)))
+                        .addComponent(imageCheckBox))
+                    .addGroup(editStepsPanelLayout.createSequentialGroup()
+                        .addGap(156, 156, 156)
+                        .addComponent(rowsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(xLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(columnsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         editStepsPanelLayout.setVerticalGroup(
             editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editStepsPanelLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
                 .addComponent(step5Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -213,75 +211,86 @@ public class WordFormPanel extends javax.swing.JPanel {
                     .addComponent(soundCheckBox)
                     .addComponent(textCheckBox)
                     .addComponent(imageCheckBox))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
+
+        closeLabel.setText("closeLabel");
+
+        categoriesComboBox.setBackground(new java.awt.Color(255, 255, 255));
+        categoriesComboBox.setBorder(null);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(titleLabel)
-                .addGap(157, 157, 157))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(step1Label))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(step2Label))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(step3Label)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(step4Label))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(20, 20, 20)
-                                        .addComponent(step3ExplLabel))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(categoriesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(errorLabel)
+                                    .addGap(398, 398, 398)))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(step4Label)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(14, 14, 14)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(uploadImageLabel)
-                                    .addComponent(wordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(166, 166, 166)
+                                .addComponent(saveButton)))
+                        .addGap(0, 20, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(errorLabel)
-                            .addComponent(categoriesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(saveButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(169, 169, 169)
-                        .addComponent(uploadSoundLabel)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                            .addComponent(editStepsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(titleLabel)
+                                .addGap(106, 106, 106)
+                                .addComponent(closeLabel)))))
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(editStepsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(step1Label)
+                    .addComponent(step2Label)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(uploadImageLabel)
+                            .addComponent(wordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(step3Label)
+                            .addGap(313, 313, 313))
+                        .addComponent(step3ExplLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addGap(3, 3, 3)
+                        .addComponent(uploadSoundLabel)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(titleLabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(closeLabel)
+                    .addComponent(titleLabel))
                 .addGap(18, 18, 18)
                 .addComponent(step1Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(wordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addComponent(step2Label)
                 .addGap(18, 18, 18)
                 .addComponent(uploadImageLabel)
-                .addGap(20, 20, 20)
+                .addGap(15, 15, 15)
                 .addComponent(step3Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(step3ExplLabel)
@@ -289,17 +298,17 @@ public class WordFormPanel extends javax.swing.JPanel {
                 .addComponent(uploadSoundLabel)
                 .addGap(18, 18, 18)
                 .addComponent(step4Label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(9, 9, 9)
                 .addComponent(categoriesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(27, 27, 27)
                 .addComponent(editStepsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(errorLabel)
                 .addGap(2, 2, 2)
                 .addComponent(saveButton)
-                .addGap(36, 36, 36))
+                .addGap(22, 22, 22))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -307,16 +316,23 @@ public class WordFormPanel extends javax.swing.JPanel {
 
         if (validateCategory()) {
 
-            Category category = new Category();
-            category.setName(wordTextField.getText());
-            category.setRows(user.getConfiguration().getDefaultGridRow());
-            category.setColumns(user.getConfiguration().getDefaultGridColumn());
-            category.setImage(imagePath);
-            category.setSound(soundPath);
-            category.setParentCategory(new Category(categoriesComboBox.getSelectedItem().toString()));
+            Category newCategory = new Category();
+            newCategory.setName(wordTextField.getText());
+            newCategory.setRows(Integer.parseInt(rowsTextField.getText()));
+            newCategory.setColumns(Integer.parseInt(columnsTextField.getText()));
+            newCategory.setImage(imagePath);
+            newCategory.setSound(soundPath);
+            newCategory.setParentCategory(new Category(categoriesComboBox.getSelectedItem().toString()));
+            newCategory.setHasSound(soundCheckBox.isSelected());
+            newCategory.setHasImage(imageCheckBox.isSelected());
+            newCategory.setHasText(textCheckBox.isSelected());
 
             try {
-                categoryService.save(category, user);
+                if (category == null) {
+                    categoryService.save(newCategory, user);
+                } else {
+                    categoryService.update(newCategory, user, category.getName());
+                }
                 parent.redrawCategoriesList();
             } catch (Exception ex) {
                 Logger.getLogger(WordFormPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -340,11 +356,13 @@ public class WordFormPanel extends javax.swing.JPanel {
         }
 
         //word should be unique
-        for (String category : categories) {
-            if (category.equals(name)) {
-                errorLabel.setText("Η λέξη πρέπει να είναι μοναδική");
-                errorLabel.setVisible(true);
-                return false;
+        if (category == null || (category != null && !category.getName().equals(name))) {
+            for (String category : categories) {
+                if (category.equals(name)) {
+                    errorLabel.setText("Η λέξη πρέπει να είναι μοναδική");
+                    errorLabel.setVisible(true);
+                    return false;
+                }
             }
         }
 
@@ -362,11 +380,20 @@ public class WordFormPanel extends javax.swing.JPanel {
             return false;
         }
 
+        if (category != null && category.getSubCategories().size() > 0 && !imageCheckBox.isSelected() && !textCheckBox.isSelected()) {
+            errorLabel.setText("Η λέξη θα πρέπει να έχει τουλάχιστον ένα από τα δύο: λεκτικό, εικόνα");
+            errorLabel.setVisible(true);
+            return false;
+        }
+
         return true;
     }
 
     private void setUI() {
         errorLabel.setVisible(false);
+
+        closeLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/close-icon.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH)));
+        closeLabel.setText("");
 
         titleLabel.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 16));
         titleLabel.setForeground(Color.decode(UIConstants.getMainColor()));
@@ -408,17 +435,31 @@ public class WordFormPanel extends javax.swing.JPanel {
         categoriesComboBox.setFont(new Font(UIConstants.getMainColor(), Font.PLAIN, 14));
 
         if (category == null) {
+
             editStepsPanel.setVisible(false);
+
         } else {
-            editStepsPanel.setVisible(true);
-            System.out.println(category.getName());
+            //if the category has subcategories, fill the appropriate fields
+            if (category.getSubCategories().size() > 0) {
+                editStepsPanel.setVisible(true);
+                rowsTextField.setText(String.valueOf(category.getRows()));
+                columnsTextField.setText(String.valueOf(category.getColumns()));
+                soundCheckBox.setSelected(category.hasSound());
+                imageCheckBox.setSelected(category.hasImage());
+                textCheckBox.setSelected(category.hasText());
+            } else {
+                editStepsPanel.setVisible(false);
+            }
+
             wordTextField.setText(category.getName());
             uploadImageLabel.setIcon(new ImageIcon(new ImageIcon(category.getImage()).getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
             // uploadSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")).getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
-//            categoriesComboBox.setSelectedItem(category.getParentCategory().getName());
-            rowsTextField.setText(String.valueOf(category.getRows()));
-            columnsTextField.setText(String.valueOf(category.getColumns()));
-            // soundCheckBox.setSelected(category.);
+            //categoriesComboBox.setSelectedItem(category.getParentCategory().getName());
+
+            categoriesComboBox.setSelectedItem(category.getParentCategory().getName());
+
+            imagePath = category.getImage();
+            soundPath = category.getImage();
         }
     }
 
@@ -494,11 +535,20 @@ public class WordFormPanel extends javax.swing.JPanel {
                 }
             }
         });
+
+        closeLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                parent.hideInfoPanel();
+                parent.showInfoPanel();
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JComboBox categoriesComboBox;
+    private javax.swing.JLabel closeLabel;
     private javax.swing.JTextField columnsTextField;
     private javax.swing.JPanel editStepsPanel;
     private javax.swing.JLabel errorLabel;

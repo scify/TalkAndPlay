@@ -1,5 +1,6 @@
 package org.scify.talkandplay.gui.configuration;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -10,72 +11,93 @@ import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.CategoryService;
 
 public class ConfigurationPanel extends javax.swing.JPanel {
-    
+
     private MainFrame parent;
     private User user;
     private InfoPanel infoPanel;
     private TabsPanel tabsPanel;
+    private JPanel infoWrapperPanel;
     private GridBagConstraints gbc;
     private CategoryService categoryService;
-    
+
     public ConfigurationPanel(User user, MainFrame parent) {
         this.user = user;
         this.parent = parent;
         this.categoryService = new CategoryService();
-        
+
         initComponents();
         initCustomComponents();
     }
-    
+
     private void initCustomComponents() {
         parent.setPanelTitle("Προτιμήσεις χρήστη");
         gbc = new GridBagConstraints();
-        setLayout(new GridBagLayout());
+        contentPanel.setLayout(new GridBagLayout());
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        
+
         gbc.gridx = 0;
         gbc.gridy = 0;
-        add(new JLabel(), gbc);
+        contentPanel.add(new JLabel(), gbc);
         gbc.gridx = 1;
         gbc.gridy = 0;
-        add(new JLabel(), gbc);
+        contentPanel.add(new JLabel(), gbc);
         gbc.gridx = 2;
         gbc.gridy = 0;
-        add(new JLabel(), gbc);
-        
+        contentPanel.add(new JLabel(), gbc);
+
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
-        
+
         gbc.weightx = 1;
         infoPanel = new InfoPanel(this, user);
-        add(infoPanel, gbc);
-        
+        infoWrapperPanel = new JPanel();
+        infoWrapperPanel.add(infoPanel);
+        infoWrapperPanel.setBackground(Color.white);
+        contentPanel.add(infoWrapperPanel, gbc);
+
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.weightx = 1;
         gbc.gridwidth = 2;
         tabsPanel = new TabsPanel(user, this);
-        add(tabsPanel, gbc);
+        contentPanel.add(tabsPanel, gbc);
     }
-    
+
     public void addPanel(JPanel panel) {
-        remove(infoPanel);
+        infoWrapperPanel.removeAll();
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weightx = 1;
         gbc.gridwidth = 1;
-        add(panel, gbc);
+        infoWrapperPanel.add(panel, gbc);
         revalidate();
         repaint();
     }
-    
+
     public void redrawCategoriesList() {
         tabsPanel.redrawCategoriesList();
     }
-    
+
     public void goBack() {
         parent.changePanel(new MainPanel(parent));
+    }
+
+    public void showInfoPanel() {
+        infoWrapperPanel.removeAll();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 1;
+        gbc.gridwidth = 1;
+        infoWrapperPanel.add(infoPanel, gbc);
+        revalidate();
+        repaint();
+    }
+
+    public void hideInfoPanel() {
+        infoWrapperPanel.removeAll();
+        revalidate();
+        repaint();
     }
 
     /**
@@ -87,21 +109,43 @@ public class ConfigurationPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        contentPanel = new javax.swing.JPanel();
+
         setBackground(new java.awt.Color(255, 255, 255));
+
+        jScrollPane1.setBorder(null);
+
+        contentPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
+        contentPanel.setLayout(contentPanelLayout);
+        contentPanelLayout.setHorizontalGroup(
+            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 393, Short.MAX_VALUE)
+        );
+        contentPanelLayout.setVerticalGroup(
+            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 307, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(contentPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 393, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 307, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel contentPanel;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

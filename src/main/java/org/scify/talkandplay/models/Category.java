@@ -14,6 +14,10 @@ public class Category {
     private Category parentCategory;
     private List<Category> subCategories;
     private List<Tile> tiles;
+    
+    private boolean hasSound;
+    private boolean hasImage;
+    private boolean hasText;
 
     public Category(String name) {
         this.name = name;
@@ -122,6 +126,32 @@ public class Category {
     public void setEditable(boolean editable) {
         this.editable = editable;
     }
+
+    public boolean hasSound() {
+        return hasSound;
+    }
+
+    public void setHasSound(boolean hasSound) {
+        this.hasSound = hasSound;
+    }
+
+    public boolean hasImage() {
+        return hasImage;
+    }
+
+    public void setHasImage(boolean hasImage) {
+        this.hasImage = hasImage;
+    }
+
+    public boolean hasText() {
+        return hasText;
+    }
+
+    public void setHasText(boolean hasText) {
+        this.hasText = hasText;
+    }
+    
+    
 
     @Override
     public String toString() {

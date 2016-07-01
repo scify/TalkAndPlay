@@ -4,6 +4,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -17,11 +18,13 @@ public class EntertainmentPanel extends javax.swing.JPanel {
     private User user;
     private GuiHelper guiHelper;
     private ModuleService moduleService;
+    private ConfigurationPanel parent;
 
-    public EntertainmentPanel(User user) {
+    public EntertainmentPanel(User user, ConfigurationPanel parent) {
         this.user = user;
         this.guiHelper = new GuiHelper();
         this.moduleService = new ModuleService();
+        this.parent = parent;
 
         initComponents();
         initCustomComponents();
@@ -38,6 +41,7 @@ public class EntertainmentPanel extends javax.swing.JPanel {
         guiHelper.setStepLabelFont(step3Label);
 
         guiHelper.drawButton(saveButton);
+        guiHelper.drawButton(backButton);
         errorLabel.setVisible(false);
 
         setListeners();
@@ -116,6 +120,13 @@ public class EntertainmentPanel extends javax.swing.JPanel {
                 }
             }
         });
+
+        backButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                parent.goBack();
+            }
+        });
     }
 
     /**
@@ -136,6 +147,7 @@ public class EntertainmentPanel extends javax.swing.JPanel {
         songSumTextField = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         errorLabel = new javax.swing.JLabel();
+        backButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -167,73 +179,74 @@ public class EntertainmentPanel extends javax.swing.JPanel {
         errorLabel.setForeground(new java.awt.Color(153, 0, 0));
         errorLabel.setText("error");
 
+        backButton.setBackground(new java.awt.Color(75, 161, 69));
+        backButton.setFont(backButton.getFont());
+        backButton.setForeground(new java.awt.Color(255, 255, 255));
+        backButton.setText("Πίσω");
+        backButton.setBorder(null);
+        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 454, Short.MAX_VALUE)
+                .addComponent(saveButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(backButton)
+                .addGap(14, 14, 14))
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(step2Label))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(step3Label))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(89, 89, 89)
-                            .addComponent(saveButton))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(musicPathTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel4))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(step1Label))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(videoPathTextField)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(songSumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(errorLabel))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                    .addComponent(step1Label)
+                    .addComponent(musicPathTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(step2Label)
+                    .addComponent(videoPathTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(step3Label)
+                    .addComponent(songSumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(errorLabel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(21, 21, 21)
                 .addComponent(step1Label)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(musicPathTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGap(30, 30, 30)
                 .addComponent(step2Label)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(videoPathTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(33, 33, 33)
                 .addComponent(step3Label)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(songSumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(errorLabel)
-                .addGap(11, 11, 11)
-                .addComponent(saveButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveButton)
+                    .addComponent(backButton))
                 .addGap(15, 15, 15))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButtonMouseClicked
 
-        if (musicPathTextField.getText().isEmpty() || "Φάκελος μουσικής".equals(musicPathTextField.getText())) {
-            errorLabel.setText("Ο φάκελος μουσικής πρέπει να οριστεί.");
+        if (musicPathTextField.getText().isEmpty() || "Φάκελος μουσικής".equals(musicPathTextField.getText()) || !(new File(musicPathTextField.getText()).isDirectory())) {
+            errorLabel.setText("Ο φάκελος μουσικής πρέπει να οριστεί σωστά.");
             errorLabel.setVisible(true);
-        } else if (videoPathTextField.getText().isEmpty() || "Φάκελος video".equals(videoPathTextField.getText())) {
-            errorLabel.setText("Ο φάκελος video πρέπει να οριστεί.");
+        } else if (videoPathTextField.getText().isEmpty() || "Φάκελος video".equals(videoPathTextField.getText()) || !(new File(videoPathTextField.getText()).isDirectory())) {
+            errorLabel.setText("Ο φάκελος video πρέπει να οριστεί σωστά.");
             errorLabel.setVisible(true);
         } else if (songSumTextField.getText().isEmpty() || !StringUtils.isNumeric(songSumTextField.getText())) {
             errorLabel.setText("Το πλήθος τραγουδιών πρέπει οριστεί σωστά");
@@ -253,8 +266,13 @@ public class EntertainmentPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_saveButtonMouseClicked
 
+    private void backButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_backButtonMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel errorLabel;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField musicPathTextField;

@@ -11,6 +11,7 @@ import org.scify.talkandplay.utils.ConfigurationHandler;
 public class CategoryService {
 
     private ConfigurationHandler configurationHandler;
+    private Category category;
     String projectPath;
 
     public CategoryService() {
@@ -18,29 +19,25 @@ public class CategoryService {
     }
 
     public Category getCategory(String categoryName, User user) {
-        Category category =null;
-        category =getCategory(user.getCommunicationModule().getCategories(), categoryName, category, user.getCommunicationModule().getName());
-        System.out.println(category);
+        getCategory(user.getCommunicationModule().getCategories(), categoryName, user.getCommunicationModule().getName());
         return category;
     }
 
-    private Category getCategory(List<Category> categories, String categoryName, Category category, String parent) {
+    private void getCategory(List<Category> categories, String categoryName, String parent) {
 
         if (categories.size() == 0) {
-            return null;
+            return;
         } else {
             for (Category cat : categories) {
                 if (cat.getName().equals(categoryName)) {
                     category = cat;
                     category.setParentCategory(new Category(parent));
-                    return category;
+                    return;
                 } else {
-                    getCategory(cat.getSubCategories(), categoryName, category, cat.getName());
+                    getCategory(cat.getSubCategories(), categoryName, cat.getName());
                 }
             }
         }
-        
-        return category;
     }
 
     /**
@@ -155,7 +152,10 @@ public class CategoryService {
             categoryChild.addContent(new Element("rows").setText(String.valueOf(category.getRows())));
             categoryChild.addContent(new Element("columns").setText(String.valueOf(category.getColumns())));
             categoryChild.addContent(new Element("image").setText(category.getImage()));
-            categoryChild.addContent(new Element("order").setText(String.valueOf(category.getOrder())));
+            //categoryChild.addContent(new Element("order").setText(String.valueOf(category.getOrder())));
+            categoryChild.addContent(new Element("hasSound").setText(String.valueOf(category.hasSound())));
+            categoryChild.addContent(new Element("hasImage").setText(String.valueOf(category.hasImage())));
+            categoryChild.addContent(new Element("hasText").setText(String.valueOf(category.hasText())));
 
             attachToParent(profile.getChild("communication").getChild("categories"), category.getParentCategory().getName(), categoryChild);
 
@@ -174,13 +174,6 @@ public class CategoryService {
         Element profile = configurationHandler.getProfileElement(user.getName());
 
         if (profile != null) {
-            Element categoryChild = new Element("category");
-            categoryChild.setAttribute(new Attribute("name", category.getName()));
-            categoryChild.addContent(new Element("rows").setText(String.valueOf(category.getRows())));
-            categoryChild.addContent(new Element("columns").setText(String.valueOf(category.getColumns())));
-            categoryChild.addContent(new Element("image").setText(category.getImage()));
-            categoryChild.addContent(new Element("order").setText(String.valueOf(category.getOrder())));
-
             updateToParent(profile.getChild("communication").getChild("categories"), oldName, category);
 
             configurationHandler.writeToXmlFile();
@@ -249,11 +242,14 @@ public class CategoryService {
     private void updateToParent(Element categoryNode, String oldName, Category categoryChild) {
 
         if (oldName.equals(categoryNode.getAttributeValue("name"))) {
-
             categoryNode.getAttribute("name").setValue(categoryChild.getName());
             categoryNode.getChild("rows").setText(String.valueOf(categoryChild.getRows()));
             categoryNode.getChild("columns").setText(String.valueOf(categoryChild.getColumns()));
-            categoryNode.getChild("order").setText(String.valueOf(categoryChild.getOrder()));
+            // categoryNode.getChild("order").setText(String.valueOf(categoryChild.getOrder()));
+
+            categoryNode.getChild("hasSound").setText(String.valueOf(categoryChild.hasSound()));
+            categoryNode.getChild("hasImage").setText(String.valueOf(categoryChild.hasImage()));
+            categoryNode.getChild("hasText").setText(String.valueOf(categoryChild.hasText()));
 
             if (categoryChild.getImage() == null) {
                 categoryNode.getChild("image").setText(categoryNode.getChildText("image"));

@@ -23,25 +23,36 @@
       <categories>
         <category name="Φαγητό">
           <rows>3</rows>
-          <columns>3</columns>
+          <columns>2</columns>
           <image>/home/christina/Desktop/talkandplay/food-1.png</image>
           <categories>
-            <category name="Γλυκά">
-              <rows>3</rows>
-              <columns>4</columns>
+            <category name="Γλυκάκια">
+              <rows>2</rows>
+              <columns>2</columns>
               <image>/home/christina/Desktop/talkandplay/cupcake.png</image>
             </category>
           </categories>
+          <hasSound>false</hasSound>
+          <hasImage>true</hasImage>
+          <hasText>false</hasText>
         </category>
-        <category name="Ποτό">
-          <rows>4</rows>
-          <columns>4</columns>
-          <image>/home/christina/Desktop/talkandplay/glass-1.png</image>
+        <category name="Ποτάκια">
+          <rows>2</rows>
+          <columns>2</columns>
+          <image>/home/christina/Desktop/talkandplay/official images/Φαγητό/χυμός.png</image>
           <categories>
             <category name="Κοκτέιλς">
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/christina/Desktop/talkandplay/cocktail.png</image>
+            </category>
+            <category name="Test">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>/home/christina/Desktop/talkandplay/games/aquarium.png</image>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
             </category>
           </categories>
         </category>
