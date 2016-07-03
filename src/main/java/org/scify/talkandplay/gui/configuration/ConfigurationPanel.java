@@ -1,9 +1,9 @@
 package org.scify.talkandplay.gui.configuration;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.MainFrame;
 import org.scify.talkandplay.gui.MainPanel;
@@ -36,20 +36,10 @@ public class ConfigurationPanel extends javax.swing.JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         gbc.gridx = 0;
-        gbc.gridy = 0;
-        contentPanel.add(new JLabel(), gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        contentPanel.add(new JLabel(), gbc);
-        gbc.gridx = 2;
-        gbc.gridy = 0;
-        contentPanel.add(new JLabel(), gbc);
-
-        gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
-
         gbc.weightx = 1;
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         infoPanel = new InfoPanel(this, user);
         infoWrapperPanel = new JPanel();
         infoWrapperPanel.add(infoPanel);
@@ -96,6 +86,11 @@ public class ConfigurationPanel extends javax.swing.JPanel {
 
     public void hideInfoPanel() {
         infoWrapperPanel.removeAll();
+        JPanel emptyPanel = new JPanel();
+        emptyPanel.setPreferredSize(new Dimension(460, infoWrapperPanel.getHeight()));
+        emptyPanel.setMinimumSize(new Dimension(460, infoWrapperPanel.getHeight()));
+        emptyPanel.setBackground(Color.white);
+        infoWrapperPanel.add(emptyPanel);
         revalidate();
         repaint();
     }

@@ -36,6 +36,7 @@ public class InfoPanel extends javax.swing.JPanel {
         backButton = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(460, 655));
 
         jLabel1.setText("Κάνε κλικ πάνω σε κάποια λέξη για να την επεξεργαστείς.");
 

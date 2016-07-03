@@ -41,7 +41,7 @@ public class ConfigurationHandler {
     private List<User> profiles;
     private File file;
     private String projectPath;
-    private Map<String, List<File>> userFiles;
+    private Map<String, List<String>> userFiles;
 
     private static String DEFAULT_SOUND;
 
@@ -82,7 +82,7 @@ public class ConfigurationHandler {
 
     public User getUser(String name) {
         for (User user : getProfiles()) {
-            if (user.getName().equals(name)) {              
+            if (user.getName().equals(name)) {
                 return user;
             }
         }
@@ -453,6 +453,26 @@ public class ConfigurationHandler {
             }
             return categories;
         }
+    }
+
+    /**
+     * For a certain user, check that all the files exist (in case the files
+     * must be configured again)
+     *
+     * @param username
+     * @return
+     */
+    public boolean hasBrokenFiles(String username) {
+        for (Map.Entry<String, List<String>> entry : userFiles.entrySet()) {
+            if (entry.getKey().equals(username)) {
+                for (String path : entry.getValue()) {
+                    if (!(new File(path).isFile())) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     /**
