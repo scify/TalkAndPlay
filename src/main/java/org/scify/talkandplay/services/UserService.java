@@ -31,6 +31,17 @@ public class UserService {
         return user;
     }
 
+    /**
+     * Refresh the xml file and get a user
+     * @param name
+     * @return 
+     */
+    public User refreshAndGetUser(String name) {
+        User user = configurationHandler.refreshAndGetUser(name);
+
+        return user;
+    }
+
     public List<User> getUsers() {
         List<User> user = configurationHandler.getProfiles();
 
@@ -43,8 +54,6 @@ public class UserService {
      * @param user
      */
     public void save(User user) throws Exception {
-
-        configurationHandler.getProfiles().add(user);
 
         Element profiles = configurationFile.getRootElement();
 
@@ -148,7 +157,7 @@ public class UserService {
      *
      * @param name
      */
-    public User update(User user, String oldName) throws Exception {
+    public void update(User user, String oldName) throws Exception {
 
         List profiles = configurationFile.getRootElement().getChildren();
 
@@ -209,10 +218,11 @@ public class UserService {
                 } else {
                     profile.getChild("image").setText(user.getImage());
                 }
+
                 configurationHandler.writeToXmlFile();
+                break;
             }
         }
-        return user;
     }
 
     /**
@@ -222,8 +232,6 @@ public class UserService {
      */
     public void delete(User user) throws Exception {
 
-        configurationHandler.getProfiles().remove(user);
-
         List profiles = configurationFile.getRootElement().getChildren();
 
         //find the user from the users list
@@ -232,8 +240,9 @@ public class UserService {
             Element profile = (Element) profiles.get(i);
 
             if (profile.getChildText("name").equals(user.getName())) {
-                profiles.remove(i);
+                profile.detach();
                 configurationHandler.writeToXmlFile();
+                break;
             }
         }
     }

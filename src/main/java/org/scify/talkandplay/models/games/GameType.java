@@ -1,5 +1,6 @@
 package org.scify.talkandplay.models.games;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,9 @@ public class GameType {
     private String sound;
     private String type;
     private boolean enabled;
+
+    //used only to display default ImageIcons from the app jar
+    private URL imageURL;
 
     private List<Game> games;
 
@@ -75,6 +79,14 @@ public class GameType {
 
     public void setGames(List<Game> games) {
         this.games = games;
+    }
+
+    public URL getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(URL imageURL) {
+        this.imageURL = imageURL;
     }
 
 }

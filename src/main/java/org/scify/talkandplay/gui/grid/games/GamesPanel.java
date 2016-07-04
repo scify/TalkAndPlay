@@ -71,6 +71,7 @@ public class GamesPanel extends BaseGridPanel {
 
         JPanel panel = tileCreator.create(gameType.getName(),
                 gameType.getImage(),
+                gameType.getImageURL(),
                 gameType.getSound(),
                 new TileAction() {
                     @Override

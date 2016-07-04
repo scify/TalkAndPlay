@@ -15,8 +15,8 @@ public class SequenceGame extends Game{
     public SequenceGame() {
     }
 
-    public SequenceGame(String name, String image, boolean enabled, int difficulty) {
-        super(name, image, enabled);
+    public SequenceGame(String name, boolean enabled, int difficulty) {
+        super(name, enabled);
         this.difficulty = difficulty;
         this.images = images;
         this.images = new ArrayList();

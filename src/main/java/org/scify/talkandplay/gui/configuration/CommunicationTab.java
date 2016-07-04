@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,7 +25,7 @@ import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.CategoryService;
 import org.scify.talkandplay.services.UserService;
 
-public class CommunicationPanel extends javax.swing.JPanel {
+public class CommunicationTab extends javax.swing.JPanel {
 
     private User user;
     private UserService userService;
@@ -39,7 +38,7 @@ public class CommunicationPanel extends javax.swing.JPanel {
 
     private static final int MARGIN = 20;
 
-    public CommunicationPanel(User user, ConfigurationPanel parent) {
+    public CommunicationTab(User user, ConfigurationPanel parent) {
         this.user = user;
         this.parent = parent;
         this.userService = new UserService();
@@ -55,11 +54,11 @@ public class CommunicationPanel extends javax.swing.JPanel {
         contentPanel.setLayout(new GridBagLayout());
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.anchor = GridBagConstraints.SOUTHWEST;
-        
+        c.anchor = GridBagConstraints.NORTHWEST;
+
         row = 1;
         c.weightx = 1;
-        //c.weighty = 0.0;
+        c.weighty = 0.1;
         c.gridx = 0;
         c.gridy = row;
         row++;
@@ -112,9 +111,9 @@ public class CommunicationPanel extends javax.swing.JPanel {
                 panel.add(controlsPanel, BorderLayout.LINE_END);
 
                 //   c.weightx = 0.1;
-                c.weighty = 0.0;
+                c.weighty = 0.1;
                 c.gridy = row;
-                 c.ipady = 20;
+                c.ipady = 0;
                 contentPanel.add(panel, c);
 
                 // add(panel);
@@ -129,8 +128,8 @@ public class CommunicationPanel extends javax.swing.JPanel {
     public void redrawCategoriesList() {
         contentPanel.removeAll();
         contentPanel.add(titlePanel(), c);
-                
-        user = userService.getUser(user.getName());
+
+        user = userService.refreshAndGetUser(user.getName());
         drawCategories(user.getCommunicationModule().getCategories(), MARGIN);
 
         revalidate();

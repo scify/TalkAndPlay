@@ -13,7 +13,7 @@ public class TabsPanel extends javax.swing.JPanel {
 
     private User user;
     private ConfigurationPanel parent;
-    private CommunicationPanel communicationPanel;
+    private CommunicationTab communicationPanel;
     private EntertainmentPanel entertainmentPanel;
 
     public TabsPanel(User user, ConfigurationPanel parent) {
@@ -47,13 +47,13 @@ public class TabsPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(tabsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void initCustomComponents() {
 
-        communicationPanel = new CommunicationPanel(user, parent);
+        communicationPanel = new CommunicationTab(user, parent);
         entertainmentPanel = new EntertainmentPanel(user, parent);
 
         tabsPanel.addTab("Επικοινωνία", communicationPanel);

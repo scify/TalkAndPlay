@@ -33,18 +33,17 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         contentPane = new javax.swing.JPanel();
-        contentPanel = new javax.swing.JPanel();
         logoLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         titlePanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        contentPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Talk&Play");
 
         contentPane.setBackground(new java.awt.Color(255, 255, 255));
         contentPane.setPreferredSize(new java.awt.Dimension(800, 720));
-
-        contentPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/tp_logo_small.png"))); // NOI18N
 
@@ -66,20 +65,29 @@ public class MainFrame extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        jScrollPane1.setBorder(null);
+
+        contentPanel.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setViewportView(contentPanel);
+
         javax.swing.GroupLayout contentPaneLayout = new javax.swing.GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentPaneLayout.createSequentialGroup()
-                .addGap(736, 752, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addContainerGap())
-            .addGroup(contentPaneLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addComponent(logoLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(titlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(contentPaneLayout.createSequentialGroup()
+                .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(contentPaneLayout.createSequentialGroup()
+                        .addGap(736, 752, Short.MAX_VALUE)
+                        .addComponent(jLabel1))
+                    .addGroup(contentPaneLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,7 +98,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(logoLabel))
                     .addComponent(titlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(41, 41, 41)
-                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addContainerGap())
@@ -145,27 +153,13 @@ public class MainFrame extends javax.swing.JFrame {
         titlePanel.add(titleLabel);
         titlePanel.add(Box.createHorizontalGlue());
     }
-
-    /*
-     configureButton.setEnabled(false);
-
-     ConfigurationFrame configurationFrame = new ConfigurationFrame(this);
-     configurationFrame.setLocationRelativeTo(null);
-     configurationFrame.setVisible(true);
-     configurationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-     configurationFrame.addWindowListener(new WindowAdapter() {
-     @Override
-     public void windowClosing(WindowEvent we) {
-     configureButton.setEnabled(true);
-     }
-     });
-     */
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPane;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JPanel titlePanel;
     // End of variables declaration//GEN-END:variables

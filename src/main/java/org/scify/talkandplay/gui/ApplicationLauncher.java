@@ -36,7 +36,7 @@ public class ApplicationLauncher {
         UIManager.put("CheckBox.gradient", gradients);
 
         //combobox
-        UIManager.put("ComboBox.selectionBackground", Color.decode("#4BA145"));
+        UIManager.put("ComboBox.selectionBackground", Color.decode(UIConstants.getMainColor()));
         UIManager.put("ComboBox.selectionForeground", Color.white);
         UIManager.put("ComboBox.buttonDarkShadow", Color.black);
 
@@ -56,14 +56,14 @@ public class ApplicationLauncher {
          ScrollBar.trackHighlight
          */
         //tabs
-        UIManager.put("TabbedPane.borderColor", Color.decode("#4BA145"));
-        UIManager.put("TabbedPane.foreground", Color.decode("#4BA145"));
-        UIManager.put("TabbedPane.selectedForeground", Color.white);
-        UIManager.put("TabbedPane.darkShadow", Color.decode("#4BA145"));
+        UIManager.put("TabbedPane.borderColor", Color.decode(UIConstants.getMainColor()));
+        UIManager.put("TabbedPane.borderHightlightColor", Color.decode(UIConstants.getMainColor()));
+        UIManager.put("TabbedPane.foreground", Color.decode(UIConstants.getMainColor()));
+        UIManager.put("TabbedPane.darkShadow", Color.decode(UIConstants.getMainColor()));
         UIManager.put("TabbedPane.light", Color.white);
-        UIManager.put("TabbedPane.selectHighlight", Color.decode("#4BA145"));
-        UIManager.put("TabbedPane.borderHightlightColor", Color.decode("#4BA145"));
-        UIManager.put("TabbedPane.selected", Color.decode("#4BA145"));
+        UIManager.put("TabbedPane.selected", Color.decode(UIConstants.getMainColor()));
+        UIManager.put("TabbedPane.selectHighlight", Color.decode(UIConstants.getMainColor()));
+        UIManager.put("TabbedPane.selectedForeground", Color.white);
         UIManager.put("TabbedPane.contentBorderInsets", new Insets(1, 1, 1, 1));
 
         java.util.Enumeration keys = UIManager.getLookAndFeelDefaults().keys();

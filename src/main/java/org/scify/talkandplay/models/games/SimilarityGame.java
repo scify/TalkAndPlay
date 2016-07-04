@@ -16,8 +16,8 @@ public class SimilarityGame extends Game {
         this.images = new ArrayList();
     }
 
-    public SimilarityGame(String name, String image, boolean enabled, int difficulty) {
-        super(name, image, enabled);
+    public SimilarityGame(String name,  boolean enabled, int difficulty) {
+        super(name, enabled);
         this.difficulty = difficulty;
         this.images = images;
         this.images = new ArrayList();

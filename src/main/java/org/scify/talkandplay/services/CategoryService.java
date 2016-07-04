@@ -157,7 +157,12 @@ public class CategoryService {
             categoryChild.addContent(new Element("hasImage").setText(String.valueOf(category.hasImage())));
             categoryChild.addContent(new Element("hasText").setText(String.valueOf(category.hasText())));
 
-            attachToParent(profile.getChild("communication").getChild("categories"), category.getParentCategory().getName(), categoryChild);
+            //check if the category is the first level of the comm module
+            if (category.getParentCategory().getName().equals(user.getCommunicationModule().getName())) {
+                profile.getChild("communication").getChild("categories").addContent(categoryChild);
+            } else {
+                attachToParent(profile.getChild("communication").getChild("categories"), category.getParentCategory().getName(), categoryChild);
+            }
 
             configurationHandler.writeToXmlFile();
         }
@@ -207,10 +212,9 @@ public class CategoryService {
      * @param name
      * @return
      */
-    private Element attachToParent(Element categoryNode, String name, Element categoryChild) {
+    private void attachToParent(Element categoryNode, String name, Element categoryChild) {
 
         if (name.equals(categoryNode.getAttributeValue("name"))) {
-
             if (categoryNode.getChild("categories") == null) {
                 Element categories = new Element("categories");
                 categories.addContent(categoryChild);
@@ -218,9 +222,6 @@ public class CategoryService {
             } else {
                 categoryNode.getChild("categories").addContent(categoryChild);
             }
-
-            return categoryNode;
-
         } else {
 
             for (int i = 0; i < categoryNode.getChildren().size(); i++) {
@@ -228,7 +229,6 @@ public class CategoryService {
                 attachToParent(categoryEl, name, categoryChild);
             }
         }
-        return categoryNode;
     }
 
     /**

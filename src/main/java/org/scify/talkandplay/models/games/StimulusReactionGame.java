@@ -11,8 +11,8 @@ public class StimulusReactionGame extends Game {
     public StimulusReactionGame() {
     }
 
-    public StimulusReactionGame(String name, String image, boolean enabled, int difficulty) {
-        super(name, image, enabled);
+    public StimulusReactionGame(String name, boolean enabled, int difficulty) {
+        super(name, enabled);
         this.difficulty = difficulty;
         this.images = new ArrayList();
     }

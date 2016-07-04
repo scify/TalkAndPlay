@@ -9,6 +9,7 @@ import org.scify.talkandplay.gui.MainFrame;
 import org.scify.talkandplay.gui.MainPanel;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.CategoryService;
+import org.scify.talkandplay.services.UserService;
 
 public class ConfigurationPanel extends javax.swing.JPanel {
 
@@ -19,11 +20,13 @@ public class ConfigurationPanel extends javax.swing.JPanel {
     private JPanel infoWrapperPanel;
     private GridBagConstraints gbc;
     private CategoryService categoryService;
+    private UserService userService;
 
-    public ConfigurationPanel(User user, MainFrame parent) {
-        this.user = user;
+    public ConfigurationPanel(String userName, MainFrame parent) {
         this.parent = parent;
         this.categoryService = new CategoryService();
+        this.userService = new UserService();
+        this.user = userService.refreshAndGetUser(userName);
 
         initComponents();
         initCustomComponents();
@@ -104,12 +107,9 @@ public class ConfigurationPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
         contentPanel = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
-
-        jScrollPane1.setBorder(null);
 
         contentPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -124,23 +124,26 @@ public class ConfigurationPanel extends javax.swing.JPanel {
             .addGap(0, 307, Short.MAX_VALUE)
         );
 
-        jScrollPane1.setViewportView(contentPanel);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPanel;
-    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

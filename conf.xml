@@ -1,88 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <profiles>
   <profile preselected="false">
-    <name>dddd</name>
-    <image>/home/christina/Desktop/talkandplay/cat.png</image>
-    <configuration>
-      <rotationSpeed>1</rotationSpeed>
-      <defaultGridRow>2</defaultGridRow>
-      <defaultGridColumn>2</defaultGridColumn>
-      <selectionSensor>
-        <type>keyboard</type>
-        <keyCode>86</keyCode>
-        <keyChar>v</keyChar>
-      </selectionSensor>
-    </configuration>
-    <communication>
-      <name>Επικοινωνία</name>
-      <enabled>true</enabled>
-      <image>/home/christina/Desktop/talkandplay/emoticon.png</image>
-      <sound>/home/christina/Desktop/talkandplay/sounds/cupcake.mp3</sound>
-      <rows>3</rows>
-      <columns>3</columns>
-      <categories>
-        <category name="Φαγητό">
-          <rows>3</rows>
-          <columns>2</columns>
-          <image>/home/christina/Desktop/talkandplay/food-1.png</image>
-          <categories>
-            <category name="Γλυκάκια">
-              <rows>2</rows>
-              <columns>2</columns>
-              <image>/home/christina/Desktop/talkandplay/cupcake.png</image>
-            </category>
-          </categories>
-          <hasSound>false</hasSound>
-          <hasImage>true</hasImage>
-          <hasText>false</hasText>
-        </category>
-        <category name="Ποτάκια">
-          <rows>2</rows>
-          <columns>2</columns>
-          <image>/home/christina/Desktop/talkandplay/official images/Φαγητό/χυμός.png</image>
-          <categories>
-            <category name="Κοκτέιλς">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/christina/Desktop/talkandplay/cocktail.png</image>
-            </category>
-            <category name="Test">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/christina/Desktop/talkandplay/games/aquarium.png</image>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-          </categories>
-        </category>
-      </categories>
-    </communication>
-    <entertainment>
-      <name>Ψυχαγωγία</name>
-      <enabled>true</enabled>
-      <image>/home/christina/Desktop/talkandplay/music-player.png</image>
-      <music>
-        <name>Μουσική</name>
-        <image>/home/christina/Desktop/talkandplay/music-player.png</image>
-        <enabled>true</enabled>
-        <folderPath />
-      </music>
-      <video>
-        <name>Βίντεο</name>
-        <image>/home/christina/Desktop/talkandplay/video-camera.png</image>
-        <enabled>true</enabled>
-        <folderPath />
-      </video>
-    </entertainment>
-    <games>
-      <name>Παιχνίδια</name>
-      <enabled>true</enabled>
-      <image>/home/christina/Desktop/talkandplay/game-controller.png</image>
-    </games>
-  </profile>
-  <profile preselected="false">
-    <name>testaki</name>
+    <name>testaki-do not touch</name>
     <image>/home/christina/Downloads/demo_imgs/edfsaf.jpg</image>
     <configuration>
       <rotationSpeed>5</rotationSpeed>
@@ -135,22 +54,10 @@
               <image>/home/christina/Downloads/demo_imgs/7887736_f260.jpg</image>
               <order>0</order>
             </category>
-            <category name="EDW">
-              <rows>3</rows>
-              <columns>4</columns>
-              <image>/home/christina/Downloads/demo_imgs/7887736_f260.jpg</image>
-              <order>0</order>
-            </category>
             <category name="sds">
               <rows>3</rows>
               <columns>4</columns>
               <image>/home/christina/Downloads/Assistive Technologies.png</image>
-              <order>0</order>
-            </category>
-            <category name="KOTA">
-              <rows>3</rows>
-              <columns>4</columns>
-              <image>/home/christina/Downloads/2013-01-10.jpg</image>
               <order>0</order>
             </category>
             <category name="KOTA!">
@@ -191,20 +98,6 @@
               <columns>3</columns>
               <order>0</order>
               <image>/home/christina/Desktop/talkandplay/hipster.png</image>
-            </category>
-          </categories>
-        </category>
-        <category name="Test1">
-          <rows>2</rows>
-          <columns>3</columns>
-          <order>0</order>
-          <image>/home/christina/Desktop/talkandplay/glass.png</image>
-          <categories>
-            <category name="fdsfds">
-              <rows>3</rows>
-              <columns>4</columns>
-              <image>/home/christina/Downloads/20151116_150332.jpg</image>
-              <order>0</order>
             </category>
           </categories>
         </category>
@@ -443,8 +336,8 @@
     </games>
   </profile>
   <profile preselected="false">
-    <name>kota</name>
-    <image>/home/christina/Downloads/demo_imgs/250px-WhiteCat.jpg</image>
+    <name>monkey</name>
+    <image>/home/xrist/Desktop/6.jpg</image>
     <configuration>
       <rotationSpeed>1</rotationSpeed>
       <defaultGridRow>3</defaultGridRow>
@@ -453,61 +346,9 @@
       <image>true</image>
       <text>true</text>
       <selectionSensor>
-        <type>keyboard</type>
-        <keyCode>70</keyCode>
-        <keyChar>f</keyChar>
-      </selectionSensor>
-      <navigationSensor>
-        <type>keyboard</type>
-        <keyCode>51</keyCode>
-        <keyChar>3</keyChar>
-      </navigationSensor>
-    </configuration>
-    <communication>
-      <name>Επικοινωνία</name>
-      <enabled>true</enabled>
-      <image />
-      <rows>1</rows>
-      <columns>1</columns>
-      <categories />
-    </communication>
-    <entertainment>
-      <name>Ψυχαγωγία</name>
-      <enabled>true</enabled>
-      <image />
-      <music>
-        <name>Μουσική</name>
-        <enabled>true</enabled>
-        <image />
-        <path />
-      </music>
-      <video>
-        <name>Βίντεο</name>
-        <enabled>true</enabled>
-        <image />
-        <path />
-      </video>
-    </entertainment>
-    <games>
-      <name>Παιχνίδια</name>
-      <enabled>true</enabled>
-      <image />
-    </games>
-  </profile>
-  <profile preselected="false">
-    <name>kokoko</name>
-    <image />
-    <configuration>
-      <rotationSpeed>1</rotationSpeed>
-      <defaultGridRow>3</defaultGridRow>
-      <defaultGridColumn>3</defaultGridColumn>
-      <sound>false</sound>
-      <image>false</image>
-      <text>true</text>
-      <selectionSensor>
-        <type>keyboard</type>
-        <keyCode>32</keyCode>
-        <keyChar />
+        <type>mouse</type>
+        <button>1</button>
+        <clickCount>2</clickCount>
       </selectionSensor>
     </configuration>
     <communication>
@@ -516,25 +357,42 @@
       <image />
       <rows>1</rows>
       <columns>1</columns>
-      <categories />
+      <categories>
+        <category name="Φαγητό">
+          <rows>3</rows>
+          <columns>3</columns>
+          <image>/home/xrist/Desktop/T+P_Communication Images_a/Φαγητό/Μακαρόνια.png</image>
+          <hasSound>false</hasSound>
+          <hasImage>false</hasImage>
+          <hasText>false</hasText>
+          <categories>
+            <category name="Φρούτα">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>/home/xrist/Desktop/T+P_Communication Images_a/Φρούτα/μήλο.png</image>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+          </categories>
+        </category>
+      </categories>
     </communication>
     <entertainment>
       <name>Ψυχαγωγία</name>
       <enabled>true</enabled>
       <image />
+      <musicPath />
+      <videoPath />
       <music>
         <name>Μουσική</name>
         <enabled>true</enabled>
-        <path>/home/christina/Music</path>
         <image />
-        <playlistSize>10</playlistSize>
       </music>
       <video>
         <name>Βίντεο</name>
         <enabled>true</enabled>
-        <path>/home/christina/Videos</path>
         <image />
-        <playlistSize>10</playlistSize>
       </video>
     </entertainment>
     <games>

@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
@@ -73,7 +75,7 @@ public class ConfigurationHandler {
 
     public List<User> getProfiles() {
         try {
-            profiles = refreshXMLFile();
+            profiles = parseXML();
             return profiles;
         } catch (Exception ex) {
             return null;
@@ -81,10 +83,26 @@ public class ConfigurationHandler {
     }
 
     public User getUser(String name) {
-        for (User user : getProfiles()) {
+        List<User> profiles = getProfiles();
+        for (User user : profiles) {
             if (user.getName().equals(name)) {
                 return user;
             }
+        }
+        return null;
+    }
+
+    public User refreshAndGetUser(String name) {
+        try {
+            List<User> profiles = refreshXMLFile();
+
+            for (User user : profiles) {
+                if (user.getName().equals(name)) {
+                    return user;
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ConfigurationHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -233,19 +251,29 @@ public class ConfigurationHandler {
         Element musicNode = (Element) entertainmentNode.getChild("music");
         MusicModule musicModule = new MusicModule();
         musicModule.setName(musicNode.getChildText("name"));
-        musicModule.setImage(musicNode.getChildText("image"));
         musicModule.setSound(getSound(musicNode.getChildText("sound")));
         musicModule.setFolderPath(musicNode.getChildText("folderPath"));
         musicModule.setEnabled("true".equals(musicNode.getChildText("name")));
+
+        if (musicNode.getChildText("image").isEmpty()) {
+            musicModule.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/music_module.png"));
+        } else {
+            musicModule.setImage(musicNode.getChildText("image"));
+        }
 
         //set the video module
         Element videoNode = (Element) entertainmentNode.getChild("video");
         VideoModule videoModule = new VideoModule();
         videoModule.setName(videoNode.getChildText("name"));
-        videoModule.setImage(videoNode.getChildText("image"));
         videoModule.setSound(getSound(videoNode.getChildText("sound")));
         videoModule.setFolderPath(videoNode.getChildText("folderPath"));
         videoModule.setEnabled("true".equals(videoNode.getChildText("name")));
+
+        if (videoNode.getChildText("image").isEmpty()) {
+            videoModule.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/video_module.png"));
+        } else {
+            videoModule.setImage(videoNode.getChildText("image"));
+        }
 
         entertainmentModule.setMusicModule(musicModule);
         entertainmentModule.setVideoModule(videoModule);
@@ -278,11 +306,16 @@ public class ConfigurationHandler {
 
             for (int i = 0; i < gamesList.size(); i++) {
                 StimulusReactionGame game = new StimulusReactionGame(((Element) gamesList.get(i)).getChildText("name"),
-                        ((Element) gamesList.get(i)).getChildText("image"),
                         "true".equals(((Element) gamesList.get(i)).getChildText("enabled")),
                         Integer.parseInt(((Element) gamesList.get(i)).getChildText("difficulty")));
                 game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
                 game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
+
+                if (((Element) gamesList.get(i)).getChildText("image").isEmpty()) {
+                    game.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/stimulus_game.png"));
+                } else {
+                    game.setImage(((Element) gamesList.get(i)).getChildText("image"));
+                }
 
                 List imagesList = ((Element) gamesList.get(i)).getChild("gameImages").getChildren();
 
@@ -309,11 +342,16 @@ public class ConfigurationHandler {
 
             for (int i = 0; i < gamesList.size(); i++) {
                 SequenceGame game = new SequenceGame(((Element) gamesList.get(i)).getChildText("name"),
-                        ((Element) gamesList.get(i)).getChildText("image"),
                         "true".equals(((Element) gamesList.get(i)).getChildText("enabled")),
                         Integer.parseInt(((Element) gamesList.get(i)).getChildText("difficulty")));
                 game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
                 game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
+
+                if (((Element) gamesList.get(i)).getChildText("image").isEmpty()) {
+                    game.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/sequence_game.png"));
+                } else {
+                    game.setImage(((Element) gamesList.get(i)).getChildText("image"));
+                }
 
                 List imagesList = ((Element) gamesList.get(i)).getChild("gameImages").getChildren();
 
@@ -341,11 +379,16 @@ public class ConfigurationHandler {
 
             for (int i = 0; i < gamesList.size(); i++) {
                 SimilarityGame game = new SimilarityGame(((Element) gamesList.get(i)).getChildText("name"),
-                        ((Element) gamesList.get(i)).getChildText("image"),
                         "true".equals(((Element) gamesList.get(i)).getChildText("enabled")),
                         Integer.parseInt(((Element) gamesList.get(i)).getChildText("difficulty")));
                 game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
                 game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
+
+                if (((Element) gamesList.get(i)).getChildText("image").isEmpty()) {
+                    game.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/similarity_game.png"));
+                } else {
+                    game.setImage(((Element) gamesList.get(i)).getChildText("image"));
+                }
 
                 List imagesList = ((Element) gamesList.get(i)).getChild("gameImages").getChildren();
 
