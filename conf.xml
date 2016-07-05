@@ -1,343 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <profiles>
   <profile preselected="false">
-    <name>testaki-do not touch</name>
-    <image>/home/christina/Downloads/demo_imgs/edfsaf.jpg</image>
-    <configuration>
-      <rotationSpeed>5</rotationSpeed>
-      <defaultGridRow>3</defaultGridRow>
-      <defaultGridColumn>4</defaultGridColumn>
-      <sound>false</sound>
-      <image>true</image>
-      <text>false</text>
-      <selectionSensor>
-        <type>mouse</type>
-        <button>1</button>
-        <clickCount>1</clickCount>
-      </selectionSensor>
-      <navigationSensor>
-        <type>keyboard</type>
-        <keyCode>32</keyCode>
-        <keyChar />
-      </navigationSensor>
-    </configuration>
-    <communication>
-      <name>Επικοινωνία</name>
-      <enabled>true</enabled>
-      <image>/home/christina/Downloads/demo_imgs/cat_1.jpg</image>
-      <rows>2</rows>
-      <columns>4</columns>
-      <categories>
-        <category name="Food">
-          <rows>2</rows>
-          <columns>3</columns>
-          <order>0</order>
-          <image>/home/christina/Desktop/talkandplay/food-2.png</image>
-          <sound>/home/christina/Desktop/talkandplay/pretty_kitty_cats.mp3</sound>
-          <categories>
-            <category name="Λέξη">
-              <rows>3</rows>
-              <columns>4</columns>
-              <image>/home/christina/Downloads/demo_imgs/animals-cats-cute-cute-cats-Favim.com-2629444.jpg</image>
-              <order>0</order>
-            </category>
-            <category name="hfghfhgfh">
-              <rows>3</rows>
-              <columns>4</columns>
-              <image>/home/christina/Downloads/2013-01-10.jpg</image>
-              <order>0</order>
-              <categories />
-            </category>
-            <category name="dsdsada">
-              <rows>3</rows>
-              <columns>4</columns>
-              <image>/home/christina/Downloads/demo_imgs/7887736_f260.jpg</image>
-              <order>0</order>
-            </category>
-            <category name="sds">
-              <rows>3</rows>
-              <columns>4</columns>
-              <image>/home/christina/Downloads/Assistive Technologies.png</image>
-              <order>0</order>
-            </category>
-            <category name="KOTA!">
-              <rows>3</rows>
-              <columns>4</columns>
-              <image>/home/christina/Downloads/2013-01-10.jpg</image>
-              <order>0</order>
-            </category>
-          </categories>
-        </category>
-        <category name="Drink">
-          <rows>2</rows>
-          <columns>3</columns>
-          <order>0</order>
-          <image>/home/christina/Desktop/talkandplay/glass-1.png</image>
-          <categories>
-            <category name="Κοκτέιλς">
-              <rows>2</rows>
-              <columns>3</columns>
-              <image>/home/christina/Desktop/talkandplay/cocktail.png</image>
-            </category>
-          </categories>
-        </category>
-        <category name="Sweets">
-          <rows>2</rows>
-          <columns>3</columns>
-          <order>0</order>
-          <image>/home/christina/Desktop/talkandplay/cupcake.png</image>
-        </category>
-        <category name="Feelings!">
-          <rows>2</rows>
-          <columns>3</columns>
-          <order>0</order>
-          <image>/home/christina/Desktop/talkandplay/happy.png</image>
-          <categories>
-            <category name="Moustache!">
-              <rows>2</rows>
-              <columns>3</columns>
-              <order>0</order>
-              <image>/home/christina/Desktop/talkandplay/hipster.png</image>
-            </category>
-          </categories>
-        </category>
-        <category name="Test2">
-          <rows>2</rows>
-          <columns>3</columns>
-          <order>0</order>
-          <image>/home/christina/Desktop/talkandplay/cheese.png</image>
-          <categories>
-            <category name="KOTA!!">
-              <rows>3</rows>
-              <columns>4</columns>
-              <image>/home/christina/Downloads/2013-01-10.jpg</image>
-              <order>0</order>
-            </category>
-          </categories>
-        </category>
-      </categories>
-    </communication>
-    <entertainment>
-      <name>Ψυχαγωγία</name>
-      <enabled>true</enabled>
-      <image>/home/christina/Desktop/talkandplay/music-player.png</image>
-      <music>
-        <name>Μουσική</name>
-        <image>/home/christina/Desktop/talkandplay/music-player.png</image>
-        <enabled>true</enabled>
-        <folderPath>/home/christina/Music</folderPath>
-      </music>
-      <video>
-        <name>Βίντεο</name>
-        <image>/home/christina/Desktop/talkandplay/video-camera.png</image>
-        <enabled>true</enabled>
-        <folderPath>/home/christina/Videos</folderPath>
-      </video>
-    </entertainment>
-    <games>
-      <name>Παιχνίδια</name>
-      <enabled>true</enabled>
-      <image>/home/christina/Desktop/talkandplay/joystick.png</image>
-      <stimulusReactionGames>
-        <name>Ερέθισμα-Αντίδραση</name>
-        <enabled>true</enabled>
-        <image>/home/christina/Desktop/talkandplay/games/stimulusReaction.png</image>
-        <games>
-          <game>
-            <name>Game 1</name>
-            <image />
-            <sound />
-            <winSound />
-            <errorSound />
-            <enabled>true</enabled>
-            <difficulty>4</difficulty>
-            <gameImages>
-              <image>
-                <name>gdfgfdgfd</name>
-                <path>/home/christina/Desktop/talkandplay/games/circle.png</path>
-                <order>1</order>
-              </image>
-              <image>
-                <name />
-                <path>/home/christina/Desktop/talkandplay/games/happiness.png</path>
-                <order>2</order>
-              </image>
-              <image>
-                <name />
-                <path>/home/christina/Desktop/talkandplay/games/smile.png</path>
-                <order>3</order>
-              </image>
-            </gameImages>
-          </game>
-          <game>
-            <name>Game 2</name>
-            <image />
-            <sound />
-            <winSound>/home/christina/Desktop/talkandplay/games/win.mp3</winSound>
-            <errorSound>/home/christina/Desktop/talkandplay/games/error.mp3</errorSound>
-            <enabled>true</enabled>
-            <difficulty>4</difficulty>
-            <gameImages>
-              <image>
-                <name>gdfgfdgfd</name>
-                <path>/home/christina/Desktop/talkandplay/games/flying-balloon.png</path>
-                <order>1</order>
-              </image>
-              <image>
-                <name />
-                <path>/home/christina/Desktop/talkandplay/games/ballons.png</path>
-                <order>2</order>
-              </image>
-              <image>
-                <name />
-                <path>/home/christina/Desktop/talkandplay/games/ballons-1.png</path>
-                <order>3</order>
-              </image>
-            </gameImages>
-          </game>
-        </games>
-      </stimulusReactionGames>
-      <sequenceGames>
-        <name>Χρονικής Αλληλουχίας</name>
-        <enabled>true</enabled>
-        <image>/home/christina/Desktop/talkandplay/games/sequence.png</image>
-        <games>
-          <game>
-            <name>Game 1</name>
-            <image />
-            <sound />
-            <winSound>/home/christina/Desktop/talkandplay/games/win.mp3</winSound>
-            <errorSound>/home/christina/Desktop/talkandplay/games/error.mp3</errorSound>
-            <enabled>true</enabled>
-            <difficulty>4</difficulty>
-            <gameImages>
-              <image>
-                <name>gdfgfdgfd</name>
-                <path>/home/christina/Desktop/talkandplay/games/cat.png</path>
-                <order>1</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>/home/christina/Desktop/talkandplay/games/aquarium.png</path>
-                <order>2</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>/home/christina/Desktop/talkandplay/games/fishbones.png</path>
-                <order>3</order>
-                <enabled>true</enabled>
-              </image>
-            </gameImages>
-          </game>
-        </games>
-      </sequenceGames>
-      <similarityGames>
-        <name>Βρες το όμοιο</name>
-        <enabled>true</enabled>
-        <image>/home/christina/Desktop/talkandplay/games/similar.png</image>
-        <games>
-          <game>
-            <name>Game 1</name>
-            <image />
-            <sound />
-            <winSound>/home/christina/Desktop/talkandplay/games/win.mp3</winSound>
-            <errorSound>/home/christina/Desktop/talkandplay/games/error.mp3</errorSound>
-            <enabled>true</enabled>
-            <difficulty>4</difficulty>
-            <gameImages>
-              <image>
-                <name />
-                <path>/home/christina/Desktop/talkandplay/games/similarity/like.png</path>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>/home/christina/Desktop/talkandplay/games/similarity/favorite.png</path>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>/home/christina/Desktop/talkandplay/games/similarity/shapes-2.png</path>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>/home/christina/Desktop/talkandplay/games/similarity/favorite-1.png</path>
-                <enabled>true</enabled>
-              </image>
-            </gameImages>
-          </game>
-          <game>
-            <name>Game 2</name>
-            <image />
-            <sound />
-            <winSound>/home/christina/Desktop/talkandplay/games/win.mp3</winSound>
-            <errorSound>/home/christina/Desktop/talkandplay/games/error.mp3</errorSound>
-            <enabled>true</enabled>
-            <difficulty>4</difficulty>
-            <gameImages>
-              <image>
-                <name />
-                <path>/home/christina/Desktop/talkandplay/games/similarity/shapes.png</path>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>/home/christina/Desktop/talkandplay/games/similarity/shapes-1.png</path>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>/home/christina/Desktop/talkandplay/games/similarity/square.png</path>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>/home/christina/Desktop/talkandplay/games/similarity/square-1.png</path>
-                <enabled>true</enabled>
-              </image>
-            </gameImages>
-          </game>
-          <game>
-            <name>Game 3</name>
-            <image />
-            <sound />
-            <winSound>/home/christina/Desktop/talkandplay/games/win.mp3</winSound>
-            <errorSound>/home/christina/Desktop/talkandplay/games/error.mp3</errorSound>
-            <enabled>true</enabled>
-            <difficulty>4</difficulty>
-            <gameImages>
-              <image>
-                <name />
-                <path>/home/christina/Desktop/talkandplay/games/similarity/star.png</path>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>/home/christina/Desktop/talkandplay/games/similarity/star-1.png</path>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>/home/christina/Desktop/talkandplay/games/similarity/star-2.png</path>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>/home/christina/Desktop/talkandplay/games/similarity/star-3.png</path>
-                <enabled>true</enabled>
-              </image>
-            </gameImages>
-          </game>
-        </games>
-      </similarityGames>
-    </games>
-  </profile>
-  <profile preselected="false">
-    <name>monkey</name>
-    <image>/home/xrist/Desktop/6.jpg</image>
+    <name>wig</name>
+    <image>/home/christina/Downloads/demo_imgs/cat_with_wig.jpg</image>
     <configuration>
       <rotationSpeed>1</rotationSpeed>
       <defaultGridRow>3</defaultGridRow>
@@ -346,35 +11,35 @@
       <image>true</image>
       <text>true</text>
       <selectionSensor>
-        <type>mouse</type>
-        <button>1</button>
-        <clickCount>2</clickCount>
+        <type>keyboard</type>
+        <keyCode>32</keyCode>
+        <keyChar />
       </selectionSensor>
     </configuration>
     <communication>
       <name>Επικοινωνία</name>
       <enabled>true</enabled>
       <image />
-      <rows>1</rows>
-      <columns>1</columns>
+      <rows>3</rows>
+      <columns>3</columns>
       <categories>
-        <category name="Φαγητό">
+        <category name="ττ">
           <rows>3</rows>
           <columns>3</columns>
-          <image>/home/xrist/Desktop/T+P_Communication Images_a/Φαγητό/Μακαρόνια.png</image>
+          <image>/home/christina/Desktop/talkandplay/bathroom.png</image>
           <hasSound>false</hasSound>
           <hasImage>false</hasImage>
           <hasText>false</hasText>
-          <categories>
-            <category name="Φρούτα">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/T+P_Communication Images_a/Φρούτα/μήλο.png</image>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-          </categories>
+          <categories />
+        </category>
+        <category name="top">
+          <rows>3</rows>
+          <columns>3</columns>
+          <image>/home/christina/Desktop/talkandplay/cheese.png</image>
+          <sound>/home/christina/Music/water.mp3</sound>
+          <hasSound>false</hasSound>
+          <hasImage>false</hasImage>
+          <hasText>false</hasText>
         </category>
       </categories>
     </communication>

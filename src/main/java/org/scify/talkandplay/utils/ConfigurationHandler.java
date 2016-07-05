@@ -6,8 +6,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
@@ -40,19 +38,14 @@ import org.scify.talkandplay.models.sensors.Sensor;
 public class ConfigurationHandler {
 
     private Document configurationFile;
-    private List<User> profiles;
-    private File file;
+    private List<User> users;
     private String projectPath;
     private Map<String, List<String>> userFiles;
 
-    private static String DEFAULT_SOUND;
-
     public ConfigurationHandler() {
-        DEFAULT_SOUND = getClass().getResource("/org/scify/talkandplay/resources/sounds/cat.mp3").getPath();
-
         try {
             projectPath = System.getProperty("user.dir") + File.separator + "conf.xml";
-            file = new File(projectPath);
+            File file = new File(projectPath);
             if (!file.exists() || file.isDirectory()) {
                 PrintWriter writer = new PrintWriter(projectPath, "UTF-8");
                 writer.println("<?xml version=\"1.0\"?>\n"
@@ -63,7 +56,7 @@ public class ConfigurationHandler {
             SAXBuilder builder = new SAXBuilder();
             configurationFile = (Document) builder.build(file);
 
-            profiles = parseXML();
+            parseXML();
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }
@@ -73,55 +66,27 @@ public class ConfigurationHandler {
         return configurationFile;
     }
 
-    public List<User> getProfiles() {
-        try {
-            profiles = parseXML();
-            return profiles;
-        } catch (Exception ex) {
-            return null;
-        }
+    public List<User> getUsers() {
+        return users;
     }
 
-    public User getUser(String name) {
-        List<User> profiles = getProfiles();
-        for (User user : profiles) {
-            if (user.getName().equals(name)) {
-                return user;
-            }
-        }
-        return null;
+    public Element getRootElement() {
+        return configurationFile.getRootElement();
     }
 
-    public User refreshAndGetUser(String name) {
-        try {
-            List<User> profiles = refreshXMLFile();
-
-            for (User user : profiles) {
-                if (user.getName().equals(name)) {
-                    return user;
-                }
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(ConfigurationHandler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-
-    public Element getProfileElement(String name) throws Exception {
-        Element profile = null;
-        SAXBuilder builder = new SAXBuilder();
-        configurationFile = (Document) builder.build(file);
+    public Element getUserElement(String name) throws Exception {
+        Element userEl = null;
         List profiles = configurationFile.getRootElement().getChildren();
 
         for (int i = 0; i < profiles.size(); i++) {
 
-            profile = (Element) profiles.get(i);
+            userEl = (Element) profiles.get(i);
 
-            if (name.equals(profile.getChildText("name"))) {
+            if (name.equals(userEl.getChildText("name"))) {
                 break;
             }
         }
-        return profile;
+        return userEl;
     }
 
     /**
@@ -130,37 +95,35 @@ public class ConfigurationHandler {
      * @return
      * @throws Exception
      */
-    private List<User> parseXML() throws Exception {
-        List<User> list = new ArrayList<>();
-        List profiles = configurationFile.getRootElement().getChildren();
+    private void parseXML() throws Exception {
+        users = new ArrayList();
+        List usersEl = configurationFile.getRootElement().getChildren();
 
-        for (int i = 0; i < profiles.size(); i++) {
+        for (int i = 0; i < usersEl.size(); i++) {
 
-            Element profile = (Element) profiles.get(i);
-            User user = new User(profile.getChildText("name"), profile.getChildText("image"));
+            Element userEl = (Element) usersEl.get(i);
+            User user = new User(userEl.getChildText("name"), userEl.getChildText("image"));
 
-            if (profile.getAttributeValue("preselected") != null) {
-                user.setPreselected(Boolean.parseBoolean(profile.getAttributeValue("preselected")));
+            if (userEl.getAttributeValue("preselected") != null) {
+                user.setPreselected(Boolean.parseBoolean(userEl.getAttributeValue("preselected")));
             } else {
                 user.setPreselected(false);
             }
 
-            Element configuration = (Element) profile.getChild("configuration");
+            Element configuration = (Element) userEl.getChild("configuration");
             user.setConfiguration(getConfiguration(configuration));
 
-            Element communication = (Element) profile.getChild("communication");
+            Element communication = (Element) userEl.getChild("communication");
             user.setCommunicationModule(getCommunicationModule(communication));
 
-            Element entertainment = (Element) profile.getChild("entertainment");
+            Element entertainment = (Element) userEl.getChild("entertainment");
             user.setEntertainmentModule(getEntertainmentModule(entertainment));
 
-            Element games = (Element) profile.getChild("games");
+            Element games = (Element) userEl.getChild("games");
             user.setGameModule(getGameModule(games));
 
-            list.add(user);
+            users.add(user);
         }
-
-        return list;
     }
 
     /**
@@ -218,7 +181,7 @@ public class ConfigurationHandler {
 
         CommunicationModule communicationModule = new CommunicationModule();
         communicationModule.setName(communicationNode.getChildText("name"));
-        communicationModule.setSound(getSound(communicationNode.getChildText("sound")));
+        communicationModule.setSound(communicationNode.getChildText("sound"));
         communicationModule.setRows(Integer.parseInt(communicationNode.getChildText("rows")));
         communicationModule.setColumns(Integer.parseInt(communicationNode.getChildText("columns")));
 
@@ -238,7 +201,7 @@ public class ConfigurationHandler {
         //set the entertainment module settings
         EntertainmentModule entertainmentModule = new EntertainmentModule();
         entertainmentModule.setName(entertainmentNode.getChildText("name"));
-        entertainmentModule.setSound(getSound(entertainmentNode.getChildText("sound")));
+        entertainmentModule.setSound(entertainmentNode.getChildText("sound"));
         entertainmentModule.setEnabled("true".equals(entertainmentNode.getChildText("enabled")));
 
         if (entertainmentNode.getChildText("image").isEmpty()) {
@@ -251,7 +214,7 @@ public class ConfigurationHandler {
         Element musicNode = (Element) entertainmentNode.getChild("music");
         MusicModule musicModule = new MusicModule();
         musicModule.setName(musicNode.getChildText("name"));
-        musicModule.setSound(getSound(musicNode.getChildText("sound")));
+        musicModule.setSound(musicNode.getChildText("sound"));
         musicModule.setFolderPath(musicNode.getChildText("folderPath"));
         musicModule.setEnabled("true".equals(musicNode.getChildText("name")));
 
@@ -265,7 +228,7 @@ public class ConfigurationHandler {
         Element videoNode = (Element) entertainmentNode.getChild("video");
         VideoModule videoModule = new VideoModule();
         videoModule.setName(videoNode.getChildText("name"));
-        videoModule.setSound(getSound(videoNode.getChildText("sound")));
+        videoModule.setSound(videoNode.getChildText("sound"));
         videoModule.setFolderPath(videoNode.getChildText("folderPath"));
         videoModule.setEnabled("true".equals(videoNode.getChildText("name")));
 
@@ -285,7 +248,7 @@ public class ConfigurationHandler {
         //set the game module settings
         GameModule gameModule = new GameModule();
         gameModule.setName(gameNode.getChildText("name"));
-        gameModule.setSound(getSound(gameNode.getChildText("sound")));
+        gameModule.setSound(gameNode.getChildText("sound"));
         gameModule.setEnabled("true".equals(gameNode.getChildText("enabled")));
 
         if (gameNode.getChildText("image").isEmpty()) {
@@ -430,7 +393,7 @@ public class ConfigurationHandler {
                         Integer.parseInt(categoryEl.getChildText("columns")),
                         categoryEl.getChildText("image"));
 
-                category.setSound(getSound(categoryEl.getChildText("sound")));
+                category.setSound(categoryEl.getChildText("sound"));
 
                 if (parent != null) {
                     category.setParentCategory(new Category(parent.getName()));
@@ -518,25 +481,10 @@ public class ConfigurationHandler {
         return true;
     }
 
-    /**
-     * Set the sound, either the path given or the default one
-     *
-     * @param path
-     * @return
-     */
-    private String getSound(String path) {
-        if (path != null) {
-            return path;
-        } else {
-            return DEFAULT_SOUND;
-        }
-    }
-
-    public List refreshXMLFile() throws Exception {
+    public void refreshXmlFile() throws Exception {
         SAXBuilder builder = new SAXBuilder();
-        configurationFile = (Document) builder.build(file);
-        profiles = parseXML();
-        return profiles;
+        configurationFile = (Document) builder.build(new File(projectPath));
+        parseXML();
     }
 
     /**

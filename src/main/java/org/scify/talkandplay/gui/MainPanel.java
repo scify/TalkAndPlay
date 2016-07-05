@@ -21,13 +21,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.users.UserFormPanel;
-import org.scify.talkandplay.gui.users.ProfilePanel;
+import org.scify.talkandplay.gui.users.UserPanel;
 import org.scify.talkandplay.models.User;
-import org.scify.talkandplay.utils.ConfigurationHandler;
+import org.scify.talkandplay.utils.ConfigurationFile;
 
 /**
  *
@@ -35,12 +34,12 @@ import org.scify.talkandplay.utils.ConfigurationHandler;
  */
 public class MainPanel extends javax.swing.JPanel {
 
-    private ConfigurationHandler configurationHandler;
-    private List<ProfilePanel> profilesPanel;
+    private ConfigurationFile configurationFile;
+    private List<UserPanel> userPanelList;
     private MainFrame parent;
 
     public MainPanel(MainFrame parent) {
-        this.configurationHandler = new ConfigurationHandler();
+        this.configurationFile = ConfigurationFile.getInstance();
         this.parent = parent;
         initComponents();
         initCustomComponents();
@@ -55,43 +54,44 @@ public class MainPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        profilePanel = new javax.swing.JPanel();
+        usersPanel = new javax.swing.JPanel();
 
-        profilePanel.setBackground(new java.awt.Color(255, 255, 255));
-        profilePanel.setForeground(new java.awt.Color(255, 255, 255));
+        usersPanel.setBackground(new java.awt.Color(255, 255, 255));
+        usersPanel.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(profilePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+            .addComponent(usersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(profilePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(usersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void initCustomComponents() {
 
-        List<User> users = configurationHandler.getProfiles();
+        List<User> users = configurationFile.getUsers();
 
         if (users.size() > 5) {
-            profilePanel.setLayout(new GridLayout(0, 6));
+            usersPanel.setLayout(new GridLayout(0, 6));
         } else {
-            profilePanel.setLayout(new GridLayout(0, users.size() + 1));
+            usersPanel.setLayout(new GridLayout(0, users.size() + 1));
         }
 
-        profilesPanel = new ArrayList<>();
-        for (final User profile : users) {
-            ProfilePanel profilePanel = new ProfilePanel(parent, profile);
+        userPanelList = new ArrayList<>();
+        for (final User user : users) {
 
-            profilePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            UserPanel userPanel = new UserPanel(parent, user);
+
+            userPanel.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     if (evt.getClickCount() == 2) {
                         GridFrame imagesFrame;
                         try {
-                            imagesFrame = new GridFrame(profile.getName());
+                            imagesFrame = new GridFrame(user.getName());
                             imagesFrame.setLocationRelativeTo(null);
                             imagesFrame.setTitle("Talk&Play");
                             imagesFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -102,34 +102,30 @@ public class MainPanel extends javax.swing.JPanel {
                     }
                 }
             });
-
-            profilesPanel.add(profilePanel);
+            userPanelList.add(userPanel);
         }
-
-        repaintProfiles();
-    
+        repaintUsers();
     }
 
     public void removeUser(User selectedUser) {
-        repaintProfiles();
-        for (ProfilePanel p : profilesPanel) {
+        for (UserPanel p : userPanelList) {
             if (p.getUser().equals(selectedUser)) {
-                profilesPanel.remove(p);
+                usersPanel.remove(p);
                 break;
             }
         }
-        repaintProfiles();
+        repaintUsers();
     }
 
-    public void repaintProfiles() {
-        profilePanel.removeAll();
-        if (!profilesPanel.isEmpty()) {
-            for (JPanel panel : profilesPanel) {
-                profilePanel.add(panel);
+    public void repaintUsers() {
+        usersPanel.removeAll();
+        if (!userPanelList.isEmpty()) {
+            for (JPanel panel : userPanelList) {
+                usersPanel.add(panel);
             }
         }
         addUserPanel();
-        profilePanel.repaint();
+        usersPanel.repaint();
     }
 
     private void addUserPanel() {
@@ -147,7 +143,7 @@ public class MainPanel extends javax.swing.JPanel {
 
         addUserPanel.add(imageLabel);
         addUserPanel.add(nameLabel);
-        profilePanel.add(addUserPanel);
+        usersPanel.add(addUserPanel);
 
         final MainPanel currentPanel = this;
 
@@ -169,30 +165,31 @@ public class MainPanel extends javax.swing.JPanel {
         });
     }
 
-    public void updateProfilesPanel(User user, String oldName) {
-        for (ProfilePanel p : profilesPanel) {
+    public void updateUsersPanel(User user, String oldName) {
+        for (UserPanel p : userPanelList) {
             if (p.getUser().getName().equals(oldName)) {
                 p.repaintPanel(user);
                 break;
             }
         }
-        repaintProfiles();
+        repaintUsers();
     }
 
-    public void removeFromProfilesPanel(String removeProfile) {
-        for (ProfilePanel p : profilesPanel) {
-            if (p.getUser().getName().equals(removeProfile)) {
-                profilesPanel.remove(p);
+    public void removeFromUsersPanel(String removeUser) {
+        for (UserPanel p : userPanelList) {
+            if (p.getUser().getName().equals(removeUser)) {
+                usersPanel.remove(p);
                 break;
             }
         }
-        repaintProfiles();
+        repaintUsers();
     }
 
-    public List<ProfilePanel> getProfilesPanel() {
-        return profilesPanel;
+    public List<UserPanel> getUsersPanel() {
+        return userPanelList;
     }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel profilePanel;
+    private javax.swing.JPanel usersPanel;
     // End of variables declaration//GEN-END:variables
 }

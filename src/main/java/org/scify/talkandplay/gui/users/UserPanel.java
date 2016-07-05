@@ -17,7 +17,7 @@ import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.UserService;
 
-public class ProfilePanel extends javax.swing.JPanel {
+public class UserPanel extends javax.swing.JPanel {
 
     private MainFrame parent;
     private User user;
@@ -31,11 +31,11 @@ public class ProfilePanel extends javax.swing.JPanel {
         return user;
     }
 
-    public ProfilePanel() {
+    public UserPanel() {
         initComponents();
     }
 
-    public ProfilePanel(MainFrame mainFrame, User user) {
+    public UserPanel(MainFrame mainFrame, User user) {
         this.parent = mainFrame;
         this.user = user;
         this.guiHelper = new GuiHelper();
@@ -105,7 +105,7 @@ public class ProfilePanel extends javax.swing.JPanel {
                         userService.delete(user);
                         parent.changePanel(new MainPanel(parent));
                     } catch (Exception ex) {
-                        Logger.getLogger(ProfilePanel.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(UserPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }

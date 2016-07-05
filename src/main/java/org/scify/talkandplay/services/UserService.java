@@ -2,21 +2,18 @@ package org.scify.talkandplay.services;
 
 import java.util.List;
 import org.jdom.Attribute;
-import org.jdom.Document;
 import org.jdom.Element;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
-import org.scify.talkandplay.utils.ConfigurationHandler;
+import org.scify.talkandplay.utils.ConfigurationFile;
 
 public class UserService {
 
-    private ConfigurationHandler configurationHandler;
-    private Document configurationFile;
+    private ConfigurationFile configurationFile;
 
     public UserService() {
-        configurationHandler = new ConfigurationHandler();
-        configurationFile = configurationHandler.getConfigurationFile();
+        this.configurationFile = ConfigurationFile.getInstance();
     }
 
     /**
@@ -26,24 +23,13 @@ public class UserService {
      * @return
      */
     public User getUser(String name) {
-        User user = configurationHandler.getUser(name);
-
-        return user;
-    }
-
-    /**
-     * Refresh the xml file and get a user
-     * @param name
-     * @return 
-     */
-    public User refreshAndGetUser(String name) {
-        User user = configurationHandler.refreshAndGetUser(name);
+        User user = configurationFile.getUser(name);
 
         return user;
     }
 
     public List<User> getUsers() {
-        List<User> user = configurationHandler.getProfiles();
+        List<User> user = configurationFile.getUsers();
 
         return user;
     }
@@ -112,8 +98,8 @@ public class UserService {
         communication.addContent(new Element("name").setText("Επικοινωνία"));
         communication.addContent(new Element("enabled").setText("true"));
         communication.addContent(new Element("image"));
-        communication.addContent(new Element("rows").setText("1"));
-        communication.addContent(new Element("columns").setText("1"));
+        communication.addContent(new Element("rows").setText(String.valueOf(user.getConfiguration().getDefaultGridRow())));
+        communication.addContent(new Element("columns").setText(String.valueOf(user.getConfiguration().getDefaultGridColumn())));
         communication.addContent(categories);
 
         //add entertainment module settings
@@ -149,7 +135,7 @@ public class UserService {
         profile.addContent(games);
         profiles.addContent(profile);
 
-        configurationHandler.writeToXmlFile();
+        configurationFile.update();
     }
 
     /**
@@ -219,7 +205,7 @@ public class UserService {
                     profile.getChild("image").setText(user.getImage());
                 }
 
-                configurationHandler.writeToXmlFile();
+                configurationFile.update();
                 break;
             }
         }
@@ -241,7 +227,7 @@ public class UserService {
 
             if (profile.getChildText("name").equals(user.getName())) {
                 profile.detach();
-                configurationHandler.writeToXmlFile();
+                configurationFile.update();
                 break;
             }
         }

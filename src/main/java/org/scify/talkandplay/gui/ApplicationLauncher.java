@@ -4,20 +4,15 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.UIManager;
 import org.scify.talkandplay.gui.helpers.UIConstants;
-import org.scify.talkandplay.models.User;
-import org.scify.talkandplay.utils.ConfigurationHandler;
 
 public class ApplicationLauncher {
 
     public static void main(String[] args) {
 
-        // testConfig();
         setUI();
-        ConfigurationHandler conf = new ConfigurationHandler();
-        MainFrame mainFrame = new MainFrame(conf);
+        MainFrame mainFrame = new MainFrame();
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
 
@@ -76,23 +71,4 @@ public class ApplicationLauncher {
         }
     }
 
-    private static void testConfig() {
-
-        ConfigurationHandler conf = new ConfigurationHandler();
-        List<User> profiles = conf.getProfiles();
-
-        for (User user : profiles) {
-
-            System.out.println("Profile: " + user.getName());
-
-            /*  for (Game game : user.getGameModule().getGames()) {
-
-             System.out.println(game.getName());
-
-             for (Game game1 : game.getGames()) {
-             System.out.println(game1.getName());
-             }
-             }*/
-        }
-    }
 }

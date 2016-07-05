@@ -14,7 +14,7 @@ public class TabsPanel extends javax.swing.JPanel {
     private User user;
     private ConfigurationPanel parent;
     private CommunicationTab communicationPanel;
-    private EntertainmentPanel entertainmentPanel;
+    private EntertainmentTab entertainmentPanel;
 
     public TabsPanel(User user, ConfigurationPanel parent) {
         this.user = user;
@@ -54,7 +54,7 @@ public class TabsPanel extends javax.swing.JPanel {
     private void initCustomComponents() {
 
         communicationPanel = new CommunicationTab(user, parent);
-        entertainmentPanel = new EntertainmentPanel(user, parent);
+        entertainmentPanel = new EntertainmentTab(user, parent);
 
         tabsPanel.addTab("Επικοινωνία", communicationPanel);
         tabsPanel.addTab("Ψυχαγωγία", entertainmentPanel);

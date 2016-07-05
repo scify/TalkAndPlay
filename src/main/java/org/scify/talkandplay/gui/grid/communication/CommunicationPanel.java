@@ -67,13 +67,12 @@ public class CommunicationPanel extends BaseGridPanel {
 
     private void initCustomComponents() throws IOException {
         setBorder(new EmptyBorder(0, 10, 10, 10));
-
         drawImages(rootCategory);
     }
 
     /**
-     * Draw the categories and their sub categories. This klassy piece of code
-     * does work.
+     * Draw the categories and their sub categories. 
+     * It may not look like it, but this klassy piece of code ~does~ work.
      *
      * @param category
      * @throws IOException
@@ -84,7 +83,7 @@ public class CommunicationPanel extends BaseGridPanel {
         int emptiesCount = 0;
 
         setGrid(category);
-
+        
         if (category.getSubCategories().size() > 0) {
             //show only the num of images that fit the grid
             if (category.getSubCategories().size() >= grid) {

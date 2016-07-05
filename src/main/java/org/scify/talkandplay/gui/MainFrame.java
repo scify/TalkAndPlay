@@ -9,15 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.helpers.UIConstants;
-import org.scify.talkandplay.utils.ConfigurationHandler;
 
 public class MainFrame extends javax.swing.JFrame {
 
     public MainFrame() {
-        initComponents();
-    }
-
-    public MainFrame(ConfigurationHandler configurationHandler) {
         initComponents();
         initCustomComponents();
     }
@@ -120,9 +115,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void initCustomComponents() {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
+
         contentPanel.add(new MainPanel(this), BorderLayout.CENTER);
-        
+
         contentPanel.revalidate();
         contentPanel.repaint();
         revalidate();
@@ -153,7 +148,7 @@ public class MainFrame extends javax.swing.JFrame {
         titlePanel.add(titleLabel);
         titlePanel.add(Box.createHorizontalGlue());
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPane;
     private javax.swing.JPanel contentPanel;

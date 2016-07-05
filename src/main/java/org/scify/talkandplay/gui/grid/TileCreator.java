@@ -1,5 +1,6 @@
 package org.scify.talkandplay.gui.grid;
 
+import java.io.File;
 import java.net.URL;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
@@ -25,8 +26,11 @@ public class TileCreator {
     private SensorService sensorService;
     private GuiHelper guiHelper;
     private AudioMediaPlayerComponent audioPlayer;
+    private static String DEFAULT_SOUND;
 
     public TileCreator(User user) {
+        DEFAULT_SOUND = new File("demo_resources/sounds/cat.mp3").getAbsolutePath();
+
         this.sensorService = new SensorService(user);
         this.guiHelper = new GuiHelper();
         this.audioPlayer = new AudioMediaPlayerComponent();
@@ -73,12 +77,11 @@ public class TileCreator {
 
     public JPanel create(String name, String image, URL imageURL, String sound, TileAction tileAction) {
         JPanel panel;
-        if (image==null || image.isEmpty()) {
+        if (image == null || image.isEmpty()) {
             panel = guiHelper.createImagePanel(imageURL, name);
         } else {
             panel = guiHelper.createImagePanel(image, name);
         }
-
         addListeners(panel, sound, tileAction);
         return panel;
     }
@@ -110,11 +113,8 @@ public class TileCreator {
      */
     private void act(String sound, TileAction tileAction) {
         tileAction.act();
-        if (sound != null && !sound.isEmpty()) {
-            this.tileAction = tileAction;
-
-            audioPlayer.getMediaPlayer().playMedia(sound);
-        }
+        this.tileAction = tileAction;
+        playAudio(sound);
     }
 
     /**
@@ -131,6 +131,10 @@ public class TileCreator {
      * @param sound
      */
     public void playAudio(String sound) {
-        audioPlayer.getMediaPlayer().playMedia(sound);
+        if (sound != null) {
+            audioPlayer.getMediaPlayer().playMedia(sound);
+        } else {
+            audioPlayer.getMediaPlayer().playMedia(DEFAULT_SOUND);
+        }
     }
 }

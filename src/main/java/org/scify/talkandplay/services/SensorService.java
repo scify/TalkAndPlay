@@ -26,8 +26,7 @@ public class SensorService {
                 return true;
             }
         } else if (sensor instanceof KeyboardSensor && user.getConfiguration().getSelectionSensor() instanceof KeyboardSensor) {
-            if (((KeyboardSensor) sensor).getKeyChar() == ((KeyboardSensor) user.getConfiguration().getSelectionSensor()).getKeyChar()
-                    && ((KeyboardSensor) sensor).getKeyCode() == ((KeyboardSensor) user.getConfiguration().getSelectionSensor()).getKeyCode()) {
+            if (((KeyboardSensor) sensor).getKeyCode() == ((KeyboardSensor) user.getConfiguration().getSelectionSensor()).getKeyCode()) {
                 return true;
             }
         }

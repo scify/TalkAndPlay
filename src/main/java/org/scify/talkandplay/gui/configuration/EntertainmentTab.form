@@ -91,7 +91,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="4. &#x38c;&#x3c1;&#x3b9;&#x3c3;&#x3b5; &#x3ad;&#x3bd;&#x3c4;&#x3b1;&#x3c3;&#x3b7; &#x3ae;&#x3c7;&#x3bf;&#x3c5; (?)"/>
+        <Property name="text" type="java.lang.String" value="4. &#x38c;&#x3c1;&#x3b9;&#x3c3;&#x3b5; &#x3ad;&#x3bd;&#x3c4;&#x3b1;&#x3c3;&#x3b7; &#x3ae;&#x3c7;&#x3bf;&#x3c5; (ignore this)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="musicPathTextField">

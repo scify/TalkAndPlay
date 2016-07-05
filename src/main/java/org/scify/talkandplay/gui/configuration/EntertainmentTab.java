@@ -13,14 +13,14 @@ import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.ModuleService;
 
-public class EntertainmentPanel extends javax.swing.JPanel {
+public class EntertainmentTab extends javax.swing.JPanel {
 
     private User user;
     private GuiHelper guiHelper;
     private ModuleService moduleService;
     private ConfigurationPanel parent;
 
-    public EntertainmentPanel(User user, ConfigurationPanel parent) {
+    public EntertainmentTab(User user, ConfigurationPanel parent) {
         this.user = user;
         this.guiHelper = new GuiHelper();
         this.moduleService = new ModuleService();
@@ -157,7 +157,7 @@ public class EntertainmentPanel extends javax.swing.JPanel {
 
         step3Label.setText("3. Όρισε πλήθος τραγουδιών και video ανά σελίδα");
 
-        jLabel4.setText("4. Όρισε ένταση ήχου (?)");
+        jLabel4.setText("4. Όρισε ένταση ήχου (ignore this)");
 
         musicPathTextField.setText("Φάκελος μουσικής");
 
@@ -260,8 +260,9 @@ public class EntertainmentPanel extends javax.swing.JPanel {
 
             try {
                 moduleService.update(user);
+                parent.displayMessage("Οι ρυθμίσεις αποθηκεύτηκαν!");
             } catch (Exception ex) {
-                Logger.getLogger(EntertainmentPanel.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(EntertainmentTab.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_saveButtonMouseClicked

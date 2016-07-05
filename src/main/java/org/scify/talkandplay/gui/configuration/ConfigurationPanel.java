@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.MainFrame;
 import org.scify.talkandplay.gui.MainPanel;
@@ -26,7 +27,7 @@ public class ConfigurationPanel extends javax.swing.JPanel {
         this.parent = parent;
         this.categoryService = new CategoryService();
         this.userService = new UserService();
-        this.user = userService.refreshAndGetUser(userName);
+        this.user = userService.getUser(userName);
 
         initComponents();
         initCustomComponents();
@@ -96,6 +97,11 @@ public class ConfigurationPanel extends javax.swing.JPanel {
         infoWrapperPanel.add(emptyPanel);
         revalidate();
         repaint();
+    }
+
+    public void displayMessage(String msg) {
+        JOptionPane.showMessageDialog(parent,
+                msg);
     }
 
     /**

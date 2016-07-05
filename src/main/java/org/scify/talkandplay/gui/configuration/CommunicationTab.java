@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.helpers.UIConstants;
-import org.scify.talkandplay.gui.users.ProfilePanel;
+import org.scify.talkandplay.gui.users.UserPanel;
 import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.CategoryService;
@@ -129,7 +129,7 @@ public class CommunicationTab extends javax.swing.JPanel {
         contentPanel.removeAll();
         contentPanel.add(titlePanel(), c);
 
-        user = userService.refreshAndGetUser(user.getName());
+        user = userService.getUser(user.getName());
         drawCategories(user.getCommunicationModule().getCategories(), MARGIN);
 
         revalidate();
@@ -182,7 +182,7 @@ public class CommunicationTab extends javax.swing.JPanel {
                         categoryService.delete(category, user);
                         redrawCategoriesList();
                     } catch (Exception ex) {
-                        Logger.getLogger(ProfilePanel.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(UserPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
