@@ -5,6 +5,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.RenderingHints;
@@ -14,13 +16,11 @@ import java.net.URL;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -72,7 +72,8 @@ public class GuiHelper {
 
     /**
      * Set the style of the custom text fields
-     * @param textField 
+     *
+     * @param textField
      */
     public void setCustomTextField(JTextField textField) {
         textField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.GRAY));
@@ -134,6 +135,7 @@ public class GuiHelper {
 
     public JPanel createImagePanel(String imagePath, String text) {
         ImageIcon imageIcon = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(300, 300, java.awt.Image.SCALE_SMOOTH));
+        imageIcon = new ImageIcon(imagePath);
 
         return decorateImageIcon(imageIcon, text);
     }
@@ -141,6 +143,8 @@ public class GuiHelper {
     public JPanel createImagePanel(URL imagePath, String text) {
 
         ImageIcon imageIcon = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(300, 300, java.awt.Image.SCALE_SMOOTH));
+
+        imageIcon = new ImageIcon(imagePath);
 
         return decorateImageIcon(imageIcon, text);
     }
@@ -150,18 +154,28 @@ public class GuiHelper {
     }
 
     private JPanel decorateImageIcon(ImageIcon imageIcon, String text) {
-        JPanel panel = new JPanel(new BorderLayout());
+        // JPanel panel = new JPanel(new BorderLayout());
+        JPanel panel = new JPanel(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor=GridBagConstraints.FIRST_LINE_START;
+        c.weightx=1;
+        c.weighty=1;
+        c.gridx = 0;
+        c.gridy = 0;
 
         JLabel imgLabel = new JLabel(imageIcon);
         JLabel txtLabel = new JLabel(text);
         txtLabel.setFont(new Font("Courier New", Font.PLAIN, 40));
+        txtLabel.setHorizontalAlignment(JLabel.CENTER);
         panel.setBackground(Color.white);
         panel.setBorder(new EmptyBorder(20, 20, 20, 20));
-        panel.add(imgLabel, BorderLayout.CENTER);
-        panel.add(txtLabel, BorderLayout.NORTH);
-        txtLabel.setHorizontalAlignment(JLabel.CENTER);
         panel.setBorder(BorderFactory.createLineBorder(Color.white, 10));
 
+        panel.add(imgLabel, c);
+        c.gridy = 1;
+        panel.add(txtLabel, c);
         return panel;
     }
 

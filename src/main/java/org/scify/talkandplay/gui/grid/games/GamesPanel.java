@@ -74,49 +74,55 @@ public class GamesPanel extends BaseGridPanel {
                 gameType.getImageURL(),
                 gameType.getSound(),
                 new TileAction() {
-                    @Override
-                    public void act() {
-                        timer.cancel();
-                        if ("stimulusReactionGame".equals(gameType.getType())) {
-                            showStimulusReactionGame();
-                        } else if ("sequenceGame".equals(gameType.getType())) {
-                            showSequenceGame();
-                        } else if ("similarityGame".equals(gameType.getType())) {
-                            showSimilarityGame();
-                        }
-                    }
+            @Override
+            public void act() {
+                timer.cancel();
+                if ("stimulusReactionGame".equals(gameType.getType())) {
+                    showStimulusReactionGame();
+                } else if ("sequenceGame".equals(gameType.getType())) {
+                    showSequenceGame();
+                } else if ("similarityGame".equals(gameType.getType())) {
+                    showSimilarityGame();
+                }
+            }
 
-                    @Override
-                    public void audioFinished() {
-                        if ("stimulusReactionGame".equals(gameType.getType())) {
-                            showStimulusReactionGame();
-                        } else if ("sequenceGame".equals(gameType.getType())) {
-                            showSequenceGame();
-                        } else if ("similarityGame".equals(gameType.getType())) {
-                            showSimilarityGame();
-                        }
-                    }
-                });
+            @Override
+            public void audioFinished() {
+                if ("stimulusReactionGame".equals(gameType.getType())) {
+                    showStimulusReactionGame();
+                } else if ("sequenceGame".equals(gameType.getType())) {
+                    showSequenceGame();
+                } else if ("similarityGame".equals(gameType.getType())) {
+                    showSimilarityGame();
+                }
+            }
+        });
 
         return panel;
     }
 
     private JPanel createBackItem() {
         JPanel panel = tileCreator.create("Πίσω",
-                getClass().getResource("/org/scify/talkandplay/resources/back-icon.png").getFile(),
-                user.getEntertainmentModule().getVideoModule().getSound(),
+                null,
+                getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"),
+                null,
                 new TileAction() {
-                    @Override
-                    public void act() {
-                        timer.cancel();
-                        showMainMenu();
-                    }
+            @Override
+            public void act() {
+                timer.cancel();
+                showMainMenu();
+            }
 
-                    @Override
-                    public void audioFinished() {
-                        return;
-                    }
-                });
+            @Override
+            public void audioFinished() {
+                return;
+            }
+
+            @Override
+            public boolean mute() {
+                return true;
+            }
+        });
 
         return panel;
     }

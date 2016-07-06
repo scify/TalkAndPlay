@@ -1,7 +1,8 @@
 package org.scify.talkandplay.gui.grid;
 
 import java.awt.Color;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -52,10 +53,23 @@ public class BaseGridPanel extends javax.swing.JPanel {
         });
     }
 
+    protected GridBagConstraints c;
+
     protected void initLayout(int rows, int columns) {
-        GridLayout gridLayout = new GridLayout(rows, columns, IMAGE_PADDING, IMAGE_PADDING);
-        setLayout(gridLayout);
+        /*   GridLayout gridLayout = new GridLayout(rows, columns, IMAGE_PADDING, IMAGE_PADDING);
+        setLayout(gridLayout);*/
+
+        setLayout(new GridBagLayout());
+        c = new GridBagConstraints();
+       // c.gridwidth = GridBagConstraints.RELATIVE;
+        c.fill = GridBagConstraints.BOTH;
+       c.anchor=GridBagConstraints.FIRST_LINE_START;
+        c.weightx=20;
+        c.weighty=20;
+        c.gridx = 0;
+        c.gridy = 0;
     }
+
 
     protected void showMainMenu() {
         parent.clearGrid();
