@@ -40,13 +40,14 @@ public class GamesPanel extends BaseGridPanel {
 
     private void initCustomComponents() {
         removeAll();
-        initLayout(0, user.getConfiguration().getDefaultGridColumn());
+        initLayout();
 
         panelList = new ArrayList<>();
 
         for (GameType gameType : user.getGameModule().getGameTypes()) {
             JPanel gamePanel = createGameItem(gameType);
             add(gamePanel);
+            c.gridx++;
             panelList.add(gamePanel);
         }
 
@@ -74,29 +75,29 @@ public class GamesPanel extends BaseGridPanel {
                 gameType.getImageURL(),
                 gameType.getSound(),
                 new TileAction() {
-            @Override
-            public void act() {
-                timer.cancel();
-                if ("stimulusReactionGame".equals(gameType.getType())) {
-                    showStimulusReactionGame();
-                } else if ("sequenceGame".equals(gameType.getType())) {
-                    showSequenceGame();
-                } else if ("similarityGame".equals(gameType.getType())) {
-                    showSimilarityGame();
-                }
-            }
+                    @Override
+                    public void act() {
+                        timer.cancel();
+                        if ("stimulusReactionGame".equals(gameType.getType())) {
+                            showStimulusReactionGame();
+                        } else if ("sequenceGame".equals(gameType.getType())) {
+                            showSequenceGame();
+                        } else if ("similarityGame".equals(gameType.getType())) {
+                            showSimilarityGame();
+                        }
+                    }
 
-            @Override
-            public void audioFinished() {
-                if ("stimulusReactionGame".equals(gameType.getType())) {
-                    showStimulusReactionGame();
-                } else if ("sequenceGame".equals(gameType.getType())) {
-                    showSequenceGame();
-                } else if ("similarityGame".equals(gameType.getType())) {
-                    showSimilarityGame();
-                }
-            }
-        });
+                    @Override
+                    public void audioFinished() {
+                        if ("stimulusReactionGame".equals(gameType.getType())) {
+                            showStimulusReactionGame();
+                        } else if ("sequenceGame".equals(gameType.getType())) {
+                            showSequenceGame();
+                        } else if ("similarityGame".equals(gameType.getType())) {
+                            showSimilarityGame();
+                        }
+                    }
+                });
 
         return panel;
     }
@@ -107,22 +108,22 @@ public class GamesPanel extends BaseGridPanel {
                 getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"),
                 null,
                 new TileAction() {
-            @Override
-            public void act() {
-                timer.cancel();
-                showMainMenu();
-            }
+                    @Override
+                    public void act() {
+                        timer.cancel();
+                        showMainMenu();
+                    }
 
-            @Override
-            public void audioFinished() {
-                return;
-            }
+                    @Override
+                    public void audioFinished() {
+                        return;
+                    }
 
-            @Override
-            public boolean mute() {
-                return true;
-            }
-        });
+                    @Override
+                    public boolean mute() {
+                        return true;
+                    }
+                });
 
         return panel;
     }

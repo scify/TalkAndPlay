@@ -23,19 +23,17 @@ public class GridPanel extends BaseGridPanel {
         super(user, parent);
         this.panelList = new ArrayList<>();
         initComponents();
-        draw();
+        initCustomComponents();
     }
 
     /**
      * Draw/display each module and add the necessary listeners
      *
      */
-    private void draw() {
+    private void initCustomComponents() {
         panelList = new ArrayList<>();
-        initLayout(0, user.getConfiguration().getDefaultGridColumn());
-
-        c.gridy=1;
-        c.gridx=0;
+        initLayout();
+        
         if (user.getCommunicationModule().isEnabled()) {
             JPanel communicationPanel = tileCreator.create(user.getCommunicationModule().getName(),
                     user.getCommunicationModule().getImage(),
@@ -57,7 +55,6 @@ public class GridPanel extends BaseGridPanel {
             panelList.add(communicationPanel);
         }
 
-         c.gridx=1;
         if (user.getEntertainmentModule().isEnabled()) {
             JPanel entertainmentPanel = tileCreator.create(user.getEntertainmentModule().getName(),
                     user.getEntertainmentModule().getImage(),
@@ -75,11 +72,11 @@ public class GridPanel extends BaseGridPanel {
                         }
                     });
             entertainmentPanel.setBackground(Color.white);
+            c.gridx++;
             add(entertainmentPanel, c);
             panelList.add(entertainmentPanel);
         }
 
-         c.gridx=2;
         if (user.getGameModule().isEnabled()) {
             JPanel gamesPanel = tileCreator.create(user.getGameModule().getName(),
                     user.getGameModule().getImage(),
@@ -97,6 +94,7 @@ public class GridPanel extends BaseGridPanel {
                         }
                     });
             gamesPanel.setBackground(Color.white);
+            c.gridx++;
             add(gamesPanel, c);
             panelList.add(gamesPanel);
         }

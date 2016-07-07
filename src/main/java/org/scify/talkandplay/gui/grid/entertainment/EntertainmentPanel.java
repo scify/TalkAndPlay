@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.grid.BaseGridPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.TileAction;
@@ -41,9 +40,7 @@ public class EntertainmentPanel extends BaseGridPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initCustomComponents() {
-        removeAll();
-        setBorder(new EmptyBorder(0, 10, 10, 10));
-        initLayout(0, user.getConfiguration().getDefaultGridColumn());
+        initLayout();
 
         panelList = new ArrayList<>();
 
@@ -51,9 +48,11 @@ public class EntertainmentPanel extends BaseGridPanel {
         JPanel videoPanel = createVideoItem();
         JPanel backPanel = createBackItem();
 
-        add(musicPanel);
-        add(videoPanel);
-        add(backPanel);
+        add(musicPanel, c);
+        c.gridx++;
+        add(videoPanel, c);
+        c.gridx++;
+        add(backPanel, c);
         panelList.add(musicPanel);
         panelList.add(videoPanel);
         panelList.add(backPanel);
@@ -77,16 +76,16 @@ public class EntertainmentPanel extends BaseGridPanel {
                 user.getEntertainmentModule().getMusicModule().getImageURL(),
                 user.getEntertainmentModule().getMusicModule().getSound(),
                 new TileAction() {
-            @Override
-            public void act() {
-                timer.cancel();
-            }
+                    @Override
+                    public void act() {
+                        timer.cancel();
+                    }
 
-            @Override
-            public void audioFinished() {
-                showMusic();
-            }
-        });
+                    @Override
+                    public void audioFinished() {
+                        showMusic();
+                    }
+                });
 
         return panel;
     }
@@ -97,16 +96,16 @@ public class EntertainmentPanel extends BaseGridPanel {
                 user.getEntertainmentModule().getVideoModule().getImageURL(),
                 user.getEntertainmentModule().getVideoModule().getSound(),
                 new TileAction() {
-            @Override
-            public void act() {
-                timer.cancel();
-            }
+                    @Override
+                    public void act() {
+                        timer.cancel();
+                    }
 
-            @Override
-            public void audioFinished() {
-                showVideo();
-            }
-        });
+                    @Override
+                    public void audioFinished() {
+                        showVideo();
+                    }
+                });
 
         return panel;
     }
@@ -117,22 +116,22 @@ public class EntertainmentPanel extends BaseGridPanel {
                 getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"),
                 null,
                 new TileAction() {
-            @Override
-            public void act() {
-                timer.cancel();
-                showMainMenu();
-            }
+                    @Override
+                    public void act() {
+                        timer.cancel();
+                        showMainMenu();
+                    }
 
-            @Override
-            public void audioFinished() {
-                return;
-            }
+                    @Override
+                    public void audioFinished() {
+                        return;
+                    }
 
-            @Override
-            public boolean mute() {
-                return true;
-            }
-        });
+                    @Override
+                    public boolean mute() {
+                        return true;
+                    }
+                });
 
         return panel;
     }

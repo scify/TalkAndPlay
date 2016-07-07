@@ -4,12 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.net.URL;
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 
@@ -39,7 +35,7 @@ public class TilePanel extends javax.swing.JPanel {
         setBorder(new LineBorder(Color.white, 10));
 
         JLabel textLabel = new JLabel(text);
-        textLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 30));
+        textLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 35));
         textLabel.setHorizontalAlignment(JLabel.CENTER);
         add(textLabel, BorderLayout.CENTER);
 
@@ -48,8 +44,8 @@ public class TilePanel extends javax.swing.JPanel {
         } else {
             add(new ImagePanel(imageUrl), BorderLayout.CENTER);
         }
-
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

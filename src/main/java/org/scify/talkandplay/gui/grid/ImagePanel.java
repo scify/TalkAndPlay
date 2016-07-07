@@ -2,16 +2,18 @@ package org.scify.talkandplay.gui.grid;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
+import org.scify.talkandplay.gui.helpers.GuiHelper;
 
 public class ImagePanel extends javax.swing.JPanel {
 
     private String imageString;
     private URL imageUrl;
+    private GuiHelper guiHelper;
 
     public ImagePanel(String imageString) {
         this.imageString = imageString;
@@ -26,6 +28,7 @@ public class ImagePanel extends javax.swing.JPanel {
     }
 
     private void initCustomComponents() {
+        this.guiHelper = new GuiHelper();
         setBackground(Color.white);
         setBorder(new EmptyBorder(0, 20, 0, 20));
     }
@@ -42,6 +45,7 @@ public class ImagePanel extends javax.swing.JPanel {
             image = (new ImageIcon(imageUrl)).getImage();
         }
 
+        guiHelper.applyQualityRenderingHints((Graphics2D) g);
         g.drawImage(image, 0, 0, w, h, this);
     }
 

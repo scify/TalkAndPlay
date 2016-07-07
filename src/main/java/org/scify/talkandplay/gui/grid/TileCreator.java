@@ -29,8 +29,8 @@ public class TileCreator {
     private static String DEFAULT_SOUND;
 
     public TileCreator(User user) {
-       // DEFAULT_SOUND = new File("demo_resources/sounds/cat.mp3").getAbsolutePath();
-         DEFAULT_SOUND = getClass().getResource("/org/scify/talkandplay/resources/sounds/cat.mp3").getPath();
+     //   DEFAULT_SOUND = new File("demo_resources/sounds/cat.mp3").getAbsolutePath();
+          DEFAULT_SOUND = getClass().getResource("/org/scify/talkandplay/resources/sounds/cat.mp3").getPath();
 
         this.sensorService = new SensorService(user);
         this.guiHelper = new GuiHelper();
@@ -72,7 +72,7 @@ public class TileCreator {
      */
     public JPanel create(String name, String image, String sound, TileAction tileAction) {
         JPanel panel = guiHelper.createImagePanel(image, name);
-     //   JPanel panel = new TilePanel(name, image);
+        //   JPanel panel = new TilePanel(name, image);
         addListeners(panel, sound, tileAction);
         return panel;
     }
@@ -81,10 +81,10 @@ public class TileCreator {
         JPanel panel;
         if (image == null || image.isEmpty()) {
             panel = guiHelper.createImagePanel(imageURL, name);
-           // panel = new TilePanel(name, imageURL);
+            // panel = new TilePanel(name, imageURL);
         } else {
             panel = guiHelper.createImagePanel(image, name);
-           // panel = new TilePanel(name, image);
+            // panel = new TilePanel(name, image);
         }
         addListeners(panel, sound, tileAction);
         return panel;

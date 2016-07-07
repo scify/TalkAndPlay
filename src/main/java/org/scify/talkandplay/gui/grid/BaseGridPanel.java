@@ -55,21 +55,19 @@ public class BaseGridPanel extends javax.swing.JPanel {
 
     protected GridBagConstraints c;
 
-    protected void initLayout(int rows, int columns) {
+    protected void initLayout() {
         /*   GridLayout gridLayout = new GridLayout(rows, columns, IMAGE_PADDING, IMAGE_PADDING);
-        setLayout(gridLayout);*/
+         setLayout(gridLayout);*/
 
         setLayout(new GridBagLayout());
         c = new GridBagConstraints();
-       // c.gridwidth = GridBagConstraints.RELATIVE;
         c.fill = GridBagConstraints.BOTH;
-       c.anchor=GridBagConstraints.FIRST_LINE_START;
-        c.weightx=20;
-        c.weighty=20;
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        c.weightx = 20;
+        c.weighty = 20;
         c.gridx = 0;
         c.gridy = 0;
     }
-
 
     protected void showMainMenu() {
         parent.clearGrid();
@@ -80,8 +78,18 @@ public class BaseGridPanel extends javax.swing.JPanel {
 
     protected void fillWithEmpties() {
         empties = empties - panelList.size();
+
         for (int i = 0; i < empties; i++) {
-            add(new JLabel());
+            if (c.gridx == user.getConfiguration().getDefaultGridRow() - 1) {
+                c.gridx = 0;
+                c.gridy++;
+            } else {
+                c.gridx++;
+            }
+            if (c.gridy == user.getConfiguration().getDefaultGridColumn() - 1) {
+                c.gridy++;
+            }
+            add(new JLabel(), c);
         }
     }
 
