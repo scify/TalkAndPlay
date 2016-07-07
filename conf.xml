@@ -430,7 +430,8 @@
           </categories>
         </category>
       </categories>
-    </communication><communication>
+    </communication>
+    <communication>
       <name>Επικοινωνία</name>
       <enabled>true</enabled>
       <image />
@@ -622,17 +623,19 @@
       <name>Ψυχαγωγία</name>
       <enabled>true</enabled>
       <image />
-      <musicPath />
-      <videoPath />
       <music>
         <name>Μουσική</name>
         <enabled>true</enabled>
         <image />
+        <path>/home/christina/Music/</path>
+        <playlistSize>10</playlistSize>
       </music>
       <video>
         <name>Βίντεο</name>
         <enabled>true</enabled>
         <image />
+        <path>/home/christina/Videos/</path>
+        <playlistSize>10</playlistSize>
       </video>
     </entertainment>
     <games>

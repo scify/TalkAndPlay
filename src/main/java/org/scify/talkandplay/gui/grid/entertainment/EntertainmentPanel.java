@@ -141,8 +141,6 @@ public class EntertainmentPanel extends BaseGridPanel {
                 && !user.getEntertainmentModule().getMusicModule().getFolderPath().isEmpty()
                 && (new File(user.getEntertainmentModule().getMusicModule().getFolderPath())).exists()) {
             MusicPanel musicPanel = new MusicPanel(user, parent);
-            parent.clearGrid();
-            parent.addGrid(musicPanel);
         } else {
             JOptionPane.showMessageDialog(parent,
                     "Ο φάκελος Μουσική δεν έχει οριστεί σωστά.",

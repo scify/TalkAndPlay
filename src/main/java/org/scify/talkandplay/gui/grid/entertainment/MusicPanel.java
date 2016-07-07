@@ -1,45 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.scify.talkandplay.gui.grid.entertainment;
 
+import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.grid.GridFrame;
+import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 
-/**
- *
- * @author christina
- */
 public class MusicPanel extends javax.swing.JPanel {
 
     private User user;
     private GridFrame parent;
-    private Timer timer;
     private int selectedFile;
     private String currentFile;
-    private List<JLabel> fileLabels;
+    private ArrayList<JPanel> filesList;
 
-    int currSec = 0;
+    private JPanel songsPanel, sliderPanel, playerPanel;
 
-    /**
-     * Creates new form MusicPanel
-     */
+    private int currSec = 0;
+
     public MusicPanel(User user, GridFrame parent) {
         this.user = user;
         this.parent = parent;
-        this.fileLabels = new ArrayList<>();
 
         initComponents();
         initCustomComponents();
@@ -54,177 +47,182 @@ public class MusicPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        musicPanel = new javax.swing.JPanel();
-        filesPanel = new javax.swing.JPanel();
-        mediaPlayerPanel = new javax.swing.JPanel();
-
-        javax.swing.GroupLayout filesPanelLayout = new javax.swing.GroupLayout(filesPanel);
-        filesPanel.setLayout(filesPanelLayout);
-        filesPanelLayout.setHorizontalGroup(
-            filesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
-        );
-        filesPanelLayout.setVerticalGroup(
-            filesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout musicPanelLayout = new javax.swing.GroupLayout(musicPanel);
-        musicPanel.setLayout(musicPanelLayout);
-        musicPanelLayout.setHorizontalGroup(
-            musicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(musicPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(filesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69)
-                .addComponent(mediaPlayerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        musicPanelLayout.setVerticalGroup(
-            musicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mediaPlayerPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
-            .addComponent(filesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(musicPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 517, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(musicPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 353, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void initCustomComponents() {
+        
+        setBackground(Color.white);
+        setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weighty = 1;
+        c.gridwidth = 3;
 
-        final MediaPlayerPanel playerPanel = new MediaPlayerPanel(this, parent);
-        mediaPlayerPanel.add(playerPanel);
+        initSongList();
+        initPlayerButtons();
 
-        File musicFolder = new File(user.getEntertainmentModule().getMusicModule().getFolderPath());
+        add(songsPanel, c);
+        c.gridy++;
+        add(playerPanel, c);
 
-        filesPanel.setLayout(new BoxLayout(filesPanel, BoxLayout.PAGE_AXIS));
-
-        JLabel fileLabel;
-
-        for (final File file : musicFolder.listFiles()) {
-            fileLabel = new JLabel(file.getName());
-            fileLabels.add(fileLabel);
-            filesPanel.add(fileLabel);
-            fileLabel.addMouseListener(new MouseAdapter() {
-                public void mouseClicked(MouseEvent e) {
-                    timer.cancel();
-                    currentFile = file.getName();
-                    setSelected();
-                    playerPanel.playMedia(getFilePath(file.getName()));
-                }
-            });
-        }
-
-        if (fileLabels.size() == 0) {
-            JLabel noFilesLabel = new JLabel("Δεν υπάρχουν αρχεία");
-            fileLabels.add(noFilesLabel);
-            filesPanel.add(noFilesLabel);
-        } else {
-            JLabel backLabel = new JLabel("Πίσω");
-
-            backLabel.addMouseListener(new MouseAdapter() {
-                public void mouseClicked(MouseEvent e) {
-                    timer.cancel();
-                    parent.remove(musicPanel);
-                    EntertainmentPanel entPanel = new EntertainmentPanel(user, parent);
-                }
-            });
-
-            fileLabels.add(backLabel);
-            filesPanel.add(backLabel);
-            setTimer();
-        }
-
-        filesPanel.revalidate();
-        filesPanel.repaint();
-        mediaPlayerPanel.revalidate();
-        mediaPlayerPanel.repaint();
-        musicPanel.revalidate();
-        musicPanel.repaint();
-        parent.add(musicPanel);
+        setAlignmentX(0);
+        revalidate();
+        repaint();
+        parent.clearGrid();
+        parent.addGrid(this);
         parent.revalidate();
         parent.repaint();
     }
 
-    public void setTimer() {
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if (selectedFile == 0) {
-                    fileLabels.get(fileLabels.size() - 1).setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
-                    fileLabels.get(selectedFile).setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-                    selectedFile++;
-                } else if (selectedFile == fileLabels.size() - 1) {
-                    fileLabels.get(selectedFile - 1).setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
-                    fileLabels.get(selectedFile).setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-                    selectedFile = 0;
-                } else if (selectedFile < fileLabels.size() - 1 && selectedFile > 0) {
-                    fileLabels.get(selectedFile - 1).setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
-                    fileLabels.get(selectedFile).setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-                    selectedFile++;
-                }
-            }
-        }, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+    private void initSongList() {
+
+        File musicFolder = new File(user.getEntertainmentModule().getMusicModule().getFolderPath());
+        songsPanel = new JPanel();
+        songsPanel.setLayout(new BoxLayout(songsPanel, BoxLayout.PAGE_AXIS));
+        //  songsPanel.setBackground(Color.white);
+
+        songsPanel.add(drawSongPanel("Προηγούμενα τραγούδια"));
+
+        for (File file : musicFolder.listFiles()) {
+
+            songsPanel.add(drawSongPanel(file.getName()));
+        }
+
+        songsPanel.add(drawSongPanel("Επόμενα τραγούδια"));
     }
 
+    private void initPlayerButtons() {
+
+        playerPanel = new JPanel();
+        playerPanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 1.0;
+        c.weighty = 1.0;
+
+        playerPanel.add(drawButton("Προηγούμενο", getClass().getResource("/org/scify/talkandplay/resources/prev-button.png")), c);
+        c.gridx++;
+        playerPanel.add(drawButton("Αναπαραγωγή", getClass().getResource("/org/scify/talkandplay/resources/play-button.png")), c);
+        c.gridx++;
+        playerPanel.add(drawButton("Επόμενο", getClass().getResource("/org/scify/talkandplay/resources/next-button.png")), c);
+        c.gridx++;
+        playerPanel.add(drawButton("Λίστα", getClass().getResource("/org/scify/talkandplay/resources/up-icon.png")), c);
+        c.gridx++;
+        playerPanel.add(drawButton("Έξοδος", getClass().getResource("/org/scify/talkandplay/resources/exit-icon.png")), c);
+    }
+
+    private JPanel drawButton(String text, URL imageIcon) {
+        JLabel label = new JLabel(text);
+        label.setBorder(new EmptyBorder(5, 5, 5, 5));
+        label.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 16));
+        label.setHorizontalAlignment(JLabel.CENTER);
+        JLabel icon = new JLabel(new ImageIcon(new ImageIcon(imageIcon).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+        icon.setBorder(new EmptyBorder(5, 5, 5, 5));
+        icon.setHorizontalAlignment(JLabel.CENTER);
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+        panel.setBackground(Color.decode(UIConstants.getGrey()));
+        panel.add(label);
+        panel.add(icon);
+        return panel;
+    }
+
+    private JPanel drawSongPanel(String text) {
+        JLabel fileLabel = new JLabel(text);
+        fileLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
+        fileLabel.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+        JPanel songPanel = new JPanel();
+        songPanel.setBackground(Color.decode(UIConstants.getGrey()));
+        songPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        songPanel.setAlignmentX(JPanel.LEFT_ALIGNMENT);
+        songPanel.add(fileLabel);
+
+        return songPanel;
+    }
+
+    /*
+     public void setTimer() {
+     timer = new Timer();
+     timer.schedule(new TimerTask() {
+     @Override
+     public void run() {
+     if (selectedFile == 0) {
+     fileLabels.get(fileLabels.size() - 1).setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
+     fileLabels.get(selectedFile).setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+     selectedFile++;
+     } else if (selectedFile == fileLabels.size() - 1) {
+     fileLabels.get(selectedFile - 1).setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
+     fileLabels.get(selectedFile).setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+     selectedFile = 0;
+     } else if (selectedFile < fileLabels.size() - 1 && selectedFile > 0) {
+     fileLabels.get(selectedFile - 1).setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
+     fileLabels.get(selectedFile).setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+     selectedFile++;
+     }
+     }
+     }, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+     }*/
     public String getFilePath(String fileName) {
         return user.getEntertainmentModule().getMusicModule().getFolderPath() + File.separator + fileName;
     }
+    /*
+     public String getPreviousFile() {
+     timer.cancel();
+     for (int i = 0; i < fileLabels.size(); i++) {
+     if (fileLabels.get(i).getText().equals(currentFile)) {
+     if (i == 0) {
+     currentFile = fileLabels.get(fileLabels.size() - 1).getText();
+     } else {
+     currentFile = fileLabels.get(i - 1).getText();
+     }
+     break;
+     }
+     }
+     return currentFile;
+     }*/
 
-    public String getPreviousFile() {
-        timer.cancel();
-        for (int i = 0; i < fileLabels.size(); i++) {
-            if (fileLabels.get(i).getText().equals(currentFile)) {
-                if (i == 0) {
-                    currentFile = fileLabels.get(fileLabels.size() - 1).getText();
-                } else {
-                    currentFile = fileLabels.get(i - 1).getText();
-                }
-                break;
-            }
-        }
-        return currentFile;
-    }
+    /*  public String getNextFile() {
+     timer.cancel();
+     for (int i = 0; i < fileLabels.size(); i++) {
+     if (fileLabels.get(i).getText().equals(currentFile)) {
+     if (i == fileLabels.size() - 1) {
+     currentFile = fileLabels.get(0).getText();
+     } else {
+     currentFile = fileLabels.get(i + 1).getText();
+     }
+     break;
+     }
+     }
+     return currentFile;
+     }
 
-    public String getNextFile() {
-        timer.cancel();
-        for (int i = 0; i < fileLabels.size(); i++) {
-            if (fileLabels.get(i).getText().equals(currentFile)) {
-                if (i == fileLabels.size() - 1) {
-                    currentFile = fileLabels.get(0).getText();
-                } else {
-                    currentFile = fileLabels.get(i + 1).getText();
-                }
-                break;
-            }
-        }
-        return currentFile;
-    }
+     public void setSelected() {
+     for (int i = 0; i < fileLabels.size(); i++) {
+     if (fileLabels.get(i).getText().equals(currentFile)) {
+     fileLabels.get(i).setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+     } else {
+     fileLabels.get(i).setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
 
-    public void setSelected() {
-        for (int i = 0; i < fileLabels.size(); i++) {
-            if (fileLabels.get(i).getText().equals(currentFile)) {
-                fileLabels.get(i).setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-            } else {
-                fileLabels.get(i).setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
-
-            }
-        }
-    }
-
+     }
+     }
+     }
+     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel filesPanel;
-    private javax.swing.JPanel mediaPlayerPanel;
-    private javax.swing.JPanel musicPanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -156,7 +156,6 @@ public class CommunicationPanel extends BaseGridPanel {
         parent.addGrid(this);
         parent.revalidate();
         parent.repaint();
-        parent.pack();
     }
 
     /**

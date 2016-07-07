@@ -53,9 +53,9 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
             @Override
             public void finished(MediaPlayer mediaPlayer) {
                 if (parent instanceof MusicPanel) {
-                    String nextFile = ((MusicPanel) parent).getNextFile();
-                    ((MusicPanel) parent).setSelected();
-                    playMedia(((MusicPanel) parent).getFilePath(nextFile));
+                   // String nextFile = ((MusicPanel) parent).getNextFile();
+                   // ((MusicPanel) parent).setSelected();
+                  //  playMedia(((MusicPanel) parent).getFilePath(nextFile));
                 }
             }
 
@@ -206,15 +206,15 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
 
     private void prevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevButtonActionPerformed
         if (parent instanceof MusicPanel) {
-            String prevFile = ((MusicPanel) parent).getPreviousFile();
-            playMedia(((MusicPanel) parent).getFilePath(prevFile));
+           // String prevFile = ((MusicPanel) parent).getPreviousFile();
+          //  playMedia(((MusicPanel) parent).getFilePath(prevFile));
         }
     }//GEN-LAST:event_prevButtonActionPerformed
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         if (parent instanceof MusicPanel) {
-            String nextFile = ((MusicPanel) parent).getNextFile();
-            playMedia(((MusicPanel) parent).getFilePath(nextFile));
+          //  String nextFile = ((MusicPanel) parent).getNextFile();
+           // playMedia(((MusicPanel) parent).getFilePath(nextFile));
         }
     }//GEN-LAST:event_nextButtonActionPerformed
 

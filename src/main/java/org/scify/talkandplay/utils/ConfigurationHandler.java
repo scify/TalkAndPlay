@@ -215,7 +215,7 @@ public class ConfigurationHandler {
         MusicModule musicModule = new MusicModule();
         musicModule.setName(musicNode.getChildText("name"));
         musicModule.setSound(musicNode.getChildText("sound"));
-        musicModule.setFolderPath(musicNode.getChildText("folderPath"));
+        musicModule.setFolderPath(musicNode.getChildText("path"));
         musicModule.setEnabled("true".equals(musicNode.getChildText("name")));
 
         if (musicNode.getChildText("image").isEmpty()) {
@@ -229,7 +229,7 @@ public class ConfigurationHandler {
         VideoModule videoModule = new VideoModule();
         videoModule.setName(videoNode.getChildText("name"));
         videoModule.setSound(videoNode.getChildText("sound"));
-        videoModule.setFolderPath(videoNode.getChildText("folderPath"));
+        videoModule.setFolderPath(videoNode.getChildText("path"));
         videoModule.setEnabled("true".equals(videoNode.getChildText("name")));
 
         if (videoNode.getChildText("image").isEmpty()) {

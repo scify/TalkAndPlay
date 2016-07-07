@@ -44,6 +44,9 @@ public class EntertainmentTab extends javax.swing.JPanel {
         guiHelper.drawButton(backButton);
         errorLabel.setVisible(false);
 
+        musicPathTextField.setText(user.getEntertainmentModule().getMusicModule().getFolderPath());
+        videoPathTextField.setText(user.getEntertainmentModule().getVideoModule().getFolderPath());
+
         setListeners();
     }
 

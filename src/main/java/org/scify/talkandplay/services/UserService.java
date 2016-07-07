@@ -107,14 +107,14 @@ public class UserService {
         entertainment.addContent(new Element("name").setText("Ψυχαγωγία"));
         entertainment.addContent(new Element("enabled").setText("true"));
         entertainment.addContent(new Element("image"));
-        entertainment.addContent(new Element("musicPath"));
-        entertainment.addContent(new Element("videoPath"));
 
         //add music module settings
         Element music = new Element("music");
         music.addContent(new Element("name").setText("Μουσική"));
         music.addContent(new Element("enabled").setText("true"));
         music.addContent(new Element("image"));
+        music.addContent(new Element("path"));
+        music.addContent(new Element("path"));
         entertainment.addContent(music);
 
         //add video module settings
@@ -122,13 +122,15 @@ public class UserService {
         video.addContent(new Element("name").setText("Βίντεο"));
         video.addContent(new Element("enabled").setText("true"));
         video.addContent(new Element("image"));
+        video.addContent(new Element("path"));
+        video.addContent(new Element("playlistSize"));
         entertainment.addContent(video);
 
         //add game module settings
         Element games = new Element("games");
         games.addContent(new Element("name").setText("Παιχνίδια"));
         games.addContent(new Element("enabled").setText("true"));
-        games.addContent(new Element("image"));
+        games.addContent(new Element("playlistSize"));
 
         profile.addContent(communication);
         profile.addContent(entertainment);
