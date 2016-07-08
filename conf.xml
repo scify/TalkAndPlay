@@ -213,12 +213,14 @@
       <music>
         <name>Μουσική</name>
         <enabled>true</enabled>
-        <image />
+        <image />        
+        <playlistSize>10</playlistSize>
       </music>
       <video>
         <name>Βίντεο</name>
         <enabled>true</enabled>
-        <image />
+        <image />        
+        <playlistSize>10</playlistSize>
       </video>
     </entertainment>
     <games>

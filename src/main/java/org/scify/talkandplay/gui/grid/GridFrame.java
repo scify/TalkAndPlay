@@ -1,5 +1,6 @@
 package org.scify.talkandplay.gui.grid;
 
+import java.awt.GridBagConstraints;
 import java.io.IOException;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -12,6 +13,7 @@ public class GridFrame extends javax.swing.JFrame {
 
     private User user;
     private UserService userService;
+    private GridBagConstraints c;
 
     public GridFrame(String userName) throws IOException {
         this.userService = new UserService();
@@ -81,8 +83,9 @@ public class GridFrame extends javax.swing.JFrame {
     private void initCustomComponents() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         gridPanel.setLayout(new BoxLayout(gridPanel, BoxLayout.LINE_AXIS));
+
         gridPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-        
+
         GridPanel panel = new GridPanel(user, this);
         gridPanel.add(panel);
         gridPanel.revalidate();
@@ -98,7 +101,7 @@ public class GridFrame extends javax.swing.JFrame {
     }
 
     public void addGrid(JPanel panel) {
-        gridPanel.add(panel);
+        gridPanel.add(panel, c);
     }
 
     /*
