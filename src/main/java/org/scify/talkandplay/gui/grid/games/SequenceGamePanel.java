@@ -102,7 +102,6 @@ public class SequenceGamePanel extends BaseGridPanel {
                         if (correctImages == image.getOrder()) {
                             correctImages++;
                            // imagesPanel.remove(panel);
-                            timer.setSelected(0);
                           //  panel.setBorder(null);
                           //  panelList.remove(panel);
                           //  correctImagesPanel.add(panel);

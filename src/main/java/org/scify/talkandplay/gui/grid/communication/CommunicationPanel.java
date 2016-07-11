@@ -70,12 +70,22 @@ public class CommunicationPanel extends BaseGridPanel {
         initLayout();
         c.gridx = -1;
         c.gridy = 0;
+
+     /*   c.gridx = 0;
+        c.gridy = 0;
+        c.gridwidth = 1;
+        add(new JLabel(), c);
+        c.gridy = 1;
+        add(new JLabel(), c);
+        c.gridy = 2;
+        add(new JLabel(), c);
+*/
         drawImages(rootCategory);
     }
 
     /**
      * Draw the categories and their sub categories. It may not look like it,
-     * but this klassy piece of code ~does~ work.
+     * but this klassy piece of code works.
      *
      * @param category
      * @throws IOException

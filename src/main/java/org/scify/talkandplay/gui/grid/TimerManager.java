@@ -29,7 +29,8 @@ public class TimerManager {
     }
 
     public void start() {
-        this.timer = new Timer();
+        timer = new Timer();
+        selected = 0;
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -39,7 +40,6 @@ public class TimerManager {
                     panelList.get(panelList.size() - 1).setBackground(Color.decode(defaultBackgroundColor));
                     panelList.get(selected).setBorder(BorderFactory.createLineBorder(Color.decode(BORDER_COLOR), BORDER_SIZE));
                     panelList.get(selected).setBackground(Color.decode(BACKGROUND_COLOR));
-
                     selected++;
                 } else if (selected == 0 && selected == panelList.size() - 1) {
                     panelList.get(selected).setBorder(BorderFactory.createLineBorder(Color.decode(BORDER_COLOR), BORDER_SIZE));
@@ -61,12 +61,18 @@ public class TimerManager {
         }, nextExecutionTime, period);
     }
 
-    public void cancel() {
-        timer.cancel();
+    public void unselect() {
+        if (selected == 0) {
+            panelList.get(panelList.size() - 1).setBorder(BorderFactory.createLineBorder(Color.white, BORDER_SIZE));
+            panelList.get(panelList.size() - 1).setBackground(Color.decode(defaultBackgroundColor));
+        } else {
+            panelList.get(selected - 1).setBorder(BorderFactory.createLineBorder(Color.white, BORDER_SIZE));
+            panelList.get(selected - 1).setBackground(Color.decode(defaultBackgroundColor));
+        }
     }
 
-    public void setSelected(int selected) {
-        this.selected = selected;
+    public void cancel() {
+        timer.cancel();
     }
 
     public void setList(List<JPanel> panelList) {

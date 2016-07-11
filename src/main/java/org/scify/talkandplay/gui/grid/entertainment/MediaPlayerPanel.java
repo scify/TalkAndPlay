@@ -1,7 +1,6 @@
 package org.scify.talkandplay.gui.grid.entertainment;
 
 import java.awt.Font;
-import org.scify.talkandplay.gui.grid.entertainment.MusicPanel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JPanel;
@@ -37,13 +36,12 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
 
     private void initAudioPlayer() {
 
+        mediaSlider.setEnabled(false);
         audioPlayer.getMediaPlayer().mute(false);
-
         audioPlayer.getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
 
             @Override
             public void opening(MediaPlayer mediaPlayer) {
-                System.out.println("dsdas");
             }
 
             @Override
@@ -55,7 +53,7 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
             @Override
             public void finished(MediaPlayer mediaPlayer) {
                 if (parent instanceof MusicPanel) {
-                   // String nextFile = ((MusicPanel) parent).getNextFile();
+                    // String nextFile = ((MusicPanel) parent).getNextFile();
                     // ((MusicPanel) parent).setSelected();
                     //  playMedia(((MusicPanel) parent).getFilePath(nextFile));
                 }
@@ -92,7 +90,6 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
 
         startLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
         endLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
-
     }
 
     public void playMedia(String path) {
@@ -170,6 +167,10 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
 
     public AudioMediaPlayerComponent getAudioPlayer() {
         return this.audioPlayer;
+    }
+
+    public boolean isPlaying() {
+        return audioPlayer.getMediaPlayer().isPlaying();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

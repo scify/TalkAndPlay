@@ -41,7 +41,7 @@
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
-            <category name="Πατάτες τηγανητές">
+            <category name="Πατάτ">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/Φαγητό/Πατάτες τηγανητές.png</image>
@@ -213,13 +213,13 @@
       <music>
         <name>Μουσική</name>
         <enabled>true</enabled>
-        <image />        
+        <image />
         <playlistSize>10</playlistSize>
       </music>
       <video>
         <name>Βίντεο</name>
         <enabled>true</enabled>
-        <image />        
+        <image />
         <playlistSize>10</playlistSize>
       </video>
     </entertainment>
@@ -240,9 +240,9 @@
       <image>true</image>
       <text>true</text>
       <selectionSensor>
-        <type>mouse</type>
-        <button>1</button>
-        <clickCount>1</clickCount>
+        <type>keyboard</type>
+        <keyCode>32</keyCode>
+        <keyChar />
       </selectionSensor>
     </configuration>
     <communication>

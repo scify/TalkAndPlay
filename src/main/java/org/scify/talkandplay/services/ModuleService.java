@@ -26,7 +26,5 @@ public class ModuleService {
 
             configurationFile.update();
         }
-
     }
-
 }

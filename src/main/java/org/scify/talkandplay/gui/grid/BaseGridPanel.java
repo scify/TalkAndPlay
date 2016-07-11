@@ -17,10 +17,8 @@ import org.scify.talkandplay.services.UserService;
  *
  * @author christina
  */
-public class BaseGridPanel extends javax.swing.JPanel {
+public class BaseGridPanel extends BasePanel {
 
-    protected GridFrame parent;
-    protected User user;
     protected UserService userService;
     protected ArrayList<JPanel> panelList;
     protected int empties;
@@ -31,8 +29,7 @@ public class BaseGridPanel extends javax.swing.JPanel {
     protected final int IMAGE_PADDING = 10;
 
     public BaseGridPanel(User user, GridFrame parent) {
-        this.user = user;
-        this.parent = parent;
+        super(user, parent);
         this.timer = new TimerManager(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         this.tileCreator = new TileCreator(user);
         this.empties = user.getConfiguration().getDefaultGridRow() * user.getConfiguration().getDefaultGridColumn();
@@ -67,13 +64,6 @@ public class BaseGridPanel extends javax.swing.JPanel {
         c.weighty = 20;
         c.gridx = 0;
         c.gridy = 0;
-    }
-
-    protected void showMainMenu() {
-        parent.clearGrid();
-        parent.addGrid(new GridPanel(user, parent));
-        parent.revalidate();
-        parent.repaint();
     }
 
     protected void fillWithEmpties() {

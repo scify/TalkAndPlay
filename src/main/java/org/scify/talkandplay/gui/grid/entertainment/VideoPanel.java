@@ -1,38 +1,43 @@
 package org.scify.talkandplay.gui.grid.entertainment;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
-import java.util.ArrayList;
+import java.net.URL;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import org.scify.talkandplay.gui.grid.BaseMediaPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
+import org.scify.talkandplay.gui.grid.TimerManager;
+import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.models.sensors.KeyboardSensor;
+import org.scify.talkandplay.models.sensors.MouseSensor;
+import org.scify.talkandplay.models.sensors.Sensor;
+import uk.co.caprica.vlcj.player.MediaPlayer;
+import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 
-/**
- *
- * @author christina
- */
-public class VideoPanel extends javax.swing.JPanel {
+public class VideoPanel extends BaseMediaPanel {
 
-    private User user;
-    private GridFrame parent;
-    private Timer timer;
-    private int selectedFile;
-    private String currentFile;
-    private List<JLabel> fileLabels;
 
-    int currSec = 0;
+    private JPanel playerPanel, prevPanel, playPanel, nextPanel, listPanel, exitPanel;
+
 
     public VideoPanel(User user, GridFrame parent) {
-        this.user = user;
-        this.parent = parent;
-        this.fileLabels = new ArrayList<>();
-
+        super(user, parent);
+       
         initComponents();
         initCustomComponents();
     }
@@ -46,168 +51,292 @@ public class VideoPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        videoPanel = new javax.swing.JPanel();
-        filesPanel = new javax.swing.JPanel();
-        mediaPlayerPanel = new javax.swing.JPanel();
-
-        javax.swing.GroupLayout filesPanelLayout = new javax.swing.GroupLayout(filesPanel);
-        filesPanel.setLayout(filesPanelLayout);
-        filesPanelLayout.setHorizontalGroup(
-            filesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
-        );
-        filesPanelLayout.setVerticalGroup(
-            filesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout videoPanelLayout = new javax.swing.GroupLayout(videoPanel);
-        videoPanel.setLayout(videoPanelLayout);
-        videoPanelLayout.setHorizontalGroup(
-            videoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(videoPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(filesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69)
-                .addComponent(mediaPlayerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        videoPanelLayout.setVerticalGroup(
-            videoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mediaPlayerPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
-            .addComponent(filesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(videoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 517, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(videoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 353, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void initCustomComponents() {
 
-        final MediaPlayerPanel playerPanel = new MediaPlayerPanel(this, parent);
-        mediaPlayerPanel.add(playerPanel);
+        setBorder(new EmptyBorder(0, 20, 20, 20));
+        setBackground(Color.white);
+        setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.WEST;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weighty = 1;
+        c.weightx = 1;
 
-        File videoFolder = new File(user.getEntertainmentModule().getVideoModule().getFolderPath());
+        initPlayerButtons();
 
-        filesPanel.setLayout(new BoxLayout(filesPanel, BoxLayout.PAGE_AXIS));
+        filesPanel = new FilesPanel(user, (new File(user.getEntertainmentModule().getVideoModule().getFolderPath())).listFiles(), this);
 
-        JLabel fileLabel;
+        add(filesPanel, c);
+        c.gridy++;
+        add(mediaPlayerPanel, c);
+        c.gridy++;
+        add(playerPanel, c);
 
-        for (final File file : videoFolder.listFiles()) {
-            fileLabel = new JLabel(file.getName());
-            fileLabels.add(fileLabel);
-            filesPanel.add(fileLabel);
-            fileLabel.addMouseListener(new MouseAdapter() {
-                public void mouseClicked(MouseEvent e) {
-                    timer.cancel();
-                    currentFile = file.getName();
-                    VideoFrame videoFrame = new VideoFrame(user, getFilePath(currentFile));
-                    videoFrame.playMedia(file.getName());
-                }
-            });
-        }
-       // videoFrame.setFiles(fileLabels);
+        mediaPlayerPanel.getAudioPlayer().getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
+            @Override
+            public void finished(MediaPlayer mediaPlayer) {
+                setPlayButton();
+            }
 
-        if (fileLabels.size() == 0) {
-            JLabel noFilesLabel = new JLabel("Δεν υπάρχουν αρχεία");
-            fileLabels.add(noFilesLabel);
-            filesPanel.add(noFilesLabel);
-        } else {
-            JLabel backLabel = new JLabel("Πίσω");
+            @Override
+            public void playing(MediaPlayer mediaPlayer) {
+                setPauseButton();
+            }
 
-            backLabel.addMouseListener(new MouseAdapter() {
-                public void mouseClicked(MouseEvent e) {
-                    timer.cancel();
-                    parent.remove(videoPanel);
-                    EntertainmentPanel entPanel = new EntertainmentPanel(user, parent);
-                }
-            });
+            @Override
+            public void paused(MediaPlayer mediaPlayer) {
+                setPlayButton();
+            }
+        });
 
-            fileLabels.add(backLabel);
-            filesPanel.add(backLabel);
-            setTimer();
-        }
-
-        filesPanel.revalidate();
-        filesPanel.repaint();
-        mediaPlayerPanel.revalidate();
-        mediaPlayerPanel.repaint();
-        videoPanel.revalidate();
-        videoPanel.repaint();
-        parent.add(videoPanel);
+        revalidate();
+        repaint();
+        parent.clearGrid();
+        parent.addGrid(this);
         parent.revalidate();
         parent.repaint();
     }
 
-    public void setTimer() {
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if (selectedFile == 0) {
-                    fileLabels.get(fileLabels.size() - 1).setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
-                    fileLabels.get(selectedFile).setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-                    selectedFile++;
-                } else if (selectedFile == fileLabels.size() - 1) {
-                    fileLabels.get(selectedFile - 1).setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
-                    fileLabels.get(selectedFile).setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-                    selectedFile = 0;
-                } else if (selectedFile < fileLabels.size() - 1 && selectedFile > 0) {
-                    fileLabels.get(selectedFile - 1).setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
-                    fileLabels.get(selectedFile).setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-                    selectedFile++;
-                }
-            }
-        }, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+    private void initPlayerButtons() {
+
+        playerPanel = new JPanel();
+        playerPanel.setLayout(new GridBagLayout());
+        playerPanel.setBackground(Color.white);
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.NONE;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 1;
+        c.weighty = 1;
+
+        prevPanel = drawButton("Προηγούμενο", getClass().getResource("/org/scify/talkandplay/resources/prev-button.png"));
+        playPanel = drawButton("Αναπαραγωγή", getClass().getResource("/org/scify/talkandplay/resources/play-button.png"));
+        nextPanel = drawButton("Επόμενο", getClass().getResource("/org/scify/talkandplay/resources/next-button.png"));
+        listPanel = drawButton("Λίστα", getClass().getResource("/org/scify/talkandplay/resources/up-icon.png"));
+        exitPanel = drawButton("Έξοδος", getClass().getResource("/org/scify/talkandplay/resources/exit-icon.png"));
+
+        playerPanel.add(prevPanel, c);
+        c.gridx++;
+        playerPanel.add(playPanel, c);
+        c.gridx++;
+        playerPanel.add(nextPanel, c);
+        c.gridx++;
+        playerPanel.add(listPanel, c);
+        c.gridx++;
+        playerPanel.add(exitPanel, c);
+
+        controlsList.add(prevPanel);
+        controlsList.add(playPanel);
+        controlsList.add(nextPanel);
+        controlsList.add(listPanel);
+        controlsList.add(exitPanel);
+
+        addListeners();
+    }
+
+    private JPanel drawButton(String text, URL imageIcon) {
+        JLabel label = new JLabel(text);
+        label.setBorder(new EmptyBorder(5, 5, 5, 5));
+        label.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel icon = new JLabel(new ImageIcon(new ImageIcon(imageIcon).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+        icon.setBorder(new EmptyBorder(5, 5, 5, 5));
+        icon.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+        panel.setBackground(Color.decode(UIConstants.getGrey()));
+        panel.setPreferredSize(new Dimension(180, 100));
+        panel.setMaximumSize(new Dimension(180, 100));
+        panel.setMinimumSize(new Dimension(180, 100));
+        panel.setBorder((new LineBorder(Color.white, 10)));
+
+        panel.add(label);
+        panel.add(icon);
+        return panel;
+    }
+
+    public void playFile(String fileName) {
+        timer.cancel();
+        mediaPlayerPanel.playMedia(getFilePath(fileName));
+        setPauseButton();
+        timer.setList(controlsList);
+        timer.start();
+    }
+
+    public TimerManager getTimer() {
+        return timer;
+    }
+
+    public List<JPanel> getControlsList() {
+        return controlsList;
     }
 
     public String getFilePath(String fileName) {
-        return user.getEntertainmentModule().getVideoModule().getFolderPath() + File.separator + fileName;
+        return user.getEntertainmentModule().getMusicModule().getFolderPath() + File.separator + fileName;
     }
 
-    public String getPreviousFile() {
-        timer.cancel();
-        for (int i = 0; i < fileLabels.size(); i++) {
-            if (fileLabels.get(i).getText().equals(currentFile)) {
-                if (i == 0) {
-                    currentFile = fileLabels.get(fileLabels.size() - 1).getText();
-                } else {
-                    currentFile = fileLabels.get(i - 1).getText();
+    private void addListeners() {
+
+        prevPanel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
+                    getPrevious();
                 }
-                break;
             }
-        }
-        return currentFile;
+        });
+        prevPanel.addKeyListener(new KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
+                if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
+                    getPrevious();
+                }
+            }
+        });
+
+        nextPanel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
+                    getNext();
+                }
+            }
+        });
+        nextPanel.addKeyListener(new KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
+                if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
+                    getNext();
+                }
+            }
+        });
+
+        playPanel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
+                    mediaPlayerPanel.getAudioPlayer().getMediaPlayer().pause();
+                } else {
+                    mediaPlayerPanel.getAudioPlayer().getMediaPlayer().play();
+                }
+            }
+        });
+        playPanel.addKeyListener(new KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
+                if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
+                    mediaPlayerPanel.getAudioPlayer().getMediaPlayer().pause();
+                }
+            }
+        });
+
+        listPanel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor)) {
+                    timer.cancel();
+                    timer.unselect();
+                    timer.setList(filesPanel.getPanelList());
+                    timer.start();
+                }
+            }
+        });
+        listPanel.addKeyListener(new KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
+                if (sensorService.shouldSelect(sensor)) {
+                    timer.cancel();
+                    timer.unselect();
+                    timer.setList(filesPanel.getPanelList());
+                    timer.start();
+                }
+            }
+        });
+
+        exitPanel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor)) {
+                    timer.cancel();
+                    parent.clearGrid();
+                    EntertainmentPanel entPanel = new EntertainmentPanel(user, parent);
+                }
+            }
+        });
+        exitPanel.addKeyListener(new KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
+                if (sensorService.shouldSelect(sensor)) {
+                    timer.cancel();
+                    parent.clearGrid();
+                    EntertainmentPanel entPanel = new EntertainmentPanel(user, parent);
+                }
+            }
+        });
+
     }
 
-    public String getNextFile() {
-        timer.cancel();
-        for (int i = 0; i < fileLabels.size(); i++) {
-            if (fileLabels.get(i).getText().equals(currentFile)) {
-                System.out.println(fileLabels.get(i).getText() + "=" + currentFile);
-                if (i == fileLabels.size() - 1) {
-                    currentFile = fileLabels.get(0).getText();
-                } else {
-                    currentFile = fileLabels.get(i + 1).getText();
-                }
-                break;
+    private void getPrevious() {
+        int selected = filesPanel.getSelected();
+        if (selected != -1) {
+            if (selected == 0) {
+                selected = filesPanel.getFileList().size() - 1;
+            } else {
+                selected--;
             }
+
+            filesPanel.setSelected(selected);
+
+            mediaPlayerPanel.getAudioPlayer().getMediaPlayer().stop();
+            mediaPlayerPanel.getAudioPlayer().getMediaPlayer().playMedia(getFilePath(filesPanel.getFileList().get(selected)));
         }
-        return currentFile;
+    }
+
+    private void getNext() {
+        int selected = filesPanel.getSelected();
+        if (selected != -1) {
+            if (selected == filesPanel.getFileList().size() - 1) {
+                selected = 0;
+            } else {
+                selected++;
+            }
+
+            filesPanel.setSelected(selected);
+
+            mediaPlayerPanel.getAudioPlayer().getMediaPlayer().stop();
+            mediaPlayerPanel.getAudioPlayer().getMediaPlayer().playMedia(getFilePath(filesPanel.getFileList().get(selected)));
+        }
+    }
+
+    private void setPlayButton() {
+        ((JLabel) playPanel.getComponent(0)).setText("Αναπαραγωγή");
+        ((JLabel) playPanel.getComponent(1)).setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/play-button.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+
+    }
+
+    private void setPauseButton() {
+        ((JLabel) playPanel.getComponent(0)).setText("Παύση");
+        ((JLabel) playPanel.getComponent(1)).setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/pause-button.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel filesPanel;
-    private javax.swing.JPanel mediaPlayerPanel;
-    private javax.swing.JPanel videoPanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,9 +2,7 @@ package org.scify.talkandplay.gui.grid.entertainment;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.ComponentOrientation;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,14 +12,14 @@ import java.awt.event.MouseAdapter;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
-import javax.swing.Box;
+import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import org.scify.talkandplay.gui.grid.BaseMediaPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.TimerManager;
 import org.scify.talkandplay.gui.helpers.UIConstants;
@@ -30,36 +28,15 @@ import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.SensorService;
+import uk.co.caprica.vlcj.player.MediaPlayer;
+import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 
-public class MusicPanel extends javax.swing.JPanel {
+public class MusicPanel extends BaseMediaPanel {
 
-    private User user;
-    private GridFrame parent;
-    private int selectedFile;
-    private String currentFile;
-    private ArrayList<JPanel> panelList;
-    private ArrayList<JPanel> controlsList;
-    private File[] files;
-    private int start, end;
-    private int step;
-    protected TimerManager timer;
-    private MediaPlayerPanel mediaPlayerPanel;
-
-    private SensorService sensorService;
-
-    private JPanel songsPanel, sliderPanel, playerPanel, prevSongs, nextSongs, controls;
-
-    private int currSec = 0;
+    private JPanel playerPanel, prevPanel, playPanel, nextPanel, listPanel, exitPanel;
 
     public MusicPanel(User user, GridFrame parent) {
-        this.user = user;
-        this.parent = parent;
-        this.sensorService = new SensorService(user);
-        this.panelList = new ArrayList();
-        this.controlsList = new ArrayList();
-        this.mediaPlayerPanel = new MediaPlayerPanel(this, parent);
-        this.timer = new TimerManager(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
-
+        super(user, parent);
         initComponents();
         initCustomComponents();
     }
@@ -98,31 +75,32 @@ public class MusicPanel extends javax.swing.JPanel {
         c.weighty = 1;
         c.weightx = 1;
 
-        files = (new File(user.getEntertainmentModule().getMusicModule().getFolderPath())).listFiles();
-        step = user.getEntertainmentModule().getMusicModule().getPlaylistSize() - 3;
-        start = 0;
-        if (files.length < step) {
-            end = files.length;
-        } else {
-            end = step;
-        }
-
-        songsPanel = new JPanel();
-        songsPanel.setLayout(new BoxLayout(songsPanel, BoxLayout.PAGE_AXIS));
-        songsPanel.setBackground(Color.white);
-
-        drawSongList();
         initPlayerButtons();
 
-        add(songsPanel, c);
+        filesPanel = new FilesPanel(user, (new File(user.getEntertainmentModule().getMusicModule().getFolderPath())).listFiles(), this);
+
+        add(filesPanel, c);
         c.gridy++;
         add(mediaPlayerPanel, c);
         c.gridy++;
         add(playerPanel, c);
 
-        timer.setList(panelList);
-        timer.setDefaultBackgroundColor(UIConstants.getGrey());
-        timer.start();
+        mediaPlayerPanel.getAudioPlayer().getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
+            @Override
+            public void finished(MediaPlayer mediaPlayer) {
+                setPlayButton();
+            }
+
+            @Override
+            public void playing(MediaPlayer mediaPlayer) {
+                setPauseButton();
+            }
+
+            @Override
+            public void paused(MediaPlayer mediaPlayer) {
+                setPlayButton();
+            }
+        });
 
         revalidate();
         repaint();
@@ -130,38 +108,6 @@ public class MusicPanel extends javax.swing.JPanel {
         parent.addGrid(this);
         parent.revalidate();
         parent.repaint();
-    }
-
-    private void drawSongList() {
-
-        songsPanel.removeAll();
-        prevSongs = drawSongPanel("Προηγούμενα τραγούδια");
-        nextSongs = drawSongPanel("Επόμενα τραγούδια");
-        controls = drawSongPanel("Χειριστήριο");
-        songsPanel.add(prevSongs);
-        panelList.add(prevSongs);
-
-        for (int i = start; i < end; i++) {
-            System.out.println(i);
-            if (i >= files.length) {
-                songsPanel.add(new JLabel(""));
-            } else {
-                JPanel panel = drawSongPanel(files[i].getName());
-                songsPanel.add(panel);
-                panelList.add(panel);
-                addSongListener(panel, files[i]);
-            }
-        }
-
-        songsPanel.add(nextSongs);
-        songsPanel.add(controls);
-        songsPanel.revalidate();
-        songsPanel.repaint();
-
-        panelList.add(nextSongs);
-        panelList.add(controls);
-
-        addListeners();
     }
 
     private void initPlayerButtons() {
@@ -176,11 +122,11 @@ public class MusicPanel extends javax.swing.JPanel {
         c.weightx = 1;
         c.weighty = 1;
 
-        JPanel prevPanel = drawButton("Προηγούμενο", getClass().getResource("/org/scify/talkandplay/resources/prev-button.png"));
-        JPanel playPanel = drawButton("Αναπαραγωγή", getClass().getResource("/org/scify/talkandplay/resources/play-button.png"));
-        JPanel nextPanel = drawButton("Επόμενο", getClass().getResource("/org/scify/talkandplay/resources/next-button.png"));
-        JPanel listPanel = drawButton("Λίστα", getClass().getResource("/org/scify/talkandplay/resources/up-icon.png"));
-        JPanel exitPanel = drawButton("Έξοδος", getClass().getResource("/org/scify/talkandplay/resources/exit-icon.png"));
+        prevPanel = drawButton("Προηγούμενο", getClass().getResource("/org/scify/talkandplay/resources/prev-button.png"));
+        playPanel = drawButton("Αναπαραγωγή", getClass().getResource("/org/scify/talkandplay/resources/play-button.png"));
+        nextPanel = drawButton("Επόμενο", getClass().getResource("/org/scify/talkandplay/resources/next-button.png"));
+        listPanel = drawButton("Λίστα", getClass().getResource("/org/scify/talkandplay/resources/up-icon.png"));
+        exitPanel = drawButton("Έξοδος", getClass().getResource("/org/scify/talkandplay/resources/exit-icon.png"));
 
         playerPanel.add(prevPanel, c);
         c.gridx++;
@@ -197,6 +143,8 @@ public class MusicPanel extends javax.swing.JPanel {
         controlsList.add(nextPanel);
         controlsList.add(listPanel);
         controlsList.add(exitPanel);
+
+        addListeners();
     }
 
     private JPanel drawButton(String text, URL imageIcon) {
@@ -213,6 +161,8 @@ public class MusicPanel extends javax.swing.JPanel {
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         panel.setBackground(Color.decode(UIConstants.getGrey()));
         panel.setPreferredSize(new Dimension(180, 100));
+        panel.setMaximumSize(new Dimension(180, 100));
+        panel.setMinimumSize(new Dimension(180, 100));
         panel.setBorder((new LineBorder(Color.white, 10)));
 
         panel.add(label);
@@ -220,193 +170,171 @@ public class MusicPanel extends javax.swing.JPanel {
         return panel;
     }
 
-    private JPanel drawSongPanel(String text) {
-        JLabel fileLabel = new JLabel(text);
-        fileLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
-        fileLabel.setHorizontalAlignment(JLabel.LEFT);
-        fileLabel.setBorder(new EmptyBorder(5, 5, 5, 5));
+    public void playFile(String fileName) {
+        timer.cancel();
+        mediaPlayerPanel.playMedia(getFilePath(fileName));
+        setPauseButton();
+        timer.setList(controlsList);
+        timer.start();
+    }
 
-        JPanel songPanel = new JPanel();
-        songPanel.setLayout(new FlowLayout());
-        songPanel.setBackground(Color.decode(UIConstants.getGrey()));
-        songPanel.setBorder((new LineBorder(Color.white, 10)));
-        songPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+    public TimerManager getTimer() {
+        return timer;
+    }
 
-        songPanel.add(fileLabel);
+    public List<JPanel> getControlsList() {
+        return controlsList;
+    }
 
-        return songPanel;
+    public String getFilePath(String fileName) {
+        return user.getEntertainmentModule().getMusicModule().getFolderPath() + File.separator + fileName;
     }
 
     private void addListeners() {
 
-        prevSongs.addMouseListener(new MouseAdapter() {
+        prevPanel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor)) {
-                    timer.cancel();
-                    configurePrevSongs();
-                    if (end <= files.length + step) {
-                        drawSongList();
-                        timer.start();
-                    }
+                if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
+                    getPrevious();
                 }
             }
         });
-        prevSongs.addKeyListener(new KeyAdapter() {
+        prevPanel.addKeyListener(new KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
-                if (sensorService.shouldSelect(sensor)) {
-                    configurePrevSongs();
-                    if (end < files.length) {
-                        drawSongList();
-                    }
+                if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
+                    getPrevious();
                 }
             }
         });
 
-        nextSongs.addMouseListener(new MouseAdapter() {
+        nextPanel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor)) {
-                    configureNextSongs();
-                    if (end <= files.length + step) {
-                        drawSongList();
-                    }
+                if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
+                    getNext();
                 }
             }
         });
-        nextSongs.addKeyListener(new KeyAdapter() {
+        nextPanel.addKeyListener(new KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
-                if (sensorService.shouldSelect(sensor)) {
-                    configureNextSongs();
-                    if (end <= files.length) {
-                        drawSongList();
-                    }
+                if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
+                    getNext();
                 }
             }
         });
-    }
 
-    private void addSongListener(JPanel panel, final File file) {
-        panel.addMouseListener(new MouseAdapter() {
+        playPanel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
+                    mediaPlayerPanel.getAudioPlayer().getMediaPlayer().pause();
+                } else {
+                    mediaPlayerPanel.getAudioPlayer().getMediaPlayer().play();
+                }
+            }
+        });
+        playPanel.addKeyListener(new KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
+                if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
+                    mediaPlayerPanel.getAudioPlayer().getMediaPlayer().pause();
+                }
+            }
+        });
+
+        listPanel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
                     timer.cancel();
-                    currentFile = file.getName();
-                    //setSelected();
-                    mediaPlayerPanel.playMedia(getFilePath(file.getName()));
-                    timer.setList(controlsList);
-                    timer.setSelected(0);
+                    timer.unselect();
+                    timer.setList(filesPanel.getPanelList());
                     timer.start();
                 }
             }
         });
-        panel.addKeyListener(new KeyAdapter() {
+        listPanel.addKeyListener(new KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
                     timer.cancel();
-                    currentFile = file.getName();
-                    // setSelected();
-                    mediaPlayerPanel.playMedia(getFilePath(file.getName()));
-                    timer.setList(controlsList);
+                    timer.unselect();
+                    timer.setList(filesPanel.getPanelList());
                     timer.start();
                 }
             }
         });
+
+        exitPanel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor)) {
+                    timer.cancel();
+                    parent.clearGrid();
+                    EntertainmentPanel entPanel = new EntertainmentPanel(user, parent);
+                }
+            }
+        });
+        exitPanel.addKeyListener(new KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
+                if (sensorService.shouldSelect(sensor)) {
+                    timer.cancel();
+                    parent.clearGrid();
+                    EntertainmentPanel entPanel = new EntertainmentPanel(user, parent);
+                }
+            }
+        });
+
     }
 
-    private void configureNextSongs() {
-        start = end;
+    private void getPrevious() {
+        int selected = filesPanel.getSelected();
+        if (selected != -1) {
+            if (selected == 0) {
+                selected = filesPanel.getFileList().size() - 1;
+            } else {
+                selected--;
+            }
 
-        if (end + step < files.length) {
-            end += step;
-        } else {
-            end = files.length;
+            filesPanel.setSelected(selected);
+
+            mediaPlayerPanel.getAudioPlayer().getMediaPlayer().stop();
+            mediaPlayerPanel.getAudioPlayer().getMediaPlayer().playMedia(getFilePath(filesPanel.getFileList().get(selected)));
         }
-        System.out.println("start " + start + ", end " + end);
     }
 
-    private void configurePrevSongs() {
-        end = start;
+    private void getNext() {
+        int selected = filesPanel.getSelected();
+        if (selected != -1) {
+            if (selected == filesPanel.getFileList().size() - 1) {
+                selected = 0;
+            } else {
+                selected++;
+            }
 
-        if (start - step > 0) {
-            start -= step;
-        } else {
-            start = 0;
+            filesPanel.setSelected(selected);
+
+            mediaPlayerPanel.getAudioPlayer().getMediaPlayer().stop();
+            mediaPlayerPanel.getAudioPlayer().getMediaPlayer().playMedia(getFilePath(filesPanel.getFileList().get(selected)));
         }
-        System.out.println("start " + start + ", end " + end);
     }
 
-    /*
-     public void setTimer() {
-     timer = new Timer();
-     timer.schedule(new TimerTask() {
-     @Override
-     public void run() {
-     if (selectedFile == 0) {
-     fileLabels.get(fileLabels.size() - 1).setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
-     fileLabels.get(selectedFile).setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-     selectedFile++;
-     } else if (selectedFile == fileLabels.size() - 1) {
-     fileLabels.get(selectedFile - 1).setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
-     fileLabels.get(selectedFile).setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-     selectedFile = 0;
-     } else if (selectedFile < fileLabels.size() - 1 && selectedFile > 0) {
-     fileLabels.get(selectedFile - 1).setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
-     fileLabels.get(selectedFile).setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-     selectedFile++;
-     }
-     }
-     }, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
-     }*/
-    public String getFilePath(String fileName) {
-        return user.getEntertainmentModule().getMusicModule().getFolderPath() + File.separator + fileName;
+    private void setPlayButton() {
+        ((JLabel) playPanel.getComponent(0)).setText("Αναπαραγωγή");
+        ((JLabel) playPanel.getComponent(1)).setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/play-button.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+
     }
-    /*
-     public String getPreviousFile() {
-     timer.cancel();
-     for (int i = 0; i < fileLabels.size(); i++) {
-     if (fileLabels.get(i).getText().equals(currentFile)) {
-     if (i == 0) {
-     currentFile = fileLabels.get(fileLabels.size() - 1).getText();
-     } else {
-     currentFile = fileLabels.get(i - 1).getText();
-     }
-     break;
-     }
-     }
-     return currentFile;
-     }*/
 
-    /*  public String getNextFile() {
-     timer.cancel();
-     for (int i = 0; i < fileLabels.size(); i++) {
-     if (fileLabels.get(i).getText().equals(currentFile)) {
-     if (i == fileLabels.size() - 1) {
-     currentFile = fileLabels.get(0).getText();
-     } else {
-     currentFile = fileLabels.get(i + 1).getText();
-     }
-     break;
-     }
-     }
-     return currentFile;
-     }
+    private void setPauseButton() {
+        ((JLabel) playPanel.getComponent(0)).setText("Παύση");
+        ((JLabel) playPanel.getComponent(1)).setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/pause-button.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 
-     */
-    /* public void setSelected() {
-     for (int i = 0; i < fileLabels.size(); i++) {
-     if (fileLabels.get(i).getText().equals(currentFile)) {
-     fileLabels.get(i).setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-     } else {
-     fileLabels.get(i).setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
+    }
 
-     }
-     }
-     }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

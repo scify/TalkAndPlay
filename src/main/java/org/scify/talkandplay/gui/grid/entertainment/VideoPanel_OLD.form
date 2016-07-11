@@ -16,17 +16,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="musicPanel" min="-2" max="-2" attributes="0"/>
+          <Component id="videoPanel" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="musicPanel" alignment="0" max="32767" attributes="0"/>
+          <Component id="videoPanel" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="musicPanel">
+    <Container class="javax.swing.JPanel" name="videoPanel">
 
       <Layout>
         <DimensionLayout dim="0">

@@ -29,7 +29,7 @@ public class TileCreator {
     private static String DEFAULT_SOUND;
 
     public TileCreator(User user) {
-        // DEFAULT_SOUND = new File("demo_resources/sounds/cat.mp3").getAbsolutePath();
+        //DEFAULT_SOUND = new File("demo_resources/sounds/cat.mp3").getAbsolutePath();
         DEFAULT_SOUND = getClass().getResource("/org/scify/talkandplay/resources/sounds/cat.mp3").getPath();
 
         this.sensorService = new SensorService(user);
