@@ -10,12 +10,14 @@ import java.awt.ComponentOrientation;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.io.File;
-import java.nio.file.FileSystemAlreadyExistsException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -24,6 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import org.scify.talkandplay.gui.grid.BaseMediaPanel;
 import org.scify.talkandplay.gui.grid.TimerManager;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
@@ -39,19 +42,19 @@ public class FilesPanel extends javax.swing.JPanel {
     private int start, end, step, empties;
     private List<JPanel> panelList;
     private List<String> currentFiles;
-    private MusicPanel parent;
-    private JPanel prevSongs, nextSongs, controls;
+    private BaseMediaPanel parent;
+    private JPanel prevSongs, nextSongs, controls, back;
     private String currentFile;
     private TimerManager timer;
     private SensorService sensorService;
 
-    public FilesPanel(User user, File[] files, MusicPanel parent) {
+    public FilesPanel(User user, List<File> files, BaseMediaPanel parent) {
         this.user = user;
         this.files = new ArrayList();
-        Collections.addAll(this.files, files);
         this.parent = parent;
         this.timer = parent.getTimer();
         this.sensorService = new SensorService(user);
+        this.files = files;
 
         initComponents();
         initCustomComponents();
@@ -63,29 +66,14 @@ public class FilesPanel extends javax.swing.JPanel {
 
         timer.setDefaultBackgroundColor(UIConstants.getGrey());
 
-        for (int i = 0; i < files.size(); i++) {
-            if (files.get(i).isDirectory()) {
-                files.remove(files.get(i));
-            }
-        }
-
-        if (files.size() == 0) {
-            JLabel noFiles = new JLabel("Δεν υπάρχουν αρχεία");
-            JPanel panel = drawFile("Πίσω", null);
-            add(noFiles);
-            add(panel);
-            panelList.add(panel);
-
+        step = user.getEntertainmentModule().getMusicModule().getPlaylistSize() - 3;
+        start = 0;
+        if (files.size() < step) {
+            end = files.size();
         } else {
-            step = user.getEntertainmentModule().getMusicModule().getPlaylistSize() - 3;
-            start = 0;
-            if (files.size() < step) {
-                end = files.size();
-            } else {
-                end = step;
-            }
-            drawFiles();
+            end = step;
         }
+        drawFiles();
 
     }
 
@@ -96,9 +84,16 @@ public class FilesPanel extends javax.swing.JPanel {
 
         empties = 0;
 
-        prevSongs = drawFile("Προηγούμενα τραγούδια", new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/left-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        nextSongs = drawFile("Επόμενα τραγούδια", new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/right-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        controls = drawFile("Χειριστήριο", new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/down-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        if (parent instanceof MusicPanel) {
+            prevSongs = drawFile("Προηγούμενα τραγούδια", new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/left-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+            nextSongs = drawFile("Επόμενα τραγούδια", new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/right-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+            controls = drawFile("Χειριστήριο", new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/down-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        } else {
+            prevSongs = drawFile("Προηγούμενα video", new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/left-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+            nextSongs = drawFile("Επόμενα video", new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/right-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+            back = drawFile("Πίσω", new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        }
+
         add(prevSongs);
         panelList.add(prevSongs);
 
@@ -115,14 +110,23 @@ public class FilesPanel extends javax.swing.JPanel {
         }
 
         add(nextSongs);
-        add(controls);
+        if (parent instanceof MusicPanel) {
+            add(controls);
+        } else if (parent instanceof VideoPanel) {
+            add(back);
+        }
 
         for (int i = 0; i < empties; i++) {
             add(drawEmpty());
         }
 
         panelList.add(nextSongs);
-        panelList.add(controls);
+
+        if (parent instanceof MusicPanel) {
+            panelList.add(controls);
+        } else if (parent instanceof VideoPanel) {
+            panelList.add(back);
+        }
 
         timer.setList(panelList);
         timer.start();
@@ -175,7 +179,7 @@ public class FilesPanel extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    if (start > 0) {
+                    if (files.size() > step && start > 0) {
                         timer.cancel();
                         configurePrevSongs();
                         drawFiles();
@@ -188,7 +192,7 @@ public class FilesPanel extends javax.swing.JPanel {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
-                    if (start > 0) {
+                    if (files.size() > step && start > 0) {
                         timer.cancel();
                         configurePrevSongs();
                         drawFiles();
@@ -201,7 +205,7 @@ public class FilesPanel extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    if (end <= files.size()) {
+                    if (files.size() > step && end <= files.size()) {
                         timer.cancel();
                         configureNextSongs();
                         drawFiles();
@@ -213,7 +217,7 @@ public class FilesPanel extends javax.swing.JPanel {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
-                    if (end <= files.size()) {
+                    if (files.size() > step && end <= files.size()) {
                         timer.cancel();
                         configureNextSongs();
                         drawFiles();
@@ -222,28 +226,49 @@ public class FilesPanel extends javax.swing.JPanel {
             }
         });
 
-        controls.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor)) {
-                    timer.cancel();
-                    timer.unselect();
-                    timer.setList(parent.getControlsList());
-                    timer.start();
+        if (parent instanceof MusicPanel) {
+            controls.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+                    if (sensorService.shouldSelect(sensor)) {
+                        timer.cancel();
+                        timer.unselect();
+                        timer.setList(parent.getControlsList());
+                        timer.start();
+                    }
                 }
-            }
-        });
-        controls.addKeyListener(new KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
-                if (sensorService.shouldSelect(sensor)) {
-                    timer.cancel();
-                    timer.unselect();
-                    timer.setList(parent.getControlsList());
-                    timer.start();
+            });
+            controls.addKeyListener(new KeyAdapter() {
+                public void keyPressed(java.awt.event.KeyEvent evt) {
+                    Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
+                    if (sensorService.shouldSelect(sensor)) {
+                        timer.cancel();
+                        timer.unselect();
+                        timer.setList(parent.getControlsList());
+                        timer.start();
+                    }
                 }
-            }
-        });
+            });
+        } else if (parent instanceof VideoPanel) {
+            back.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+                    if (sensorService.shouldSelect(sensor)) {
+                        timer.cancel();
+                        parent.goBack();
+                    }
+                }
+            });
+            back.addKeyListener(new KeyAdapter() {
+                public void keyPressed(java.awt.event.KeyEvent evt) {
+                    Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
+                    if (sensorService.shouldSelect(sensor)) {
+                        timer.cancel();
+                        parent.goBack();
+                    }
+                }
+            });
+        }
     }
 
     private void addFileListener(JPanel panel, final File file) {
@@ -269,16 +294,6 @@ public class FilesPanel extends javax.swing.JPanel {
         });
     }
 
-    /*  private void setSelected() {
-     for (int i = 0; i < panelList.size(); i++) {
-     if (((JLabel) panelList.get(i).getComponent(0)).getText().equals(currentFile)) {
-     panelList.get(i).setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-     } else {
-     panelList.get(i).setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
-
-     }
-     }
-     }*/
     private void configureNextSongs() {
         if (end <= files.size()) {
             start = end;

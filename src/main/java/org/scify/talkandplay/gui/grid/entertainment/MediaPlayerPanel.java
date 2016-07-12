@@ -1,11 +1,8 @@
 package org.scify.talkandplay.gui.grid.entertainment;
 
 import java.awt.Font;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.helpers.Time;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
@@ -20,14 +17,12 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
 
     private AudioMediaPlayerComponent audioPlayer;
     private JPanel parent;
-    private GridFrame gridFrame;
 
     /**
      * Creates new form MediaPlayerPanel
      */
-    public MediaPlayerPanel(JPanel parent, GridFrame gridFrame) {
+    public MediaPlayerPanel(JPanel parent) {
         this.parent = parent;
-        this.gridFrame = gridFrame;
         this.audioPlayer = new AudioMediaPlayerComponent();
         initComponents();
         initAudioPlayer();
@@ -76,14 +71,15 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
             }
         });
 
-        gridFrame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                audioPlayer.getMediaPlayer().stop();
-                audioPlayer.getMediaPlayer().stop();
-                e.getWindow().dispose();
-            }
-        });
+        /*
+         gridFrame.addWindowListener(new WindowAdapter() {
+         @Override
+         public void windowClosing(WindowEvent e) {
+         audioPlayer.getMediaPlayer().stop();
+         audioPlayer.getMediaPlayer().stop();
+         e.getWindow().dispose();
+         }
+         });*/
     }
 
     private void initCustomComponents() {

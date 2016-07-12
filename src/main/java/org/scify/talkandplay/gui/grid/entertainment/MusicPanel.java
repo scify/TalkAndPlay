@@ -11,8 +11,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -21,13 +19,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import org.scify.talkandplay.gui.grid.BaseMediaPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
-import org.scify.talkandplay.gui.grid.TimerManager;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
-import org.scify.talkandplay.services.SensorService;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 
@@ -36,7 +32,7 @@ public class MusicPanel extends BaseMediaPanel {
     private JPanel playerPanel, prevPanel, playPanel, nextPanel, listPanel, exitPanel;
 
     public MusicPanel(User user, GridFrame parent) {
-        super(user, parent);
+        super(user, parent, (new File(user.getEntertainmentModule().getMusicModule().getFolderPath())).listFiles());
         initComponents();
         initCustomComponents();
     }
@@ -64,43 +60,38 @@ public class MusicPanel extends BaseMediaPanel {
 
     private void initCustomComponents() {
 
-        setBorder(new EmptyBorder(0, 20, 20, 20));
-        setBackground(Color.white);
-        setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.anchor = GridBagConstraints.WEST;
-        c.gridx = 0;
-        c.gridy = 0;
-        c.weighty = 1;
-        c.weightx = 1;
+        initLayout();
+        
+        if (isEmpty()) {
+            drawEmpty();
+        } else {
+            initPlayerButtons();
 
-        initPlayerButtons();
+            filesPanel = new FilesPanel(user, files, this);
 
-        filesPanel = new FilesPanel(user, (new File(user.getEntertainmentModule().getMusicModule().getFolderPath())).listFiles(), this);
+            add(filesPanel, c);
+            c.gridy++;
+            add(mediaPlayerPanel, c);
+            c.gridy++;
+            add(playerPanel, c);
 
-        add(filesPanel, c);
-        c.gridy++;
-        add(mediaPlayerPanel, c);
-        c.gridy++;
-        add(playerPanel, c);
+            mediaPlayerPanel.getAudioPlayer().getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
+                @Override
+                public void finished(MediaPlayer mediaPlayer) {
+                    setPlayButton();
+                }
 
-        mediaPlayerPanel.getAudioPlayer().getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
-            @Override
-            public void finished(MediaPlayer mediaPlayer) {
-                setPlayButton();
-            }
+                @Override
+                public void playing(MediaPlayer mediaPlayer) {
+                    setPauseButton();
+                }
 
-            @Override
-            public void playing(MediaPlayer mediaPlayer) {
-                setPauseButton();
-            }
-
-            @Override
-            public void paused(MediaPlayer mediaPlayer) {
-                setPlayButton();
-            }
-        });
+                @Override
+                public void paused(MediaPlayer mediaPlayer) {
+                    setPlayButton();
+                }
+            });
+        }
 
         revalidate();
         repaint();
@@ -170,20 +161,13 @@ public class MusicPanel extends BaseMediaPanel {
         return panel;
     }
 
+    @Override
     public void playFile(String fileName) {
         timer.cancel();
         mediaPlayerPanel.playMedia(getFilePath(fileName));
         setPauseButton();
         timer.setList(controlsList);
         timer.start();
-    }
-
-    public TimerManager getTimer() {
-        return timer;
-    }
-
-    public List<JPanel> getControlsList() {
-        return controlsList;
     }
 
     public String getFilePath(String fileName) {
