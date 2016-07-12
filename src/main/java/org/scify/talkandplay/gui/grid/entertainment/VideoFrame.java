@@ -22,16 +22,15 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSlider;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import org.scify.talkandplay.gui.grid.TimerManager;
 import org.scify.talkandplay.gui.helpers.Time;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
@@ -58,7 +57,7 @@ public class VideoFrame extends javax.swing.JFrame {
     private FilesPanel filesPanel;
     private String currentFile;
     private User user;
-    private Timer timer;
+    private TimerManager timer;
     private boolean hiddenControls = false;
 
     public VideoFrame(User user, String currentFile, VideoPanel parent, FilesPanel filesPanel) {
@@ -69,6 +68,7 @@ public class VideoFrame extends javax.swing.JFrame {
         this.parent = parent;
         this.filesPanel = filesPanel;
         this.controlsList = new ArrayList();
+        this.timer = new TimerManager(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
 
         setTitle("Video Player");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -282,6 +282,10 @@ public class VideoFrame extends javax.swing.JFrame {
         controlsList.add(exitPanel);
 
         addListeners();
+
+        timer.setDefaultBackgroundColor(UIConstants.getGrey());
+        timer.setList(controlsList);
+        timer.start();
     }
 
     private JPanel drawButton(String text, URL imageIcon) {
