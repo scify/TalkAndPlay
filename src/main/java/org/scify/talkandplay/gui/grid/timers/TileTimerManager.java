@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import org.scify.talkandplay.gui.grid.ImagePanel;
-import org.scify.talkandplay.gui.grid.TilePanel;
+import org.scify.talkandplay.gui.grid.tiles.ImagePanel;
+import org.scify.talkandplay.gui.grid.tiles.TilePanel;
 
 public class TileTimerManager extends TimerManager {
 

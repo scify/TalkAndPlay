@@ -1,4 +1,4 @@
-package org.scify.talkandplay.gui.grid;
+package org.scify.talkandplay.gui.grid.tiles;
 
 public abstract class TileAction {
 

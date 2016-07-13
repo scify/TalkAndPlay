@@ -234,8 +234,8 @@
     <image />
     <configuration>
       <rotationSpeed>1</rotationSpeed>
-      <defaultGridRow>3</defaultGridRow>
-      <defaultGridColumn>3</defaultGridColumn>
+      <defaultGridRow>4</defaultGridRow>
+      <defaultGridColumn>4</defaultGridColumn>
       <sound>false</sound>
       <image>true</image>
       <text>true</text>
@@ -249,8 +249,8 @@
       <name>Επικοινωνία</name>
       <enabled>true</enabled>
       <image />
-      <rows>3</rows>
-      <columns>3</columns>
+      <rows>4</rows>
+      <columns>4</columns>
       <categories>
         <category name="Φαγητό">
           <rows>3</rows>

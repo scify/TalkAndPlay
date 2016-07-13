@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.BaseGridPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
-import org.scify.talkandplay.gui.grid.TileAction;
+import org.scify.talkandplay.gui.grid.tiles.TileAction;
 import org.scify.talkandplay.models.User;
 
 public class EntertainmentPanel extends BaseGridPanel {

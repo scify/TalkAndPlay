@@ -12,7 +12,7 @@ public class UIConstants {
 
     private static final String blue = "#5bd8ff";
 
-    private static final String mainFont = "DejaVu Sans";
+    private static final String mainFont = UIConstants.getMainFont();
 
     public static String getMainColor() {
         return mainColor;

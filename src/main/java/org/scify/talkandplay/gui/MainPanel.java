@@ -23,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.grid.GridFrame;
+import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.gui.users.UserFormPanel;
 import org.scify.talkandplay.gui.users.UserPanel;
 import org.scify.talkandplay.models.User;
@@ -139,7 +140,7 @@ public class MainPanel extends javax.swing.JPanel {
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nameLabel.setBorder(new EmptyBorder(5, 0, 20, 0));
-        nameLabel.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
+        nameLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 16));
 
         addUserPanel.add(imageLabel);
         addUserPanel.add(nameLabel);

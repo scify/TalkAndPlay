@@ -2,18 +2,21 @@ package org.scify.talkandplay.gui.users;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.MainFrame;
 import org.scify.talkandplay.gui.MainPanel;
-import org.scify.talkandplay.gui.configuration.ConfigurationPanel;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
+import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.UserService;
 
@@ -79,21 +82,28 @@ public class UserPanel extends javax.swing.JPanel {
         profilePanel.setLayout(new BoxLayout(profilePanel, BoxLayout.Y_AXIS));
         profilePanel.setBorder(new EmptyBorder(0, 0, 0, 20));
         JLabel imageLabel = new JLabel(guiHelper.getRoundIcon((user.getImage())));
-        JLabel editLabel = new JLabel("Επεξεργασία");
-        JLabel deleteLabel = new JLabel("Διαγραφή");
-        JLabel configLabel = new JLabel("Config");
-        JLabel nameLabel;
 
+        JPanel controlsPanel = new JPanel();
+        controlsPanel.setBackground(Color.white);
+        controlsPanel.setBorder(new EmptyBorder(5, 0, 0, 0));
+        controlsPanel.setLayout(new BoxLayout(controlsPanel, BoxLayout.X_AXIS));
+        JLabel editLabel = new JLabel("ΠΡΟΤΙΜΗΣΕΙΣ");
+        JLabel deleteLabel = new JLabel("ΔΙΑΓΡΑΦΗ");
+        controlsPanel.add(editLabel);
+        controlsPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+        controlsPanel.add(deleteLabel);
+
+        JLabel nameLabel;
         if (userService.hasBrokenFiles(user)) {
             nameLabel = new JLabel(user.getName(), new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/warning.png")), JLabel.RIGHT);
         } else {
             nameLabel = new JLabel(user.getName());
         }
+        nameLabel.setBorder(new EmptyBorder(5, 0, 0, 0));
 
         editLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 parent.changePanel(new UserFormPanel(parent, user));
-
             }
         });
 
@@ -110,31 +120,23 @@ public class UserPanel extends javax.swing.JPanel {
                 }
             }
         });
-        
-         configLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                parent.changePanel(new ConfigurationPanel(user.getName(), parent));
-            }
-        });
 
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nameLabel.setBorder(new EmptyBorder(5, 0, 0, 0));
-        nameLabel.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
+        nameLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 16));
         editLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         editLabel.setBorder(new EmptyBorder(5, 0, 0, 0));
-        editLabel.setFont(new Font("DejaVu Sans", Font.PLAIN, 11));
+        editLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 12));
         editLabel.setForeground(Color.decode("#4BA145"));
         deleteLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         deleteLabel.setBorder(new EmptyBorder(5, 0, 0, 0));
-        deleteLabel.setFont(new Font("DejaVu Sans", Font.PLAIN, 11));
+        deleteLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 12));
         deleteLabel.setForeground(Color.decode("#AE001D"));
 
         profilePanel.add(imageLabel);
         profilePanel.add(nameLabel);
-        profilePanel.add(editLabel);
-        profilePanel.add(deleteLabel);
-        profilePanel.add(configLabel);
+        profilePanel.add(controlsPanel);
     }
 
     public void repaintPanel(User user) {

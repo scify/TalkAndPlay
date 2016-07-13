@@ -3,12 +3,15 @@ package org.scify.talkandplay.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.WindowAdapter;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 
 public class MainFrame extends javax.swing.JFrame {
@@ -124,7 +127,7 @@ public class MainFrame extends javax.swing.JFrame {
         contentPanel.repaint();
         revalidate();
         repaint();
-        pack();
+        pack();       
     }
 
     public void changePanel(JPanel newPanel) {
@@ -141,14 +144,29 @@ public class MainFrame extends javax.swing.JFrame {
     public void setPanelTitle(String title) {
         titlePanel.removeAll();
         titlePanel.setBackground(Color.decode(UIConstants.getMainColor()));
-        titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.LINE_AXIS));
+        //titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.LINE_AXIS));
+        titlePanel.setLayout(new BorderLayout());
+
         JLabel titleLabel = new JLabel(title);
         titleLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 20));
         titleLabel.setForeground(Color.white);
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
-        titlePanel.add(Box.createHorizontalGlue());
-        titlePanel.add(titleLabel);
-        titlePanel.add(Box.createHorizontalGlue());
+
+        /*  JPanel backPanel = new JPanel();
+         backPanel.setBackground(Color.decode(UIConstants.getMainColor()));
+         backPanel.setBorder(new LineBorder(Color.white, 1));*/
+        JLabel backLabel = new JLabel("ΠΙΣΩ");
+        backLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 20));
+        backLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/left-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
+
+        backLabel.setBorder(new LineBorder(Color.white, 1));
+        /*  JLabel backIcon = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/left-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
+         backPanel.add(backIcon);
+         backPanel.add(backLabel);
+         */
+        titlePanel.add(backLabel, BorderLayout.LINE_START);
+        titlePanel.add(titleLabel, BorderLayout.CENTER);
+        // titlePanel.add(Box.createHorizontalGlue());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,4 +1,4 @@
-package org.scify.talkandplay.gui.grid;
+package org.scify.talkandplay.gui.grid.tiles;
 
 import java.io.File;
 import java.net.URL;
@@ -29,8 +29,8 @@ public class TileCreator {
     private static String DEFAULT_SOUND;
 
     public TileCreator(User user) {
-        DEFAULT_SOUND = new File("demo_resources/sounds/cat.mp3").getAbsolutePath();
-        //DEFAULT_SOUND = getClass().getResource("/org/scify/talkandplay/resources/sounds/cat.mp3").getPath();
+        //DEFAULT_SOUND = new File("demo_resources/sounds/cat.mp3").getAbsolutePath();
+        DEFAULT_SOUND = getClass().getResource("/org/scify/talkandplay/resources/sounds/cat.mp3").getPath();
 
         this.sensorService = new SensorService(user);
         this.guiHelper = new GuiHelper();

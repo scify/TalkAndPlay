@@ -1,55 +1,64 @@
-package org.scify.talkandplay.gui.grid;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package org.scify.talkandplay.gui.grid.tiles;
 
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
-import java.net.URL;
-import javax.swing.BoxLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 
-public class TilePanel extends javax.swing.JPanel {
+/**
+ *
+ * @author christina
+ */
+public class TextPanel extends javax.swing.JPanel {
 
     private String text;
-    private String imageString;
-    private URL imageUrl;
 
-    public TilePanel(String text, String imageString) {
+    public TextPanel(String text) {
         this.text = text;
-        this.imageString = imageString;
-        initComponents();
-        initCustomComponents();
-    }
-
-    public TilePanel(String text, URL imageUrl) {
-        this.text = text;
-        this.imageUrl = imageUrl;
         initComponents();
         initCustomComponents();
     }
 
     private void initCustomComponents() {
         setBackground(Color.white);
-        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        //  setBorder(new LineBorder(Color.white, 10));
-        setBorder(new EmptyBorder(20, 20, 20, 20));
 
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
         JLabel textLabel = new JLabel(text);
+        textLabel.setForeground(Color.black);
         textLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 35));
         textLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(textLabel);
 
-        if (imageString != null && !imageString.isEmpty()) {
-            JPanel imagePanel = new ImagePanel(imageString);
-            imagePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-            add(imagePanel);
-        } else {
-            JPanel imagePanel = new ImagePanel(imageUrl);
-            imagePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-            add(imagePanel);
-        }
+        Font labelFont = new Font(UIConstants.getMainFont(), Font.PLAIN, 35);
+        String labelText = textLabel.getText();
+
+        int stringWidth = textLabel.getFontMetrics(labelFont).stringWidth(labelText);
+        int componentWidth = textLabel.getWidth();
+
+// Find out how much the font can grow in width.
+        double widthRatio = (double) componentWidth / (double) stringWidth;
+
+        int newFontSize = (int) (labelFont.getSize() * widthRatio);
+        int componentHeight = textLabel.getHeight();
+
+// Pick a new font size so it will not be larger than the height of label.
+        int fontSizeToUse = Math.min(newFontSize, componentHeight);
+
+// Set the label's font size to the newly determined size.
+        textLabel.setFont(new Font(labelFont.getName(), Font.PLAIN, fontSizeToUse));
+        add(textLabel);
     }
 
     /**
