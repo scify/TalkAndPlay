@@ -29,6 +29,7 @@ import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 
 public class MusicPanel extends BaseMediaPanel {
 
+    private JLabel playingNow;
     private JPanel playerPanel, prevPanel, playPanel, nextPanel, listPanel, exitPanel;
 
     public MusicPanel(User user, GridFrame parent) {
@@ -61,15 +62,21 @@ public class MusicPanel extends BaseMediaPanel {
     private void initCustomComponents() {
 
         initLayout();
-        
+
         if (isEmpty()) {
             drawEmpty();
         } else {
+
+            playingNow = new JLabel(" ");
+            playingNow.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
+
             initPlayerButtons();
 
             filesPanel = new FilesPanel(user, files, this);
 
             add(filesPanel, c);
+            c.gridy++;
+            add(playingNow, c);
             c.gridy++;
             add(mediaPlayerPanel, c);
             c.gridy++;
@@ -79,11 +86,13 @@ public class MusicPanel extends BaseMediaPanel {
                 @Override
                 public void finished(MediaPlayer mediaPlayer) {
                     setPlayButton();
+                    playingNow.setText(" ");
                 }
 
                 @Override
                 public void playing(MediaPlayer mediaPlayer) {
                     setPauseButton();
+                    playingNow.setText("ΠΑΙΖΕΙ ΤΩΡΑ: " + currentFile);
                 }
 
                 @Override
@@ -163,6 +172,7 @@ public class MusicPanel extends BaseMediaPanel {
 
     @Override
     public void playFile(String fileName) {
+        currentFile = fileName;
         timer.cancel();
         mediaPlayerPanel.playMedia(getFilePath(fileName));
         setPauseButton();
@@ -285,7 +295,7 @@ public class MusicPanel extends BaseMediaPanel {
             }
 
             filesPanel.setSelected(selected);
-
+            currentFile = filesPanel.getFileList().get(selected);
             mediaPlayerPanel.getAudioPlayer().getMediaPlayer().stop();
             mediaPlayerPanel.getAudioPlayer().getMediaPlayer().playMedia(getFilePath(filesPanel.getFileList().get(selected)));
         }
@@ -301,7 +311,7 @@ public class MusicPanel extends BaseMediaPanel {
             }
 
             filesPanel.setSelected(selected);
-
+            currentFile = filesPanel.getFileList().get(selected);
             mediaPlayerPanel.getAudioPlayer().getMediaPlayer().stop();
             mediaPlayerPanel.getAudioPlayer().getMediaPlayer().playMedia(getFilePath(filesPanel.getFileList().get(selected)));
         }

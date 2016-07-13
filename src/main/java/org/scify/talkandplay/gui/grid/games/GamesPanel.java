@@ -55,8 +55,7 @@ public class GamesPanel extends BaseGridPanel {
         add(backPanel);
         panelList.add(backPanel);
 
-        fillWithEmpties();
-
+       // fillWithEmpties();
         timer.setList(panelList);
         timer.start();
 

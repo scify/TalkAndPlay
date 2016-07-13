@@ -3,6 +3,7 @@ package org.scify.talkandplay.gui.grid;
 import java.awt.GridBagConstraints;
 import java.io.IOException;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -82,8 +83,8 @@ public class GridFrame extends javax.swing.JFrame {
 
     private void initCustomComponents() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setIconImage((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/tp_logo_mini.png"))).getImage());
         gridPanel.setLayout(new BoxLayout(gridPanel, BoxLayout.LINE_AXIS));
-
         gridPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         GridPanel panel = new GridPanel(user, this);

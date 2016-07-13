@@ -33,7 +33,7 @@ public class GridPanel extends BaseGridPanel {
     private void initCustomComponents() {
         panelList = new ArrayList<>();
         initLayout();
-        
+
         if (user.getCommunicationModule().isEnabled()) {
             JPanel communicationPanel = tileCreator.create(user.getCommunicationModule().getName(),
                     user.getCommunicationModule().getImage(),
@@ -99,7 +99,7 @@ public class GridPanel extends BaseGridPanel {
             panelList.add(gamesPanel);
         }
 
-        fillWithEmpties();
+       // fillWithEmpties();
 
         timer.setList(panelList);
         timer.start();

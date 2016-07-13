@@ -8,6 +8,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
+import org.scify.talkandplay.gui.helpers.UIConstants;
 
 public class ImagePanel extends javax.swing.JPanel {
 

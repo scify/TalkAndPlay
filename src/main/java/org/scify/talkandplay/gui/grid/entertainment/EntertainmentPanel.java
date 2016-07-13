@@ -57,8 +57,7 @@ public class EntertainmentPanel extends BaseGridPanel {
         panelList.add(videoPanel);
         panelList.add(backPanel);
 
-        fillWithEmpties();
-
+       // fillWithEmpties();
         timer.setList(panelList);
         timer.start();
 

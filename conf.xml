@@ -646,5 +646,82 @@
       <image />
     </games>
   </profile>
+  <profile preselected="false">
+    <name>rrr</name>
+    <image />
+    <configuration>
+      <rotationSpeed>1</rotationSpeed>
+      <defaultGridRow>2</defaultGridRow>
+      <defaultGridColumn>3</defaultGridColumn>
+      <sound>false</sound>
+      <image>false</image>
+      <text>true</text>
+      <selectionSensor>
+        <type>mouse</type>
+        <button>1</button>
+        <clickCount>1</clickCount>
+      </selectionSensor>
+    </configuration>
+    <communication>
+      <name>Επικοινωνία</name>
+      <enabled>true</enabled>
+      <image />
+      <rows>3</rows>
+      <columns>3</columns>
+      <categories>
+        <category name="test">
+          <rows>3</rows>
+          <columns>3</columns>
+          <image>/home/christina/Desktop/talkandplay/games/ballons-1.png</image>
+          <sound />
+          <hasSound>false</hasSound>
+          <hasImage>false</hasImage>
+          <hasText>false</hasText>
+        </category>
+        <category name="τεστ2">
+          <rows>3</rows>
+          <columns>3</columns>
+          <image>/home/christina/Downloads/2013-01-10.jpg</image>
+          <sound />
+          <hasSound>false</hasSound>
+          <hasImage>false</hasImage>
+          <hasText>false</hasText>
+        </category>
+        <category name="τεστ3">
+          <rows>3</rows>
+          <columns>3</columns>
+          <image>/home/christina/Pictures/hmerominia_sumvasis.png</image>
+          <sound />
+          <hasSound>false</hasSound>
+          <hasImage>false</hasImage>
+          <hasText>false</hasText>
+        </category>
+      </categories>
+    </communication>
+    <entertainment>
+      <name>Ψυχαγωγία</name>
+      <enabled>true</enabled>
+      <image />
+      <music>
+        <name>Μουσική</name>
+        <enabled>true</enabled>
+        <image />
+        <path />
+        <playlistSize>10</playlistSize>
+      </music>
+      <video>
+        <name>Βίντεο</name>
+        <enabled>true</enabled>
+        <image />
+        <path />
+        <playlistSize>10</playlistSize>
+      </video>
+    </entertainment>
+    <games>
+      <name>Παιχνίδια</name>
+      <image />
+      <enabled>true</enabled>
+    </games>
+  </profile>
 </profiles>
 

@@ -1,13 +1,15 @@
 package org.scify.talkandplay.gui.grid;
 
+import org.scify.talkandplay.gui.grid.timers.TimerManager;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import org.scify.talkandplay.gui.grid.timers.TileTimerManager;
+import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.UserService;
 
@@ -19,6 +21,7 @@ import org.scify.talkandplay.services.UserService;
  */
 public class BaseGridPanel extends BasePanel {
 
+    protected Category currentCategory;
     protected UserService userService;
     protected ArrayList<JPanel> panelList;
     protected int empties;
@@ -30,7 +33,7 @@ public class BaseGridPanel extends BasePanel {
 
     public BaseGridPanel(User user, GridFrame parent) {
         super(user, parent);
-        this.timer = new TimerManager(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+        this.timer = new TileTimerManager(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         this.tileCreator = new TileCreator(user);
         this.empties = user.getConfiguration().getDefaultGridRow() * user.getConfiguration().getDefaultGridColumn();
 
@@ -53,9 +56,6 @@ public class BaseGridPanel extends BasePanel {
     protected GridBagConstraints c;
 
     protected void initLayout() {
-        /*   GridLayout gridLayout = new GridLayout(rows, columns, IMAGE_PADDING, IMAGE_PADDING);
-         setLayout(gridLayout);*/
-
         setLayout(new GridBagLayout());
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
@@ -68,18 +68,24 @@ public class BaseGridPanel extends BasePanel {
 
     protected void fillWithEmpties() {
         empties = empties - panelList.size();
+        int rows, columns;
+
+        if (currentCategory == null) {
+            rows = user.getConfiguration().getDefaultGridRow() - 1;
+            columns = user.getConfiguration().getDefaultGridColumn() - 1;
+        } else {
+            rows = currentCategory.getRows();
+            columns = currentCategory.getColumns();
+        }
 
         for (int i = 0; i < empties; i++) {
-            if (c.gridx == user.getConfiguration().getDefaultGridRow() - 1) {
+            add(tileCreator.createEmpty(), c);
+            if (c.gridx == rows - 1) {
                 c.gridx = 0;
                 c.gridy++;
             } else {
                 c.gridx++;
             }
-            if (c.gridy == user.getConfiguration().getDefaultGridColumn() - 1) {
-                c.gridy++;
-            }
-            add(new JLabel(), c);
         }
     }
 

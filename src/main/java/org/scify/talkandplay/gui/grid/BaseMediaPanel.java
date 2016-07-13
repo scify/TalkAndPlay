@@ -1,5 +1,6 @@
 package org.scify.talkandplay.gui.grid;
 
+import org.scify.talkandplay.gui.grid.timers.TimerManager;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -7,8 +8,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.io.File;
@@ -25,6 +24,7 @@ import javax.swing.border.LineBorder;
 import org.scify.talkandplay.gui.grid.entertainment.EntertainmentPanel;
 import org.scify.talkandplay.gui.grid.entertainment.FilesPanel;
 import org.scify.talkandplay.gui.grid.entertainment.MediaPlayerPanel;
+import org.scify.talkandplay.gui.grid.timers.ButtonTimerManager;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
@@ -40,6 +40,7 @@ public class BaseMediaPanel extends BasePanel {
     protected MediaPlayerPanel mediaPlayerPanel;
     protected ArrayList<File> files;
     protected GridBagConstraints c;
+    protected String currentFile;
     
     protected SensorService sensorService;
     
@@ -49,7 +50,7 @@ public class BaseMediaPanel extends BasePanel {
         this.sensorService = new SensorService(user);
         this.controlsList = new ArrayList();
         this.mediaPlayerPanel = new MediaPlayerPanel(this);
-        this.timer = new TimerManager(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+        this.timer = new ButtonTimerManager(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         this.files = new ArrayList();
         this.c = new GridBagConstraints();
         Collections.addAll(this.files, files);

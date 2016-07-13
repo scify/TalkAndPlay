@@ -133,14 +133,10 @@ public class GuiHelper {
     }
 
     public JPanel createImagePanel(String imagePath, String text) {
-        //  ImageIcon imageIcon = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(300, 300, java.awt.Image.SCALE_SMOOTH));
-
         return decorateImageIcon(imagePath, null, text);
     }
 
     public JPanel createImagePanel(URL imagePath, String text) {
-
-        // ImageIcon imageIcon = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(300, 300, java.awt.Image.SCALE_SMOOTH));
         return decorateImageIcon(null, imagePath, text);
     }
 
@@ -157,5 +153,6 @@ public class GuiHelper {
         }
         return panel;
     }
+
 
 }

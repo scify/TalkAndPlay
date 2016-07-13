@@ -7,7 +7,7 @@ import java.net.URL;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
+import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 
 public class TilePanel extends javax.swing.JPanel {
@@ -33,7 +33,8 @@ public class TilePanel extends javax.swing.JPanel {
     private void initCustomComponents() {
         setBackground(Color.white);
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        setBorder(new LineBorder(Color.white, 10));
+        //  setBorder(new LineBorder(Color.white, 10));
+        setBorder(new EmptyBorder(20, 20, 20, 20));
 
         JLabel textLabel = new JLabel(text);
         textLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 35));

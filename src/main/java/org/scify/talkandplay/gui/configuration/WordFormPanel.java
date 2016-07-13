@@ -324,7 +324,7 @@ public class WordFormPanel extends javax.swing.JPanel {
                 category = newCategory;
                 updateCategoriesComboBox();
                 parent.redrawCategoriesList();
-                parent.displayMessage("Η κατηγορία αποθηκεύτηκε!");
+                parent.displayMessage("Η λέξη αποθηκεύτηκε!");
                 parent.showInfoPanel();
             } catch (Exception ex) {
                 Logger.getLogger(WordFormPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -439,7 +439,7 @@ public class WordFormPanel extends javax.swing.JPanel {
             editStepsPanel.setVisible(false);
 
         } else {
-            titleLabel.setText("ΕΠΕΞΕΡΓΑΣΙΑ ΝΕΑΣ ΛΕΞΗΣ");
+            titleLabel.setText("ΕΠΕΞΕΡΓΑΣΙΑ ΛΕΞΗΣ");
             //if the category has subcategories, fill the appropriate fields
             if (category.getSubCategories().size() > 0) {
                 editStepsPanel.setVisible(true);

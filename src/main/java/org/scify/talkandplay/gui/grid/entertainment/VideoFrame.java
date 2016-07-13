@@ -6,6 +6,7 @@
 package org.scify.talkandplay.gui.grid.entertainment;
 
 import java.awt.BorderLayout;
+import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -16,12 +17,14 @@ import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -30,7 +33,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import org.scify.talkandplay.gui.grid.TimerManager;
+import org.scify.talkandplay.gui.grid.timers.ButtonTimerManager;
+import org.scify.talkandplay.gui.grid.timers.TimerManager;
 import org.scify.talkandplay.gui.helpers.Time;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
@@ -50,7 +54,7 @@ import uk.co.caprica.vlcj.player.embedded.DefaultAdaptiveRuntimeFullScreenStrate
 public class VideoFrame extends javax.swing.JFrame {
 
     private final EmbeddedMediaPlayerComponent mediaPlayerComponent;
-    private JPanel prevPanel, playPanel, nextPanel, exitPanel;
+    private JPanel prevPanel, playPanel, nextPanel, fullScreenPanel, exitPanel;
     private List<JPanel> controlsList;
     private SensorService sensorService;
     private VideoPanel parent;
@@ -58,6 +62,7 @@ public class VideoFrame extends javax.swing.JFrame {
     private String currentFile;
     private User user;
     private TimerManager timer;
+    private Timer t;
     private boolean hiddenControls = false;
 
     public VideoFrame(User user, String currentFile, VideoPanel parent, FilesPanel filesPanel) {
@@ -68,9 +73,10 @@ public class VideoFrame extends javax.swing.JFrame {
         this.parent = parent;
         this.filesPanel = filesPanel;
         this.controlsList = new ArrayList();
-        this.timer = new TimerManager(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+        this.timer = new ButtonTimerManager(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
 
         setTitle("Video Player");
+        setIconImage((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/tp_logo_mini.png"))).getImage());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initComponents();
         initMediaPlayer();
@@ -113,7 +119,7 @@ public class VideoFrame extends javax.swing.JFrame {
         );
         controlsPanelLayout.setVerticalGroup(
             controlsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout playerPanelLayout = new javax.swing.GroupLayout(playerPanel);
@@ -155,13 +161,33 @@ public class VideoFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(videoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(playerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(playerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void initMediaPlayer() {
+
+        mediaPlayerComponent.getMediaPlayer().setFullScreenStrategy(
+                new DefaultAdaptiveRuntimeFullScreenStrategy(this) {
+                    @Override
+                    protected void beforeEnterFullScreen() {
+                        System.out.println("enter");
+                        playerPanel.setBackground(Color.yellow);
+                        playerPanel.setVisible(false);
+                    }
+
+                    @Override
+                    protected void afterExitFullScreen() {
+                        setExtendedState(JFrame.MAXIMIZED_BOTH);
+                        System.out.println("exit");
+                        playerPanel.setVisible(true);
+                    }
+                }
+        );
+
         mediaPlayerComponent.getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
             @Override
             public void playing(MediaPlayer mediaPlayer) {
@@ -206,32 +232,23 @@ public class VideoFrame extends javax.swing.JFrame {
             }
         });
 
-        mediaPlayerComponent.getVideoSurface().addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+        Canvas videoSurface = this.mediaPlayerComponent.getVideoSurface();
+        videoSurface.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Sensor sensor = new MouseSensor(e.getButton(), e.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    System.out.println("hiddenControls " + hiddenControls);
-                    //if (hiddenControls) {
-                    System.out.println("clicky");
-                    mediaPlayerComponent.getMediaPlayer().pause();
-                    playerPanel.setVisible(true);
-                    playerPanel.setBackground(Color.yellow);
-                    hiddenControls = false;
-                    pack();
-                    // }
+                    mediaPlayerComponent.getMediaPlayer().setFullScreen(false);
                 }
             }
         });
 
-        mediaPlayerComponent.getVideoSurface().addKeyListener(new KeyAdapter() {
+        videoSurface.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
-                    if (hiddenControls) {
-                        playerPanel.setVisible(true);
-                        hiddenControls = false;
-                    }
+                    mediaPlayerComponent.getMediaPlayer().setFullScreen(false);
                 }
             }
         });
@@ -266,6 +283,7 @@ public class VideoFrame extends javax.swing.JFrame {
         prevPanel = drawButton("Προηγούμενο", getClass().getResource("/org/scify/talkandplay/resources/prev-button.png"));
         playPanel = drawButton("Αναπαραγωγή", getClass().getResource("/org/scify/talkandplay/resources/play-button.png"));
         nextPanel = drawButton("Επόμενο", getClass().getResource("/org/scify/talkandplay/resources/next-button.png"));
+        fullScreenPanel = drawButton("Πλήρης Οθόνη", getClass().getResource("/org/scify/talkandplay/resources/fullscreen-icon.png"));
         exitPanel = drawButton("Έξοδος", getClass().getResource("/org/scify/talkandplay/resources/exit-icon.png"));
 
         controlsPanel.add(prevPanel, c);
@@ -274,17 +292,21 @@ public class VideoFrame extends javax.swing.JFrame {
         c.gridx++;
         controlsPanel.add(nextPanel, c);
         c.gridx++;
+        controlsPanel.add(fullScreenPanel, c);
+        c.gridx++;
         controlsPanel.add(exitPanel, c);
 
         controlsList.add(prevPanel);
         controlsList.add(playPanel);
         controlsList.add(nextPanel);
+        controlsList.add(fullScreenPanel);
         controlsList.add(exitPanel);
 
         addListeners();
 
         timer.setDefaultBackgroundColor(UIConstants.getGrey());
         timer.setList(controlsList);
+        System.out.println("controls "+controlsList.size());
         timer.start();
     }
 
@@ -322,7 +344,6 @@ public class VideoFrame extends javax.swing.JFrame {
 
         endLabel.setText(Time.getTime(hrs, mins, secs));
         setPauseButton();
-
         mediaPlayerComponent.getMediaPlayer().playMedia(file);
         setVisible(true);
     }
@@ -394,6 +415,25 @@ public class VideoFrame extends javax.swing.JFrame {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor) && mediaPlayerComponent.getMediaPlayer().isPlaying()) {
                     mediaPlayerComponent.getMediaPlayer().pause();
+                    pack();
+                }
+            }
+        });
+
+        fullScreenPanel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor)) {
+                    mediaPlayerComponent.getMediaPlayer().toggleFullScreen();
+                    pack();
+                }
+            }
+        });
+        fullScreenPanel.addKeyListener(new KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
+                if (sensorService.shouldSelect(sensor)) {
+                    mediaPlayerComponent.getMediaPlayer().toggleFullScreen();
                 }
             }
         });
@@ -417,7 +457,6 @@ public class VideoFrame extends javax.swing.JFrame {
                 }
             }
         });
-
     }
 
     private void getPrevious() {
@@ -448,7 +487,6 @@ public class VideoFrame extends javax.swing.JFrame {
             playMedia(getFilePath(filesPanel.getFileList().get(selected)));
         }
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel controlsPanel;
     private javax.swing.JSlider durationSlider;

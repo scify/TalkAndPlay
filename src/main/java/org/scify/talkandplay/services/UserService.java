@@ -98,8 +98,8 @@ public class UserService {
         communication.addContent(new Element("name").setText("Επικοινωνία"));
         communication.addContent(new Element("enabled").setText("true"));
         communication.addContent(new Element("image"));
-        communication.addContent(new Element("rows").setText("1"));
-        communication.addContent(new Element("columns").setText("3"));
+        communication.addContent(new Element("rows").setText(String.valueOf(user.getConfiguration().getDefaultGridRow())));
+        communication.addContent(new Element("columns").setText(String.valueOf(user.getConfiguration().getDefaultGridColumn())));
         communication.addContent(categories);
 
         //add entertainment module settings

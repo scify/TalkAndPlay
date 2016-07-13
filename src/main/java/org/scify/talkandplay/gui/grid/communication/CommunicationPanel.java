@@ -2,10 +2,8 @@ package org.scify.talkandplay.gui.grid.communication;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.grid.BaseGridPanel;
@@ -19,13 +17,11 @@ import org.scify.talkandplay.services.SensorService;
 public class CommunicationPanel extends BaseGridPanel {
 
     private User user;
-    private List<JPanel> panelList;
 
     private CategoryService categoryService;
     private SensorService sensorService;
 
     private Category rootCategory;
-    private Category currentCategory;
 
     final CommunicationPanel currentPanel = this;
 
@@ -71,15 +67,6 @@ public class CommunicationPanel extends BaseGridPanel {
         c.gridx = -1;
         c.gridy = 0;
 
-     /*   c.gridx = 0;
-        c.gridy = 0;
-        c.gridwidth = 1;
-        add(new JLabel(), c);
-        c.gridy = 1;
-        add(new JLabel(), c);
-        c.gridy = 2;
-        add(new JLabel(), c);
-*/
         drawImages(rootCategory);
     }
 
@@ -92,9 +79,10 @@ public class CommunicationPanel extends BaseGridPanel {
      */
     private void drawImages(Category category) throws IOException {
         removeAll();
+        currentCategory = category;
         c.gridx = -1;
         c.gridy = 0;
-        panelList = new ArrayList<>();
+        panelList = new ArrayList();
         int emptiesCount = 0;
 
         setGrid(category);
@@ -149,13 +137,14 @@ public class CommunicationPanel extends BaseGridPanel {
         //mock JLabels in order to keep the grid size
         if (emptiesCount > 0) {
             add(createLessItem(category));
-            for (int i = 0; i < emptiesCount; i++) {
-                add(new JLabel(), c);
-
-                setGrid(category);
-            }
+            /* for (int i = 0; i < emptiesCount; i++) {
+             add(new JLabel(), c);
+             setGrid(category);
+             }*/
         }
 
+        fillWithEmpties();
+        // System.out.println(category.getName() + " " + c.gridx + " " + c.gridy);
         timer.setList(panelList);
         timer.start();
 
@@ -350,15 +339,16 @@ public class CommunicationPanel extends BaseGridPanel {
         }
         grid = rows * columns;
 
-        if (c.gridx == rows - 1) {
+        if (c.gridx == (rows - 1)) {
             c.gridx = 0;
             c.gridy++;
         } else {
             c.gridx++;
         }
-        if (c.gridy == columns - 1) {
-            c.gridy++;
-        }
+        /* if (c.gridy == (columns - 1)) {
+         c.gridy++;
+         }*/
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

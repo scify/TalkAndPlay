@@ -27,7 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import org.scify.talkandplay.gui.grid.BaseMediaPanel;
-import org.scify.talkandplay.gui.grid.TimerManager;
+import org.scify.talkandplay.gui.grid.timers.TimerManager;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;

@@ -89,7 +89,6 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
     }
 
     public void playMedia(String path) {
-        System.out.println("Now playing " + path);
         mediaSlider.setValue(0);
         audioPlayer.getMediaPlayer().prepareMedia(path);
         audioPlayer.getMediaPlayer().parseMedia();

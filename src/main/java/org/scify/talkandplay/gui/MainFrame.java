@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -115,6 +116,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void initCustomComponents() {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setIconImage((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/tp_logo_mini.png"))).getImage());
 
         contentPanel.add(new MainPanel(this), BorderLayout.CENTER);
 
