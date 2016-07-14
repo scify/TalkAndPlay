@@ -123,6 +123,7 @@ public class WordFormPanel extends javax.swing.JPanel {
 
         step4Label.setText("4. Επίλεξε πού ανήκει η λέξη");
 
+        step4ExplTextArea.setEditable(false);
         step4ExplTextArea.setBackground(new java.awt.Color(255, 255, 255));
         step4ExplTextArea.setColumns(20);
         step4ExplTextArea.setRows(5);

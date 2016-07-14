@@ -163,7 +163,7 @@ public class MusicPanel extends BaseMediaPanel {
         panel.setPreferredSize(new Dimension(180, 100));
         panel.setMaximumSize(new Dimension(180, 100));
         panel.setMinimumSize(new Dimension(180, 100));
-        panel.setBorder((new LineBorder(Color.white, 10)));
+        panel.setBorder((new LineBorder(Color.white, 5)));
 
         panel.add(label);
         panel.add(icon);
@@ -267,6 +267,7 @@ public class MusicPanel extends BaseMediaPanel {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
                     timer.cancel();
+                    mediaPlayerPanel.stop();
                     parent.clearGrid();
                     EntertainmentPanel entPanel = new EntertainmentPanel(user, parent);
                 }
@@ -277,6 +278,7 @@ public class MusicPanel extends BaseMediaPanel {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
                     timer.cancel();
+                    mediaPlayerPanel.stop();
                     parent.clearGrid();
                     EntertainmentPanel entPanel = new EntertainmentPanel(user, parent);
                 }

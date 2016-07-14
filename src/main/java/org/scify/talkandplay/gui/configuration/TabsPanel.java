@@ -15,6 +15,7 @@ public class TabsPanel extends javax.swing.JPanel {
     private ConfigurationPanel parent;
     private CommunicationTab communicationPanel;
     private EntertainmentTab entertainmentPanel;
+    private GamesTab gamesPanel;
 
     public TabsPanel(User user, ConfigurationPanel parent) {
         this.user = user;
@@ -55,10 +56,11 @@ public class TabsPanel extends javax.swing.JPanel {
 
         communicationPanel = new CommunicationTab(user, parent);
         entertainmentPanel = new EntertainmentTab(user, parent);
+        gamesPanel = new GamesTab(user, parent);
 
         tabsPanel.addTab("Επικοινωνία", communicationPanel);
         tabsPanel.addTab("Ψυχαγωγία", entertainmentPanel);
-        tabsPanel.addTab("Παιχνίδια", null);
+        tabsPanel.addTab("Παιχνίδια", gamesPanel);
 
         tabsPanel.setSelectedIndex(0);
         tabsPanel.setForegroundAt(0, Color.white);
@@ -75,7 +77,7 @@ public class TabsPanel extends javax.swing.JPanel {
                 if (tabsPanel.getSelectedIndex() == 0) {
                     parent.showInfoPanel();
                 }
-                if (tabsPanel.getSelectedIndex() == 1) {
+                if (tabsPanel.getSelectedIndex() == 1 || tabsPanel.getSelectedIndex() == 2) {
                     parent.hideInfoPanel();
                 }
             }

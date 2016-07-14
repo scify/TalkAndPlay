@@ -50,10 +50,10 @@ public class TimerManager {
 
     public void unselect() {
         if (selected == 0) {
-            panelList.get(panelList.size() - 1).setBorder(BorderFactory.createLineBorder(Color.white, BORDER_SIZE));
+            panelList.get(panelList.size() - 1).setBorder(BorderFactory.createLineBorder(Color.white, getBorderSize()));
             panelList.get(panelList.size() - 1).setBackground(Color.decode(defaultBackgroundColor));
         } else {
-            panelList.get(selected - 1).setBorder(BorderFactory.createLineBorder(Color.white, BORDER_SIZE));
+            panelList.get(selected - 1).setBorder(BorderFactory.createLineBorder(Color.white, getBorderSize()));
             panelList.get(selected - 1).setBackground(Color.decode(defaultBackgroundColor));
         }
     }
@@ -76,5 +76,9 @@ public class TimerManager {
 
     public void setDefaultBackgroundColor(String color) {
         this.defaultBackgroundColor = color;
+    }
+
+    protected int getBorderSize() {
+        return BORDER_SIZE;
     }
 }

@@ -9,7 +9,7 @@ public class ModuleService {
     private ConfigurationFile configurationFile;
 
     public ModuleService() {
-          this.configurationFile = ConfigurationFile.getInstance();
+        this.configurationFile = ConfigurationFile.getInstance();
     }
 
     public void update(User user) throws Exception {
@@ -18,10 +18,23 @@ public class ModuleService {
 
         if (profile != null) {
 
-            profile.getChild("entertainment").getChild("music").getChild("path").setText(user.getEntertainmentModule().getMusicModule().getFolderPath());
+            String path;
+            if (!user.getEntertainmentModule().getMusicModule().getFolderPath().endsWith("/")) {
+                path = user.getEntertainmentModule().getMusicModule().getFolderPath() + "/";
+            } else {
+                path = user.getEntertainmentModule().getMusicModule().getFolderPath();
+            }
+
+            profile.getChild("entertainment").getChild("music").getChild("path").setText(path);
             profile.getChild("entertainment").getChild("music").getChild("playlistSize").setText(String.valueOf(user.getEntertainmentModule().getMusicModule().getPlaylistSize()));
 
-            profile.getChild("entertainment").getChild("video").getChild("path").setText(user.getEntertainmentModule().getVideoModule().getFolderPath());
+            if (!user.getEntertainmentModule().getVideoModule().getFolderPath().endsWith("/")) {
+                path = user.getEntertainmentModule().getVideoModule().getFolderPath() + "/";
+            } else {
+                path = user.getEntertainmentModule().getVideoModule().getFolderPath();
+            }
+
+            profile.getChild("entertainment").getChild("video").getChild("path").setText(path);
             profile.getChild("entertainment").getChild("video").getChild("playlistSize").setText(String.valueOf(user.getEntertainmentModule().getMusicModule().getPlaylistSize()));
 
             configurationFile.update();

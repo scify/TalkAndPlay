@@ -37,13 +37,13 @@ public class TilePanel extends javax.swing.JPanel {
         setBorder(new EmptyBorder(20, 20, 20, 20));
 
        // add(new TextLabel(text));
-        JLabel textLabel = new JLabel("<html><span style='font-size:100%'>koko</span></html>");
+      /*  JLabel textLabel = new JLabel("<html><span style='font-size:100%'>koko</span></html>");
         textLabel.setFont(new Font(Font.SERIF, Font.PLAIN, 35));
-        add(textLabel );
-      /*  JLabel textLabel = new JLabel(text);
+        add(textLabel );*/
+       JLabel textLabel = new JLabel(text);
         textLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 30));
         textLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(textLabel);*/
+        add(textLabel);
 
         if (imageString != null && !imageString.isEmpty()) {
             JPanel imagePanel = new ImagePanel(imageString);

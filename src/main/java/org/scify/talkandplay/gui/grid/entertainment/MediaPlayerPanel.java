@@ -167,6 +167,11 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
     public boolean isPlaying() {
         return audioPlayer.getMediaPlayer().isPlaying();
     }
+    
+     public void stop() {
+        audioPlayer.getMediaPlayer().stop();
+        audioPlayer.getMediaPlayer().release();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel endLabel;

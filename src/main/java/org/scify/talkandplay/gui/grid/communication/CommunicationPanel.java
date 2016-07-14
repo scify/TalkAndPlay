@@ -345,6 +345,8 @@ public class CommunicationPanel extends BaseGridPanel {
         } else {
             c.gridx++;
         }
+
+        System.out.println(rows + ", " + columns);
         /* if (c.gridy == (columns - 1)) {
          c.gridy++;
          }*/

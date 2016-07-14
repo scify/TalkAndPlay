@@ -10,14 +10,10 @@ import java.awt.ComponentOrientation;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -144,12 +140,12 @@ public class FilesPanel extends javax.swing.JPanel {
 
         fileLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
         fileLabel.setHorizontalAlignment(JLabel.LEFT);
-        fileLabel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        fileLabel.setBorder(new EmptyBorder(3, 3, 3, 3));
 
         JPanel songPanel = new JPanel();
         songPanel.setLayout(new FlowLayout());
         songPanel.setBackground(Color.decode(UIConstants.getGrey()));
-        songPanel.setBorder((new LineBorder(Color.white, 10)));
+        songPanel.setBorder((new LineBorder(Color.white, 5)));
         songPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 
         songPanel.add(fileLabel);
@@ -161,12 +157,12 @@ public class FilesPanel extends javax.swing.JPanel {
 
         JLabel emptyLabel = new JLabel(" ");
         emptyLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
-        emptyLabel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        emptyLabel.setBorder(new EmptyBorder(3, 3, 3, 3));
 
         JPanel empty = new JPanel();
         empty.setLayout(new FlowLayout());
         empty.setBackground(Color.white);
-        empty.setBorder((new LineBorder(Color.white, 10)));
+        empty.setBorder((new LineBorder(Color.white, 5)));
 
         empty.add(emptyLabel);
 
@@ -331,10 +327,10 @@ public class FilesPanel extends javax.swing.JPanel {
         for (int i = 0; i < panelList.size(); i++) {
 
             if (currentFile.equals(((JLabel) panelList.get(i).getComponent(0)).getText())) {
-                panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.decode(UIConstants.getBlue()), 10));
+                panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.decode(UIConstants.getBlue()), 5));
                 panelList.get(i).setBackground(Color.decode(UIConstants.getLightBlue()));
             } else {
-                panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.white, 10));
+                panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.white, 5));
                 panelList.get(i).setBackground(Color.decode(UIConstants.getGrey()));
             }
         }

@@ -292,21 +292,21 @@ public class VideoFrame extends javax.swing.JFrame {
         c.gridx++;
         controlsPanel.add(nextPanel, c);
         c.gridx++;
-        controlsPanel.add(fullScreenPanel, c);
-        c.gridx++;
+        /*   controlsPanel.add(fullScreenPanel, c);
+         c.gridx++;*/
         controlsPanel.add(exitPanel, c);
 
         controlsList.add(prevPanel);
         controlsList.add(playPanel);
         controlsList.add(nextPanel);
-        controlsList.add(fullScreenPanel);
+        // controlsList.add(fullScreenPanel);
         controlsList.add(exitPanel);
 
         addListeners();
 
         timer.setDefaultBackgroundColor(UIConstants.getGrey());
         timer.setList(controlsList);
-        System.out.println("controls "+controlsList.size());
+        System.out.println("controls " + controlsList.size());
         timer.start();
     }
 
@@ -326,7 +326,7 @@ public class VideoFrame extends javax.swing.JFrame {
         panel.setPreferredSize(new Dimension(180, 100));
         panel.setMaximumSize(new Dimension(180, 100));
         panel.setMinimumSize(new Dimension(180, 100));
-        panel.setBorder((new LineBorder(Color.white, 10)));
+        panel.setBorder((new LineBorder(Color.white, 5)));
 
         panel.add(label);
         panel.add(icon);
@@ -443,6 +443,8 @@ public class VideoFrame extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
+                    mediaPlayerComponent.getMediaPlayer().stop();
+                    mediaPlayerComponent.getMediaPlayer().release();
                     parent.getTimer().start();
                     videoFrame.dispatchEvent(new WindowEvent(videoFrame, WindowEvent.WINDOW_CLOSING));
                 }
@@ -452,6 +454,11 @@ public class VideoFrame extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
+                    if (mediaPlayerComponent.getMediaPlayer().isPlaying()) {
+                        mediaPlayerComponent.getMediaPlayer().play();
+                    }
+                    mediaPlayerComponent.getMediaPlayer().stop();
+                    mediaPlayerComponent.getMediaPlayer().release();
                     parent.getTimer().start();
                     videoFrame.dispatchEvent(new WindowEvent(videoFrame, WindowEvent.WINDOW_CLOSING));
                 }

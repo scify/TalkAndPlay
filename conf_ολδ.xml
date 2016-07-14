@@ -11,9 +11,9 @@
       <image>true</image>
       <text>true</text>
       <selectionSensor>
-        <type>keyboard</type>
-        <keyCode>32</keyCode>
-        <keyChar />
+        <type>mouse</type>
+        <button>1</button>
+        <clickCount>1</clickCount>
       </selectionSensor>
     </configuration>
     <communication>
@@ -26,7 +26,7 @@
         <category name="Φαγητό">
           <rows>3</rows>
           <columns>3</columns>
-          <image>demo_resources/Φαγητό/Μπιφτέκι.png</image>
+          <image>/home/christina/Desktop/tp/demo_resources/Φαγητό/Μπιφτέκι.png</image>
           <sound>demo_resources/sounds/φαγητό.mp3</sound>
           <hasSound>false</hasSound>
           <hasImage>false</hasImage>
@@ -208,18 +208,20 @@
       <name>Ψυχαγωγία</name>
       <enabled>true</enabled>
       <image />
+      <musicPath />
+      <videoPath />
       <music>
         <name>Μουσική</name>
         <enabled>true</enabled>
         <image />
-        <path>/home/talk-and-play/Music/</path>
+        <path>/home/christina/Music/</path>
         <playlistSize>10</playlistSize>
       </music>
       <video>
         <name>Βίντεο</name>
         <enabled>true</enabled>
         <image />
-        <path>/home/talk-and-play/Videos/</path>
+        <path>/home/christina/Videos/</path>
         <playlistSize>10</playlistSize>
       </video>
     </entertainment>
@@ -629,14 +631,14 @@
         <name>Μουσική</name>
         <enabled>true</enabled>
         <image />
-        <path>/home/talk-and-play/Templates</path>
+        <path>/home/christina/PhpstormProjects/</path>
         <playlistSize>10</playlistSize>
       </music>
       <video>
         <name>Βίντεο</name>
         <enabled>true</enabled>
         <image />
-        <path>/home/talk-and-play/Music</path>
+        <path>/home/christina/Videos/</path>
         <playlistSize>10</playlistSize>
       </video>
     </entertainment>
@@ -647,19 +649,19 @@
     </games>
   </profile>
   <profile preselected="false">
-    <name>Dadarrio</name>
+    <name>rrr</name>
     <image />
     <configuration>
       <rotationSpeed>1</rotationSpeed>
-      <defaultGridRow>3</defaultGridRow>
+      <defaultGridRow>2</defaultGridRow>
       <defaultGridColumn>3</defaultGridColumn>
-      <sound>true</sound>
-      <image>true</image>
+      <sound>false</sound>
+      <image>false</image>
       <text>true</text>
       <selectionSensor>
-        <type>keyboard</type>
-        <keyCode>32</keyCode>
-        <keyChar />
+        <type>mouse</type>
+        <button>1</button>
+        <clickCount>1</clickCount>
       </selectionSensor>
     </configuration>
     <communication>
@@ -669,234 +671,32 @@
       <rows>3</rows>
       <columns>3</columns>
       <categories>
-        <category name="yipi yay kai mother&amp;*^%$">
+        <category name="test">
           <rows>3</rows>
           <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Ναι .png</image>
+          <image>/home/christina/Desktop/talkandplay/games/ballons-1.png</image>
           <sound />
           <hasSound>false</hasSound>
           <hasImage>false</hasImage>
           <hasText>false</hasText>
         </category>
-        <category name="hell NO">
+        <category name="τεστ2">
           <rows>3</rows>
           <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Όχι.png</image>
+          <image>/home/christina/Downloads/2013-01-10.jpg</image>
           <sound />
           <hasSound>false</hasSound>
           <hasImage>false</hasImage>
           <hasText>false</hasText>
         </category>
-        <category name="Chemical alert">
+        <category name="τεστ3">
           <rows>3</rows>
           <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Πάνα χρησιμοποιημένη με κακά.png</image>
+          <image>/home/christina/Pictures/hmerominia_sumvasis.png</image>
           <sound />
           <hasSound>false</hasSound>
           <hasImage>false</hasImage>
           <hasText>false</hasText>
-        </category>
-        <category name="Toxic alert!">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Πάνα χρησιμοποιημένη με τσίσα.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-        </category>
-        <category name="don't need this">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Δεν Θέλω.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-        </category>
-        <category name="Gimme">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Θέλω.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-        </category>
-        <category name="meh....">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Είμαι κουρασμένος-η.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-        </category>
-        <category name="gimme a solution, make it a double">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/νερό.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-        </category>
-        <category name="I am @#$% freezing">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Κρυώνω.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-        </category>
-        <category name="So hot!">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Ζεσταίνομαι.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-        </category>
-        <category name="So much pain!">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Ανακατεύομαι.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-          <categories>
-            <category name="headache">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Πόνος/Κεφάλι.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="leg hurts">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Πόνος/Πόδι.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="arm hurt">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Πόνος/Χέρι.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-          </categories>
-        </category>
-        <category name="I WANT FOOD">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Θέλω.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-          <categories>
-            <category name="Chicken, gimme chicken nowwwwww!!!!!!">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Φαγητό/ κοτόπουλο.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="cucumber, yea, give me now!!!">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Φαγητό/αγγούρι.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="Gimme cocktail, NOW!!!!!!!!! where is my #$@! Pinnacolada ##$$%^!!">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Φαγητό/γάλα.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="Yogurt? I hate yogurt, give it to me!!!">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Φαγητό/γιαούρτι.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="Pasta!!!!! I NEED PASTA!!!!!">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Φαγητό/Μακαρόνια.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="Gimme meatballs, or one gargantuanlike meatball!!!">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Φαγητό/Μπιφτέκι.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="STEAK!!!!! big one!!">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Φαγητό/μπριζόλα.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="orange, tomato, whatever!! I am hungry">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Φαγητό/ντομάτα.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="French fries!! With everything!! ">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Φαγητό/Πατάτες τηγανητές.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="MINESTRONE BABY!!! YES!!!">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Φαγητό/σούπα.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-          </categories>
         </category>
       </categories>
     </communication>
@@ -908,14 +708,63 @@
         <name>Μουσική</name>
         <enabled>true</enabled>
         <image />
-        <path />
+        <path>/home/christina/NewFolder/</path>
         <playlistSize>10</playlistSize>
       </music>
       <video>
         <name>Βίντεο</name>
         <enabled>true</enabled>
         <image />
-        <path />
+        <path>/home/christina/Pictures/</path>
+        <playlistSize>10</playlistSize>
+      </video>
+    </entertainment>
+    <games>
+      <name>Παιχνίδια</name>
+      <image />
+      <enabled>true</enabled>
+    </games>
+  </profile>
+  <profile preselected="false">
+    <name>kikk</name>
+    <image />
+    <configuration>
+      <rotationSpeed>1</rotationSpeed>
+      <defaultGridRow>3</defaultGridRow>
+      <defaultGridColumn>3</defaultGridColumn>
+      <sound>false</sound>
+      <image>true</image>
+      <text>false</text>
+      <selectionSensor>
+        <type>mouse</type>
+        <button>1</button>
+        <clickCount>1</clickCount>
+      </selectionSensor>
+    </configuration>
+    <communication>
+      <name>Επικοινωνία</name>
+      <enabled>true</enabled>
+      <image />
+      <rows>3</rows>
+      <columns>3</columns>
+      <categories />
+    </communication>
+    <entertainment>
+      <name>Ψυχαγωγία</name>
+      <enabled>true</enabled>
+      <image />
+      <music>
+        <name>Μουσική</name>
+        <enabled>true</enabled>
+        <image />
+        <path>/home/christina/Programs/</path>
+        <playlistSize>10</playlistSize>
+      </music>
+      <video>
+        <name>Βίντεο</name>
+        <enabled>true</enabled>
+        <image />
+        <path>/home/christina/Public/</path>
         <playlistSize>10</playlistSize>
       </video>
     </entertainment>
