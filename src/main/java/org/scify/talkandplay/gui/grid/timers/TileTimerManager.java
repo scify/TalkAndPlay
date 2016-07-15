@@ -9,6 +9,8 @@ import org.scify.talkandplay.gui.grid.tiles.TilePanel;
 
 public class TileTimerManager extends TimerManager {
 
+    protected int BORDER_SIZE = 5;
+
     public TileTimerManager(List<JPanel> panelList, long nextExecutionTime, long period) {
         super(panelList, nextExecutionTime, period);
     }
@@ -18,9 +20,9 @@ public class TileTimerManager extends TimerManager {
         panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.white, BORDER_SIZE));
         panelList.get(i).setBackground(Color.decode(defaultBackgroundColor));
 
-        TilePanel tilePanel = (TilePanel) panelList.get(i).getComponent(0);
-        tilePanel.setBackground(Color.white);
-        ((ImagePanel) tilePanel.getComponent(1)).setBackground(Color.white);
+        /*    TilePanel tilePanel = (TilePanel) panelList.get(i).getComponent(0);
+         tilePanel.setBackground(Color.white);
+         ((ImagePanel) tilePanel.getComponent(1)).setBackground(Color.white);*/
     }
 
     @Override
@@ -28,9 +30,9 @@ public class TileTimerManager extends TimerManager {
         panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.decode(BORDER_COLOR), BORDER_SIZE));
         panelList.get(i).setBackground(Color.decode(BACKGROUND_COLOR));
 
-        TilePanel tilePanel = (TilePanel) panelList.get(i).getComponent(0);
-        tilePanel.setBackground(Color.decode(BACKGROUND_COLOR));
-        ((ImagePanel) tilePanel.getComponent(1)).setBackground(Color.decode(BACKGROUND_COLOR));
-
+        /*  TilePanel tilePanel = (TilePanel) panelList.get(i).getComponent(0);
+         tilePanel.setBackground(Color.decode(BACKGROUND_COLOR));
+         ((ImagePanel) tilePanel.getComponent(1)).setBackground(Color.decode(BACKGROUND_COLOR));
+         */
     }
 }

@@ -78,6 +78,8 @@ public class CommunicationPanel extends BaseGridPanel {
      * @throws IOException
      */
     private void drawImages(Category category) throws IOException {
+         tileCreator.setHeight((int)parent.getBounds().getHeight());
+        tileCreator.setWidth((int)parent.getBounds().getWidth());
         removeAll();
         currentCategory = category;
         c.gridx = -1;
@@ -136,7 +138,10 @@ public class CommunicationPanel extends BaseGridPanel {
         //check if there's empty space that should be filled with
         //mock JLabels in order to keep the grid size
         if (emptiesCount > 0) {
-            add(createLessItem(category));
+            JPanel panel = createLessItem(category);
+            add(panel, c);
+            setGrid(category);
+            panelList.add(panel);
             /* for (int i = 0; i < emptiesCount; i++) {
              add(new JLabel(), c);
              setGrid(category);
@@ -345,8 +350,6 @@ public class CommunicationPanel extends BaseGridPanel {
         } else {
             c.gridx++;
         }
-
-        System.out.println(rows + ", " + columns);
         /* if (c.gridy == (columns - 1)) {
          c.gridy++;
          }*/

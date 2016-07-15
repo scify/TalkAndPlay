@@ -27,8 +27,18 @@ import org.scify.talkandplay.gui.grid.tiles.TilePanel;
  */
 public class GuiHelper {
 
+    private int width, height, rows, columns;
+
     private static final int DEFAULT_WIDTH = 150;
     private static final int DEFAULT_HEIGHT = 150;
+
+    public GuiHelper() {
+    }
+
+    public GuiHelper(int rows, int columns) {
+        this.rows = rows;
+        this.columns = columns;
+    }
 
     /**
      * Draw the default button
@@ -143,16 +153,25 @@ public class GuiHelper {
     private JPanel decorateImageIcon(String image, URL imageURL, String text) {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Color.white);
-        panel.setBorder(new EmptyBorder(20, 20, 20, 20));
-        panel.setBorder(BorderFactory.createLineBorder(Color.white, 10));
+       // panel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        panel.setBorder(BorderFactory.createLineBorder(Color.white, 5));
 
         if (image != null) {
-            panel.add(new TilePanel(text, image), BorderLayout.CENTER);
+            panel.add(new TilePanel(text, image, width, height, rows, columns), BorderLayout.CENTER);
         } else {
             panel.add(new TilePanel(text, imageURL), BorderLayout.CENTER);
         }
         return panel;
     }
 
+    public void setWidth(int width) {
+        this.width = width;
+    }
 
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    
+    
 }

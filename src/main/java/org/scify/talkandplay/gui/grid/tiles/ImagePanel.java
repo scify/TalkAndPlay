@@ -35,8 +35,8 @@ public class ImagePanel extends javax.swing.JPanel {
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        int w = getWidth();
-        int h = getHeight();
+        int w = 400;//getWidth();
+        int h = 290;//getHeight();
         Image image;
 
         if (imageString != null && !imageString.isEmpty()) {

@@ -11,9 +11,9 @@
       <image>true</image>
       <text>true</text>
       <selectionSensor>
-        <type>keyboard</type>
-        <keyCode>32</keyCode>
-        <keyChar />
+        <type>mouse</type>
+        <button>1</button>
+        <clickCount>1</clickCount>
       </selectionSensor>
     </configuration>
     <communication>
@@ -249,17 +249,17 @@
       <name>Επικοινωνία</name>
       <enabled>true</enabled>
       <image />
-      <rows>4</rows>
-      <columns>4</columns>
+      <rows>2</rows>
+      <columns>3</columns>
       <categories>
         <category name="Φαγητό">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/christina/Desktop/tp//home/christina/Desktop/tp/demo_resources/Φαγητό/Μπιφτέκι.png</image>
+          <rows>4</rows>
+          <columns>4</columns>
+          <image>/home/christina/Desktop/tp/demo_resources/Φαγητό/Μπιφτέκι.png</image>
           <sound>/home/christina/Desktop/tp/demo_resources/sounds/φαγητό.mp3</sound>
           <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
+          <hasImage>true</hasImage>
+          <hasText>true</hasText>
           <categories>
             <category name="Μακαρόνια">
               <rows>3</rows>
@@ -319,6 +319,60 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/christina/Desktop/tp/demo_resources/Φαγητό/τυρί.png</image>
+              <sound />
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="γιαούρτι">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>/home/christina/Desktop/tp/demo_resources/Φαγητό/γιαούρτι.png</image>
+              <sound />
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="μρπιζόλα">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>/home/christina/Desktop/talkandplay/official images/Φαγητό/μπριζόλα.png</image>
+              <sound />
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="ψωμι">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>/home/christina/Desktop/talkandplay/official images/Φαγητό/ψωμί.png</image>
+              <sound />
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="αγγούρι">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>/home/christina/Desktop/tp/demo_resources/Φαγητό/αγγούρι.png</image>
+              <sound />
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="mpifteki">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>/home/christina/Desktop/tp/demo_resources/Φαγητό/Μπιφτέκι.png</image>
+              <sound />
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="ximos">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>/home/christina/Desktop/tp/demo_resources/Φαγητό/χυμός.png</image>
               <sound />
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
@@ -657,9 +711,9 @@
       <image>true</image>
       <text>true</text>
       <selectionSensor>
-        <type>keyboard</type>
-        <keyCode>32</keyCode>
-        <keyChar />
+        <type>mouse</type>
+        <button>1</button>
+        <clickCount>1</clickCount>
       </selectionSensor>
     </configuration>
     <communication>

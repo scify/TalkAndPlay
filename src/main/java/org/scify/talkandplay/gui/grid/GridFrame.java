@@ -36,7 +36,6 @@ public class GridFrame extends javax.swing.JFrame {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         contentPane = new javax.swing.JPanel();
         gridPanel = new javax.swing.JPanel();
-        logoLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Talk&Play");
@@ -46,25 +45,17 @@ public class GridFrame extends javax.swing.JFrame {
 
         gridPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/tp_logo_small.png"))); // NOI18N
-
         javax.swing.GroupLayout contentPaneLayout = new javax.swing.GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentPaneLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(logoLabel)
-                .addContainerGap(624, Short.MAX_VALUE))
-            .addComponent(gridPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(gridPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentPaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(logoLabel)
-                .addGap(18, 18, 18)
-                .addComponent(gridPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(gridPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,6 +115,5 @@ public class GridFrame extends javax.swing.JFrame {
     private javax.swing.JPanel contentPane;
     private javax.swing.JPanel gridPanel;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JLabel logoLabel;
     // End of variables declaration//GEN-END:variables
 }

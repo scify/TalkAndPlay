@@ -26,20 +26,26 @@ public class BaseGridPanel extends BasePanel {
     protected UserService userService;
     protected ArrayList<JPanel> panelList;
     protected int empties;
+    protected int width, height;
 
     protected TimerManager timer;
     protected TileCreator tileCreator;
 
-    protected final int IMAGE_PADDING = 10;
-
-    public BaseGridPanel(User user, GridFrame parent) {
+   public BaseGridPanel(User user, GridFrame parent) {
         super(user, parent);
         this.timer = new TileTimerManager(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
-        this.tileCreator = new TileCreator(user);
-        this.empties = user.getConfiguration().getDefaultGridRow() * user.getConfiguration().getDefaultGridColumn();
+
+        if (currentCategory == null) {
+            this.tileCreator = new TileCreator(user,  user.getConfiguration().getDefaultGridRow(), user.getConfiguration().getDefaultGridColumn());
+        } else {
+            this.tileCreator = new TileCreator(user,currentCategory.getRows(), currentCategory.getColumns());
+        }
+        tileCreator.setHeight((int)parent.getBounds().getHeight());
+        tileCreator.setWidth((int)parent.getBounds().getWidth());
 
         initComponents();
         initListeners();
+        setEmpties();
         setBackground(Color.white);
     }
 
@@ -67,7 +73,16 @@ public class BaseGridPanel extends BasePanel {
         c.gridy = 0;
     }
 
+    protected void setEmpties() {
+        if (currentCategory == null) {
+            empties = user.getConfiguration().getDefaultGridRow() * user.getConfiguration().getDefaultGridRow();
+        } else {
+            empties = currentCategory.getRows() * currentCategory.getColumns();
+        }
+    }
+
     protected void fillWithEmpties() {
+        setEmpties();
         empties = empties - panelList.size();
         int rows, columns;
 
