@@ -97,12 +97,12 @@ public class CommunicationTab extends javax.swing.JPanel {
                 controlsPanel.add(editLabel);
                 controlsPanel.add(deleteLabel);
                 controlsPanel.setVisible(false);
-                controlsPanel.setBackground(Color.decode(UIConstants.getMainColor()));
+                controlsPanel.setBackground(Color.decode(UIConstants.green));
 
                 if (category.getSubCategories().size() > 0) {
-                    label.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 14));
+                    label.setFont(new Font(UIConstants.mainFont, Font.BOLD, 14));
                 } else {
-                    label.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 14));
+                    label.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 14));
                 }
 
                 setListeners(panel, editLabel, deleteLabel, category.getName());
@@ -141,7 +141,7 @@ public class CommunicationTab extends javax.swing.JPanel {
         panel.setLayout(new FlowLayout(FlowLayout.LEADING));
         panel.setBackground(Color.white);
         JLabel label = new JLabel(user.getCommunicationModule().getName());
-        label.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 16));
+        label.setFont(new Font(UIConstants.mainFont, Font.BOLD, 16));
 
         panel.add(label);
 
@@ -160,7 +160,7 @@ public class CommunicationTab extends javax.swing.JPanel {
                     panel.getComponent(0).setForeground(Color.black);
                     panel.getComponent(1).setVisible(false);
                 }
-                panel.setBackground(Color.decode(UIConstants.getMainColor()));
+                panel.setBackground(Color.decode(UIConstants.green));
                 panel.getComponent(0).setForeground(Color.white);
                 panel.getComponent(1).setVisible(true);
             }

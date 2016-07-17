@@ -37,11 +37,11 @@ public class TextPanel extends javax.swing.JPanel {
     protected void paintComponent(Graphics g) {
         JLabel textLabel = new JLabel(text);
         textLabel.setForeground(Color.black);
-        textLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 35));
+        textLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 35));
         textLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(textLabel);
 
-        Font labelFont = new Font(UIConstants.getMainFont(), Font.PLAIN, 35);
+        Font labelFont = new Font(UIConstants.mainFont, Font.PLAIN, 35);
         String labelText = textLabel.getText();
 
         int stringWidth = textLabel.getFontMetrics(labelFont).stringWidth(labelText);

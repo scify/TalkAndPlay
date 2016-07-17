@@ -20,9 +20,7 @@ public class TileTimerManager extends TimerManager {
         panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.white, BORDER_SIZE));
         panelList.get(i).setBackground(Color.decode(defaultBackgroundColor));
 
-        /*    TilePanel tilePanel = (TilePanel) panelList.get(i).getComponent(0);
-         tilePanel.setBackground(Color.white);
-         ((ImagePanel) tilePanel.getComponent(1)).setBackground(Color.white);*/
+        ((TilePanel) panelList.get(i).getComponent(0)).setUnSelected();
     }
 
     @Override
@@ -30,9 +28,6 @@ public class TileTimerManager extends TimerManager {
         panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.decode(BORDER_COLOR), BORDER_SIZE));
         panelList.get(i).setBackground(Color.decode(BACKGROUND_COLOR));
 
-        /*  TilePanel tilePanel = (TilePanel) panelList.get(i).getComponent(0);
-         tilePanel.setBackground(Color.decode(BACKGROUND_COLOR));
-         ((ImagePanel) tilePanel.getComponent(1)).setBackground(Color.decode(BACKGROUND_COLOR));
-         */
+        ((TilePanel) panelList.get(i).getComponent(0)).setSelected();
     }
 }

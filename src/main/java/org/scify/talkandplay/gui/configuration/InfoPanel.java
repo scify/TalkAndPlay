@@ -132,7 +132,7 @@ public class InfoPanel extends javax.swing.JPanel {
 
     private void initCustomComponents() {
         setLayout(new GridLayout(0, 1, 0, 0));
-        Font font = new Font(UIConstants.getMainFont(), Font.BOLD, 16);
+        Font font = new Font(UIConstants.mainFont, Font.BOLD, 16);
         editLabel.setFont(font);
         addLabel.setFont(font);
         

@@ -93,12 +93,12 @@ public class BaseMediaPanel extends BasePanel {
         
         JLabel noFiles = new JLabel("Δεν υπάρχουν αρχεία");
         noFiles.setBorder(new EmptyBorder(5, 5, 5, 5));
-        noFiles.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
+        noFiles.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
         noFiles.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         JLabel label = new JLabel("Πίσω");
         label.setBorder(new EmptyBorder(5, 5, 5, 5));
-        label.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
+        label.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         JLabel icon = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png")).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
@@ -107,7 +107,7 @@ public class BaseMediaPanel extends BasePanel {
         
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        panel.setBackground(Color.decode(UIConstants.getGrey()));
+        panel.setBackground(Color.decode(UIConstants.grey));
         panel.setPreferredSize(new Dimension(180, 130));
         panel.setMaximumSize(new Dimension(180, 130));
         panel.setMinimumSize(new Dimension(180, 130));

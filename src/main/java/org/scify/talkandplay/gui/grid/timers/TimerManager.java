@@ -16,8 +16,8 @@ public class TimerManager {
     protected long nextExecutionTime, period;
 
     protected static final int BORDER_SIZE = 10;
-    protected static final String BORDER_COLOR = UIConstants.getBlue();
-    protected static final String BACKGROUND_COLOR = UIConstants.getLightBlue();
+    protected static final String BORDER_COLOR = UIConstants.blue;
+    protected static final String BACKGROUND_COLOR = UIConstants.lightBlue;
     protected String defaultBackgroundColor = "#ffffff";
 
     public TimerManager(List<JPanel> panelList, long nextExecutionTime, long period) {

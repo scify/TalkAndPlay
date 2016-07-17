@@ -27,17 +27,10 @@ import org.scify.talkandplay.gui.grid.tiles.TilePanel;
  */
 public class GuiHelper {
 
-    private int width, height, rows, columns;
-
     private static final int DEFAULT_WIDTH = 150;
     private static final int DEFAULT_HEIGHT = 150;
 
     public GuiHelper() {
-    }
-
-    public GuiHelper(int rows, int columns) {
-        this.rows = rows;
-        this.columns = columns;
     }
 
     /**
@@ -46,7 +39,7 @@ public class GuiHelper {
      * @param button
      */
     public void drawButton(JButton button) {
-        button.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
+        button.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
         button.setBorder(new LineBorder(new Color(75, 161, 69), 20));
         button.setMargin(new Insets(10, 10, 10, 10));
     }
@@ -72,11 +65,11 @@ public class GuiHelper {
      * @param label
      */
     public void setStepLabelFont(JLabel label) {
-        label.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 14));
+        label.setFont(new Font(UIConstants.mainFont, Font.BOLD, 14));
     }
 
     public void setStepExplLabelFont(JLabel label) {
-        label.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 12));
+        label.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 12));
     }
 
     /**
@@ -86,7 +79,7 @@ public class GuiHelper {
      */
     public void setCustomTextField(JTextField textField) {
         textField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.GRAY));
-        textField.setFont(new Font(UIConstants.getMainFont(), Font.ITALIC, 14));
+        textField.setFont(new Font(UIConstants.mainFont, Font.ITALIC, 14));
         textField.setHorizontalAlignment(JTextField.CENTER);
     }
 
@@ -153,25 +146,15 @@ public class GuiHelper {
     private JPanel decorateImageIcon(String image, URL imageURL, String text) {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Color.white);
-       // panel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        // panel.setBorder(new EmptyBorder(3, 3, 3, 3));
         panel.setBorder(BorderFactory.createLineBorder(Color.white, 5));
 
         if (image != null) {
-            panel.add(new TilePanel(text, image, width, height, rows, columns), BorderLayout.CENTER);
+            panel.add(new TilePanel(text, image), BorderLayout.CENTER);
         } else {
             panel.add(new TilePanel(text, imageURL), BorderLayout.CENTER);
         }
         return panel;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    
-    
 }

@@ -84,8 +84,8 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
 
     private void initCustomComponents() {
 
-        startLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
-        endLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
+        startLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
+        endLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
     }
 
     public void playMedia(String path) {

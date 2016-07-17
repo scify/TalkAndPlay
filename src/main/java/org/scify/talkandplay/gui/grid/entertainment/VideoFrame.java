@@ -255,8 +255,8 @@ public class VideoFrame extends javax.swing.JFrame {
     }
 
     private void initCustomComponents() {
-        startLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
-        endLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
+        startLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
+        endLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
 
         videoPanel.add(mediaPlayerComponent, BorderLayout.CENTER);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -304,7 +304,7 @@ public class VideoFrame extends javax.swing.JFrame {
 
         addListeners();
 
-        timer.setDefaultBackgroundColor(UIConstants.getGrey());
+        timer.setDefaultBackgroundColor(UIConstants.grey);
         timer.setList(controlsList);
         System.out.println("controls " + controlsList.size());
         timer.start();
@@ -313,7 +313,7 @@ public class VideoFrame extends javax.swing.JFrame {
     private JPanel drawButton(String text, URL imageIcon) {
         JLabel label = new JLabel(text);
         label.setBorder(new EmptyBorder(5, 5, 5, 5));
-        label.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
+        label.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel icon = new JLabel(new ImageIcon(new ImageIcon(imageIcon).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
@@ -322,7 +322,7 @@ public class VideoFrame extends javax.swing.JFrame {
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        panel.setBackground(Color.decode(UIConstants.getGrey()));
+        panel.setBackground(Color.decode(UIConstants.grey));
         panel.setPreferredSize(new Dimension(180, 100));
         panel.setMaximumSize(new Dimension(180, 100));
         panel.setMinimumSize(new Dimension(180, 100));

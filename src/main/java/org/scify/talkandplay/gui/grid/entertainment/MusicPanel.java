@@ -68,7 +68,7 @@ public class MusicPanel extends BaseMediaPanel {
         } else {
 
             playingNow = new JLabel(" ");
-            playingNow.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
+            playingNow.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
 
             initPlayerButtons();
 
@@ -150,7 +150,7 @@ public class MusicPanel extends BaseMediaPanel {
     private JPanel drawButton(String text, URL imageIcon) {
         JLabel label = new JLabel(text);
         label.setBorder(new EmptyBorder(5, 5, 5, 5));
-        label.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
+        label.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel icon = new JLabel(new ImageIcon(new ImageIcon(imageIcon).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
@@ -159,7 +159,7 @@ public class MusicPanel extends BaseMediaPanel {
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        panel.setBackground(Color.decode(UIConstants.getGrey()));
+        panel.setBackground(Color.decode(UIConstants.grey));
         panel.setPreferredSize(new Dimension(180, 100));
         panel.setMaximumSize(new Dimension(180, 100));
         panel.setMinimumSize(new Dimension(180, 100));

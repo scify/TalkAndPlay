@@ -53,6 +53,8 @@ public class EntertainmentTab extends javax.swing.JPanel {
             videoPathTextField.setText(user.getEntertainmentModule().getVideoModule().getFolderPath());
         }
 
+        songSumTextField.setText(String.valueOf(user.getEntertainmentModule().getMusicModule().getPlaylistSize()));
+
         setListeners();
     }
 
@@ -98,10 +100,8 @@ public class EntertainmentTab extends javax.swing.JPanel {
             public void focusLost(FocusEvent fe) {
                 if (musicPathTextField.getText().isEmpty()) {
                     musicPathTextField.setText("Φάκελος μουσικής");
-                } else {
-                    if (!musicPathTextField.getText().endsWith("/")) {
-                        musicPathTextField.setText(musicPathTextField.getText() + "/");
-                    }
+                } else if (!musicPathTextField.getText().endsWith("/")) {
+                    musicPathTextField.setText(musicPathTextField.getText() + "/");
                 }
             }
         });
@@ -116,10 +116,8 @@ public class EntertainmentTab extends javax.swing.JPanel {
             public void focusLost(FocusEvent fe) {
                 if (videoPathTextField.getText().isEmpty()) {
                     videoPathTextField.setText("Φάκελος video");
-                } else {
-                    if (!videoPathTextField.getText().endsWith("/")) {
-                        videoPathTextField.setText(videoPathTextField.getText() + "/");
-                    }
+                } else if (!videoPathTextField.getText().endsWith("/")) {
+                    videoPathTextField.setText(videoPathTextField.getText() + "/");
                 }
             }
         });
@@ -247,7 +245,7 @@ public class EntertainmentTab extends javax.swing.JPanel {
                 .addComponent(songSumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(soundLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(errorLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -268,7 +266,7 @@ public class EntertainmentTab extends javax.swing.JPanel {
         } else if (songSumTextField.getText().isEmpty() || !StringUtils.isNumeric(songSumTextField.getText())) {
             errorLabel.setText("Το πλήθος τραγουδιών πρέπει οριστεί σωστά");
             errorLabel.setVisible(true);
-        } else if (Integer.parseInt(songSumTextField.getText())<0 || Integer.parseInt(songSumTextField.getText())>10) {
+        } else if (Integer.parseInt(songSumTextField.getText()) < 0 || Integer.parseInt(songSumTextField.getText()) > 10) {
             errorLabel.setText("Το πλήθος τραγουδιών πρέπει να είναι μεταξύ 0 και 10");
             errorLabel.setVisible(true);
         } else {

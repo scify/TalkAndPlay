@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.UserService;
 
@@ -74,6 +75,13 @@ public class GridFrame extends javax.swing.JFrame {
 
     private void initCustomComponents() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        UIConstants.getInstance().setHeight(getHeight());
+        UIConstants.getInstance().setWidth(getWidth());
+        UIConstants.getInstance().setRows(1);
+        UIConstants.getInstance().setColumns(3);
+
         setIconImage((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/tp_logo_mini.png"))).getImage());
         gridPanel.setLayout(new BoxLayout(gridPanel, BoxLayout.LINE_AXIS));
         gridPanel.setBorder(new EmptyBorder(10, 10, 10, 10));

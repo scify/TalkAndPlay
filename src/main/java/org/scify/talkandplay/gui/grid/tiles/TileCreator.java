@@ -26,7 +26,6 @@ public class TileCreator {
     private SensorService sensorService;
     private GuiHelper guiHelper;
     private AudioMediaPlayerComponent audioPlayer;
-    private int width, height, rows, columns;
     private static String DEFAULT_SOUND;
 
     public TileCreator(User user, int rows, int columns) {
@@ -34,10 +33,8 @@ public class TileCreator {
        DEFAULT_SOUND = getClass().getResource("/org/scify/talkandplay/resources/sounds/cat.mp3").getPath();
 
         this.sensorService = new SensorService(user);
-        this.guiHelper = new GuiHelper(rows, columns);
+        this.guiHelper = new GuiHelper();
         this.audioPlayer = new AudioMediaPlayerComponent();
-        this.rows = rows;
-        this.columns = columns;
         initAudioPlayer();
     }
 
@@ -147,16 +144,6 @@ public class TileCreator {
         } else {
             audioPlayer.getMediaPlayer().playMedia(DEFAULT_SOUND);
         }
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-        this.guiHelper.setWidth(width);
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-        this.guiHelper.setHeight(height);
     }
 
 }

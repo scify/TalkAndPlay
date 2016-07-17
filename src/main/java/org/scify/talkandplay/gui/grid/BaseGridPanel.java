@@ -40,9 +40,7 @@ public class BaseGridPanel extends BasePanel {
         } else {
             this.tileCreator = new TileCreator(user,currentCategory.getRows(), currentCategory.getColumns());
         }
-        tileCreator.setHeight((int)parent.getBounds().getHeight());
-        tileCreator.setWidth((int)parent.getBounds().getWidth());
-
+        
         initComponents();
         initListeners();
         setEmpties();

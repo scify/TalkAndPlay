@@ -144,12 +144,12 @@ public class MainFrame extends javax.swing.JFrame {
 
     public void setPanelTitle(String title) {
         titlePanel.removeAll();
-        titlePanel.setBackground(Color.decode(UIConstants.getMainColor()));
+        titlePanel.setBackground(Color.decode(UIConstants.green));
         //titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.LINE_AXIS));
         titlePanel.setLayout(new BorderLayout());
 
         JLabel titleLabel = new JLabel(title);
-        titleLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 20));
+        titleLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 20));
         titleLabel.setForeground(Color.white);
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
 
@@ -158,20 +158,20 @@ public class MainFrame extends javax.swing.JFrame {
     /*
      public void setPanelTitleWithBackNext(final User user, String title) {
      titlePanel.removeAll();
-     titlePanel.setBackground(Color.decode(UIConstants.getMainColor()));
+     titlePanel.setBackground(Color.decode(UIConstants.green));
      //titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.LINE_AXIS));
      titlePanel.setLayout(new BorderLayout());
 
      JLabel titleLabel = new JLabel(title);
-     titleLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 20));
+     titleLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 20));
      titleLabel.setForeground(Color.white);
      titleLabel.setHorizontalAlignment(JLabel.CENTER);
 
      /*  JPanel backPanel = new JPanel();
-     backPanel.setBackground(Color.decode(UIConstants.getMainColor()));
+     backPanel.setBackground(Color.decode(UIConstants.green));
      backPanel.setBorder(new LineBorder(Color.white, 1));*/
     /*   JLabel backLabel = new JLabel("ΠΙΣΩ");
-     backLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 20));
+     backLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 20));
      backLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/left-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
      backLabel.setBorder(new LineBorder(Color.white, 1));
      /*  JLabel backIcon = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/left-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
@@ -180,7 +180,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     /*
      JLabel nextLabel = new JLabel("ΕΠΟΜΕΝΟ");
-     nextLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 20));
+     nextLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 20));
      nextLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/right-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
      nextLabel.setBorder(new LineBorder(Color.white, 1));
 

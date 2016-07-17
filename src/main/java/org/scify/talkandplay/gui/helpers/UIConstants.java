@@ -2,40 +2,59 @@ package org.scify.talkandplay.gui.helpers;
 
 public class UIConstants {
 
-    private static final String mainColor = "#4BA145";
+    private static UIConstants singleton = new UIConstants();
 
-    private static final String disabledColor = "#A6AAA9";
-
-    private static final String grey = "#d2d4d3";
-
-    private static final String lightBlue = "#def7ff";
-
-    private static final String blue = "#5bd8ff";
-
-    private static final String mainFont = UIConstants.getMainFont();
-
-    public static String getMainColor() {
-        return mainColor;
+    private UIConstants() {
     }
 
-    public static String getMainFont() {
-        return mainFont;
+    public static UIConstants getInstance() {
+        return singleton;
     }
 
-    public static String getDisabledColor() {
-        return disabledColor;
+    public static final String disabledColor = "#A6AAA9";
+
+    public static final String green = "#4BA145";
+
+    public static final String grey = "#d2d4d3";
+
+    public static final String lightBlue = "#def7ff";
+
+    public static final String blue = "#5bd8ff";
+
+    public static final String mainFont = "DejaVu Sans";
+
+    protected int width, height, rows, columns;
+
+    public int getWidth() {
+        return width;
     }
 
-    public static String getGrey() {
-        return grey;
+    public void setWidth(int width) {
+        this.width = width;
     }
 
-    public static String getLightBlue() {
-        return lightBlue;
+    public int getHeight() {
+        return height;
     }
 
-    public static String getBlue() {
-        return blue;
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public void setRows(int rows) {
+        this.rows = rows;
+    }
+
+    public int getColumns() {
+        return columns;
+    }
+
+    public void setColumns(int columns) {
+        this.columns = columns;
     }
 
 }

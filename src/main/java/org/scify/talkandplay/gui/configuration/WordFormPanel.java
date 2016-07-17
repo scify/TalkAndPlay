@@ -56,7 +56,7 @@ public class WordFormPanel extends javax.swing.JPanel {
 
     private void initCustomComponents() {
         categories = categoryService.getLinearCategories(user);
-        setBorder(new LineBorder(Color.decode(UIConstants.getMainColor()), 1));
+        setBorder(new LineBorder(Color.decode(UIConstants.green), 1));
         setUI();
         setListeners();
     }
@@ -399,8 +399,8 @@ public class WordFormPanel extends javax.swing.JPanel {
         closeLabel.setText("");
 
         titleLabel.setText("ΠΡΟΣΘΗΚΗ ΝΕΑΣ ΛΕΞΗΣ");
-        titleLabel.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 16));
-        titleLabel.setForeground(Color.decode(UIConstants.getMainColor()));
+        titleLabel.setFont(new Font(UIConstants.mainFont, Font.BOLD, 16));
+        titleLabel.setForeground(Color.decode(UIConstants.green));
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
 
         guiHelper.drawButton(saveButton);
@@ -413,7 +413,7 @@ public class WordFormPanel extends javax.swing.JPanel {
         guiHelper.setStepExplLabelFont(step3ExplLabel);
 
         wordTextField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.GRAY));
-        wordTextField.setFont(new Font(UIConstants.getMainFont(), Font.ITALIC, 14));
+        wordTextField.setFont(new Font(UIConstants.mainFont, Font.ITALIC, 14));
         wordTextField.setHorizontalAlignment(JTextField.CENTER);
 
         uploadImageLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
@@ -432,8 +432,8 @@ public class WordFormPanel extends javax.swing.JPanel {
 
         updateCategoriesComboBox();
 
-        categoriesComboBox.setBorder(new LineBorder(Color.decode(UIConstants.getMainColor()), 1));
-        categoriesComboBox.setFont(new Font(UIConstants.getMainColor(), Font.PLAIN, 14));
+        categoriesComboBox.setBorder(new LineBorder(Color.decode(UIConstants.green), 1));
+        categoriesComboBox.setFont(new Font(UIConstants.green, Font.PLAIN, 14));
 
         if (category == null) {
 

@@ -124,14 +124,14 @@ public class UserPanel extends javax.swing.JPanel {
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nameLabel.setBorder(new EmptyBorder(5, 0, 0, 0));
-        nameLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 16));
+        nameLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 16));
         editLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         editLabel.setBorder(new EmptyBorder(5, 0, 0, 0));
-        editLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 12));
+        editLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 12));
         editLabel.setForeground(Color.decode("#4BA145"));
         deleteLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         deleteLabel.setBorder(new EmptyBorder(5, 0, 0, 0));
-        deleteLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 12));
+        deleteLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 12));
         deleteLabel.setForeground(Color.decode("#AE001D"));
 
         profilePanel.add(imageLabel);

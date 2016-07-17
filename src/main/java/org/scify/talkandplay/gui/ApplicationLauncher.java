@@ -31,14 +31,14 @@ public class ApplicationLauncher {
         UIManager.put("CheckBox.gradient", gradients);
 
         //combobox
-        UIManager.put("ComboBox.selectionBackground", Color.decode(UIConstants.getMainColor()));
+        UIManager.put("ComboBox.selectionBackground", Color.decode(UIConstants.green));
         UIManager.put("ComboBox.selectionForeground", Color.white);
         UIManager.put("ComboBox.buttonDarkShadow", Color.black);
 
         UIManager.put("ScrollBar.background", Color.white);
-        UIManager.put("ScrollBar.thumbShadow", Color.decode(UIConstants.getMainColor()));
-        UIManager.put("ScrollBar.track", Color.decode(UIConstants.getMainColor()));
-        UIManager.put("ScrollBar.trackHighlight", Color.decode(UIConstants.getMainColor()));
+        UIManager.put("ScrollBar.thumbShadow", Color.decode(UIConstants.green));
+        UIManager.put("ScrollBar.track", Color.decode(UIConstants.green));
+        UIManager.put("ScrollBar.trackHighlight", Color.decode(UIConstants.green));
 
         /*
          ScrollBar.background
@@ -51,13 +51,13 @@ public class ApplicationLauncher {
          ScrollBar.trackHighlight
          */
         //tabs
-        UIManager.put("TabbedPane.borderColor", Color.decode(UIConstants.getMainColor()));
-        UIManager.put("TabbedPane.borderHightlightColor", Color.decode(UIConstants.getMainColor()));
-        UIManager.put("TabbedPane.foreground", Color.decode(UIConstants.getMainColor()));
-        UIManager.put("TabbedPane.darkShadow", Color.decode(UIConstants.getMainColor()));
+        UIManager.put("TabbedPane.borderColor", Color.decode(UIConstants.green));
+        UIManager.put("TabbedPane.borderHightlightColor", Color.decode(UIConstants.green));
+        UIManager.put("TabbedPane.foreground", Color.decode(UIConstants.green));
+        UIManager.put("TabbedPane.darkShadow", Color.decode(UIConstants.green));
         UIManager.put("TabbedPane.light", Color.white);
-        UIManager.put("TabbedPane.selected", Color.decode(UIConstants.getMainColor()));
-        UIManager.put("TabbedPane.selectHighlight", Color.decode(UIConstants.getMainColor()));
+        UIManager.put("TabbedPane.selected", Color.decode(UIConstants.green));
+        UIManager.put("TabbedPane.selectHighlight", Color.decode(UIConstants.green));
         UIManager.put("TabbedPane.selectedForeground", Color.white);
         UIManager.put("TabbedPane.contentBorderInsets", new Insets(1, 1, 1, 1));
 
@@ -66,7 +66,7 @@ public class ApplicationLauncher {
             Object key = keys.nextElement();
             Object value = UIManager.get(key);
             if (value != null && value instanceof javax.swing.plaf.FontUIResource) {
-                UIManager.put(key, new Font(UIConstants.getMainFont(), Font.PLAIN, 12));
+                UIManager.put(key, new Font(UIConstants.mainFont, Font.PLAIN, 12));
             }
         }
     }

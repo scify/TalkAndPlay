@@ -36,7 +36,7 @@ public class TextLabel extends JLabel {
     }
 
     private void createImage() {
-        Font font = new Font(UIConstants.getMainFont(), Font.PLAIN, SIZE);
+        Font font = new Font(UIConstants.mainFont, Font.PLAIN, SIZE);
         FontRenderContext frc = new FontRenderContext(null, true, true);
         TextLayout layout = new TextLayout(text, font, frc);
         Rectangle r = layout.getPixelBounds(null, 0, 0);
@@ -64,7 +64,7 @@ public class TextLabel extends JLabel {
 
          guiHelper.applyQualityRenderingHints((Graphics2D) g);
          g.drawImage(image, 0, 0, w, h, this);*/
-        setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 35));
+        setFont(new Font(UIConstants.mainFont, Font.PLAIN, 35));
         final Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
         g2d.setRenderingHint(java.awt.RenderingHints.KEY_TEXT_ANTIALIASING, java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_ON);

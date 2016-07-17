@@ -714,17 +714,17 @@ public class UserFormPanel extends javax.swing.JPanel {
         scanButtons.add(manualScanRadioButton);
 
         //set the titles of the form
-        nameLabel.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 14));
-        imageLabel.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 14));
-        sensorLabel.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 14));
-        rotationSpeedLabel.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 14));
-        defaultGridSizeLabel.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 14));
-        tilesLabel.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 14));
+        nameLabel.setFont(new Font(UIConstants.mainFont, Font.BOLD, 14));
+        imageLabel.setFont(new Font(UIConstants.mainFont, Font.BOLD, 14));
+        sensorLabel.setFont(new Font(UIConstants.mainFont, Font.BOLD, 14));
+        rotationSpeedLabel.setFont(new Font(UIConstants.mainFont, Font.BOLD, 14));
+        defaultGridSizeLabel.setFont(new Font(UIConstants.mainFont, Font.BOLD, 14));
+        tilesLabel.setFont(new Font(UIConstants.mainFont, Font.BOLD, 14));
 
         nameTextField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.GRAY));
-        nameTextField.setFont(new Font(UIConstants.getMainFont(), Font.ITALIC, 14));
+        nameTextField.setFont(new Font(UIConstants.mainFont, Font.ITALIC, 14));
         nameTextField.setHorizontalAlignment(JTextField.CENTER);
-        uploadImageLabel.setFont(new Font(UIConstants.getMainFont(), Font.BOLD, 14));
+        uploadImageLabel.setFont(new Font(UIConstants.mainFont, Font.BOLD, 14));
 
         rowsTextField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.GRAY));
         rowsTextField.setHorizontalAlignment(JTextField.CENTER);
@@ -736,9 +736,9 @@ public class UserFormPanel extends javax.swing.JPanel {
         enableTextField(selectionSensorTextField1);
 
         //set the text color
-        selectionSensorTextField1.setForeground(Color.decode(UIConstants.getMainColor()));
-        selectionSensorTextField2.setForeground(Color.decode(UIConstants.getMainColor()));
-        navigationSensorTextField.setForeground(Color.decode(UIConstants.getMainColor()));
+        selectionSensorTextField1.setForeground(Color.decode(UIConstants.green));
+        selectionSensorTextField2.setForeground(Color.decode(UIConstants.green));
+        navigationSensorTextField.setForeground(Color.decode(UIConstants.green));
 
         selectionSensorTextField1.setHorizontalAlignment(JTextField.CENTER);
         selectionSensorTextField2.setHorizontalAlignment(JTextField.CENTER);
@@ -753,15 +753,15 @@ public class UserFormPanel extends javax.swing.JPanel {
 
     private void disableTextField(JTextField textField) {
         textField.setEnabled(false);
-        textField.setForeground(Color.decode(UIConstants.getDisabledColor()));
-        textField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.decode(UIConstants.getDisabledColor())));
+        textField.setForeground(Color.decode(UIConstants.disabledColor));
+        textField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.decode(UIConstants.disabledColor)));
         textField.setBorder(BorderFactory.createCompoundBorder(textField.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
     }
 
     private void enableTextField(JTextField textField) {
         textField.setEnabled(true);
-        textField.setForeground(Color.decode(UIConstants.getMainColor()));
-        textField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.decode(UIConstants.getMainColor())));
+        textField.setForeground(Color.decode(UIConstants.green));
+        textField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.decode(UIConstants.green)));
         textField.setBorder(BorderFactory.createCompoundBorder(textField.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
     }
 

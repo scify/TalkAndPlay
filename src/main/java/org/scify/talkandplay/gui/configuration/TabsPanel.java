@@ -64,13 +64,13 @@ public class TabsPanel extends javax.swing.JPanel {
 
         tabsPanel.setSelectedIndex(0);
         tabsPanel.setForegroundAt(0, Color.white);
-        tabsPanel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
+        tabsPanel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
 
         tabsPanel.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent ce) {
                 for (int i = 0; i < tabsPanel.getTabCount(); i++) {
-                    tabsPanel.setForegroundAt(i, Color.decode(UIConstants.getMainColor()));
+                    tabsPanel.setForegroundAt(i, Color.decode(UIConstants.green));
                 }
                 tabsPanel.setForegroundAt(tabsPanel.getSelectedIndex(), Color.white);
 

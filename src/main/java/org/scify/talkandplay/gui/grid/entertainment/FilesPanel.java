@@ -60,7 +60,7 @@ public class FilesPanel extends javax.swing.JPanel {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         setBackground(Color.white);
 
-        timer.setDefaultBackgroundColor(UIConstants.getGrey());
+        timer.setDefaultBackgroundColor(UIConstants.grey);
 
         step = user.getEntertainmentModule().getMusicModule().getPlaylistSize() - 3;
         start = 0;
@@ -138,13 +138,13 @@ public class FilesPanel extends javax.swing.JPanel {
             fileLabel.setIcon(icon);
         }
 
-        fileLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
+        fileLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
         fileLabel.setHorizontalAlignment(JLabel.LEFT);
         fileLabel.setBorder(new EmptyBorder(3, 3, 3, 3));
 
         JPanel songPanel = new JPanel();
         songPanel.setLayout(new FlowLayout());
-        songPanel.setBackground(Color.decode(UIConstants.getGrey()));
+        songPanel.setBackground(Color.decode(UIConstants.grey));
         songPanel.setBorder((new LineBorder(Color.white, 5)));
         songPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 
@@ -156,7 +156,7 @@ public class FilesPanel extends javax.swing.JPanel {
     private JPanel drawEmpty() {
 
         JLabel emptyLabel = new JLabel(" ");
-        emptyLabel.setFont(new Font(UIConstants.getMainFont(), Font.PLAIN, 18));
+        emptyLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
         emptyLabel.setBorder(new EmptyBorder(3, 3, 3, 3));
 
         JPanel empty = new JPanel();
@@ -201,7 +201,7 @@ public class FilesPanel extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    if (files.size() > step && end <= files.size()) {
+                    if (files.size() > step && end < files.size()) {
                         timer.cancel();
                         configureNextSongs();
                         drawFiles();
@@ -213,7 +213,7 @@ public class FilesPanel extends javax.swing.JPanel {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
-                    if (files.size() > step && end <= files.size()) {
+                    if (files.size() > step && end < files.size()) {
                         timer.cancel();
                         configureNextSongs();
                         drawFiles();
@@ -327,11 +327,11 @@ public class FilesPanel extends javax.swing.JPanel {
         for (int i = 0; i < panelList.size(); i++) {
 
             if (currentFile.equals(((JLabel) panelList.get(i).getComponent(0)).getText())) {
-                panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.decode(UIConstants.getBlue()), 5));
-                panelList.get(i).setBackground(Color.decode(UIConstants.getLightBlue()));
+                panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.decode(UIConstants.blue), 5));
+                panelList.get(i).setBackground(Color.decode(UIConstants.lightBlue));
             } else {
                 panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.white, 5));
-                panelList.get(i).setBackground(Color.decode(UIConstants.getGrey()));
+                panelList.get(i).setBackground(Color.decode(UIConstants.grey));
             }
         }
     }
