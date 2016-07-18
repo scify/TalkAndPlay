@@ -910,14 +910,14 @@
         <name>Μουσική</name>
         <enabled>true</enabled>
         <image />
-        <path>/home/christina/Music/</path>
+        <path>/home/xrist/Music/</path>
         <playlistSize>10</playlistSize>
       </music>
       <video>
         <name>Βίντεο</name>
         <enabled>true</enabled>
         <image />
-        <path>/home/christina/Videos/</path>
+        <path>/home/xrist/Videos/</path>
         <playlistSize>10</playlistSize>
       </video>
     </entertainment>

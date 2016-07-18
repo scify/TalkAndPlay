@@ -41,6 +41,8 @@ public class TilePanel extends javax.swing.JPanel {
     }
 
     private void initCustomComponents() {
+                System.out.println("printing "+text);
+
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         setBackground(Color.white);
 
@@ -60,7 +62,6 @@ public class TilePanel extends javax.swing.JPanel {
         Image img;
         if (imageString != null && !imageString.isEmpty()) {
             img = new ImageIcon(imageString).getImage();
-            System.out.println(imageString);
         } else {
             img = new ImageIcon(imageUrl).getImage();
         }

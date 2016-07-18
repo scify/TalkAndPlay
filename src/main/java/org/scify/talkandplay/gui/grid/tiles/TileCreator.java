@@ -49,7 +49,6 @@ public class TileCreator {
             @Override
             public void playing(MediaPlayer mediaPlayer) {
                 audioPlayer.getMediaPlayer().mute(false);
-                audioPlayer.getMediaPlayer().setVolume(100);
             }
 
             @Override

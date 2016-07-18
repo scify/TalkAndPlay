@@ -2,7 +2,6 @@ package org.scify.talkandplay.gui.configuration;
 
 import java.awt.Font;
 import java.awt.GridLayout;
-import org.scify.talkandplay.gui.MainPanel;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;

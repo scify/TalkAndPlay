@@ -60,7 +60,9 @@ public class EntertainmentPanel extends BaseGridPanel {
         panelList.add(videoPanel);
         panelList.add(backPanel);
 
-        // fillWithEmpties();
+        c.gridy++;
+        c.gridx = 0;
+        fillWithEmpties();
         timer.setList(panelList);
         timer.start();
 
@@ -78,16 +80,16 @@ public class EntertainmentPanel extends BaseGridPanel {
                 user.getEntertainmentModule().getMusicModule().getImageURL(),
                 user.getEntertainmentModule().getMusicModule().getSound(),
                 new TileAction() {
-                    @Override
-                    public void act() {
-                        timer.cancel();
-                    }
+            @Override
+            public void act() {
+                timer.cancel();
+            }
 
-                    @Override
-                    public void audioFinished() {
-                        showMusic();
-                    }
-                });
+            @Override
+            public void audioFinished() {
+                showMusic();
+            }
+        });
 
         return panel;
     }
@@ -98,16 +100,16 @@ public class EntertainmentPanel extends BaseGridPanel {
                 user.getEntertainmentModule().getVideoModule().getImageURL(),
                 user.getEntertainmentModule().getVideoModule().getSound(),
                 new TileAction() {
-                    @Override
-                    public void act() {
-                        timer.cancel();
-                    }
+            @Override
+            public void act() {
+                timer.cancel();
+            }
 
-                    @Override
-                    public void audioFinished() {
-                        showVideo();
-                    }
-                });
+            @Override
+            public void audioFinished() {
+                showVideo();
+            }
+        });
 
         return panel;
     }
@@ -118,22 +120,22 @@ public class EntertainmentPanel extends BaseGridPanel {
                 getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"),
                 null,
                 new TileAction() {
-                    @Override
-                    public void act() {
-                        timer.cancel();
-                        showMainMenu();
-                    }
+            @Override
+            public void act() {
+                timer.cancel();
+                showMainMenu();
+            }
 
-                    @Override
-                    public void audioFinished() {
-                        return;
-                    }
+            @Override
+            public void audioFinished() {
+                return;
+            }
 
-                    @Override
-                    public boolean mute() {
-                        return true;
-                    }
-                });
+            @Override
+            public boolean mute() {
+                return true;
+            }
+        });
 
         return panel;
     }
