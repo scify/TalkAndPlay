@@ -20,115 +20,235 @@
       <name>Επικοινωνία</name>
       <enabled>true</enabled>
       <image />
+      <sound>demo_resources/sounds/Επικοινωνία.mp3</sound>
       <rows>3</rows>
       <columns>3</columns>
       <categories>
         <category name="Φαγητό">
-          <rows>3</rows>
+          <rows>2</rows>
           <columns>3</columns>
-          <image>demo_resources/Φαγητό/Μπιφτέκι.png</image>
-          <sound>demo_resources/sounds/φαγητό.mp3</sound>
+          <image>demo_resources/images/Φαγητό/Μπιφτέκι.png</image>
+          <sound>demo_resources/sounds/Φαγητό.mp3</sound>
           <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
+          <hasImage>true</hasImage>
+          <hasText>true</hasText>
           <categories>
             <category name="Μακαρόνια">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/Φαγητό/Μακαρόνια.png</image>
+              <image>demo_resources/images/Φαγητό/Μακαρόνια.png</image>
               <sound>demo_resources/sounds/Μακαρόνια.mp3</sound>
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
-            <category name="Πατάτ">
+            <category name="Πατάτες τηγανητές">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/Φαγητό/Πατάτες τηγανητές.png</image>
-              <sound>demo_resources/sounds/Πατάτες_τηγανητές.mp3</sound>
+              <image>demo_resources/images/Φαγητό/Πατάτες τηγανητές.png</image>
+              <sound>demo_resources/sounds/Πατάτες τηγανητές.mp3</sound>
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
-            <category name="τοστ">
+            <category name="Μπιφτέκι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/Φαγητό/τοστ.png</image>
+              <image>demo_resources/images/Φαγητό/Μπιφτέκι.png</image>
+              <sound>demo_resources/sounds/Μπιφτέκι.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="Μπριζόλα">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Φαγητό/μπριζόλα.png</image>
+              <sound>demo_resources/sounds/Μπριζόλα.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="Κοτόπουλο">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Φαγητό/κοτόπουλο.png</image>
+              <sound>demo_resources/sounds/Κοτόπουλο.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="Σούπα">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Φαγητό/σούπα.png</image>
+              <sound>demo_resources/sounds/Σούπα.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="Ψωμί">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Φαγητό/ψωμί.png</image>
+              <sound>demo_resources/sounds/Ψωμί.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="Τοστ">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Φαγητό/τοστ.png</image>
+              <sound>demo_resources/sounds/Τοστ.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="Νερό">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Φαγητό/νερό.png</image>
               <sound />
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
-            <category name="χυμός">
+            <category name="Χυμός">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/Φαγητό/χυμός.png</image>
-              <sound />
+              <image>demo_resources/images/Φαγητό/χυμός.png</image>
+              <sound>demo_resources/sounds/Χυμός.mp3</sound>
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
-            <category name="γάλα">
+            <category name="Γάλα">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/Φαγητό/γάλα.png</image>
-              <sound />
+              <image>demo_resources/images/Φαγητό/Γάλα.png</image>
+              <sound>demo_resources/sounds/Γάλα.mp3</sound>
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
-            <category name="σούπα">
+            <category name="Γιαούρτι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/Φαγητό/σούπα.png</image>
-              <sound />
+              <image>demo_resources/images/Φαγητό/γιαούρτι.png</image>
+              <sound>demo_resources/sounds/Γιαούρτι.mp3</sound>
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
-            <category name="τυρί">
+            <category name="Αγγούρι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/Φαγητό/τυρί.png</image>
-              <sound />
+              <image>demo_resources/images/Φαγητό/αγγούρι.png</image>
+              <sound>demo_resources/sounds/Αγγούρι.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="Ντομάτα">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Φαγητό/ντομάτα.png</image>
+              <sound>demo_resources/sounds/Ντομάτα.mp3</sound>
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
           </categories>
         </category>
-        <category name="φρούτα">
+        <category name="Φρούτα">
           <rows>3</rows>
           <columns>3</columns>
-          <image>demo_resources/Φρούτα/πορτοκάλι.png</image>
-          <sound>demo_resources/sounds/φρούτα.mp3</sound>
+          <image>demo_resources/images/Φρούτα/πορτοκάλι.png</image>
+          <sound>demo_resources/sounds/Φρούτα.mp3</sound>
           <hasSound>false</hasSound>
           <hasImage>false</hasImage>
           <hasText>false</hasText>
           <categories>
-            <category name="μήλο">
+            <category name="Μήλο">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/Φρούτα/μήλο.png</image>
-              <sound />
+              <image>demo_resources/images/Φρούτα/μήλο.png</image>
+              <sound>demo_resources/sounds/Μήλο.mp3</sound>
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
-            <category name="μπανάνα">
+            <category name="Μπανάνα">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/Φρούτα/μπανάνα.png</image>
-              <sound />
+              <image>demo_resources/images/Φρούτα/μπανάνα.png</image>
+              <sound>demo_resources/sounds/Μπανάνα.mp3</sound>
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
-            <category name="ροδάκινο">
+            <category name="Ροδάκινο">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/Φρούτα/ροδάκινο.png</image>
-              <sound />
+              <image>demo_resources/images/Φρούτα/ροδάκινο.png</image>
+              <sound>demo_resources/sounds/Ροδάκινο.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="Αχλάδι">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Φρούτα/αχλάδι.png</image>
+              <sound>demo_resources/sounds/Αχλάδι.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="Καρπούζι">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Φρούτα/καρπούζι.png</image>
+              <sound>demo_resources/sounds/Καρπούζι.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="Πορτοκάλι">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Φρούτα/πορτοκάλι.png</image>
+              <sound>demo_resources/sounds/Πορτοκάλι.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+          </categories>
+        </category>
+        <category name="Τουαλέτα">
+          <rows>3</rows>
+          <columns>3</columns>
+          <image>demo_resources/images/Τουαλέτα/τουαλέτα.png</image>
+          <sound>demo_resources/sounds/Τουαλέτα.mp3</sound>
+          <hasSound>false</hasSound>
+          <hasImage>false</hasImage>
+          <hasText>false</hasText>
+          <categories>
+            <category name="Αλλαγή πάνας">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Τουαλέτα/Πάνα χρησιμοποιημένη με τσίσα.png</image>
+              <sound>demo_resources/sounds/Αλλαγή πάνας.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="Αλλαγή πάνας">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Τουαλέτα/Πάνα χρησιμοποιημένη με κακά.png</image>
+              <sound>demo_resources/sounds/Αλλαγή πάνας.mp3</sound>
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
@@ -138,17 +258,26 @@
         <category name="Συναισθήματα">
           <rows>3</rows>
           <columns>3</columns>
-          <image>demo_resources/Συναισθήματα/Χαρά.png</image>
+          <image>demo_resources/images/Συναισθήματα/Χαρά.png</image>
           <sound>demo_resources/sounds/Συναισθήματα.mp3</sound>
           <hasSound>false</hasSound>
           <hasImage>false</hasImage>
           <hasText>false</hasText>
           <categories>
+            <category name="Χαρά">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Συναισθήματα/Χαρά.png</image>
+              <sound>demo_resources/sounds/Χαίρομαι.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
             <category name="Λύπη">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/Συναισθήματα/Λύπη.png</image>
-              <sound />
+              <image>demo_resources/images/Συναισθήματα/Λύπη.png</image>
+              <sound>demo_resources/sounds/Είμαι λυπημένος.mp3</sound>
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
@@ -156,8 +285,64 @@
             <category name="Θυμός">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/Συναισθήματα/Θυμός.png</image>
-              <sound />
+              <image>demo_resources/images/Συναισθήματα/Θυμός.png</image>
+              <sound>demo_resources/sounds/Είμαι θυμωμένος.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="Αηδία">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Συναισθήματα/Αηδία.png</image>
+              <sound>demo_resources/sounds/Νιώθω αηδία.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="Φόβος">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Συναισθήματα/Φόβος.png</image>
+              <sound>demo_resources/sounds/Φοβάμαι.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+          </categories>
+        </category>
+        <category name="Πόνος">
+          <rows>3</rows>
+          <columns>3</columns>
+          <image>demo_resources/images/Πόνος/Πόνος.png</image>
+          <sound>demo_resources/sounds/Πονάω.mp3</sound>
+          <hasSound>false</hasSound>
+          <hasImage>false</hasImage>
+          <hasText>false</hasText>
+          <categories>
+            <category name="Πόνος στο κεφάλι">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Πόνος/Πόνος Κεφάλι.png</image>
+              <sound>demo_resources/sounds/Πονάει το κεφάλι μου.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="Πόνος στο πόδι">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Πόνος/Πόνος Πόδι.png</image>
+              <sound>demo_resources/sounds/Πονάει το πόδι μου.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="Πόνος στο χέρι">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Πόνος/Πόνος Χέρι.png</image>
+              <sound>demo_resources/sounds/Πονάει το χέρι μου.mp3</sound>
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
@@ -167,7 +352,7 @@
         <category name="Θερμοκρασία">
           <rows>3</rows>
           <columns>3</columns>
-          <image>demo_resources/Θερμοκρασία/Ζεστό.png</image>
+          <image>demo_resources/images/Θερμοκρασία/Ζεσταίνομαι.png</image>
           <sound>demo_resources/sounds/Θερμοκρασία.mp3</sound>
           <hasSound>false</hasSound>
           <hasImage>false</hasImage>
@@ -176,8 +361,8 @@
             <category name="Κρύο">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/Θερμοκρασία/Κρύο.png</image>
-              <sound />
+              <image>demo_resources/images/Θερμοκρασία/Κρύο.png</image>
+              <sound>demo_resources/sounds/Κρύο.mp3</sound>
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
@@ -185,8 +370,8 @@
             <category name="Ζεστό">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/Θερμοκρασία/Ζεστό.png</image>
-              <sound />
+              <image>demo_resources/images/Θερμοκρασία/Ζεστό.png</image>
+              <sound>demo_resources/sounds/Ζεστό.mp3</sound>
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
@@ -194,8 +379,46 @@
             <category name="Καυτό">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/Θερμοκρασία/Καυτό.png</image>
-              <sound />
+              <image>demo_resources/images/Θερμοκρασία/Καυτό.png</image>
+              <sound>demo_resources/sounds/Καυτό.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+          </categories>
+        </category>
+        <category name="Φαγούρα">
+          <rows>3</rows>
+          <columns>3</columns>
+          <image>demo_resources/images/Φαγούρα/Φαγούρα.png</image>
+          <sound>demo_resources/sounds/Φαγούρα.mp3</sound>
+          <hasSound>false</hasSound>
+          <hasImage>false</hasImage>
+          <hasText>false</hasText>
+          <categories>
+            <category name="Φαγούρα στο κεφάλι">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Φαγούρα/Φαγούρα Κεφάλι.png</image>
+              <sound>demo_resources/sounds/Φαγούρα στο κεφάλι.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="Φαγούρα στο πόδι">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Φαγούρα/Φαγούρα Πόδι.png</image>
+              <sound>demo_resources/sounds/Φαγούρα στο πόδι.mp3</sound>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+            </category>
+            <category name="Φαγούρα στο χέρι">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>demo_resources/images/Φαγούρα/Φαγούρα Χέρι.png</image>
+              <sound>demo_resources/sounds/Φαγούρα στο χέρι.mp3</sound>
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
@@ -208,10 +431,12 @@
       <name>Ψυχαγωγία</name>
       <enabled>true</enabled>
       <image />
+      <sound>demo_resources/sounds/Ψυχαγωγία.mp3</sound>
       <music>
         <name>Μουσική</name>
         <enabled>true</enabled>
         <image />
+        <sound>demo_resources/sounds/Μουσική.mp3</sound>
         <path>/home/talk-and-play/Music/</path>
         <playlistSize>10</playlistSize>
       </music>
@@ -219,6 +444,7 @@
         <name>Βίντεο</name>
         <enabled>true</enabled>
         <image />
+        <sound>demo_resources/sounds/Βίντεο.mp3</sound>
         <path>/home/talk-and-play/Videos/</path>
         <playlistSize>10</playlistSize>
       </video>
@@ -226,6 +452,7 @@
     <games>
       <name>Παιχνίδια</name>
       <enabled>true</enabled>
+      <sound>demo_resources/sounds/Παιχνίδια.mp3</sound>
       <image />
     </games>
   </profile>
@@ -255,8 +482,8 @@
         <category name="Φαγητό">
           <rows>2</rows>
           <columns>3</columns>
-          <image>/home/xrist/Desktop/tp/demo_resources/Φαγητό/Μπιφτέκι.png</image>
-          <sound>/home/xrist/Desktop/tp/demo_resources/sounds/φαγητό.mp3</sound>
+          <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/Μπιφτέκι.png</image>
+          <sound>/home/xrist/Desktop/tp/demo_resources/sounds/Φαγητό.mp3</sound>
           <hasSound>false</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
@@ -264,7 +491,7 @@
             <category name="Μακαρόνια">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φαγητό/Μακαρόνια.png</image>
+              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/Μακαρόνια.png</image>
               <sound>/home/xrist/Desktop/tp/demo_resources/sounds/Μακαρόνια.mp3</sound>
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
@@ -273,67 +500,67 @@
             <category name="Πατάτες τηγανητές">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φαγητό/Πατάτες τηγανητές.png</image>
+              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/Πατάτες τηγανητές.png</image>
               <sound>/home/xrist/Desktop/tp/demo_resources/sounds/Πατάτες_τηγανητές.mp3</sound>
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
-            <category name="τοστ">
+            <category name="Τοστ">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φαγητό/τοστ.png</image>
+              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/τοστ.png</image>
               <sound />
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
-            <category name="χυμός">
+            <category name="Χυμός">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φαγητό/χυμός.png</image>
+              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/χυμός.png</image>
               <sound />
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
-            <category name="γάλα">
+            <category name="Γάλα">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φαγητό/γάλα.png</image>
+              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/γάλα.png</image>
               <sound />
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
-            <category name="σούπα">
+            <category name="Σούπα">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φαγητό/σούπα.png</image>
+              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/σούπα.png</image>
               <sound />
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
-            <category name="τυρί">
+            <category name="Τυρί">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φαγητό/τυρί.png</image>
+              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/τυρί.png</image>
               <sound />
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
-            <category name="γιαούρτι">
+            <category name="Γιαούρτι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φαγητό/γιαούρτι.png</image>
+              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/γιαούρτι.png</image>
               <sound />
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
-            <category name="μρπιζόλα">
+            <category name="Μπριζόλα">
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/xrist/Desktop/talkandplay/official images/Φαγητό/μπριζόλα.png</image>
@@ -342,7 +569,7 @@
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
-            <category name="ψωμι">
+            <category name="Ψωμί">
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/xrist/Desktop/talkandplay/official images/Φαγητό/ψωμί.png</image>
@@ -351,28 +578,28 @@
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
-            <category name="αγγούρι">
+            <category name="Αγγούρι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φαγητό/αγγούρι.png</image>
+              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/αγγούρι.png</image>
               <sound />
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
-            <category name="mpifteki">
+            <category name="Μπιφτέκι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φαγητό/Μπιφτέκι.png</image>
+              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/Μπιφτέκι.png</image>
               <sound />
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
             </category>
-            <category name="ximos">
+            <category name="Κοτόπουλο">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φαγητό/χυμός.png</image>
+              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/Κοτόπουλο.png</image>
               <sound />
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
@@ -497,7 +724,7 @@
         <category name="Φαγητό">
           <rows>3</rows>
           <columns>3</columns>
-          <image>/home/xrist/Desktop/tp/demo_resources/Φαγητό/Μπιφτέκι.png</image>
+          <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/Μπιφτέκι.png</image>
           <sound>/home/xrist/Desktop/tp/demo_resources/sounds/φαγητό.mp3</sound>
           <hasSound>false</hasSound>
           <hasImage>false</hasImage>
@@ -506,7 +733,7 @@
             <category name="Μακαρόνια">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φαγητό/Μακαρόνια.png</image>
+              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/Μακαρόνια.png</image>
               <sound>/home/xrist/Desktop/tp/demo_resources/sounds/Μακαρόνια.mp3</sound>
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
@@ -515,7 +742,7 @@
             <category name="Πατάτες τηγανητές">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φαγητό/Πατάτες τηγανητές.png</image>
+              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/Πατάτες τηγανητές.png</image>
               <sound>/home/xrist/Desktop/tp/demo_resources/sounds/Πατάτες_τηγανητές.mp3</sound>
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
@@ -524,7 +751,7 @@
             <category name="τοστ">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φαγητό/τοστ.png</image>
+              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/τοστ.png</image>
               <sound />
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
@@ -533,7 +760,7 @@
             <category name="χυμός">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φαγητό/χυμός.png</image>
+              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/χυμός.png</image>
               <sound />
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
@@ -542,7 +769,7 @@
             <category name="γάλα">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φαγητό/γάλα.png</image>
+              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/γάλα.png</image>
               <sound />
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
@@ -551,7 +778,7 @@
             <category name="σούπα">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φαγητό/σούπα.png</image>
+              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/σούπα.png</image>
               <sound />
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
@@ -560,7 +787,7 @@
             <category name="τυρί">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φαγητό/τυρί.png</image>
+              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/τυρί.png</image>
               <sound />
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
@@ -683,14 +910,14 @@
         <name>Μουσική</name>
         <enabled>true</enabled>
         <image />
-        <path>/home/xrist/Music/</path>
+        <path>/home/christina/Music/</path>
         <playlistSize>10</playlistSize>
       </music>
       <video>
         <name>Βίντεο</name>
         <enabled>true</enabled>
         <image />
-        <path>/home/xrist/Videos/</path>
+        <path>/home/christina/Videos/</path>
         <playlistSize>10</playlistSize>
       </video>
     </entertainment>
@@ -698,285 +925,6 @@
       <name>Παιχνίδια</name>
       <enabled>true</enabled>
       <image />
-    </games>
-  </profile>
-  <profile preselected="false">
-    <name>Dadarrio</name>
-    <image />
-    <configuration>
-      <rotationSpeed>1</rotationSpeed>
-      <defaultGridRow>3</defaultGridRow>
-      <defaultGridColumn>3</defaultGridColumn>
-      <sound>true</sound>
-      <image>true</image>
-      <text>true</text>
-      <selectionSensor>
-        <type>mouse</type>
-        <button>1</button>
-        <clickCount>1</clickCount>
-      </selectionSensor>
-    </configuration>
-    <communication>
-      <name>Επικοινωνία</name>
-      <enabled>true</enabled>
-      <image />
-      <rows>3</rows>
-      <columns>3</columns>
-      <categories>
-        <category name="yipi yay kai mother&amp;*^%$">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Ναι .png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-        </category>
-        <category name="hell NO">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Όχι.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-        </category>
-        <category name="Chemical alert">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Πάνα χρησιμοποιημένη με κακά.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-        </category>
-        <category name="Toxic alert!">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Πάνα χρησιμοποιημένη με τσίσα.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-        </category>
-        <category name="don't need this">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Δεν Θέλω.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-        </category>
-        <category name="Gimme">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Θέλω.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-        </category>
-        <category name="meh....">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Είμαι κουρασμένος-η.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-        </category>
-        <category name="gimme a solution, make it a double">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/νερό.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-        </category>
-        <category name="I am @#$% freezing">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Κρυώνω.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-        </category>
-        <category name="So hot!">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Ζεσταίνομαι.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-        </category>
-        <category name="So much pain!">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Ανακατεύομαι.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-          <categories>
-            <category name="headache">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Πόνος/Κεφάλι.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="leg hurts">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Πόνος/Πόδι.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="arm hurt">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Πόνος/Χέρι.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-          </categories>
-        </category>
-        <category name="I WANT FOOD">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Θέλω.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-          <categories>
-            <category name="Chicken, gimme chicken nowwwwww!!!!!!">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Φαγητό/ κοτόπουλο.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="cucumber, yea, give me now!!!">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Φαγητό/αγγούρι.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="Gimme cocktail, NOW!!!!!!!!! where is my #$@! Pinnacolada ##$$%^!!">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Φαγητό/γάλα.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="Yogurt? I hate yogurt, give it to me!!!">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Φαγητό/γιαούρτι.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="Pasta!!!!! I NEED PASTA!!!!!">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Φαγητό/Μακαρόνια.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="Gimme meatballs, or one gargantuanlike meatball!!!">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Φαγητό/Μπιφτέκι.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="STEAK!!!!! big one!!">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Φαγητό/μπριζόλα.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="orange, tomato, whatever!! I am hungry">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Φαγητό/ντομάτα.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="French fries!! With everything!! ">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Φαγητό/Πατάτες τηγανητές.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="MINESTRONE BABY!!! YES!!!">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/talk-and-play/Desktop/TalkandPlay/demo_resources/Φαγητό/σούπα.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-          </categories>
-        </category>
-      </categories>
-    </communication>
-    <entertainment>
-      <name>Ψυχαγωγία</name>
-      <enabled>true</enabled>
-      <image />
-      <music>
-        <name>Μουσική</name>
-        <enabled>true</enabled>
-        <image />
-        <path />
-        <playlistSize>10</playlistSize>
-      </music>
-      <video>
-        <name>Βίντεο</name>
-        <enabled>true</enabled>
-        <image />
-        <path />
-        <playlistSize>10</playlistSize>
-      </video>
-    </entertainment>
-    <games>
-      <name>Παιχνίδια</name>
-      <image />
-      <enabled>true</enabled>
     </games>
   </profile>
 </profiles>

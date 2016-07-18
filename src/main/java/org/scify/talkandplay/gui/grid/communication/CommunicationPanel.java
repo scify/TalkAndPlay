@@ -86,7 +86,6 @@ public class CommunicationPanel extends BaseGridPanel {
         c.gridx = -1;
         c.gridy = 0;
         panelList = new ArrayList();
-        int emptiesCount = 0;
 
         setGrid(category);
 
@@ -95,22 +94,21 @@ public class CommunicationPanel extends BaseGridPanel {
             if (category.getSubCategories().size() >= grid) {
                 int i;
                 for (i = stopped; i < (grid + stopped - 2); i++) {
-                    if (i > category.getSubCategories().size() - 1) {
-                        emptiesCount++;
-                    } else {
+                    if (i < category.getSubCategories().size()) {
                         JPanel panel = createCategoryItem(category.getSubCategories().get(i));
                         add(panel, c);
                         setGrid(category);
                         panelList.add(panel);
                     }
                 }
-                if (i <= category.getSubCategories().size() - 1) {
-                    stopped = i;
-                    JPanel panel = createMoreItem(category);
-                    add(panel, c);
-                    setGrid(category);
-                    panelList.add(panel);
-                } else {
+
+                stopped = i;
+                JPanel panel = createMoreItem(category);
+                add(panel, c);
+                setGrid(category);
+                panelList.add(panel);
+
+                if (i >= category.getSubCategories().size()) {
                     stopped = 0;
                 }
             } else {
@@ -124,28 +122,20 @@ public class CommunicationPanel extends BaseGridPanel {
         }
 
         //if parent is null, display the first menu
-        if (emptiesCount == 0 && null == category.getParentCategory()) {
+        if (null == category.getParentCategory()) {
             JPanel panel = createBackItem(category, true);
             add(panel, c);
             setGrid(category);
             panelList.add(panel);
-        } else if (emptiesCount == 0 && null != category.getParentCategory()) {
+        } else {
             JPanel panel = createBackItem(category, false);
             add(panel, c);
             setGrid(category);
             panelList.add(panel);
         }
 
-        //check if there's empty space that should be filled with
-        //mock JLabels in order to keep the grid size
-        if (emptiesCount > 0) {
-            JPanel panel = createLessItem(category);
-            add(panel, c);
-            setGrid(category);
-            panelList.add(panel);
-        }
-
         fillWithEmpties();
+
         timer.setList(panelList);
         timer.start();
 
@@ -166,28 +156,26 @@ public class CommunicationPanel extends BaseGridPanel {
      * @throws IOException
      */
     private JPanel createCategoryItem(final Category category) throws IOException {
-
         JPanel panel = tileCreator.create(category.getName(),
                 category.getImage(),
                 category.getSound(),
                 new TileAction() {
-            @Override
-            public void act() {
-                timer.cancel();
-                currentCategory = category;
-            }
+                    @Override
+                    public void act() {
+                        timer.cancel();
+                        currentCategory = category;
+                    }
 
-            @Override
-            public void audioFinished() {
-                if (currentCategory.getSubCategories().size() > 0) {
-                    currentPanel.showNextGrid(currentCategory);
-                } else {
-                    timer.setList(panelList);
-                    timer.start();
-                }
-            }
-        });
-
+                    @Override
+                    public void audioFinished() {
+                        if (currentCategory.getSubCategories().size() > 0) {
+                            currentPanel.showNextGrid(currentCategory);
+                        } else {
+                            timer.setList(panelList);
+                            timer.start();
+                        }
+                    }
+                });
         return panel;
     }
 
@@ -199,43 +187,42 @@ public class CommunicationPanel extends BaseGridPanel {
      * @throws IOException
      */
     private JPanel createBackItem(final Category category, final boolean isRoot) throws IOException {
-
         JPanel panel = tileCreator.create("Πίσω",
                 null,
                 getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"),
                 null,
                 new TileAction() {
-            @Override
-            public void act() {
-                timer.cancel();
-                stopped = 0;
-                if (isRoot) {
-                    showMainMenu();
-                } else if (!isRoot && category.getParentCategory() == null) {
-                    try {
-                        drawImages(rootCategory);
-                    } catch (IOException ex) {
-                        Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    @Override
+                    public void act() {
+                        timer.cancel();
+                        stopped = 0;
+                        if (isRoot) {
+                            showMainMenu();
+                        } else if (!isRoot && category.getParentCategory() == null) {
+                            try {
+                                drawImages(rootCategory);
+                            } catch (IOException ex) {
+                                Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            try {
+                                drawImages(category.getParentCategory());
+                            } catch (IOException ex) {
+                                Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                     }
-                } else {
-                    try {
-                        drawImages(category.getParentCategory());
-                    } catch (IOException ex) {
-                        Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+
+                    @Override
+                    public void audioFinished() {
+                        return;
                     }
-                }
-            }
 
-            @Override
-            public void audioFinished() {
-                return;
-            }
-
-            @Override
-            public boolean mute() {
-                return true;
-            }
-        });
+                    @Override
+                    public boolean mute() {
+                        return true;
+                    }
+                });
 
         return panel;
     }
@@ -248,70 +235,31 @@ public class CommunicationPanel extends BaseGridPanel {
      * @throws IOException
      */
     private JPanel createMoreItem(final Category category) throws IOException {
-
         JPanel panel = tileCreator.create("Περισσότερα",
                 null,
                 getClass().getResource("/org/scify/talkandplay/resources/more-icon.png"),
                 null,
                 new TileAction() {
-            @Override
-            public void act() {
-                timer.cancel();
-                try {
-                    drawImages(category);
-                } catch (IOException ex) {
-                    Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+                    @Override
+                    public void act() {
+                        timer.cancel();
+                        try {
+                            drawImages(category);
+                        } catch (IOException ex) {
+                            Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
 
-            @Override
-            public void audioFinished() {
-                return;
-            }
+                    @Override
+                    public void audioFinished() {
+                        return;
+                    }
 
-            @Override
-            public boolean mute() {
-                return true;
-            }
-        });
-
-        return panel;
-    }
-
-    /**
-     * Create the JPanel that holds the less button
-     *
-     * @param category
-     * @return
-     * @throws IOException
-     */
-    private JPanel createLessItem(final Category category) throws IOException {
-
-        JPanel panel = tileCreator.create("Λιγότερα",
-                null,
-                getClass().getResource("/org/scify/talkandplay/resources/less-icon.png"),
-                null,
-                new TileAction() {
-            @Override
-            public void act() {
-                timer.cancel();
-                try {
-                    drawImages(category);
-                } catch (IOException ex) {
-                    Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-            @Override
-            public void audioFinished() {
-                return;
-            }
-
-            @Override
-            public boolean mute() {
-                return true;
-            }
-        });
+                    @Override
+                    public boolean mute() {
+                        return true;
+                    }
+                });
 
         return panel;
     }

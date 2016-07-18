@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.timers.TileTimerManager;
+import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.UserService;
@@ -31,16 +32,16 @@ public class BaseGridPanel extends BasePanel {
     protected TimerManager timer;
     protected TileCreator tileCreator;
 
-   public BaseGridPanel(User user, GridFrame parent) {
+    public BaseGridPanel(User user, GridFrame parent) {
         super(user, parent);
         this.timer = new TileTimerManager(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
 
         if (currentCategory == null) {
-            this.tileCreator = new TileCreator(user,  user.getConfiguration().getDefaultGridRow(), user.getConfiguration().getDefaultGridColumn());
+            this.tileCreator = new TileCreator(user, user.getConfiguration().getDefaultGridRow(), user.getConfiguration().getDefaultGridColumn());
         } else {
-            this.tileCreator = new TileCreator(user,currentCategory.getRows(), currentCategory.getColumns());
+            this.tileCreator = new TileCreator(user, currentCategory.getRows(), currentCategory.getColumns());
         }
-        
+
         initComponents();
         initListeners();
         setEmpties();
@@ -73,7 +74,7 @@ public class BaseGridPanel extends BasePanel {
 
     protected void setEmpties() {
         if (currentCategory == null) {
-            empties = user.getConfiguration().getDefaultGridRow() * user.getConfiguration().getDefaultGridRow();
+            empties = UIConstants.getInstance().getRows() * UIConstants.getInstance().getColumns();
         } else {
             empties = currentCategory.getRows() * currentCategory.getColumns();
         }
@@ -85,8 +86,8 @@ public class BaseGridPanel extends BasePanel {
         int rows, columns;
 
         if (currentCategory == null) {
-            rows = user.getConfiguration().getDefaultGridRow() - 1;
-            columns = user.getConfiguration().getDefaultGridColumn() - 1;
+            rows = UIConstants.getInstance().getRows();
+            columns = UIConstants.getInstance().getColumns();
         } else {
             rows = currentCategory.getRows();
             columns = currentCategory.getColumns();
@@ -94,7 +95,7 @@ public class BaseGridPanel extends BasePanel {
 
         for (int i = 0; i < empties; i++) {
             add(tileCreator.createEmpty(), c);
-            if (c.gridx == rows - 1) {
+            if (c.gridx == (columns - 1)) {
                 c.gridx = 0;
                 c.gridy++;
             } else {

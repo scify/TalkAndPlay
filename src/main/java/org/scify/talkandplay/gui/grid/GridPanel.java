@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.communication.CommunicationPanel;
 import org.scify.talkandplay.gui.grid.entertainment.EntertainmentPanel;
 import org.scify.talkandplay.gui.grid.games.GamesPanel;
+import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 
 /**
@@ -32,6 +33,8 @@ public class GridPanel extends BaseGridPanel {
      *
      */
     private void initCustomComponents() {
+        UIConstants.getInstance().setRows(2);
+        UIConstants.getInstance().setColumns(3);
         panelList = new ArrayList<>();
         initLayout();
 
@@ -100,7 +103,9 @@ public class GridPanel extends BaseGridPanel {
             panelList.add(gamesPanel);
         }
 
-       // fillWithEmpties();
+        c.gridy++;
+        c.gridx=0;
+        fillWithEmpties();
 
         timer.setList(panelList);
         timer.start();

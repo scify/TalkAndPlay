@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.BaseGridPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.tiles.TileAction;
+import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 
 public class EntertainmentPanel extends BaseGridPanel {
@@ -40,6 +41,8 @@ public class EntertainmentPanel extends BaseGridPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initCustomComponents() {
+        UIConstants.getInstance().setRows(2);
+        UIConstants.getInstance().setColumns(3);
         initLayout();
 
         panelList = new ArrayList<>();
@@ -57,7 +60,7 @@ public class EntertainmentPanel extends BaseGridPanel {
         panelList.add(videoPanel);
         panelList.add(backPanel);
 
-       // fillWithEmpties();
+        // fillWithEmpties();
         timer.setList(panelList);
         timer.start();
 

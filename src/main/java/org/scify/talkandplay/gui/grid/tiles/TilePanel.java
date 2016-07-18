@@ -47,6 +47,7 @@ public class TilePanel extends javax.swing.JPanel {
         JTextPane textPane = new JTextPane();
         textPane.setText(text);
         textPane.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 20));
+        textPane.setEditable(false);
         StyledDocument doc = textPane.getStyledDocument();
         SimpleAttributeSet center = new SimpleAttributeSet();
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
@@ -59,6 +60,7 @@ public class TilePanel extends javax.swing.JPanel {
         Image img;
         if (imageString != null && !imageString.isEmpty()) {
             img = new ImageIcon(imageString).getImage();
+            System.out.println(imageString);
         } else {
             img = new ImageIcon(imageUrl).getImage();
         }
@@ -70,13 +72,14 @@ public class TilePanel extends javax.swing.JPanel {
         if (calculateImageHeight() > 0) {
             int imageRatio = img.getHeight(this) / img.getWidth(this);
             imageHeight = calculateImageHeight();
-            imageWidth = imageHeight / imageRatio;
+            imageWidth = imageRatio == 0 ? imageHeight : imageHeight / imageRatio;
         } else {
             imageHeight = calculateImageHeight();
-            imageWidth = calculateImageHeight();
+            imageWidth = calculateImageWidth();
         }
 
-        System.out.println(text + " " + imageHeight + " " + UIConstants.getInstance().getRows() + "x" + UIConstants.getInstance().getColumns());
+        //   System.out.println(text + " " + imageHeight + " " + UIConstants.getInstance().getRows() + "x" + UIConstants.getInstance().getColumns());
+
         image = new JLabel(new ImageIcon(img.getScaledInstance(imageWidth, imageHeight, Image.SCALE_SMOOTH)));
 
         JPanel imagePanel = new JPanel(new GridBagLayout());
@@ -87,9 +90,13 @@ public class TilePanel extends javax.swing.JPanel {
 
         add(imagePanel);
 
-        setPreferredSize(new Dimension(imageHeight, imageHeight));
-        setMaximumSize(new Dimension(imageWidth, imageHeight));
-        setMinimumSize(new Dimension(imageWidth, imageHeight));
+        /*   setPreferredSize(new Dimension(imageWidth, imageHeight));
+         setMaximumSize(new Dimension(imageWidth, imageHeight));
+         setMinimumSize(new Dimension(imageWidth, imageHeight));*/
+    }
+
+    private int calculateImageWidth() {
+        return (UIConstants.getInstance().getWidth() / UIConstants.getInstance().getColumns() - 20 /*- (20 * UIConstants.getInstance().getRows())*/);
     }
 
     private int calculateImageHeight() {
