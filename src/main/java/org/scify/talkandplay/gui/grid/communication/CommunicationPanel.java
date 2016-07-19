@@ -1,9 +1,12 @@
 package org.scify.talkandplay.gui.grid.communication;
 
+import java.awt.Image;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.grid.BaseGridPanel;
@@ -99,6 +102,7 @@ public class CommunicationPanel extends BaseGridPanel {
                         add(panel, c);
                         setGrid(category);
                         panelList.add(panel);
+                        System.out.println("------------------------------------");
                     }
                 }
 

@@ -1,0 +1,98 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGILL (0x4) at pc=0x00007fadc5ab0f6b, pid=5847, tid=140383136237312
+#
+# JRE version: OpenJDK Runtime Environment (7.0_95) (build 1.7.0_95-b00)
+# Java VM: OpenJDK 64-Bit Server VM (24.95-b01 mixed mode linux-amd64 compressed oops)
+# Derivative: IcedTea 2.6.4
+# Distribution: Ubuntu 14.04 LTS, package 7u95-2.6.4-0ubuntu0.14.04.2
+# Problematic frame:
+# C  [libpthread.so.0+0x11f6b]  __lll_lock_elision+0x4b
+#
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please include
+# instructions on how to reproduce the bug and visit:
+#   http://icedtea.classpath.org/bugzilla
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007fadc02b6800):  JavaThread "AWT-EventQueue-0" [_thread_in_native, id=5868, stack(0x00007fad7ee7c000,0x00007fad7ef7d000)]
+
+siginfo:si_signo=SIGILL: si_errno=0, si_code=2 (ILL_ILLOPN), si_addr=0x00007fadc5ab0f6b
+
+Registers:
+RAX=0x00000000ffffffff, RBX=0x0000000000000000, RCX=0x0000000000000003, RDX=0x0000000000000080
+RSP=0x00007fad7ef78878, RBP=0x0000000000000000, RSI=0x00007fad6c00013e, RDI=0x00000000ffffffff
+R8 =0x00007fad6c000128, R9 =0x00007fad6c000128, R10=0x00007fad6c000170, R11=0x00007fad7dec3c80
+R12=0x0000000000000000, R13=0x0000000000000000, R14=0x00007fad7ef78a50, R15=0x00007fad6c000108
+RIP=0x00007fadc5ab0f6b, EFLAGS=0x0000000000010206, CSGSFS=0x0000000000000033, ERR=0x0000000000000000
+  TRAPNO=0x0000000000000006
+
+Top of Stack: (sp=0x00007fad7ef78878)
+0x00007fad7ef78878:   00007fad7dec3cc4 00007fad6c000150
+0x00007fad7ef78888:   00007fad6c000128 0000000000000000
+0x00007fad7ef78898:   0000000000000000 00007fad7ef78918
+0x00007fad7ef788a8:   00007fad7ef7891c 00007fad7ef79368
+0x00007fad7ef788b8:   00007fad9d9b5f8c 0000000000000000
+0x00007fad7ef788c8:   000000000000000e 00007fad7debde00
+0x00007fad7ef788d8:   0000000000000000 00007fad7ef78910
+0x00007fad7ef788e8:   0000000000000020 00007fad7ef78910
+0x00007fad7ef788f8:   00007fad7ef78a50 00007fad7ef78a20
+0x00007fad7ef78908:   00007fad9d9b6adc 0000000000000000
+0x00007fad7ef78918:   00007fad7ef79400 00007fad7ef78a10
+0x00007fad7ef78928:   00007fad9d9b640c 00007fad7ef789a8
+0x00007fad7ef78938:   00007fad7ef789ac 00007fad7ef789c0
+0x00007fad7ef78948:   0000000000000000 000000010000000b
+0x00007fad7ef78958:   00007fad7ef78910 00007fad7dec3c80
+0x00007fad7ef78968:   00007fad7ef79400 00007fad00000000
+0x00007fad7ef78978:   00007fad7ef79380 00007fad7ef78860
+0x00007fad7ef78988:   0000000400000000 0000000000000020
+0x00007fad7ef78998:   00007fad7ef789bc 00007fad7ef789b8
+0x00007fad7ef789a8:   00007fad7ef789c0 00007fad00000001
+0x00007fad7ef789b8:   0000000000000001 00007fad00000001
+0x00007fad7ef789c8:   0000000000000000 00007fad7ef793f0
+0x00007fad7ef789d8:   616341343fb54200 00007fad7ef78a40
+0x00007fad7ef789e8:   0000000000000000 00007fad7ef78b10
+0x00007fad7ef789f8:   00007fad7ef78a40 00007fad7ef78a70
+0x00007fad7ef78a08:   0000000000000004 00007fad7ef793f0
+0x00007fad7ef78a18:   00007fad7e0d7e41 00007fad7ef78af0
+0x00007fad7ef78a28:   00007fad7ef78af8 00007fad7ef78b00
+0x00007fad7ef78a38:   00007fad7ef78b08 00007fadbc1812f1
+0x00007fad7ef78a48:   00007fadbc181058 00007fad9d9b6db0
+0x00007fad7ef78a58:   00007fad9d9b6e10 00007fad9d9b6db0
+0x00007fad7ef78a68:   00007fad9d9b6db0 000000077a48f1d8 
+
+Instructions: (pc=0x00007fadc5ab0f6b)
+0x00007fadc5ab0f4b:   73 20 00 bf ff ff ff ff 85 c9 7f 12 eb d8 0f 1f
+0x00007fadc5ab0f5b:   80 00 00 00 00 a8 02 74 24 83 e9 01 74 c8 89 f8
+0x00007fadc5ab0f6b:   c7 f8 00 00 00 00 83 f8 ff 75 ea 41 8b 00 85 c0
+0x00007fadc5ab0f7b:   74 c4 c6 f8 ff eb e2 66 0f 1f 44 00 00 a8 01 74 
+
+Register to memory mapping:
+
+RAX=0x00000000ffffffff is an unknown value
+RBX=0x0000000000000000 is an unknown value
+RCX=0x0000000000000003 is an unknown value
+RDX=0x0000000000000080 is an unknown value
+RSP=0x00007fad7ef78878 is pointing into the stack for thread: 0x00007fadc02b6800
+RBP=0x0000000000000000 is an unknown value
+RSI=0x00007fad6c00013e is an unknown value
+RDI=0x00000000ffffffff is an unknown value
+R8 =0x00007fad6c000128 is an unknown value
+R9 =0x00007fad6c000128 is an unknown value
+R10=0x00007fad6c000170 is an unknown value
+R11=0x00007fad7dec3c80: libvlc_event_detach+0 in /usr/lib/libvlc.so.5.4.0 at 0x00007fad7deb7000
+R12=0x0000000000000000 is an unknown value
+R13=0x0000000000000000 is an unknown value
+R14=0x00007fad7ef78a50 is pointing into the stack for thread: 0x00007fadc02b6800
+R15=0x00007fad6c000108 is an unknown value
+
+
+Stack: [0x00007fad7ee7c000,0x00007fad7ef7d000],  sp=0x00007fad7ef78878,  free space=1010k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libpthread.so.0+0x11f6b]  __lll_lock_elision+0x4b

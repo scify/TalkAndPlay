@@ -446,7 +446,7 @@ public class VideoFrame extends javax.swing.JFrame {
                     mediaPlayerComponent.getMediaPlayer().stop();
                     mediaPlayerComponent.getMediaPlayer().release();
                     parent.getTimer().start();
-                    videoFrame.dispatchEvent(new WindowEvent(videoFrame, WindowEvent.WINDOW_CLOSING));
+                   // videoFrame.dispatchEvent(new WindowEvent(videoFrame, WindowEvent.WINDOW_CLOSING));
                 }
             }
         });

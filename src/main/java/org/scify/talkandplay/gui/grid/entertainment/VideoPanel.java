@@ -10,15 +10,23 @@ import org.scify.talkandplay.gui.grid.BaseMediaPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.timers.TimerManager;
 import org.scify.talkandplay.models.User;
+import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
+import uk.co.caprica.vlcj.player.MediaPlayerFactory;
+import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 
 public class VideoPanel extends BaseMediaPanel {
+
+    private MediaPlayerFactory mediaPlayerFactory;
+    private EmbeddedMediaPlayer mediaPlayer;
 
     private JPanel playerPanel, prevPanel, playPanel, nextPanel, listPanel, exitPanel;
 
     public VideoPanel(User user, GridFrame parent) {
         super(user, parent, (new File(user.getEntertainmentModule().getVideoModule().getFolderPath())).listFiles());
+        mediaPlayerFactory = new MediaPlayerFactory();
+        mediaPlayer = mediaPlayerFactory.newEmbeddedMediaPlayer();
 
         initComponents();
         initCustomComponents();
@@ -109,6 +117,14 @@ public class VideoPanel extends BaseMediaPanel {
         ((JLabel) playPanel.getComponent(0)).setText("Παύση");
         ((JLabel) playPanel.getComponent(1)).setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/pause-button.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 
+    }
+
+    public EmbeddedMediaPlayer getMediaPlayer() {
+        return this.mediaPlayer;
+    }
+
+    public MediaPlayerFactory getMediaPlayerFactory() {
+        return this.mediaPlayerFactory;
     }
 
 

@@ -250,6 +250,9 @@ public class FilesPanel extends javax.swing.JPanel {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                     if (sensorService.shouldSelect(sensor)) {
+                        if (parent instanceof VideoPanel) {
+                            ((VideoPanel) parent).getMediaPlayer().release();
+                        }
                         timer.cancel();
                         parent.goBack();
                     }
@@ -259,6 +262,9 @@ public class FilesPanel extends javax.swing.JPanel {
                 public void keyPressed(java.awt.event.KeyEvent evt) {
                     Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                     if (sensorService.shouldSelect(sensor)) {
+                        if (parent instanceof VideoPanel) {
+                            ((VideoPanel) parent).getMediaPlayer().release();
+                        }
                         timer.cancel();
                         parent.goBack();
                     }

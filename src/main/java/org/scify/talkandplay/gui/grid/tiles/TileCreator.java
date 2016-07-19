@@ -53,6 +53,7 @@ public class TileCreator {
 
             @Override
             public void finished(MediaPlayer mediaPlayer) {
+                System.out.println("---------------Audio finished");
                 tileAction.audioFinished();
             }
         });
