@@ -153,9 +153,9 @@ public class CategoryService {
             categoryChild.addContent(new Element("image").setText(category.getImage()));
             categoryChild.addContent(new Element("sound").setText(category.getSound()));
             //categoryChild.addContent(new Element("order").setText(String.valueOf(category.getOrder())));
-            categoryChild.addContent(new Element("hasSound").setText(String.valueOf(category.hasSound())));
-            categoryChild.addContent(new Element("hasImage").setText(String.valueOf(category.hasImage())));
-            categoryChild.addContent(new Element("hasText").setText(String.valueOf(category.hasText())));
+            categoryChild.addContent(new Element("hasSound").setText(String.valueOf(user.getConfiguration().hasSound())));
+            categoryChild.addContent(new Element("hasImage").setText(String.valueOf(user.getConfiguration().hasImage())));
+            categoryChild.addContent(new Element("hasText").setText(String.valueOf(user.getConfiguration().hasText())));
 
             //check if the category is the first level of the comm module
             if (category.getParentCategory().getName().equals(user.getCommunicationModule().getName())) {

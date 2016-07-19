@@ -104,6 +104,12 @@ public class ConfigurationPanel extends javax.swing.JPanel {
                 msg);
     }
 
+    public void redrawCategoriesDropDown() {
+        if (infoWrapperPanel.getComponent(0) instanceof WordFormPanel) {
+            ((WordFormPanel) infoWrapperPanel.getComponent(0)).updateCategoriesComboBox();
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -927,5 +927,54 @@
       <image />
     </games>
   </profile>
+  <profile preselected="false">
+    <name>τεστ</name>
+    <image />
+    <configuration>
+      <rotationSpeed>1</rotationSpeed>
+      <defaultGridRow>3</defaultGridRow>
+      <defaultGridColumn>3</defaultGridColumn>
+      <sound>false</sound>
+      <image>true</image>
+      <text>true</text>
+      <selectionSensor>
+        <type>mouse</type>
+        <button>1</button>
+        <clickCount>1</clickCount>
+      </selectionSensor>
+    </configuration>
+    <communication>
+      <name>Επικοινωνία</name>
+      <enabled>true</enabled>
+      <image />
+      <rows>3</rows>
+      <columns>3</columns>
+      <categories />
+    </communication>
+    <entertainment>
+      <name>Ψυχαγωγία</name>
+      <enabled>true</enabled>
+      <image />
+      <music>
+        <name>Μουσική</name>
+        <enabled>true</enabled>
+        <image />
+        <path />
+        <playlistSize>10</playlistSize>
+      </music>
+      <video>
+        <name>Βίντεο</name>
+        <enabled>true</enabled>
+        <image />
+        <path />
+        <playlistSize>10</playlistSize>
+      </video>
+    </entertainment>
+    <games>
+      <name>Παιχνίδια</name>
+      <image />
+      <enabled>true</enabled>
+    </games>
+  </profile>
 </profiles>
 

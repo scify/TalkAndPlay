@@ -41,8 +41,6 @@ public class TilePanel extends javax.swing.JPanel {
     }
 
     private void initCustomComponents() {
-        System.out.println("printing " + text);
-
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         setBackground(Color.white);
 

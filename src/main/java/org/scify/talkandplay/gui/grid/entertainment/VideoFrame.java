@@ -172,20 +172,20 @@ public class VideoFrame extends javax.swing.JFrame {
 
         mediaPlayerComponent.getMediaPlayer().setFullScreenStrategy(
                 new DefaultAdaptiveRuntimeFullScreenStrategy(this) {
-                    @Override
-                    protected void beforeEnterFullScreen() {
-                        System.out.println("enter");
-                        playerPanel.setBackground(Color.yellow);
-                        playerPanel.setVisible(false);
-                    }
+            @Override
+            protected void beforeEnterFullScreen() {
+                System.out.println("enter");
+                playerPanel.setBackground(Color.yellow);
+                playerPanel.setVisible(false);
+            }
 
-                    @Override
-                    protected void afterExitFullScreen() {
-                        setExtendedState(JFrame.MAXIMIZED_BOTH);
-                        System.out.println("exit");
-                        playerPanel.setVisible(true);
-                    }
-                }
+            @Override
+            protected void afterExitFullScreen() {
+                setExtendedState(JFrame.MAXIMIZED_BOTH);
+                System.out.println("exit");
+                playerPanel.setVisible(true);
+            }
+        }
         );
 
         mediaPlayerComponent.getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
@@ -443,10 +443,13 @@ public class VideoFrame extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
+                    if (mediaPlayerComponent.getMediaPlayer().isPlaying()) {
+                        mediaPlayerComponent.getMediaPlayer().play();
+                    }
                     mediaPlayerComponent.getMediaPlayer().stop();
                     mediaPlayerComponent.getMediaPlayer().release();
                     parent.getTimer().start();
-                   // videoFrame.dispatchEvent(new WindowEvent(videoFrame, WindowEvent.WINDOW_CLOSING));
+                    videoFrame.dispatchEvent(new WindowEvent(videoFrame, WindowEvent.WINDOW_CLOSING));
                 }
             }
         });
