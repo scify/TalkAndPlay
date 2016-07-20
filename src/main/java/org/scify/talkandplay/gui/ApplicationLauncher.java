@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.util.ArrayList;
 import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 
 public class ApplicationLauncher {
@@ -40,16 +41,6 @@ public class ApplicationLauncher {
         UIManager.put("ScrollBar.track", Color.decode(UIConstants.green));
         UIManager.put("ScrollBar.trackHighlight", Color.decode(UIConstants.green));
 
-        /*
-         ScrollBar.background
-         ScrollBar.foreground
-         ScrollBar.thumb
-         ScrollBar.thumbDarkShadow
-         ScrollBar.thumbHighlight
-         ScrollBar.thumbShadow
-         ScrollBar.track
-         ScrollBar.trackHighlight
-         */
         //tabs
         UIManager.put("TabbedPane.borderColor", Color.decode(UIConstants.green));
         UIManager.put("TabbedPane.borderHightlightColor", Color.decode(UIConstants.green));
@@ -60,6 +51,10 @@ public class ApplicationLauncher {
         UIManager.put("TabbedPane.selectHighlight", Color.decode(UIConstants.green));
         UIManager.put("TabbedPane.selectedForeground", Color.white);
         UIManager.put("TabbedPane.contentBorderInsets", new Insets(1, 1, 1, 1));
+
+        UIManager.put("ToolTip.foreground", Color.black);
+        UIManager.put("ToolTip.background", Color.white);
+        UIManager.put("ToolTip.border", new LineBorder( Color.decode(UIConstants.green), 1));
 
         java.util.Enumeration keys = UIManager.getLookAndFeelDefaults().keys();
         while (keys.hasMoreElements()) {

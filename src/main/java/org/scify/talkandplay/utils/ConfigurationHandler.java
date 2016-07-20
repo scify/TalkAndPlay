@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.jdom.Document;
@@ -41,6 +42,7 @@ public class ConfigurationHandler {
     private List<User> users;
     private String projectPath;
     private Map<String, List<String>> userFiles;
+    private List<String> files;
 
     public ConfigurationHandler() {
         try {
@@ -96,11 +98,13 @@ public class ConfigurationHandler {
      * @throws Exception
      */
     private void parseXML() throws Exception {
+        userFiles = new HashMap();
         users = new ArrayList();
         List usersEl = configurationFile.getRootElement().getChildren();
 
         for (int i = 0; i < usersEl.size(); i++) {
 
+            files = new ArrayList();
             Element userEl = (Element) usersEl.get(i);
             User user = new User(userEl.getChildText("name"), userEl.getChildText("image"));
 
@@ -123,6 +127,7 @@ public class ConfigurationHandler {
             user.setGameModule(getGameModule(games));
 
             users.add(user);
+            userFiles.put(user.getName(), files);
         }
     }
 
@@ -174,14 +179,13 @@ public class ConfigurationHandler {
 
     private CommunicationModule getCommunicationModule(Element communicationNode) {
         //set the communication module settings
-        List<Category> categoriesArray = new ArrayList<>();
+        List<Category> categoriesArray = new ArrayList();
 
         Element categories = (Element) communicationNode.getChild("categories");
         categoriesArray = getCategories(categories, categoriesArray, null);
 
         CommunicationModule communicationModule = new CommunicationModule();
         communicationModule.setName(communicationNode.getChildText("name"));
-        communicationModule.setSound(communicationNode.getChildText("sound"));
         communicationModule.setRows(Integer.parseInt(communicationNode.getChildText("rows")));
         communicationModule.setColumns(Integer.parseInt(communicationNode.getChildText("columns")));
 
@@ -479,21 +483,6 @@ public class ConfigurationHandler {
                     category.setHasText(true);
                 }
 
-                //set the tiles
-                if (categoryEl.getChild("tiles") != null) {
-                    Element tileEl;
-                    for (int j = 0; j < categoryEl.getChild("tiles").getChildren().size(); j++) {
-                        tileEl = (Element) categoryEl.getChild("tiles").getChildren().get(j);
-
-                        int order = 0;
-                        if (tileEl.getAttributeValue("order") != null) {
-                            order = Integer.parseInt(categoryEl.getAttributeValue("order"));
-                        }
-
-                        category.getTiles().add(new Tile(tileEl.getChildText("name"), tileEl.getChildText("image"), tileEl.getChildText("sound"), order));
-                    }
-                }
-
                 if (parent != null) {
                     category.setParentCategory(parent);
                 }
@@ -505,6 +494,13 @@ public class ConfigurationHandler {
 
                 category.setSubCategories((ArrayList<Category>) categoriesArray);
                 categories.add(category);
+
+                if (!categoryEl.getChildText("sound").isEmpty()) {
+                    files.add(categoryEl.getChildText("sound"));
+                }
+                if (!categoryEl.getChildText("image").isEmpty()) {
+                    files.add(categoryEl.getChildText("image"));
+                }
 
             }
             return categories;
@@ -523,12 +519,29 @@ public class ConfigurationHandler {
             if (entry.getKey().equals(username)) {
                 for (String path : entry.getValue()) {
                     if (!(new File(path).isFile())) {
-                        return false;
+                        System.out.println(path);
+                        return true;
                     }
                 }
             }
         }
-        return true;
+        return false;
+    }
+
+    public List<String> getBrokenFiles(String username) {
+        List<String> brokenFiles = new ArrayList();
+
+        for (Map.Entry<String, List<String>> entry : userFiles.entrySet()) {
+            if (entry.getKey().equals(username)) {
+                for (String path : entry.getValue()) {
+                    if (!(new File(path).isFile())) {
+                        brokenFiles.add(path);
+                    }
+                }
+            }
+        }
+
+        return brokenFiles;
     }
 
     public void refreshXmlFile() throws Exception {

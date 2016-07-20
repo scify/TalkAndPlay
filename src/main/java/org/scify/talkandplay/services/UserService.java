@@ -102,7 +102,7 @@ public class UserService {
         communication.addContent(new Element("rows").setText(String.valueOf(user.getConfiguration().getDefaultGridRow())));
         communication.addContent(new Element("columns").setText(String.valueOf(user.getConfiguration().getDefaultGridColumn())));
         communication.addContent(categories);
-        
+
         //add entertainment module settings
         Element entertainment = new Element("entertainment");
         entertainment.addContent(new Element("name").setText("Ψυχαγωγία"));
@@ -240,10 +240,11 @@ public class UserService {
         }
     }
 
-    public boolean hasBrokenFiles(User user) {
-        boolean flag = false;
+    public boolean hasBrokenFiles(String username) {
+        return configurationFile.hasBrokenFiles(username);
+    }
 
-        // for(File file : configurationHandler.getFiles())
-        return flag;
+    public List<String> getBrokenFiles(String username) {
+        return configurationFile.getBrokenFiles(username);
     }
 }

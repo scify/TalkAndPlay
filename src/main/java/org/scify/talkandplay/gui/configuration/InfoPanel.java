@@ -1,21 +1,28 @@
 package org.scify.talkandplay.gui.configuration;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.List;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.services.UserService;
 
 public class InfoPanel extends javax.swing.JPanel {
 
     private GuiHelper guiHelper;
     private ConfigurationPanel parent;
     private User user;
+    private UserService userService;
 
     public InfoPanel(ConfigurationPanel parent, User user) {
         this.guiHelper = new GuiHelper();
         this.parent = parent;
         this.user = user;
+        this.userService = new UserService();
 
         initComponents();
         initCustomComponents();
@@ -37,6 +44,9 @@ public class InfoPanel extends javax.swing.JPanel {
         backButton = new javax.swing.JButton();
         editLabel = new javax.swing.JLabel();
         addLabel = new javax.swing.JLabel();
+        brokenFilesLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        brokenFilesPanel = new javax.swing.JPanel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(460, 655));
@@ -71,6 +81,26 @@ public class InfoPanel extends javax.swing.JPanel {
 
         addLabel.setText("2. Προσθήκη  ");
 
+        brokenFilesLabel.setText("Τα παρακάτω αρχεία δεν μπορούν να βρεθούν:");
+
+        jScrollPane1.setBorder(null);
+
+        brokenFilesPanel.setBackground(new java.awt.Color(255, 255, 255));
+        brokenFilesPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        javax.swing.GroupLayout brokenFilesPanelLayout = new javax.swing.GroupLayout(brokenFilesPanel);
+        brokenFilesPanel.setLayout(brokenFilesPanelLayout);
+        brokenFilesPanelLayout.setHorizontalGroup(
+            brokenFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        brokenFilesPanelLayout.setVerticalGroup(
+            brokenFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 129, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(brokenFilesPanel);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -87,8 +117,10 @@ public class InfoPanel extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(addWordButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(backButton)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(backButton))
+                            .addComponent(brokenFilesLabel))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -106,7 +138,11 @@ public class InfoPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addWordButton)
                     .addComponent(backButton))
-                .addContainerGap(468, Short.MAX_VALUE))
+                .addGap(66, 66, 66)
+                .addComponent(brokenFilesLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(246, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -134,7 +170,28 @@ public class InfoPanel extends javax.swing.JPanel {
         Font font = new Font(UIConstants.mainFont, Font.BOLD, 16);
         editLabel.setFont(font);
         addLabel.setFont(font);
-        
+        brokenFilesPanel.setBackground(Color.white);
+
+        List<String> brokenFiles = userService.getBrokenFiles(user.getName());
+        if (brokenFiles.size()==0) {
+            brokenFilesLabel.setVisible(false);
+            brokenFilesPanel.setVisible(false);
+        } else {
+            font = new Font(UIConstants.mainFont, Font.BOLD, 14);
+            brokenFilesLabel.setFont(font);
+            brokenFilesLabel.setVisible(true);
+            brokenFilesPanel.setVisible(true);
+            brokenFilesPanel.setLayout(new BoxLayout(brokenFilesPanel, BoxLayout.Y_AXIS));
+
+            font = new Font(UIConstants.mainFont, Font.PLAIN, 12);
+
+            for (String file : brokenFiles) {
+                JLabel fileLabel = new JLabel(file);
+                add(fileLabel);
+              //  fileLabel.setFont(font);
+                brokenFilesPanel.add(fileLabel);
+            }
+        }
         guiHelper.drawButton(addWordButton);
         guiHelper.drawButton(backButton);
     }
@@ -144,8 +201,11 @@ public class InfoPanel extends javax.swing.JPanel {
     private javax.swing.JLabel addLabel;
     private javax.swing.JButton addWordButton;
     private javax.swing.JButton backButton;
+    private javax.swing.JLabel brokenFilesLabel;
+    private javax.swing.JPanel brokenFilesPanel;
     private javax.swing.JLabel editExplLabel;
     private javax.swing.JLabel editLabel;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

@@ -51,4 +51,12 @@ public class ConfigurationFile {
         return configurationHandler.getUserElement(name);
     }
 
+    public boolean hasBrokenFiles(String username) {
+        return configurationHandler.hasBrokenFiles(username);
+    }
+
+    
+    public List<String> getBrokenFiles(String username){
+        return configurationHandler.getBrokenFiles(username);
+    }
 }

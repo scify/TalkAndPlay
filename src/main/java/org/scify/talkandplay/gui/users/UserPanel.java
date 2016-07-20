@@ -94,8 +94,9 @@ public class UserPanel extends javax.swing.JPanel {
         controlsPanel.add(deleteLabel);
 
         JLabel nameLabel;
-        if (userService.hasBrokenFiles(user)) {
+        if (userService.hasBrokenFiles(user.getName())) {
             nameLabel = new JLabel(user.getName(), new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/warning.png")), JLabel.RIGHT);
+            nameLabel.setToolTipText("Κάποια αρχεία δεν μπορούν να βρεθούν");
         } else {
             nameLabel = new JLabel(user.getName());
         }
