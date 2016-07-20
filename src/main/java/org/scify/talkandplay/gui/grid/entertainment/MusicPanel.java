@@ -235,6 +235,8 @@ public class MusicPanel extends BaseMediaPanel {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
                     mediaPlayerPanel.getAudioPlayer().getMediaPlayer().pause();
+                } else {
+                    mediaPlayerPanel.getAudioPlayer().getMediaPlayer().play();
                 }
             }
         });

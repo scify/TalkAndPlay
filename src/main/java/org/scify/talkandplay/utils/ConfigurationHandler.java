@@ -448,6 +448,8 @@ public class ConfigurationHandler {
                         categoryEl.getChildText("image"));
 
                 category.setSound(categoryEl.getChildText("sound"));
+                
+                
 
                 if (parent != null) {
                     category.setParentCategory(new Category(parent.getName()));

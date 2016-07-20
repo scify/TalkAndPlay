@@ -170,7 +170,7 @@ public class VideoFrame extends javax.swing.JFrame {
 
     private void initMediaPlayer() {
 
-       mediaPlayer.setFullScreenStrategy(
+        mediaPlayer.setFullScreenStrategy(
                 new DefaultAdaptiveRuntimeFullScreenStrategy(this) {
                     @Override
                     protected void beforeEnterFullScreen() {
@@ -231,26 +231,26 @@ public class VideoFrame extends javax.swing.JFrame {
          e.getWindow().dispose();
          }
          });*/
- /*       Canvas videoSurface = this.mediaPlayerComponent.getVideoSurface();
-        videoSurface.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                Sensor sensor = new MouseSensor(e.getButton(), e.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor)) {
-                    mediaPlayer.setFullScreen(false);
-                }
-            }
-        });
+        /*       Canvas videoSurface = this.mediaPlayerComponent.getVideoSurface();
+         videoSurface.addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseClicked(MouseEvent e) {
+         Sensor sensor = new MouseSensor(e.getButton(), e.getClickCount(), "mouse");
+         if (sensorService.shouldSelect(sensor)) {
+         mediaPlayer.setFullScreen(false);
+         }
+         }
+         });
 
-        videoSurface.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent evt) {
-                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
-                if (sensorService.shouldSelect(sensor)) {
-                    mediaPlayer.setFullScreen(false);
-                }
-            }
-        });*/
+         videoSurface.addKeyListener(new KeyAdapter() {
+         @Override
+         public void keyPressed(KeyEvent evt) {
+         Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
+         if (sensorService.shouldSelect(sensor)) {
+         mediaPlayer.setFullScreen(false);
+         }
+         }
+         });*/
     }
 
     private void initCustomComponents() {
@@ -413,7 +413,8 @@ public class VideoFrame extends javax.swing.JFrame {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor) && mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();
-                    pack();
+                } else {
+                    mediaPlayer.play();
                 }
             }
         });

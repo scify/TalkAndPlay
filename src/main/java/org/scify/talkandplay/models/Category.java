@@ -5,16 +5,15 @@ import java.util.List;
 
 public class Category {
 
-    private int rows, columns;
     private String name;
     private String image;
     private String sound;
+    private Integer rows, columns;
     private int order;
     private boolean editable;
     private Category parentCategory;
     private List<Category> subCategories;
-    private List<Tile> tiles;
-    
+
     private boolean hasSound;
     private boolean hasImage;
     private boolean hasText;
@@ -24,16 +23,13 @@ public class Category {
     }
 
     public Category(String name, List<Tile> tiles, Category parentCategory, List<Category> subCategories) {
-        this.tiles = new ArrayList<>();
         this.subCategories = new ArrayList<>();
         this.name = name;
-        this.tiles = tiles;
         this.parentCategory = parentCategory;
         this.subCategories = subCategories;
     }
 
-    public Category(String name, int rows, int columns, String image) {
-        this.tiles = new ArrayList<>();
+    public Category(String name, Integer rows, Integer columns, String image) {
         this.subCategories = new ArrayList<>();
         this.rows = rows;
         this.columns = columns;
@@ -41,25 +37,30 @@ public class Category {
         this.image = image;
     }
 
+    public Category(String name, String image) {
+        this.subCategories = new ArrayList<>();
+        this.name = name;
+        this.image = image;
+    }
+
     public Category() {
 //        this.parentCategory = new Category();
-        this.tiles = new ArrayList<>();
         this.subCategories = new ArrayList<>();
     }
 
-    public int getRows() {
+    public Integer getRows() {
         return rows;
     }
 
-    public void setRows(int rows) {
+    public void setRows(Integer rows) {
         this.rows = rows;
     }
 
-    public int getColumns() {
+    public Integer getColumns() {
         return columns;
     }
 
-    public void setColumns(int columns) {
+    public void setColumns(Integer columns) {
         this.columns = columns;
     }
 
@@ -79,9 +80,6 @@ public class Category {
         this.order = order;
     }
 
-    public List<Tile> getTiles() {
-        return tiles;
-    }
 
     public String getImage() {
         return image;
@@ -99,9 +97,6 @@ public class Category {
         this.sound = sound;
     }
 
-    public void setTiles(List<Tile> tiles) {
-        this.tiles = tiles;
-    }
 
     public Category getParentCategory() {
         return parentCategory;
@@ -150,8 +145,6 @@ public class Category {
     public void setHasText(boolean hasText) {
         this.hasText = hasText;
     }
-    
-    
 
     @Override
     public String toString() {

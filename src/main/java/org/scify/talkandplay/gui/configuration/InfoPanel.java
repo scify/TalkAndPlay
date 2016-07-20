@@ -83,6 +83,7 @@ public class InfoPanel extends javax.swing.JPanel {
 
         brokenFilesLabel.setText("Τα παρακάτω αρχεία δεν μπορούν να βρεθούν:");
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);
 
         brokenFilesPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -170,16 +171,17 @@ public class InfoPanel extends javax.swing.JPanel {
         Font font = new Font(UIConstants.mainFont, Font.BOLD, 16);
         editLabel.setFont(font);
         addLabel.setFont(font);
-        brokenFilesPanel.setBackground(Color.white);
 
         List<String> brokenFiles = userService.getBrokenFiles(user.getName());
         if (brokenFiles.size()==0) {
             brokenFilesLabel.setVisible(false);
+            jScrollPane1.setVisible(false);
             brokenFilesPanel.setVisible(false);
         } else {
             font = new Font(UIConstants.mainFont, Font.BOLD, 14);
             brokenFilesLabel.setFont(font);
             brokenFilesLabel.setVisible(true);
+            jScrollPane1.setVisible(true);
             brokenFilesPanel.setVisible(true);
             brokenFilesPanel.setLayout(new BoxLayout(brokenFilesPanel, BoxLayout.Y_AXIS));
 

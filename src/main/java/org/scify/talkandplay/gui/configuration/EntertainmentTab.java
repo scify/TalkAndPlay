@@ -266,8 +266,8 @@ public class EntertainmentTab extends javax.swing.JPanel {
         } else if (songSumTextField.getText().isEmpty() || !StringUtils.isNumeric(songSumTextField.getText())) {
             errorLabel.setText("Το πλήθος τραγουδιών πρέπει οριστεί σωστά");
             errorLabel.setVisible(true);
-        } else if (Integer.parseInt(songSumTextField.getText()) < 0 || Integer.parseInt(songSumTextField.getText()) > 10) {
-            errorLabel.setText("Το πλήθος τραγουδιών πρέπει να είναι μεταξύ 0 και 10");
+        } else if (Integer.parseInt(songSumTextField.getText()) < 6 || Integer.parseInt(songSumTextField.getText()) > 10) {
+            errorLabel.setText("Το πλήθος τραγουδιών πρέπει να είναι μεταξύ 6 και 10");
             errorLabel.setVisible(true);
         } else {
             errorLabel.setVisible(false);

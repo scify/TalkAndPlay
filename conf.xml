@@ -480,7 +480,7 @@
       <rows>2</rows>
       <columns>3</columns>
       <categories>
-        <category name="Φαγητό">
+        <category name="Λέξη">
           <rows>2</rows>
           <columns>3</columns>
           <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/Μπιφτέκι.png</image>
@@ -506,6 +506,17 @@
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
+              <categories>
+                <category name="fff">
+                  <rows>3</rows>
+                  <columns>3</columns>
+                  <image>/home/christina/Pictures/filtra_anazitisis.png</image>
+                  <sound />
+                  <hasSound>false</hasSound>
+                  <hasImage>true</hasImage>
+                  <hasText>true</hasText>
+                </category>
+              </categories>
             </category>
             <category name="Τοστ">
               <rows>3</rows>
@@ -726,7 +737,7 @@
         <image />
         <sound />
         <path>/home/christina/Music/</path>
-        <playlistSize>10</playlistSize>
+        <playlistSize>6</playlistSize>
       </music>
       <video>
         <name>Βίντεο</name>
@@ -734,7 +745,7 @@
         <image />
         <sound />
         <path>/home/christina/Videos/</path>
-        <playlistSize>10</playlistSize>
+        <playlistSize>6</playlistSize>
       </video>
     </entertainment>
     <games>
