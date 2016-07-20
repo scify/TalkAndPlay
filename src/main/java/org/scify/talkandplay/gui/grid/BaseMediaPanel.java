@@ -33,7 +33,7 @@ import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.SensorService;
 
 public class BaseMediaPanel extends BasePanel {
-    
+
     protected FilesPanel filesPanel;
     protected ArrayList<JPanel> controlsList;
     protected TimerManager timer;
@@ -41,22 +41,23 @@ public class BaseMediaPanel extends BasePanel {
     protected ArrayList<File> files;
     protected GridBagConstraints c;
     protected String currentFile;
-    
+
     protected SensorService sensorService;
-    
+
     public BaseMediaPanel(User user, GridFrame parent, File[] files) {
         super(user, parent);
-        
+
         this.sensorService = new SensorService(user);
         this.controlsList = new ArrayList();
         this.mediaPlayerPanel = new MediaPlayerPanel(this);
         this.timer = new ButtonTimerManager(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         this.files = new ArrayList();
+        this.currentFile = "";
         this.c = new GridBagConstraints();
         Collections.addAll(this.files, files);
         prepareFiles();
     }
-    
+
     public void initLayout() {
         setBorder(new EmptyBorder(0, 20, 20, 20));
         setBackground(Color.white);
@@ -68,43 +69,43 @@ public class BaseMediaPanel extends BasePanel {
         c.weighty = 1;
         c.weightx = 1;
     }
-    
+
     public void playFile(String fileName) {
         return;
     }
-    
+
     public TimerManager getTimer() {
         return timer;
     }
-    
+
     public List<JPanel> getControlsList() {
         return controlsList;
     }
-    
+
     public boolean isEmpty() {
         if (files.isEmpty()) {
             return true;
         }
         return false;
     }
-    
+
     protected void drawEmpty() {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        
+
         JLabel noFiles = new JLabel("Δεν υπάρχουν αρχεία");
         noFiles.setBorder(new EmptyBorder(5, 5, 5, 5));
         noFiles.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
         noFiles.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
+
         JLabel label = new JLabel("Πίσω");
         label.setBorder(new EmptyBorder(5, 5, 5, 5));
         label.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
+
         JLabel icon = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png")).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
         icon.setBorder(new EmptyBorder(5, 5, 5, 5));
         icon.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
+
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         panel.setBackground(Color.decode(UIConstants.grey));
@@ -114,13 +115,13 @@ public class BaseMediaPanel extends BasePanel {
         panel.setBorder((new LineBorder(Color.white, 10)));
         panel.add(icon);
         panel.add(label);
-        
+
         add(noFiles);
         add(panel);
         controlsList.add(panel);
         timer.setList(controlsList);
         timer.start();
-        
+
         panel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
@@ -138,7 +139,7 @@ public class BaseMediaPanel extends BasePanel {
             }
         });
     }
-    
+
     public void goBack() {
         timer.cancel();
         parent.clearGrid();
@@ -157,5 +158,5 @@ public class BaseMediaPanel extends BasePanel {
             }
         }
     }
-   
+
 }

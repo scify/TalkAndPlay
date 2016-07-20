@@ -191,6 +191,12 @@ public class ConfigurationHandler {
             communicationModule.setImage(communicationNode.getChildText("image"));
         }
 
+        if (communicationNode.getChildText("sound").isEmpty()) {
+            communicationModule.setSound("demo_resources/sounds/Επικοινωνία.mp3");
+        } else {
+            communicationModule.setSound(communicationNode.getChildText("sound"));
+        }
+
         communicationModule.setEnabled("true".equals(communicationNode.getChildText("enabled")));
         communicationModule.setCategories(categoriesArray);
 
@@ -210,6 +216,12 @@ public class ConfigurationHandler {
             entertainmentModule.setImage(entertainmentNode.getChildText("image"));
         }
 
+        if (entertainmentNode.getChildText("sound").isEmpty()) {
+            entertainmentModule.setSound("demo_resources/sounds/Ψυχαγωγία.mp3");
+        } else {
+            entertainmentModule.setSound(entertainmentNode.getChildText("sound"));
+        }
+
         //set the music module
         Element musicNode = (Element) entertainmentNode.getChild("music");
         MusicModule musicModule = new MusicModule();
@@ -225,6 +237,12 @@ public class ConfigurationHandler {
             musicModule.setImage(musicNode.getChildText("image"));
         }
 
+        if (musicNode.getChildText("sound").isEmpty()) {
+            musicModule.setSound("demo_resources/sounds/Μουσική.mp3");
+        } else {
+            musicModule.setSound(musicNode.getChildText("sound"));
+        }
+
         //set the video module
         Element videoNode = (Element) entertainmentNode.getChild("video");
         VideoModule videoModule = new VideoModule();
@@ -238,6 +256,12 @@ public class ConfigurationHandler {
             videoModule.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/video_module.png"));
         } else {
             videoModule.setImage(videoNode.getChildText("image"));
+        }
+
+        if (videoNode.getChildText("sound").isEmpty()) {
+            videoModule.setSound("demo_resources/sounds/Βίντεο.mp3");
+        } else {
+            videoModule.setSound(videoNode.getChildText("sound"));
         }
 
         entertainmentModule.setMusicModule(musicModule);
@@ -259,6 +283,12 @@ public class ConfigurationHandler {
             gameModule.setImage(gameNode.getChildText("image"));
         }
 
+        if (gameNode.getChildText("sound").isEmpty()) {
+            gameModule.setSound("demo_resources/sounds/Παιχνίδια.mp3");
+        } else {
+            gameModule.setSound(gameNode.getChildText("sound"));
+        }
+
         //set the stimulus reaction games
         Element stimulusReactionGamesNode = gameNode.getChild("stimulusReactionGames");
         if (stimulusReactionGamesNode != null) {
@@ -266,6 +296,12 @@ public class ConfigurationHandler {
                     stimulusReactionGamesNode.getChildText("image"),
                     "true".equals(stimulusReactionGamesNode.getChildText("enabled")),
                     "stimulusReactionGame");
+
+            if (stimulusReactionGamesNode.getChildText("sound").isEmpty()) {
+                stimulusReactionType.setSound("demo_resources/sounds/Ερέθισμα - Αντίδραση.mp3");
+            } else {
+                stimulusReactionType.setSound(stimulusReactionGamesNode.getChildText("sound"));
+            }
 
             List gamesList = stimulusReactionGamesNode.getChild("games").getChildren();
 
@@ -303,6 +339,12 @@ public class ConfigurationHandler {
                     "true".equals(sequenceGamesNode.getChildText("enabled")),
                     "sequenceGame");
 
+            if (stimulusReactionGamesNode.getChildText("sound").isEmpty()) {
+                sequenceGameType.setSound("demo_resources/sounds/Χρονικής Αλληλουχίας.mp3");
+            } else {
+                sequenceGameType.setSound(sequenceGamesNode.getChildText("sound"));
+            }
+
             List gamesList = sequenceGamesNode.getChild("games").getChildren();
 
             for (int i = 0; i < gamesList.size(); i++) {
@@ -339,6 +381,12 @@ public class ConfigurationHandler {
                     similarGamesNode.getChildText("image"),
                     "true".equals(similarGamesNode.getChildText("enabled")),
                     "similarityGame");
+
+            if (similarGamesNode.getChildText("sound").isEmpty()) {
+                similarityGameType.setSound("demo_resources/sounds/Βρες το όμοιο.mp3");
+            } else {
+                similarityGameType.setSound(similarGamesNode.getChildText("sound"));
+            }
 
             List gamesList = similarGamesNode.getChild("games").getChildren();
 

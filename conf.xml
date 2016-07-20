@@ -476,6 +476,7 @@
       <name>Επικοινωνία</name>
       <enabled>true</enabled>
       <image />
+      <sound />
       <rows>2</rows>
       <columns>3</columns>
       <categories>
@@ -714,210 +715,25 @@
         </category>
       </categories>
     </communication>
-    <communication>
-      <name>Επικοινωνία</name>
-      <enabled>true</enabled>
-      <image />
-      <rows>3</rows>
-      <columns>3</columns>
-      <categories>
-        <category name="Φαγητό">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/Μπιφτέκι.png</image>
-          <sound>/home/xrist/Desktop/tp/demo_resources/sounds/φαγητό.mp3</sound>
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-          <categories>
-            <category name="Μακαρόνια">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/Μακαρόνια.png</image>
-              <sound>/home/xrist/Desktop/tp/demo_resources/sounds/Μακαρόνια.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="Πατάτες τηγανητές">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/Πατάτες τηγανητές.png</image>
-              <sound>/home/xrist/Desktop/tp/demo_resources/sounds/Πατάτες_τηγανητές.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="τοστ">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/τοστ.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="χυμός">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/χυμός.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="γάλα">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/γάλα.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="σούπα">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/σούπα.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="τυρί">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/τυρί.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-          </categories>
-        </category>
-        <category name="φρούτα">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/xrist/Desktop/tp/demo_resources/Φρούτα/πορτοκάλι.png</image>
-          <sound>/home/xrist/Desktop/tp/demo_resources/sounds/φρούτα.mp3</sound>
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-          <categories>
-            <category name="μήλο">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φρούτα/μήλο.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="μπανάνα">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φρούτα/μπανάνα.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="ροδάκινο">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φρούτα/ροδάκινο.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-          </categories>
-        </category>
-        <category name="Συναισθήματα">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/xrist/Desktop/tp/demo_resources/Συναισθήματα/Χαρά.png</image>
-          <sound>/home/xrist/Desktop/tp/demo_resources/sounds/Συναισθήματα.mp3</sound>
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-          <categories>
-            <category name="Λύπη">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Συναισθήματα/Λύπη.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="Θυμός">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Συναισθήματα/Θυμός.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-          </categories>
-        </category>
-        <category name="Θερμοκρασία">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/xrist/Desktop/tp/demo_resources/Θερμοκρασία/Ζεστό.png</image>
-          <sound>/home/xrist/Desktop/tp/demo_resources/sounds/Θερμοκρασία.mp3</sound>
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
-          <categories>
-            <category name="Κρύο">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Θερμοκρασία/Κρύο.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="Ζεστό">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Θερμοκρασία/Ζεστό.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="Καυτό">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Θερμοκρασία/Καυτό.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-          </categories>
-        </category>
-      </categories>
-    </communication>
     <entertainment>
       <name>Ψυχαγωγία</name>
       <enabled>true</enabled>
       <image />
+      <sound />
       <music>
         <name>Μουσική</name>
         <enabled>true</enabled>
         <image />
-        <path>/home/xrist/Music/</path>
+        <sound />
+        <path>/home/christina/Music/</path>
         <playlistSize>10</playlistSize>
       </music>
       <video>
         <name>Βίντεο</name>
         <enabled>true</enabled>
         <image />
-        <path>/home/xrist/Videos/</path>
+        <sound />
+        <path>/home/christina/Videos/</path>
         <playlistSize>10</playlistSize>
       </video>
     </entertainment>
@@ -925,55 +741,7 @@
       <name>Παιχνίδια</name>
       <enabled>true</enabled>
       <image />
-    </games>
-  </profile>
-  <profile preselected="false">
-    <name>τεστ</name>
-    <image />
-    <configuration>
-      <rotationSpeed>1</rotationSpeed>
-      <defaultGridRow>3</defaultGridRow>
-      <defaultGridColumn>3</defaultGridColumn>
-      <sound>false</sound>
-      <image>true</image>
-      <text>true</text>
-      <selectionSensor>
-        <type>mouse</type>
-        <button>1</button>
-        <clickCount>1</clickCount>
-      </selectionSensor>
-    </configuration>
-    <communication>
-      <name>Επικοινωνία</name>
-      <enabled>true</enabled>
-      <image />
-      <rows>3</rows>
-      <columns>3</columns>
-      <categories />
-    </communication>
-    <entertainment>
-      <name>Ψυχαγωγία</name>
-      <enabled>true</enabled>
-      <image />
-      <music>
-        <name>Μουσική</name>
-        <enabled>true</enabled>
-        <image />
-        <path />
-        <playlistSize>10</playlistSize>
-      </music>
-      <video>
-        <name>Βίντεο</name>
-        <enabled>true</enabled>
-        <image />
-        <path />
-        <playlistSize>10</playlistSize>
-      </video>
-    </entertainment>
-    <games>
-      <name>Παιχνίδια</name>
-      <image />
-      <enabled>true</enabled>
+      <sound />
     </games>
   </profile>
 </profiles>

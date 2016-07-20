@@ -98,21 +98,24 @@ public class UserService {
         communication.addContent(new Element("name").setText("Επικοινωνία"));
         communication.addContent(new Element("enabled").setText("true"));
         communication.addContent(new Element("image"));
+        communication.addContent(new Element("sound"));
         communication.addContent(new Element("rows").setText(String.valueOf(user.getConfiguration().getDefaultGridRow())));
         communication.addContent(new Element("columns").setText(String.valueOf(user.getConfiguration().getDefaultGridColumn())));
         communication.addContent(categories);
-
+        
         //add entertainment module settings
         Element entertainment = new Element("entertainment");
         entertainment.addContent(new Element("name").setText("Ψυχαγωγία"));
         entertainment.addContent(new Element("enabled").setText("true"));
         entertainment.addContent(new Element("image"));
+        entertainment.addContent(new Element("sound"));
 
         //add music module settings
         Element music = new Element("music");
         music.addContent(new Element("name").setText("Μουσική"));
         music.addContent(new Element("enabled").setText("true"));
         music.addContent(new Element("image"));
+        music.addContent(new Element("sound"));
         music.addContent(new Element("path"));
         music.addContent(new Element("playlistSize").setText("10"));
         entertainment.addContent(music);
@@ -122,6 +125,7 @@ public class UserService {
         video.addContent(new Element("name").setText("Βίντεο"));
         video.addContent(new Element("enabled").setText("true"));
         video.addContent(new Element("image"));
+        video.addContent(new Element("sound"));
         video.addContent(new Element("path"));
         video.addContent(new Element("playlistSize").setText("10"));
         entertainment.addContent(video);
@@ -130,6 +134,7 @@ public class UserService {
         Element games = new Element("games");
         games.addContent(new Element("name").setText("Παιχνίδια"));
         games.addContent(new Element("image"));
+        games.addContent(new Element("sound"));
         games.addContent(new Element("enabled").setText("true"));
 
         profile.addContent(communication);

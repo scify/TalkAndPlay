@@ -18,15 +18,13 @@ import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 
 public class VideoPanel extends BaseMediaPanel {
 
-    private MediaPlayerFactory mediaPlayerFactory;
-    private EmbeddedMediaPlayer mediaPlayer;
+    private EmbeddedMediaPlayerComponent mediaPlayerComponent;
 
     private JPanel playerPanel, prevPanel, playPanel, nextPanel, listPanel, exitPanel;
 
     public VideoPanel(User user, GridFrame parent) {
         super(user, parent, (new File(user.getEntertainmentModule().getVideoModule().getFolderPath())).listFiles());
-        mediaPlayerFactory = new MediaPlayerFactory();
-        mediaPlayer = mediaPlayerFactory.newEmbeddedMediaPlayer();
+        mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
 
         initComponents();
         initCustomComponents();
@@ -119,12 +117,12 @@ public class VideoPanel extends BaseMediaPanel {
 
     }
 
-    public EmbeddedMediaPlayer getMediaPlayer() {
-        return this.mediaPlayer;
+    public EmbeddedMediaPlayerComponent getMediaPlayerComponent() {
+        return this.mediaPlayerComponent;
     }
 
-    public MediaPlayerFactory getMediaPlayerFactory() {
-        return this.mediaPlayerFactory;
+    public EmbeddedMediaPlayer getMediaPlayer() {
+        return this.mediaPlayerComponent.getMediaPlayer();
     }
 
 

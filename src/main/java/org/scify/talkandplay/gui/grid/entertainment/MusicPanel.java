@@ -189,7 +189,7 @@ public class MusicPanel extends BaseMediaPanel {
         prevPanel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
+                if (sensorService.shouldSelect(sensor) && currentFile != null && !currentFile.isEmpty()) {
                     getPrevious();
                 }
             }
@@ -197,7 +197,7 @@ public class MusicPanel extends BaseMediaPanel {
         prevPanel.addKeyListener(new KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
-                if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
+                if (sensorService.shouldSelect(sensor) && currentFile != null && !currentFile.isEmpty()) {
                     getPrevious();
                 }
             }
@@ -206,7 +206,7 @@ public class MusicPanel extends BaseMediaPanel {
         nextPanel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
+                if (sensorService.shouldSelect(sensor) && currentFile != null && !currentFile.isEmpty()) {
                     getNext();
                 }
             }
@@ -214,7 +214,7 @@ public class MusicPanel extends BaseMediaPanel {
         nextPanel.addKeyListener(new KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
-                if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
+                if (sensorService.shouldSelect(sensor) && currentFile != null && !currentFile.isEmpty()) {
                     getNext();
                 }
             }
