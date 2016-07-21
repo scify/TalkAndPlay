@@ -88,6 +88,17 @@ public class ConfigurationPanel extends javax.swing.JPanel {
         repaint();
     }
 
+    public void showGamesPanel() {
+        infoWrapperPanel.removeAll();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 1;
+        gbc.gridwidth = 1;
+        infoWrapperPanel.add(new GamesInfoPanel(), gbc);
+        revalidate();
+        repaint();
+    }
+
     public void hideInfoPanel() {
         infoWrapperPanel.removeAll();
         JPanel emptyPanel = new JPanel();

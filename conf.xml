@@ -454,6 +454,30 @@
       <enabled>true</enabled>
       <sound>demo_resources/sounds/Παιχνίδια.mp3</sound>
       <image />
+      <stimulusReactionGames>
+        <name>Ερέθισμα - Αντίδραση</name>
+        <image />
+        <sound />
+        <enabled>true</enabled>
+        <games>
+          <game>
+            <name>Game 1</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>/home/christina/Documents/TalkAndPlay/images/talkandplay/games/stimulus1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+        </games>
+      </stimulusReactionGames>
     </games>
   </profile>
   <profile preselected="false">

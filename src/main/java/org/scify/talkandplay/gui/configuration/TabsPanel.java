@@ -76,9 +76,10 @@ public class TabsPanel extends javax.swing.JPanel {
 
                 if (tabsPanel.getSelectedIndex() == 0) {
                     parent.showInfoPanel();
-                }
-                if (tabsPanel.getSelectedIndex() == 1 || tabsPanel.getSelectedIndex() == 2) {
+                } else if (tabsPanel.getSelectedIndex() == 1) {
                     parent.hideInfoPanel();
+                } else if (tabsPanel.getSelectedIndex() == 2) {
+                    parent.showGamesPanel();
                 }
             }
         });

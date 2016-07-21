@@ -21,6 +21,12 @@ public class GameImage {
         this.order = order;
     }
 
+    public GameImage(String image, boolean enabled, int order) {
+        this.image = image;
+        this.enabled = enabled;
+        this.order = order;
+    }
+
     public String getName() {
         return name;
     }
@@ -60,6 +66,5 @@ public class GameImage {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-
 
 }

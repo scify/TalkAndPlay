@@ -325,6 +325,7 @@ public class ConfigurationHandler {
                 List imagesList = ((Element) gamesList.get(i)).getChild("gameImages").getChildren();
 
                 for (int j = 0; j < imagesList.size(); j++) {
+                    System.out.println(((Element) imagesList.get(j)).getChildText("order"));
                     GameImage image = new GameImage(((Element) imagesList.get(j)).getChildText("name"),
                             ((Element) imagesList.get(j)).getChildText("path"),
                             Integer.parseInt(((Element) imagesList.get(j)).getChildText("order")));

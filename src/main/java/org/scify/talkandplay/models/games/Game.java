@@ -16,20 +16,19 @@ public class Game {
     private String winSound;
     private String errorSound;
     private boolean enabled;
+    private List<GameImage> images;
 
     //used only to display default ImageIcons from the app jar
     private URL imageURL;
 
-    private List<Game> games;
-
     public Game() {
-        this.games = new ArrayList();
+        this.images = new ArrayList();
     }
 
     public Game(String name, boolean enabled) {
         this.name = name;
         this.enabled = enabled;
-        this.games = new ArrayList();
+        this.images = new ArrayList();
     }
 
     public String getName() {
@@ -80,20 +79,20 @@ public class Game {
         this.enabled = enabled;
     }
 
-    public List<Game> getGames() {
-        return games;
-    }
-
-    public void setGames(List<Game> games) {
-        this.games = games;
-    }
-
     public URL getImageURL() {
         return imageURL;
     }
 
     public void setImageURL(URL imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public List<GameImage> getImages() {
+        return images;
+    }
+
+    public void setImages(List<GameImage> images) {
+        this.images = images;
     }
 
 }
