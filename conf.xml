@@ -462,7 +462,7 @@
         <games>
           <game>
             <name>Game 1</name>
-            <enabled>true</enabled>
+            <enabled>false</enabled>
             <image />
             <difficulty>4</difficulty>
             <winSound />
@@ -474,10 +474,24 @@
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
+              <image>
+                <name />
+                <path>/home/christina/Documents/TalkAndPlay/images/talkandplay/games/stimulus2.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>/home/christina/Documents/TalkAndPlay/images/talkandplay/games/stimulus3.png</path>
+                <order>1</order>
+                <enabled>false</enabled>
+              </image>
             </gameImages>
           </game>
         </games>
       </stimulusReactionGames>
+      <!--sequenceGame />
+      <similarityGames /-->
     </games>
   </profile>
   <profile preselected="false">

@@ -1,22 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.scify.talkandplay.gui.configuration;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.games.Game;
-import org.scify.talkandplay.models.games.GameImage;
 
 /**
  *
@@ -24,52 +26,77 @@ import org.scify.talkandplay.models.games.GameImage;
  */
 public class GamePanel extends javax.swing.JPanel {
 
+    private static final int MAX_IMAGES = 4;
     private Game game;
-    private String img1Path, img2Path, img3Path, img4Path;
+
+    private List<JLabel> imgLabels;
+    private List<JCheckBox> imgCheckboxes;
+
+    private Font activeFont, inactiveFont;
 
     /**
      * Creates new form GamePanel
      */
     public GamePanel(Game game) {
         this.game = game;
+        this.imgLabels = new ArrayList();
+        this.imgCheckboxes = new ArrayList();
         initComponents();
         initCustomComponents();
     }
 
     private void initCustomComponents() {
 
-        if (game.getImages().size() > 0) {
-            setImageIcon(img1Label, game.getImages().get(0).getImage());
-        } else {
-            setImageIcon(img1Label, null);
-        }
-        if (game.getImages().size() > 2) {
-            setImageIcon(img2Label, game.getImages().get(1).getImage());
-        } else {
-            setImageIcon(img2Label, null);
-        }
-        if (game.getImages().size() > 3) {
-            setImageIcon(img3Label, game.getImages().get(2).getImage());
-        } else {
-            setImageIcon(img3Label, null);
-        }
-        if (game.getImages().size() > 4) {
-            setImageIcon(img4Label, game.getImages().get(3).getImage());
-        } else {
-            setImageIcon(img4Label, null);
+        imgLabels.add(img1Label);
+        imgLabels.add(img2Label);
+        imgLabels.add(img3Label);
+        imgLabels.add(img4Label);
+
+        imgCheckboxes.add(checkBox1);
+        imgCheckboxes.add(checkBox2);
+        imgCheckboxes.add(checkBox3);
+        imgCheckboxes.add(checkBox4);
+
+        for (int i = 0; i < MAX_IMAGES; i++) {
+            if (i < game.getImages().size()) {
+                setImageIcon(imgLabels.get(i), game.getImages().get(i).getImage());
+                imgCheckboxes.get(i).setEnabled(true);
+                imgCheckboxes.get(i).setSelected(game.getImages().get(i).isEnabled());
+                setCheckboxListener(imgCheckboxes.get(i), i);
+            } else {
+                setImageIcon(imgLabels.get(i), null);
+                imgCheckboxes.get(i).setEnabled(false);
+            }
+            setImageListener(imgLabels.get(i), i);
         }
 
-        nameLabel.setText(game.getName());
-        nameLabel.setVisible(false);
+
+        activeFont = new Font(UIConstants.mainFont, Font.BOLD, 12);
+        inactiveFont = new Font(UIConstants.mainFont, Font.PLAIN, 12);
+
         activeButton.setBackground(Color.white);
-        activeButton.setForeground(Color.decode(UIConstants.green));
-        activeButton.setBorder(new LineBorder(Color.decode(UIConstants.green), 1));
         activeButton.setMargin(new Insets(10, 10, 10, 10));
 
         inactiveButton.setBackground(Color.white);
-        inactiveButton.setForeground(Color.decode(UIConstants.disabledColor));
-        inactiveButton.setBorder(new LineBorder(Color.decode(UIConstants.disabledColor), 1));
         inactiveButton.setMargin(new Insets(3, 3, 3, 3));
+
+        if (game.isEnabled()) {
+            activeButton.setForeground(Color.decode(UIConstants.green));
+            activeButton.setBorder(new LineBorder(Color.decode(UIConstants.green), 1));
+            activeButton.setFont(activeFont);
+
+            inactiveButton.setForeground(Color.decode(UIConstants.disabledColor));
+            inactiveButton.setBorder(new LineBorder(Color.decode(UIConstants.disabledColor), 1));
+            inactiveButton.setFont(inactiveFont);
+        } else {
+            inactiveButton.setForeground(Color.decode(UIConstants.green));
+            inactiveButton.setBorder(new LineBorder(Color.decode(UIConstants.green), 1));
+            inactiveButton.setFont(activeFont);
+
+            activeButton.setForeground(Color.decode(UIConstants.disabledColor));
+            activeButton.setBorder(new LineBorder(Color.decode(UIConstants.disabledColor), 1));
+            activeButton.setFont(inactiveFont);
+        }
     }
 
     private void setImageIcon(JLabel label, String path) {
@@ -81,24 +108,8 @@ public class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public String getName() {
-        return nameLabel.getText();
-    }
-
-    public List<GameImage> getImages() {
-        List<GameImage> images = new ArrayList();
-
-        GameImage image;
-        image = new GameImage(img1Path, checkBox1.isSelected(), 1);
-        images.add(image);
-        image = new GameImage(img2Path, checkBox1.isSelected(), 2);
-        images.add(image);
-        image = new GameImage(img3Path, checkBox1.isSelected(), 3);
-        images.add(image);
-        image = new GameImage(img4Path, checkBox1.isSelected(), 4);
-        images.add(image);
-
-        return images;
+    public Game getGame() {       
+        return game;
     }
 
     /**
@@ -120,7 +131,6 @@ public class GamePanel extends javax.swing.JPanel {
         img4Label = new javax.swing.JLabel();
         activeButton = new javax.swing.JButton();
         inactiveButton = new javax.swing.JButton();
-        nameLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -149,10 +159,18 @@ public class GamePanel extends javax.swing.JPanel {
         img4Label.setVerifyInputWhenFocusTarget(false);
 
         activeButton.setText("Διαθέσιμο");
+        activeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                activeButtonMouseClicked(evt);
+            }
+        });
 
         inactiveButton.setText("Μη διαθέσιμο");
-
-        nameLabel.setText("jLabel1");
+        inactiveButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                inactiveButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -164,37 +182,34 @@ public class GamePanel extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(img1Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
+                        .addGap(44, 44, 44)
                         .addComponent(checkBox1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(img2Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(checkBox2)
-                        .addGap(44, 44, 44)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(img2Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(checkBox2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(img3Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(checkBox3)
-                        .addGap(43, 43, 43)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(img4Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(checkBox4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(42, 42, 42)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(nameLabel))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(inactiveButton, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                        .addComponent(activeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                        .addComponent(img4Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(checkBox4)
+                        .addGap(50, 50, 50)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(inactiveButton, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                    .addComponent(activeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,11 +222,11 @@ public class GamePanel extends javax.swing.JPanel {
                         .addComponent(checkBox3))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(img2Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(checkBox2))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(img1Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(checkBox1))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -221,12 +236,66 @@ public class GamePanel extends javax.swing.JPanel {
                                 .addComponent(inactiveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(img4Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(checkBox4)
-                            .addComponent(nameLabel))))
+                        .addComponent(checkBox4)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void activeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_activeButtonMouseClicked
+        if (!game.isEnabled()) {
+            game.setEnabled(true);
+
+            activeButton.setForeground(Color.decode(UIConstants.green));
+            activeButton.setBorder(new LineBorder(Color.decode(UIConstants.green), 1));
+            activeButton.setFont(activeFont);
+
+            inactiveButton.setForeground(Color.decode(UIConstants.disabledColor));
+            inactiveButton.setBorder(new LineBorder(Color.decode(UIConstants.disabledColor), 1));
+            inactiveButton.setFont(inactiveFont);
+        }
+    }//GEN-LAST:event_activeButtonMouseClicked
+
+    private void inactiveButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inactiveButtonMouseClicked
+        if (game.isEnabled()) {
+            game.setEnabled(false);
+
+            inactiveButton.setForeground(Color.decode(UIConstants.green));
+            inactiveButton.setBorder(new LineBorder(Color.decode(UIConstants.green), 1));
+            inactiveButton.setFont(activeFont);
+
+            activeButton.setForeground(Color.decode(UIConstants.disabledColor));
+            activeButton.setBorder(new LineBorder(Color.decode(UIConstants.disabledColor), 1));
+            activeButton.setFont(inactiveFont);
+        }
+    }//GEN-LAST:event_inactiveButtonMouseClicked
+
+    private void setImageListener(final JLabel image, final int i) {
+        final JFileChooser chooser = new JFileChooser();
+
+        image.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent me) {
+                chooser.setDialogTitle("Διάλεξε εικόνα");
+                chooser.setAcceptAllFileFilterUsed(false);
+                chooser.setFileFilter(new FileNameExtensionFilter("Image Files", "png", "jpg", "jpeg", "JPG", "JPEG", "gif"));
+                chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    String path = chooser.getSelectedFile().getAbsolutePath();
+                    game.getImages().get(i).setImage(path);
+                    image.setIcon(new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                }
+            }
+        });
+    }
+
+    private void setCheckboxListener(final JCheckBox checkbox, final int i) {
+
+        checkbox.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent ce) {
+                game.getImages().get(i).setEnabled(checkbox.isSelected());
+            }
+        });
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -240,6 +309,5 @@ public class GamePanel extends javax.swing.JPanel {
     private javax.swing.JLabel img3Label;
     private javax.swing.JLabel img4Label;
     private javax.swing.JButton inactiveButton;
-    private javax.swing.JLabel nameLabel;
     // End of variables declaration//GEN-END:variables
 }

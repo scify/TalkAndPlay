@@ -17,7 +17,6 @@ import org.scify.talkandplay.models.modules.CommunicationModule;
 import org.scify.talkandplay.models.Configuration;
 import org.scify.talkandplay.models.modules.EntertainmentModule;
 import org.scify.talkandplay.models.modules.GameModule;
-import org.scify.talkandplay.models.Tile;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.games.GameImage;
 import org.scify.talkandplay.models.games.GameType;
@@ -325,9 +324,8 @@ public class ConfigurationHandler {
                 List imagesList = ((Element) gamesList.get(i)).getChild("gameImages").getChildren();
 
                 for (int j = 0; j < imagesList.size(); j++) {
-                    System.out.println(((Element) imagesList.get(j)).getChildText("order"));
-                    GameImage image = new GameImage(((Element) imagesList.get(j)).getChildText("name"),
-                            ((Element) imagesList.get(j)).getChildText("path"),
+                    GameImage image = new GameImage(((Element) imagesList.get(j)).getChildText("path"),
+                            "true".equals(((Element) imagesList.get(j)).getChildText("enabled")),
                             Integer.parseInt(((Element) imagesList.get(j)).getChildText("order")));
                     game.getImages().add(image);
                 }
@@ -369,7 +367,7 @@ public class ConfigurationHandler {
 
                 for (int j = 0; j < imagesList.size(); j++) {
                     GameImage image = new GameImage(((Element) imagesList.get(j)).getChildText("name"),
-                            ((Element) imagesList.get(j)).getChildText("path"),
+                            "true".equals(((Element) imagesList.get(j)).getChildText("enabled")),
                             Integer.parseInt(((Element) imagesList.get(j)).getChildText("order")));
                     game.setEnabled("true".equals(((Element) imagesList.get(j)).getChildText("enabled")));
                     game.getImages().add(image);
@@ -412,7 +410,7 @@ public class ConfigurationHandler {
 
                 for (int j = 0; j < imagesList.size(); j++) {
                     GameImage image = new GameImage(((Element) imagesList.get(j)).getChildText("name"),
-                            ((Element) imagesList.get(j)).getChildText("path"), 0);
+                            "true".equals(((Element) imagesList.get(j)).getChildText("enabled")), 0);
                     game.setEnabled("true".equals(((Element) imagesList.get(j)).getChildText("enabled")));
                     game.getImages().add(image);
                 }
@@ -449,8 +447,6 @@ public class ConfigurationHandler {
                         categoryEl.getChildText("image"));
 
                 category.setSound(categoryEl.getChildText("sound"));
-                
-                
 
                 if (parent != null) {
                     category.setParentCategory(new Category(parent.getName()));
@@ -522,7 +518,6 @@ public class ConfigurationHandler {
             if (entry.getKey().equals(username)) {
                 for (String path : entry.getValue()) {
                     if (!(new File(path).isFile())) {
-                        System.out.println(path);
                         return true;
                     }
                 }

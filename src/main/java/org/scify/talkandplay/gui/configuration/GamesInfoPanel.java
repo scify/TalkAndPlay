@@ -7,7 +7,6 @@ package org.scify.talkandplay.gui.configuration;
 
 import java.awt.Font;
 import javax.swing.JTextArea;
-import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 
 /**
