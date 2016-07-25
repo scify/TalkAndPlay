@@ -46,7 +46,7 @@ public class TilePanel extends javax.swing.JPanel {
 
         JTextPane textPane = new JTextPane();
         textPane.setText(text);
-        textPane.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 20));
+        textPane.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 24));
         textPane.setEditable(false);
         StyledDocument doc = textPane.getStyledDocument();
         SimpleAttributeSet center = new SimpleAttributeSet();

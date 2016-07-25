@@ -1,9 +1,11 @@
 package org.scify.talkandplay.gui.grid.entertainment;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.BaseMediaPanel;
@@ -13,18 +15,20 @@ import org.scify.talkandplay.models.User;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
-import uk.co.caprica.vlcj.player.MediaPlayerFactory;
+import uk.co.caprica.vlcj.player.embedded.DefaultAdaptiveRuntimeFullScreenStrategy;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 
 public class VideoPanel extends BaseMediaPanel {
 
     private EmbeddedMediaPlayerComponent mediaPlayerComponent;
 
-    private JPanel playerPanel, prevPanel, playPanel, nextPanel, listPanel, exitPanel;
+    private JPanel playPanel;
+    private VideoFrame videoFrame;
 
     public VideoPanel(User user, GridFrame parent) {
         super(user, parent, (new File(user.getEntertainmentModule().getVideoModule().getFolderPath())).listFiles());
         mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
+        filesPanel = new FilesPanel(user, files, this);
 
         initComponents();
         initCustomComponents();
@@ -58,7 +62,6 @@ public class VideoPanel extends BaseMediaPanel {
         if (isEmpty()) {
             drawEmpty();
         } else {
-            filesPanel = new FilesPanel(user, files, this);
 
             add(filesPanel, c);
             mediaPlayerPanel.getAudioPlayer().getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
@@ -89,7 +92,23 @@ public class VideoPanel extends BaseMediaPanel {
 
     public void playFile(String fileName) {
         timer.cancel();
-        VideoFrame videoFrame = new VideoFrame(user, getFilePath(fileName), this, filesPanel);
+        videoFrame = new VideoFrame(user, null, this, filesPanel);
+
+        mediaPlayerComponent.getMediaPlayer().setFullScreenStrategy(
+                new DefaultAdaptiveRuntimeFullScreenStrategy(videoFrame) {
+                    @Override
+                    protected void beforeEnterFullScreen() {
+                        System.out.println("fullscreen");
+                        videoFrame.hidePanel();
+                    }
+
+                    @Override
+                    protected void afterExitFullScreen() {
+                        System.out.println("exit fullscreen");
+                        videoFrame.showPanel();
+                    }
+                });
+
         videoFrame.playMedia(getFilePath(fileName));
     }
 

@@ -75,27 +75,33 @@ public class GamesTab extends javax.swing.JPanel {
     private void showGamesPerType(String type) {
         gamesPanel2.removeAll();
         gamePanels.clear();
+        GameType gameType = null;
 
-        for (GameType gameType : user.getGameModule().getGameTypes()) {
-            if (type.equals(gameType.getType())) {
-                if (gameType.getGames().size() > 0) {
-                    for (Game game : gameType.getGames()) {
-                        GamePanel gamePanel = new GamePanel(game);
-                        gamesPanel2.add(gamePanel);
-                        gamePanels.add(gamePanel);
-
-                    }
-                    step2Label.setVisible(true);
-                    saveButton.setVisible(true);
-                } else {
-                    step2Label.setVisible(true);
-                    saveButton.setVisible(false);
-                    gamesPanel2.add(new JLabel("Δεν υπάρχουν παιχνίδια σε αυτή την κατηγορία"));
-                }
-                gamesPanel2.revalidate();
-                gamesPanel2.repaint();
+        for (GameType gt : user.getGameModule().getGameTypes()) {
+            if (type.equals(gt.getType())) {
+                gameType = gt;
             }
         }
+
+        if (gameType != null) {
+            if (gameType.getGames().size() > 0) {
+                for (Game game : gameType.getGames()) {
+                    GamePanel gamePanel = new GamePanel(game);
+                    gamesPanel2.add(gamePanel);
+                    gamePanels.add(gamePanel);
+
+                }
+                step2Label.setVisible(true);
+                saveButton.setVisible(true);
+            }
+        } else {
+            step2Label.setVisible(true);
+            saveButton.setVisible(false);
+            gamesPanel2.add(new JLabel("Δεν υπάρχουν παιχνίδια σε αυτή την κατηγορία"));
+        }
+
+        gamesPanel2.revalidate();
+        gamesPanel2.repaint();
     }
 
     /**
@@ -205,11 +211,11 @@ public class GamesTab extends javax.swing.JPanel {
         for (GamePanel panel : gamePanels) {
             try {
                 gameService.updateGame(user.getName(), panel.getGame(), currentGameType);
-                parent.displayMessage("Οι αλλαγές αποθηκεύτηκαν!");
             } catch (Exception ex) {
                 Logger.getLogger(GamesTab.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        parent.displayMessage("Οι αλλαγές αποθηκεύτηκαν!");
     }//GEN-LAST:event_saveButtonMouseClicked
 
 

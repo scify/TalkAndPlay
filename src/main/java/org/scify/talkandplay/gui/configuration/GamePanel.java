@@ -19,6 +19,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.games.Game;
+import org.scify.talkandplay.models.games.GameImage;
 
 /**
  *
@@ -70,7 +71,6 @@ public class GamePanel extends javax.swing.JPanel {
             setImageListener(imgLabels.get(i), i);
         }
 
-
         activeFont = new Font(UIConstants.mainFont, Font.BOLD, 12);
         inactiveFont = new Font(UIConstants.mainFont, Font.PLAIN, 12);
 
@@ -108,7 +108,7 @@ public class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public Game getGame() {       
+    public Game getGame() {
         return game;
     }
 
@@ -280,7 +280,12 @@ public class GamePanel extends javax.swing.JPanel {
                 chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                     String path = chooser.getSelectedFile().getAbsolutePath();
-                    game.getImages().get(i).setImage(path);
+
+                    if (i > game.getImages().size()-1) {
+                        game.getImages().add(new GameImage(path, imgCheckboxes.get(i).isSelected(), i+1));
+                    } else {
+                        game.getImages().get(i).setImage(path);
+                    }
                     image.setIcon(new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 }
             }

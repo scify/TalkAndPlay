@@ -63,7 +63,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="nameLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="572" max="32767" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -87,29 +87,37 @@
                           </Group>
                           <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="sensorLabel" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="sensorLabel" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                      <Component id="manualScanRadioButton" min="-2" max="-2" attributes="0"/>
+                                      <Component id="autoScanRadioButton" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="manualScanRadioButton" min="-2" max="-2" attributes="0"/>
-                                              <Component id="autoScanRadioButton" min="-2" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="selectionSensorTextField1" min="-2" pref="178" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="selectionSensorTextField2" min="-2" pref="178" max="-2" attributes="0"/>
+                                                      <Component id="navigationSensorTextField" min="-2" pref="178" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="navigationSensorTextField" min="-2" pref="178" max="-2" attributes="0"/>
-                                      <Component id="selectionSensorTextField1" min="-2" pref="178" max="-2" attributes="0"/>
-                                      <Component id="selectionSensorTextField2" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
-                                  </Group>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -218,13 +226,26 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="autoScanRadioButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="selectionSensorTextField1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                          <Component id="manualScanRadioButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="navigationSensorTextField" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="selectionSensorTextField2" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="selectionSensorTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                  <Component id="manualScanRadioButton" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="selectionSensorTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="navigationSensorTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="errorLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
@@ -381,7 +402,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="sensorLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="3. &#x3a4;&#x3c1;&#x3cc;&#x3c0;&#x3bf;&#x3c2; &#x3b5;&#x3bd;&#x3b1;&#x3bb;&#x3bb;&#x3b1;&#x3b3;&#x3ae;&#x3c2;"/>
+            <Property name="text" type="java.lang.String" value="3. &#x3a4;&#x3c1;&#x3cc;&#x3c0;&#x3bf;&#x3b9; &#x3b5;&#x3bd;&#x3b1;&#x3bb;&#x3bb;&#x3b1;&#x3b3;&#x3ae;&#x3c2; &#x3ba;&#x3b1;&#x3b9; &#x3c0;&#x3bb;&#x3bf;&#x3ae;&#x3b3;&#x3b7;&#x3c3;&#x3b7;&#x3c2;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="defaultGridSizeLabel">
@@ -480,6 +501,21 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x3b5;&#x3c0;&#x3b9;&#x3bb;&#x3bf;&#x3b3;&#x3ae;:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x3b5;&#x3c0;&#x3b9;&#x3bb;&#x3bf;&#x3b3;&#x3ae;:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x3c0;&#x3bb;&#x3bf;&#x3ae;&#x3b3;&#x3b7;&#x3c3;&#x3b7;:"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

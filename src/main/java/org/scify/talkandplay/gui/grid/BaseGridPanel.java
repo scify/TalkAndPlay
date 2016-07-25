@@ -9,10 +9,12 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.JPanel;
+import org.scify.talkandplay.gui.grid.timers.MouseTimerManager;
 import org.scify.talkandplay.gui.grid.timers.TileTimerManager;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.services.UserService;
 
 /**
@@ -34,7 +36,12 @@ public class BaseGridPanel extends BasePanel {
 
     public BaseGridPanel(User user, GridFrame parent) {
         super(user, parent);
-        this.timer = new TileTimerManager(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+
+        if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
+            this.timer = new MouseTimerManager(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+        } else {
+            this.timer = new TileTimerManager(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+        }
 
         if (currentCategory == null) {
             this.tileCreator = new TileCreator(user, user.getConfiguration().getDefaultGridRow(), user.getConfiguration().getDefaultGridColumn());

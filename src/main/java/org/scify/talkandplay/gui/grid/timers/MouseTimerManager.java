@@ -4,12 +4,13 @@ import java.awt.Color;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import org.scify.talkandplay.gui.grid.tiles.TilePanel;
 
-public class ButtonTimerManager extends TimerManager {
+public class MouseTimerManager extends TimerManager {
 
     protected int BORDER_SIZE = 5;
 
-    public ButtonTimerManager(List<JPanel> panelList, long nextExecutionTime, long period) {
+    public MouseTimerManager(List<JPanel> panelList, long nextExecutionTime, long period) {
         super(panelList, nextExecutionTime, period);
     }
 
@@ -25,7 +26,18 @@ public class ButtonTimerManager extends TimerManager {
         panelList.get(i).setBackground(Color.decode(BACKGROUND_COLOR));
     }
 
+    @Override
+    public void start() {
+        return;
+    }
+
+    @Override
+    public void cancel() {
+        return;
+    }
+
     public int getBorderSize() {
         return BORDER_SIZE;
     }
+
 }

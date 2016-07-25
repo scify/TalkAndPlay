@@ -34,9 +34,8 @@ public class TimerManager {
             @Override
             public void run() {
                 panelList.get(selected).requestFocusInWindow();
-                for (int i = 0; i < panelList.size(); i++) {
-                    setUnselected(i);
-                }
+
+                unselectAll();
                 setSelected(selected);
 
                 if (selected == 0 || (selected < panelList.size() - 1 && selected > 0)) {
@@ -58,12 +57,18 @@ public class TimerManager {
         }
     }
 
-    protected void setUnselected(int i) {
+    public void setUnselected(int i) {
         return;
     }
 
-    protected void setSelected(int i) {
+    public void setSelected(int i) {
         return;
+    }
+
+    public void unselectAll() {
+        for (int i = 0; i < panelList.size(); i++) {
+            setUnselected(i);
+        }
     }
 
     public void cancel() {
@@ -78,7 +83,20 @@ public class TimerManager {
         this.defaultBackgroundColor = color;
     }
 
-    protected int getBorderSize() {
+    public int getBorderSize() {
         return BORDER_SIZE;
     }
+
+    public String getDefaultBackgroundColor() {
+        return defaultBackgroundColor;
+    }
+
+    public static String getBorderColor() {
+        return BORDER_COLOR;
+    }
+
+    public static String getBackgroundColor() {
+        return BACKGROUND_COLOR;
+    }
+
 }

@@ -70,7 +70,6 @@ public class FilesPanel extends javax.swing.JPanel {
             end = step;
         }
         drawFiles();
-
     }
 
     private void drawFiles() {
@@ -80,15 +79,32 @@ public class FilesPanel extends javax.swing.JPanel {
 
         empties = 0;
 
+        String prevText, nextText, backText;
         if (parent instanceof MusicPanel) {
-            prevSongs = drawFile("Προηγούμενα τραγούδια", new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/left-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-            nextSongs = drawFile("Επόμενα τραγούδια", new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/right-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-            controls = drawFile("Χειριστήριο", new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/down-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+            prevText = "Προηγούμενα τραγούδια";
+            nextText = "Επόμενα τραγούδια";
+            backText = "Χειριστήριο";
         } else {
-            prevSongs = drawFile("Προηγούμενα video", new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/left-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-            nextSongs = drawFile("Επόμενα video", new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/right-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-            back = drawFile("Πίσω", new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+            prevText = "Προηγούμενα video";
+            nextText = "Επόμενα video";
+            backText = "Πίσω";
         }
+
+        if (start == 0) {
+            prevSongs = drawControl(prevText, new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/left-icon-disabled.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "icon");
+            prevSongs.getComponent(1).setForeground(Color.decode(UIConstants.disabledColor));
+        } else {
+            prevSongs = drawControl(prevText, new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/left-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "icon");
+        }
+        if (end >= files.size()) {
+            nextSongs = drawControl(nextText, new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/right-icon-disabled.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "text");
+            nextSongs.getComponent(0).setForeground(Color.decode(UIConstants.disabledColor));
+        } else {
+            nextSongs = drawControl(nextText, new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/right-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "text");
+        }
+
+        controls = drawControl(backText, new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/down-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "icon");
+        back = drawControl(backText, new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "icon");
 
         add(prevSongs);
         panelList.add(prevSongs);
@@ -97,7 +113,7 @@ public class FilesPanel extends javax.swing.JPanel {
             if (i >= files.size()) {
                 empties++;
             } else {
-                JPanel panel = drawFile(files.get(i).getName(), null);
+                JPanel panel = drawFile(files.get(i).getName(), i + 1);
                 add(panel);
                 panelList.add(panel);
                 currentFiles.add(files.get(i).getName());
@@ -132,25 +148,48 @@ public class FilesPanel extends javax.swing.JPanel {
         repaint();
     }
 
-    private JPanel drawFile(String text, ImageIcon icon) {
+    private JPanel drawControl(String text, ImageIcon icon, String first) {
+        JLabel iconLabel = new JLabel();
         JLabel fileLabel = new JLabel(text);
-        if (icon != null) {
-            fileLabel.setIcon(icon);
-        }
+        iconLabel.setIcon(icon);
 
-        fileLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
-        fileLabel.setHorizontalAlignment(JLabel.LEFT);
+        fileLabel.setFont(new Font(UIConstants.mainFont, Font.BOLD, 18));
         fileLabel.setBorder(new EmptyBorder(3, 3, 3, 3));
 
-        JPanel songPanel = new JPanel();
-        songPanel.setLayout(new FlowLayout());
-        songPanel.setBackground(Color.decode(UIConstants.grey));
-        songPanel.setBorder((new LineBorder(Color.white, 5)));
-        songPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        panel.setBackground(Color.decode(UIConstants.grey));
+        panel.setBorder((new LineBorder(Color.white, 5)));
 
-        songPanel.add(fileLabel);
+        if ("icon".equals(first)) {
+            panel.add(iconLabel);
+            panel.add(fileLabel);
+        } else {
+            panel.add(fileLabel);
+            panel.add(iconLabel);
+        }
 
-        return songPanel;
+        return panel;
+    }
+
+    private JPanel drawFile(String text, int i) {
+        JLabel numberLabel = new JLabel(i + ". ");
+        JLabel fileLabel = new JLabel(text);
+
+        numberLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
+        numberLabel.setBorder(new EmptyBorder(3, 3, 3, 0));
+        fileLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
+        fileLabel.setBorder(new EmptyBorder(3, 0, 3, 0));
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout(FlowLayout.LEADING));
+        panel.setBackground(Color.decode(UIConstants.grey));
+        panel.setBorder((new LineBorder(Color.white, 5)));
+
+        panel.add(numberLabel);
+        panel.add(fileLabel);
+
+        return panel;
     }
 
     private JPanel drawEmpty() {
@@ -177,10 +216,10 @@ public class FilesPanel extends javax.swing.JPanel {
                 if (sensorService.shouldSelect(sensor)) {
                     if (files.size() > step && start > 0) {
                         timer.cancel();
+                        timer.unselectAll();
                         configurePrevSongs();
                         drawFiles();
                     }
-
                 }
             }
         });
@@ -279,7 +318,7 @@ public class FilesPanel extends javax.swing.JPanel {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
                     currentFile = file.getName();
-                    //  setSelected();
+                    setSelected(currentFile);
                     parent.playFile(currentFile);
                 }
             }
@@ -289,7 +328,7 @@ public class FilesPanel extends javax.swing.JPanel {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
                     currentFile = file.getName();
-                    //  setSelected();
+                    setSelected(currentFile);
                     parent.playFile(currentFile);
                 }
             }
@@ -319,7 +358,7 @@ public class FilesPanel extends javax.swing.JPanel {
     }
 
     public int getSelected() {
-        for (int i = 0; i < currentFiles.size(); i++) {
+        for (int i = 0; i < currentFiles.size(); i++) {           
             if (currentFile.equals(currentFiles.get(i))) {
                 return i;
             }
@@ -327,17 +366,29 @@ public class FilesPanel extends javax.swing.JPanel {
         return -1;
     }
 
+    public void setSelected(String selected) {
+        currentFile = selected;
+        for (int i = 0; i < panelList.size(); i++) {
+            if (currentFile.equals(((JLabel) panelList.get(i).getComponent(1)).getText())) {
+                panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.decode(timer.getBorderColor()), timer.getBorderSize()));
+                panelList.get(i).setBackground(Color.decode(timer.getBackgroundColor()));
+            } else {
+                panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.white, timer.getBorderSize()));
+                panelList.get(i).setBackground(Color.decode(timer.getDefaultBackgroundColor()));
+            }
+        }
+    }
+
     public void setSelected(int selected) {
         currentFile = currentFiles.get(selected);//((JLabel) panelList.get(selected).getComponent(0)).getText();
 
         for (int i = 0; i < panelList.size(); i++) {
-
-            if (currentFile.equals(((JLabel) panelList.get(i).getComponent(0)).getText())) {
-                panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.decode(UIConstants.blue), 5));
-                panelList.get(i).setBackground(Color.decode(UIConstants.lightBlue));
+            if (currentFile.equals(((JLabel) panelList.get(i).getComponent(1)).getText())) {
+                panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.decode(timer.getBorderColor()), timer.getBorderSize()));
+                panelList.get(i).setBackground(Color.decode(timer.getBackgroundColor()));
             } else {
-                panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.white, 5));
-                panelList.get(i).setBackground(Color.decode(UIConstants.grey));
+                panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.white, timer.getBorderSize()));
+                panelList.get(i).setBackground(Color.decode(timer.getDefaultBackgroundColor()));
             }
         }
     }

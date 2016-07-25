@@ -25,6 +25,8 @@ import org.scify.talkandplay.gui.grid.entertainment.EntertainmentPanel;
 import org.scify.talkandplay.gui.grid.entertainment.FilesPanel;
 import org.scify.talkandplay.gui.grid.entertainment.MediaPlayerPanel;
 import org.scify.talkandplay.gui.grid.timers.ButtonTimerManager;
+import org.scify.talkandplay.gui.grid.timers.MouseTimerManager;
+import org.scify.talkandplay.gui.grid.timers.TileTimerManager;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
@@ -50,10 +52,16 @@ public class BaseMediaPanel extends BasePanel {
         this.sensorService = new SensorService(user);
         this.controlsList = new ArrayList();
         this.mediaPlayerPanel = new MediaPlayerPanel(this);
-        this.timer = new ButtonTimerManager(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         this.files = new ArrayList();
         this.currentFile = "";
         this.c = new GridBagConstraints();
+
+        if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
+            this.timer = new MouseTimerManager(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+        } else {
+            this.timer = new ButtonTimerManager(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+        }
+
         Collections.addAll(this.files, files);
         prepareFiles();
     }

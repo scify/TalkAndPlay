@@ -15,7 +15,7 @@ public class TileTimerManager extends TimerManager {
     }
 
     @Override
-    protected void setUnselected(int i) {
+    public void setUnselected(int i) {
         panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.white, BORDER_SIZE));
         panelList.get(i).setBackground(Color.decode(defaultBackgroundColor));
 
@@ -23,7 +23,7 @@ public class TileTimerManager extends TimerManager {
     }
 
     @Override
-    protected void setSelected(int i) {
+    public void setSelected(int i) {
         panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.decode(BORDER_COLOR), BORDER_SIZE));
         panelList.get(i).setBackground(Color.decode(BACKGROUND_COLOR));
 
