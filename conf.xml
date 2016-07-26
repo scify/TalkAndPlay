@@ -458,6 +458,8 @@
         <name>Ερέθισμα - Αντίδραση</name>
         <image />
         <sound />
+        <winSound />
+        <errorSound />
         <enabled>true</enabled>
         <games>
           <game>
@@ -465,31 +467,25 @@
             <enabled>false</enabled>
             <image />
             <difficulty>4</difficulty>
-            <winSound />
+            <winSound>demo_resources/sounds/games/BoyBall MP3.mp3</winSound>
             <errorSound />
             <gameImages>
               <image>
                 <name />
-                <path>/home/christina/Documents/TalkAndPlay/images/talkandplay/games/stimulus1.png</path>
+                <path>demo_resources/images/games/stimulus1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>/home/christina/Documents/TalkAndPlay/images/talkandplay/games/stimulus2.png</path>
+                <path>demo_resources/images/games/stimulus2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>/home/christina/Documents/TalkAndPlay/images/talkandplay/games/stimulus3.png</path>
+                <path>demo_resources/images/games/stimulus3.png</path>
                 <order>3</order>
-                <enabled>false</enabled>
-              </image>
-              <image>
-                <name />
-                <path>/home/christina/Pictures/filtra_anazitisis.png</path>
-                <order>4</order>
                 <enabled>false</enabled>
               </image>
             </gameImages>
@@ -504,19 +500,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>/home/christina/Documents/TalkAndPlay/images/talkandplay/games/balloon.png</path>
+                <path>demo_resources/images/games/balloon.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>/home/christina/Documents/TalkAndPlay/images/talkandplay/games/ballons.png</path>
+                <path>demo_resources/images/games/ballons.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>/home/christina/Documents/TalkAndPlay/images/talkandplay/games/ballons-1.png</path>
+                <path>demo_resources/images/games/ballons-1.png</path>
                 <order>3</order>
                 <enabled>false</enabled>
               </image>
@@ -524,8 +520,156 @@
           </game>
         </games>
       </stimulusReactionGames>
-      <!--sequenceGame />
-      <similarityGames /-->
+      <sequenceGames>
+        <name>Χρονικής Αλληλουχίας</name>
+        <image />
+        <sound />
+        <winSound />
+        <errorSound />
+        <enabled>true</enabled>
+        <games>
+          <game>
+            <name>Game 1</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/sequence1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/sequence2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/sequence3.png</path>
+                <order>3</order>
+                <enabled>false</enabled>
+              </image>
+            </gameImages>
+          </game>
+          <game>
+            <name>Game 2</name>
+            <enabled>false</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/time.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/time-1.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/hours.png</path>
+                <order>3</order>
+                <enabled>false</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/clock1.png</path>
+                <order>4</order>
+                <enabled>false</enabled>
+              </image>
+            </gameImages>
+          </game>
+        </games>
+      </sequenceGames>
+      <similarityGames>
+        <name>Βρες το όμοιο</name>
+        <image />
+        <sound />
+        <winSound />
+        <errorSound />
+        <enabled>true</enabled>
+        <games>
+          <game>
+            <name>Game 1</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/like.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/shapes-2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/favorite-1.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/favorite.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+          <game>
+            <name>Game 2</name>
+            <enabled>false</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/similarity1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/similarity2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/similarity3.png</path>
+                <order>3</order>
+                <enabled>false</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/similarity4.png</path>
+                <order>4</order>
+                <enabled>false</enabled>
+              </image>
+            </gameImages>
+          </game>
+        </games>
+      </similarityGames>
     </games>
   </profile>
   <profile preselected="false">
@@ -688,6 +832,15 @@
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
+            </category>
+            <category name="τεστ">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>/home/christina/Desktop/tp/demo_resources/tp_logo_mini.png</image>
+              <sound />
+              <hasSound>false</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
           </categories>
         </category>

@@ -7,6 +7,7 @@ package org.scify.talkandplay.gui.configuration;
 
 import java.awt.Font;
 import javax.swing.JTextArea;
+import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 
 /**
@@ -15,16 +16,22 @@ import org.scify.talkandplay.gui.helpers.UIConstants;
  */
 public class GamesInfoPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form GamesInfoPanel
-     */
-    public GamesInfoPanel() {
+    private ConfigurationPanel parent;
+    private GuiHelper guiHelper;
+    
+    
+    public GamesInfoPanel(ConfigurationPanel parent) {
+        this.parent=parent;
+        this.guiHelper = new GuiHelper();
+        
         initComponents();
         initCustomComponents();
     }
 
     public void initCustomComponents() {
 
+        guiHelper.drawButton(backButton);
+        
         Font font = new Font(UIConstants.mainFont, Font.BOLD, 16);
         step1Label.setFont(font);
         step2Label.setFont(font);
@@ -70,6 +77,7 @@ public class GamesInfoPanel extends javax.swing.JPanel {
         step4TextArea = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         step3TextArea = new javax.swing.JTextArea();
+        backButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(460, 558));
@@ -103,6 +111,17 @@ public class GamesInfoPanel extends javax.swing.JPanel {
         step3TextArea.setText("Ρύθμισε το επίπεδο δυσκολίας για κάθε παιχνίδι ενεργοποιώντας σε κάθε τετράδα τις εικόνες που επιθυμείς. Για να ενεργοποιήσεις μία εικόνα, κάνε κλικ στο κουτί ακριβώς από κάτω της.");
         jScrollPane2.setViewportView(step3TextArea);
 
+        backButton.setBackground(new java.awt.Color(75, 161, 69));
+        backButton.setFont(backButton.getFont());
+        backButton.setForeground(new java.awt.Color(255, 255, 255));
+        backButton.setText("Πίσω");
+        backButton.setBorder(null);
+        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,15 +132,19 @@ public class GamesInfoPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(step1Label)
                             .addComponent(step2Label)
                             .addComponent(step3Label)
                             .addComponent(step4Label))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(192, 192, 192)
+                .addComponent(backButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,24 +153,31 @@ public class GamesInfoPanel extends javax.swing.JPanel {
                 .addComponent(step1Label)
                 .addGap(9, 9, 9)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(step2Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                .addGap(12, 12, 12)
                 .addComponent(step3Label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(step4Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                .addComponent(backButton)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void backButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseClicked
+        parent.goBack();
+    }//GEN-LAST:event_backButtonMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

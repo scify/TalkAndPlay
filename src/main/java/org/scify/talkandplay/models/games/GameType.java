@@ -14,6 +14,8 @@ public class GameType {
     private String image;
     private String sound;
     private String type;
+    private String winSound;
+    private String errorSound;
     private boolean enabled;
 
     //used only to display default ImageIcons from the app jar
@@ -87,6 +89,22 @@ public class GameType {
 
     public void setImageURL(URL imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public String getWinSound() {
+        return winSound;
+    }
+
+    public void setWinSound(String winSound) {
+        this.winSound = winSound;
+    }
+
+    public String getErrorSound() {
+        return errorSound;
+    }
+
+    public void setErrorSound(String errorSound) {
+        this.errorSound = errorSound;
     }
 
 }

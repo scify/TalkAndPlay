@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.BaseGridPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.tiles.TileAction;
+import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.games.GameType;
 
@@ -39,23 +40,26 @@ public class GamesPanel extends BaseGridPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initCustomComponents() {
-        removeAll();
+        UIConstants.getInstance().setRows(2);
+        UIConstants.getInstance().setColumns(3);
         initLayout();
-
+       
         panelList = new ArrayList<>();
 
         for (GameType gameType : user.getGameModule().getGameTypes()) {
             JPanel gamePanel = createGameItem(gameType);
-            add(gamePanel);
+            add(gamePanel, c);
             c.gridx++;
             panelList.add(gamePanel);
         }
 
         JPanel backPanel = createBackItem();
-        add(backPanel);
+        add(backPanel, c);
         panelList.add(backPanel);
 
-       // fillWithEmpties();
+        c.gridy++;
+        c.gridx = 0;
+        fillWithEmpties();
         timer.setList(panelList);
         timer.start();
 
@@ -67,7 +71,7 @@ public class GamesPanel extends BaseGridPanel {
         parent.repaint();
     }
 
-    private JPanel createGameItem(final GameType gameType) {
+    private JPanel createGameItem(final GameType gameType) {       
 
         JPanel panel = tileCreator.create(gameType.getName(),
                 gameType.getImage(),
@@ -77,13 +81,6 @@ public class GamesPanel extends BaseGridPanel {
                     @Override
                     public void act() {
                         timer.cancel();
-                        if ("stimulusReactionGame".equals(gameType.getType())) {
-                            showStimulusReactionGame();
-                        } else if ("sequenceGame".equals(gameType.getType())) {
-                            showSequenceGame();
-                        } else if ("similarityGame".equals(gameType.getType())) {
-                            showSimilarityGame();
-                        }
                     }
 
                     @Override

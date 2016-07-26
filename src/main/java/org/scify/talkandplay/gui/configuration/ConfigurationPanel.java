@@ -94,7 +94,7 @@ public class ConfigurationPanel extends javax.swing.JPanel {
         gbc.gridy = 1;
         gbc.weightx = 1;
         gbc.gridwidth = 1;
-        infoWrapperPanel.add(new GamesInfoPanel(), gbc);
+        infoWrapperPanel.add(new GamesInfoPanel(this), gbc);
         revalidate();
         repaint();
     }

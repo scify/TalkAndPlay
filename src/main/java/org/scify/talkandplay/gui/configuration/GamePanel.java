@@ -20,6 +20,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.games.Game;
 import org.scify.talkandplay.models.games.GameImage;
+import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
 
 /**
  *
@@ -32,16 +33,15 @@ public class GamePanel extends javax.swing.JPanel {
 
     private List<JLabel> imgLabels;
     private List<JCheckBox> imgCheckboxes;
+    private AudioMediaPlayerComponent audioPlayer;
 
     private Font activeFont, inactiveFont;
 
-    /**
-     * Creates new form GamePanel
-     */
     public GamePanel(Game game) {
         this.game = game;
         this.imgLabels = new ArrayList();
         this.imgCheckboxes = new ArrayList();
+        this.audioPlayer = new AudioMediaPlayerComponent();
         initComponents();
         initCustomComponents();
     }
@@ -80,6 +80,14 @@ public class GamePanel extends javax.swing.JPanel {
         inactiveButton.setBackground(Color.white);
         inactiveButton.setMargin(new Insets(3, 3, 3, 3));
 
+        soundLabel.setHorizontalTextPosition(JLabel.CENTER);
+        soundLabel.setVerticalTextPosition(JLabel.BOTTOM);
+        if (game.getWinSound() == null || game.getWinSound().isEmpty()) {
+            soundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+        } else {
+            soundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+        }
+
         if (game.isEnabled()) {
             activeButton.setForeground(Color.decode(UIConstants.green));
             activeButton.setBorder(new LineBorder(Color.decode(UIConstants.green), 1));
@@ -97,6 +105,8 @@ public class GamePanel extends javax.swing.JPanel {
             activeButton.setBorder(new LineBorder(Color.decode(UIConstants.disabledColor), 1));
             activeButton.setFont(inactiveFont);
         }
+
+        setSoundListener();
     }
 
     private void setImageIcon(JLabel label, String path) {
@@ -131,6 +141,7 @@ public class GamePanel extends javax.swing.JPanel {
         img4Label = new javax.swing.JLabel();
         activeButton = new javax.swing.JButton();
         inactiveButton = new javax.swing.JButton();
+        soundLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -172,6 +183,8 @@ public class GamePanel extends javax.swing.JPanel {
             }
         });
 
+        soundLabel.setText("Προσθήκη ήχου");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,6 +222,8 @@ public class GamePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(inactiveButton, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                     .addComponent(activeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(soundLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -234,7 +249,11 @@ public class GamePanel extends javax.swing.JPanel {
                                 .addComponent(activeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(3, 3, 3)
                                 .addComponent(inactiveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(img4Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(img4Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(soundLabel))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(checkBox4)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -281,8 +300,8 @@ public class GamePanel extends javax.swing.JPanel {
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                     String path = chooser.getSelectedFile().getAbsolutePath();
 
-                    if (i > game.getImages().size()-1) {
-                        game.getImages().add(new GameImage(path, imgCheckboxes.get(i).isSelected(), i+1));
+                    if (i > game.getImages().size() - 1) {
+                        game.getImages().add(new GameImage(path, imgCheckboxes.get(i).isSelected(), i + 1));
                     } else {
                         game.getImages().get(i).setImage(path);
                     }
@@ -302,6 +321,44 @@ public class GamePanel extends javax.swing.JPanel {
         });
     }
 
+    private void setSoundListener() {
+
+        soundLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent me) {
+                if (game.getWinSound() == null || game.getWinSound().isEmpty()) {
+                    soundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                } else {
+                    soundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    audioPlayer.getMediaPlayer().playMedia(game.getWinSound());
+                }
+            }
+
+            @Override
+            public void mouseExited(MouseEvent me) {
+                if (game.getWinSound() == null || game.getWinSound().isEmpty()) {
+                    soundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                } else {
+                    soundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                }
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                JFileChooser chooser = new JFileChooser();
+
+                chooser.setDialogTitle("Διάλεξε ήχο");
+                chooser.setAcceptAllFileFilterUsed(false);
+                chooser.setFileFilter(new FileNameExtensionFilter("Sound Files", "mp3", "wav", "wma", "mid"));
+                chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    game.setWinSound(chooser.getSelectedFile().getAbsolutePath());
+                    soundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                }
+            }
+        });
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton activeButton;
@@ -314,5 +371,6 @@ public class GamePanel extends javax.swing.JPanel {
     private javax.swing.JLabel img3Label;
     private javax.swing.JLabel img4Label;
     private javax.swing.JButton inactiveButton;
+    private javax.swing.JLabel soundLabel;
     // End of variables declaration//GEN-END:variables
 }
