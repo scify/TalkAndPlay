@@ -100,12 +100,14 @@ public class VideoPanel extends BaseMediaPanel {
                     protected void beforeEnterFullScreen() {
                         System.out.println("fullscreen");
                         videoFrame.hidePanel();
+                        videoFrame.pack();
                     }
 
                     @Override
                     protected void afterExitFullScreen() {
                         System.out.println("exit fullscreen");
                         videoFrame.showPanel();
+                        videoFrame.pack();
                     }
                 });
 

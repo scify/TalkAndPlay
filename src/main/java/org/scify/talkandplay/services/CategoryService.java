@@ -148,14 +148,24 @@ public class CategoryService {
 
             Element categoryChild = new Element("category");
             categoryChild.setAttribute(new Attribute("name", category.getName()));
-            categoryChild.addContent(new Element("rows").setText(String.valueOf(category.getRows())));
-            categoryChild.addContent(new Element("columns").setText(String.valueOf(category.getColumns())));
             categoryChild.addContent(new Element("image").setText(category.getImage()));
             categoryChild.addContent(new Element("sound").setText(category.getSound()));
             //categoryChild.addContent(new Element("order").setText(String.valueOf(category.getOrder())));
             categoryChild.addContent(new Element("hasSound").setText(String.valueOf(user.getConfiguration().hasSound())));
             categoryChild.addContent(new Element("hasImage").setText(String.valueOf(user.getConfiguration().hasImage())));
             categoryChild.addContent(new Element("hasText").setText(String.valueOf(user.getConfiguration().hasText())));
+
+            if (category.getRows() != null) {
+                categoryChild.addContent(new Element("rows").setText(String.valueOf(category.getRows())));
+            } else {
+                categoryChild.addContent(new Element("rows"));
+            }
+
+            if (category.getColumns() != null) {
+                categoryChild.addContent(new Element("columns").setText(String.valueOf(category.getColumns())));
+            } else {
+                categoryChild.addContent(new Element("columns"));
+            }
 
             //check if the category is the first level of the comm module
             if (category.getParentCategory().getName().equals(user.getCommunicationModule().getName())) {
@@ -248,13 +258,23 @@ public class CategoryService {
 
         if (oldName.equals(categoryNode.getAttributeValue("name"))) {
             categoryNode.getAttribute("name").setValue(categoryChild.getName());
-            categoryNode.getChild("rows").setText(String.valueOf(categoryChild.getRows()));
-            categoryNode.getChild("columns").setText(String.valueOf(categoryChild.getColumns()));
             // categoryNode.getChild("order").setText(String.valueOf(categoryChild.getOrder()));
 
             categoryNode.getChild("hasSound").setText(String.valueOf(categoryChild.hasSound()));
             categoryNode.getChild("hasImage").setText(String.valueOf(categoryChild.hasImage()));
             categoryNode.getChild("hasText").setText(String.valueOf(categoryChild.hasText()));
+
+            if (categoryChild.getRows() != null) {
+                categoryNode.getChild("rows").setText(String.valueOf(categoryChild.getRows()));
+            } else {
+                categoryNode.getChild("rows").setText("");
+            }
+
+            if (categoryChild.getColumns() != null) {
+                categoryNode.getChild("columns").setText(String.valueOf(categoryChild.getColumns()));
+            } else {
+                categoryNode.getChild("rows").setText("");
+            }
 
             if (categoryChild.getImage() == null) {
                 categoryNode.getChild("image").setText(categoryNode.getChildText("image"));

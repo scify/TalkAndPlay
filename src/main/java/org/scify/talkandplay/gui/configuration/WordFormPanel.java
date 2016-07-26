@@ -148,11 +148,7 @@ public class WordFormPanel extends javax.swing.JPanel {
 
         editStepsPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        rowsTextField.setText("3");
-
         xLabel.setText("x");
-
-        columnsTextField.setText("3");
 
         step6Label.setText("6. Εμφάνιση πίνακα");
 
@@ -303,14 +299,20 @@ public class WordFormPanel extends javax.swing.JPanel {
 
             Category newCategory = new Category();
             newCategory.setName(wordTextField.getText());
-            newCategory.setRows(Integer.parseInt(rowsTextField.getText()));
-            newCategory.setColumns(Integer.parseInt(columnsTextField.getText()));
             newCategory.setImage(imagePath);
             newCategory.setSound(soundPath);
             newCategory.setParentCategory(new Category(categoriesComboBox.getSelectedItem().toString()));
             newCategory.setHasSound(soundCheckBox.isSelected());
             newCategory.setHasImage(imageCheckBox.isSelected());
             newCategory.setHasText(textCheckBox.isSelected());
+
+            if (rowsTextField.getText() != null && !rowsTextField.getText().isEmpty()) {
+                newCategory.setRows(Integer.parseInt(rowsTextField.getText()));
+            }
+
+            if (columnsTextField.getText() != null && !columnsTextField.getText().isEmpty()) {
+                newCategory.setColumns(Integer.parseInt(columnsTextField.getText()));
+            }
 
             try {
                 if (category == null) {

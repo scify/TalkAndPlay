@@ -47,18 +47,22 @@ public class InfoPanel extends javax.swing.JPanel {
         brokenFilesLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         brokenFilesPanel = new javax.swing.JPanel();
+        changeOrderButton = new javax.swing.JButton();
+        changeOrderLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        changeOrderTextArea = new javax.swing.JTextArea();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(460, 655));
 
         editExplLabel.setText("Κάνε κλικ πάνω σε κάποια λέξη για να την επεξεργαστείς.");
 
-        addExplLabel.setText("Πάτησε “Πρόσθεσε νέα λέξη” για να προσθέσεις νέα λέξη.");
+        addExplLabel.setText("Πάτησε “Νέα λέξη” για να προσθέσεις νέα λέξη.");
 
         addWordButton.setBackground(new java.awt.Color(75, 161, 69));
         addWordButton.setFont(addWordButton.getFont());
         addWordButton.setForeground(new java.awt.Color(255, 255, 255));
-        addWordButton.setText("Πρόσθεσε νέα λέξη");
+        addWordButton.setText("Νέα λέξη");
         addWordButton.setBorder(null);
         addWordButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -102,6 +106,26 @@ public class InfoPanel extends javax.swing.JPanel {
 
         jScrollPane1.setViewportView(brokenFilesPanel);
 
+        changeOrderButton.setBackground(new java.awt.Color(75, 161, 69));
+        changeOrderButton.setFont(changeOrderButton.getFont());
+        changeOrderButton.setForeground(new java.awt.Color(255, 255, 255));
+        changeOrderButton.setText("Αλλαγή σειράς");
+        changeOrderButton.setBorder(null);
+        changeOrderButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                changeOrderButtonMouseClicked(evt);
+            }
+        });
+
+        changeOrderLabel.setText("3. Αλλαγή σειράς");
+
+        jScrollPane2.setBorder(null);
+
+        changeOrderTextArea.setColumns(20);
+        changeOrderTextArea.setRows(5);
+        changeOrderTextArea.setText("Πάτησε \"Αλλαγή σειράς\" για να αλλάξεις τη σειρά των λέξεων, και πάτησε \"Αλλαγή σειράς\" ξανά για να αποθηκεύσεις τις αλλαγές");
+        jScrollPane2.setViewportView(changeOrderTextArea);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -109,48 +133,57 @@ public class InfoPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(editExplLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
+                    .addComponent(editExplLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(editLabel)
                             .addComponent(addLabel)
                             .addComponent(addExplLabel)
+                            .addComponent(changeOrderLabel)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(addWordButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(changeOrderButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(backButton))
                             .addComponent(brokenFilesLabel))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(14, 14, 14)
                 .addComponent(editLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(editExplLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addComponent(addLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(editExplLabel)
+                .addGap(15, 15, 15)
+                .addComponent(addLabel)
+                .addGap(12, 12, 12)
                 .addComponent(addExplLabel)
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
+                .addComponent(changeOrderLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addWordButton)
-                    .addComponent(backButton))
-                .addGap(66, 66, 66)
+                    .addComponent(backButton)
+                    .addComponent(changeOrderButton))
+                .addGap(49, 49, 49)
                 .addComponent(brokenFilesLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,14 +199,25 @@ public class InfoPanel extends javax.swing.JPanel {
         parent.goBack();
     }//GEN-LAST:event_backButtonMouseClicked
 
+    private void changeOrderButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changeOrderButtonMouseClicked
+        parent.redrawCategoriesListWithOrder();
+    }//GEN-LAST:event_changeOrderButtonMouseClicked
+
     private void initCustomComponents() {
         setLayout(new GridLayout(0, 1, 0, 0));
         Font font = new Font(UIConstants.mainFont, Font.BOLD, 16);
         editLabel.setFont(font);
         addLabel.setFont(font);
+        changeOrderLabel.setFont(font);
+
+        changeOrderTextArea.setEditable(false);
+        changeOrderTextArea.setLineWrap(true);
+        changeOrderTextArea.setWrapStyleWord(true);
+        changeOrderTextArea.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        jScrollPane2.setBorder(null);
 
         List<String> brokenFiles = userService.getBrokenFiles(user.getName());
-        if (brokenFiles.size()==0) {
+        if (brokenFiles.size() == 0) {
             brokenFilesLabel.setVisible(false);
             jScrollPane1.setVisible(false);
             brokenFilesPanel.setVisible(false);
@@ -185,17 +229,15 @@ public class InfoPanel extends javax.swing.JPanel {
             brokenFilesPanel.setVisible(true);
             brokenFilesPanel.setLayout(new BoxLayout(brokenFilesPanel, BoxLayout.Y_AXIS));
 
-            font = new Font(UIConstants.mainFont, Font.PLAIN, 12);
-
             for (String file : brokenFiles) {
                 JLabel fileLabel = new JLabel(file);
                 add(fileLabel);
-              //  fileLabel.setFont(font);
                 brokenFilesPanel.add(fileLabel);
             }
         }
         guiHelper.drawButton(addWordButton);
         guiHelper.drawButton(backButton);
+        guiHelper.drawButton(changeOrderButton);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -205,9 +247,13 @@ public class InfoPanel extends javax.swing.JPanel {
     private javax.swing.JButton backButton;
     private javax.swing.JLabel brokenFilesLabel;
     private javax.swing.JPanel brokenFilesPanel;
+    private javax.swing.JButton changeOrderButton;
+    private javax.swing.JLabel changeOrderLabel;
+    private javax.swing.JTextArea changeOrderTextArea;
     private javax.swing.JLabel editExplLabel;
     private javax.swing.JLabel editLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

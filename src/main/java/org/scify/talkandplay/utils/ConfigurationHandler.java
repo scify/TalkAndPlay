@@ -42,6 +42,7 @@ public class ConfigurationHandler {
     private String projectPath;
     private Map<String, List<String>> userFiles;
     private List<String> files;
+    private User currentUser;
 
     public ConfigurationHandler() {
         try {
@@ -106,6 +107,7 @@ public class ConfigurationHandler {
             files = new ArrayList();
             Element userEl = (Element) usersEl.get(i);
             User user = new User(userEl.getChildText("name"), userEl.getChildText("image"));
+            currentUser = user;
 
             if (userEl.getAttributeValue("preselected") != null) {
                 user.setPreselected(Boolean.parseBoolean(userEl.getAttributeValue("preselected")));
@@ -495,11 +497,27 @@ public class ConfigurationHandler {
 
                 Category category = new Category(
                         categoryEl.getAttributeValue("name"),
-                        Integer.parseInt(categoryEl.getChildText("rows")),
-                        Integer.parseInt(categoryEl.getChildText("columns")),
                         categoryEl.getChildText("image"));
 
                 category.setSound(categoryEl.getChildText("sound"));
+
+                if (categoryEl.getChildText("rows") != null && !categoryEl.getChildText("rows").isEmpty()) {
+                    category.setRows(Integer.parseInt(categoryEl.getChildText("rows")));
+                } else {
+                    category.setRows(currentUser.getConfiguration().getDefaultGridRow());
+                }
+
+                if (categoryEl.getChildText("columns") != null&& !categoryEl.getChildText("columns").isEmpty()) {
+                    category.setColumns(Integer.parseInt(categoryEl.getChildText("columns")));
+                } else {
+                    category.setColumns(currentUser.getConfiguration().getDefaultGridColumn());
+                }
+
+                if (categoryEl.getChildText("editable") != null) {
+                    category.setEditable(Boolean.parseBoolean(categoryEl.getChildText("editable")));
+                } else {
+                    category.setEditable(true);
+                }
 
                 if (parent != null) {
                     category.setParentCategory(new Category(parent.getName()));

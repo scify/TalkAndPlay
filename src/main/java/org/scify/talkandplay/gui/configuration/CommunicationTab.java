@@ -67,7 +67,7 @@ public class CommunicationTab extends javax.swing.JPanel {
 
         contentPanel.add(titlePanel(), c);
 
-        drawCategories(user.getCommunicationModule().getCategories(), MARGIN);
+        drawCategories(user.getCommunicationModule().getCategories(), MARGIN, false);
     }
 
     /**
@@ -76,7 +76,7 @@ public class CommunicationTab extends javax.swing.JPanel {
      * @param categories
      * @param margin
      */
-    private void drawCategories(List<Category> categories, int margin) {
+    private void drawCategories(List<Category> categories, int margin, boolean withOrdering) {
         if (categories == null || categories.isEmpty()) {
             return;
         } else {
@@ -86,6 +86,8 @@ public class CommunicationTab extends javax.swing.JPanel {
                 panel.setLayout(new BorderLayout());
                 panel.setBackground(Color.white);
 
+                JPanel controlsPanel = new JPanel();
+
                 JLabel label = new JLabel(category.getName());
                 label.setBorder(new EmptyBorder(0, margin, 0, 0));
 
@@ -93,7 +95,16 @@ public class CommunicationTab extends javax.swing.JPanel {
                 JLabel deleteLabel = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/delete-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
                 editLabel.setBorder(new EmptyBorder(0, 0, 0, 10));
 
-                JPanel controlsPanel = new JPanel();
+                if (withOrdering) {
+                    JLabel upLabel = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/up-icon-white.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+                    JLabel downLabel = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/down-icon-white.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+                    upLabel.setBorder(new EmptyBorder(0, 0, 0, 10));
+                    downLabel.setBorder(new EmptyBorder(0, 0, 0, 10));
+
+                    controlsPanel.add(upLabel);
+                    controlsPanel.add(downLabel);
+                }
+
                 controlsPanel.add(editLabel);
                 controlsPanel.add(deleteLabel);
                 controlsPanel.setVisible(false);
@@ -119,7 +130,7 @@ public class CommunicationTab extends javax.swing.JPanel {
                 // add(panel);
                 panels.add(panel);
                 row++;
-                drawCategories(category.getSubCategories(), margin);
+                drawCategories(category.getSubCategories(), margin, withOrdering);
             }
             margin -= MARGIN;
         }
@@ -130,8 +141,29 @@ public class CommunicationTab extends javax.swing.JPanel {
         contentPanel.add(titlePanel(), c);
 
         user = userService.getUser(user.getName());
-        drawCategories(user.getCommunicationModule().getCategories(), MARGIN);
+        drawCategories(user.getCommunicationModule().getCategories(), MARGIN, false);
 
+        revalidate();
+        repaint();
+    }
+
+    public void redrawCategoriesListWithOrder() {
+        contentPanel.removeAll();
+        contentPanel.add(titlePanel(), c);
+
+        user = userService.getUser(user.getName());
+        drawCategories(user.getCommunicationModule().getCategories(), MARGIN, true);
+
+        //set the first panel as the selected one
+        if (panels.size() > 0) {
+            panels.get(2).setBackground(Color.decode(UIConstants.green));
+            panels.get(2).getComponent(0).setForeground(Color.white);
+            panels.get(2).getComponent(1).setVisible(true);
+        }
+        
+         panels.get(2).setBackground(Color.decode(UIConstants.green));
+            panels.get(2).getComponent(0).setForeground(Color.white);
+            panels.get(2).getComponent(1).setVisible(true);
         revalidate();
         repaint();
     }

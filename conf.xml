@@ -732,6 +732,42 @@
                   <hasImage>true</hasImage>
                   <hasText>true</hasText>
                 </category>
+                <category name="ddddd">
+                  <image>/home/christina/Documents/empty_pixel.png</image>
+                  <sound />
+                  <hasSound>false</hasSound>
+                  <hasImage>true</hasImage>
+                  <hasText>true</hasText>
+                </category>
+                <category name="null">
+                  <image>/home/christina/Pictures/hmerominia_sumvasis.png</image>
+                  <sound />
+                  <hasSound>false</hasSound>
+                  <hasImage>true</hasImage>
+                  <hasText>true</hasText>
+                  <rows />
+                  <columns />
+                </category>
+                <category name="null22222">
+                  <image>/home/christina/Pictures/Selection_002.png</image>
+                  <sound />
+                  <hasSound>false</hasSound>
+                  <hasImage>false</hasImage>
+                  <hasText>false</hasText>
+                  <rows />
+                  <columns />
+                  <categories>
+                    <category name="aaaaaaaaaa">
+                      <image>/home/christina/Documents/autocomplete.png</image>
+                      <sound />
+                      <hasSound>false</hasSound>
+                      <hasImage>true</hasImage>
+                      <hasText>true</hasText>
+                      <rows />
+                      <columns />
+                    </category>
+                  </categories>
+                </category>
               </categories>
             </category>
             <category name="Τοστ">
@@ -742,6 +778,17 @@
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
+              <categories>
+                <category name="zampuoun">
+                  <image>/home/christina/Documents/empty_pixel.png</image>
+                  <sound />
+                  <hasSound>false</hasSound>
+                  <hasImage>true</hasImage>
+                  <hasText>true</hasText>
+                  <rows />
+                  <columns />
+                </category>
+              </categories>
             </category>
             <category name="Χυμός">
               <rows>3</rows>
