@@ -1,24 +1,42 @@
 package org.scify.talkandplay.gui.grid.games;
 
-import java.awt.FlowLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import org.scify.talkandplay.gui.grid.BaseGridPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.tiles.TileAction;
+import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.models.games.Game;
 import org.scify.talkandplay.models.games.GameImage;
 import org.scify.talkandplay.models.games.GameType;
 import org.scify.talkandplay.models.games.StimulusReactionGame;
+import org.scify.talkandplay.models.sensors.KeyboardSensor;
+import org.scify.talkandplay.models.sensors.MouseSensor;
+import org.scify.talkandplay.models.sensors.Sensor;
+import org.scify.talkandplay.services.SensorService;
 
 public class StimulusReactionGamePanel extends BaseGridPanel {
 
     private StimulusReactionGame game;
+    private SensorService sensorService;
     private int selected;
 
     public StimulusReactionGamePanel(User user, GridFrame parent) {
         super(user, parent);
+        this.sensorService = new SensorService(user);
+        this.selected = 0;
 
         initComponents();
         initCustomComponents();
@@ -46,21 +64,35 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initCustomComponents() {
-        removeAll();
-        setLayout(new FlowLayout());
+        UIConstants.getInstance().setRows(1);
+        UIConstants.getInstance().setColumns(1);
+        initLayout();
+
         panelList = new ArrayList<>();
 
-        //select a random game
-        Random randomGenerator = new Random();
-        for (GameType gameType : user.getGameModule().getGameTypes()) {
-            if ("stimulusReactionGame".equals(gameType.getType())) {
-                game = (StimulusReactionGame) gameType.getGames().get(randomGenerator.nextInt(gameType.getGames().size()));
+        if (game == null) {
+            //select a random game
+            Random randomGenerator = new Random();
+            for (GameType gameType : user.getGameModule().getGameTypes()) {
+                if ("stimulusReactionGame".equals(gameType.getType())) {
+                    for (int j = 0; j < gameType.getGames().size(); j++) {
+                        int i = randomGenerator.nextInt(gameType.getGames().size());
+                        if (gameType.getGames().get(i).isEnabled()) {
+                            game = (StimulusReactionGame) gameType.getGames().get(i);
+                            break;
+                        }
+                    }
+                }
             }
         }
-
-        JPanel gamePanel = createGameItem(game.getImages().get(0));
         
-        add(gamePanel);
+        if (game == null) {
+            add(new JLabel("tttt"), c);
+        } else {
+            JPanel gamePanel = createGameItem(game.getImages().get(0));
+            add(gamePanel, c);
+        }
+
         revalidate();
         repaint();
         parent.clearGrid();
@@ -71,9 +103,11 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
 
     private JPanel createGameItem(GameImage image) {
 
+        final StimulusReactionGamePanel currentPanel = this;
+
         JPanel panel = tileCreator.create("",
                 image.getImage(),
-                null,
+                image.getSound(),
                 new TileAction() {
                     @Override
                     public void act() {
@@ -81,12 +115,28 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
                         if (selected == game.getImages().size() - 1) {
                             congratulate(game.getImages().get(selected));
                         } else {
-                            createGameItem(game.getImages().get(selected));
+                            removeAll();
+                            add(createGameItem(game.getImages().get(selected)), c);
+                            revalidate();
+                            repaint();
+                            parent.clearGrid();
+                            parent.addGrid(currentPanel);
+                            parent.revalidate();
+                            parent.repaint();
                         }
                     }
 
                     @Override
                     public void audioFinished() {
+
+                    }
+
+                    @Override
+                    public boolean mute() {
+                        if (selected == game.getImages().size() - 1) {
+                            return false;
+                        }
+                        return true;
                     }
                 });
 
@@ -159,6 +209,105 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
 
         timer.setList(panelList);
         timer.start();
+    }
+
+    private void setControls() {
+
+        JPanel newGamePanel = drawControl("Νέο παιχνίδι");
+        JPanel playAgainPanel = drawControl("Παίξε το ίδιο ξανά");
+        JPanel exitPanel = drawControl("Έξοδος");
+
+        newGamePanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                Sensor sensor = new MouseSensor(me.getButton(), me.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor)) {
+                    StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
+                    parent.clearGrid();
+                    parent.addGrid(gamePanel);
+                }
+            }
+        });
+        newGamePanel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
+                if (sensorService.shouldSelect(sensor)) {
+                    StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
+                    parent.clearGrid();
+                    parent.addGrid(gamePanel);
+                }
+            }
+        });
+
+        playAgainPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                Sensor sensor = new MouseSensor(me.getButton(), me.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor)) {
+                    StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
+                    gamePanel.setGame(game);
+                    parent.clearGrid();
+                    parent.addGrid(gamePanel);
+                }
+            }
+        });
+        playAgainPanel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
+                if (sensorService.shouldSelect(sensor)) {
+                    StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
+                    gamePanel.setGame(game);
+                    parent.clearGrid();
+                    parent.addGrid(gamePanel);
+                }
+            }
+        });
+
+        exitPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                Sensor sensor = new MouseSensor(me.getButton(), me.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor)) {
+                    GamesPanel gamesPanel = new GamesPanel(user, parent);
+                    parent.clearGrid();
+                    parent.addGrid(gamesPanel);
+                }
+            }
+        });
+        exitPanel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
+                if (sensorService.shouldSelect(sensor)) {
+                    GamesPanel gamesPanel = new GamesPanel(user, parent);
+                    parent.clearGrid();
+                    parent.addGrid(gamesPanel);
+                }
+            }
+        });
+    }
+
+    private JPanel drawControl(String text) {
+
+        JLabel label = new JLabel(text);
+        label.setBorder(new EmptyBorder(5, 5, 5, 5));
+        label.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+        panel.setBackground(Color.decode(UIConstants.grey));
+        panel.setPreferredSize(new Dimension(180, 100));
+        panel.setMaximumSize(new Dimension(180, 100));
+        panel.setMinimumSize(new Dimension(180, 100));
+        panel.setBorder((new LineBorder(Color.white, 5)));
+
+        panel.add(label);
+        return panel;
+
+    }
+
+    public void setGame(StimulusReactionGame game) {
+        this.game = game;
     }
 
 

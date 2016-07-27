@@ -11,9 +11,9 @@
       <image>true</image>
       <text>true</text>
       <selectionSensor>
-        <type>keyboard</type>
-        <keyCode>32</keyCode>
-        <keyChar />
+        <type>mouse</type>
+        <button>1</button>
+        <clickCount>1</clickCount>
       </selectionSensor>
     </configuration>
     <communication>
@@ -464,35 +464,7 @@
         <games>
           <game>
             <name>Game 1</name>
-            <enabled>false</enabled>
-            <image />
-            <difficulty>4</difficulty>
-            <winSound>demo_resources/sounds/games/BoyBall MP3.mp3</winSound>
-            <errorSound />
-            <gameImages>
-              <image>
-                <name />
-                <path>demo_resources/images/games/stimulus1.png</path>
-                <order>1</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>demo_resources/images/games/stimulus2.png</path>
-                <order>2</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>demo_resources/images/games/stimulus3.png</path>
-                <order>3</order>
-                <enabled>false</enabled>
-              </image>
-            </gameImages>
-          </game>
-          <game>
-            <name>Game 2</name>
-            <enabled>false</enabled>
+            <enabled>true</enabled>
             <image />
             <difficulty>4</difficulty>
             <winSound />
@@ -500,20 +472,94 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/balloon.png</path>
+                <path>demo_resources/images/games/αυτοκίνητο/αυτοκίνητο_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/ballons.png</path>
+                <path>demo_resources/images/games/αυτοκίνητο/αυτοκίνητο_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/ballons-1.png</path>
+                <path>demo_resources/images/games/αυτοκίνητο/αυτοκίνητο_3.png</path>
                 <order>3</order>
+                <enabled>false</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/αυτοκίνητο/αυτοκίνητο_4.png</path>
+                <order>4</order>
+                <enabled>false</enabled>
+              </image>
+            </gameImages>
+          </game>
+          <game>
+            <name>Game 2</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound>demo_resources/sounds/games/καράβι/ship.mp3</winSound>
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/καράβι/καράβι_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/καράβι/καράβι_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/καράβι/καράβι_3.png</path>
+                <order>3</order>
+                <enabled>false</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/καράβι/καράβι_4.png</path>
+                <order>4</order>
+                <enabled>false</enabled>
+              </image>
+            </gameImages>
+          </game>
+          <game>
+            <name>Game 3</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_3.png</path>
+                <order>3</order>
+                <enabled>false</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_4.png</path>
+                <order>4</order>
                 <enabled>false</enabled>
               </image>
             </gameImages>
@@ -558,7 +604,7 @@
           </game>
           <game>
             <name>Game 2</name>
-            <enabled>false</enabled>
+            <enabled>true</enabled>
             <image />
             <difficulty>4</difficulty>
             <winSound />

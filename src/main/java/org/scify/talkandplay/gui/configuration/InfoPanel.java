@@ -200,7 +200,10 @@ public class InfoPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_backButtonMouseClicked
 
     private void changeOrderButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changeOrderButtonMouseClicked
-        parent.redrawCategoriesListWithOrder();
+
+
+
+
     }//GEN-LAST:event_changeOrderButtonMouseClicked
 
     private void initCustomComponents() {

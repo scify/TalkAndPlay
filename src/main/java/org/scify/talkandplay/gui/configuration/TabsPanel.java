@@ -89,9 +89,6 @@ public class TabsPanel extends javax.swing.JPanel {
         communicationPanel.redrawCategoriesList();
     }
     
-    public void redrawCategoriesListWithOrder() {
-        communicationPanel.redrawCategoriesListWithOrder();
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane tabsPanel;

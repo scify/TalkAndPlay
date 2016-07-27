@@ -87,15 +87,17 @@ public class WordFormPanel extends javax.swing.JPanel {
         rowsTextField = new javax.swing.JTextField();
         xLabel = new javax.swing.JLabel();
         columnsTextField = new javax.swing.JTextField();
-        step6Label = new javax.swing.JLabel();
+        step7Label = new javax.swing.JLabel();
         imageCheckBox = new javax.swing.JCheckBox();
         textCheckBox = new javax.swing.JCheckBox();
         soundCheckBox = new javax.swing.JCheckBox();
-        step5Label = new javax.swing.JLabel();
+        step6Label = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         closeLabel = new javax.swing.JLabel();
         categoriesComboBox = new javax.swing.JComboBox();
         errorLabel = new javax.swing.JLabel();
+        step5Label = new javax.swing.JLabel();
+        orderTextField = new javax.swing.JTextField();
 
         backButton.setBackground(new java.awt.Color(75, 161, 69));
         backButton.setFont(backButton.getFont());
@@ -150,7 +152,7 @@ public class WordFormPanel extends javax.swing.JPanel {
 
         xLabel.setText("x");
 
-        step6Label.setText("6. Εμφάνιση πίνακα");
+        step7Label.setText("7. Εμφάνιση πίνακα");
 
         imageCheckBox.setBackground(new java.awt.Color(255, 255, 255));
         imageCheckBox.setText("Εικόνα");
@@ -161,7 +163,7 @@ public class WordFormPanel extends javax.swing.JPanel {
         soundCheckBox.setBackground(new java.awt.Color(255, 255, 255));
         soundCheckBox.setText("Ήχος");
 
-        step5Label.setText("5. Καθόρισε μέγεθος πίνακα");
+        step6Label.setText("6. Καθόρισε μέγεθος πίνακα");
 
         jLabel1.setText("(άφησε κενό για προεπιλέγμενο μέγεθος πίνακα)");
 
@@ -187,14 +189,14 @@ public class WordFormPanel extends javax.swing.JPanel {
                                 .addComponent(textCheckBox)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(imageCheckBox))
-                    .addComponent(step5Label)
-                    .addComponent(step6Label))
+                    .addComponent(step6Label)
+                    .addComponent(step7Label))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         editStepsPanelLayout.setVerticalGroup(
             editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editStepsPanelLayout.createSequentialGroup()
-                .addComponent(step5Label)
+                .addComponent(step6Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(12, 12, 12)
@@ -203,7 +205,7 @@ public class WordFormPanel extends javax.swing.JPanel {
                     .addComponent(xLabel)
                     .addComponent(columnsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(step6Label)
+                .addComponent(step7Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(soundCheckBox)
@@ -219,6 +221,8 @@ public class WordFormPanel extends javax.swing.JPanel {
         errorLabel.setBackground(new java.awt.Color(255, 255, 255));
         errorLabel.setForeground(new java.awt.Color(153, 0, 0));
         errorLabel.setText("error");
+
+        step5Label.setText("5. Επιλογή σειράς");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -255,6 +259,12 @@ public class WordFormPanel extends javax.swing.JPanel {
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(orderTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(step5Label, javax.swing.GroupLayout.Alignment.LEADING))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,12 +294,16 @@ public class WordFormPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(categoriesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(editStepsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(step5Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(orderTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(editStepsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(errorLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(14, 14, 14)
                 .addComponent(saveButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -305,6 +319,7 @@ public class WordFormPanel extends javax.swing.JPanel {
             newCategory.setHasSound(soundCheckBox.isSelected());
             newCategory.setHasImage(imageCheckBox.isSelected());
             newCategory.setHasText(textCheckBox.isSelected());
+            newCategory.setOrder(Integer.parseInt(orderTextField.getText()));
 
             if (rowsTextField.getText() != null && !rowsTextField.getText().isEmpty()) {
                 newCategory.setRows(Integer.parseInt(rowsTextField.getText()));
@@ -408,6 +423,7 @@ public class WordFormPanel extends javax.swing.JPanel {
         guiHelper.setStepLabelFont(step4Label);
         guiHelper.setStepLabelFont(step5Label);
         guiHelper.setStepLabelFont(step6Label);
+        guiHelper.setStepLabelFont(step7Label);
         guiHelper.setStepExplLabelFont(step3ExplLabel);
 
         wordTextField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.GRAY));
@@ -447,6 +463,7 @@ public class WordFormPanel extends javax.swing.JPanel {
                 soundCheckBox.setSelected(category.hasSound());
                 imageCheckBox.setSelected(category.hasImage());
                 textCheckBox.setSelected(category.hasText());
+                orderTextField.setText(String.valueOf(category.getOrder()));
             } else {
                 editStepsPanel.setVisible(false);
             }
@@ -580,6 +597,7 @@ public class WordFormPanel extends javax.swing.JPanel {
     private javax.swing.JCheckBox imageCheckBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField orderTextField;
     private javax.swing.JTextField rowsTextField;
     private javax.swing.JButton saveButton;
     private javax.swing.JCheckBox soundCheckBox;
@@ -591,6 +609,7 @@ public class WordFormPanel extends javax.swing.JPanel {
     private javax.swing.JLabel step4Label;
     private javax.swing.JLabel step5Label;
     private javax.swing.JLabel step6Label;
+    private javax.swing.JLabel step7Label;
     private javax.swing.JCheckBox textCheckBox;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JLabel uploadImageLabel;

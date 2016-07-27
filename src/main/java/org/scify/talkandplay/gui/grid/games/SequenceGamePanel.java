@@ -1,13 +1,15 @@
 package org.scify.talkandplay.gui.grid.games;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.BaseGridPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.tiles.TileAction;
+import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.games.GameImage;
 import org.scify.talkandplay.models.games.GameType;
@@ -50,40 +52,59 @@ public class SequenceGamePanel extends BaseGridPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initCustomComponents() {
+        /*setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+         imagesPanel = new JPanel();
+         correctImagesPanel = new JPanel();
+         imagesPanel.setLayout(new BoxLayout(imagesPanel, BoxLayout.LINE_AXIS));
+         imagesPanel.setBorder(new MatteBorder(0, 0, 1, 0, Color.decode(UIConstants.grey)));
+         correctImagesPanel.setLayout(new BoxLayout(correctImagesPanel, BoxLayout.LINE_AXIS));
+         */
 
-        imagesPanel = new JPanel();
-        correctImagesPanel = new JPanel();
-        imagesPanel.setLayout(new BoxLayout(imagesPanel, BoxLayout.LINE_AXIS));
-        correctImagesPanel.setLayout(new BoxLayout(correctImagesPanel, BoxLayout.LINE_AXIS));
-
+        UIConstants.getInstance().setRows(2);
+        UIConstants.getInstance().setColumns(4);
+        initLayout();
         panelList = new ArrayList<>();
 
         //select a random game
         Random randomGenerator = new Random();
         for (GameType gameType : user.getGameModule().getGameTypes()) {
             if ("sequenceGame".equals(gameType.getType())) {
-                game = (SequenceGame) gameType.getGames().get(randomGenerator.nextInt(gameType.getGames().size()));
+                for (int j = 0; j < gameType.getGames().size(); j++) {
+                    int i = randomGenerator.nextInt(gameType.getGames().size());
+                    if (gameType.getGames().get(i).isEnabled()) {
+                        game = (SequenceGame) gameType.getGames().get(i);
+                        break;
+                    }
+                }
             }
         }
 
         //draw the images in a random order
-        List<GameImage> tmpImages = game.getImages();
+        List<GameImage> tmpImages = new ArrayList(game.getImages());
         int i;
         while (!tmpImages.isEmpty()) {
-            i = randomGenerator.nextInt(game.getImages().size());
-            JPanel panel = createGameItem(game.getImages().get(i));
-            imagesPanel.add(panel);
+            i = randomGenerator.nextInt(tmpImages.size());
+            JPanel panel = createGameItem(tmpImages.get(i));
+            add(panel, c);
+            c.gridx++;
             panelList.add(panel);
             tmpImages.remove(i);
         }
 
-        add(imagesPanel);
-        add(correctImagesPanel);
+        c.gridx = 0;
+        c.gridy++;
+        for (int j = 0; j < game.getImages().size(); j++) {
+            add(tileCreator.createEmpty(), c);
+            c.gridx++;
+        }
+
+        /* add(imagesPanel);
+         add(correctImagesPanel);*/
         revalidate();
         repaint();
-        parent.add(this);
+        parent.clearGrid();
+        parent.addGrid(this);
         parent.revalidate();
         parent.repaint();
 
@@ -92,7 +113,7 @@ public class SequenceGamePanel extends BaseGridPanel {
     }
 
     private JPanel createGameItem(final GameImage image) {
-       final JPanel panel = tileCreator.create("",
+        final JPanel panel = tileCreator.create("",
                 image.getImage(),
                 null,
                 new TileAction() {
@@ -101,15 +122,17 @@ public class SequenceGamePanel extends BaseGridPanel {
                         System.out.println("sequence clicky");
                         if (correctImages == image.getOrder()) {
                             correctImages++;
-                           // imagesPanel.remove(panel);
-                          //  panel.setBorder(null);
-                          //  panelList.remove(panel);
-                          //  correctImagesPanel.add(panel);
+                            // imagesPanel.remove(panel);
+                            //  panel.setBorder(null);
+                            //  panelList.remove(panel);
+                            //  correctImagesPanel.add(panel);
+
                         } else {
                             timer.cancel();
                             tileCreator.playAudio(game.getErrorSound());
                         }
                     }
+
                     @Override
                     public void audioFinished() {
                     }

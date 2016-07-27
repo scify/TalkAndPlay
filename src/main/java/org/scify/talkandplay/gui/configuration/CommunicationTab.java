@@ -67,7 +67,8 @@ public class CommunicationTab extends javax.swing.JPanel {
 
         contentPanel.add(titlePanel(), c);
 
-        drawCategories(user.getCommunicationModule().getCategories(), MARGIN, false);
+        drawCategories(user.getCommunicationModule().getCategories(), MARGIN);
+
     }
 
     /**
@@ -76,11 +77,12 @@ public class CommunicationTab extends javax.swing.JPanel {
      * @param categories
      * @param margin
      */
-    private void drawCategories(List<Category> categories, int margin, boolean withOrdering) {
+    private void drawCategories(List<Category> categories, int margin) {
         if (categories == null || categories.isEmpty()) {
             return;
         } else {
             margin += MARGIN;
+
             for (Category category : categories) {
                 final JPanel panel = new JPanel();
                 panel.setLayout(new BorderLayout());
@@ -95,15 +97,8 @@ public class CommunicationTab extends javax.swing.JPanel {
                 JLabel deleteLabel = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/delete-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
                 editLabel.setBorder(new EmptyBorder(0, 0, 0, 10));
 
-                if (withOrdering) {
-                    JLabel upLabel = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/up-icon-white.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-                    JLabel downLabel = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/down-icon-white.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-                    upLabel.setBorder(new EmptyBorder(0, 0, 0, 10));
-                    downLabel.setBorder(new EmptyBorder(0, 0, 0, 10));
-
-                    controlsPanel.add(upLabel);
-                    controlsPanel.add(downLabel);
-                }
+             
+                setListeners(panel, editLabel, deleteLabel, category.getName());
 
                 controlsPanel.add(editLabel);
                 controlsPanel.add(deleteLabel);
@@ -126,47 +121,26 @@ public class CommunicationTab extends javax.swing.JPanel {
                 c.gridy = row;
                 c.ipady = 0;
                 contentPanel.add(panel, c);
-
-                // add(panel);
                 panels.add(panel);
                 row++;
-                drawCategories(category.getSubCategories(), margin, withOrdering);
+                drawCategories(category.getSubCategories(), margin);
             }
             margin -= MARGIN;
         }
     }
 
     public void redrawCategoriesList() {
+        panels = new ArrayList();
         contentPanel.removeAll();
         contentPanel.add(titlePanel(), c);
 
         user = userService.getUser(user.getName());
-        drawCategories(user.getCommunicationModule().getCategories(), MARGIN, false);
+        drawCategories(user.getCommunicationModule().getCategories(), MARGIN);
 
         revalidate();
         repaint();
     }
 
-    public void redrawCategoriesListWithOrder() {
-        contentPanel.removeAll();
-        contentPanel.add(titlePanel(), c);
-
-        user = userService.getUser(user.getName());
-        drawCategories(user.getCommunicationModule().getCategories(), MARGIN, true);
-
-        //set the first panel as the selected one
-        if (panels.size() > 0) {
-            panels.get(2).setBackground(Color.decode(UIConstants.green));
-            panels.get(2).getComponent(0).setForeground(Color.white);
-            panels.get(2).getComponent(1).setVisible(true);
-        }
-        
-         panels.get(2).setBackground(Color.decode(UIConstants.green));
-            panels.get(2).getComponent(0).setForeground(Color.white);
-            panels.get(2).getComponent(1).setVisible(true);
-        revalidate();
-        repaint();
-    }
 
     private JPanel titlePanel() {
         JPanel panel = new JPanel();
@@ -179,6 +153,7 @@ public class CommunicationTab extends javax.swing.JPanel {
 
         return panel;
     }
+
 
     private void setListeners(final JPanel panel, JLabel editLabel, JLabel deleteLabel, final String category) {
 
