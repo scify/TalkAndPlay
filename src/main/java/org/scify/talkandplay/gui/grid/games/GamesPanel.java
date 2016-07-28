@@ -71,8 +71,8 @@ public class GamesPanel extends BaseGridPanel {
         parent.repaint();
     }
 
-    private JPanel createGameItem(final GameType gameType) {       
-
+    private JPanel createGameItem(final GameType gameType) {     
+        
         JPanel panel = tileCreator.create(gameType.getName(),
                 gameType.getImage(),
                 gameType.getImageURL(),

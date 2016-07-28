@@ -74,6 +74,11 @@ public class TileCreator {
         addListeners(panel, sound, tileAction);
         return panel;
     }
+    
+     public JPanel create(String name, String image, String sound) {
+        JPanel panel = guiHelper.createImagePanel(image, name);
+        return panel;
+    }
 
     public JPanel create(String name, String image, URL imageURL, String sound, TileAction tileAction) {
         JPanel panel;
@@ -100,7 +105,6 @@ public class TileCreator {
                 }
             }
         });
-
         panel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");

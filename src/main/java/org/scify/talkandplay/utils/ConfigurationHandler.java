@@ -307,7 +307,7 @@ public class ConfigurationHandler {
             } else {
                 stimulusReactionType.setSound(stimulusReactionGamesNode.getChildText("sound"));
             }
-
+            
             if (stimulusReactionGamesNode.getChildText("image").isEmpty()) {
                 stimulusReactionType.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/stimulus_game.png"));
             } else {
@@ -315,15 +315,15 @@ public class ConfigurationHandler {
             }
 
             if (stimulusReactionGamesNode.getChildText("winSound").isEmpty()) {
-                stimulusReactionType.setSound("demo_resources/sounds/games/winSound.mp3");
+                stimulusReactionType.setWinSound("demo_resources/sounds/games/winSound.mp3");
             } else {
-                stimulusReactionType.setSound(stimulusReactionGamesNode.getChildText("winSound"));
+                stimulusReactionType.setWinSound(stimulusReactionGamesNode.getChildText("winSound"));
             }
 
             if (stimulusReactionGamesNode.getChildText("errorSound").isEmpty()) {
-                stimulusReactionType.setSound("demo_resources/sounds/games/errorSound.mp3");
+                stimulusReactionType.setErrorSound("demo_resources/sounds/games/errorSound.mp3");
             } else {
-                stimulusReactionType.setSound(stimulusReactionGamesNode.getChildText("errorSound"));
+                stimulusReactionType.setErrorSound(stimulusReactionGamesNode.getChildText("errorSound"));
             }
 
             List gamesList = stimulusReactionGamesNode.getChild("games").getChildren();
@@ -375,15 +375,15 @@ public class ConfigurationHandler {
             }
 
             if (sequenceGamesNode.getChildText("winSound").isEmpty()) {
-                sequenceGameType.setSound("demo_resources/sounds/games/winSound.mp3");
+                sequenceGameType.setWinSound("demo_resources/sounds/games/winSound.mp3");
             } else {
-                sequenceGameType.setSound(sequenceGamesNode.getChildText("winSound"));
+                sequenceGameType.setWinSound(sequenceGamesNode.getChildText("winSound"));
             }
 
             if (sequenceGamesNode.getChildText("errorSound").isEmpty()) {
-                sequenceGameType.setSound("demo_resources/sounds/games/errorSound.mp3");
+                sequenceGameType.setErrorSound("demo_resources/sounds/games/errorSound.mp3");
             } else {
-                sequenceGameType.setSound(sequenceGamesNode.getChildText("errorSound"));
+                sequenceGameType.setErrorSound(sequenceGamesNode.getChildText("errorSound"));
             }
 
             List gamesList = sequenceGamesNode.getChild("games").getChildren();
@@ -435,15 +435,15 @@ public class ConfigurationHandler {
             }
 
             if (similarGamesNode.getChildText("winSound").isEmpty()) {
-                similarityGameType.setSound("demo_resources/sounds/games/winSound.mp3");
+                similarityGameType.setWinSound("demo_resources/sounds/games/winSound.mp3");
             } else {
-                similarityGameType.setSound(similarGamesNode.getChildText("winSound"));
+                similarityGameType.setWinSound(similarGamesNode.getChildText("winSound"));
             }
 
             if (similarGamesNode.getChildText("errorSound").isEmpty()) {
-                similarityGameType.setSound("demo_resources/sounds/games/errorSound.mp3");
+                similarityGameType.setErrorSound("demo_resources/sounds/games/errorSound.mp3");
             } else {
-                similarityGameType.setSound(similarGamesNode.getChildText("errorSound"));
+                similarityGameType.setErrorSound(similarGamesNode.getChildText("errorSound"));
             }
 
             List gamesList = similarGamesNode.getChild("games").getChildren();

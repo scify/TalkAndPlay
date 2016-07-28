@@ -1,42 +1,38 @@
 package org.scify.talkandplay.gui.grid.games;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import org.scify.talkandplay.gui.grid.BaseGridPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.tiles.TileAction;
-import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
-import org.scify.talkandplay.models.games.Game;
 import org.scify.talkandplay.models.games.GameImage;
 import org.scify.talkandplay.models.games.GameType;
 import org.scify.talkandplay.models.games.StimulusReactionGame;
-import org.scify.talkandplay.models.sensors.KeyboardSensor;
-import org.scify.talkandplay.models.sensors.MouseSensor;
-import org.scify.talkandplay.models.sensors.Sensor;
-import org.scify.talkandplay.services.SensorService;
 
 public class StimulusReactionGamePanel extends BaseGridPanel {
 
     private StimulusReactionGame game;
-    private SensorService sensorService;
     private int selected;
+    private JPanel gamePanel, controlsPanel;
 
     public StimulusReactionGamePanel(User user, GridFrame parent) {
         super(user, parent);
-        this.sensorService = new SensorService(user);
         this.selected = 0;
+
+        initComponents();
+        initCustomComponents();
+    }
+
+    public StimulusReactionGamePanel(User user, GridFrame parent, StimulusReactionGame game) {
+        super(user, parent);
+        this.selected = 0;
+        this.game = game;
 
         initComponents();
         initCustomComponents();
@@ -59,16 +55,23 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 327, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void initCustomComponents() {
-        UIConstants.getInstance().setRows(1);
-        UIConstants.getInstance().setColumns(1);
-        initLayout();
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        panelList = new ArrayList<>();
+        gamePanel = new JPanel();
+        gamePanel.setBackground(Color.white);
+        controlsPanel = new JPanel();
+        controlsPanel.setBackground(Color.white);
+        add(gamePanel);
+        add(controlsPanel);
+
+        gamePanel.setLayout(new FlowLayout());
+
+        panelList = new ArrayList();
 
         if (game == null) {
             //select a random game
@@ -85,16 +88,22 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
                 }
             }
         }
-        
+
         if (game == null) {
-            add(new JLabel("tttt"), c);
+            //TODO fix
+            gamePanel.add(new JLabel("tttt"));
         } else {
-            JPanel gamePanel = createGameItem(game.getImages().get(0));
-            add(gamePanel, c);
+            JPanel gameImage = createGameItem(game.getImages().get(0));
+            gamePanel.add(gameImage);
+            panelList.add(gameImage);
+
         }
 
-        revalidate();
-        repaint();
+        timer.setList(panelList);
+        timer.start();
+
+        gamePanel.revalidate();
+        gamePanel.repaint();
         parent.clearGrid();
         parent.addGrid(this);
         parent.revalidate();
@@ -104,6 +113,7 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
     private JPanel createGameItem(GameImage image) {
 
         final StimulusReactionGamePanel currentPanel = this;
+        panelList = new ArrayList();
 
         JPanel panel = tileCreator.create("",
                 image.getImage(),
@@ -111,14 +121,15 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
                 new TileAction() {
                     @Override
                     public void act() {
+                        timer.cancel();
                         selected++;
                         if (selected == game.getImages().size() - 1) {
                             congratulate(game.getImages().get(selected));
                         } else {
-                            removeAll();
-                            add(createGameItem(game.getImages().get(selected)), c);
-                            revalidate();
-                            repaint();
+                            gamePanel.removeAll();
+                            gamePanel.add(createGameItem(game.getImages().get(selected)), c);
+                            gamePanel.revalidate();
+                            gamePanel.repaint();
                             parent.clearGrid();
                             parent.addGrid(currentPanel);
                             parent.revalidate();
@@ -140,6 +151,10 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
                     }
                 });
 
+        panelList.add(panel);
+        timer.setList(panelList);
+        timer.start();
+
         return panel;
     }
 
@@ -152,12 +167,6 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
                 new TileAction() {
                     @Override
                     public void act() {
-                        selected++;
-                        if (selected == game.getImages().size() - 1) {
-                            congratulate(game.getImages().get(selected));
-                        } else {
-                            createGameItem(game.getImages().get(selected));
-                        }
                     }
 
                     @Override
@@ -165,151 +174,45 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
                     }
                 });
 
-        JPanel nextGame = tileCreator.create("Επόμενο παιχνίδι",
-                getClass().getResource("/org/scify/talkandplay/resources/more-icon.png").getFile(),
-                null,
-                new TileAction() {
-                    @Override
-                    public void act() {
-                        StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
-                        parent.clearGrid();
-                        parent.addGrid(gamePanel);
-                    }
+        gamePanel.removeAll();
+        gamePanel.add(finalImage);
+        gamePanel.revalidate();
+        gamePanel.repaint();
 
-                    @Override
-                    public void audioFinished() {
-                    }
-                });
+        ControlsPanel controls = new ControlsPanel(user, this);
 
-        JPanel back = tileCreator.create("Πίσω",
-                getClass().getResource("/org/scify/talkandplay/resources/back-icon.png").getFile(),
-                null,
-                new TileAction() {
-                    @Override
-                    public void act() {
-                        GamesPanel gamesPanel = new GamesPanel(user, parent);
-                        parent.clearGrid();
-                        parent.addGrid(gamesPanel);
-                    }
+        controlsPanel.add(controls);
 
-                    @Override
-                    public void audioFinished() {
-                    }
-                });
-
-        panelList.add(nextGame);
-        panelList.add(back);
-
-        removeAll();
-        add(finalImage);
-        add(nextGame);
-        add(back);
-        revalidate();
-        repaint();
-
-        timer.setList(panelList);
+        timer.setList(controls.getControls());
         timer.start();
-    }
 
-    private void setControls() {
-
-        JPanel newGamePanel = drawControl("Νέο παιχνίδι");
-        JPanel playAgainPanel = drawControl("Παίξε το ίδιο ξανά");
-        JPanel exitPanel = drawControl("Έξοδος");
-
-        newGamePanel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                Sensor sensor = new MouseSensor(me.getButton(), me.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor)) {
-                    StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
-                    parent.clearGrid();
-                    parent.addGrid(gamePanel);
-                }
-            }
-        });
-        newGamePanel.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
-                if (sensorService.shouldSelect(sensor)) {
-                    StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
-                    parent.clearGrid();
-                    parent.addGrid(gamePanel);
-                }
-            }
-        });
-
-        playAgainPanel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                Sensor sensor = new MouseSensor(me.getButton(), me.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor)) {
-                    StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
-                    gamePanel.setGame(game);
-                    parent.clearGrid();
-                    parent.addGrid(gamePanel);
-                }
-            }
-        });
-        playAgainPanel.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
-                if (sensorService.shouldSelect(sensor)) {
-                    StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
-                    gamePanel.setGame(game);
-                    parent.clearGrid();
-                    parent.addGrid(gamePanel);
-                }
-            }
-        });
-
-        exitPanel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                Sensor sensor = new MouseSensor(me.getButton(), me.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor)) {
-                    GamesPanel gamesPanel = new GamesPanel(user, parent);
-                    parent.clearGrid();
-                    parent.addGrid(gamesPanel);
-                }
-            }
-        });
-        exitPanel.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
-                if (sensorService.shouldSelect(sensor)) {
-                    GamesPanel gamesPanel = new GamesPanel(user, parent);
-                    parent.clearGrid();
-                    parent.addGrid(gamesPanel);
-                }
-            }
-        });
-    }
-
-    private JPanel drawControl(String text) {
-
-        JLabel label = new JLabel(text);
-        label.setBorder(new EmptyBorder(5, 5, 5, 5));
-        label.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
-        label.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        panel.setBackground(Color.decode(UIConstants.grey));
-        panel.setPreferredSize(new Dimension(180, 100));
-        panel.setMaximumSize(new Dimension(180, 100));
-        panel.setMinimumSize(new Dimension(180, 100));
-        panel.setBorder((new LineBorder(Color.white, 5)));
-
-        panel.add(label);
-        return panel;
-
+        parent.clearGrid();
+        parent.addGrid(this);
+        parent.revalidate();
+        parent.repaint();
     }
 
     public void setGame(StimulusReactionGame game) {
         this.game = game;
     }
 
+    public void newGame() {
+        StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
+        parent.clearGrid();
+        parent.addGrid(gamePanel);
+    }
+
+    public void playAgain() {
+        StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent, game);
+        parent.clearGrid();
+        parent.addGrid(gamePanel);
+    }
+
+    public void exit() {
+        GamesPanel gamesPanel = new GamesPanel(user, parent);
+        parent.clearGrid();
+        parent.addGrid(gamesPanel);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
