@@ -20,6 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import org.scify.talkandplay.gui.grid.timers.ButtonTimerManager;
+import org.scify.talkandplay.gui.grid.timers.TimerManager;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
@@ -37,11 +39,14 @@ public class ControlsPanel extends javax.swing.JPanel {
     private SensorService sensorService;
     private JPanel parent;
     private List<JPanel> controls;
+    private TimerManager timer;
 
     public ControlsPanel(User user, JPanel parent) {
         this.sensorService = new SensorService(user);
         this.user = user;
         this.parent = parent;
+        this.timer = new ButtonTimerManager(controls, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+        this.timer.setDefaultBackgroundColor(UIConstants.grey);
 
         initComponents();
         initCustomComponents();
@@ -51,24 +56,26 @@ public class ControlsPanel extends javax.swing.JPanel {
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
-        c.anchor = GridBagConstraints.FIRST_LINE_START;
-        c.weightx = 20;
-        c.weighty = 20;
+        c.weightx = 1;
+        c.weighty = 1;
         c.gridx = 0;
         c.gridy = 0;
 
         controls = new ArrayList();
 
-        JLabel congratsLabel = new JLabel("Μπράβο!");
+        JLabel congratsLabel = new JLabel(Message.getRandomCongrats());
         congratsLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 24));
         congratsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        congratsLabel.setBorder(new EmptyBorder(0, 0, 20, 0));
 
         JPanel newGamePanel = drawControl("Νέο παιχνίδι");
         JPanel playAgainPanel = drawControl("Παίξε το ίδιο ξανά");
         JPanel exitPanel = drawControl("Έξοδος");
 
+        c.anchor = GridBagConstraints.CENTER;
         add(congratsLabel, c);
         c.gridy++;
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
         add(newGamePanel, c);
         c.gridx++;
         add(playAgainPanel, c);
@@ -137,27 +144,30 @@ public class ControlsPanel extends javax.swing.JPanel {
     private void newGame() {
         if (parent instanceof StimulusReactionGamePanel) {
             ((StimulusReactionGamePanel) parent).newGame();
-        }
-        else if (parent instanceof SequenceGamePanel) {
+        } else if (parent instanceof SequenceGamePanel) {
             ((SequenceGamePanel) parent).newGame();
+        } else if (parent instanceof SimilarityGamePanel) {
+            ((SimilarityGamePanel) parent).newGame();
         }
     }
 
     private void playAgain() {
         if (parent instanceof StimulusReactionGamePanel) {
             ((StimulusReactionGamePanel) parent).playAgain();
-        }
-        else if (parent instanceof SequenceGamePanel) {
+        } else if (parent instanceof SequenceGamePanel) {
             ((SequenceGamePanel) parent).playAgain();
+        } else if (parent instanceof SimilarityGamePanel) {
+            ((SimilarityGamePanel) parent).playAgain();
         }
     }
 
     private void exit() {
         if (parent instanceof StimulusReactionGamePanel) {
             ((StimulusReactionGamePanel) parent).exit();
-        }
-        else if (parent instanceof SequenceGamePanel) {
+        } else if (parent instanceof SequenceGamePanel) {
             ((SequenceGamePanel) parent).exit();
+        } else if (parent instanceof SimilarityGamePanel) {
+            ((SimilarityGamePanel) parent).exit();
         }
     }
 
@@ -183,6 +193,10 @@ public class ControlsPanel extends javax.swing.JPanel {
 
     public List<JPanel> getControls() {
         return controls;
+    }
+
+    public TimerManager getTimer() {
+        return timer;
     }
 
     /**

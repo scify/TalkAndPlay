@@ -14,14 +14,14 @@ import java.util.Random;
 public class Message {
 
     private static final String[] CONGRATS = {"Μπράβο!", "Τα κατάφερες!", "Σωστά!"};
-    private static final String[] ERROR = {"Λάθος. Προσπάθησε ξανά!"};
-    private Random random = new Random();
+    private static final String[] ERROR = {"Λάθος. Προσπάθησε ξανά!", "Προσπάθησε ξανά."};
+    private static Random random = new Random();
 
-    public String getRandomCongrats() {
+    public static String getRandomCongrats() {
         return CONGRATS[random.nextInt(CONGRATS.length)];
     }
 
-    public String getRandomError() {
+    public static String getRandomError() {
         return ERROR[random.nextInt(ERROR.length)];
     }
 }

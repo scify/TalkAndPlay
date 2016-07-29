@@ -183,8 +183,8 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
 
         controlsPanel.add(controls);
 
-        timer.setList(controls.getControls());
-        timer.start();
+        controls.getTimer().setList(controls.getControls());
+        controls.getTimer().start();
 
         parent.clearGrid();
         parent.addGrid(this);

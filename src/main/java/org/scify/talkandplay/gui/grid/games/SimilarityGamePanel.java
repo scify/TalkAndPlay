@@ -1,30 +1,31 @@
 package org.scify.talkandplay.gui.grid.games;
 
-import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import org.scify.talkandplay.gui.grid.BaseGridPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.tiles.TileAction;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.models.games.Game;
 import org.scify.talkandplay.models.games.GameImage;
-import org.scify.talkandplay.models.games.GameType;
+import org.scify.talkandplay.models.games.SequenceGame;
 import org.scify.talkandplay.models.games.SimilarityGame;
 
-public class SimilarityGamePanel extends BaseGridPanel {
+public class SimilarityGamePanel extends BaseGamePanel {
 
-    private SimilarityGame game;
-    private JPanel imagesPanel, correctImagesPanel;
     private boolean endGame = false;
-
     private String correctImage;
 
     public SimilarityGamePanel(User user, GridFrame parent) {
-        super(user, parent);
+        super(user, parent, "similarityGame", null);
+
+        initComponents();
+        initCustomComponents();
+    }
+
+    public SimilarityGamePanel(User user, GridFrame parent, Game game) {
+        super(user, parent, "similarityGame", game);
 
         initComponents();
         initCustomComponents();
@@ -52,49 +53,47 @@ public class SimilarityGamePanel extends BaseGridPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initCustomComponents() {
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-
-        imagesPanel = new JPanel();
-        correctImagesPanel = new JPanel();
-        imagesPanel.setLayout(new BoxLayout(imagesPanel, BoxLayout.LINE_AXIS));
-        correctImagesPanel.setLayout(new BoxLayout(correctImagesPanel, BoxLayout.LINE_AXIS));
-
-        panelList = new ArrayList<>();
-
-        //select a random game
-        Random randomGenerator = new Random();
-        for (GameType gameType : user.getGameModule().getGameTypes()) {
-            if ("similarityGame".equals(gameType.getType())) {
-                game = (SimilarityGame) gameType.getGames().get(randomGenerator.nextInt(gameType.getGames().size()));
-            }
-        }
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setTopMessage("Πάτα το κουμπί πάνω στο όμοιο!");
+        setBottomMessage("");
 
         int i = randomGenerator.nextInt(game.getImages().size());
         correctImage = game.getImages().get(i).getImage();
-        correctImagesPanel.add(createGameItem(game.getImages().get(i)));
+        bottomPanel.add(createGameItem(game.getImages().get(i)));
 
-        //draw the images in a random order
-        List<GameImage> tmpImages = new ArrayList<GameImage>(game.getImages());
+        List<GameImage> tmpImages = new ArrayList(game.getImages());
         while (!tmpImages.isEmpty()) {
             i = randomGenerator.nextInt(tmpImages.size());
-            JPanel panel = createGameItem(tmpImages.get(i));
-            imagesPanel.add(panel);
-            panelList.add(panel);
+            randomImages.add(tmpImages.get(i));
             tmpImages.remove(i);
         }
 
-        add(correctImagesPanel);
-        add(Box.createRigidArea(new Dimension(100, 0)));
-        add(imagesPanel);
-        revalidate();
-        repaint();
-        parent.add(this);
-        parent.revalidate();
-        parent.repaint();
+        for (GameImage image : randomImages) {
+            JPanel panel = createGameItem(image);
+            topPanel.add(panel, c1);
+            panelList.add(panel);
+            c1.gridx++;
+        }
+
+        c1.gridx = 0;
+        for (int j = 0; j < game.getImages().size(); j++) {
+            bottomPanel.add(tileCreator.createEmpty(), c1);
+            c1.gridx++;
+        }
 
         timer.setList(panelList);
         timer.start();
 
+        topPanel.revalidate();
+        topPanel.repaint();
+        bottomPanel.revalidate();
+        bottomPanel.repaint();
+        revalidate();
+        repaint();
+        parent.clearGrid();
+        parent.addGrid(this);
+        parent.revalidate();
+        parent.repaint();
     }
 
     private JPanel createGameItem(final GameImage image) {
@@ -105,15 +104,25 @@ public class SimilarityGamePanel extends BaseGridPanel {
                 new TileAction() {
                     @Override
                     public void act() {
-                        System.out.println("similarity clicky");
                         for (int i = 0; i < game.getImages().size(); i++) {
                             if (game.getImages().get(i).getImage().equals(image.getImage()) && game.getImages().get(i).getImage().equals(correctImage)) {
                                 timer.cancel();
-                                endGame = true;
                                 congratulate();
                             } else if (game.getImages().get(i).getImage().equals(image.getImage()) && !game.getImages().get(i).getImage().equals(correctImage)) {
                                 timer.cancel();
-                                tileCreator.playAudio(game.getErrorSound());
+                                setBottomMessage(Message.getRandomError());
+                                timer.cancel();
+                                tileCreator.playAudio(game.getErrorSound(), new TileAction() {
+                                    @Override
+                                    public void act() {
+                                        return;
+                                    }
+
+                                    @Override
+                                    public void audioFinished() {
+                                        timer.start();
+                                    }
+                                });
                             }
                         }
                     }
@@ -132,52 +141,42 @@ public class SimilarityGamePanel extends BaseGridPanel {
 
     private void congratulate() {
         tileCreator.playAudio(game.getWinSound());
+        setBottomMessage("");
+        setTopMessage("");
 
-        JPanel nextGame = tileCreator.create("Επόμενο παιχνίδι",
-                getClass().getResource("/org/scify/talkandplay/resources/more-icon.png").getFile(),
-                null,
-                new TileAction() {
-                    @Override
-                    public void act() {
-                        SimilarityGamePanel gamePanel = new SimilarityGamePanel(user, parent);
-                        parent.clearGrid();
-                        parent.addGrid(gamePanel);
-                    }
+        ControlsPanel controls = new ControlsPanel(user, this);
+        topPanel.removeAll();
+        topPanel.add(controls);
+        topPanel.revalidate();
+        topPanel.repaint();
 
-                    @Override
-                    public void audioFinished() {
-                    }
-                });
+        controls.getTimer().setList(controls.getControls());
+        controls.getTimer().start();
 
-        JPanel back = tileCreator.create("Πίσω",
-                getClass().getResource("/org/scify/talkandplay/resources/back-icon.png").getFile(),
-                null,
-                new TileAction() {
-                    @Override
-                    public void act() {
-                        GamesPanel gamesPanel = new GamesPanel(user, parent);
-                        parent.clearGrid();
-                        parent.addGrid(gamesPanel);
-                    }
-
-                    @Override
-                    public void audioFinished() {
-                    }
-                });
-
-        panelList.add(nextGame);
-        panelList.add(back);
-
-        removeAll();
-        add(nextGame);
-        add(back);
-        revalidate();
-        repaint();
-
-        timer.setList(panelList);
-        timer.start();
+        parent.clearGrid();
+        parent.addGrid(this);
+        parent.revalidate();
+        parent.repaint();
     }
 
+    public void newGame() {
+        SimilarityGamePanel gamePanel = new SimilarityGamePanel(user, parent);
+        parent.clearGrid();
+        parent.addGrid(topPanel);
+    }
+
+    public void playAgain() {
+        SimilarityGamePanel topPanel = new SimilarityGamePanel(user, parent, (SimilarityGame) game);
+        parent.clearGrid();
+        parent.addGrid(topPanel);
+
+    }
+
+    public void exit() {
+        GamesPanel gamesPanel = new GamesPanel(user, parent);
+        parent.clearGrid();
+        parent.addGrid(gamesPanel);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

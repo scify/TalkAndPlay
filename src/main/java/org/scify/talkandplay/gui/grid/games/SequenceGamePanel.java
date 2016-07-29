@@ -1,57 +1,39 @@
 package org.scify.talkandplay.gui.grid.games;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.MatteBorder;
-import org.scify.talkandplay.gui.grid.BaseGridPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.tiles.TileAction;
-import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.games.GameImage;
-import org.scify.talkandplay.models.games.GameType;
 import org.scify.talkandplay.models.games.SequenceGame;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.SensorService;
 
-public class SequenceGamePanel extends BaseGridPanel {
+public class SequenceGamePanel extends BaseGamePanel {
 
-    private SequenceGame game;
-    private JPanel gamePanel, controlsPanel, msgPanel;
     private SensorService sensorService;
-    private GridBagConstraints c1;
-    private Random randomGenerator;
-    private List<GameImage> randomImages;
 
     private int correctImages;
 
     public SequenceGamePanel(User user, GridFrame parent) {
-        super(user, parent);
+        super(user, parent, "sequenceGame", null);
         this.correctImages = 1;
         this.sensorService = new SensorService(user);
-        this.randomImages = new ArrayList();
 
         initComponents();
         initCustomComponents();
     }
 
     public SequenceGamePanel(User user, GridFrame parent, SequenceGame game) {
-        super(user, parent);
+        super(user, parent, "sequenceGame", game);
         this.correctImages = 1;
         this.sensorService = new SensorService(user);
-        this.randomImages = new ArrayList();
-        this.game = game;
 
         initComponents();
         initCustomComponents();
@@ -80,48 +62,9 @@ public class SequenceGamePanel extends BaseGridPanel {
 
     private void initCustomComponents() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBottomMessage("Ποια εικόνα πρέπει να μπει πρώτη; Πάτα το κουμπί πάνω της!");
 
-        gamePanel = new JPanel();
-        gamePanel.setBackground(Color.white);
-        gamePanel.setBorder(new MatteBorder(0, 0, 2, 0, Color.decode(UIConstants.grey)));
-        controlsPanel = new JPanel();
-        controlsPanel.setBackground(Color.pink);
-        msgPanel = new JPanel();
-        msgPanel.setBackground(Color.white);
-        add(gamePanel);
-        add(controlsPanel);
-        add(msgPanel);
-
-        setMessage("Ποιά εικόνα πρέπει να μπει πρώτη; Πάτα το κουμπί πάνω της!");
-
-        gamePanel.setLayout(new GridBagLayout());
-        controlsPanel.setLayout(new GridBagLayout());
-        c1 = new GridBagConstraints();
-        c1.fill = GridBagConstraints.BOTH;
-        c1.anchor = GridBagConstraints.FIRST_LINE_START;
-        c1.weightx = 20;
-        c1.weighty = 20;
-        c1.gridx = 0;
-        c1.gridy = 0;
-
-        panelList = new ArrayList();
-        randomGenerator = new Random();
-
-        //select a random game
-        if (game == null) {
-            for (GameType gameType : user.getGameModule().getGameTypes()) {
-                if ("sequenceGame".equals(gameType.getType())) {
-                    for (int j = 0; j < gameType.getGames().size(); j++) {
-                        int i = randomGenerator.nextInt(gameType.getGames().size());
-                        if (gameType.getGames().get(i).isEnabled()) {
-                            game = (SequenceGame) gameType.getGames().get(i);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
+        //draw the images in a random order
         List<GameImage> tmpImages = new ArrayList(game.getImages());
         int i;
         while (!tmpImages.isEmpty()) {
@@ -130,21 +73,24 @@ public class SequenceGamePanel extends BaseGridPanel {
             tmpImages.remove(i);
         }
 
-        //draw the images in a random order
         redrawGamesPanel();
-
+        
         c1.gridx = 0;
         c1.gridy = 0;
         for (int j = 0; j < game.getImages().size(); j++) {
-            controlsPanel.add(tileCreator.createEmpty(), c1);
+            bottomPanel.add(tileCreator.createEmpty(), c1);
             c1.gridx++;
         }
-
+        
         timer.setList(panelList);
         timer.start();
 
-        gamePanel.revalidate();
-        gamePanel.repaint();
+        topPanel.revalidate();
+        topPanel.repaint();
+        bottomPanel.revalidate();
+        bottomPanel.repaint();
+        revalidate();
+        repaint();
         parent.clearGrid();
         parent.addGrid(this);
         parent.revalidate();
@@ -183,41 +129,52 @@ public class SequenceGamePanel extends BaseGridPanel {
             congratulate();
             redrawControlsPanel();
 
-            controlsPanel.revalidate();
-            controlsPanel.repaint();
-            gamePanel.revalidate();
-            gamePanel.repaint();
+            bottomPanel.revalidate();
+            bottomPanel.repaint();
+            topPanel.revalidate();
+            topPanel.repaint();
         } else if (correctImages == order) {
+            setBottomMessage(Message.getRandomCongrats());
             timer.cancel();
             correctImages++;
             redrawGamesPanel();
             redrawControlsPanel();
 
-            controlsPanel.revalidate();
-            controlsPanel.repaint();
-            gamePanel.revalidate();
-            gamePanel.repaint();
+            bottomPanel.revalidate();
+            bottomPanel.repaint();
+            topPanel.revalidate();
+            topPanel.repaint();
 
-            timer.setList(panelList);
             timer.start();
         } else {
+            setBottomMessage(Message.getRandomError());
             timer.cancel();
-            tileCreator.playAudio(game.getErrorSound());
+            tileCreator.playAudio(game.getErrorSound(), new TileAction() {
+                @Override
+                public void act() {
+                    return;
+                }
+
+                @Override
+                public void audioFinished() {
+                    timer.start();
+                }
+            });
         }
     }
 
     private void redrawGamesPanel() {
         c1.gridx = 0;
-        gamePanel.removeAll();
+        topPanel.removeAll();
+
         panelList.clear();
         int i = 0;
-
         for (GameImage image : randomImages) {
             if (image.getOrder() < correctImages) {
-                gamePanel.add(tileCreator.createEmpty(), c1);
+                topPanel.add(tileCreator.createEmpty(), c1);
             } else {
                 JPanel panel = createGameItem(randomImages.get(i));
-                gamePanel.add(panel, c1);
+                topPanel.add(panel, c1);
                 panelList.add(panel);
             }
             i++;
@@ -227,7 +184,7 @@ public class SequenceGamePanel extends BaseGridPanel {
 
     private void redrawControlsPanel() {
         c1.gridx = 0;
-        controlsPanel.removeAll();
+        bottomPanel.removeAll();
         GameImage img;
 
         for (int i = 0; i < randomImages.size(); i++) {
@@ -240,25 +197,26 @@ public class SequenceGamePanel extends BaseGridPanel {
             }
 
             if (img != null) {
-                controlsPanel.add(createGameItem(img), c1);
+                bottomPanel.add(createGameItem(img), c1);
             } else {
-                controlsPanel.add(tileCreator.createEmpty(), c1);
+                bottomPanel.add(tileCreator.createEmpty(), c1);
             }
             c1.gridx++;
         }
     }
 
     private void congratulate() {
+        bottomMsgPanel.setVisible(false);
         tileCreator.playAudio(game.getWinSound());
 
         ControlsPanel controls = new ControlsPanel(user, this);
-        gamePanel.removeAll();
-        gamePanel.add(controls);
-        gamePanel.revalidate();
-        gamePanel.repaint();
+        topPanel.removeAll();
+        topPanel.add(controls);
+        topPanel.revalidate();
+        topPanel.repaint();
 
-        timer.setList(controls.getControls());
-        timer.start();
+        controls.getTimer().setList(controls.getControls());
+        controls.getTimer().start();
 
         parent.clearGrid();
         parent.addGrid(this);
@@ -267,15 +225,15 @@ public class SequenceGamePanel extends BaseGridPanel {
     }
 
     public void newGame() {
-        SequenceGamePanel gamePanel = new SequenceGamePanel(user, parent);
+        SequenceGamePanel topPanel = new SequenceGamePanel(user, parent);
         parent.clearGrid();
-        parent.addGrid(gamePanel);
+        parent.addGrid(topPanel);
     }
 
     public void playAgain() {
-        SequenceGamePanel gamePanel = new SequenceGamePanel(user, parent, game);
+        SequenceGamePanel topPanel = new SequenceGamePanel(user, parent, (SequenceGame) game);
         parent.clearGrid();
-        parent.addGrid(gamePanel);
+        parent.addGrid(topPanel);
 
     }
 
@@ -284,16 +242,6 @@ public class SequenceGamePanel extends BaseGridPanel {
         parent.clearGrid();
         parent.addGrid(gamesPanel);
     }
-
-    private void setMessage(String text) {
-        msgPanel.removeAll();
-        JLabel msgLabel = new JLabel(text);
-        msgLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 20));
-        msgLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        msgPanel.add(msgLabel);
-    }
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

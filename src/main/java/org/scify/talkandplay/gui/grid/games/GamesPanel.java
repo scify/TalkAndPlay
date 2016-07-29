@@ -1,5 +1,9 @@
 package org.scify.talkandplay.gui.grid.games;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.BaseGridPanel;
@@ -8,6 +12,10 @@ import org.scify.talkandplay.gui.grid.tiles.TileAction;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.games.GameType;
+import org.scify.talkandplay.models.sensors.KeyboardSensor;
+import org.scify.talkandplay.models.sensors.MouseSensor;
+import org.scify.talkandplay.models.sensors.Sensor;
+import org.scify.talkandplay.services.SensorService;
 
 public class GamesPanel extends BaseGridPanel {
 
@@ -43,7 +51,7 @@ public class GamesPanel extends BaseGridPanel {
         UIConstants.getInstance().setRows(2);
         UIConstants.getInstance().setColumns(3);
         initLayout();
-       
+
         panelList = new ArrayList<>();
 
         for (GameType gameType : user.getGameModule().getGameTypes()) {
@@ -71,8 +79,8 @@ public class GamesPanel extends BaseGridPanel {
         parent.repaint();
     }
 
-    private JPanel createGameItem(final GameType gameType) {     
-        
+    private JPanel createGameItem(final GameType gameType) {
+
         JPanel panel = tileCreator.create(gameType.getName(),
                 gameType.getImage(),
                 gameType.getImageURL(),
@@ -125,7 +133,35 @@ public class GamesPanel extends BaseGridPanel {
     }
 
     private void showStimulusReactionGame() {
-        StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
+        final SensorService sensorService = new SensorService(user);
+        ButtonPanel buttonPanel = new ButtonPanel("Βάλε στη σωστή σειρά τις κάρτες.", "Πάτα το κουμπί για να ξεκινήσεις!");
+
+        buttonPanel.setFocusable(true);
+        buttonPanel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent me) {
+                Sensor sensor = new MouseSensor(me.getButton(), me.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor)) {
+                    StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
+                }
+            }
+        });
+        buttonPanel.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                Sensor sensor = new KeyboardSensor(ke.getKeyCode(), String.valueOf(ke.getKeyChar()), "keyboard");
+                if (sensorService.shouldSelect(sensor)) {
+                    StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
+                }
+            }
+        });
+
+        removeAll();
+        add(buttonPanel);
+        revalidate();
+        repaint();
+        parent.clearGrid();
+        parent.addGrid(this);
+        parent.revalidate();
+        parent.repaint();
     }
 
     private void showSequenceGame() {
