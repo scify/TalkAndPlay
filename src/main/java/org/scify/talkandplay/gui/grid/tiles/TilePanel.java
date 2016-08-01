@@ -56,6 +56,10 @@ public class TilePanel extends javax.swing.JPanel {
         textPanel.setBackground(Color.white);
         textPanel.add(textPane);
         add(textPanel);
+        
+        if(text==null || text.isEmpty()){
+            textPanel.setVisible(false);
+        }
 
         Image img;
         if (imageString != null && !imageString.isEmpty()) {

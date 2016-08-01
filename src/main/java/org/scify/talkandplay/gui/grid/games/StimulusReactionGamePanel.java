@@ -93,7 +93,7 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
             //TODO fix
             gamePanel.add(new JLabel("tttt"));
         } else {
-            JPanel gameImage = createGameItem(game.getImages().get(0));
+            JPanel gameImage = createGameItem(game.getEnabledImages().get(0));
             gamePanel.add(gameImage);
             panelList.add(gameImage);
 
@@ -113,7 +113,7 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
     private JPanel createGameItem(GameImage image) {
 
         final StimulusReactionGamePanel currentPanel = this;
-        panelList = new ArrayList();
+        panelList.clear();
 
         JPanel panel = tileCreator.create("",
                 image.getImage(),
@@ -123,11 +123,11 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
                     public void act() {
                         timer.cancel();
                         selected++;
-                        if (selected == game.getImages().size() - 1) {
-                            congratulate(game.getImages().get(selected));
+                        if (selected == game.getEnabledImages().size() - 1) {
+                            congratulate(game.getEnabledImages().get(selected));
                         } else {
                             gamePanel.removeAll();
-                            gamePanel.add(createGameItem(game.getImages().get(selected)), c);
+                            gamePanel.add(createGameItem(game.getEnabledImages().get(selected)), c);
                             gamePanel.revalidate();
                             gamePanel.repaint();
                             parent.clearGrid();
@@ -144,9 +144,6 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
 
                     @Override
                     public boolean mute() {
-                        if (selected == game.getImages().size() - 1) {
-                            return false;
-                        }
                         return true;
                     }
                 });
@@ -159,6 +156,7 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
     }
 
     private void congratulate(GameImage image) {
+
         tileCreator.playAudio(game.getWinSound());
 
         JPanel finalImage = tileCreator.create("",
@@ -197,22 +195,26 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
     }
 
     public void newGame() {
+        tileCreator.freePlayerResources();
         StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
         parent.clearGrid();
         parent.addGrid(gamePanel);
     }
 
     public void playAgain() {
+        tileCreator.freePlayerResources();
         StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent, game);
         parent.clearGrid();
         parent.addGrid(gamePanel);
     }
 
     public void exit() {
+        tileCreator.freePlayerResources();
         GamesPanel gamesPanel = new GamesPanel(user, parent);
         parent.clearGrid();
         parent.addGrid(gamesPanel);
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

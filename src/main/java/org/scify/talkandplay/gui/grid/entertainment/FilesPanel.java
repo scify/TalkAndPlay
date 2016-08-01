@@ -6,7 +6,6 @@
 package org.scify.talkandplay.gui.grid.entertainment;
 
 import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;

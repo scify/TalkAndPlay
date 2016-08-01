@@ -380,6 +380,13 @@ public class GamesTab extends javax.swing.JPanel {
         parent.displayMessage("Οι αλλαγές αποθηκεύτηκαν!");
     }//GEN-LAST:event_saveButtonMouseClicked
 
+    public void stopPlayer() {
+        for (GamePanel panel : gamePanels) {
+            panel.stopPlayer();
+        }
+        audioPlayer.getMediaPlayer().stop();
+        audioPlayer.getMediaPlayer().release();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel errorSoundLabel;

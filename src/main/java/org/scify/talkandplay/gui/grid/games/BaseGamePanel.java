@@ -7,15 +7,21 @@ package org.scify.talkandplay.gui.grid.games;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.tiles.TileCreator;
@@ -72,7 +78,7 @@ public class BaseGamePanel extends javax.swing.JPanel {
         topPanel.setBackground(Color.white);
         topPanel.setBorder(new MatteBorder(0, 0, 2, 0, Color.decode(UIConstants.grey)));
         bottomPanel = new JPanel();
-        bottomPanel.setBackground(Color.pink);
+        bottomPanel.setBackground(Color.white);
         bottomMsgPanel = new JPanel();
         bottomMsgPanel.setBackground(Color.white);
         topMsgPanel = new JPanel();
@@ -100,8 +106,7 @@ public class BaseGamePanel extends javax.swing.JPanel {
         if (game == null) {
             getRandomGame();
         }
-        
-        
+
     }
 
     /**
@@ -129,7 +134,7 @@ public class BaseGamePanel extends javax.swing.JPanel {
             }
         }
     }
-    
+
     protected void setTopMessage(String text) {
         topMsgPanel.setVisible(true);
         topMsgPanel.removeAll();

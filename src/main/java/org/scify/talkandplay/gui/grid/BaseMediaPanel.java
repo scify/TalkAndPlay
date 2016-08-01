@@ -12,6 +12,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -26,7 +27,6 @@ import org.scify.talkandplay.gui.grid.entertainment.FilesPanel;
 import org.scify.talkandplay.gui.grid.entertainment.MediaPlayerPanel;
 import org.scify.talkandplay.gui.grid.timers.ButtonTimerManager;
 import org.scify.talkandplay.gui.grid.timers.MouseTimerManager;
-import org.scify.talkandplay.gui.grid.timers.TileTimerManager;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
@@ -43,10 +43,11 @@ public class BaseMediaPanel extends BasePanel {
     protected ArrayList<File> files;
     protected GridBagConstraints c;
     protected String currentFile;
+    protected String[] fileExtensions;
 
     protected SensorService sensorService;
 
-    public BaseMediaPanel(User user, GridFrame parent, File[] files) {
+    public BaseMediaPanel(User user, GridFrame parent, File[] files, String[] fileExtensions) {
         super(user, parent);
 
         this.sensorService = new SensorService(user);
@@ -55,6 +56,7 @@ public class BaseMediaPanel extends BasePanel {
         this.files = new ArrayList();
         this.currentFile = "";
         this.c = new GridBagConstraints();
+        this.fileExtensions = fileExtensions;
 
         if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
             this.timer = new MouseTimerManager(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
@@ -158,11 +160,18 @@ public class BaseMediaPanel extends BasePanel {
      * Remove the directories and keep only the files
      */
     protected void prepareFiles() {
+        String extension;
+
         Iterator<File> i = files.iterator();
         while (i.hasNext()) {
             File f = i.next();
             if (f.isDirectory()) {
                 i.remove();
+            } else {
+                extension = f.getName().substring(f.getName().lastIndexOf(".") + 1, f.getName().length());
+                if (!Arrays.asList(fileExtensions).contains(extension)) {
+                    i.remove();
+                }
             }
         }
     }

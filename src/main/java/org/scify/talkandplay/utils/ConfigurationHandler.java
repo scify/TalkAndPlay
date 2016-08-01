@@ -18,6 +18,7 @@ import org.scify.talkandplay.models.Configuration;
 import org.scify.talkandplay.models.modules.EntertainmentModule;
 import org.scify.talkandplay.models.modules.GameModule;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.models.games.Game;
 import org.scify.talkandplay.models.games.GameImage;
 import org.scify.talkandplay.models.games.GameType;
 import org.scify.talkandplay.models.games.SequenceGame;
@@ -307,7 +308,7 @@ public class ConfigurationHandler {
             } else {
                 stimulusReactionType.setSound(stimulusReactionGamesNode.getChildText("sound"));
             }
-            
+
             if (stimulusReactionGamesNode.getChildText("image").isEmpty()) {
                 stimulusReactionType.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/stimulus_game.png"));
             } else {
@@ -332,8 +333,18 @@ public class ConfigurationHandler {
                 StimulusReactionGame game = new StimulusReactionGame(((Element) gamesList.get(i)).getChildText("name"),
                         "true".equals(((Element) gamesList.get(i)).getChildText("enabled")),
                         Integer.parseInt(((Element) gamesList.get(i)).getChildText("difficulty")));
-                game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
-                game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
+
+                if (((Element) gamesList.get(i)).getChildText("winSound").isEmpty()) {
+                    game.setWinSound("demo_resources/sounds/games/winSound.mp3");
+                } else {
+                    game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
+                }
+
+                if (((Element) gamesList.get(i)).getChildText("errorSound").isEmpty()) {
+                    game.setErrorSound("demo_resources/sounds/games/errorSound.mp3");
+                } else {
+                    game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
+                }
 
                 if (((Element) gamesList.get(i)).getChildText("image").isEmpty()) {
                     game.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/stimulus_game.png"));
@@ -349,8 +360,15 @@ public class ConfigurationHandler {
                             Integer.parseInt(((Element) imagesList.get(j)).getChildText("order")));
                     game.getImages().add(image);
                 }
+                game.setEnabledImages();
                 stimulusReactionType.getGames().add(game);
             }
+            for (Game game : stimulusReactionType.getGames()) {
+                if (game.isEnabled()) {
+                    stimulusReactionType.getEnabledGames().add((StimulusReactionGame) game);
+                }
+            }
+
             gameModule.getGameTypes().add(stimulusReactionType);
         }
 
@@ -392,8 +410,18 @@ public class ConfigurationHandler {
                 SequenceGame game = new SequenceGame(((Element) gamesList.get(i)).getChildText("name"),
                         "true".equals(((Element) gamesList.get(i)).getChildText("enabled")),
                         Integer.parseInt(((Element) gamesList.get(i)).getChildText("difficulty")));
-                game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
-                game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
+
+                if (((Element) gamesList.get(i)).getChildText("winSound").isEmpty()) {
+                    game.setWinSound("demo_resources/sounds/games/winSound.mp3");
+                } else {
+                    game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
+                }
+
+                if (((Element) gamesList.get(i)).getChildText("errorSound").isEmpty()) {
+                    game.setErrorSound("demo_resources/sounds/games/errorSound.mp3");
+                } else {
+                    game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
+                }
 
                 if (((Element) gamesList.get(i)).getChildText("image").isEmpty()) {
                     game.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/sequence_game.png"));
@@ -409,9 +437,17 @@ public class ConfigurationHandler {
                             Integer.parseInt(((Element) imagesList.get(j)).getChildText("order")));
                     game.getImages().add(image);
                 }
+                game.setEnabledImages();
                 sequenceGameType.getGames().add(game);
             }
+
+            for (Game game : sequenceGameType.getGames()) {
+                if (game.isEnabled()) {
+                    sequenceGameType.getEnabledGames().add((SequenceGame) game);
+                }
+            }
             gameModule.getGameTypes().add(sequenceGameType);
+
         }
 
         //set the similar games
@@ -452,8 +488,18 @@ public class ConfigurationHandler {
                 SimilarityGame game = new SimilarityGame(((Element) gamesList.get(i)).getChildText("name"),
                         "true".equals(((Element) gamesList.get(i)).getChildText("enabled")),
                         Integer.parseInt(((Element) gamesList.get(i)).getChildText("difficulty")));
-                game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
-                game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
+
+                if (((Element) gamesList.get(i)).getChildText("winSound").isEmpty()) {
+                    game.setWinSound("demo_resources/sounds/games/winSound.mp3");
+                } else {
+                    game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
+                }
+
+                if (((Element) gamesList.get(i)).getChildText("errorSound").isEmpty()) {
+                    game.setErrorSound("demo_resources/sounds/games/errorSound.mp3");
+                } else {
+                    game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
+                }
 
                 if (((Element) gamesList.get(i)).getChildText("image").isEmpty()) {
                     game.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/similarity_game.png"));
@@ -469,7 +515,14 @@ public class ConfigurationHandler {
                             Integer.parseInt(((Element) imagesList.get(j)).getChildText("order")));
                     game.getImages().add(image);
                 }
+                game.setEnabledImages();
                 similarityGameType.getGames().add(game);
+            }
+
+            for (Game game : similarityGameType.getGames()) {
+                if (game.isEnabled()) {
+                    similarityGameType.getEnabledGames().add((SimilarityGame) game);
+                }
             }
             gameModule.getGameTypes().add(similarityGameType);
         }
@@ -507,7 +560,7 @@ public class ConfigurationHandler {
                     category.setRows(currentUser.getConfiguration().getDefaultGridRow());
                 }
 
-                if (categoryEl.getChildText("columns") != null&& !categoryEl.getChildText("columns").isEmpty()) {
+                if (categoryEl.getChildText("columns") != null && !categoryEl.getChildText("columns").isEmpty()) {
                     category.setColumns(Integer.parseInt(categoryEl.getChildText("columns")));
                 } else {
                     category.setColumns(currentUser.getConfiguration().getDefaultGridColumn());

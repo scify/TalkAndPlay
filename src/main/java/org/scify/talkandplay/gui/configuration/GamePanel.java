@@ -358,6 +358,11 @@ public class GamePanel extends javax.swing.JPanel {
             }
         });
     }
+    
+    public void stopPlayer(){
+        audioPlayer.getMediaPlayer().stop();
+        audioPlayer.getMediaPlayer().release();
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

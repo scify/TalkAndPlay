@@ -1,11 +1,20 @@
 package org.scify.talkandplay.gui.grid.games;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import org.scify.talkandplay.gui.grid.BaseGridPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.tiles.TileAction;
@@ -134,42 +143,250 @@ public class GamesPanel extends BaseGridPanel {
 
     private void showStimulusReactionGame() {
         final SensorService sensorService = new SensorService(user);
-        ButtonPanel buttonPanel = new ButtonPanel("Βάλε στη σωστή σειρά τις κάρτες.", "Πάτα το κουμπί για να ξεκινήσεις!");
+        
+        if (hasGames("stimulusReactionGame")) {
 
-        buttonPanel.setFocusable(true);
-        buttonPanel.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent me) {
-                Sensor sensor = new MouseSensor(me.getButton(), me.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor)) {
-                    StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
-                }
-            }
-        });
-        buttonPanel.addKeyListener(new KeyAdapter() {
-            public void keyPressed(KeyEvent ke) {
-                Sensor sensor = new KeyboardSensor(ke.getKeyCode(), String.valueOf(ke.getKeyChar()), "keyboard");
-                if (sensorService.shouldSelect(sensor)) {
-                    StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
-                }
-            }
-        });
+            ButtonPanel buttonPanel = new ButtonPanel("Πάτα το κουμπί!", "");
 
-        removeAll();
-        add(buttonPanel);
-        revalidate();
-        repaint();
-        parent.clearGrid();
-        parent.addGrid(this);
-        parent.revalidate();
-        parent.repaint();
+            buttonPanel.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent me) {
+                    Sensor sensor = new MouseSensor(me.getButton(), me.getClickCount(), "mouse");
+                    if (sensorService.shouldSelect(sensor)) {
+                        StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
+                    }
+                }
+            });
+            buttonPanel.addKeyListener(new KeyAdapter() {
+                public void keyPressed(KeyEvent ke) {
+                    Sensor sensor = new KeyboardSensor(ke.getKeyCode(), String.valueOf(ke.getKeyChar()), "keyboard");
+                    if (sensorService.shouldSelect(sensor)) {
+                        StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
+                    }
+                }
+            });
+
+            removeAll();
+            add(buttonPanel);
+            revalidate();
+            repaint();
+            parent.clearGrid();
+            parent.addGrid(this);
+            parent.revalidate();
+            parent.repaint();
+
+            buttonPanel.requestFocusInWindow();
+            buttonPanel.setFocusable(true);
+        } else {
+            JPanel panel = noGamePanel();
+
+            panel.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent me) {
+                    Sensor sensor = new MouseSensor(me.getButton(), me.getClickCount(), "mouse");
+                    if (sensorService.shouldSelect(sensor)) {
+                        GamesPanel gamePanel = new GamesPanel(user, parent);
+                    }
+                }
+            });
+            panel.addKeyListener(new KeyAdapter() {
+                public void keyPressed(KeyEvent ke) {
+                    Sensor sensor = new KeyboardSensor(ke.getKeyCode(), String.valueOf(ke.getKeyChar()), "keyboard");
+                    if (sensorService.shouldSelect(sensor)) {
+                        GamesPanel gamePanel = new GamesPanel(user, parent);
+                    }
+                }
+            });
+
+            removeAll();
+            add(panel);
+
+            revalidate();
+            repaint();
+            parent.clearGrid();
+            parent.addGrid(this);
+            parent.revalidate();
+            parent.repaint();
+
+            panel.requestFocusInWindow();
+            panel.setFocusable(true);
+
+        }
     }
 
     private void showSequenceGame() {
-        SequenceGamePanel gamePanel = new SequenceGamePanel(user, parent);
+        final SensorService sensorService = new SensorService(user);
+
+        if (hasGames("sequenceGame")) {
+
+            ButtonPanel buttonPanel = new ButtonPanel("Βρες το όμοιο.", "Πάτα το κουμπί για να ξεκινήσεις!");
+
+            buttonPanel.setFocusable(true);
+            buttonPanel.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent me) {
+                    Sensor sensor = new MouseSensor(me.getButton(), me.getClickCount(), "mouse");
+                    if (sensorService.shouldSelect(sensor)) {
+                        SequenceGamePanel gamePanel = new SequenceGamePanel(user, parent);
+                    }
+                }
+            });
+            buttonPanel.addKeyListener(new KeyAdapter() {
+                public void keyPressed(KeyEvent ke) {
+                    Sensor sensor = new KeyboardSensor(ke.getKeyCode(), String.valueOf(ke.getKeyChar()), "keyboard");
+                    if (sensorService.shouldSelect(sensor)) {
+                        SequenceGamePanel gamePanel = new SequenceGamePanel(user, parent);
+                    }
+                }
+            });
+
+            removeAll();
+            add(buttonPanel);
+            revalidate();
+            repaint();
+            parent.clearGrid();
+            parent.addGrid(this);
+            parent.revalidate();
+            parent.repaint();
+
+            buttonPanel.requestFocusInWindow();
+            buttonPanel.setFocusable(true);
+        } else {
+            JPanel panel = noGamePanel();
+
+            panel.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent me) {
+                    Sensor sensor = new MouseSensor(me.getButton(), me.getClickCount(), "mouse");
+                    if (sensorService.shouldSelect(sensor)) {
+                        GamesPanel gamePanel = new GamesPanel(user, parent);
+                    }
+                }
+            });
+            panel.addKeyListener(new KeyAdapter() {
+                public void keyPressed(KeyEvent ke) {
+                    Sensor sensor = new KeyboardSensor(ke.getKeyCode(), String.valueOf(ke.getKeyChar()), "keyboard");
+                    if (sensorService.shouldSelect(sensor)) {
+                        GamesPanel gamePanel = new GamesPanel(user, parent);
+                    }
+                }
+            });
+
+            removeAll();
+            add(panel);
+
+            revalidate();
+            repaint();
+            parent.clearGrid();
+            parent.addGrid(this);
+            parent.revalidate();
+            parent.repaint();
+
+            panel.requestFocusInWindow();
+            panel.setFocusable(true);
+
+        }
     }
 
     private void showSimilarityGame() {
-        SimilarityGamePanel gamePanel = new SimilarityGamePanel(user, parent);
+        final SensorService sensorService = new SensorService(user);
+
+        if (hasGames("similarityGame")) {
+            ButtonPanel buttonPanel = new ButtonPanel("Βάλε στη σωστή σειρά τις κάρτες.", "Πάτα το κουμπί για να ξεκινήσεις!");
+
+            buttonPanel.setFocusable(true);
+            buttonPanel.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent me) {
+                    Sensor sensor = new MouseSensor(me.getButton(), me.getClickCount(), "mouse");
+                    if (sensorService.shouldSelect(sensor)) {
+                        SimilarityGamePanel gamePanel = new SimilarityGamePanel(user, parent);
+                    }
+                }
+            });
+            buttonPanel.addKeyListener(new KeyAdapter() {
+                public void keyPressed(KeyEvent ke) {
+                    Sensor sensor = new KeyboardSensor(ke.getKeyCode(), String.valueOf(ke.getKeyChar()), "keyboard");
+                    if (sensorService.shouldSelect(sensor)) {
+                        SimilarityGamePanel gamePanel = new SimilarityGamePanel(user, parent);
+                    }
+                }
+            });
+
+            removeAll();
+            add(buttonPanel);
+
+            revalidate();
+            repaint();
+            parent.clearGrid();
+            parent.addGrid(this);
+            parent.revalidate();
+            parent.repaint();
+
+            buttonPanel.requestFocusInWindow();
+            buttonPanel.setFocusable(true);
+        } else {
+            JPanel panel = noGamePanel();
+
+            panel.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent me) {
+                    Sensor sensor = new MouseSensor(me.getButton(), me.getClickCount(), "mouse");
+                    if (sensorService.shouldSelect(sensor)) {
+                        GamesPanel gamePanel = new GamesPanel(user, parent);
+                    }
+                }
+            });
+            panel.addKeyListener(new KeyAdapter() {
+                public void keyPressed(KeyEvent ke) {
+                    Sensor sensor = new KeyboardSensor(ke.getKeyCode(), String.valueOf(ke.getKeyChar()), "keyboard");
+                    if (sensorService.shouldSelect(sensor)) {
+                        GamesPanel gamePanel = new GamesPanel(user, parent);
+                    }
+                }
+            });
+
+            removeAll();
+            add(panel);
+
+            revalidate();
+            repaint();
+            parent.clearGrid();
+            parent.addGrid(this);
+            parent.revalidate();
+            parent.repaint();
+
+            panel.requestFocusInWindow();
+            panel.setFocusable(true);
+
+        }
+    }
+
+    private JPanel noGamePanel() {
+        JLabel iconLabel = new JLabel();
+        iconLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png")).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
+        iconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel fileLabel = new JLabel("Δεν υπάρχουν παιχνίδια");
+        fileLabel.setFont(new Font(UIConstants.mainFont, Font.BOLD, 18));
+        fileLabel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        fileLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBackground(Color.decode(UIConstants.grey));
+        panel.setBorder((new LineBorder(Color.white, 5)));
+
+        panel.add(fileLabel);
+        panel.add(iconLabel);
+
+        return panel;
+    }
+
+    private boolean hasGames(String type) {
+        boolean hasGames = true;
+
+        for (GameType gameType : user.getGameModule().getGameTypes()) {
+            if (type.equals(gameType.getType()) && gameType.getEnabledGames().size() == 0) {
+                hasGames = false;
+                break;
+            }
+        }
+        return hasGames;
     }
 
 

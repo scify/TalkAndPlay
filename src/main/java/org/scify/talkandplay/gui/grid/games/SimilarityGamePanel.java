@@ -53,15 +53,16 @@ public class SimilarityGamePanel extends BaseGamePanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initCustomComponents() {
+
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setTopMessage("Πάτα το κουμπί πάνω στο όμοιο!");
         setBottomMessage("");
 
-        int i = randomGenerator.nextInt(game.getImages().size());
-        correctImage = game.getImages().get(i).getImage();
-        bottomPanel.add(createGameItem(game.getImages().get(i)));
+        int i = randomGenerator.nextInt(game.getEnabledImages().size());
+        correctImage = game.getEnabledImages().get(i).getImage();
+        bottomPanel.add(createGameItem(game.getEnabledImages().get(i)));
 
-        List<GameImage> tmpImages = new ArrayList(game.getImages());
+        List<GameImage> tmpImages = new ArrayList(game.getEnabledImages());
         while (!tmpImages.isEmpty()) {
             i = randomGenerator.nextInt(tmpImages.size());
             randomImages.add(tmpImages.get(i));
@@ -76,7 +77,7 @@ public class SimilarityGamePanel extends BaseGamePanel {
         }
 
         c1.gridx = 0;
-        for (int j = 0; j < game.getImages().size(); j++) {
+        for (int j = 0; j < game.getEnabledImages().size(); j++) {
             bottomPanel.add(tileCreator.createEmpty(), c1);
             c1.gridx++;
         }
@@ -104,11 +105,11 @@ public class SimilarityGamePanel extends BaseGamePanel {
                 new TileAction() {
                     @Override
                     public void act() {
-                        for (int i = 0; i < game.getImages().size(); i++) {
-                            if (game.getImages().get(i).getImage().equals(image.getImage()) && game.getImages().get(i).getImage().equals(correctImage)) {
+                        for (int i = 0; i < game.getEnabledImages().size(); i++) {
+                            if (game.getEnabledImages().get(i).getImage().equals(image.getImage()) && game.getEnabledImages().get(i).getImage().equals(correctImage)) {
                                 timer.cancel();
                                 congratulate();
-                            } else if (game.getImages().get(i).getImage().equals(image.getImage()) && !game.getImages().get(i).getImage().equals(correctImage)) {
+                            } else if (game.getEnabledImages().get(i).getImage().equals(image.getImage()) && !game.getEnabledImages().get(i).getImage().equals(correctImage)) {
                                 timer.cancel();
                                 setBottomMessage(Message.getRandomError());
                                 timer.cancel();
@@ -160,12 +161,14 @@ public class SimilarityGamePanel extends BaseGamePanel {
     }
 
     public void newGame() {
+        tileCreator.freePlayerResources();
         SimilarityGamePanel gamePanel = new SimilarityGamePanel(user, parent);
         parent.clearGrid();
         parent.addGrid(topPanel);
     }
 
     public void playAgain() {
+        tileCreator.freePlayerResources();
         SimilarityGamePanel topPanel = new SimilarityGamePanel(user, parent, (SimilarityGame) game);
         parent.clearGrid();
         parent.addGrid(topPanel);
@@ -173,10 +176,12 @@ public class SimilarityGamePanel extends BaseGamePanel {
     }
 
     public void exit() {
+        tileCreator.freePlayerResources();
         GamesPanel gamesPanel = new GamesPanel(user, parent);
         parent.clearGrid();
         parent.addGrid(gamesPanel);
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

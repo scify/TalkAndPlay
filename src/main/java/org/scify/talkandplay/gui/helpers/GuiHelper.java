@@ -146,7 +146,6 @@ public class GuiHelper {
     private JPanel decorateImageIcon(String image, URL imageURL, String text) {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Color.white);
-        // panel.setBorder(new EmptyBorder(3, 3, 3, 3));
         panel.setBorder(BorderFactory.createLineBorder(Color.white, 5));
 
         if (image != null) {

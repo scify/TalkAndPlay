@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.BaseMediaPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.timers.TimerManager;
+import org.scify.talkandplay.gui.helpers.FileExtensions;
 import org.scify.talkandplay.models.User;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.MediaPlayer;
@@ -26,7 +27,9 @@ public class VideoPanel extends BaseMediaPanel {
     private VideoFrame videoFrame;
 
     public VideoPanel(User user, GridFrame parent) {
-        super(user, parent, (new File(user.getEntertainmentModule().getVideoModule().getFolderPath())).listFiles());
+        super(user, parent,
+                (new File(user.getEntertainmentModule().getVideoModule().getFolderPath())).listFiles(),
+                FileExtensions.getVideoExtensions());
         mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
         filesPanel = new FilesPanel(user, files, this);
 

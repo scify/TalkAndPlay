@@ -17,6 +17,7 @@ public class Game {
     private String errorSound;
     private boolean enabled;
     private List<GameImage> images;
+    private List<GameImage> enabledImages;
 
     //used only to display default ImageIcons from the app jar
     private URL imageURL;
@@ -29,6 +30,7 @@ public class Game {
         this.name = name;
         this.enabled = enabled;
         this.images = new ArrayList();
+        this.enabledImages = new ArrayList();
     }
 
     public String getName() {
@@ -85,6 +87,18 @@ public class Game {
 
     public void setImageURL(URL imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public List<GameImage> getEnabledImages() {
+        return enabledImages;
+    }
+
+    public void setEnabledImages() {
+        for (GameImage image : images) {
+            if (image.isEnabled()) {
+                enabledImages.add(image);
+            }
+        }
     }
 
     public List<GameImage> getImages() {

@@ -22,9 +22,11 @@ public class GameType {
     private URL imageURL;
 
     private List<Game> games;
+    private List<Game> enabledGames;
 
     public GameType() {
         this.games = new ArrayList();
+        this.enabledGames = new ArrayList();
     }
 
     public GameType(String name, String image, boolean enabled, String type) {
@@ -33,6 +35,7 @@ public class GameType {
         this.enabled = enabled;
         this.type = type;
         this.games = new ArrayList();
+        this.enabledGames = new ArrayList();
     }
 
     public String getName() {
@@ -81,6 +84,10 @@ public class GameType {
 
     public void setGames(List<Game> games) {
         this.games = games;
+    }
+
+    public List<Game> getEnabledGames() {
+        return enabledGames;
     }
 
     public URL getImageURL() {

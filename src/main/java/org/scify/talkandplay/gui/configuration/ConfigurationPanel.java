@@ -72,10 +72,9 @@ public class ConfigurationPanel extends javax.swing.JPanel {
     public void redrawCategoriesList() {
         tabsPanel.redrawCategoriesList();
     }
-    
-
 
     public void goBack() {
+        tabsPanel.stopPlayer();
         parent.changePanel(new MainPanel(parent));
     }
 

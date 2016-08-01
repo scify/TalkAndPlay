@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import org.scify.talkandplay.gui.grid.BaseMediaPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
+import org.scify.talkandplay.gui.helpers.FileExtensions;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
@@ -33,7 +34,9 @@ public class MusicPanel extends BaseMediaPanel {
     private JPanel playerPanel, prevPanel, playPanel, nextPanel, listPanel, exitPanel;
 
     public MusicPanel(User user, GridFrame parent) {
-        super(user, parent, (new File(user.getEntertainmentModule().getMusicModule().getFolderPath())).listFiles());
+        super(user, parent,
+                (new File(user.getEntertainmentModule().getMusicModule().getFolderPath())).listFiles(),
+                FileExtensions.getAudioExtensions());
         initComponents();
         initCustomComponents();
     }

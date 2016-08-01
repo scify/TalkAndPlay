@@ -65,7 +65,7 @@ public class SequenceGamePanel extends BaseGamePanel {
         setBottomMessage("Ποια εικόνα πρέπει να μπει πρώτη; Πάτα το κουμπί πάνω της!");
 
         //draw the images in a random order
-        List<GameImage> tmpImages = new ArrayList(game.getImages());
+        List<GameImage> tmpImages = new ArrayList(game.getEnabledImages());
         int i;
         while (!tmpImages.isEmpty()) {
             i = randomGenerator.nextInt(tmpImages.size());
@@ -77,7 +77,7 @@ public class SequenceGamePanel extends BaseGamePanel {
         
         c1.gridx = 0;
         c1.gridy = 0;
-        for (int j = 0; j < game.getImages().size(); j++) {
+        for (int j = 0; j < game.getEnabledImages().size(); j++) {
             bottomPanel.add(tileCreator.createEmpty(), c1);
             c1.gridx++;
         }
@@ -225,12 +225,14 @@ public class SequenceGamePanel extends BaseGamePanel {
     }
 
     public void newGame() {
+        tileCreator.freePlayerResources();
         SequenceGamePanel topPanel = new SequenceGamePanel(user, parent);
         parent.clearGrid();
         parent.addGrid(topPanel);
     }
 
     public void playAgain() {
+        tileCreator.freePlayerResources();
         SequenceGamePanel topPanel = new SequenceGamePanel(user, parent, (SequenceGame) game);
         parent.clearGrid();
         parent.addGrid(topPanel);
@@ -238,10 +240,12 @@ public class SequenceGamePanel extends BaseGamePanel {
     }
 
     public void exit() {
+        tileCreator.freePlayerResources();
         GamesPanel gamesPanel = new GamesPanel(user, parent);
         parent.clearGrid();
         parent.addGrid(gamesPanel);
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
