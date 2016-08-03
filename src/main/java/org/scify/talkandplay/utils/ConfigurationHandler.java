@@ -188,8 +188,10 @@ public class ConfigurationHandler {
 
         CommunicationModule communicationModule = new CommunicationModule();
         communicationModule.setName(communicationNode.getChildText("name"));
-        communicationModule.setRows(Integer.parseInt(communicationNode.getChildText("rows")));
-        communicationModule.setColumns(Integer.parseInt(communicationNode.getChildText("columns")));
+        /*communicationModule.setRows(Integer.parseInt(communicationNode.getChildText("rows")));
+        communicationModule.setColumns(Integer.parseInt(communicationNode.getChildText("columns")));*/
+        communicationModule.setRows(currentUser.getConfiguration().getDefaultGridRow());
+        communicationModule.setColumns(currentUser.getConfiguration().getDefaultGridColumn());
 
         if (communicationNode.getChildText("image").isEmpty()) {
             communicationModule.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/communication_module.png"));
@@ -334,14 +336,14 @@ public class ConfigurationHandler {
                         "true".equals(((Element) gamesList.get(i)).getChildText("enabled")),
                         Integer.parseInt(((Element) gamesList.get(i)).getChildText("difficulty")));
 
-                if (((Element) gamesList.get(i)).getChildText("winSound").isEmpty()) {
-                    game.setWinSound("demo_resources/sounds/games/winSound.mp3");
+                if (((Element) gamesList.get(i)).getChildText("winSound")==null || ((Element) gamesList.get(i)).getChildText("winSound").isEmpty()) {
+                    game.setWinSound(null);
                 } else {
                     game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
                 }
 
-                if (((Element) gamesList.get(i)).getChildText("errorSound").isEmpty()) {
-                    game.setErrorSound("demo_resources/sounds/games/errorSound.mp3");
+                if (((Element) gamesList.get(i)).getChildText("errorSound")==null || ((Element) gamesList.get(i)).getChildText("errorSound").isEmpty()) {
+                    game.setErrorSound(null);
                 } else {
                     game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
                 }
@@ -360,9 +362,11 @@ public class ConfigurationHandler {
                             Integer.parseInt(((Element) imagesList.get(j)).getChildText("order")));
                     game.getImages().add(image);
                 }
+                
                 game.setEnabledImages();
                 stimulusReactionType.getGames().add(game);
             }
+            
             for (Game game : stimulusReactionType.getGames()) {
                 if (game.isEnabled()) {
                     stimulusReactionType.getEnabledGames().add((StimulusReactionGame) game);
@@ -411,14 +415,14 @@ public class ConfigurationHandler {
                         "true".equals(((Element) gamesList.get(i)).getChildText("enabled")),
                         Integer.parseInt(((Element) gamesList.get(i)).getChildText("difficulty")));
 
-                if (((Element) gamesList.get(i)).getChildText("winSound").isEmpty()) {
-                    game.setWinSound("demo_resources/sounds/games/winSound.mp3");
+                if (((Element) gamesList.get(i)).getChildText("winSound")==null || ((Element) gamesList.get(i)).getChildText("winSound").isEmpty()) {
+                    game.setWinSound(null);
                 } else {
                     game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
                 }
 
-                if (((Element) gamesList.get(i)).getChildText("errorSound").isEmpty()) {
-                    game.setErrorSound("demo_resources/sounds/games/errorSound.mp3");
+                if (((Element) gamesList.get(i)).getChildText("errorSound")==null || ((Element) gamesList.get(i)).getChildText("errorSound").isEmpty()) {
+                    game.setErrorSound(null);
                 } else {
                     game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
                 }
@@ -447,7 +451,6 @@ public class ConfigurationHandler {
                 }
             }
             gameModule.getGameTypes().add(sequenceGameType);
-
         }
 
         //set the similar games
@@ -489,14 +492,14 @@ public class ConfigurationHandler {
                         "true".equals(((Element) gamesList.get(i)).getChildText("enabled")),
                         Integer.parseInt(((Element) gamesList.get(i)).getChildText("difficulty")));
 
-                if (((Element) gamesList.get(i)).getChildText("winSound").isEmpty()) {
-                    game.setWinSound("demo_resources/sounds/games/winSound.mp3");
+                if (((Element) gamesList.get(i)).getChildText("winSound")==null || ((Element) gamesList.get(i)).getChildText("winSound").isEmpty()) {
+                    game.setWinSound(null);
                 } else {
                     game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
                 }
 
-                if (((Element) gamesList.get(i)).getChildText("errorSound").isEmpty()) {
-                    game.setErrorSound("demo_resources/sounds/games/errorSound.mp3");
+                if (((Element) gamesList.get(i)).getChildText("errorSound")==null || ((Element) gamesList.get(i)).getChildText("errorSound").isEmpty()) {
+                    game.setErrorSound(null);
                 } else {
                     game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
                 }
@@ -556,15 +559,11 @@ public class ConfigurationHandler {
 
                 if (categoryEl.getChildText("rows") != null && !categoryEl.getChildText("rows").isEmpty()) {
                     category.setRows(Integer.parseInt(categoryEl.getChildText("rows")));
-                } else {
-                    category.setRows(currentUser.getConfiguration().getDefaultGridRow());
-                }
+                } 
 
                 if (categoryEl.getChildText("columns") != null && !categoryEl.getChildText("columns").isEmpty()) {
                     category.setColumns(Integer.parseInt(categoryEl.getChildText("columns")));
-                } else {
-                    category.setColumns(currentUser.getConfiguration().getDefaultGridColumn());
-                }
+                } 
 
                 if (categoryEl.getChildText("editable") != null) {
                     category.setEditable(Boolean.parseBoolean(categoryEl.getChildText("editable")));

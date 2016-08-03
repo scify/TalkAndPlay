@@ -1,7 +1,6 @@
 package org.scify.talkandplay.gui.grid.tiles;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -23,18 +22,24 @@ public class TilePanel extends javax.swing.JPanel {
     private String text;
     private String imageString;
     private URL imageUrl;
+    private boolean hasImage;
+    private boolean hasText;
 
-    public TilePanel(String text, String imageString) {
+    public TilePanel(String text, String imageString, boolean hasImage, boolean hasText) {
         this.text = text;
         this.imageString = imageString;
+        this.hasImage = hasImage;
+        this.hasText = hasText;
 
         initComponents();
         initCustomComponents();
     }
 
-    public TilePanel(String text, URL imageUrl) {
+    public TilePanel(String text, URL imageUrl, boolean hasImage, boolean hasText) {
         this.text = text;
         this.imageUrl = imageUrl;
+        this.hasImage = hasImage;
+        this.hasText = hasText;
 
         initComponents();
         initCustomComponents();
@@ -56,16 +61,20 @@ public class TilePanel extends javax.swing.JPanel {
         textPanel.setBackground(Color.white);
         textPanel.add(textPane);
         add(textPanel);
-        
-        if(text==null || text.isEmpty()){
+
+        if (text == null || text.isEmpty() || !hasText) {
             textPanel.setVisible(false);
         }
 
         Image img;
-        if (imageString != null && !imageString.isEmpty()) {
-            img = new ImageIcon(imageString).getImage();
+        if (!hasImage) {
+            img = new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/empty_pixel.png")).getImage();
         } else {
-            img = new ImageIcon(imageUrl).getImage();
+            if (imageString != null && !imageString.isEmpty()) {
+                img = new ImageIcon(imageString).getImage();
+            } else {
+                img = new ImageIcon(imageUrl).getImage();
+            }
         }
 
         JLabel image;

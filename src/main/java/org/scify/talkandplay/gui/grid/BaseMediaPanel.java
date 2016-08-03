@@ -175,5 +175,4 @@ public class BaseMediaPanel extends BasePanel {
             }
         }
     }
-
 }

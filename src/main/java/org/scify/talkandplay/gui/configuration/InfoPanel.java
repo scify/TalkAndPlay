@@ -47,7 +47,6 @@ public class InfoPanel extends javax.swing.JPanel {
         brokenFilesLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         brokenFilesPanel = new javax.swing.JPanel();
-        changeOrderButton = new javax.swing.JButton();
         changeOrderLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         changeOrderTextArea = new javax.swing.JTextArea();
@@ -106,17 +105,6 @@ public class InfoPanel extends javax.swing.JPanel {
 
         jScrollPane1.setViewportView(brokenFilesPanel);
 
-        changeOrderButton.setBackground(new java.awt.Color(75, 161, 69));
-        changeOrderButton.setFont(changeOrderButton.getFont());
-        changeOrderButton.setForeground(new java.awt.Color(255, 255, 255));
-        changeOrderButton.setText("Αλλαγή σειράς");
-        changeOrderButton.setBorder(null);
-        changeOrderButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                changeOrderButtonMouseClicked(evt);
-            }
-        });
-
         changeOrderLabel.setText("3. Αλλαγή σειράς");
 
         jScrollPane2.setBorder(null);
@@ -143,10 +131,9 @@ public class InfoPanel extends javax.swing.JPanel {
                             .addComponent(addExplLabel)
                             .addComponent(changeOrderLabel)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(106, 106, 106)
                                 .addComponent(addWordButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(changeOrderButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(backButton))
                             .addComponent(brokenFilesLabel))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -170,8 +157,7 @@ public class InfoPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addWordButton)
-                    .addComponent(backButton)
-                    .addComponent(changeOrderButton))
+                    .addComponent(backButton))
                 .addGap(49, 49, 49)
                 .addComponent(brokenFilesLabel)
                 .addGap(18, 18, 18)
@@ -198,13 +184,6 @@ public class InfoPanel extends javax.swing.JPanel {
     private void backButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseClicked
         parent.goBack();
     }//GEN-LAST:event_backButtonMouseClicked
-
-    private void changeOrderButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changeOrderButtonMouseClicked
-
-
-
-
-    }//GEN-LAST:event_changeOrderButtonMouseClicked
 
     private void initCustomComponents() {
         setLayout(new GridLayout(0, 1, 0, 0));
@@ -240,7 +219,6 @@ public class InfoPanel extends javax.swing.JPanel {
         }
         guiHelper.drawButton(addWordButton);
         guiHelper.drawButton(backButton);
-        guiHelper.drawButton(changeOrderButton);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -250,7 +228,6 @@ public class InfoPanel extends javax.swing.JPanel {
     private javax.swing.JButton backButton;
     private javax.swing.JLabel brokenFilesLabel;
     private javax.swing.JPanel brokenFilesPanel;
-    private javax.swing.JButton changeOrderButton;
     private javax.swing.JLabel changeOrderLabel;
     private javax.swing.JTextArea changeOrderTextArea;
     private javax.swing.JLabel editExplLabel;

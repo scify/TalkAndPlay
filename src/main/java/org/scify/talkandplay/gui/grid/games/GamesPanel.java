@@ -143,7 +143,7 @@ public class GamesPanel extends BaseGridPanel {
 
     private void showStimulusReactionGame() {
         final SensorService sensorService = new SensorService(user);
-        
+
         if (hasGames("stimulusReactionGame")) {
 
             ButtonPanel buttonPanel = new ButtonPanel("Πάτα το κουμπί!", "");
@@ -217,7 +217,7 @@ public class GamesPanel extends BaseGridPanel {
 
         if (hasGames("sequenceGame")) {
 
-            ButtonPanel buttonPanel = new ButtonPanel("Βρες το όμοιο.", "Πάτα το κουμπί για να ξεκινήσεις!");
+            ButtonPanel buttonPanel = new ButtonPanel("Βάλε στη σωστή σειρά τις κάρτες.", "Πάτα το κουμπί για να ξεκινήσεις!");
 
             buttonPanel.setFocusable(true);
             buttonPanel.addMouseListener(new MouseAdapter() {
@@ -288,7 +288,7 @@ public class GamesPanel extends BaseGridPanel {
         final SensorService sensorService = new SensorService(user);
 
         if (hasGames("similarityGame")) {
-            ButtonPanel buttonPanel = new ButtonPanel("Βάλε στη σωστή σειρά τις κάρτες.", "Πάτα το κουμπί για να ξεκινήσεις!");
+            ButtonPanel buttonPanel = new ButtonPanel("Βρες το όμοιο.", "Πάτα το κουμπί για να ξεκινήσεις!");
 
             buttonPanel.setFocusable(true);
             buttonPanel.addMouseListener(new MouseAdapter() {

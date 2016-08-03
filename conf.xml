@@ -5,11 +5,11 @@
     <image>demo_resources/users/cat_with_wig.jpg</image>
     <configuration>
       <rotationSpeed>1</rotationSpeed>
-      <defaultGridRow>3</defaultGridRow>
-      <defaultGridColumn>3</defaultGridColumn>
-      <sound>false</sound>
+      <defaultGridRow>2</defaultGridRow>
+      <defaultGridColumn>4</defaultGridColumn>
+      <sound>true</sound>
       <image>true</image>
-      <text>true</text>
+      <text>false</text>
       <selectionSensor>
         <type>mouse</type>
         <button>1</button>
@@ -25,11 +25,11 @@
       <columns>3</columns>
       <categories>
         <category name="Φαγητό">
-          <rows>2</rows>
+          <rows>3</rows>
           <columns>3</columns>
           <image>demo_resources/images/Φαγητό/Μπιφτέκι.png</image>
           <sound>demo_resources/sounds/Φαγητό.mp3</sound>
-          <hasSound>false</hasSound>
+          <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
           <categories>
@@ -38,191 +38,191 @@
               <columns>3</columns>
               <image>demo_resources/images/Φαγητό/Μακαρόνια.png</image>
               <sound>demo_resources/sounds/Μακαρόνια.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Πατάτες τηγανητές">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φαγητό/Πατάτες τηγανητές.png</image>
               <sound>demo_resources/sounds/Πατάτες τηγανητές.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Μπιφτέκι">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φαγητό/Μπιφτέκι.png</image>
               <sound>demo_resources/sounds/Μπιφτέκι.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Μπριζόλα">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φαγητό/μπριζόλα.png</image>
               <sound>demo_resources/sounds/Μπριζόλα.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Κοτόπουλο">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φαγητό/κοτόπουλο.png</image>
               <sound>demo_resources/sounds/Κοτόπουλο.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Σούπα">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φαγητό/σούπα.png</image>
               <sound>demo_resources/sounds/Σούπα.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Ψωμί">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φαγητό/ψωμί.png</image>
               <sound>demo_resources/sounds/Ψωμί.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Τοστ">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φαγητό/τοστ.png</image>
               <sound>demo_resources/sounds/Τοστ.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Νερό">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φαγητό/νερό.png</image>
               <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Χυμός">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φαγητό/χυμός.png</image>
               <sound>demo_resources/sounds/Χυμός.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Γάλα">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φαγητό/Γάλα.png</image>
               <sound>demo_resources/sounds/Γάλα.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Γιαούρτι">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φαγητό/γιαούρτι.png</image>
               <sound>demo_resources/sounds/Γιαούρτι.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Αγγούρι">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φαγητό/αγγούρι.png</image>
               <sound>demo_resources/sounds/Αγγούρι.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Ντομάτα">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φαγητό/ντομάτα.png</image>
               <sound>demo_resources/sounds/Ντομάτα.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
           </categories>
         </category>
         <category name="Φρούτα">
-          <rows>3</rows>
-          <columns>3</columns>
+          <rows />
+          <columns />
           <image>demo_resources/images/Φρούτα/πορτοκάλι.png</image>
           <sound>demo_resources/sounds/Φρούτα.mp3</sound>
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
+          <hasSound>true</hasSound>
+          <hasImage>true</hasImage>
+          <hasText>true</hasText>
           <categories>
             <category name="Μήλο">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φρούτα/μήλο.png</image>
               <sound>demo_resources/sounds/Μήλο.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Μπανάνα">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φρούτα/μπανάνα.png</image>
               <sound>demo_resources/sounds/Μπανάνα.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Ροδάκινο">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φρούτα/ροδάκινο.png</image>
               <sound>demo_resources/sounds/Ροδάκινο.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Αχλάδι">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φρούτα/αχλάδι.png</image>
               <sound>demo_resources/sounds/Αχλάδι.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Καρπούζι">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φρούτα/καρπούζι.png</image>
               <sound>demo_resources/sounds/Καρπούζι.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Πορτοκάλι">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φρούτα/πορτοκάλι.png</image>
               <sound>demo_resources/sounds/Πορτοκάλι.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
           </categories>
         </category>
@@ -231,27 +231,27 @@
           <columns>3</columns>
           <image>demo_resources/images/Τουαλέτα/τουαλέτα.png</image>
           <sound>demo_resources/sounds/Τουαλέτα.mp3</sound>
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
+          <hasSound>true</hasSound>
+          <hasImage>true</hasImage>
+          <hasText>true</hasText>
           <categories>
             <category name="Αλλαγή πάνας">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Τουαλέτα/Πάνα χρησιμοποιημένη με τσίσα.png</image>
               <sound>demo_resources/sounds/Αλλαγή πάνας.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Αλλαγή πάνας">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Τουαλέτα/Πάνα χρησιμοποιημένη με κακά.png</image>
               <sound>demo_resources/sounds/Αλλαγή πάνας.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
           </categories>
         </category>
@@ -260,54 +260,54 @@
           <columns>3</columns>
           <image>demo_resources/images/Συναισθήματα/Χαρά.png</image>
           <sound>demo_resources/sounds/Συναισθήματα.mp3</sound>
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
+          <hasSound>true</hasSound>
+          <hasImage>true</hasImage>
+          <hasText>true</hasText>
           <categories>
             <category name="Χαρά">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Συναισθήματα/Χαρά.png</image>
               <sound>demo_resources/sounds/Χαίρομαι.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Λύπη">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Συναισθήματα/Λύπη.png</image>
               <sound>demo_resources/sounds/Είμαι λυπημένος.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Θυμός">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Συναισθήματα/Θυμός.png</image>
               <sound>demo_resources/sounds/Είμαι θυμωμένος.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Αηδία">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Συναισθήματα/Αηδία.png</image>
               <sound>demo_resources/sounds/Νιώθω αηδία.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Φόβος">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Συναισθήματα/Φόβος.png</image>
               <sound>demo_resources/sounds/Φοβάμαι.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
           </categories>
         </category>
@@ -316,36 +316,36 @@
           <columns>3</columns>
           <image>demo_resources/images/Πόνος/Πόνος.png</image>
           <sound>demo_resources/sounds/Πονάω.mp3</sound>
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
+          <hasSound>true</hasSound>
+          <hasImage>true</hasImage>
+          <hasText>true</hasText>
           <categories>
             <category name="Πόνος στο κεφάλι">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Πόνος/Πόνος Κεφάλι.png</image>
               <sound>demo_resources/sounds/Πονάει το κεφάλι μου.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Πόνος στο πόδι">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Πόνος/Πόνος Πόδι.png</image>
               <sound>demo_resources/sounds/Πονάει το πόδι μου.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Πόνος στο χέρι">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Πόνος/Πόνος Χέρι.png</image>
               <sound>demo_resources/sounds/Πονάει το χέρι μου.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
           </categories>
         </category>
@@ -354,36 +354,36 @@
           <columns>3</columns>
           <image>demo_resources/images/Θερμοκρασία/Ζεσταίνομαι.png</image>
           <sound>demo_resources/sounds/Θερμοκρασία.mp3</sound>
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
+          <hasSound>true</hasSound>
+          <hasImage>true</hasImage>
+          <hasText>true</hasText>
           <categories>
             <category name="Κρύο">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Θερμοκρασία/Κρύο.png</image>
               <sound>demo_resources/sounds/Κρύο.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Ζεστό">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Θερμοκρασία/Ζεστό.png</image>
               <sound>demo_resources/sounds/Ζεστό.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Καυτό">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Θερμοκρασία/Καυτό.png</image>
               <sound>demo_resources/sounds/Καυτό.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
           </categories>
         </category>
@@ -392,36 +392,36 @@
           <columns>3</columns>
           <image>demo_resources/images/Φαγούρα/Φαγούρα.png</image>
           <sound>demo_resources/sounds/Φαγούρα.mp3</sound>
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
+          <hasSound>true</hasSound>
+          <hasImage>true</hasImage>
+          <hasText>true</hasText>
           <categories>
             <category name="Φαγούρα στο κεφάλι">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φαγούρα/Φαγούρα Κεφάλι.png</image>
               <sound>demo_resources/sounds/Φαγούρα στο κεφάλι.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Φαγούρα στο πόδι">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φαγούρα/Φαγούρα Πόδι.png</image>
               <sound>demo_resources/sounds/Φαγούρα στο πόδι.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Φαγούρα στο χέρι">
               <rows>3</rows>
               <columns>3</columns>
               <image>demo_resources/images/Φαγούρα/Φαγούρα Χέρι.png</image>
               <sound>demo_resources/sounds/Φαγούρα στο χέρι.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
           </categories>
         </category>
@@ -459,7 +459,7 @@
         <image />
         <sound />
         <winSound />
-        <errorSound />
+        <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
         <enabled>true</enabled>
         <games>
           <game>
@@ -502,7 +502,7 @@
             <image />
             <difficulty>4</difficulty>
             <winSound>demo_resources/sounds/games/ship.mp3</winSound>
-            <errorSound />
+            <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
             <gameImages>
               <image>
                 <name />
@@ -535,8 +535,8 @@
             <enabled>true</enabled>
             <image />
             <difficulty>4</difficulty>
-            <winSound />
-            <errorSound />
+            <winSound>demo_resources/sounds/games/winSound.mp3</winSound>
+            <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
             <gameImages>
               <image>
                 <name />
@@ -570,8 +570,8 @@
         <name>Χρονικής Αλληλουχίας</name>
         <image />
         <sound />
-        <winSound />
-        <errorSound />
+        <winSound>/home/christina/Music/DIIV - Doused.mp3</winSound>
+        <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
         <enabled>true</enabled>
         <games>
           <game>
@@ -648,10 +648,10 @@
         <games>
           <game>
             <name>Game 1</name>
-            <enabled>false</enabled>
+            <enabled>true</enabled>
             <image />
             <difficulty>4</difficulty>
-            <winSound>demo_resources/sounds/games/winSound.mp3</winSound>
+            <winSound>/home/christina/Projects/talkAndPlay/TalkAndPlay/demo_resources/sounds/games/Succes 4 MP3.mp3</winSound>
             <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
             <gameImages>
               <image>
@@ -682,10 +682,10 @@
           </game>
           <game>
             <name>Game 2</name>
-            <enabled>false</enabled>
+            <enabled>true</enabled>
             <image />
             <difficulty>4</difficulty>
-            <winSound>demo_resources/sounds/games/winSound.mp3</winSound>
+            <winSound>/home/christina/Music/Maroon 5 - Sugar (lyrics).mp3</winSound>
             <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
             <gameImages>
               <image>
@@ -747,7 +747,7 @@
           <columns>3</columns>
           <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/Μπιφτέκι.png</image>
           <sound>/home/xrist/Desktop/tp/demo_resources/sounds/Φαγητό.mp3</sound>
-          <hasSound>false</hasSound>
+          <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
           <categories>
@@ -756,182 +756,98 @@
               <columns>3</columns>
               <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/Μακαρόνια.png</image>
               <sound>/home/xrist/Desktop/tp/demo_resources/sounds/Μακαρόνια.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="Πατάτες τηγανητές">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/Πατάτες τηγανητές.png</image>
-              <sound>/home/xrist/Desktop/tp/demo_resources/sounds/Πατάτες_τηγανητές.mp3</sound>
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-              <categories>
-                <category name="fff">
-                  <rows>3</rows>
-                  <columns>3</columns>
-                  <image>/home/christina/Pictures/filtra_anazitisis.png</image>
-                  <sound />
-                  <hasSound>false</hasSound>
-                  <hasImage>true</hasImage>
-                  <hasText>true</hasText>
-                </category>
-                <category name="ddddd">
-                  <image>/home/christina/Documents/empty_pixel.png</image>
-                  <sound />
-                  <hasSound>false</hasSound>
-                  <hasImage>true</hasImage>
-                  <hasText>true</hasText>
-                </category>
-                <category name="null">
-                  <image>/home/christina/Pictures/hmerominia_sumvasis.png</image>
-                  <sound />
-                  <hasSound>false</hasSound>
-                  <hasImage>true</hasImage>
-                  <hasText>true</hasText>
-                  <rows />
-                  <columns />
-                </category>
-                <category name="null22222">
-                  <image>/home/christina/Pictures/Selection_002.png</image>
-                  <sound />
-                  <hasSound>false</hasSound>
-                  <hasImage>false</hasImage>
-                  <hasText>false</hasText>
-                  <rows />
-                  <columns />
-                  <categories>
-                    <category name="aaaaaaaaaa">
-                      <image>/home/christina/Documents/autocomplete.png</image>
-                      <sound />
-                      <hasSound>false</hasSound>
-                      <hasImage>true</hasImage>
-                      <hasText>true</hasText>
-                      <rows />
-                      <columns />
-                    </category>
-                  </categories>
-                </category>
-              </categories>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Τοστ">
-              <rows>3</rows>
-              <columns>3</columns>
+              <rows />
+              <columns />
               <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/τοστ.png</image>
               <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-              <categories>
-                <category name="zampuoun">
-                  <image>/home/christina/Documents/empty_pixel.png</image>
-                  <sound />
-                  <hasSound>false</hasSound>
-                  <hasImage>true</hasImage>
-                  <hasText>true</hasText>
-                  <rows />
-                  <columns />
-                </category>
-              </categories>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+              <categories />
             </category>
             <category name="Χυμός">
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/χυμός.png</image>
               <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Γάλα">
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/γάλα.png</image>
               <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Σούπα">
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/σούπα.png</image>
               <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Τυρί">
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/τυρί.png</image>
               <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Γιαούρτι">
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/γιαούρτι.png</image>
               <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Μπριζόλα">
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/xrist/Desktop/talkandplay/official images/Φαγητό/μπριζόλα.png</image>
               <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Ψωμί">
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/xrist/Desktop/talkandplay/official images/Φαγητό/ψωμί.png</image>
               <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Αγγούρι">
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/αγγούρι.png</image>
               <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Μπιφτέκι">
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/Μπιφτέκι.png</image>
               <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="Κοτόπουλο">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/Κοτόπουλο.png</image>
-              <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
-            </category>
-            <category name="τεστ">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/christina/Desktop/tp/demo_resources/tp_logo_mini.png</image>
-              <sound />
-              <hasSound>false</hasSound>
+              <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
             </category>
@@ -942,36 +858,36 @@
           <columns>3</columns>
           <image>/home/xrist/Desktop/tp/demo_resources/Φρούτα/πορτοκάλι.png</image>
           <sound>/home/xrist/Desktop/tp/demo_resources/sounds/φρούτα.mp3</sound>
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
+          <hasSound>true</hasSound>
+          <hasImage>true</hasImage>
+          <hasText>true</hasText>
           <categories>
             <category name="μήλο">
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/xrist/Desktop/tp/demo_resources/Φρούτα/μήλο.png</image>
               <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="μπανάνα">
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/xrist/Desktop/tp/demo_resources/Φρούτα/μπανάνα.png</image>
               <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="ροδάκινο">
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/xrist/Desktop/tp/demo_resources/Φρούτα/ροδάκινο.png</image>
               <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
           </categories>
         </category>
@@ -980,27 +896,27 @@
           <columns>3</columns>
           <image>/home/xrist/Desktop/tp/demo_resources/Συναισθήματα/Χαρά.png</image>
           <sound>/home/xrist/Desktop/tp/demo_resources/sounds/Συναισθήματα.mp3</sound>
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
+          <hasSound>true</hasSound>
+          <hasImage>true</hasImage>
+          <hasText>true</hasText>
           <categories>
             <category name="Λύπη">
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/xrist/Desktop/tp/demo_resources/Συναισθήματα/Λύπη.png</image>
               <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Θυμός">
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/xrist/Desktop/tp/demo_resources/Συναισθήματα/Θυμός.png</image>
               <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
           </categories>
         </category>
@@ -1009,36 +925,36 @@
           <columns>3</columns>
           <image>/home/xrist/Desktop/tp/demo_resources/Θερμοκρασία/Ζεστό.png</image>
           <sound>/home/xrist/Desktop/tp/demo_resources/sounds/Θερμοκρασία.mp3</sound>
-          <hasSound>false</hasSound>
-          <hasImage>false</hasImage>
-          <hasText>false</hasText>
+          <hasSound>true</hasSound>
+          <hasImage>true</hasImage>
+          <hasText>true</hasText>
           <categories>
             <category name="Κρύο">
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/xrist/Desktop/tp/demo_resources/Θερμοκρασία/Κρύο.png</image>
               <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Ζεστό">
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/xrist/Desktop/tp/demo_resources/Θερμοκρασία/Ζεστό.png</image>
               <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
             <category name="Καυτό">
               <rows>3</rows>
               <columns>3</columns>
               <image>/home/xrist/Desktop/tp/demo_resources/Θερμοκρασία/Καυτό.png</image>
               <sound />
-              <hasSound>false</hasSound>
-              <hasImage>false</hasImage>
-              <hasText>false</hasText>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
             </category>
           </categories>
         </category>

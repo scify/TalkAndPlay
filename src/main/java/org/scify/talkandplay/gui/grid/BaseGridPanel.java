@@ -43,7 +43,7 @@ public class BaseGridPanel extends BasePanel {
             this.timer = new TileTimerManager(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         }
 
-        if (currentCategory == null) {
+        if (currentCategory == null || currentCategory.getRows() == null || currentCategory.getColumns() == null) {
             this.tileCreator = new TileCreator(user, user.getConfiguration().getDefaultGridRow(), user.getConfiguration().getDefaultGridColumn());
         } else {
             this.tileCreator = new TileCreator(user, currentCategory.getRows(), currentCategory.getColumns());
@@ -80,7 +80,7 @@ public class BaseGridPanel extends BasePanel {
     }
 
     protected void setEmpties() {
-        if (currentCategory == null) {
+        if (currentCategory == null || currentCategory.getRows() == null || currentCategory.getColumns() == null) {
             empties = UIConstants.getInstance().getRows() * UIConstants.getInstance().getColumns();
         } else {
             empties = currentCategory.getRows() * currentCategory.getColumns();
@@ -92,7 +92,7 @@ public class BaseGridPanel extends BasePanel {
         empties = empties - panelList.size();
         int rows, columns;
 
-        if (currentCategory == null) {
+        if (currentCategory == null || currentCategory.getRows() == null || currentCategory.getColumns() == null) {
             rows = UIConstants.getInstance().getRows();
             columns = UIConstants.getInstance().getColumns();
         } else {

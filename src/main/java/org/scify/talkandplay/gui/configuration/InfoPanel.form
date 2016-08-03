@@ -52,10 +52,9 @@
                               <Component id="addExplLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="changeOrderLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
                                   <Component id="addWordButton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="changeOrderButton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="backButton" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="brokenFilesLabel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -86,7 +85,6 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="addWordButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="backButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="changeOrderButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   <Component id="brokenFilesLabel" min="-2" max="-2" attributes="0"/>
@@ -204,28 +202,6 @@
             </Container>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="changeOrderButton">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="45" green="a1" red="4b" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
-              <FontInfo relative="true">
-                <Font component="changeOrderButton" property="font" relativeSize="true" size="0"/>
-              </FontInfo>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="&#x391;&#x3bb;&#x3bb;&#x3b1;&#x3b3;&#x3ae; &#x3c3;&#x3b5;&#x3b9;&#x3c1;&#x3ac;&#x3c2;"/>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="changeOrderButtonMouseClicked"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="changeOrderLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="3. &#x391;&#x3bb;&#x3bb;&#x3b1;&#x3b3;&#x3ae; &#x3c3;&#x3b5;&#x3b9;&#x3c1;&#x3ac;&#x3c2;"/>

@@ -85,9 +85,20 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
-                              <Component id="winSoundLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
-                              <Component id="errorSoundLabel" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="winSoundLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="removeWinSoundLavel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
+                                      <Component id="errorSoundLabel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
+                                      <Component id="removeErrorSoundLavel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
                       <EmptySpace min="0" pref="225" max="32767" attributes="0"/>
@@ -114,7 +125,12 @@
                           <Component id="winSoundLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="errorSoundLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="55" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="removeWinSoundLavel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="removeErrorSoundLavel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="34" max="32767" attributes="0"/>
                       <Component id="saveButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -202,6 +218,16 @@
             <Component class="javax.swing.JLabel" name="errorSoundLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x3c3;&#x3c6;&#x3ac;&#x3bb;&#x3bc;&#x3b1;"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="removeWinSoundLavel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x391;&#x3c6;&#x3b1;&#x3af;&#x3c1;&#x3b5;&#x3c3;&#x3b7; &#x3ae;&#x3c7;&#x3bf;&#x3c5;"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="removeErrorSoundLavel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x391;&#x3c6;&#x3b1;&#x3af;&#x3c1;&#x3b5;&#x3c3;&#x3b7; &#x3ae;&#x3c7;&#x3bf;&#x3c5;"/>
               </Properties>
             </Component>
           </SubComponents>

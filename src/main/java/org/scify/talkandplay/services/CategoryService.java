@@ -273,7 +273,7 @@ public class CategoryService {
             if (categoryChild.getColumns() != null) {
                 categoryNode.getChild("columns").setText(String.valueOf(categoryChild.getColumns()));
             } else {
-                categoryNode.getChild("rows").setText("");
+                categoryNode.getChild("columns").setText("");
             }
 
             if (categoryChild.getImage() == null) {

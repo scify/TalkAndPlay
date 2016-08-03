@@ -32,8 +32,9 @@ public class TileCreator {
         DEFAULT_SOUND = new File("demo_resources/sounds/default.mp3").getAbsolutePath();
         //   DEFAULT_SOUND = getClass().getResource("/org/scify/talkandplay/resources/sounds/cat.mp3").getPath();
 
+        this.user = user;
         this.sensorService = new SensorService(user);
-        this.guiHelper = new GuiHelper();
+        this.guiHelper = new GuiHelper(user);
         this.audioPlayer = new AudioMediaPlayerComponent();
         initAudioPlayer();
     }
@@ -123,8 +124,10 @@ public class TileCreator {
     private void act(String sound, TileAction tileAction) {
         tileAction.act();
         this.tileAction = tileAction;
-        if (!this.tileAction.mute()) {
+        if (!this.tileAction.mute() && user.getConfiguration().hasSound()) {
             playAudio(sound);
+        } else {
+            tileAction.audioFinished();
         }
     }
 

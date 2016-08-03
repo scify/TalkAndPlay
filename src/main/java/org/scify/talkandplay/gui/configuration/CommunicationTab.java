@@ -97,9 +97,6 @@ public class CommunicationTab extends javax.swing.JPanel {
                 JLabel deleteLabel = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/delete-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
                 editLabel.setBorder(new EmptyBorder(0, 0, 0, 10));
 
-             
-                setListeners(panel, editLabel, deleteLabel, category.getName());
-
                 controlsPanel.add(editLabel);
                 controlsPanel.add(deleteLabel);
                 controlsPanel.setVisible(false);
@@ -141,7 +138,6 @@ public class CommunicationTab extends javax.swing.JPanel {
         repaint();
     }
 
-
     private JPanel titlePanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.LEADING));
@@ -154,9 +150,7 @@ public class CommunicationTab extends javax.swing.JPanel {
         return panel;
     }
 
-
     private void setListeners(final JPanel panel, JLabel editLabel, JLabel deleteLabel, final String category) {
-
         //add the green background when a panel is clicked
         panel.addMouseListener(new MouseAdapter() {
             @Override
@@ -183,14 +177,16 @@ public class CommunicationTab extends javax.swing.JPanel {
         deleteLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                int dialogResult = JOptionPane.showConfirmDialog(null, "Είσαι σίγουρος/η ότι θες να διαγράψεις τη λέξη;", "Warning", 0);
-                if (dialogResult == JOptionPane.YES_OPTION) {
-                    try {
-                        categoryService.delete(category, user);
-                        redrawCategoriesList();
-                        parent.redrawCategoriesDropDown();
-                    } catch (Exception ex) {
-                        Logger.getLogger(UserPanel.class.getName()).log(Level.SEVERE, null, ex);
+                if (me.getClickCount() == 1) {
+                    int dialogResult = JOptionPane.showConfirmDialog(null, "Είσαι σίγουρος/η ότι θες να διαγράψεις τη λέξη;", "Warning", 0);
+                    if (dialogResult == JOptionPane.YES_OPTION) {
+                        try {
+                            categoryService.delete(category, user);
+                            redrawCategoriesList();
+                            parent.redrawCategoriesDropDown();
+                        } catch (Exception ex) {
+                            Logger.getLogger(UserPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 }
             }

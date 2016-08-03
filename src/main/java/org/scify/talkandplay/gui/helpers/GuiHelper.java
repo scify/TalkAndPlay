@@ -17,9 +17,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import org.scify.talkandplay.gui.grid.tiles.TilePanel;
+import org.scify.talkandplay.models.User;
 
 /**
  *
@@ -27,10 +27,16 @@ import org.scify.talkandplay.gui.grid.tiles.TilePanel;
  */
 public class GuiHelper {
 
+    private User user;
+
     private static final int DEFAULT_WIDTH = 150;
     private static final int DEFAULT_HEIGHT = 150;
 
     public GuiHelper() {
+    }
+
+    public GuiHelper(User user) {
+        this.user = user;
     }
 
     /**
@@ -149,10 +155,13 @@ public class GuiHelper {
         panel.setBorder(BorderFactory.createLineBorder(Color.white, 5));
 
         if (image != null) {
-            panel.add(new TilePanel(text, image), BorderLayout.CENTER);
-        } else {
-            panel.add(new TilePanel(text, imageURL), BorderLayout.CENTER);
-        }
+            panel.add(new TilePanel(text, image, user.getConfiguration().hasImage(), user.getConfiguration().hasText()), BorderLayout.CENTER);
+        } else if (imageURL != null) {
+            panel.add(new TilePanel(text, imageURL, user.getConfiguration().hasImage(), user.getConfiguration().hasText()), BorderLayout.CENTER);
+        }/* else {
+         panel.add(new TilePanel(text), BorderLayout.CENTER);
+         }*/
+
         return panel;
     }
 

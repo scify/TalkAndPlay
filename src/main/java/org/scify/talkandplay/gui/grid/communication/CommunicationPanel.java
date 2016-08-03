@@ -79,8 +79,14 @@ public class CommunicationPanel extends BaseGridPanel {
      * @throws IOException
      */
     private void drawImages(Category category) throws IOException {
-        UIConstants.getInstance().setRows(category.getRows());
-        UIConstants.getInstance().setColumns(category.getColumns());
+        if (category.getRows() == null || category.getColumns() == null) {
+            UIConstants.getInstance().setRows(user.getConfiguration().getDefaultGridRow());
+            UIConstants.getInstance().setColumns(user.getConfiguration().getDefaultGridColumn());
+        } else {
+            UIConstants.getInstance().setRows(category.getRows());
+            UIConstants.getInstance().setColumns(category.getColumns());
+        }
+
         removeAll();
         currentCategory = category;
         c.gridx = -1;
@@ -160,22 +166,22 @@ public class CommunicationPanel extends BaseGridPanel {
                 category.getImage(),
                 category.getSound(),
                 new TileAction() {
-            @Override
-            public void act() {
-                timer.cancel();
-                currentCategory = category;
-            }
+                    @Override
+                    public void act() {
+                        timer.cancel();
+                        currentCategory = category;
+                    }
 
-            @Override
-            public void audioFinished() {
-                if (currentCategory.getSubCategories().size() > 0) {
-                    currentPanel.showNextGrid(currentCategory);
-                } else {
-                    timer.setList(panelList);
-                    timer.start();
-                }
-            }
-        });
+                    @Override
+                    public void audioFinished() {
+                        if (currentCategory.getSubCategories().size() > 0) {
+                            currentPanel.showNextGrid(currentCategory);
+                        } else {
+                            timer.setList(panelList);
+                            timer.start();
+                        }
+                    }
+                });
         return panel;
     }
 
@@ -192,37 +198,37 @@ public class CommunicationPanel extends BaseGridPanel {
                 getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"),
                 null,
                 new TileAction() {
-            @Override
-            public void act() {
-                timer.cancel();
-                stopped = 0;
-                if (isRoot) {
-                    showMainMenu();
-                } else if (!isRoot && category.getParentCategory() == null) {
-                    try {
-                        drawImages(rootCategory);
-                    } catch (IOException ex) {
-                        Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    @Override
+                    public void act() {
+                        timer.cancel();
+                        stopped = 0;
+                        if (isRoot) {
+                            showMainMenu();
+                        } else if (!isRoot && category.getParentCategory() == null) {
+                            try {
+                                drawImages(rootCategory);
+                            } catch (IOException ex) {
+                                Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            try {
+                                drawImages(category.getParentCategory());
+                            } catch (IOException ex) {
+                                Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                     }
-                } else {
-                    try {
-                        drawImages(category.getParentCategory());
-                    } catch (IOException ex) {
-                        Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+
+                    @Override
+                    public void audioFinished() {
+                        return;
                     }
-                }
-            }
 
-            @Override
-            public void audioFinished() {
-                return;
-            }
-
-            @Override
-            public boolean mute() {
-                return true;
-            }
-        });
+                    @Override
+                    public boolean mute() {
+                        return true;
+                    }
+                });
 
         return panel;
     }
@@ -240,26 +246,26 @@ public class CommunicationPanel extends BaseGridPanel {
                 getClass().getResource("/org/scify/talkandplay/resources/more-icon.png"),
                 null,
                 new TileAction() {
-            @Override
-            public void act() {
-                timer.cancel();
-                try {
-                    drawImages(category);
-                } catch (IOException ex) {
-                    Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+                    @Override
+                    public void act() {
+                        timer.cancel();
+                        try {
+                            drawImages(category);
+                        } catch (IOException ex) {
+                            Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
 
-            @Override
-            public void audioFinished() {
-                return;
-            }
+                    @Override
+                    public void audioFinished() {
+                        return;
+                    }
 
-            @Override
-            public boolean mute() {
-                return true;
-            }
-        });
+                    @Override
+                    public boolean mute() {
+                        return true;
+                    }
+                });
 
         return panel;
     }
@@ -279,7 +285,7 @@ public class CommunicationPanel extends BaseGridPanel {
      */
     private void setGrid(Category category) {
         int rows, columns;
-        if (category == null) {
+        if (category == null || category.getRows() == null || category.getColumns() == null) {
             rows = user.getConfiguration().getDefaultGridRow();
             columns = user.getConfiguration().getDefaultGridColumn();
         } else {
@@ -297,7 +303,6 @@ public class CommunicationPanel extends BaseGridPanel {
         /* if (c.gridy == (columns - 1)) {
          c.gridy++;
          }*/
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

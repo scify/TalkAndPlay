@@ -226,16 +226,16 @@ public class SequenceGamePanel extends BaseGamePanel {
 
     public void newGame() {
         tileCreator.freePlayerResources();
-        SequenceGamePanel topPanel = new SequenceGamePanel(user, parent);
+        SequenceGamePanel gamesPanel = new SequenceGamePanel(user, parent);
         parent.clearGrid();
-        parent.addGrid(topPanel);
+        parent.addGrid(gamesPanel);
     }
 
     public void playAgain() {
         tileCreator.freePlayerResources();
-        SequenceGamePanel topPanel = new SequenceGamePanel(user, parent, (SequenceGame) game);
+        SequenceGamePanel gamesPanel = new SequenceGamePanel(user, parent, (SequenceGame) game);
         parent.clearGrid();
-        parent.addGrid(topPanel);
+        parent.addGrid(gamesPanel);
 
     }
 

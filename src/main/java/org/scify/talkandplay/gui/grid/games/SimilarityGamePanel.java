@@ -135,6 +135,11 @@ public class SimilarityGamePanel extends BaseGamePanel {
                             timer.start();
                         }
                     }
+
+                    @Override
+                    public boolean mute() {
+                        return true;
+                    }
                 });
 
         return panel;
@@ -164,14 +169,14 @@ public class SimilarityGamePanel extends BaseGamePanel {
         tileCreator.freePlayerResources();
         SimilarityGamePanel gamePanel = new SimilarityGamePanel(user, parent);
         parent.clearGrid();
-        parent.addGrid(topPanel);
+        parent.addGrid(gamePanel);
     }
 
     public void playAgain() {
         tileCreator.freePlayerResources();
-        SimilarityGamePanel topPanel = new SimilarityGamePanel(user, parent, (SimilarityGame) game);
+        SimilarityGamePanel gamePanel = new SimilarityGamePanel(user, parent, (SimilarityGame) game);
         parent.clearGrid();
-        parent.addGrid(topPanel);
+        parent.addGrid(gamePanel);
 
     }
 

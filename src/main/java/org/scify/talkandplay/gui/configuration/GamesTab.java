@@ -61,6 +61,8 @@ public class GamesTab extends javax.swing.JPanel {
         winSoundLabel.setVisible(false);
         errorSoundLabel.setVisible(false);
         saveButton.setVisible(false);
+        removeWinSoundLavel.setVisible(false);
+        removeErrorSoundLavel.setVisible(false);
         winSoundLabel.setHorizontalTextPosition(JLabel.CENTER);
         winSoundLabel.setVerticalTextPosition(JLabel.BOTTOM);
         errorSoundLabel.setHorizontalTextPosition(JLabel.CENTER);
@@ -110,6 +112,7 @@ public class GamesTab extends javax.swing.JPanel {
                 } else {
                     windSoundPath = gameType.getWinSound();
                     winSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    removeWinSoundLavel.setVisible(true);
                 }
 
                 if (gameType.getErrorSound() == null || gameType.getErrorSound().isEmpty() || !(new File(gameType.getErrorSound()).isFile())) {
@@ -118,6 +121,7 @@ public class GamesTab extends javax.swing.JPanel {
                 } else {
                     errorSoundPath = gameType.getErrorSound();
                     errorSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    removeErrorSoundLavel.setVisible(true);
                 }
             }
         } else {
@@ -223,6 +227,26 @@ public class GamesTab extends javax.swing.JPanel {
                 }
             }
         });
+
+        removeWinSoundLavel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                gameType.setWinSound("");
+                winSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                removeWinSoundLavel.setVisible(false);
+                windSoundPath = null;
+            }
+        });
+
+        removeErrorSoundLavel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                gameType.setWinSound("");
+                errorSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                removeErrorSoundLavel.setVisible(false);
+                errorSoundPath = null;
+            }
+        });
     }
 
     /**
@@ -245,6 +269,8 @@ public class GamesTab extends javax.swing.JPanel {
         step3ExplLabel = new javax.swing.JLabel();
         winSoundLabel = new javax.swing.JLabel();
         errorSoundLabel = new javax.swing.JLabel();
+        removeWinSoundLavel = new javax.swing.JLabel();
+        removeErrorSoundLavel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -290,6 +316,10 @@ public class GamesTab extends javax.swing.JPanel {
 
         errorSoundLabel.setText("σφάλμα");
 
+        removeWinSoundLavel.setText("Αφαίρεση ήχου");
+
+        removeErrorSoundLavel.setText("Αφαίρεση ήχου");
+
         javax.swing.GroupLayout wrapperPanelLayout = new javax.swing.GroupLayout(wrapperPanel);
         wrapperPanel.setLayout(wrapperPanelLayout);
         wrapperPanelLayout.setHorizontalGroup(
@@ -320,9 +350,16 @@ public class GamesTab extends javax.swing.JPanel {
                             .addComponent(step3ExplLabel)))
                     .addGroup(wrapperPanelLayout.createSequentialGroup()
                         .addGap(104, 104, 104)
-                        .addComponent(winSoundLabel)
-                        .addGap(153, 153, 153)
-                        .addComponent(errorSoundLabel)))
+                        .addGroup(wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(winSoundLabel)
+                            .addComponent(removeWinSoundLavel))
+                        .addGroup(wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(wrapperPanelLayout.createSequentialGroup()
+                                .addGap(138, 138, 138)
+                                .addComponent(errorSoundLabel))
+                            .addGroup(wrapperPanelLayout.createSequentialGroup()
+                                .addGap(116, 116, 116)
+                                .addComponent(removeErrorSoundLavel)))))
                 .addGap(0, 225, Short.MAX_VALUE))
         );
         wrapperPanelLayout.setVerticalGroup(
@@ -344,7 +381,11 @@ public class GamesTab extends javax.swing.JPanel {
                 .addGroup(wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(winSoundLabel)
                     .addComponent(errorSoundLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(removeWinSoundLavel)
+                    .addComponent(removeErrorSoundLavel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(saveButton)
                 .addContainerGap())
         );
@@ -376,7 +417,6 @@ public class GamesTab extends javax.swing.JPanel {
         } catch (Exception ex) {
             Logger.getLogger(GamesTab.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         parent.displayMessage("Οι αλλαγές αποθηκεύτηκαν!");
     }//GEN-LAST:event_saveButtonMouseClicked
 
@@ -393,6 +433,8 @@ public class GamesTab extends javax.swing.JPanel {
     private javax.swing.JComboBox gamesComboBox;
     private javax.swing.JPanel gamesPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel removeErrorSoundLavel;
+    private javax.swing.JLabel removeWinSoundLavel;
     private javax.swing.JButton saveButton;
     private javax.swing.JLabel step1Label;
     private javax.swing.JLabel step2Label;

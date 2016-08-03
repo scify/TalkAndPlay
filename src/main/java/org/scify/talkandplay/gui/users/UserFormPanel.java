@@ -210,7 +210,7 @@ public class UserFormPanel extends javax.swing.JPanel {
 
         step6ExplTextArea.setColumns(20);
         step6ExplTextArea.setRows(5);
-        step6ExplTextArea.setText("Τα πεδία 4 και 5 μπορούν να ρυθμιστούν και ανεξάρτητα για κάθε σύνολο λέξεων σε επόμενο στάδιο.");
+        step6ExplTextArea.setText("Το πεδίο 5 μπορεί να ρυθμιστεί και ανεξάρτητα για κάθε σύνολο λέξεων σε επόμενο στάδιο.");
         jScrollPane1.setViewportView(step6ExplTextArea);
 
         jLabel1.setText("επιλογή:");
@@ -511,12 +511,12 @@ public class UserFormPanel extends javax.swing.JPanel {
             }
         }
 
-        //image or text should be selected
+       /* //image or text should be selected
         if (!imageCheckBox.isSelected() && !textCheckBox.isSelected()) {
             errorLabel.setText("Οι λέξεις θα πρέπει να έχουν τουλάχιστον ένα από τα δύο: λεκτικό, εικόνα");
             errorLabel.setVisible(true);
             return false;
-        }
+        }*/
 
         return true;
     }
@@ -772,6 +772,9 @@ public class UserFormPanel extends javax.swing.JPanel {
         step6ExplTextArea.setWrapStyleWord(true);
         step6ExplTextArea.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         jScrollPane1.setBorder(null);
+        
+        imageCheckBox.setSelected(true);
+        imageCheckBox.setVisible(false);
     }
 
     private void disableTextField(JTextField textField) {
