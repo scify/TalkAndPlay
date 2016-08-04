@@ -110,6 +110,7 @@ public class TileCreator {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
+                    System.out.println("@tilecreator "+sound);
                     act(sound, tileAction);
                 }
             }

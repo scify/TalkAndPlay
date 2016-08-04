@@ -9,12 +9,17 @@
       <defaultGridColumn>4</defaultGridColumn>
       <sound>true</sound>
       <image>true</image>
-      <text>false</text>
+      <text>true</text>
       <selectionSensor>
-        <type>mouse</type>
-        <button>1</button>
-        <clickCount>1</clickCount>
+        <type>keyboard</type>
+        <keyCode>32</keyCode>
+        <keyChar />
       </selectionSensor>
+      <navigationSensor>
+        <type>keyboard</type>
+        <keyCode>10</keyCode>
+        <keyChar />
+      </navigationSensor>
     </configuration>
     <communication>
       <name>Επικοινωνία</name>
