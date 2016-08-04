@@ -1,15 +1,20 @@
-package org.scify.talkandplay.gui.grid.timers;
+package org.scify.talkandplay.gui.grid.selectors;
 
 import java.awt.Color;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-public class ButtonTimerManager extends TimerManager {
+/**
+ * Selector for the grey buttons found at the media player and the games
+ *
+ * @author christina
+ */
+public class ButtonSelector extends Selector {
 
     protected int BORDER_SIZE = 5;
 
-    public ButtonTimerManager(List<JPanel> panelList, long nextExecutionTime, long period) {
+    public ButtonSelector(List<JPanel> panelList, long nextExecutionTime, long period) {
         super(panelList, nextExecutionTime, period);
     }
 

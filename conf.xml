@@ -459,7 +459,7 @@
         <image />
         <sound />
         <winSound />
-        <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
+        <errorSound />
         <enabled>true</enabled>
         <games>
           <game>
@@ -570,8 +570,8 @@
         <name>Χρονικής Αλληλουχίας</name>
         <image />
         <sound />
-        <winSound>/home/christina/Music/DIIV - Doused.mp3</winSound>
-        <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
+        <winSound />
+        <errorSound />
         <enabled>true</enabled>
         <games>
           <game>
@@ -579,7 +579,7 @@
             <enabled>true</enabled>
             <image />
             <difficulty>4</difficulty>
-            <winSound />
+            <winSound>/home/christina/Music/INNA - AmazingOfficial Music Video.mp3</winSound>
             <errorSound />
             <gameImages>
               <image>

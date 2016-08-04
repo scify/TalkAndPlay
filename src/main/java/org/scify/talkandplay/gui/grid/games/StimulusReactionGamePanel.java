@@ -99,8 +99,8 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
 
         }
 
-        timer.setList(panelList);
-        timer.start();
+        selector.setList(panelList);
+        selector.start();
 
         gamePanel.revalidate();
         gamePanel.repaint();
@@ -121,7 +121,7 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
                 new TileAction() {
                     @Override
                     public void act() {
-                        timer.cancel();
+                        selector.cancel();
                         selected++;
                         if (selected == game.getEnabledImages().size() - 1) {
                             congratulate(game.getEnabledImages().get(selected));
@@ -149,15 +149,15 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
                 });
 
         panelList.add(panel);
-        timer.setList(panelList);
-        timer.start();
+        selector.setList(panelList);
+        selector.start();
 
         return panel;
     }
 
     private void congratulate(GameImage image) {
 
-        tileCreator.playAudio(game.getWinSound());
+        tileCreator.playAudio(getWinSound());
 
         JPanel finalImage = tileCreator.create("",
                 image.getImage(),
@@ -181,8 +181,8 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
 
         controlsPanel.add(controls);
 
-        controls.getTimer().setList(controls.getControls());
-        controls.getTimer().start();
+        controls.getSelector().setList(controls.getControls());
+        controls.getSelector().start();
 
         parent.clearGrid();
         parent.addGrid(this);
@@ -215,7 +215,23 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
         parent.addGrid(gamesPanel);
     }
 
+    protected String getWinSound() {
+        String sound = null;
 
+        if (game.getWinSound() != null && !game.getWinSound().isEmpty()) {
+            sound = game.getWinSound();
+        } else {
+            for (GameType gameType : user.getGameModule().getGameTypes()) {
+                if ("stimulusReactionGame".equals(gameType.getType()) && gameType.getWinSound() != null && !gameType.getWinSound().isEmpty()) {
+                    sound = gameType.getWinSound();
+                }
+            }
+        }
+        if (sound == null) {
+            sound = "demo_resources/sounds/games/winSound.mp3";
+        }
+        return sound;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

@@ -1,4 +1,4 @@
-package org.scify.talkandplay.gui.grid.timers;
+package org.scify.talkandplay.gui.grid.selectors;
 
 import java.awt.Color;
 import java.util.List;
@@ -6,11 +6,16 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.tiles.TilePanel;
 
-public class TileTimerManager extends TimerManager {
+/**
+ * The main selector for the grid
+ *
+ * @author christina
+ */
+public class TileSelector extends Selector {
 
     protected int BORDER_SIZE = 5;
 
-    public TileTimerManager(List<JPanel> panelList, long nextExecutionTime, long period) {
+    public TileSelector(List<JPanel> panelList, long nextExecutionTime, long period) {
         super(panelList, nextExecutionTime, period);
     }
 

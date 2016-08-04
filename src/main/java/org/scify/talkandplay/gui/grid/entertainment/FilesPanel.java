@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import org.scify.talkandplay.gui.grid.BaseMediaPanel;
-import org.scify.talkandplay.gui.grid.timers.TimerManager;
+import org.scify.talkandplay.gui.grid.selectors.Selector;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
@@ -40,14 +40,14 @@ public class FilesPanel extends javax.swing.JPanel {
     private BaseMediaPanel parent;
     private JPanel prevSongs, nextSongs, controls, back;
     private String currentFile;
-    private TimerManager timer;
+    private Selector selector;
     private SensorService sensorService;
 
     public FilesPanel(User user, List<File> files, BaseMediaPanel parent) {
         this.user = user;
         this.files = new ArrayList();
         this.parent = parent;
-        this.timer = parent.getTimer();
+        this.selector = parent.getSelector();
         this.sensorService = new SensorService(user);
         this.files = files;
 
@@ -59,7 +59,7 @@ public class FilesPanel extends javax.swing.JPanel {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         setBackground(Color.white);
 
-        timer.setDefaultBackgroundColor(UIConstants.grey);
+        selector.setDefaultBackgroundColor(UIConstants.grey);
 
         step = user.getEntertainmentModule().getMusicModule().getPlaylistSize() - 3;
         start = 0;
@@ -139,8 +139,8 @@ public class FilesPanel extends javax.swing.JPanel {
             panelList.add(back);
         }
 
-        timer.setList(panelList);
-        timer.start();
+        selector.setList(panelList);
+        selector.start();
 
         addListeners();
         revalidate();
@@ -214,8 +214,8 @@ public class FilesPanel extends javax.swing.JPanel {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
                     if (files.size() > step && start > 0) {
-                        timer.cancel();
-                        timer.unselectAll();
+                        selector.cancel();
+                        selector.unselectAll();
                         configurePrevSongs();
                         drawFiles();
                     }
@@ -227,7 +227,7 @@ public class FilesPanel extends javax.swing.JPanel {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
                     if (files.size() > step && start > 0) {
-                        timer.cancel();
+                        selector.cancel();
                         configurePrevSongs();
                         drawFiles();
                     }
@@ -240,7 +240,7 @@ public class FilesPanel extends javax.swing.JPanel {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
                     if (files.size() > step && end < files.size()) {
-                        timer.cancel();
+                        selector.cancel();
                         configureNextSongs();
                         drawFiles();
                     }
@@ -252,7 +252,7 @@ public class FilesPanel extends javax.swing.JPanel {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
                     if (files.size() > step && end < files.size()) {
-                        timer.cancel();
+                        selector.cancel();
                         configureNextSongs();
                         drawFiles();
                     }
@@ -265,10 +265,10 @@ public class FilesPanel extends javax.swing.JPanel {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                     if (sensorService.shouldSelect(sensor)) {
-                        timer.cancel();
-                        timer.unselect();
-                        timer.setList(parent.getControlsList());
-                        timer.start();
+                        selector.cancel();
+                        selector.unselect();
+                        selector.setList(parent.getControlsList());
+                        selector.start();
                     }
                 }
             });
@@ -276,10 +276,10 @@ public class FilesPanel extends javax.swing.JPanel {
                 public void keyPressed(java.awt.event.KeyEvent evt) {
                     Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                     if (sensorService.shouldSelect(sensor)) {
-                        timer.cancel();
-                        timer.unselect();
-                        timer.setList(parent.getControlsList());
-                        timer.start();
+                        selector.cancel();
+                        selector.unselect();
+                        selector.setList(parent.getControlsList());
+                        selector.start();
                     }
                 }
             });
@@ -291,7 +291,7 @@ public class FilesPanel extends javax.swing.JPanel {
                         if (parent instanceof VideoPanel) {
                             ((VideoPanel) parent).getMediaPlayer().release();
                         }
-                        timer.cancel();
+                        selector.cancel();
                         parent.goBack();
                     }
                 }
@@ -303,7 +303,7 @@ public class FilesPanel extends javax.swing.JPanel {
                         if (parent instanceof VideoPanel) {
                             ((VideoPanel) parent).getMediaPlayer().release();
                         }
-                        timer.cancel();
+                        selector.cancel();
                         parent.goBack();
                     }
                 }
@@ -369,11 +369,11 @@ public class FilesPanel extends javax.swing.JPanel {
         currentFile = selected;
         for (int i = 0; i < panelList.size(); i++) {
             if (currentFile.equals(((JLabel) panelList.get(i).getComponent(1)).getText())) {
-                panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.decode(timer.getBorderColor()), timer.getBorderSize()));
-                panelList.get(i).setBackground(Color.decode(timer.getBackgroundColor()));
+                panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.decode(selector.getBorderColor()), selector.getBorderSize()));
+                panelList.get(i).setBackground(Color.decode(selector.getBackgroundColor()));
             } else {
-                panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.white, timer.getBorderSize()));
-                panelList.get(i).setBackground(Color.decode(timer.getDefaultBackgroundColor()));
+                panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.white, selector.getBorderSize()));
+                panelList.get(i).setBackground(Color.decode(selector.getDefaultBackgroundColor()));
             }
         }
     }
@@ -383,11 +383,11 @@ public class FilesPanel extends javax.swing.JPanel {
 
         for (int i = 0; i < panelList.size(); i++) {
             if (currentFile.equals(((JLabel) panelList.get(i).getComponent(1)).getText())) {
-                panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.decode(timer.getBorderColor()), timer.getBorderSize()));
-                panelList.get(i).setBackground(Color.decode(timer.getBackgroundColor()));
+                panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.decode(selector.getBorderColor()), selector.getBorderSize()));
+                panelList.get(i).setBackground(Color.decode(selector.getBackgroundColor()));
             } else {
-                panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.white, timer.getBorderSize()));
-                panelList.get(i).setBackground(Color.decode(timer.getDefaultBackgroundColor()));
+                panelList.get(i).setBorder(BorderFactory.createLineBorder(Color.white, selector.getBorderSize()));
+                panelList.get(i).setBackground(Color.decode(selector.getDefaultBackgroundColor()));
             }
         }
     }

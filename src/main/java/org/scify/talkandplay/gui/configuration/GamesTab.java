@@ -78,7 +78,6 @@ public class GamesTab extends javax.swing.JPanel {
         gamesComboBox.addItem("Βρες το όμοιο");
 
         setListeners();
-
     }
 
     private void showGamesPerType(String type) {
@@ -94,10 +93,9 @@ public class GamesTab extends javax.swing.JPanel {
         if (gameType != null) {
             if (gameType.getGames().size() > 0) {
                 for (Game game : gameType.getGames()) {
-                    GamePanel gamePanel = new GamePanel(game);
+                    GamePanel gamePanel = new GamePanel(game, this);
                     gamesPanel2.add(gamePanel);
                     gamePanels.add(gamePanel);
-
                 }
                 step2Label.setVisible(true);
                 step3Label.setVisible(true);
@@ -147,7 +145,7 @@ public class GamesTab extends javax.swing.JPanel {
                     winSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 } else {
                     winSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
-                    audioPlayer.getMediaPlayer().playMedia(windSoundPath);
+                    playMedia(windSoundPath);
                 }
             }
 
@@ -172,6 +170,7 @@ public class GamesTab extends javax.swing.JPanel {
                     windSoundPath = chooser.getSelectedFile().getAbsolutePath();
                     winSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                     gameType.setWinSound(windSoundPath);
+                    removeWinSoundLavel.setVisible(true);
                 }
             }
         });
@@ -183,7 +182,7 @@ public class GamesTab extends javax.swing.JPanel {
                     errorSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 } else {
                     errorSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
-                    audioPlayer.getMediaPlayer().playMedia(errorSoundPath);
+                    playMedia(errorSoundPath);
                 }
             }
 
@@ -208,6 +207,7 @@ public class GamesTab extends javax.swing.JPanel {
                     errorSoundPath = chooser.getSelectedFile().getAbsolutePath();
                     errorSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                     gameType.setErrorSound(errorSoundPath);
+                    removeErrorSoundLavel.setVisible(true);
                 }
             }
         });
@@ -241,7 +241,7 @@ public class GamesTab extends javax.swing.JPanel {
         removeErrorSoundLavel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                gameType.setWinSound("");
+                gameType.setErrorSound("");
                 errorSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 removeErrorSoundLavel.setVisible(false);
                 errorSoundPath = null;
@@ -420,10 +420,11 @@ public class GamesTab extends javax.swing.JPanel {
         parent.displayMessage("Οι αλλαγές αποθηκεύτηκαν!");
     }//GEN-LAST:event_saveButtonMouseClicked
 
+    public void playMedia(String path) {
+        audioPlayer.getMediaPlayer().playMedia(path);
+    }
+
     public void stopPlayer() {
-        for (GamePanel panel : gamePanels) {
-            panel.stopPlayer();
-        }
         audioPlayer.getMediaPlayer().stop();
         audioPlayer.getMediaPlayer().release();
     }

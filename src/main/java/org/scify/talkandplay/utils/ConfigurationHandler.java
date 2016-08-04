@@ -318,13 +318,13 @@ public class ConfigurationHandler {
             }
 
             if (stimulusReactionGamesNode.getChildText("winSound").isEmpty()) {
-                stimulusReactionType.setWinSound("demo_resources/sounds/games/winSound.mp3");
+                stimulusReactionType.setWinSound(null);
             } else {
                 stimulusReactionType.setWinSound(stimulusReactionGamesNode.getChildText("winSound"));
             }
 
             if (stimulusReactionGamesNode.getChildText("errorSound").isEmpty()) {
-                stimulusReactionType.setErrorSound("demo_resources/sounds/games/errorSound.mp3");
+                stimulusReactionType.setErrorSound(null);
             } else {
                 stimulusReactionType.setErrorSound(stimulusReactionGamesNode.getChildText("errorSound"));
             }
@@ -397,13 +397,13 @@ public class ConfigurationHandler {
             }
 
             if (sequenceGamesNode.getChildText("winSound").isEmpty()) {
-                sequenceGameType.setWinSound("demo_resources/sounds/games/winSound.mp3");
+                sequenceGameType.setWinSound(null);
             } else {
                 sequenceGameType.setWinSound(sequenceGamesNode.getChildText("winSound"));
             }
 
             if (sequenceGamesNode.getChildText("errorSound").isEmpty()) {
-                sequenceGameType.setErrorSound("demo_resources/sounds/games/errorSound.mp3");
+                sequenceGameType.setErrorSound(null);
             } else {
                 sequenceGameType.setErrorSound(sequenceGamesNode.getChildText("errorSound"));
             }
@@ -474,13 +474,13 @@ public class ConfigurationHandler {
             }
 
             if (similarGamesNode.getChildText("winSound").isEmpty()) {
-                similarityGameType.setWinSound("demo_resources/sounds/games/winSound.mp3");
+                similarityGameType.setWinSound(null);
             } else {
                 similarityGameType.setWinSound(similarGamesNode.getChildText("winSound"));
             }
 
             if (similarGamesNode.getChildText("errorSound").isEmpty()) {
-                similarityGameType.setErrorSound("demo_resources/sounds/games/errorSound.mp3");
+                similarityGameType.setErrorSound(null);
             } else {
                 similarityGameType.setErrorSound(similarGamesNode.getChildText("errorSound"));
             }

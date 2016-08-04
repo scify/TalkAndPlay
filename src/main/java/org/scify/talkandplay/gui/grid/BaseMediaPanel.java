@@ -1,6 +1,6 @@
 package org.scify.talkandplay.gui.grid;
 
-import org.scify.talkandplay.gui.grid.timers.TimerManager;
+import org.scify.talkandplay.gui.grid.selectors.Selector;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -25,8 +25,8 @@ import javax.swing.border.LineBorder;
 import org.scify.talkandplay.gui.grid.entertainment.EntertainmentPanel;
 import org.scify.talkandplay.gui.grid.entertainment.FilesPanel;
 import org.scify.talkandplay.gui.grid.entertainment.MediaPlayerPanel;
-import org.scify.talkandplay.gui.grid.timers.ButtonTimerManager;
-import org.scify.talkandplay.gui.grid.timers.MouseTimerManager;
+import org.scify.talkandplay.gui.grid.selectors.ButtonSelector;
+import org.scify.talkandplay.gui.grid.selectors.MouseSelector;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
@@ -38,7 +38,7 @@ public class BaseMediaPanel extends BasePanel {
 
     protected FilesPanel filesPanel;
     protected ArrayList<JPanel> controlsList;
-    protected TimerManager timer;
+    protected Selector selector;
     protected MediaPlayerPanel mediaPlayerPanel;
     protected ArrayList<File> files;
     protected GridBagConstraints c;
@@ -59,9 +59,9 @@ public class BaseMediaPanel extends BasePanel {
         this.fileExtensions = fileExtensions;
 
         if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
-            this.timer = new MouseTimerManager(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+            this.selector = new MouseSelector(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         } else {
-            this.timer = new ButtonTimerManager(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+            this.selector = new ButtonSelector(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         }
 
         Collections.addAll(this.files, files);
@@ -84,8 +84,8 @@ public class BaseMediaPanel extends BasePanel {
         return;
     }
 
-    public TimerManager getTimer() {
-        return timer;
+    public Selector getSelector() {
+        return selector;
     }
 
     public List<JPanel> getControlsList() {
@@ -129,8 +129,8 @@ public class BaseMediaPanel extends BasePanel {
         add(noFiles);
         add(panel);
         controlsList.add(panel);
-        timer.setList(controlsList);
-        timer.start();
+        selector.setList(controlsList);
+        selector.start();
 
         panel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -151,7 +151,7 @@ public class BaseMediaPanel extends BasePanel {
     }
 
     public void goBack() {
-        timer.cancel();
+        selector.cancel();
         parent.clearGrid();
         EntertainmentPanel entPanel = new EntertainmentPanel(user, parent);
     }

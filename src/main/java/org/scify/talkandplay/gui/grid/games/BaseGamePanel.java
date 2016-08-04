@@ -7,27 +7,21 @@ package org.scify.talkandplay.gui.grid.games;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.tiles.TileCreator;
-import org.scify.talkandplay.gui.grid.timers.MouseTimerManager;
-import org.scify.talkandplay.gui.grid.timers.TileTimerManager;
-import org.scify.talkandplay.gui.grid.timers.TimerManager;
+import org.scify.talkandplay.gui.grid.selectors.MouseSelector;
+import org.scify.talkandplay.gui.grid.selectors.TileSelector;
+import org.scify.talkandplay.gui.grid.selectors.Selector;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.games.Game;
@@ -45,7 +39,7 @@ public class BaseGamePanel extends javax.swing.JPanel {
     protected Game game;
     protected GridBagConstraints c1;
     protected Random randomGenerator;
-    protected TimerManager timer;
+    protected Selector selector;
     protected TileCreator tileCreator;
     protected String type;
     protected JPanel topPanel, bottomPanel, topMsgPanel, bottomMsgPanel;
@@ -59,9 +53,9 @@ public class BaseGamePanel extends javax.swing.JPanel {
         this.game = game;
 
         if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
-            this.timer = new MouseTimerManager(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+            this.selector = new MouseSelector(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         } else {
-            this.timer = new TileTimerManager(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+            this.selector = new TileSelector(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         }
 
         this.tileCreator = new TileCreator(user, user.getConfiguration().getDefaultGridRow(), user.getConfiguration().getDefaultGridColumn());
@@ -106,7 +100,6 @@ public class BaseGamePanel extends javax.swing.JPanel {
         if (game == null) {
             getRandomGame();
         }
-
     }
 
     /**
@@ -154,6 +147,49 @@ public class BaseGamePanel extends javax.swing.JPanel {
         bottomMsgPanel.add(msgLabel);
         bottomMsgPanel.revalidate();
         bottomMsgPanel.repaint();
+    }
+
+    /**
+     * Get the win sound for the game
+     *
+     * @return
+     */
+    protected String getWinSound() {
+        String sound = null;
+
+        if (game.getWinSound() != null && !game.getWinSound().isEmpty()) {
+            sound = game.getWinSound();
+        } else {
+            for (GameType gameType : user.getGameModule().getGameTypes()) {
+                if (type.equals(gameType.getType()) && gameType.getWinSound() != null && !gameType.getWinSound().isEmpty()) {
+                    sound = gameType.getWinSound();
+                }
+            }
+        }
+        if (sound == null) {
+            sound = "demo_resources/sounds/games/winSound.mp3";
+        }
+        return sound;
+    }
+
+    /**
+     * Get the error sound
+     *
+     * @return
+     */
+    protected String getErrorSound() {
+        String sound = null;
+
+        for (GameType gameType : user.getGameModule().getGameTypes()) {
+            if (type.equals(gameType.getType()) && gameType.getErrorSound() != null && !gameType.getErrorSound().isEmpty()) {
+                sound = gameType.getErrorSound();
+            }
+        }
+
+        if (sound == null) {
+            sound = "demo_resources/sounds/games/errorSound.mp3";
+        }
+        return sound;
     }
 
     /**

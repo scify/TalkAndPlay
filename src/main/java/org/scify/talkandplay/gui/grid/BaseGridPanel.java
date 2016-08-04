@@ -1,7 +1,7 @@
 package org.scify.talkandplay.gui.grid;
 
 import org.scify.talkandplay.gui.grid.tiles.TileCreator;
-import org.scify.talkandplay.gui.grid.timers.TimerManager;
+import org.scify.talkandplay.gui.grid.selectors.Selector;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,8 +9,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.JPanel;
-import org.scify.talkandplay.gui.grid.timers.MouseTimerManager;
-import org.scify.talkandplay.gui.grid.timers.TileTimerManager;
+import org.scify.talkandplay.gui.grid.selectors.MouseSelector;
+import org.scify.talkandplay.gui.grid.selectors.TileSelector;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.User;
@@ -31,16 +31,16 @@ public class BaseGridPanel extends BasePanel {
     protected int empties;
     protected int width, height;
 
-    protected TimerManager timer;
+    protected Selector selector;
     protected TileCreator tileCreator;
 
     public BaseGridPanel(User user, GridFrame parent) {
         super(user, parent);
 
         if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
-            this.timer = new MouseTimerManager(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+            this.selector = new MouseSelector(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         } else {
-            this.timer = new TileTimerManager(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+            this.selector = new TileSelector(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         }
 
         if (currentCategory == null || currentCategory.getRows() == null || currentCategory.getColumns() == null) {
@@ -59,7 +59,7 @@ public class BaseGridPanel extends BasePanel {
         parent.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                timer.cancel();
+                selector.cancel();
                 tileCreator.freePlayerResources();
                 e.getWindow().dispose();
             }

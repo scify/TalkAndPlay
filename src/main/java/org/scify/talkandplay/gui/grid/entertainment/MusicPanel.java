@@ -176,11 +176,11 @@ public class MusicPanel extends BaseMediaPanel {
     @Override
     public void playFile(String fileName) {
         currentFile = fileName;
-        timer.cancel();
+        selector.cancel();
         mediaPlayerPanel.playMedia(getFilePath(fileName));
         setPauseButton();
-        timer.setList(controlsList);
-        timer.start();
+        selector.setList(controlsList);
+        selector.start();
     }
 
     public String getFilePath(String fileName) {
@@ -248,10 +248,10 @@ public class MusicPanel extends BaseMediaPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    timer.cancel();
-                    timer.unselect();
-                    timer.setList(filesPanel.getPanelList());
-                    timer.start();
+                    selector.cancel();
+                    selector.unselect();
+                    selector.setList(filesPanel.getPanelList());
+                    selector.start();
                 }
             }
         });
@@ -259,10 +259,10 @@ public class MusicPanel extends BaseMediaPanel {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
-                    timer.cancel();
-                    timer.unselect();
-                    timer.setList(filesPanel.getPanelList());
-                    timer.start();
+                    selector.cancel();
+                    selector.unselect();
+                    selector.setList(filesPanel.getPanelList());
+                    selector.start();
                 }
             }
         });
@@ -271,7 +271,7 @@ public class MusicPanel extends BaseMediaPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    timer.cancel();
+                    selector.cancel();
                     mediaPlayerPanel.stop();
                     parent.clearGrid();
                     EntertainmentPanel entPanel = new EntertainmentPanel(user, parent);
@@ -282,7 +282,7 @@ public class MusicPanel extends BaseMediaPanel {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
-                    timer.cancel();
+                    selector.cancel();
                     mediaPlayerPanel.stop();
                     parent.clearGrid();
                     EntertainmentPanel entPanel = new EntertainmentPanel(user, parent);

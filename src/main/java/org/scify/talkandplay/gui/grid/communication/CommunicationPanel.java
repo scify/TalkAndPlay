@@ -142,8 +142,8 @@ public class CommunicationPanel extends BaseGridPanel {
 
         fillWithEmpties();
 
-        timer.setList(panelList);
-        timer.start();
+        selector.setList(panelList);
+        selector.start();
 
         revalidate();
         repaint();
@@ -168,7 +168,7 @@ public class CommunicationPanel extends BaseGridPanel {
                 new TileAction() {
                     @Override
                     public void act() {
-                        timer.cancel();
+                        selector.cancel();
                         currentCategory = category;
                     }
 
@@ -177,8 +177,8 @@ public class CommunicationPanel extends BaseGridPanel {
                         if (currentCategory.getSubCategories().size() > 0) {
                             currentPanel.showNextGrid(currentCategory);
                         } else {
-                            timer.setList(panelList);
-                            timer.start();
+                            selector.setList(panelList);
+                            selector.start();
                         }
                     }
                 });
@@ -200,7 +200,7 @@ public class CommunicationPanel extends BaseGridPanel {
                 new TileAction() {
                     @Override
                     public void act() {
-                        timer.cancel();
+                        selector.cancel();
                         stopped = 0;
                         if (isRoot) {
                             showMainMenu();
@@ -248,7 +248,7 @@ public class CommunicationPanel extends BaseGridPanel {
                 new TileAction() {
                     @Override
                     public void act() {
-                        timer.cancel();
+                        selector.cancel();
                         try {
                             drawImages(category);
                         } catch (IOException ex) {

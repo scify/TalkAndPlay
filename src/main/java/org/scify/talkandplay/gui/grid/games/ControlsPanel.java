@@ -20,8 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import org.scify.talkandplay.gui.grid.timers.ButtonTimerManager;
-import org.scify.talkandplay.gui.grid.timers.TimerManager;
+import org.scify.talkandplay.gui.grid.selectors.ButtonSelector;
+import org.scify.talkandplay.gui.grid.selectors.Selector;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
@@ -39,14 +39,14 @@ public class ControlsPanel extends javax.swing.JPanel {
     private SensorService sensorService;
     private JPanel parent;
     private List<JPanel> controls;
-    private TimerManager timer;
+    private Selector selector;
 
     public ControlsPanel(User user, JPanel parent) {
         this.sensorService = new SensorService(user);
         this.user = user;
         this.parent = parent;
-        this.timer = new ButtonTimerManager(controls, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
-        this.timer.setDefaultBackgroundColor(UIConstants.grey);
+        this.selector = new ButtonSelector(controls, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+        this.selector.setDefaultBackgroundColor(UIConstants.grey);
 
         initComponents();
         initCustomComponents();
@@ -195,8 +195,8 @@ public class ControlsPanel extends javax.swing.JPanel {
         return controls;
     }
 
-    public TimerManager getTimer() {
-        return timer;
+    public Selector getSelector() {
+        return selector;
     }
 
     /**

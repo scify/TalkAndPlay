@@ -30,18 +30,18 @@ public class GamePanel extends javax.swing.JPanel {
 
     private static final int MAX_IMAGES = 4;
     private Game game;
-
+    private GamesTab parent;
     private List<JLabel> imgLabels;
     private List<JCheckBox> imgCheckboxes;
-    private AudioMediaPlayerComponent audioPlayer;
 
     private Font activeFont, inactiveFont;
 
-    public GamePanel(Game game) {
+    public GamePanel(Game game, GamesTab parent) {
         this.game = game;
+        this.parent = parent;
         this.imgLabels = new ArrayList();
         this.imgCheckboxes = new ArrayList();
-        this.audioPlayer = new AudioMediaPlayerComponent();
+
         initComponents();
         initCustomComponents();
     }
@@ -342,7 +342,7 @@ public class GamePanel extends javax.swing.JPanel {
                     soundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 } else {
                     soundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
-                    audioPlayer.getMediaPlayer().playMedia(game.getWinSound());
+                   parent.playMedia(game.getWinSound());
                 }
             }
 
@@ -381,10 +381,6 @@ public class GamePanel extends javax.swing.JPanel {
         });
     }
 
-    public void stopPlayer() {
-        audioPlayer.getMediaPlayer().stop();
-        audioPlayer.getMediaPlayer().release();
-    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

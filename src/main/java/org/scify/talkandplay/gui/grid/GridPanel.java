@@ -46,7 +46,7 @@ public class GridPanel extends BaseGridPanel {
                     new TileAction() {
                         @Override
                         public void act() {
-                            timer.cancel();
+                            selector.cancel();
                         }
 
                         @Override
@@ -67,7 +67,7 @@ public class GridPanel extends BaseGridPanel {
                     new TileAction() {
                         @Override
                         public void act() {
-                            timer.cancel();
+                            selector.cancel();
                         }
 
                         @Override
@@ -89,7 +89,7 @@ public class GridPanel extends BaseGridPanel {
                     new TileAction() {
                         @Override
                         public void act() {
-                            timer.cancel();
+                            selector.cancel();
                         }
 
                         @Override
@@ -107,15 +107,15 @@ public class GridPanel extends BaseGridPanel {
         c.gridx=0;
         fillWithEmpties();
 
-        timer.setList(panelList);
-        timer.start();
+        selector.setList(panelList);
+        selector.start();
 
         revalidate();
         repaint();
     }
 
     private void showCommunication() {
-        timer.cancel();
+        selector.cancel();
         try {
             CommunicationPanel communicationPanel = new CommunicationPanel(user, parent);
         } catch (IOException ex) {
@@ -124,12 +124,12 @@ public class GridPanel extends BaseGridPanel {
     }
 
     private void showEntertainment() {
-        timer.cancel();
+        selector.cancel();
         EntertainmentPanel entertainmentPanel = new EntertainmentPanel(user, parent);
     }
 
     private void showGames() {
-        timer.cancel();
+        selector.cancel();
         GamesPanel gamesPanel = new GamesPanel(user, parent);
     }
 

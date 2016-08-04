@@ -1,16 +1,20 @@
-package org.scify.talkandplay.gui.grid.timers;
+package org.scify.talkandplay.gui.grid.selectors;
 
 import java.awt.Color;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import org.scify.talkandplay.gui.grid.tiles.TilePanel;
 
-public class MouseTimerManager extends TimerManager {
+/**
+ * Used when the mouse sensor is configured
+ *
+ * @author christina
+ */
+public class MouseSelector extends Selector {
 
     protected int BORDER_SIZE = 5;
 
-    public MouseTimerManager(List<JPanel> panelList, long nextExecutionTime, long period) {
+    public MouseSelector(List<JPanel> panelList, long nextExecutionTime, long period) {
         super(panelList, nextExecutionTime, period);
     }
 

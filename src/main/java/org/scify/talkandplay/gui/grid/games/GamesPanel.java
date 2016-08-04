@@ -77,8 +77,8 @@ public class GamesPanel extends BaseGridPanel {
         c.gridy++;
         c.gridx = 0;
         fillWithEmpties();
-        timer.setList(panelList);
-        timer.start();
+        selector.setList(panelList);
+        selector.start();
 
         revalidate();
         repaint();
@@ -97,7 +97,7 @@ public class GamesPanel extends BaseGridPanel {
                 new TileAction() {
                     @Override
                     public void act() {
-                        timer.cancel();
+                        selector.cancel();
                     }
 
                     @Override
@@ -123,7 +123,7 @@ public class GamesPanel extends BaseGridPanel {
                 new TileAction() {
                     @Override
                     public void act() {
-                        timer.cancel();
+                        selector.cancel();
                         showMainMenu();
                     }
 

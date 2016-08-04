@@ -9,7 +9,6 @@ import org.scify.talkandplay.gui.grid.tiles.TileAction;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.games.Game;
 import org.scify.talkandplay.models.games.GameImage;
-import org.scify.talkandplay.models.games.SequenceGame;
 import org.scify.talkandplay.models.games.SimilarityGame;
 
 public class SimilarityGamePanel extends BaseGamePanel {
@@ -82,8 +81,8 @@ public class SimilarityGamePanel extends BaseGamePanel {
             c1.gridx++;
         }
 
-        timer.setList(panelList);
-        timer.start();
+        selector.setList(panelList);
+        selector.start();
 
         topPanel.revalidate();
         topPanel.repaint();
@@ -107,13 +106,13 @@ public class SimilarityGamePanel extends BaseGamePanel {
                     public void act() {
                         for (int i = 0; i < game.getEnabledImages().size(); i++) {
                             if (game.getEnabledImages().get(i).getImage().equals(image.getImage()) && game.getEnabledImages().get(i).getImage().equals(correctImage)) {
-                                timer.cancel();
+                                selector.cancel();
                                 congratulate();
                             } else if (game.getEnabledImages().get(i).getImage().equals(image.getImage()) && !game.getEnabledImages().get(i).getImage().equals(correctImage)) {
-                                timer.cancel();
+                                selector.cancel();
                                 setBottomMessage(Message.getRandomError());
-                                timer.cancel();
-                                tileCreator.playAudio(game.getErrorSound(), new TileAction() {
+                                selector.cancel();
+                                tileCreator.playAudio(getErrorSound(), new TileAction() {
                                     @Override
                                     public void act() {
                                         return;
@@ -121,7 +120,7 @@ public class SimilarityGamePanel extends BaseGamePanel {
 
                                     @Override
                                     public void audioFinished() {
-                                        timer.start();
+                                        selector.start();
                                     }
                                 });
                             }
@@ -131,8 +130,8 @@ public class SimilarityGamePanel extends BaseGamePanel {
                     @Override
                     public void audioFinished() {
                         if (!endGame) {
-                            timer.setList(panelList);
-                            timer.start();
+                            selector.setList(panelList);
+                            selector.start();
                         }
                     }
 
@@ -146,7 +145,7 @@ public class SimilarityGamePanel extends BaseGamePanel {
     }
 
     private void congratulate() {
-        tileCreator.playAudio(game.getWinSound());
+        tileCreator.playAudio(getWinSound());
         setBottomMessage("");
         setTopMessage("");
 
@@ -156,8 +155,8 @@ public class SimilarityGamePanel extends BaseGamePanel {
         topPanel.revalidate();
         topPanel.repaint();
 
-        controls.getTimer().setList(controls.getControls());
-        controls.getTimer().start();
+        controls.getSelector().setList(controls.getControls());
+        controls.getSelector().start();
 
         parent.clearGrid();
         parent.addGrid(this);

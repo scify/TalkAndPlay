@@ -63,8 +63,8 @@ public class EntertainmentPanel extends BaseGridPanel {
         c.gridy++;
         c.gridx = 0;
         fillWithEmpties();
-        timer.setList(panelList);
-        timer.start();
+        selector.setList(panelList);
+        selector.start();
 
         revalidate();
         repaint();
@@ -82,7 +82,7 @@ public class EntertainmentPanel extends BaseGridPanel {
                 new TileAction() {
             @Override
             public void act() {
-                timer.cancel();
+                selector.cancel();
             }
 
             @Override
@@ -102,7 +102,7 @@ public class EntertainmentPanel extends BaseGridPanel {
                 new TileAction() {
             @Override
             public void act() {
-                timer.cancel();
+                selector.cancel();
             }
 
             @Override
@@ -122,7 +122,7 @@ public class EntertainmentPanel extends BaseGridPanel {
                 new TileAction() {
             @Override
             public void act() {
-                timer.cancel();
+                selector.cancel();
                 showMainMenu();
             }
 
@@ -150,7 +150,7 @@ public class EntertainmentPanel extends BaseGridPanel {
                     "Ο φάκελος Μουσική δεν έχει οριστεί σωστά.",
                     "Σφάλμα",
                     JOptionPane.ERROR_MESSAGE);
-            timer.start();
+            selector.start();
         }
     }
 
@@ -166,7 +166,7 @@ public class EntertainmentPanel extends BaseGridPanel {
                     "Ο φάκελος Βίντεο δεν έχει οριστεί σωστά.",
                     "Σφάλμα",
                     JOptionPane.ERROR_MESSAGE);
-            timer.start();
+            selector.start();
         }
     }
 

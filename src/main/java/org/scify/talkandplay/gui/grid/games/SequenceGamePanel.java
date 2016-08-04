@@ -74,16 +74,16 @@ public class SequenceGamePanel extends BaseGamePanel {
         }
 
         redrawGamesPanel();
-        
+
         c1.gridx = 0;
         c1.gridy = 0;
         for (int j = 0; j < game.getEnabledImages().size(); j++) {
             bottomPanel.add(tileCreator.createEmpty(), c1);
             c1.gridx++;
         }
-        
-        timer.setList(panelList);
-        timer.start();
+
+        selector.setList(panelList);
+        selector.start();
 
         topPanel.revalidate();
         topPanel.repaint();
@@ -124,7 +124,7 @@ public class SequenceGamePanel extends BaseGamePanel {
 
     private void act(JPanel panel, int order) {
         if (correctImages == randomImages.size()) {
-            timer.cancel();
+            selector.cancel();
             correctImages++;
             congratulate();
             redrawControlsPanel();
@@ -135,7 +135,7 @@ public class SequenceGamePanel extends BaseGamePanel {
             topPanel.repaint();
         } else if (correctImages == order) {
             setBottomMessage(Message.getRandomCongrats());
-            timer.cancel();
+            selector.cancel();
             correctImages++;
             redrawGamesPanel();
             redrawControlsPanel();
@@ -145,11 +145,11 @@ public class SequenceGamePanel extends BaseGamePanel {
             topPanel.revalidate();
             topPanel.repaint();
 
-            timer.start();
+            selector.start();
         } else {
             setBottomMessage(Message.getRandomError());
-            timer.cancel();
-            tileCreator.playAudio(game.getErrorSound(), new TileAction() {
+            selector.cancel();
+            tileCreator.playAudio(getErrorSound(), new TileAction() {
                 @Override
                 public void act() {
                     return;
@@ -157,7 +157,7 @@ public class SequenceGamePanel extends BaseGamePanel {
 
                 @Override
                 public void audioFinished() {
-                    timer.start();
+                    selector.start();
                 }
             });
         }
@@ -207,7 +207,7 @@ public class SequenceGamePanel extends BaseGamePanel {
 
     private void congratulate() {
         bottomMsgPanel.setVisible(false);
-        tileCreator.playAudio(game.getWinSound());
+        tileCreator.playAudio(getWinSound());
 
         ControlsPanel controls = new ControlsPanel(user, this);
         topPanel.removeAll();
@@ -215,8 +215,8 @@ public class SequenceGamePanel extends BaseGamePanel {
         topPanel.revalidate();
         topPanel.repaint();
 
-        controls.getTimer().setList(controls.getControls());
-        controls.getTimer().start();
+        controls.getSelector().setList(controls.getControls());
+        controls.getSelector().start();
 
         parent.clearGrid();
         parent.addGrid(this);
@@ -245,7 +245,7 @@ public class SequenceGamePanel extends BaseGamePanel {
         parent.clearGrid();
         parent.addGrid(gamesPanel);
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

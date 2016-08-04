@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.BaseMediaPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
-import org.scify.talkandplay.gui.grid.timers.TimerManager;
+import org.scify.talkandplay.gui.grid.selectors.Selector;
 import org.scify.talkandplay.gui.helpers.FileExtensions;
 import org.scify.talkandplay.models.User;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
@@ -94,7 +94,7 @@ public class VideoPanel extends BaseMediaPanel {
     }
 
     public void playFile(String fileName) {
-        timer.cancel();
+        selector.cancel();
         videoFrame = new VideoFrame(user, null, this, filesPanel);
 
         mediaPlayerComponent.getMediaPlayer().setFullScreenStrategy(
@@ -117,8 +117,8 @@ public class VideoPanel extends BaseMediaPanel {
         videoFrame.playMedia(getFilePath(fileName));
     }
 
-    public TimerManager getTimer() {
-        return timer;
+    public Selector getSelector() {
+        return selector;
     }
 
     public List<JPanel> getControlsList() {

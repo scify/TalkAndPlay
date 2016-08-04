@@ -1,4 +1,4 @@
-package org.scify.talkandplay.gui.grid.timers;
+package org.scify.talkandplay.gui.grid.selectors;
 
 import java.awt.Color;
 import java.util.List;
@@ -8,7 +8,12 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 
-public class TimerManager {
+/**
+ * Base selector
+ *
+ * @author christina
+ */
+public class Selector {
 
     protected Timer timer;
     protected List<JPanel> panelList;
@@ -20,7 +25,7 @@ public class TimerManager {
     protected static final String BACKGROUND_COLOR = UIConstants.lightBlue;
     protected String defaultBackgroundColor = "#ffffff";
 
-    public TimerManager(List<JPanel> panelList, long nextExecutionTime, long period) {
+    public Selector(List<JPanel> panelList, long nextExecutionTime, long period) {
         this.panelList = panelList;
         this.nextExecutionTime = nextExecutionTime;
         this.period = period;

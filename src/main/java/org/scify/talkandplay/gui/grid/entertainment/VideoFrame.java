@@ -18,9 +18,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import org.scify.talkandplay.gui.grid.timers.ButtonTimerManager;
-import org.scify.talkandplay.gui.grid.timers.MouseTimerManager;
-import org.scify.talkandplay.gui.grid.timers.TimerManager;
+import org.scify.talkandplay.gui.grid.selectors.ButtonSelector;
+import org.scify.talkandplay.gui.grid.selectors.MouseSelector;
+import org.scify.talkandplay.gui.grid.selectors.Selector;
 import org.scify.talkandplay.gui.helpers.Time;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
@@ -44,7 +44,7 @@ public class VideoFrame extends javax.swing.JFrame {
     private FilesPanel filesPanel;
     private String currentFile;
     private User user;
-    private TimerManager timer;
+    private Selector selector;
     private PlayerPanel playerPanel;
     private SensorService sensorService;
 
@@ -59,12 +59,12 @@ public class VideoFrame extends javax.swing.JFrame {
         this.sensorService = new SensorService(user);
 
         if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
-            this.timer = new MouseTimerManager(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+            this.selector = new MouseSelector(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         } else {
-            this.timer = new ButtonTimerManager(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+            this.selector = new ButtonSelector(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         }
 
-        this.playerPanel = new PlayerPanel(sensorService, timer);
+        this.playerPanel = new PlayerPanel(sensorService, selector);
 
         setTitle("Video Player");
         setVisible(false);
@@ -182,12 +182,12 @@ public class VideoFrame extends javax.swing.JFrame {
     }
 
     private void initCustomComponents() {
-        wrapperPanel.add(new PlayerPanel(sensorService, timer));
-        
+        wrapperPanel.add(new PlayerPanel(sensorService, selector));
+
         videoPanel.add(parent.getMediaPlayerComponent(), BorderLayout.CENTER);
 
         emptyPanel.setSize(playerPanel.getWidth(), playerPanel.getHeight());
-        
+
         addListeners();
     }
 
@@ -291,7 +291,7 @@ public class VideoFrame extends javax.swing.JFrame {
                         mediaPlayer.play();
                     }
                     mediaPlayer.stop();
-                    parent.getTimer().start();
+                    parent.getSelector().start();
                     videoFrame.dispatchEvent(new WindowEvent(videoFrame, WindowEvent.WINDOW_CLOSING));
                 }
             }
@@ -304,7 +304,7 @@ public class VideoFrame extends javax.swing.JFrame {
                         mediaPlayer.play();
                     }
                     mediaPlayer.stop();
-                    parent.getTimer().start();
+                    parent.getSelector().start();
                     videoFrame.dispatchEvent(new WindowEvent(videoFrame, WindowEvent.WINDOW_CLOSING));
                 }
             }
