@@ -1,7 +1,11 @@
 package org.scify.talkandplay.services;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.List;
+import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.input.SAXBuilder;
 import org.scify.talkandplay.models.games.Game;
 import org.scify.talkandplay.models.games.GameType;
 import org.scify.talkandplay.utils.ConfigurationFile;
@@ -69,5 +73,25 @@ public class GameService {
                 configurationFile.update();
             }
         }
+    }
+
+    public List setDefaultGames() {
+        List games = null;
+        try {
+            String filePath = System.getProperty("user.dir") + File.separator + "defaultGames.xml";
+            File file = new File(filePath);
+            if (!file.exists() || file.isDirectory()) {
+                return games;
+            }
+
+            SAXBuilder builder = new SAXBuilder();
+            Document configurationFile = (Document) builder.build(file);
+
+            games = configurationFile.getRootElement().getChildren();
+
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        }
+        return games;
     }
 }

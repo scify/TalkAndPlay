@@ -137,6 +137,16 @@ public class UserService {
         games.addContent(new Element("sound"));
         games.addContent(new Element("enabled").setText("true"));
 
+        //set the default games
+        GameService gameService = new GameService();
+
+        List gamesList = gameService.setDefaultGames();
+        for (int i = 0; i < gamesList.size(); i++) {
+            Element elemCopy = (Element) ((Element) gamesList.get(i)).clone();
+            elemCopy.detach();
+            games.addContent(elemCopy);
+        }
+
         profile.addContent(communication);
         profile.addContent(entertainment);
         profile.addContent(games);

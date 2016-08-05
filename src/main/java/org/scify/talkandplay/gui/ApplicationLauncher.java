@@ -16,7 +16,6 @@ public class ApplicationLauncher {
         MainFrame mainFrame = new MainFrame();
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
-
     }
 
     public static void setUI() {
@@ -54,7 +53,7 @@ public class ApplicationLauncher {
 
         UIManager.put("ToolTip.foreground", Color.black);
         UIManager.put("ToolTip.background", Color.white);
-        UIManager.put("ToolTip.border", new LineBorder( Color.decode(UIConstants.green), 1));
+        UIManager.put("ToolTip.border", new LineBorder(Color.decode(UIConstants.green), 1));
 
         java.util.Enumeration keys = UIManager.getLookAndFeelDefaults().keys();
         while (keys.hasMoreElements()) {

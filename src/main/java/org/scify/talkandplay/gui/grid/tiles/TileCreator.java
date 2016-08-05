@@ -71,7 +71,6 @@ public class TileCreator {
      */
     public JPanel create(String name, String image, String sound, TileAction tileAction) {
         JPanel panel = guiHelper.createImagePanel(image, name);
-        //   JPanel panel = new TilePanel(name, image);
         addListeners(panel, sound, tileAction);
         return panel;
     }
@@ -106,11 +105,12 @@ public class TileCreator {
                 }
             }
         });
+
         panel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
-                    System.out.println("@tilecreator "+sound);
+                    System.out.println("@tilecreator " + sound);
                     act(sound, tileAction);
                 }
             }

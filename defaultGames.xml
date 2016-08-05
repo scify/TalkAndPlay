@@ -1,0 +1,264 @@
+<defaultGames>
+<stimulusReactionGames>
+        <name>Ερέθισμα - Αντίδραση</name>
+        <image />
+        <sound />
+        <winSound />
+        <errorSound />
+        <enabled>true</enabled>
+        <games>
+          <game>
+            <name>Game 1</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/αυτοκίνητο/αυτοκίνητο_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/αυτοκίνητο/αυτοκίνητο_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/αυτοκίνητο/αυτοκίνητο_3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/αυτοκίνητο/αυτοκίνητο_4.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+          <game>
+            <name>Game 2</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound>demo_resources/sounds/games/ship.mp3</winSound>
+            <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/καράβι/καράβι_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/καράβι/καράβι_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/καράβι/καράβι_3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/καράβι/καράβι_4.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+          <game>
+            <name>Game 3</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound>demo_resources/sounds/games/winSound.mp3</winSound>
+            <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_4.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+        </games>
+      </stimulusReactionGames>
+      <sequenceGames>
+        <name>Χρονικής Αλληλουχίας</name>
+        <image />
+        <sound />
+        <winSound />
+        <errorSound />
+        <enabled>true</enabled>
+        <games>
+          <game>
+            <name>Game 1</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound>/home/christina/Music/INNA - AmazingOfficial Music Video.mp3</winSound>
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/sequence1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/sequence2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/sequence3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+          <game>
+            <name>Game 2</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/time.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/time-1.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/hours.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/clock1.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+        </games>
+      </sequenceGames>
+      <similarityGames>
+        <name>Βρες το όμοιο</name>
+        <image />
+        <sound />
+        <winSound>demo_resources/sounds/games/winSound.mp3</winSound>
+        <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
+        <enabled>true</enabled>
+        <games>
+          <game>
+            <name>Game 1</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound>/home/christina/Projects/talkAndPlay/TalkAndPlay/demo_resources/sounds/games/Succes 4 MP3.mp3</winSound>
+            <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/like.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/shapes-2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/favorite-1.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/favorite.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+          <game>
+            <name>Game 2</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound>/home/christina/Music/Maroon 5 - Sugar (lyrics).mp3</winSound>
+            <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/similarity1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/similarity2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/similarity3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/similarity4.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+        </games>
+      </similarityGames>
+    </defaultGames>

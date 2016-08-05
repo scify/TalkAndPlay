@@ -128,6 +128,10 @@ public class TilePanel extends javax.swing.JPanel {
         setBackground(Color.white);
     }
 
+    public String getName() {
+        return ((JTextPane) ((JPanel) getComponent(0)).getComponent(0)).getText();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

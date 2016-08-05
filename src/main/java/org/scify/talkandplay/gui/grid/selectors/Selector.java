@@ -38,7 +38,7 @@ public class Selector {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                panelList.get(selected).requestFocusInWindow();
+               // panelList.get(selected).requestFocusInWindow();
 
                 unselectAll();
                 setSelected(selected);
