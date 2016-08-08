@@ -19,12 +19,12 @@ import org.scify.talkandplay.services.SensorService;
  *
  * @author christina
  */
-public class ManualTileSelector extends TileSelector {
+public class ManualButtonSelector extends ButtonSelector {
 
     private SensorService sensorService;
     private User user;
 
-    public ManualTileSelector(User user, List<JPanel> panelList, long nextExecutionTime, long period) {
+    public ManualButtonSelector(User user, List<JPanel> panelList, long nextExecutionTime, long period) {
         super(panelList, nextExecutionTime, period);
 
         this.user = user;
@@ -53,6 +53,7 @@ public class ManualTileSelector extends TileSelector {
 
                         unselectAll();
                         setSelected(selected);
+                        System.out.println("selected "+selected);
 
                         panelList.get(selected).setFocusable(true);
                         panelList.get(selected).grabFocus();

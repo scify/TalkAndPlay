@@ -63,8 +63,6 @@ public class EntertainmentPanel extends BaseGridPanel {
         c.gridy++;
         c.gridx = 0;
         fillWithEmpties();
-        selector.setList(panelList);
-        selector.start();
 
         revalidate();
         repaint();
@@ -72,6 +70,9 @@ public class EntertainmentPanel extends BaseGridPanel {
         parent.addGrid(this);
         parent.revalidate();
         parent.repaint();
+        
+        selector.setList(panelList);
+        selector.start();
     }
 
     private JPanel createMusicItem() {

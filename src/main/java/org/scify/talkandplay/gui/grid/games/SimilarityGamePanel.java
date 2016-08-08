@@ -81,9 +81,6 @@ public class SimilarityGamePanel extends BaseGamePanel {
             c1.gridx++;
         }
 
-        selector.setList(panelList);
-        selector.start();
-
         topPanel.revalidate();
         topPanel.repaint();
         bottomPanel.revalidate();
@@ -94,6 +91,9 @@ public class SimilarityGamePanel extends BaseGamePanel {
         parent.addGrid(this);
         parent.revalidate();
         parent.repaint();
+
+        selector.setList(panelList);
+        selector.start();
     }
 
     private JPanel createGameItem(final GameImage image) {

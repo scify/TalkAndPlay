@@ -104,14 +104,14 @@ public class GridPanel extends BaseGridPanel {
         }
 
         c.gridy++;
-        c.gridx=0;
+        c.gridx = 0;
         fillWithEmpties();
-
-        selector.setList(panelList);
-        selector.start();
 
         revalidate();
         repaint();
+
+        selector.setList(panelList);
+        selector.start();
     }
 
     private void showCommunication() {

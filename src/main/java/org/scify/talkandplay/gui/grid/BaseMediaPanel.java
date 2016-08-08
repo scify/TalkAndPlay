@@ -26,6 +26,7 @@ import org.scify.talkandplay.gui.grid.entertainment.EntertainmentPanel;
 import org.scify.talkandplay.gui.grid.entertainment.FilesPanel;
 import org.scify.talkandplay.gui.grid.entertainment.MediaPlayerPanel;
 import org.scify.talkandplay.gui.grid.selectors.ButtonSelector;
+import org.scify.talkandplay.gui.grid.selectors.ManualButtonSelector;
 import org.scify.talkandplay.gui.grid.selectors.MouseSelector;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
@@ -60,6 +61,8 @@ public class BaseMediaPanel extends BasePanel {
 
         if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
             this.selector = new MouseSelector(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+        } else if (user.getConfiguration().getNavigationSensor() != null) {
+            this.selector = new ManualButtonSelector(user, null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         } else {
             this.selector = new ButtonSelector(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         }

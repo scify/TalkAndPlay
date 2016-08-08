@@ -110,7 +110,6 @@ public class TileCreator {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
-                    System.out.println("@tilecreator " + sound);
                     act(sound, tileAction);
                 }
             }
@@ -156,7 +155,7 @@ public class TileCreator {
     public void playAudio(String sound, TileAction tileAction) {
         this.tileAction = tileAction;
         if (sound != null && !sound.isEmpty()) {
-            audioPlayer.getMediaPlayer().playMedia(sound);
+             audioPlayer.getMediaPlayer().playMedia(sound);
         } else {
             audioPlayer.getMediaPlayer().playMedia(DEFAULT_SOUND);
         }

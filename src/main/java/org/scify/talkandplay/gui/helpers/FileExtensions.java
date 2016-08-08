@@ -6,6 +6,7 @@
 package org.scify.talkandplay.gui.helpers;
 
 /**
+ * File extensions for the vlc media player
  *
  * @author christina
  */

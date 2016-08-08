@@ -139,9 +139,6 @@ public class FilesPanel extends javax.swing.JPanel {
             panelList.add(back);
         }
 
-        selector.setList(panelList);
-        selector.start();
-
         addListeners();
         revalidate();
         repaint();
@@ -218,6 +215,9 @@ public class FilesPanel extends javax.swing.JPanel {
                         selector.unselectAll();
                         configurePrevSongs();
                         drawFiles();
+
+                        selector.setList(panelList);
+                        selector.start();
                     }
                 }
             }
@@ -230,6 +230,9 @@ public class FilesPanel extends javax.swing.JPanel {
                         selector.cancel();
                         configurePrevSongs();
                         drawFiles();
+
+                        selector.setList(panelList);
+                        selector.start();
                     }
                 }
             }
@@ -243,6 +246,9 @@ public class FilesPanel extends javax.swing.JPanel {
                         selector.cancel();
                         configureNextSongs();
                         drawFiles();
+
+                        selector.setList(panelList);
+                        selector.start();
                     }
                 }
             }
@@ -255,6 +261,9 @@ public class FilesPanel extends javax.swing.JPanel {
                         selector.cancel();
                         configureNextSongs();
                         drawFiles();
+
+                        selector.setList(panelList);
+                        selector.start();
                     }
                 }
             }
@@ -357,7 +366,7 @@ public class FilesPanel extends javax.swing.JPanel {
     }
 
     public int getSelected() {
-        for (int i = 0; i < currentFiles.size(); i++) {           
+        for (int i = 0; i < currentFiles.size(); i++) {
             if (currentFile.equals(currentFiles.get(i))) {
                 return i;
             }
@@ -390,6 +399,7 @@ public class FilesPanel extends javax.swing.JPanel {
                 panelList.get(i).setBackground(Color.decode(selector.getDefaultBackgroundColor()));
             }
         }
+
     }
 
     /**

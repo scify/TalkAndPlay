@@ -142,9 +142,6 @@ public class CommunicationPanel extends BaseGridPanel {
 
         fillWithEmpties();
 
-        selector.setList(panelList);
-        selector.start();
-
         revalidate();
         repaint();
 
@@ -152,6 +149,9 @@ public class CommunicationPanel extends BaseGridPanel {
         parent.addGrid(this);
         parent.revalidate();
         parent.repaint();
+
+        selector.setList(panelList);
+        selector.start();
     }
 
     /**

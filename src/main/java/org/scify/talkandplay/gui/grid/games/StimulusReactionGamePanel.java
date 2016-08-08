@@ -99,15 +99,15 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
 
         }
 
-        selector.setList(panelList);
-        selector.start();
-
         gamePanel.revalidate();
         gamePanel.repaint();
         parent.clearGrid();
         parent.addGrid(this);
         parent.revalidate();
         parent.repaint();
+
+        selector.setList(panelList);
+        selector.start();
     }
 
     private JPanel createGameItem(GameImage image) {

@@ -1,11 +1,9 @@
 package org.scify.talkandplay.gui.grid.entertainment;
 
-import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import java.util.List;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.BaseMediaPanel;
@@ -91,6 +89,9 @@ public class VideoPanel extends BaseMediaPanel {
         parent.addGrid(this);
         parent.revalidate();
         parent.repaint();
+
+        selector.setList(filesPanel.getPanelList());
+        selector.start();
     }
 
     public void playFile(String fileName) {
