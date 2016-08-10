@@ -53,7 +53,6 @@ public class ManualButtonSelector extends ButtonSelector {
 
                         unselectAll();
                         setSelected(selected);
-                        System.out.println("selected "+selected);
 
                         panelList.get(selected).setFocusable(true);
                         panelList.get(selected).grabFocus();

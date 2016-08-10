@@ -32,7 +32,6 @@ public class BaseGridPanel extends BasePanel {
     protected int empties;
     protected int width, height;
 
-    protected Selector selector;
     protected TileCreator tileCreator;
 
     public BaseGridPanel(User user, GridFrame parent) {

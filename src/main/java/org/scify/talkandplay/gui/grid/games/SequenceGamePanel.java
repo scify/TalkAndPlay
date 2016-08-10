@@ -106,7 +106,7 @@ public class SequenceGamePanel extends BaseGamePanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    act(panel, image.getOrder());
+                    act(image.getOrder());
                 }
             }
         });
@@ -114,7 +114,7 @@ public class SequenceGamePanel extends BaseGamePanel {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
-                    act(panel, image.getOrder());
+                    act(image.getOrder());
                 }
             }
         });
@@ -122,7 +122,7 @@ public class SequenceGamePanel extends BaseGamePanel {
         return panel;
     }
 
-    private void act(JPanel panel, int order) {
+    private void act(int order) {
         if (correctImages == randomImages.size()) {
             selector.cancel();
             correctImages++;

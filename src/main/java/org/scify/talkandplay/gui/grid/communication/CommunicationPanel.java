@@ -203,7 +203,7 @@ public class CommunicationPanel extends BaseGridPanel {
                         selector.cancel();
                         stopped = 0;
                         if (isRoot) {
-                            showMainMenu();
+                        showMainMenu();
                         } else if (!isRoot && category.getParentCategory() == null) {
                             try {
                                 drawImages(rootCategory);

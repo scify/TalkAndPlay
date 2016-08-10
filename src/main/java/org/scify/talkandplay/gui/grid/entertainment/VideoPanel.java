@@ -14,7 +14,6 @@ import org.scify.talkandplay.models.User;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
-import uk.co.caprica.vlcj.player.embedded.DefaultAdaptiveRuntimeFullScreenStrategy;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 
 public class VideoPanel extends BaseMediaPanel {
@@ -98,23 +97,23 @@ public class VideoPanel extends BaseMediaPanel {
         selector.cancel();
         videoFrame = new VideoFrame(user, null, this, filesPanel);
 
-        mediaPlayerComponent.getMediaPlayer().setFullScreenStrategy(
-                new DefaultAdaptiveRuntimeFullScreenStrategy(videoFrame) {
-                    @Override
-                    protected void beforeEnterFullScreen() {
-                        System.out.println("fullscreen");
-                        videoFrame.hidePanel();
-                        videoFrame.pack();
-                    }
+        /*  mediaPlayerComponent.getMediaPlayer().setFullScreenStrategy(
+         new DefaultAdaptiveRuntimeFullScreenStrategy(videoFrame) {
+         @Override
+         protected void beforeEnterFullScreen() {
+         System.out.println("fullscreen");
+         videoFrame.hidePanel();
+         videoFrame.pack();
+         }
 
-                    @Override
-                    protected void afterExitFullScreen() {
-                        System.out.println("exit fullscreen");
-                        videoFrame.showPanel();
-                        videoFrame.pack();
-                    }
-                });
-
+         @Override
+         protected void afterExitFullScreen() {
+         System.out.println("exit fullscreen");
+         videoFrame.showPanel();
+         videoFrame.pack();
+         }
+         });
+         */
         videoFrame.playMedia(getFilePath(fileName));
     }
 

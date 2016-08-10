@@ -12,12 +12,12 @@
       <text>true</text>
       <selectionSensor>
         <type>keyboard</type>
-        <keyCode>32</keyCode>
+        <keyCode>10</keyCode>
         <keyChar />
       </selectionSensor>
       <navigationSensor>
         <type>keyboard</type>
-        <keyCode>10</keyCode>
+        <keyCode>32</keyCode>
         <keyChar />
       </navigationSensor>
     </configuration>
@@ -995,7 +995,7 @@
     </games>
   </profile>
   <profile preselected="false">
-    <name>ghgf</name>
+    <name>sdasdas</name>
     <image />
     <configuration>
       <rotationSpeed>1</rotationSpeed>
@@ -1003,11 +1003,11 @@
       <defaultGridColumn>3</defaultGridColumn>
       <sound>false</sound>
       <image>true</image>
-      <text>false</text>
+      <text>true</text>
       <selectionSensor>
-        <type>mouse</type>
-        <button>1</button>
-        <clickCount>1</clickCount>
+        <type>keyboard</type>
+        <keyCode>32</keyCode>
+        <keyChar />
       </selectionSensor>
     </configuration>
     <communication>
@@ -1243,7 +1243,7 @@
             <enabled>true</enabled>
             <image />
             <difficulty>4</difficulty>
-            <winSound>/home/christina/Projects/talkAndPlay/TalkAndPlay/demo_resources/sounds/games/Succes 4 MP3.mp3</winSound>
+            <winSound />
             <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
             <gameImages>
               <image>

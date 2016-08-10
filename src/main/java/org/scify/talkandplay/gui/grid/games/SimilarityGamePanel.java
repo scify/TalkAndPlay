@@ -10,14 +10,20 @@ import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.games.Game;
 import org.scify.talkandplay.models.games.GameImage;
 import org.scify.talkandplay.models.games.SimilarityGame;
+import org.scify.talkandplay.models.sensors.KeyboardSensor;
+import org.scify.talkandplay.models.sensors.MouseSensor;
+import org.scify.talkandplay.models.sensors.Sensor;
+import org.scify.talkandplay.services.SensorService;
 
 public class SimilarityGamePanel extends BaseGamePanel {
 
     private boolean endGame = false;
     private String correctImage;
+    private SensorService sensorService;
 
     public SimilarityGamePanel(User user, GridFrame parent) {
         super(user, parent, "similarityGame", null);
+        this.sensorService = new SensorService(user);
 
         initComponents();
         initCustomComponents();
@@ -25,6 +31,7 @@ public class SimilarityGamePanel extends BaseGamePanel {
 
     public SimilarityGamePanel(User user, GridFrame parent, Game game) {
         super(user, parent, "similarityGame", game);
+        this.sensorService = new SensorService(user);
 
         initComponents();
         initCustomComponents();
@@ -98,50 +105,53 @@ public class SimilarityGamePanel extends BaseGamePanel {
 
     private JPanel createGameItem(final GameImage image) {
 
-        JPanel panel = tileCreator.create("",
+        final JPanel panel = tileCreator.create("",
                 image.getImage(),
-                null,
-                new TileAction() {
-                    @Override
-                    public void act() {
-                        for (int i = 0; i < game.getEnabledImages().size(); i++) {
-                            if (game.getEnabledImages().get(i).getImage().equals(image.getImage()) && game.getEnabledImages().get(i).getImage().equals(correctImage)) {
-                                selector.cancel();
-                                congratulate();
-                            } else if (game.getEnabledImages().get(i).getImage().equals(image.getImage()) && !game.getEnabledImages().get(i).getImage().equals(correctImage)) {
-                                selector.cancel();
-                                setBottomMessage(Message.getRandomError());
-                                selector.cancel();
-                                tileCreator.playAudio(getErrorSound(), new TileAction() {
-                                    @Override
-                                    public void act() {
-                                        return;
-                                    }
+                null);
 
-                                    @Override
-                                    public void audioFinished() {
-                                        selector.start();
-                                    }
-                                });
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void audioFinished() {
-                        if (!endGame) {
-                            selector.setList(panelList);
-                            selector.start();
-                        }
-                    }
-
-                    @Override
-                    public boolean mute() {
-                        return true;
-                    }
-                });
+        panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+                if (sensorService.shouldSelect(sensor)) {
+                    act(image.getImage());
+                }
+            }
+        });
+        panel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
+                
+                System.out.println(evt.getKeyCode()+", "+evt.getKeyChar());
+                if (sensorService.shouldSelect(sensor)) {
+                    act(image.getImage());
+                }
+            }
+        });
 
         return panel;
+    }
+
+    private void act(String image) {
+
+        if (image.equals(correctImage)) {
+            congratulate();
+        } else {
+            setBottomMessage(Message.getRandomError());
+            selector.cancel();
+            tileCreator.playAudio(getErrorSound(), new TileAction() {
+                @Override
+                public void act() {
+                    return;
+                }
+
+                @Override
+                public void audioFinished() {
+                    selector.setList(panelList);
+                    selector.start();
+                }
+            });
+        }
+
     }
 
     private void congratulate() {

@@ -40,14 +40,14 @@ public class PlayerPanel extends javax.swing.JPanel {
         this.sensorService = sensorService;
         this.controlsList = new ArrayList();
         this.selector = selector;
-        
+
         initComponents();
         initCustomComponents();
         initPlayerButtons();
     }
 
     private void initCustomComponents() {
-        setBackground(Color.red);
+        setBackground(Color.white);
         startLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
         endLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
     }
@@ -67,6 +67,10 @@ public class PlayerPanel extends javax.swing.JPanel {
         fullScreenPanel = drawButton("Πλήρης Οθόνη", getClass().getResource("/org/scify/talkandplay/resources/fullscreen-icon.png"));
         exitPanel = drawButton("Έξοδος", getClass().getResource("/org/scify/talkandplay/resources/exit-icon.png"));
 
+        c.gridwidth = 5;
+        add(durationPanel, c);
+        c.gridy++;
+        c.gridwidth = 1;
         add(prevPanel, c);
         c.gridx++;
         add(playPanel, c);
@@ -132,20 +136,24 @@ public class PlayerPanel extends javax.swing.JPanel {
     public void setEndLabel(String text) {
         endLabel.setText(text);
     }
-    
-    public JPanel getPrevPanel(){
+
+    public JPanel getPrevPanel() {
         return prevPanel;
     }
-    public JPanel getNextPanel(){
+
+    public JPanel getNextPanel() {
         return nextPanel;
     }
-    public JPanel getPlayPanel(){
+
+    public JPanel getPlayPanel() {
         return playPanel;
     }
-    public JPanel getFullscreenPanel(){
+
+    public JPanel getFullscreenPanel() {
         return fullScreenPanel;
     }
-    public JPanel getExitPanel(){
+
+    public JPanel getExitPanel() {
         return exitPanel;
     }
 
@@ -158,45 +166,74 @@ public class PlayerPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        durationSlider = new javax.swing.JSlider();
+        jPanel1 = new javax.swing.JPanel();
+        durationPanel = new javax.swing.JPanel();
         startLabel = new javax.swing.JLabel();
+        durationSlider = new javax.swing.JSlider();
         endLabel = new javax.swing.JLabel();
 
-        durationSlider.setValue(0);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        durationPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         startLabel.setText("00:00:00");
 
+        durationSlider.setValue(0);
+
         endLabel.setText("00:00:00");
+
+        javax.swing.GroupLayout durationPanelLayout = new javax.swing.GroupLayout(durationPanel);
+        durationPanel.setLayout(durationPanelLayout);
+        durationPanelLayout.setHorizontalGroup(
+            durationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(durationPanelLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(startLabel)
+                .addGap(0, 0, 0)
+                .addComponent(durationSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(endLabel)
+                .addGap(0, 0, 0))
+        );
+        durationPanelLayout.setVerticalGroup(
+            durationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(durationPanelLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addGroup(durationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(endLabel)
+                    .addGroup(durationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(durationSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(startLabel)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(startLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(durationSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(endLabel)
-                .addContainerGap())
+            .addComponent(durationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(endLabel)
-                    .addComponent(startLabel)
-                    .addComponent(durationSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(durationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel durationPanel;
     private javax.swing.JSlider durationSlider;
     private javax.swing.JLabel endLabel;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel startLabel;
     // End of variables declaration//GEN-END:variables
 }

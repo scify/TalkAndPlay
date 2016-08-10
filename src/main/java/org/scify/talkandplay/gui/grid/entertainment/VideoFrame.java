@@ -6,16 +6,13 @@
 package org.scify.talkandplay.gui.grid.entertainment;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import org.scify.talkandplay.gui.grid.selectors.ButtonSelector;
@@ -39,7 +36,6 @@ public class VideoFrame extends javax.swing.JFrame {
 
     private EmbeddedMediaPlayer mediaPlayer;
     private JPanel emptyPanel;
-    private List<JPanel> controlsList;
     private VideoPanel parent;
     private FilesPanel filesPanel;
     private String currentFile;
@@ -54,7 +50,6 @@ public class VideoFrame extends javax.swing.JFrame {
         this.user = user;
         this.parent = parent;
         this.filesPanel = filesPanel;
-        this.controlsList = new ArrayList();
         this.emptyPanel = new JPanel();
         this.sensorService = new SensorService(user);
 
@@ -71,9 +66,10 @@ public class VideoFrame extends javax.swing.JFrame {
         setIconImage((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/tp_logo_mini.png"))).getImage());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+
         initComponents();
-        initCustomComponents();
         initMediaPlayer();
+        initCustomComponents();
     }
 
     /**
@@ -178,13 +174,13 @@ public class VideoFrame extends javax.swing.JFrame {
                 }
             }
         });
-
     }
 
     private void initCustomComponents() {
-        wrapperPanel.add(new PlayerPanel(sensorService, selector));
-
         videoPanel.add(parent.getMediaPlayerComponent(), BorderLayout.CENTER);
+
+        wrapperPanel.setLayout(new BoxLayout(wrapperPanel, BoxLayout.Y_AXIS));
+        wrapperPanel.add(playerPanel);
 
         emptyPanel.setSize(playerPanel.getWidth(), playerPanel.getHeight());
 
@@ -263,25 +259,24 @@ public class VideoFrame extends javax.swing.JFrame {
             }
         });
 
-        playerPanel.getFullscreenPanel().addMouseListener(new MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor)) {
-                    videoPanel.setFocusable(true);
-                    mediaPlayer.toggleFullScreen();
-                }
-            }
-        });
-        playerPanel.getFullscreenPanel().addKeyListener(new KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
-                if (sensorService.shouldSelect(sensor)) {
-                    videoPanel.setFocusable(true);
-                    mediaPlayer.toggleFullScreen();
-                }
-            }
-        });
-
+        /* playerPanel.getFullscreenPanel().addMouseListener(new MouseAdapter() {
+         public void mouseClicked(java.awt.event.MouseEvent evt) {
+         Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
+         if (sensorService.shouldSelect(sensor)) {
+         videoPanel.setFocusable(true);
+         mediaPlayer.toggleFullScreen();
+         }
+         }
+         });
+         playerPanel.getFullscreenPanel().addKeyListener(new KeyAdapter() {
+         public void keyPressed(java.awt.event.KeyEvent evt) {
+         Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
+         if (sensorService.shouldSelect(sensor)) {
+         videoPanel.setFocusable(true);
+         mediaPlayer.toggleFullScreen();
+         }
+         }
+         });*/
         final VideoFrame videoFrame = this;
         playerPanel.getExitPanel().addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -344,18 +339,18 @@ public class VideoFrame extends javax.swing.JFrame {
         return user.getEntertainmentModule().getVideoModule().getFolderPath() + File.separator + fileName;
     }
 
-    public void showPanel() {
-        wrapperPanel.remove(emptyPanel);
-        playerPanel.setVisible(true);
-        emptyPanel.setVisible(false);
-    }
+    /*  public void showPanel() {
+     wrapperPanel.remove(emptyPanel);
+     playerPanel.setVisible(true);
+     emptyPanel.setVisible(false);
+     }
 
-    public void hidePanel() {
-        emptyPanel.setBackground(Color.yellow);
-        wrapperPanel.add(emptyPanel);
-        emptyPanel.setVisible(true);
-        playerPanel.setVisible(false);
-    }
+     public void hidePanel() {
+     emptyPanel.setBackground(Color.yellow);
+     wrapperPanel.add(emptyPanel);
+     emptyPanel.setVisible(true);
+     playerPanel.setVisible(false);
+     }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel videoPanel;

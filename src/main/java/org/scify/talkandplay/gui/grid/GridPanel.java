@@ -4,6 +4,7 @@ import org.scify.talkandplay.gui.grid.tiles.TileAction;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
@@ -131,6 +132,10 @@ public class GridPanel extends BaseGridPanel {
     private void showGames() {
         selector.cancel();
         GamesPanel gamesPanel = new GamesPanel(user, parent);
+    }
+
+    public List<JPanel> getPanelList() {
+        return panelList;
     }
 
     /**
