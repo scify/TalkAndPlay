@@ -13,7 +13,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -42,6 +44,7 @@ public class FilesPanel extends javax.swing.JPanel {
     private String currentFile;
     private Selector selector;
     private SensorService sensorService;
+    private Map<Integer, Boolean> hasListeners;
 
     public FilesPanel(User user, List<File> files, BaseMediaPanel parent) {
         this.user = user;
@@ -50,6 +53,7 @@ public class FilesPanel extends javax.swing.JPanel {
         this.selector = parent.getSelector();
         this.sensorService = new SensorService(user);
         this.files = files;
+        this.hasListeners = new HashMap();
 
         initComponents();
         initCustomComponents();
@@ -139,9 +143,20 @@ public class FilesPanel extends javax.swing.JPanel {
             panelList.add(back);
         }
 
+       // checkListeners();
+        selector.addListeners(panelList);
         addListeners();
         revalidate();
         repaint();
+    }
+
+    private void checkListeners() {
+        if (!hasListeners.containsKey(start)) {
+            hasListeners.put(start, true);
+            selector.addListeners(panelList);
+        } else if (hasListeners.containsKey(start) && !hasListeners.get(start)) {
+            selector.addListeners(panelList);
+        }
     }
 
     private JPanel drawControl(String text, ImageIcon icon, String first) {
@@ -216,6 +231,7 @@ public class FilesPanel extends javax.swing.JPanel {
                         configurePrevSongs();
                         drawFiles();
 
+                        checkListeners();
                         selector.setList(panelList);
                         selector.start();
                     }
@@ -231,6 +247,7 @@ public class FilesPanel extends javax.swing.JPanel {
                         configurePrevSongs();
                         drawFiles();
 
+                        checkListeners();
                         selector.setList(panelList);
                         selector.start();
                     }
@@ -247,6 +264,7 @@ public class FilesPanel extends javax.swing.JPanel {
                         configureNextSongs();
                         drawFiles();
 
+                        checkListeners();
                         selector.setList(panelList);
                         selector.start();
                     }
@@ -262,6 +280,7 @@ public class FilesPanel extends javax.swing.JPanel {
                         configureNextSongs();
                         drawFiles();
 
+                        checkListeners();
                         selector.setList(panelList);
                         selector.start();
                     }

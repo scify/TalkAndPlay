@@ -39,6 +39,10 @@ public class ManualButtonSelector extends ButtonSelector {
         panelList.get(selected).setFocusable(true);
         panelList.get(selected).grabFocus();
 
+    }
+
+    @Override
+    public void addListeners(final List<JPanel> panelList) {
         for (int i = 0; i < panelList.size(); i++) {
             panelList.get(i).addKeyListener(new KeyAdapter() {
                 public void keyPressed(KeyEvent ke) {
@@ -53,7 +57,7 @@ public class ManualButtonSelector extends ButtonSelector {
 
                         unselectAll();
                         setSelected(selected);
-
+                        
                         panelList.get(selected).setFocusable(true);
                         panelList.get(selected).grabFocus();
                     }
@@ -64,7 +68,5 @@ public class ManualButtonSelector extends ButtonSelector {
 
     @Override
     public void cancel() {
-
     }
-
 }

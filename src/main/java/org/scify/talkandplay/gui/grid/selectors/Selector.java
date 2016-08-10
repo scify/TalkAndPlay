@@ -105,4 +105,6 @@ public class Selector {
         return BACKGROUND_COLOR;
     }
 
+    public void addListeners(List<JPanel> panelList) {
+    }
 }

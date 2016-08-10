@@ -21,6 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import org.scify.talkandplay.gui.grid.selectors.ButtonSelector;
+import org.scify.talkandplay.gui.grid.selectors.ManualButtonSelector;
+import org.scify.talkandplay.gui.grid.selectors.MouseSelector;
 import org.scify.talkandplay.gui.grid.selectors.Selector;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
@@ -45,7 +47,15 @@ public class ControlsPanel extends javax.swing.JPanel {
         this.sensorService = new SensorService(user);
         this.user = user;
         this.parent = parent;
-        this.selector = new ButtonSelector(controls, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+
+        if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
+            this.selector = new MouseSelector(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+        } else if (user.getConfiguration().getNavigationSensor() != null) {
+            this.selector = new ManualButtonSelector(user, null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+        } else {
+            this.selector = new ButtonSelector(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+        }
+        
         this.selector.setDefaultBackgroundColor(UIConstants.grey);
 
         initComponents();

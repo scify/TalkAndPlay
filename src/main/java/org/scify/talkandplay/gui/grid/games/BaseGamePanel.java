@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 import org.scify.talkandplay.gui.grid.GridFrame;
+import org.scify.talkandplay.gui.grid.selectors.ManualTileSelector;
 import org.scify.talkandplay.gui.grid.tiles.TileCreator;
 import org.scify.talkandplay.gui.grid.selectors.MouseSelector;
 import org.scify.talkandplay.gui.grid.selectors.TileSelector;
@@ -54,6 +55,8 @@ public class BaseGamePanel extends javax.swing.JPanel {
 
         if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
             this.selector = new MouseSelector(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+        } else if (user.getConfiguration().getNavigationSensor() != null) {
+            this.selector = new ManualTileSelector(user, panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         } else {
             this.selector = new TileSelector(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         }
