@@ -38,7 +38,6 @@ public class ManualButtonSelector extends ButtonSelector {
         setSelected(selected);
         panelList.get(selected).setFocusable(true);
         panelList.get(selected).grabFocus();
-
     }
 
     @Override

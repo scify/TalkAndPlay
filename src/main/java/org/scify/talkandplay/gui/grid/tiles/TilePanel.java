@@ -90,7 +90,6 @@ public class TilePanel extends javax.swing.JPanel {
             imageWidth = calculateImageWidth();
         }
 
-        //   System.out.println(text + " " + imageHeight + " " + UIConstants.getInstance().getRows() + "x" + UIConstants.getInstance().getColumns());
         image = new JLabel(new ImageIcon((img.getScaledInstance(imageWidth, imageHeight, Image.SCALE_SMOOTH))));
 
         JPanel imagePanel = new JPanel(new GridBagLayout());

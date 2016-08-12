@@ -121,7 +121,6 @@ public class SimilarityGamePanel extends BaseGamePanel {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
 
-                System.out.println(evt.getKeyCode() + ", " + evt.getKeyChar());
                 if (sensorService.shouldSelect(sensor)) {
                     act(image.getImage());
                 }

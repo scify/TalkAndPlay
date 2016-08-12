@@ -38,7 +38,10 @@ public class ManualTileSelector extends TileSelector {
         setSelected(selected);
         panelList.get(selected).setFocusable(true);
         panelList.get(selected).grabFocus();
+    }
 
+    @Override
+    public void addListeners(final List<JPanel> panelList) {
         for (int i = 0; i < panelList.size(); i++) {
             panelList.get(i).addKeyListener(new KeyAdapter() {
                 public void keyPressed(KeyEvent ke) {
@@ -60,6 +63,29 @@ public class ManualTileSelector extends TileSelector {
                 }
             });
         }
+    }
+
+    @Override
+    public void addListeners(final int i) {
+        panelList.get(i).addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                Sensor sensor = new KeyboardSensor(ke.getKeyCode(), String.valueOf(ke.getKeyChar()), "keyboard");
+                if (sensorService.shouldNavigate(sensor)) {
+
+                    if (selected == 0 || (selected < panelList.size() - 1 && selected > 0)) {
+                        selected++;
+                    } else if (selected == panelList.size() - 1) {
+                        selected = 0;
+                    }
+
+                    unselectAll();
+                    setSelected(selected);
+
+                    panelList.get(selected).setFocusable(true);
+                    panelList.get(selected).grabFocus();
+                }
+            }
+        });
     }
 
     @Override

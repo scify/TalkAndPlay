@@ -138,8 +138,7 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
                     }
                     
                     @Override
-                    public void audioFinished() {
-                        
+                    public void audioFinished() {                        
                     }
                     
                     @Override

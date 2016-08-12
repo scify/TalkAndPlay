@@ -104,7 +104,7 @@ public class CommunicationPanel extends BaseGridPanel {
                         JPanel panel = createCategoryItem(category.getSubCategories().get(i));
                         add(panel, c);
                         setGrid(category);
-                        panelList.add(panel);
+                        panelList.add(panel);                       
                     }
                 }
 
@@ -150,6 +150,7 @@ public class CommunicationPanel extends BaseGridPanel {
         parent.revalidate();
         parent.repaint();
 
+        checkListeners();
         selector.setList(panelList);
         selector.start();
     }

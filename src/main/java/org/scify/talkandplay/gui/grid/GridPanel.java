@@ -104,13 +104,14 @@ public class GridPanel extends BaseGridPanel {
             panelList.add(gamesPanel);
         }
 
-        c.gridy++;
+        c.gridy++; 
         c.gridx = 0;
         fillWithEmpties();
 
         revalidate();
         repaint();
 
+        selector.addListeners(panelList);
         selector.setList(panelList);
         selector.start();
     }

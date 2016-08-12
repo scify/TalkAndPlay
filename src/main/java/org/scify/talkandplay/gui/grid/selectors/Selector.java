@@ -107,4 +107,7 @@ public class Selector {
 
     public void addListeners(List<JPanel> panelList) {
     }
+
+    public void addListeners(int i) {
+    }
 }

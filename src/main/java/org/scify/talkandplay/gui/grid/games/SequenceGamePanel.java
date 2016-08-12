@@ -144,7 +144,8 @@ public class SequenceGamePanel extends BaseGamePanel {
             bottomPanel.repaint();
             topPanel.revalidate();
             topPanel.repaint();
-
+    
+            selector.setList(panelList);
             selector.start();
         } else {
             setBottomMessage(Message.getRandomError());
