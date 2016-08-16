@@ -6,11 +6,8 @@
 package org.scify.talkandplay.services;
 
 import com.sun.jna.NativeLibrary;
-import javax.swing.JFrame;
 import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
 import uk.co.caprica.vlcj.discovery.NativeDiscovery;
-import uk.co.caprica.vlcj.player.MediaPlayer;
-import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
 /**

@@ -142,33 +142,15 @@ public class EntertainmentPanel extends BaseGridPanel {
     }
 
     private void showMusic() {
-        if (user.getEntertainmentModule().getMusicModule().getFolderPath() != null
-                && !user.getEntertainmentModule().getMusicModule().getFolderPath().isEmpty()
-                && (new File(user.getEntertainmentModule().getMusicModule().getFolderPath())).exists()) {
-            MusicPanel musicPanel = new MusicPanel(user, parent);
-        } else {
-            JOptionPane.showMessageDialog(parent,
-                    "Ο φάκελος Μουσική δεν έχει οριστεί σωστά.",
-                    "Σφάλμα",
-                    JOptionPane.ERROR_MESSAGE);
-            selector.start();
-        }
+        MusicPanel musicPanel = new MusicPanel(user, parent);
+        parent.clearGrid();
+        parent.addGrid(musicPanel);
     }
 
     private void showVideo() {
-        if (user.getEntertainmentModule().getVideoModule().getFolderPath() != null
-                && !user.getEntertainmentModule().getVideoModule().getFolderPath().isEmpty()
-                && (new File(user.getEntertainmentModule().getVideoModule().getFolderPath())).exists()) {
-            VideoPanel videoPanel = new VideoPanel(user, parent);
-            parent.clearGrid();
-            parent.addGrid(videoPanel);
-        } else {
-            JOptionPane.showMessageDialog(parent,
-                    "Ο φάκελος Βίντεο δεν έχει οριστεί σωστά.",
-                    "Σφάλμα",
-                    JOptionPane.ERROR_MESSAGE);
-            selector.start();
-        }
+        VideoPanel videoPanel = new VideoPanel(user, parent);
+        parent.clearGrid();
+        parent.addGrid(videoPanel);
     }
 
 

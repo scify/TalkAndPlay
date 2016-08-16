@@ -1,6 +1,5 @@
 package org.scify.talkandplay.gui.grid.selectors;
 
-import static com.sun.org.apache.bcel.internal.Repository.instanceOf;
 import java.awt.event.KeyListener;
 import java.util.List;
 import javax.swing.JPanel;

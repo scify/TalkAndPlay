@@ -995,19 +995,19 @@
     </games>
   </profile>
   <profile preselected="false">
-    <name>sdasdas</name>
+    <name>487878</name>
     <image />
     <configuration>
       <rotationSpeed>1</rotationSpeed>
-      <defaultGridRow>3</defaultGridRow>
-      <defaultGridColumn>3</defaultGridColumn>
-      <sound>false</sound>
+      <defaultGridRow>4</defaultGridRow>
+      <defaultGridColumn>4</defaultGridColumn>
+      <sound>true</sound>
       <image>true</image>
       <text>true</text>
       <selectionSensor>
-        <type>mouse</type>
-        <button>1</button>
-        <clickCount>1</clickCount>
+        <type>keyboard</type>
+        <keyCode>32</keyCode>
+        <keyChar />
       </selectionSensor>
     </configuration>
     <communication>
@@ -1015,9 +1015,19 @@
       <enabled>true</enabled>
       <image />
       <sound />
-      <rows>3</rows>
-      <columns>3</columns>
-      <categories />
+      <rows>4</rows>
+      <columns>4</columns>
+      <categories>
+        <category name="Λέξη">
+          <image>/home/christina/Documents/autocomplete.png</image>
+          <sound />
+          <hasSound>true</hasSound>
+          <hasImage>true</hasImage>
+          <hasText>true</hasText>
+          <rows />
+          <columns />
+        </category>
+      </categories>
     </communication>
     <entertainment>
       <name>Ψυχαγωγία</name>
@@ -1029,7 +1039,7 @@
         <enabled>true</enabled>
         <image />
         <sound />
-        <path>/home/christina/Music/</path>
+        <path />
         <playlistSize>10</playlistSize>
       </music>
       <video>
@@ -1037,7 +1047,7 @@
         <enabled>true</enabled>
         <image />
         <sound />
-        <path>/home/christina/Videos/</path>
+        <path />
         <playlistSize>10</playlistSize>
       </video>
     </entertainment>
@@ -1243,7 +1253,7 @@
             <enabled>true</enabled>
             <image />
             <difficulty>4</difficulty>
-            <winSound />
+            <winSound>/home/christina/Projects/talkAndPlay/TalkAndPlay/demo_resources/sounds/games/Succes 4 MP3.mp3</winSound>
             <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
             <gameImages>
               <image>

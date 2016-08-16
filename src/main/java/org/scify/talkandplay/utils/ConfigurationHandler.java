@@ -238,7 +238,7 @@ public class ConfigurationHandler {
         musicModule.setFolderPath(musicNode.getChildText("path"));
         musicModule.setPlaylistSize(Integer.parseInt(musicNode.getChildText("playlistSize")));
         musicModule.setEnabled("true".equals(musicNode.getChildText("name")));
-
+        
         if (musicNode.getChildText("image").isEmpty()) {
             musicModule.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/music_module.png"));
         } else {

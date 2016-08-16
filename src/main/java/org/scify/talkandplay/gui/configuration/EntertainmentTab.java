@@ -69,7 +69,6 @@ public class EntertainmentTab extends javax.swing.JPanel {
                 chooser.setAcceptAllFileFilterUsed(false);
                 chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                    System.out.println(chooser.getSelectedFile().getAbsolutePath());
                     musicPathTextField.setText(chooser.getSelectedFile().getAbsolutePath());
                 }
             }
@@ -84,7 +83,6 @@ public class EntertainmentTab extends javax.swing.JPanel {
                 chooser.setAcceptAllFileFilterUsed(false);
                 chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                    System.out.println(chooser.getSelectedFile().getAbsolutePath());
                     videoPathTextField.setText(chooser.getSelectedFile().getAbsolutePath());
                 }
             }

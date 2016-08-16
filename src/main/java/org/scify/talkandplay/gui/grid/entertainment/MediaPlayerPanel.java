@@ -18,9 +18,6 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
     private AudioMediaPlayerComponent audioPlayer;
     private JPanel parent;
 
-    /**
-     * Creates new form MediaPlayerPanel
-     */
     public MediaPlayerPanel(JPanel parent) {
         this.parent = parent;
         this.audioPlayer = new AudioMediaPlayerComponent();
@@ -48,6 +45,7 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
             @Override
             public void finished(MediaPlayer mediaPlayer) {
                 if (parent instanceof MusicPanel) {
+                    //code to autoplay the next file
                     // String nextFile = ((MusicPanel) parent).getNextFile();
                     // ((MusicPanel) parent).setSelected();
                     //  playMedia(((MusicPanel) parent).getFilePath(nextFile));
@@ -167,8 +165,8 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
     public boolean isPlaying() {
         return audioPlayer.getMediaPlayer().isPlaying();
     }
-    
-     public void stop() {
+
+    public void stop() {
         audioPlayer.getMediaPlayer().stop();
         audioPlayer.getMediaPlayer().release();
     }

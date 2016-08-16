@@ -76,15 +76,15 @@ public class PlayerPanel extends javax.swing.JPanel {
         add(playPanel, c);
         c.gridx++;
         add(nextPanel, c);
-        c.gridx++;
-        add(fullScreenPanel, c);
+        /*  c.gridx++;
+         add(fullScreenPanel, c);*/
         c.gridx++;
         add(exitPanel, c);
 
         controlsList.add(prevPanel);
         controlsList.add(playPanel);
         controlsList.add(nextPanel);
-        controlsList.add(fullScreenPanel);
+        //controlsList.add(fullScreenPanel);
         controlsList.add(exitPanel);
 
         selector.setDefaultBackgroundColor(UIConstants.grey);
@@ -155,6 +155,10 @@ public class PlayerPanel extends javax.swing.JPanel {
 
     public JPanel getExitPanel() {
         return exitPanel;
+    }
+
+    public List<JPanel> getControlPanels() {
+        return controlsList;
     }
 
     /**

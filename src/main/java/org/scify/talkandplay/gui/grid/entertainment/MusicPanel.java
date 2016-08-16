@@ -35,7 +35,7 @@ public class MusicPanel extends BaseMediaPanel {
 
     public MusicPanel(User user, GridFrame parent) {
         super(user, parent,
-                (new File(user.getEntertainmentModule().getMusicModule().getFolderPath())).listFiles(),
+                user.getEntertainmentModule().getMusicModule().getFolderPath(),
                 FileExtensions.getAudioExtensions());
         initComponents();
         initCustomComponents();
@@ -65,8 +65,9 @@ public class MusicPanel extends BaseMediaPanel {
     private void initCustomComponents() {
 
         initLayout();
+        boolean isEmpty = isEmpty(user.getEntertainmentModule().getMusicModule().getFolderPath());
 
-        if (isEmpty()) {
+        if (isEmpty) {
             drawEmpty();
         } else {
 
@@ -112,8 +113,13 @@ public class MusicPanel extends BaseMediaPanel {
         parent.revalidate();
         parent.repaint();
 
-        selector.setList(filesPanel.getPanelList());
-        selector.start();
+        if (isEmpty) {
+            selector.setList(controlsList);
+            selector.start();
+        } else {
+            selector.setList(filesPanel.getPanelList());
+            selector.start();
+        }
     }
 
     private void initPlayerButtons() {
@@ -231,7 +237,7 @@ public class MusicPanel extends BaseMediaPanel {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
                     mediaPlayerPanel.getAudioPlayer().getMediaPlayer().pause();
-                } else {
+                } else if (sensorService.shouldSelect(sensor) && !mediaPlayerPanel.isPlaying()) {
                     mediaPlayerPanel.getAudioPlayer().getMediaPlayer().play();
                 }
             }
@@ -241,7 +247,7 @@ public class MusicPanel extends BaseMediaPanel {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
                     mediaPlayerPanel.getAudioPlayer().getMediaPlayer().pause();
-                } else {
+                } else if (sensorService.shouldSelect(sensor) && !mediaPlayerPanel.isPlaying()) {
                     mediaPlayerPanel.getAudioPlayer().getMediaPlayer().play();
                 }
             }
@@ -307,7 +313,7 @@ public class MusicPanel extends BaseMediaPanel {
             filesPanel.setSelected(selected);
             currentFile = filesPanel.getFileList().get(selected);
             mediaPlayerPanel.getAudioPlayer().getMediaPlayer().stop();
-            mediaPlayerPanel.getAudioPlayer().getMediaPlayer().playMedia(getFilePath(filesPanel.getFileList().get(selected)));
+            mediaPlayerPanel.playMedia(getFilePath(filesPanel.getFileList().get(selected)));
         }
     }
 
@@ -323,7 +329,7 @@ public class MusicPanel extends BaseMediaPanel {
             filesPanel.setSelected(selected);
             currentFile = filesPanel.getFileList().get(selected);
             mediaPlayerPanel.getAudioPlayer().getMediaPlayer().stop();
-            mediaPlayerPanel.getAudioPlayer().getMediaPlayer().playMedia(getFilePath(filesPanel.getFileList().get(selected)));
+            mediaPlayerPanel.playMedia(getFilePath(filesPanel.getFileList().get(selected)));
         }
     }
 

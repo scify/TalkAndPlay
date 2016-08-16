@@ -25,7 +25,7 @@ public class VideoPanel extends BaseMediaPanel {
 
     public VideoPanel(User user, GridFrame parent) {
         super(user, parent,
-                (new File(user.getEntertainmentModule().getVideoModule().getFolderPath())).listFiles(),
+                user.getEntertainmentModule().getVideoModule().getFolderPath(),
                 FileExtensions.getVideoExtensions());
         mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
         filesPanel = new FilesPanel(user, files, this);
@@ -59,7 +59,9 @@ public class VideoPanel extends BaseMediaPanel {
 
         initLayout();
 
-        if (isEmpty()) {
+        boolean isEmpty = isEmpty(user.getEntertainmentModule().getVideoModule().getFolderPath());
+
+        if (isEmpty) {
             drawEmpty();
         } else {
 
@@ -89,8 +91,13 @@ public class VideoPanel extends BaseMediaPanel {
         parent.revalidate();
         parent.repaint();
 
-        selector.setList(filesPanel.getPanelList());
-        selector.start();
+        if (isEmpty) {
+            selector.setList(controlsList);
+            selector.start();
+        } else {
+            selector.setList(filesPanel.getPanelList());
+            selector.start();
+        }
     }
 
     public void playFile(String fileName) {

@@ -181,7 +181,6 @@ public class SequenceGamePanel extends BaseGamePanel {
             i++;
             c1.gridx++;
         }
-        System.out.println("panellist " + panelList.size());
     }
 
     private void redrawControlsPanel() {

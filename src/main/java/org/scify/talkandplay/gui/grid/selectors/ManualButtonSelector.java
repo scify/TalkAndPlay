@@ -1,14 +1,9 @@
 package org.scify.talkandplay.gui.grid.selectors;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
 import javax.swing.JPanel;
-import org.scify.talkandplay.models.Tile;
 import org.scify.talkandplay.models.User;
-import org.scify.talkandplay.models.sensors.KeyboardSensor;
-import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.SensorService;
 
 /*

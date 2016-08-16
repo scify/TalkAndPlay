@@ -48,9 +48,8 @@ public class BaseMediaPanel extends BasePanel {
 
     protected SensorService sensorService;
 
-    public BaseMediaPanel(User user, GridFrame parent, File[] files, String[] fileExtensions) {
+    public BaseMediaPanel(User user, GridFrame parent, String filesPath, String[] fileExtensions) {
         super(user, parent);
-
         this.sensorService = new SensorService(user);
         this.controlsList = new ArrayList();
         this.mediaPlayerPanel = new MediaPlayerPanel(this);
@@ -58,7 +57,7 @@ public class BaseMediaPanel extends BasePanel {
         this.currentFile = "";
         this.c = new GridBagConstraints();
         this.fileExtensions = fileExtensions;
-
+        
         if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
             this.selector = new MouseSelector(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         } else if (user.getConfiguration().getNavigationSensor() != null) {
@@ -66,9 +65,12 @@ public class BaseMediaPanel extends BasePanel {
         } else {
             this.selector = new ButtonSelector(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         }
-
-        Collections.addAll(this.files, files);
-        prepareFiles();
+        
+        if (!isEmpty(filesPath)) {
+            File[] tmpFiles = (new File(filesPath)).listFiles();
+            Collections.addAll(this.files, tmpFiles);
+            prepareFiles();
+        }
     }
 
     public void initLayout() {
@@ -95,8 +97,10 @@ public class BaseMediaPanel extends BasePanel {
         return controlsList;
     }
 
-    public boolean isEmpty() {
-        if (files.isEmpty()) {
+    public boolean isEmpty(String filesPath) {
+        if (filesPath == null
+                || filesPath.isEmpty()
+                || !(new File(filesPath).exists())) {
             return true;
         }
         return false;
@@ -132,9 +136,6 @@ public class BaseMediaPanel extends BasePanel {
         add(noFiles);
         add(panel);
         controlsList.add(panel);
-        selector.setList(controlsList);
-        selector.start();
-
         panel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");

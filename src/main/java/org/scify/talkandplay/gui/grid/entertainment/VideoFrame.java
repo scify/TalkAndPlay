@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import org.scify.talkandplay.gui.grid.selectors.ButtonSelector;
+import org.scify.talkandplay.gui.grid.selectors.ManualButtonSelector;
 import org.scify.talkandplay.gui.grid.selectors.MouseSelector;
 import org.scify.talkandplay.gui.grid.selectors.Selector;
 import org.scify.talkandplay.gui.helpers.Time;
@@ -55,6 +56,8 @@ public class VideoFrame extends javax.swing.JFrame {
 
         if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
             this.selector = new MouseSelector(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
+        } else if (user.getConfiguration().getNavigationSensor() != null) {
+            this.selector = new ManualButtonSelector(user, null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         } else {
             this.selector = new ButtonSelector(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         }
@@ -64,7 +67,7 @@ public class VideoFrame extends javax.swing.JFrame {
         setTitle("Video Player");
         setVisible(false);
         setIconImage((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/tp_logo_mini.png"))).getImage());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         initComponents();
@@ -200,6 +203,9 @@ public class VideoFrame extends javax.swing.JFrame {
         playerPanel.setPauseButton();
         mediaPlayer.playMedia(file);
         setVisible(true);
+
+        selector.setList(playerPanel.getControlPanels());
+        selector.start();
     }
 
     private void addListeners() {
@@ -243,7 +249,7 @@ public class VideoFrame extends javax.swing.JFrame {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor) && mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();
-                } else {
+                } else if (sensorService.shouldSelect(sensor) && !mediaPlayer.isPlaying()) {
                     mediaPlayer.play();
                 }
             }
@@ -253,7 +259,7 @@ public class VideoFrame extends javax.swing.JFrame {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor) && mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();
-                } else {
+                } else if (sensorService.shouldSelect(sensor) && !mediaPlayer.isPlaying()) {
                     mediaPlayer.play();
                 }
             }
@@ -287,7 +293,7 @@ public class VideoFrame extends javax.swing.JFrame {
                     }
                     mediaPlayer.stop();
                     parent.getSelector().start();
-                    videoFrame.dispatchEvent(new WindowEvent(videoFrame, WindowEvent.WINDOW_CLOSING));
+                    dispose();
                 }
             }
         });
@@ -300,7 +306,7 @@ public class VideoFrame extends javax.swing.JFrame {
                     }
                     mediaPlayer.stop();
                     parent.getSelector().start();
-                    videoFrame.dispatchEvent(new WindowEvent(videoFrame, WindowEvent.WINDOW_CLOSING));
+                    dispose();
                 }
             }
         });
@@ -308,7 +314,6 @@ public class VideoFrame extends javax.swing.JFrame {
 
     private void getPrevious() {
         int selected = filesPanel.getSelected();
-        System.out.println(selected);
 
         if (selected != -1) {
             if (selected == 0) {
@@ -317,7 +322,6 @@ public class VideoFrame extends javax.swing.JFrame {
                 selected--;
             }
             filesPanel.setSelected(selected);
-            System.out.println(selected);
             playMedia(getFilePath(filesPanel.getFileList().get(selected)));
         }
     }
