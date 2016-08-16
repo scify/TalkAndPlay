@@ -70,7 +70,7 @@ public class EntertainmentPanel extends BaseGridPanel {
         parent.addGrid(this);
         parent.revalidate();
         parent.repaint();
-        
+
         selector.setList(panelList);
         selector.start();
     }
@@ -81,16 +81,16 @@ public class EntertainmentPanel extends BaseGridPanel {
                 user.getEntertainmentModule().getMusicModule().getImageURL(),
                 user.getEntertainmentModule().getMusicModule().getSound(),
                 new TileAction() {
-            @Override
-            public void act() {
-                selector.cancel();
-            }
+                    @Override
+                    public void act() {
+                        selector.cancel();
+                    }
 
-            @Override
-            public void audioFinished() {
-                showMusic();
-            }
-        });
+                    @Override
+                    public void audioFinished() {
+                        showMusic();
+                    }
+                });
 
         return panel;
     }
@@ -101,16 +101,16 @@ public class EntertainmentPanel extends BaseGridPanel {
                 user.getEntertainmentModule().getVideoModule().getImageURL(),
                 user.getEntertainmentModule().getVideoModule().getSound(),
                 new TileAction() {
-            @Override
-            public void act() {
-                selector.cancel();
-            }
+                    @Override
+                    public void act() {
+                        selector.cancel();
+                    }
 
-            @Override
-            public void audioFinished() {
-                showVideo();
-            }
-        });
+                    @Override
+                    public void audioFinished() {
+                        showVideo();
+                    }
+                });
 
         return panel;
     }
@@ -121,22 +121,22 @@ public class EntertainmentPanel extends BaseGridPanel {
                 getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"),
                 null,
                 new TileAction() {
-            @Override
-            public void act() {
-                selector.cancel();
-                showMainMenu();
-            }
+                    @Override
+                    public void act() {
+                        selector.cancel();
+                        showMainMenu();
+                    }
 
-            @Override
-            public void audioFinished() {
-                return;
-            }
+                    @Override
+                    public void audioFinished() {
+                        return;
+                    }
 
-            @Override
-            public boolean mute() {
-                return true;
-            }
-        });
+                    @Override
+                    public boolean mute() {
+                        return true;
+                    }
+                });
 
         return panel;
     }

@@ -164,7 +164,6 @@ public class SimilarityGamePanel extends BaseGamePanel {
         topPanel.revalidate();
         topPanel.repaint();
 
-        controls.getSelector().addListeners(controls.getControls());
         controls.getSelector().setList(controls.getControls());
         controls.getSelector().start();
 

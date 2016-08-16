@@ -1,12 +1,14 @@
 package org.scify.talkandplay.gui.grid.selectors;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.helpers.UIConstants;
+import org.scify.talkandplay.models.Tile;
 
 /**
  * Base selector
@@ -105,9 +107,9 @@ public class Selector {
         return BACKGROUND_COLOR;
     }
 
-    public void addListeners(List<JPanel> panelList) {
+    public void addListeners() {
     }
 
-    public void addListeners(int i) {
+    public void act() {
     }
 }

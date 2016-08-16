@@ -11,6 +11,7 @@ import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.tiles.TileAction;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.Category;
+import org.scify.talkandplay.models.Tile;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.CategoryService;
 import org.scify.talkandplay.services.SensorService;
@@ -104,7 +105,8 @@ public class CommunicationPanel extends BaseGridPanel {
                         JPanel panel = createCategoryItem(category.getSubCategories().get(i));
                         add(panel, c);
                         setGrid(category);
-                        panelList.add(panel);                       
+                        panelList.add(panel);
+                        tileList.add(new Tile(panel, false));
                     }
                 }
 
@@ -113,6 +115,7 @@ public class CommunicationPanel extends BaseGridPanel {
                 add(panel, c);
                 setGrid(category);
                 panelList.add(panel);
+                tileList.add(new Tile(panel, false));
 
                 if (i >= category.getSubCategories().size()) {
                     stopped = 0;
@@ -123,6 +126,7 @@ public class CommunicationPanel extends BaseGridPanel {
                     add(panel, c);
                     setGrid(category);
                     panelList.add(panel);
+                    tileList.add(new Tile(panel, false));
                 }
             }
         }
@@ -133,11 +137,13 @@ public class CommunicationPanel extends BaseGridPanel {
             add(panel, c);
             setGrid(category);
             panelList.add(panel);
+            tileList.add(new Tile(panel, false));
         } else {
             JPanel panel = createBackItem(category, false);
             add(panel, c);
             setGrid(category);
             panelList.add(panel);
+            tileList.add(new Tile(panel, false));
         }
 
         fillWithEmpties();
@@ -150,7 +156,6 @@ public class CommunicationPanel extends BaseGridPanel {
         parent.revalidate();
         parent.repaint();
 
-        checkListeners();
         selector.setList(panelList);
         selector.start();
     }
@@ -204,7 +209,7 @@ public class CommunicationPanel extends BaseGridPanel {
                         selector.cancel();
                         stopped = 0;
                         if (isRoot) {
-                        showMainMenu();
+                            showMainMenu();
                         } else if (!isRoot && category.getParentCategory() == null) {
                             try {
                                 drawImages(rootCategory);

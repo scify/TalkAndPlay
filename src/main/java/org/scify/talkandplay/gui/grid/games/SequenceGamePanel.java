@@ -144,7 +144,7 @@ public class SequenceGamePanel extends BaseGamePanel {
             bottomPanel.repaint();
             topPanel.revalidate();
             topPanel.repaint();
-    
+
             selector.setList(panelList);
             selector.start();
         } else {
@@ -181,6 +181,7 @@ public class SequenceGamePanel extends BaseGamePanel {
             i++;
             c1.gridx++;
         }
+        System.out.println("panellist " + panelList.size());
     }
 
     private void redrawControlsPanel() {
@@ -216,7 +217,6 @@ public class SequenceGamePanel extends BaseGamePanel {
         topPanel.revalidate();
         topPanel.repaint();
 
-        controls.getSelector().addListeners(controls.getControls());
         controls.getSelector().setList(controls.getControls());
         controls.getSelector().start();
 

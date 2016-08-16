@@ -2,8 +2,10 @@ package org.scify.talkandplay.gui.grid.selectors;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 import javax.swing.JPanel;
+import org.scify.talkandplay.models.Tile;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
@@ -38,31 +40,35 @@ public class ManualButtonSelector extends ButtonSelector {
         setSelected(selected);
         panelList.get(selected).setFocusable(true);
         panelList.get(selected).grabFocus();
+        addListeners();
     }
 
     @Override
-    public void addListeners(final List<JPanel> panelList) {
+    public void addListeners() {
         for (int i = 0; i < panelList.size(); i++) {
-            panelList.get(i).addKeyListener(new KeyAdapter() {
-                public void keyPressed(KeyEvent ke) {
-                    Sensor sensor = new KeyboardSensor(ke.getKeyCode(), String.valueOf(ke.getKeyChar()), "keyboard");
-                    if (sensorService.shouldNavigate(sensor)) {
 
-                        if (selected == 0 || (selected < panelList.size() - 1 && selected > 0)) {
-                            selected++;
-                        } else if (selected == panelList.size() - 1) {
-                            selected = 0;
-                        }
-
-                        unselectAll();
-                        setSelected(selected);
-                        
-                        panelList.get(selected).setFocusable(true);
-                        panelList.get(selected).grabFocus();
-                    }
+            for (KeyListener listener : panelList.get(i).getKeyListeners()) {
+                if (listener instanceof ManualListener) {
+                    panelList.get(i).removeKeyListener(listener);
                 }
-            });
+            }
+
+            panelList.get(i).addKeyListener(new ManualListener(this, sensorService));
         }
+    }
+
+    public void act() {
+        if (selected == 0 || (selected < panelList.size() - 1 && selected > 0)) {
+            selected++;
+        } else if (selected == panelList.size() - 1) {
+            selected = 0;
+        }
+
+        unselectAll();
+        setSelected(selected);
+
+        panelList.get(selected).setFocusable(true);
+        panelList.get(selected).grabFocus();
     }
 
     @Override

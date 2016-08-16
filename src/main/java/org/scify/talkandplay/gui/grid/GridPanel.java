@@ -111,7 +111,6 @@ public class GridPanel extends BaseGridPanel {
         revalidate();
         repaint();
 
-        selector.addListeners(panelList);
         selector.setList(panelList);
         selector.start();
     }

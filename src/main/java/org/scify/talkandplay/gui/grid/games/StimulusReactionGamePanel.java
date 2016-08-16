@@ -180,7 +180,6 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
         
         controlsPanel.add(controls);
         
-        controls.getSelector().addListeners(controls.getControls());
         controls.getSelector().setList(controls.getControls());
         controls.getSelector().start();
         

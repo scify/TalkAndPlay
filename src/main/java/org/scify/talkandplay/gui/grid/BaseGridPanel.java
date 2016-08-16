@@ -7,14 +7,13 @@ import java.awt.GridBagLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.selectors.ManualTileSelector;
 import org.scify.talkandplay.gui.grid.selectors.MouseSelector;
 import org.scify.talkandplay.gui.grid.selectors.TileSelector;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.Category;
+import org.scify.talkandplay.models.Tile;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.services.UserService;
@@ -30,10 +29,9 @@ public class BaseGridPanel extends BasePanel {
     protected Category currentCategory;
     protected UserService userService;
     protected ArrayList<JPanel> panelList;
-    protected ArrayList<JPanel> allPanels;
+    protected ArrayList<Tile> tileList;
     protected int empties;
     protected int width, height;
-    private Map<Integer, Boolean> hasListeners;
 
     protected TileCreator tileCreator;
 
@@ -54,8 +52,7 @@ public class BaseGridPanel extends BasePanel {
             this.tileCreator = new TileCreator(user, currentCategory.getRows(), currentCategory.getColumns());
         }
 
-        this.allPanels = new ArrayList();
-        this.hasListeners = new HashMap();
+        this.tileList = new ArrayList();
         initComponents();
         initListeners();
         setEmpties();
@@ -118,16 +115,7 @@ public class BaseGridPanel extends BasePanel {
         }
     }
 
-    protected void checkListeners() {
-        for (int i = 0; i < allPanels.size(); i++) {
-            if (!hasListeners.containsKey(i)) {
-                hasListeners.put(i, true);
-                selector.addListeners(i);
-            } else if (hasListeners.containsKey(i) && !hasListeners.get(i)) {
-                selector.addListeners(i);
-            }
-        }
-    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

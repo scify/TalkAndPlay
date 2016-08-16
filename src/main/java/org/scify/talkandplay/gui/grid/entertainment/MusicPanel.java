@@ -112,7 +112,6 @@ public class MusicPanel extends BaseMediaPanel {
         parent.revalidate();
         parent.repaint();
 
-        selector.addListeners(controlsList);
         selector.setList(filesPanel.getPanelList());
         selector.start();
     }
