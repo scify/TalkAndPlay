@@ -3,7 +3,6 @@ package org.scify.talkandplay.gui.grid.games;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.tiles.TileAction;
@@ -21,8 +20,8 @@ public class SequenceGamePanel extends BaseGamePanel {
 
     private int correctImages;
 
-    public SequenceGamePanel(User user, GridFrame parent) {
-        super(user, parent, "sequenceGame", null);
+    public SequenceGamePanel(User user, GridFrame parent, String previousGame) {
+        super(user, parent, "sequenceGame", null, previousGame);
         this.correctImages = 1;
         this.sensorService = new SensorService(user);
 
@@ -31,7 +30,7 @@ public class SequenceGamePanel extends BaseGamePanel {
     }
 
     public SequenceGamePanel(User user, GridFrame parent, SequenceGame game) {
-        super(user, parent, "sequenceGame", game);
+        super(user, parent, "sequenceGame", game, "");
         this.correctImages = 1;
         this.sensorService = new SensorService(user);
 
@@ -227,7 +226,7 @@ public class SequenceGamePanel extends BaseGamePanel {
 
     public void newGame() {
         tileCreator.freePlayerResources();
-        SequenceGamePanel gamesPanel = new SequenceGamePanel(user, parent);
+        SequenceGamePanel gamesPanel = new SequenceGamePanel(user, parent, game.getName());
         parent.clearGrid();
         parent.addGrid(gamesPanel);
     }

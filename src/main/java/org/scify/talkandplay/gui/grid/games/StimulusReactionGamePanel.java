@@ -20,10 +20,12 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
     private StimulusReactionGame game;
     private int selected;
     private JPanel gamePanel, controlsPanel;
+    private String previousGame;
 
-    public StimulusReactionGamePanel(User user, GridFrame parent) {
+    public StimulusReactionGamePanel(User user, GridFrame parent, String previousGame) {
         super(user, parent);
         this.selected = 0;
+        this.previousGame = previousGame;
 
         initComponents();
         initCustomComponents();
@@ -80,7 +82,9 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
                 if ("stimulusReactionGame".equals(gameType.getType())) {
                     for (int j = 0; j < gameType.getGames().size(); j++) {
                         int i = randomGenerator.nextInt(gameType.getGames().size());
-                        if (gameType.getGames().get(i).isEnabled()) {
+                        if (gameType.getGames().get(i).isEnabled()
+                                && ((previousGame == null || previousGame.isEmpty())
+                                || (previousGame != null && !previousGame.isEmpty() && !gameType.getGames().get(i).getName().equals(previousGame)))) {
                             game = (StimulusReactionGame) gameType.getGames().get(i);
                             break;
                         }
@@ -201,7 +205,7 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
 
     public void newGame() {
         tileCreator.freePlayerResources();
-        StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent);
+        StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent, game.getName());
         parent.clearGrid();
         parent.addGrid(gamePanel);
     }

@@ -1,8 +1,6 @@
 package org.scify.talkandplay.gui.grid.entertainment;
 
-import java.io.File;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.BaseGridPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;

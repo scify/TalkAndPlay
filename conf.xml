@@ -981,13 +981,13 @@
       <rotationSpeed>1</rotationSpeed>
       <defaultGridRow>4</defaultGridRow>
       <defaultGridColumn>4</defaultGridColumn>
-      <sound>false</sound>
+      <sound>true</sound>
       <image>true</image>
       <text>true</text>
       <selectionSensor>
-        <type>mouse</type>
-        <button>1</button>
-        <clickCount>1</clickCount>
+        <type>keyboard</type>
+        <keyCode>32</keyCode>
+        <keyChar />
       </selectionSensor>
     </configuration>
     <communication>

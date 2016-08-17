@@ -21,8 +21,9 @@ public class SimilarityGamePanel extends BaseGamePanel {
     private String correctImage;
     private SensorService sensorService;
 
-    public SimilarityGamePanel(User user, GridFrame parent) {
-        super(user, parent, "similarityGame", null);
+    public SimilarityGamePanel(User user, GridFrame parent, String previousGame) {
+        super(user, parent, "similarityGame", null, previousGame);
+        this.previousGame = previousGame;
         this.sensorService = new SensorService(user);
 
         initComponents();
@@ -30,7 +31,7 @@ public class SimilarityGamePanel extends BaseGamePanel {
     }
 
     public SimilarityGamePanel(User user, GridFrame parent, Game game) {
-        super(user, parent, "similarityGame", game);
+        super(user, parent, "similarityGame", game, "");
         this.sensorService = new SensorService(user);
 
         initComponents();
@@ -175,7 +176,7 @@ public class SimilarityGamePanel extends BaseGamePanel {
 
     public void newGame() {
         tileCreator.freePlayerResources();
-        SimilarityGamePanel gamePanel = new SimilarityGamePanel(user, parent);
+        SimilarityGamePanel gamePanel = new SimilarityGamePanel(user, parent, game.getName());
         parent.clearGrid();
         parent.addGrid(gamePanel);
     }

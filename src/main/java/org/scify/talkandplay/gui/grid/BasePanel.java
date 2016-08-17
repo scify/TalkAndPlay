@@ -22,9 +22,6 @@ public class BasePanel extends javax.swing.JPanel {
         parent.addGrid(gridPanel);
         parent.revalidate();
         parent.repaint();
-
-        selector.setList(gridPanel.getPanelList());
-        selector.start();
     }
 
 }

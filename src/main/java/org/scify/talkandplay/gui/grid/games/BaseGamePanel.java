@@ -46,12 +46,14 @@ public class BaseGamePanel extends javax.swing.JPanel {
     protected JPanel topPanel, bottomPanel, topMsgPanel, bottomMsgPanel;
     protected List<GameImage> randomImages;
     protected ArrayList<JPanel> panelList;
+    protected String previousGame;
 
-    public BaseGamePanel(User user, GridFrame parent, String type, Game game) {
+    public BaseGamePanel(User user, GridFrame parent, String type, Game game, String previousGame) {
         this.user = user;
         this.parent = parent;
         this.type = type;
         this.game = game;
+        this.previousGame = previousGame;
 
         if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
             this.selector = new MouseSelector(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
@@ -115,7 +117,9 @@ public class BaseGamePanel extends javax.swing.JPanel {
             if (type.equals(gameType.getType())) {
                 for (int j = 0; j < gameType.getGames().size(); j++) {
                     int i = randomGenerator.nextInt(gameType.getGames().size());
-                    if (gameType.getGames().get(i).isEnabled()) {
+                    if (gameType.getGames().get(i).isEnabled()
+                            && ((previousGame == null || previousGame.isEmpty())
+                            || (previousGame != null && !previousGame.isEmpty() && !gameType.getGames().get(i).getName().equals(previousGame)))) {
 
                         if (type.equals("stimulusReactionGame")) {
                             game = (StimulusReactionGame) gameType.getGames().get(i);

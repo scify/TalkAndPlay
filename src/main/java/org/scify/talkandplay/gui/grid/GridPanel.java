@@ -36,8 +36,8 @@ public class GridPanel extends BaseGridPanel {
     private void initCustomComponents() {
         UIConstants.getInstance().setRows(2);
         UIConstants.getInstance().setColumns(3);
-        panelList = new ArrayList<>();
         initLayout();
+        panelList = new ArrayList<>();
 
         if (user.getCommunicationModule().isEnabled()) {
             JPanel communicationPanel = tileCreator.create(user.getCommunicationModule().getName(),
@@ -104,7 +104,7 @@ public class GridPanel extends BaseGridPanel {
             panelList.add(gamesPanel);
         }
 
-        c.gridy++; 
+        c.gridy++;
         c.gridx = 0;
         fillWithEmpties();
 
@@ -116,7 +116,6 @@ public class GridPanel extends BaseGridPanel {
     }
 
     private void showCommunication() {
-        selector.cancel();
         try {
             CommunicationPanel communicationPanel = new CommunicationPanel(user, parent);
         } catch (IOException ex) {
@@ -125,12 +124,10 @@ public class GridPanel extends BaseGridPanel {
     }
 
     private void showEntertainment() {
-        selector.cancel();
         EntertainmentPanel entertainmentPanel = new EntertainmentPanel(user, parent);
     }
 
     private void showGames() {
-        selector.cancel();
         GamesPanel gamesPanel = new GamesPanel(user, parent);
     }
 

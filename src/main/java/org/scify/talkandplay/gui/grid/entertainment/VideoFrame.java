@@ -54,7 +54,7 @@ public class VideoFrame extends javax.swing.JFrame {
         this.emptyPanel = new JPanel();
         this.sensorService = new SensorService(user);
 
-        if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
+       if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
             this.selector = new MouseSelector(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         } else if (user.getConfiguration().getNavigationSensor() != null) {
             this.selector = new ManualButtonSelector(user, null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
@@ -204,8 +204,8 @@ public class VideoFrame extends javax.swing.JFrame {
         mediaPlayer.playMedia(file);
         setVisible(true);
 
-        selector.setList(playerPanel.getControlPanels());
-        selector.start();
+      /*  selector.setList(playerPanel.getControlPanels());
+        selector.start();*/
     }
 
     private void addListeners() {
