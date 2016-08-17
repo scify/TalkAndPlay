@@ -80,8 +80,8 @@
             <enabled>true</enabled>
             <image />
             <difficulty>4</difficulty>
-            <winSound>demo_resources/sounds/games/winSound.mp3</winSound>
-            <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
+            <winSound />
+            <errorSound />
             <gameImages>
               <image>
                 <name />
@@ -108,6 +108,74 @@
                 <enabled>true</enabled>
               </image>
             </gameImages>
+          </game>          
+          <game>
+            <name>Game 4</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/Μπαλόνι/Μπαλόνι_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/Μπαλόνι/Μπαλόνι_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/Μπαλόνι/Μπαλόνι_3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/Μπαλόνι/Μπαλόνι_4.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>          
+          <game>
+            <name>Game 5</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+           <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_4.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
           </game>
         </games>
       </stimulusReactionGames>
@@ -124,7 +192,7 @@
             <enabled>true</enabled>
             <image />
             <difficulty>4</difficulty>
-            <winSound>/home/christina/Music/INNA - AmazingOfficial Music Video.mp3</winSound>
+            <winSound />
             <errorSound />
             <gameImages>
               <image>
@@ -195,66 +263,222 @@
             <name>Game 1</name>
             <enabled>true</enabled>
             <image />
-            <difficulty>4</difficulty>
-            <winSound>/home/christina/Projects/talkAndPlay/TalkAndPlay/demo_resources/sounds/games/Succes 4 MP3.mp3</winSound>
-            <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
+            <difficulty>3</difficulty>
+            <winSound />
+            <errorSound />
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/like.png</path>
+                <path>demo_resources/images/games/similarity/group2_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/shapes-2.png</path>
+                <path>demo_resources/images/games/similarity/group2_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/favorite-1.png</path>
+                <path>demo_resources/images/games/similarity/group2_3.png</path>
                 <order>3</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>          
+          <game>
+            <name>Game 2</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>3</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/group4_1.png</path>
+                <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/favorite.png</path>
+                <path>demo_resources/images/games/similarity/group4_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/group4_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
             </gameImages>
           </game>
-          <game>
-            <name>Game 2</name>
+           <game>
+            <name>Game 3</name>
             <enabled>true</enabled>
             <image />
-            <difficulty>4</difficulty>
-            <winSound>/home/christina/Music/Maroon 5 - Sugar (lyrics).mp3</winSound>
-            <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
+            <difficulty>3</difficulty>
+            <winSound />
+            <errorSound />
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/similarity1.png</path>
+                <path>demo_resources/images/games/similarity/group6_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/similarity2.png</path>
+                <path>demo_resources/images/games/similarity/group6_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/similarity3.png</path>
+                <path>demo_resources/images/games/similarity/group6_3.png</path>
                 <order>3</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+           <game>
+            <name>Game 4</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>3</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/group8_1.png</path>
+                <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/similarity4.png</path>
-                <order>4</order>
+                <path>demo_resources/images/games/similarity/group8_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/group8_3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+           <game>
+            <name>Game 5</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>3</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/group10_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/group10_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/group10_3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+           <game>
+            <name>Game 6</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>3</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/group12_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/group12_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/group12_3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+           <game>
+            <name>Game 7</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>3</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/group14_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/group14_3.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/group14_3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+           <game>
+            <name>Game 8</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>3</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/group16_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/group16_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>demo_resources/images/games/similarity/group16_3.png</path>
+                <order>3</order>
                 <enabled>true</enabled>
               </image>
             </gameImages>
