@@ -38,11 +38,11 @@ public class Selector {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                panelList.get(selected).setFocusable(true);
-                panelList.get(selected).grabFocus();
-
                 unselectAll();
                 setSelected(selected);
+
+                panelList.get(selected).setFocusable(true);
+                panelList.get(selected).grabFocus();
 
                 if (selected == panelList.size() - 1) {
                     selected = 0;

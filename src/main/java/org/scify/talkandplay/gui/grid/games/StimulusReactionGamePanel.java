@@ -237,7 +237,7 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
             }
         }
         if (sound == null) {
-            sound = "demo_resources/sounds/games/winSound.mp3";
+            sound = "resources/sounds/games/winSound.mp3";
         }
         return sound;
     }

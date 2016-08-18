@@ -58,7 +58,6 @@ public class VideoPanel extends BaseMediaPanel {
     private void initCustomComponents() {
 
         initLayout();
-
         boolean isEmpty = isEmpty(user.getEntertainmentModule().getVideoModule().getFolderPath());
 
         if (isEmpty) {

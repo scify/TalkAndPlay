@@ -18,10 +18,6 @@ public class BasePanel extends javax.swing.JPanel {
 
     protected void showMainMenu() {
         GridPanel gridPanel = new GridPanel(user, parent);
-        parent.clearGrid();
-        parent.addGrid(gridPanel);
-        parent.revalidate();
-        parent.repaint();
     }
 
 }

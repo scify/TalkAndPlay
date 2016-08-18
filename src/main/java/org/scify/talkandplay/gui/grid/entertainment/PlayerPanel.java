@@ -21,7 +21,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import org.scify.talkandplay.gui.grid.selectors.Selector;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.services.SensorService;
 
@@ -33,13 +32,11 @@ public class PlayerPanel extends javax.swing.JPanel {
 
     private JPanel prevPanel, playPanel, nextPanel, fullScreenPanel, exitPanel;
     private SensorService sensorService;
-    private Selector selector;
     private List<JPanel> controlsList;
 
-    public PlayerPanel(SensorService sensorService, Selector selector) {
+    public PlayerPanel(SensorService sensorService) {
         this.sensorService = sensorService;
         this.controlsList = new ArrayList();
-        this.selector = selector;
 
         initComponents();
         initCustomComponents();
@@ -86,10 +83,6 @@ public class PlayerPanel extends javax.swing.JPanel {
         controlsList.add(nextPanel);
         //controlsList.add(fullScreenPanel);
         controlsList.add(exitPanel);
-
-        selector.setDefaultBackgroundColor(UIConstants.grey);
-        selector.setList(controlsList);
-        selector.start();
     }
 
     private JPanel drawButton(String text, URL imageIcon) {

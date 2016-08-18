@@ -174,7 +174,7 @@ public class BaseGamePanel extends javax.swing.JPanel {
             }
         }
         if (sound == null) {
-            sound = "demo_resources/sounds/games/winSound.mp3";
+            sound = "resources/sounds/games/winSound.mp3";
         }
         return sound;
     }
@@ -194,7 +194,7 @@ public class BaseGamePanel extends javax.swing.JPanel {
         }
 
         if (sound == null) {
-            sound = "demo_resources/sounds/games/errorSound.mp3";
+            sound = "resources/sounds/games/errorSound.mp3";
         }
         return sound;
     }

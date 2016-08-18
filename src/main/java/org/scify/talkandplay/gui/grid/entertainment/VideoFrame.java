@@ -8,7 +8,6 @@ package org.scify.talkandplay.gui.grid.entertainment;
 import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
-import java.awt.event.WindowEvent;
 import java.io.File;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -20,6 +19,7 @@ import org.scify.talkandplay.gui.grid.selectors.ManualButtonSelector;
 import org.scify.talkandplay.gui.grid.selectors.MouseSelector;
 import org.scify.talkandplay.gui.grid.selectors.Selector;
 import org.scify.talkandplay.gui.helpers.Time;
+import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
@@ -54,7 +54,7 @@ public class VideoFrame extends javax.swing.JFrame {
         this.emptyPanel = new JPanel();
         this.sensorService = new SensorService(user);
 
-       if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
+        if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
             this.selector = new MouseSelector(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         } else if (user.getConfiguration().getNavigationSensor() != null) {
             this.selector = new ManualButtonSelector(user, null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
@@ -62,7 +62,7 @@ public class VideoFrame extends javax.swing.JFrame {
             this.selector = new ButtonSelector(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         }
 
-        this.playerPanel = new PlayerPanel(sensorService, selector);
+        this.playerPanel = new PlayerPanel(sensorService);
 
         setTitle("Video Player");
         setVisible(false);
@@ -204,8 +204,9 @@ public class VideoFrame extends javax.swing.JFrame {
         mediaPlayer.playMedia(file);
         setVisible(true);
 
-      /*  selector.setList(playerPanel.getControlPanels());
-        selector.start();*/
+        selector.setDefaultBackgroundColor(UIConstants.grey);
+        selector.setList(playerPanel.getControlPanels());
+        selector.start();
     }
 
     private void addListeners() {
@@ -283,7 +284,6 @@ public class VideoFrame extends javax.swing.JFrame {
          }
          }
          });*/
-        final VideoFrame videoFrame = this;
         playerPanel.getExitPanel().addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
@@ -291,6 +291,7 @@ public class VideoFrame extends javax.swing.JFrame {
                     if (mediaPlayer.isPlaying()) {
                         mediaPlayer.play();
                     }
+                    selector.cancel();
                     mediaPlayer.stop();
                     parent.getSelector().start();
                     dispose();
@@ -303,7 +304,8 @@ public class VideoFrame extends javax.swing.JFrame {
                 if (sensorService.shouldSelect(sensor)) {
                     if (mediaPlayer.isPlaying()) {
                         mediaPlayer.play();
-                    }
+                    }                    
+                    selector.cancel();
                     mediaPlayer.stop();
                     parent.getSelector().start();
                     dispose();
@@ -313,6 +315,7 @@ public class VideoFrame extends javax.swing.JFrame {
     }
 
     private void getPrevious() {
+        selector.cancel();
         int selected = filesPanel.getSelected();
 
         if (selected != -1) {
@@ -327,6 +330,7 @@ public class VideoFrame extends javax.swing.JFrame {
     }
 
     private void getNext() {
+        selector.cancel();
         int selected = filesPanel.getSelected();
         if (selected != -1) {
             if (selected == filesPanel.getFileList().size() - 1) {

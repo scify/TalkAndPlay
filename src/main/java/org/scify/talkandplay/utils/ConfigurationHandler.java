@@ -200,7 +200,7 @@ public class ConfigurationHandler {
         }
 
         if (communicationNode.getChildText("sound").isEmpty()) {
-            communicationModule.setSound("demo_resources/sounds/Επικοινωνία.mp3");
+            communicationModule.setSound("resources/sounds/Επικοινωνία.mp3");
         } else {
             communicationModule.setSound(communicationNode.getChildText("sound"));
         }
@@ -225,7 +225,7 @@ public class ConfigurationHandler {
         }
 
         if (entertainmentNode.getChildText("sound").isEmpty()) {
-            entertainmentModule.setSound("demo_resources/sounds/Ψυχαγωγία.mp3");
+            entertainmentModule.setSound("resources/sounds/Ψυχαγωγία.mp3");
         } else {
             entertainmentModule.setSound(entertainmentNode.getChildText("sound"));
         }
@@ -246,7 +246,7 @@ public class ConfigurationHandler {
         }
 
         if (musicNode.getChildText("sound").isEmpty()) {
-            musicModule.setSound("demo_resources/sounds/Μουσική.mp3");
+            musicModule.setSound("resources/sounds/Μουσική.mp3");
         } else {
             musicModule.setSound(musicNode.getChildText("sound"));
         }
@@ -267,7 +267,7 @@ public class ConfigurationHandler {
         }
 
         if (videoNode.getChildText("sound").isEmpty()) {
-            videoModule.setSound("demo_resources/sounds/Βίντεο.mp3");
+            videoModule.setSound("resources/sounds/Βίντεο.mp3");
         } else {
             videoModule.setSound(videoNode.getChildText("sound"));
         }
@@ -292,7 +292,7 @@ public class ConfigurationHandler {
         }
 
         if (gameNode.getChildText("sound").isEmpty()) {
-            gameModule.setSound("demo_resources/sounds/Παιχνίδια.mp3");
+            gameModule.setSound("resources/sounds/Παιχνίδια.mp3");
         } else {
             gameModule.setSound(gameNode.getChildText("sound"));
         }
@@ -306,7 +306,7 @@ public class ConfigurationHandler {
                     "stimulusReactionGame");
 
             if (stimulusReactionGamesNode.getChildText("sound").isEmpty()) {
-                stimulusReactionType.setSound("demo_resources/sounds/Ερέθισμα - Αντίδραση.mp3");
+                stimulusReactionType.setSound("resources/sounds/Ερέθισμα - Αντίδραση.mp3");
             } else {
                 stimulusReactionType.setSound(stimulusReactionGamesNode.getChildText("sound"));
             }
@@ -385,7 +385,7 @@ public class ConfigurationHandler {
                     "sequenceGame");
 
             if (sequenceGamesNode.getChildText("sound").isEmpty()) {
-                sequenceGameType.setSound("demo_resources/sounds/Χρονικής Αλληλουχίας.mp3");
+                sequenceGameType.setSound("resources/sounds/Χρονικής Αλληλουχίας.mp3");
             } else {
                 sequenceGameType.setSound(sequenceGamesNode.getChildText("sound"));
             }
@@ -462,7 +462,7 @@ public class ConfigurationHandler {
                     "similarityGame");
 
             if (similarGamesNode.getChildText("sound").isEmpty()) {
-                similarityGameType.setSound("demo_resources/sounds/Βρες το όμοιο.mp3");
+                similarityGameType.setSound("resources/sounds/Βρες το όμοιο.mp3");
             } else {
                 similarityGameType.setSound(similarGamesNode.getChildText("sound"));
             }

@@ -87,12 +87,6 @@ public class GridFrame extends javax.swing.JFrame {
         gridPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         GridPanel panel = new GridPanel(user, this);
-        gridPanel.add(panel);
-        gridPanel.revalidate();
-        gridPanel.repaint();
-
-        revalidate();
-        repaint();
         pack();
     }
 

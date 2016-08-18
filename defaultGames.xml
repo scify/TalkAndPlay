@@ -17,25 +17,25 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/αυτοκίνητο/αυτοκίνητο_1.png</path>
+                <path>resources/images/games/αυτοκίνητο/αυτοκίνητο_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/αυτοκίνητο/αυτοκίνητο_2.png</path>
+                <path>resources/images/games/αυτοκίνητο/αυτοκίνητο_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/αυτοκίνητο/αυτοκίνητο_3.png</path>
+                <path>resources/images/games/αυτοκίνητο/αυτοκίνητο_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/αυτοκίνητο/αυτοκίνητο_4.png</path>
+                <path>resources/images/games/αυτοκίνητο/αυτοκίνητο_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -46,30 +46,30 @@
             <enabled>true</enabled>
             <image />
             <difficulty>4</difficulty>
-            <winSound>demo_resources/sounds/games/ship.mp3</winSound>
-            <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
+            <winSound>resources/sounds/games/ship.mp3</winSound>
+            <errorSound>resources/sounds/games/errorSound.mp3</errorSound>
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/καράβι/καράβι_1.png</path>
+                <path>resources/images/games/καράβι/καράβι_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/καράβι/καράβι_2.png</path>
+                <path>resources/images/games/καράβι/καράβι_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/καράβι/καράβι_3.png</path>
+                <path>resources/images/games/καράβι/καράβι_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/καράβι/καράβι_4.png</path>
+                <path>resources/images/games/καράβι/καράβι_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -85,25 +85,25 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_1.png</path>
+                <path>resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_2.png</path>
+                <path>resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_3.png</path>
+                <path>resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_4.png</path>
+                <path>resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -119,25 +119,25 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/Μπαλόνι/Μπαλόνι_1.png</path>
+                <path>resources/images/games/Μπαλόνι/Μπαλόνι_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/Μπαλόνι/Μπαλόνι_2.png</path>
+                <path>resources/images/games/Μπαλόνι/Μπαλόνι_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/Μπαλόνι/Μπαλόνι_3.png</path>
+                <path>resources/images/games/Μπαλόνι/Μπαλόνι_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/Μπαλόνι/Μπαλόνι_4.png</path>
+                <path>resources/images/games/Μπαλόνι/Μπαλόνι_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -153,25 +153,25 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_1.png</path>
+                <path>resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_2.png</path>
+                <path>resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_3.png</path>
+                <path>resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_4.png</path>
+                <path>resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -197,19 +197,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/sequence1.png</path>
+                <path>resources/images/games/sequence1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/sequence2.png</path>
+                <path>resources/images/games/sequence2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/sequence3.png</path>
+                <path>resources/images/games/sequence3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -225,25 +225,25 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/time.png</path>
+                <path>resources/images/games/time.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/time-1.png</path>
+                <path>resources/images/games/time-1.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/hours.png</path>
+                <path>resources/images/games/hours.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/clock1.png</path>
+                <path>resources/images/games/clock1.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -255,8 +255,8 @@
         <name>Βρες το όμοιο</name>
         <image />
         <sound />
-        <winSound>demo_resources/sounds/games/winSound.mp3</winSound>
-        <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
+        <winSound>resources/sounds/games/winSound.mp3</winSound>
+        <errorSound>resources/sounds/games/errorSound.mp3</errorSound>
         <enabled>true</enabled>
         <games>
           <game>
@@ -269,19 +269,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group2_1.png</path>
+                <path>resources/images/games/similarity/group2_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group2_2.png</path>
+                <path>resources/images/games/similarity/group2_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group2_3.png</path>
+                <path>resources/images/games/similarity/group2_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -297,19 +297,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group4_1.png</path>
+                <path>resources/images/games/similarity/group4_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group4_2.png</path>
+                <path>resources/images/games/similarity/group4_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group4_3.png</path>
+                <path>resources/images/games/similarity/group4_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -325,19 +325,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group6_1.png</path>
+                <path>resources/images/games/similarity/group6_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group6_2.png</path>
+                <path>resources/images/games/similarity/group6_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group6_3.png</path>
+                <path>resources/images/games/similarity/group6_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -353,19 +353,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group8_1.png</path>
+                <path>resources/images/games/similarity/group8_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group8_2.png</path>
+                <path>resources/images/games/similarity/group8_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group8_3.png</path>
+                <path>resources/images/games/similarity/group8_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -381,19 +381,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group10_1.png</path>
+                <path>resources/images/games/similarity/group10_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group10_2.png</path>
+                <path>resources/images/games/similarity/group10_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group10_3.png</path>
+                <path>resources/images/games/similarity/group10_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -409,19 +409,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group12_1.png</path>
+                <path>resources/images/games/similarity/group12_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group12_2.png</path>
+                <path>resources/images/games/similarity/group12_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group12_3.png</path>
+                <path>resources/images/games/similarity/group12_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -437,19 +437,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group14_1.png</path>
+                <path>resources/images/games/similarity/group14_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group14_3.png</path>
+                <path>resources/images/games/similarity/group14_3.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group14_3.png</path>
+                <path>resources/images/games/similarity/group14_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -465,19 +465,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group16_1.png</path>
+                <path>resources/images/games/similarity/group16_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group16_2.png</path>
+                <path>resources/images/games/similarity/group16_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group16_3.png</path>
+                <path>resources/images/games/similarity/group16_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>

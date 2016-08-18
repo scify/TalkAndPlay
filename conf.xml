@@ -2,7 +2,7 @@
 <profiles>
   <profile preselected="false">
     <name>demo</name>
-    <image>demo_resources/users/cat_with_wig.jpg</image>
+    <image>resources/users/cat_with_wig.jpg</image>
     <configuration>
       <rotationSpeed>1</rotationSpeed>
       <defaultGridRow>2</defaultGridRow>
@@ -25,15 +25,15 @@
       <name>Επικοινωνία</name>
       <enabled>true</enabled>
       <image />
-      <sound>demo_resources/sounds/Επικοινωνία.mp3</sound>
+      <sound>resources/sounds/Επικοινωνία.mp3</sound>
       <rows>3</rows>
       <columns>3</columns>
       <categories>
         <category name="Φαγητό">
           <rows>3</rows>
           <columns>3</columns>
-          <image>demo_resources/images/Φαγητό/Μπιφτέκι.png</image>
-          <sound>demo_resources/sounds/Φαγητό.mp3</sound>
+          <image>resources/images/Φαγητό/Μπιφτέκι.png</image>
+          <sound>resources/sounds/Φαγητό.mp3</sound>
           <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
@@ -41,8 +41,8 @@
             <category name="Μακαρόνια">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φαγητό/Μακαρόνια.png</image>
-              <sound>demo_resources/sounds/Μακαρόνια.mp3</sound>
+              <image>resources/images/Φαγητό/Μακαρόνια.png</image>
+              <sound>resources/sounds/Μακαρόνια.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -50,8 +50,8 @@
             <category name="Πατάτες τηγανητές">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φαγητό/Πατάτες τηγανητές.png</image>
-              <sound>demo_resources/sounds/Πατάτες τηγανητές.mp3</sound>
+              <image>resources/images/Φαγητό/Πατάτες τηγανητές.png</image>
+              <sound>resources/sounds/Πατάτες τηγανητές.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -59,8 +59,8 @@
             <category name="Μπιφτέκι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φαγητό/Μπιφτέκι.png</image>
-              <sound>demo_resources/sounds/Μπιφτέκι.mp3</sound>
+              <image>resources/images/Φαγητό/Μπιφτέκι.png</image>
+              <sound>resources/sounds/Μπιφτέκι.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -68,8 +68,8 @@
             <category name="Μπριζόλα">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φαγητό/μπριζόλα.png</image>
-              <sound>demo_resources/sounds/Μπριζόλα.mp3</sound>
+              <image>resources/images/Φαγητό/μπριζόλα.png</image>
+              <sound>resources/sounds/Μπριζόλα.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -77,8 +77,8 @@
             <category name="Κοτόπουλο">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φαγητό/κοτόπουλο.png</image>
-              <sound>demo_resources/sounds/Κοτόπουλο.mp3</sound>
+              <image>resources/images/Φαγητό/κοτόπουλο.png</image>
+              <sound>resources/sounds/Κοτόπουλο.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -86,8 +86,8 @@
             <category name="Σούπα">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φαγητό/σούπα.png</image>
-              <sound>demo_resources/sounds/Σούπα.mp3</sound>
+              <image>resources/images/Φαγητό/σούπα.png</image>
+              <sound>resources/sounds/Σούπα.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -95,8 +95,8 @@
             <category name="Ψωμί">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φαγητό/ψωμί.png</image>
-              <sound>demo_resources/sounds/Ψωμί.mp3</sound>
+              <image>resources/images/Φαγητό/ψωμί.png</image>
+              <sound>resources/sounds/Ψωμί.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -104,8 +104,8 @@
             <category name="Τοστ">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φαγητό/τοστ.png</image>
-              <sound>demo_resources/sounds/Τοστ.mp3</sound>
+              <image>resources/images/Φαγητό/τοστ.png</image>
+              <sound>resources/sounds/Τοστ.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -113,7 +113,7 @@
             <category name="Νερό">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φαγητό/νερό.png</image>
+              <image>resources/images/Φαγητό/νερό.png</image>
               <sound />
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
@@ -122,8 +122,8 @@
             <category name="Χυμός">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φαγητό/χυμός.png</image>
-              <sound>demo_resources/sounds/Χυμός.mp3</sound>
+              <image>resources/images/Φαγητό/χυμός.png</image>
+              <sound>resources/sounds/Χυμός.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -131,8 +131,8 @@
             <category name="Γάλα">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φαγητό/Γάλα.png</image>
-              <sound>demo_resources/sounds/Γάλα.mp3</sound>
+              <image>resources/images/Φαγητό/Γάλα.png</image>
+              <sound>resources/sounds/Γάλα.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -140,8 +140,8 @@
             <category name="Γιαούρτι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φαγητό/γιαούρτι.png</image>
-              <sound>demo_resources/sounds/Γιαούρτι.mp3</sound>
+              <image>resources/images/Φαγητό/γιαούρτι.png</image>
+              <sound>resources/sounds/Γιαούρτι.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -149,8 +149,8 @@
             <category name="Αγγούρι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φαγητό/αγγούρι.png</image>
-              <sound>demo_resources/sounds/Αγγούρι.mp3</sound>
+              <image>resources/images/Φαγητό/αγγούρι.png</image>
+              <sound>resources/sounds/Αγγούρι.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -158,8 +158,8 @@
             <category name="Ντομάτα">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φαγητό/ντομάτα.png</image>
-              <sound>demo_resources/sounds/Ντομάτα.mp3</sound>
+              <image>resources/images/Φαγητό/ντομάτα.png</image>
+              <sound>resources/sounds/Ντομάτα.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -169,8 +169,8 @@
         <category name="Φρούτα">
           <rows />
           <columns />
-          <image>demo_resources/images/Φρούτα/πορτοκάλι.png</image>
-          <sound>demo_resources/sounds/Φρούτα.mp3</sound>
+          <image>resources/images/Φρούτα/πορτοκάλι.png</image>
+          <sound>resources/sounds/Φρούτα.mp3</sound>
           <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
@@ -178,8 +178,8 @@
             <category name="Μήλο">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φρούτα/μήλο.png</image>
-              <sound>demo_resources/sounds/Μήλο.mp3</sound>
+              <image>resources/images/Φρούτα/μήλο.png</image>
+              <sound>resources/sounds/Μήλο.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -187,8 +187,8 @@
             <category name="Μπανάνα">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φρούτα/μπανάνα.png</image>
-              <sound>demo_resources/sounds/Μπανάνα.mp3</sound>
+              <image>resources/images/Φρούτα/μπανάνα.png</image>
+              <sound>resources/sounds/Μπανάνα.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -196,8 +196,8 @@
             <category name="Ροδάκινο">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φρούτα/ροδάκινο.png</image>
-              <sound>demo_resources/sounds/Ροδάκινο.mp3</sound>
+              <image>resources/images/Φρούτα/ροδάκινο.png</image>
+              <sound>resources/sounds/Ροδάκινο.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -205,8 +205,8 @@
             <category name="Αχλάδι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φρούτα/αχλάδι.png</image>
-              <sound>demo_resources/sounds/Αχλάδι.mp3</sound>
+              <image>resources/images/Φρούτα/αχλάδι.png</image>
+              <sound>resources/sounds/Αχλάδι.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -214,8 +214,8 @@
             <category name="Καρπούζι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φρούτα/καρπούζι.png</image>
-              <sound>demo_resources/sounds/Καρπούζι.mp3</sound>
+              <image>resources/images/Φρούτα/καρπούζι.png</image>
+              <sound>resources/sounds/Καρπούζι.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -223,8 +223,8 @@
             <category name="Πορτοκάλι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φρούτα/πορτοκάλι.png</image>
-              <sound>demo_resources/sounds/Πορτοκάλι.mp3</sound>
+              <image>resources/images/Φρούτα/πορτοκάλι.png</image>
+              <sound>resources/sounds/Πορτοκάλι.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -234,8 +234,8 @@
         <category name="Τουαλέτα">
           <rows>3</rows>
           <columns>3</columns>
-          <image>demo_resources/images/Τουαλέτα/τουαλέτα.png</image>
-          <sound>demo_resources/sounds/Τουαλέτα.mp3</sound>
+          <image>resources/images/Τουαλέτα/τουαλέτα.png</image>
+          <sound>resources/sounds/Τουαλέτα.mp3</sound>
           <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
@@ -243,8 +243,8 @@
             <category name="Αλλαγή πάνας">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Τουαλέτα/Πάνα χρησιμοποιημένη με τσίσα.png</image>
-              <sound>demo_resources/sounds/Αλλαγή πάνας.mp3</sound>
+              <image>resources/images/Τουαλέτα/Πάνα χρησιμοποιημένη με τσίσα.png</image>
+              <sound>resources/sounds/Αλλαγή πάνας.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -252,8 +252,8 @@
             <category name="Αλλαγή πάνας">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Τουαλέτα/Πάνα χρησιμοποιημένη με κακά.png</image>
-              <sound>demo_resources/sounds/Αλλαγή πάνας.mp3</sound>
+              <image>resources/images/Τουαλέτα/Πάνα χρησιμοποιημένη με κακά.png</image>
+              <sound>resources/sounds/Αλλαγή πάνας.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -263,8 +263,8 @@
         <category name="Συναισθήματα">
           <rows>3</rows>
           <columns>3</columns>
-          <image>demo_resources/images/Συναισθήματα/Χαρά.png</image>
-          <sound>demo_resources/sounds/Συναισθήματα.mp3</sound>
+          <image>resources/images/Συναισθήματα/Χαρά.png</image>
+          <sound>resources/sounds/Συναισθήματα.mp3</sound>
           <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
@@ -272,8 +272,8 @@
             <category name="Χαρά">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Συναισθήματα/Χαρά.png</image>
-              <sound>demo_resources/sounds/Χαίρομαι.mp3</sound>
+              <image>resources/images/Συναισθήματα/Χαρά.png</image>
+              <sound>resources/sounds/Χαίρομαι.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -281,8 +281,8 @@
             <category name="Λύπη">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Συναισθήματα/Λύπη.png</image>
-              <sound>demo_resources/sounds/Είμαι λυπημένος.mp3</sound>
+              <image>resources/images/Συναισθήματα/Λύπη.png</image>
+              <sound>resources/sounds/Είμαι λυπημένος.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -290,8 +290,8 @@
             <category name="Θυμός">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Συναισθήματα/Θυμός.png</image>
-              <sound>demo_resources/sounds/Είμαι θυμωμένος.mp3</sound>
+              <image>resources/images/Συναισθήματα/Θυμός.png</image>
+              <sound>resources/sounds/Είμαι θυμωμένος.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -299,8 +299,8 @@
             <category name="Αηδία">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Συναισθήματα/Αηδία.png</image>
-              <sound>demo_resources/sounds/Νιώθω αηδία.mp3</sound>
+              <image>resources/images/Συναισθήματα/Αηδία.png</image>
+              <sound>resources/sounds/Νιώθω αηδία.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -308,8 +308,8 @@
             <category name="Φόβος">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Συναισθήματα/Φόβος.png</image>
-              <sound>demo_resources/sounds/Φοβάμαι.mp3</sound>
+              <image>resources/images/Συναισθήματα/Φόβος.png</image>
+              <sound>resources/sounds/Φοβάμαι.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -319,8 +319,8 @@
         <category name="Πόνος">
           <rows>3</rows>
           <columns>3</columns>
-          <image>demo_resources/images/Πόνος/Πόνος.png</image>
-          <sound>demo_resources/sounds/Πονάω.mp3</sound>
+          <image>resources/images/Πόνος/Πόνος.png</image>
+          <sound>resources/sounds/Πονάω.mp3</sound>
           <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
@@ -328,8 +328,8 @@
             <category name="Πόνος στο κεφάλι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Πόνος/Πόνος Κεφάλι.png</image>
-              <sound>demo_resources/sounds/Πονάει το κεφάλι μου.mp3</sound>
+              <image>resources/images/Πόνος/Πόνος Κεφάλι.png</image>
+              <sound>resources/sounds/Πονάει το κεφάλι μου.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -337,8 +337,8 @@
             <category name="Πόνος στο πόδι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Πόνος/Πόνος Πόδι.png</image>
-              <sound>demo_resources/sounds/Πονάει το πόδι μου.mp3</sound>
+              <image>resources/images/Πόνος/Πόνος Πόδι.png</image>
+              <sound>resources/sounds/Πονάει το πόδι μου.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -346,8 +346,8 @@
             <category name="Πόνος στο χέρι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Πόνος/Πόνος Χέρι.png</image>
-              <sound>demo_resources/sounds/Πονάει το χέρι μου.mp3</sound>
+              <image>resources/images/Πόνος/Πόνος Χέρι.png</image>
+              <sound>resources/sounds/Πονάει το χέρι μου.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -355,7 +355,7 @@
             <category name="Πόνος στην κοιλιά">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Πόνος/Πόνος στην κοιλιά.png</image>
+              <image>resources/images/Πόνος/Πόνος στην κοιλιά.png</image>
               <sound />
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
@@ -364,7 +364,7 @@
             <category name="Πόνος στην πλάτη">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Πόνος/Πόνος στην πλάτη.png</image>
+              <image>resources/images/Πόνος/Πόνος στην πλάτη.png</image>
               <sound />
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
@@ -375,8 +375,8 @@
         <category name="Θερμοκρασία">
           <rows>3</rows>
           <columns>3</columns>
-          <image>demo_resources/images/Θερμοκρασία/Ζεσταίνομαι.png</image>
-          <sound>demo_resources/sounds/Θερμοκρασία.mp3</sound>
+          <image>resources/images/Θερμοκρασία/Ζεσταίνομαι.png</image>
+          <sound>resources/sounds/Θερμοκρασία.mp3</sound>
           <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
@@ -384,8 +384,8 @@
             <category name="Κρύο">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Θερμοκρασία/Κρύο.png</image>
-              <sound>demo_resources/sounds/Κρύο.mp3</sound>
+              <image>resources/images/Θερμοκρασία/Κρύο.png</image>
+              <sound>resources/sounds/Κρύο.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -393,8 +393,8 @@
             <category name="Ζεστό">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Θερμοκρασία/Ζεστό.png</image>
-              <sound>demo_resources/sounds/Ζεστό.mp3</sound>
+              <image>resources/images/Θερμοκρασία/Ζεστό.png</image>
+              <sound>resources/sounds/Ζεστό.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -402,8 +402,8 @@
             <category name="Καυτό">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Θερμοκρασία/Καυτό.png</image>
-              <sound>demo_resources/sounds/Καυτό.mp3</sound>
+              <image>resources/images/Θερμοκρασία/Καυτό.png</image>
+              <sound>resources/sounds/Καυτό.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -413,8 +413,8 @@
         <category name="Φαγούρα">
           <rows>3</rows>
           <columns>3</columns>
-          <image>demo_resources/images/Φαγούρα/Φαγούρα.png</image>
-          <sound>demo_resources/sounds/Φαγούρα.mp3</sound>
+          <image>resources/images/Φαγούρα/Φαγούρα.png</image>
+          <sound>resources/sounds/Φαγούρα.mp3</sound>
           <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
@@ -422,8 +422,8 @@
             <category name="Φαγούρα στο κεφάλι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φαγούρα/Φαγούρα Κεφάλι.png</image>
-              <sound>demo_resources/sounds/Φαγούρα στο κεφάλι.mp3</sound>
+              <image>resources/images/Φαγούρα/Φαγούρα Κεφάλι.png</image>
+              <sound>resources/sounds/Φαγούρα στο κεφάλι.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -431,8 +431,8 @@
             <category name="Φαγούρα στο πόδι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φαγούρα/Φαγούρα Πόδι.png</image>
-              <sound>demo_resources/sounds/Φαγούρα στο πόδι.mp3</sound>
+              <image>resources/images/Φαγούρα/Φαγούρα Πόδι.png</image>
+              <sound>resources/sounds/Φαγούρα στο πόδι.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -440,8 +440,8 @@
             <category name="Φαγούρα στο χέρι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φαγούρα/Φαγούρα Χέρι.png</image>
-              <sound>demo_resources/sounds/Φαγούρα στο χέρι.mp3</sound>
+              <image>resources/images/Φαγούρα/Φαγούρα Χέρι.png</image>
+              <sound>resources/sounds/Φαγούρα στο χέρι.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -449,7 +449,7 @@
             <category name="Φαγούρα στην πλάτη">
               <rows>3</rows>
               <columns>3</columns>
-              <image>demo_resources/images/Φαγούρα/Φαγούρα στην πλάτη.png</image>
+              <image>resources/images/Φαγούρα/Φαγούρα στην πλάτη.png</image>
               <sound />
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
@@ -463,28 +463,28 @@
       <name>Ψυχαγωγία</name>
       <enabled>true</enabled>
       <image />
-      <sound>demo_resources/sounds/Ψυχαγωγία.mp3</sound>
+      <sound>resources/sounds/Ψυχαγωγία.mp3</sound>
       <music>
         <name>Μουσική</name>
         <enabled>true</enabled>
         <image />
-        <sound>demo_resources/sounds/Μουσική.mp3</sound>
+        <sound>resources/sounds/Μουσική.mp3</sound>
         <path>/home/christina/Music/</path>
-        <playlistSize>10</playlistSize>
+        <playlistSize>6</playlistSize>
       </music>
       <video>
         <name>Βίντεο</name>
         <enabled>true</enabled>
         <image />
-        <sound>demo_resources/sounds/Βίντεο.mp3</sound>
+        <sound>resources/sounds/Βίντεο.mp3</sound>
         <path>/home/christina/Videos/</path>
-        <playlistSize>10</playlistSize>
+        <playlistSize>6</playlistSize>
       </video>
     </entertainment>
     <games>
       <name>Παιχνίδια</name>
       <enabled>true</enabled>
-      <sound>demo_resources/sounds/Παιχνίδια.mp3</sound>
+      <sound>resources/sounds/Παιχνίδια.mp3</sound>
       <image />
       <stimulusReactionGames>
         <name>Ερέθισμα - Αντίδραση</name>
@@ -504,25 +504,25 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/αυτοκίνητο/αυτοκίνητο_1.png</path>
+                <path>resources/images/games/αυτοκίνητο/αυτοκίνητο_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/αυτοκίνητο/αυτοκίνητο_2.png</path>
+                <path>resources/images/games/αυτοκίνητο/αυτοκίνητο_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/αυτοκίνητο/αυτοκίνητο_3.png</path>
+                <path>resources/images/games/αυτοκίνητο/αυτοκίνητο_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/αυτοκίνητο/αυτοκίνητο_4.png</path>
+                <path>resources/images/games/αυτοκίνητο/αυτοκίνητο_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -533,30 +533,30 @@
             <enabled>true</enabled>
             <image />
             <difficulty>4</difficulty>
-            <winSound>demo_resources/sounds/games/ship.mp3</winSound>
-            <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
+            <winSound>resources/sounds/games/ship.mp3</winSound>
+            <errorSound>resources/sounds/games/errorSound.mp3</errorSound>
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/καράβι/καράβι_1.png</path>
+                <path>resources/images/games/καράβι/καράβι_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/καράβι/καράβι_2.png</path>
+                <path>resources/images/games/καράβι/καράβι_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/καράβι/καράβι_3.png</path>
+                <path>resources/images/games/καράβι/καράβι_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/καράβι/καράβι_4.png</path>
+                <path>resources/images/games/καράβι/καράβι_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -572,25 +572,25 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_1.png</path>
+                <path>resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_2.png</path>
+                <path>resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_3.png</path>
+                <path>resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_4.png</path>
+                <path>resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -606,25 +606,25 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/Μπαλόνι/Μπαλόνι_1.png</path>
+                <path>resources/images/games/Μπαλόνι/Μπαλόνι_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/Μπαλόνι/Μπαλόνι_2.png</path>
+                <path>resources/images/games/Μπαλόνι/Μπαλόνι_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/Μπαλόνι/Μπαλόνι_3.png</path>
+                <path>resources/images/games/Μπαλόνι/Μπαλόνι_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/Μπαλόνι/Μπαλόνι_4.png</path>
+                <path>resources/images/games/Μπαλόνι/Μπαλόνι_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -640,25 +640,25 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_1.png</path>
+                <path>resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_2.png</path>
+                <path>resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_3.png</path>
+                <path>resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_4.png</path>
+                <path>resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -684,19 +684,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/sequence1.png</path>
+                <path>resources/images/games/sequence1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/sequence2.png</path>
+                <path>resources/images/games/sequence2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/sequence3.png</path>
+                <path>resources/images/games/sequence3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -712,25 +712,25 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/time.png</path>
+                <path>resources/images/games/time.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/time-1.png</path>
+                <path>resources/images/games/time-1.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/hours.png</path>
+                <path>resources/images/games/hours.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/clock1.png</path>
+                <path>resources/images/games/clock1.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -742,8 +742,8 @@
         <name>Βρες το όμοιο</name>
         <image />
         <sound />
-        <winSound>demo_resources/sounds/games/winSound.mp3</winSound>
-        <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
+        <winSound>resources/sounds/games/winSound.mp3</winSound>
+        <errorSound>resources/sounds/games/errorSound.mp3</errorSound>
         <enabled>true</enabled>
         <games>
           <game>
@@ -756,19 +756,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group2_1.png</path>
+                <path>resources/images/games/similarity/group2_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group2_2.png</path>
+                <path>resources/images/games/similarity/group2_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group2_3.png</path>
+                <path>resources/images/games/similarity/group2_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -784,19 +784,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group4_1.png</path>
+                <path>resources/images/games/similarity/group4_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group4_2.png</path>
+                <path>resources/images/games/similarity/group4_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group4_3.png</path>
+                <path>resources/images/games/similarity/group4_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -812,19 +812,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group6_1.png</path>
+                <path>resources/images/games/similarity/group6_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group6_2.png</path>
+                <path>resources/images/games/similarity/group6_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group6_3.png</path>
+                <path>resources/images/games/similarity/group6_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -840,19 +840,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group8_1.png</path>
+                <path>resources/images/games/similarity/group8_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group8_2.png</path>
+                <path>resources/images/games/similarity/group8_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group8_3.png</path>
+                <path>resources/images/games/similarity/group8_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -868,19 +868,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group10_1.png</path>
+                <path>resources/images/games/similarity/group10_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group10_2.png</path>
+                <path>resources/images/games/similarity/group10_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group10_3.png</path>
+                <path>resources/images/games/similarity/group10_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -896,19 +896,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group12_1.png</path>
+                <path>resources/images/games/similarity/group12_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group12_2.png</path>
+                <path>resources/images/games/similarity/group12_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group12_3.png</path>
+                <path>resources/images/games/similarity/group12_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -924,19 +924,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group14_1.png</path>
+                <path>resources/images/games/similarity/group14_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group14_2.png</path>
+                <path>resources/images/games/similarity/group14_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group14_3.png</path>
+                <path>resources/images/games/similarity/group14_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -952,19 +952,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group16_1.png</path>
+                <path>resources/images/games/similarity/group16_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group16_2.png</path>
+                <path>resources/images/games/similarity/group16_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group16_3.png</path>
+                <path>resources/images/games/similarity/group16_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -978,7 +978,7 @@
     <name>test</name>
     <image />
     <configuration>
-      <rotationSpeed>1</rotationSpeed>
+      <rotationSpeed>2</rotationSpeed>
       <defaultGridRow>4</defaultGridRow>
       <defaultGridColumn>4</defaultGridColumn>
       <sound>true</sound>
@@ -1001,8 +1001,8 @@
         <category name="Λέξη">
           <rows>2</rows>
           <columns>3</columns>
-          <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/Μπιφτέκι.png</image>
-          <sound>/home/xrist/Desktop/tp/demo_resources/sounds/Φαγητό.mp3</sound>
+          <image>/home/xrist/Desktop/tp/resources/images/Φαγητό/Μπιφτέκι.png</image>
+          <sound>/home/xrist/Desktop/tp/resources/sounds/Φαγητό.mp3</sound>
           <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
@@ -1010,8 +1010,8 @@
             <category name="Μακαρόνια">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/Μακαρόνια.png</image>
-              <sound>/home/xrist/Desktop/tp/demo_resources/sounds/Μακαρόνια.mp3</sound>
+              <image>/home/xrist/Desktop/tp/resources/images/Φαγητό/Μακαρόνια.png</image>
+              <sound>/home/xrist/Desktop/tp/resources/sounds/Μακαρόνια.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -1019,7 +1019,7 @@
             <category name="Τοστ">
               <rows />
               <columns />
-              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/τοστ.png</image>
+              <image>/home/xrist/Desktop/tp/resources/images/Φαγητό/τοστ.png</image>
               <sound />
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
@@ -1029,7 +1029,7 @@
             <category name="Χυμός">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/χυμός.png</image>
+              <image>/home/xrist/Desktop/tp/resources/images/Φαγητό/χυμός.png</image>
               <sound />
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
@@ -1038,7 +1038,7 @@
             <category name="Γάλα">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/γάλα.png</image>
+              <image>/home/xrist/Desktop/tp/resources/images/Φαγητό/γάλα.png</image>
               <sound />
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
@@ -1047,7 +1047,7 @@
             <category name="Σούπα">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/σούπα.png</image>
+              <image>/home/xrist/Desktop/tp/resources/images/Φαγητό/σούπα.png</image>
               <sound />
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
@@ -1056,7 +1056,7 @@
             <category name="Τυρί">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/τυρί.png</image>
+              <image>/home/xrist/Desktop/tp/resources/images/Φαγητό/τυρί.png</image>
               <sound />
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
@@ -1065,7 +1065,7 @@
             <category name="Γιαούρτι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/γιαούρτι.png</image>
+              <image>/home/xrist/Desktop/tp/resources/images/Φαγητό/γιαούρτι.png</image>
               <sound />
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
@@ -1092,7 +1092,7 @@
             <category name="Αγγούρι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/αγγούρι.png</image>
+              <image>/home/xrist/Desktop/tp/resources/images/Φαγητό/αγγούρι.png</image>
               <sound />
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
@@ -1101,7 +1101,7 @@
             <category name="Μπιφτέκι">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/images/Φαγητό/Μπιφτέκι.png</image>
+              <image>/home/xrist/Desktop/tp/resources/images/Φαγητό/Μπιφτέκι.png</image>
               <sound />
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
@@ -1112,8 +1112,8 @@
         <category name="φρούτα">
           <rows>3</rows>
           <columns>3</columns>
-          <image>/home/xrist/Desktop/tp/demo_resources/Φρούτα/πορτοκάλι.png</image>
-          <sound>/home/xrist/Desktop/tp/demo_resources/sounds/φρούτα.mp3</sound>
+          <image>/home/xrist/Desktop/tp/resources/Φρούτα/πορτοκάλι.png</image>
+          <sound>/home/xrist/Desktop/tp/resources/sounds/φρούτα.mp3</sound>
           <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
@@ -1121,7 +1121,7 @@
             <category name="μήλο">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φρούτα/μήλο.png</image>
+              <image>/home/xrist/Desktop/tp/resources/Φρούτα/μήλο.png</image>
               <sound />
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
@@ -1130,7 +1130,7 @@
             <category name="μπανάνα">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φρούτα/μπανάνα.png</image>
+              <image>/home/xrist/Desktop/tp/resources/Φρούτα/μπανάνα.png</image>
               <sound />
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
@@ -1139,7 +1139,7 @@
             <category name="ροδάκινο">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Φρούτα/ροδάκινο.png</image>
+              <image>/home/xrist/Desktop/tp/resources/Φρούτα/ροδάκινο.png</image>
               <sound />
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
@@ -1150,8 +1150,8 @@
         <category name="Συναισθήματα">
           <rows>3</rows>
           <columns>3</columns>
-          <image>/home/xrist/Desktop/tp/demo_resources/Συναισθήματα/Χαρά.png</image>
-          <sound>/home/xrist/Desktop/tp/demo_resources/sounds/Συναισθήματα.mp3</sound>
+          <image>/home/xrist/Desktop/tp/resources/Συναισθήματα/Χαρά.png</image>
+          <sound>/home/xrist/Desktop/tp/resources/sounds/Συναισθήματα.mp3</sound>
           <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
@@ -1159,7 +1159,7 @@
             <category name="Λύπη">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Συναισθήματα/Λύπη.png</image>
+              <image>/home/xrist/Desktop/tp/resources/Συναισθήματα/Λύπη.png</image>
               <sound />
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
@@ -1168,7 +1168,7 @@
             <category name="Θυμός">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Συναισθήματα/Θυμός.png</image>
+              <image>/home/xrist/Desktop/tp/resources/Συναισθήματα/Θυμός.png</image>
               <sound />
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
@@ -1179,8 +1179,8 @@
         <category name="Θερμοκρασία">
           <rows>3</rows>
           <columns>3</columns>
-          <image>/home/xrist/Desktop/tp/demo_resources/Θερμοκρασία/Ζεστό.png</image>
-          <sound>/home/xrist/Desktop/tp/demo_resources/sounds/Θερμοκρασία.mp3</sound>
+          <image>/home/xrist/Desktop/tp/resources/Θερμοκρασία/Ζεστό.png</image>
+          <sound>/home/xrist/Desktop/tp/resources/sounds/Θερμοκρασία.mp3</sound>
           <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
@@ -1188,7 +1188,7 @@
             <category name="Κρύο">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Θερμοκρασία/Κρύο.png</image>
+              <image>/home/xrist/Desktop/tp/resources/Θερμοκρασία/Κρύο.png</image>
               <sound />
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
@@ -1197,7 +1197,7 @@
             <category name="Ζεστό">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Θερμοκρασία/Ζεστό.png</image>
+              <image>/home/xrist/Desktop/tp/resources/Θερμοκρασία/Ζεστό.png</image>
               <sound />
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
@@ -1206,7 +1206,7 @@
             <category name="Καυτό">
               <rows>3</rows>
               <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/demo_resources/Θερμοκρασία/Καυτό.png</image>
+              <image>/home/xrist/Desktop/tp/resources/Θερμοκρασία/Καυτό.png</image>
               <sound />
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
@@ -1249,16 +1249,16 @@
     <name>ttttt</name>
     <image />
     <configuration>
-      <rotationSpeed>1</rotationSpeed>
+      <rotationSpeed>2</rotationSpeed>
       <defaultGridRow>3</defaultGridRow>
       <defaultGridColumn>3</defaultGridColumn>
-      <sound>false</sound>
+      <sound>true</sound>
       <image>true</image>
-      <text>false</text>
+      <text>true</text>
       <selectionSensor>
-        <type>mouse</type>
-        <button>1</button>
-        <clickCount>1</clickCount>
+        <type>keyboard</type>
+        <keyCode>32</keyCode>
+        <keyChar />
       </selectionSensor>
     </configuration>
     <communication>
@@ -1268,7 +1268,26 @@
       <sound />
       <rows>3</rows>
       <columns>3</columns>
-      <categories />
+      <categories>
+        <category name="γδφγδφ">
+          <image>/home/christina/Pictures/filtra_anazitisis.png</image>
+          <sound />
+          <hasSound>false</hasSound>
+          <hasImage>true</hasImage>
+          <hasText>false</hasText>
+          <rows />
+          <columns />
+        </category>
+        <category name="δασδσα">
+          <image>/home/christina/Pictures/hmerominia_sumvasis.png</image>
+          <sound />
+          <hasSound>false</hasSound>
+          <hasImage>true</hasImage>
+          <hasText>false</hasText>
+          <rows />
+          <columns />
+        </category>
+      </categories>
     </communication>
     <entertainment>
       <name>Ψυχαγωγία</name>
@@ -1315,25 +1334,25 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/αυτοκίνητο/αυτοκίνητο_1.png</path>
+                <path>resources/images/games/αυτοκίνητο/αυτοκίνητο_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/αυτοκίνητο/αυτοκίνητο_2.png</path>
+                <path>resources/images/games/αυτοκίνητο/αυτοκίνητο_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/αυτοκίνητο/αυτοκίνητο_3.png</path>
+                <path>resources/images/games/αυτοκίνητο/αυτοκίνητο_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/αυτοκίνητο/αυτοκίνητο_4.png</path>
+                <path>resources/images/games/αυτοκίνητο/αυτοκίνητο_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -1344,30 +1363,30 @@
             <enabled>true</enabled>
             <image />
             <difficulty>4</difficulty>
-            <winSound>demo_resources/sounds/games/ship.mp3</winSound>
-            <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
+            <winSound>resources/sounds/games/ship.mp3</winSound>
+            <errorSound>resources/sounds/games/errorSound.mp3</errorSound>
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/καράβι/καράβι_1.png</path>
+                <path>resources/images/games/καράβι/καράβι_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/καράβι/καράβι_2.png</path>
+                <path>resources/images/games/καράβι/καράβι_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/καράβι/καράβι_3.png</path>
+                <path>resources/images/games/καράβι/καράβι_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/καράβι/καράβι_4.png</path>
+                <path>resources/images/games/καράβι/καράβι_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -1383,25 +1402,25 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_1.png</path>
+                <path>resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_2.png</path>
+                <path>resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_3.png</path>
+                <path>resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_4.png</path>
+                <path>resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -1417,25 +1436,25 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/Μπαλόνι/Μπαλόνι_1.png</path>
+                <path>resources/images/games/Μπαλόνι/Μπαλόνι_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/Μπαλόνι/Μπαλόνι_2.png</path>
+                <path>resources/images/games/Μπαλόνι/Μπαλόνι_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/Μπαλόνι/Μπαλόνι_3.png</path>
+                <path>resources/images/games/Μπαλόνι/Μπαλόνι_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/Μπαλόνι/Μπαλόνι_4.png</path>
+                <path>resources/images/games/Μπαλόνι/Μπαλόνι_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -1451,25 +1470,25 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_1.png</path>
+                <path>resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_2.png</path>
+                <path>resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_3.png</path>
+                <path>resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_4.png</path>
+                <path>resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -1495,19 +1514,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/sequence1.png</path>
+                <path>resources/images/games/sequence1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/sequence2.png</path>
+                <path>resources/images/games/sequence2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/sequence3.png</path>
+                <path>resources/images/games/sequence3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -1523,25 +1542,25 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/time.png</path>
+                <path>resources/images/games/time.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/time-1.png</path>
+                <path>resources/images/games/time-1.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/hours.png</path>
+                <path>resources/images/games/hours.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/clock1.png</path>
+                <path>resources/images/games/clock1.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -1553,8 +1572,8 @@
         <name>Βρες το όμοιο</name>
         <image />
         <sound />
-        <winSound>demo_resources/sounds/games/winSound.mp3</winSound>
-        <errorSound>demo_resources/sounds/games/errorSound.mp3</errorSound>
+        <winSound>resources/sounds/games/winSound.mp3</winSound>
+        <errorSound>resources/sounds/games/errorSound.mp3</errorSound>
         <enabled>true</enabled>
         <games>
           <game>
@@ -1567,19 +1586,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group2_1.png</path>
+                <path>resources/images/games/similarity/group2_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group2_2.png</path>
+                <path>resources/images/games/similarity/group2_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group2_3.png</path>
+                <path>resources/images/games/similarity/group2_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -1595,19 +1614,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group4_1.png</path>
+                <path>resources/images/games/similarity/group4_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group4_2.png</path>
+                <path>resources/images/games/similarity/group4_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group4_3.png</path>
+                <path>resources/images/games/similarity/group4_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -1623,19 +1642,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group6_1.png</path>
+                <path>resources/images/games/similarity/group6_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group6_2.png</path>
+                <path>resources/images/games/similarity/group6_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group6_3.png</path>
+                <path>resources/images/games/similarity/group6_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -1651,19 +1670,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group8_1.png</path>
+                <path>resources/images/games/similarity/group8_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group8_2.png</path>
+                <path>resources/images/games/similarity/group8_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group8_3.png</path>
+                <path>resources/images/games/similarity/group8_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -1679,19 +1698,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group10_1.png</path>
+                <path>resources/images/games/similarity/group10_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group10_2.png</path>
+                <path>resources/images/games/similarity/group10_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group10_3.png</path>
+                <path>resources/images/games/similarity/group10_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -1707,19 +1726,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group12_1.png</path>
+                <path>resources/images/games/similarity/group12_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group12_2.png</path>
+                <path>resources/images/games/similarity/group12_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group12_3.png</path>
+                <path>resources/images/games/similarity/group12_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -1735,19 +1754,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group14_1.png</path>
+                <path>resources/images/games/similarity/group14_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group14_3.png</path>
+                <path>resources/images/games/similarity/group14_3.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group14_3.png</path>
+                <path>resources/images/games/similarity/group14_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -1763,19 +1782,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group16_1.png</path>
+                <path>resources/images/games/similarity/group16_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group16_2.png</path>
+                <path>resources/images/games/similarity/group16_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>demo_resources/images/games/similarity/group16_3.png</path>
+                <path>resources/images/games/similarity/group16_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>

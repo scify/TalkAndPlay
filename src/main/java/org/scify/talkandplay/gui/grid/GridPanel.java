@@ -109,7 +109,11 @@ public class GridPanel extends BaseGridPanel {
         fillWithEmpties();
 
         revalidate();
-        repaint();
+        repaint();        
+        parent.clearGrid();
+        parent.addGrid(this);
+        parent.revalidate();
+        parent.repaint();
 
         selector.setList(panelList);
         selector.start();

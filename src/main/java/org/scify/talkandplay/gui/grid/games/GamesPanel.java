@@ -61,7 +61,7 @@ public class GamesPanel extends BaseGridPanel {
         UIConstants.getInstance().setColumns(3);
         initLayout();
 
-        panelList = new ArrayList<>();
+        panelList = new ArrayList();
 
         for (GameType gameType : user.getGameModule().getGameTypes()) {
             JPanel gamePanel = createGameItem(gameType);
