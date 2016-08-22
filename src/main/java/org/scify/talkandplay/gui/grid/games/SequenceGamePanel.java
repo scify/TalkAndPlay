@@ -206,17 +206,26 @@ public class SequenceGamePanel extends BaseGamePanel {
     }
 
     private void congratulate() {
-        bottomMsgPanel.setVisible(false);
-        tileCreator.playAudio(getWinSound());
+        final ControlsPanel controls = new ControlsPanel(user, this);
 
-        ControlsPanel controls = new ControlsPanel(user, this);
+        bottomMsgPanel.setVisible(false);
+        tileCreator.playAudio(getWinSound(), new TileAction() {
+            @Override
+            public void act() {
+            }
+
+            @Override
+            public void audioFinished() {
+                controls.showControls();
+                controls.getSelector().setList(controls.getControls());
+                controls.getSelector().start();
+            }
+        });
+
         topPanel.removeAll();
         topPanel.add(controls);
         topPanel.revalidate();
         topPanel.repaint();
-
-        controls.getSelector().setList(controls.getControls());
-        controls.getSelector().start();
 
         parent.clearGrid();
         parent.addGrid(this);

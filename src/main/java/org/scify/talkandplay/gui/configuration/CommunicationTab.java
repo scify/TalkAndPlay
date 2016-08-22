@@ -2,6 +2,7 @@ package org.scify.talkandplay.gui.configuration;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -32,6 +33,7 @@ public class CommunicationTab extends javax.swing.JPanel {
     private CategoryService categoryService;
     private List<JPanel> panels;
     private ConfigurationPanel parent;
+    private Font plainFont, boldFont;
     private int row;
 
     private GridBagConstraints c;
@@ -50,6 +52,9 @@ public class CommunicationTab extends javax.swing.JPanel {
 
     private void initCustomComponents() {
         panels = new ArrayList();
+        plainFont = new Font(UIConstants.mainFont, Font.PLAIN, 14);
+        boldFont = new Font(UIConstants.mainFont, Font.BOLD, 14);
+
         //  setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         contentPanel.setLayout(new GridBagLayout());
         c = new GridBagConstraints();
@@ -67,8 +72,7 @@ public class CommunicationTab extends javax.swing.JPanel {
 
         contentPanel.add(titlePanel(), c);
 
-        drawCategories(user.getCommunicationModule().getCategories(), MARGIN);
-
+        drawCategories(user.getCommunicationModule().getCategories(), MARGIN, false);
     }
 
     /**
@@ -77,7 +81,7 @@ public class CommunicationTab extends javax.swing.JPanel {
      * @param categories
      * @param margin
      */
-    private void drawCategories(List<Category> categories, int margin) {
+    private void drawCategories(List<Category> categories, int margin, boolean withOrdering) {
         if (categories == null || categories.isEmpty()) {
             return;
         } else {
@@ -97,15 +101,27 @@ public class CommunicationTab extends javax.swing.JPanel {
                 JLabel deleteLabel = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/delete-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
                 editLabel.setBorder(new EmptyBorder(0, 0, 0, 10));
 
+                if (withOrdering) {
+                    JLabel upLabel = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/up-icon-white.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+                    JLabel downLabel = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/down-icon-white.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+                    upLabel.setBorder(new EmptyBorder(0, 0, 0, 10));
+                    downLabel.setBorder(new EmptyBorder(0, 0, 0, 10));
+
+                    controlsPanel.add(upLabel);
+                    controlsPanel.add(downLabel);
+
+                    setOrderListeners(upLabel, downLabel, contentPanel.getComponentCount());
+                }
+
                 controlsPanel.add(editLabel);
                 controlsPanel.add(deleteLabel);
                 controlsPanel.setVisible(false);
                 controlsPanel.setBackground(Color.decode(UIConstants.green));
 
                 if (category.getSubCategories().size() > 0) {
-                    label.setFont(new Font(UIConstants.mainFont, Font.BOLD, 14));
+                    label.setFont(boldFont);
                 } else {
-                    label.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 14));
+                    label.setFont(plainFont);
                 }
 
                 setListeners(panel, editLabel, deleteLabel, category.getName());
@@ -113,14 +129,11 @@ public class CommunicationTab extends javax.swing.JPanel {
                 panel.add(label, BorderLayout.LINE_START);
                 panel.add(controlsPanel, BorderLayout.LINE_END);
 
-                //   c.weightx = 0.1;
-                c.weighty = 0.1;
                 c.gridy = row;
-                c.ipady = 0;
                 contentPanel.add(panel, c);
                 panels.add(panel);
                 row++;
-                drawCategories(category.getSubCategories(), margin);
+                drawCategories(category.getSubCategories(), margin, withOrdering);
             }
             margin -= MARGIN;
         }
@@ -132,8 +145,29 @@ public class CommunicationTab extends javax.swing.JPanel {
         contentPanel.add(titlePanel(), c);
 
         user = userService.getUser(user.getName());
-        drawCategories(user.getCommunicationModule().getCategories(), MARGIN);
+        drawCategories(user.getCommunicationModule().getCategories(), MARGIN, false);
 
+        revalidate();
+        repaint();
+    }
+
+    public void redrawCategoriesListWithOrder() {
+        contentPanel.removeAll();
+        contentPanel.add(titlePanel(), c);
+
+        user = userService.getUser(user.getName());
+        drawCategories(user.getCommunicationModule().getCategories(), MARGIN, true);
+
+        //set the first panel as the selected one
+        if (panels.size() > 0) {
+            panels.get(2).setBackground(Color.decode(UIConstants.green));
+            panels.get(2).getComponent(0).setForeground(Color.white);
+            panels.get(2).getComponent(1).setVisible(true);
+        }
+
+        panels.get(2).setBackground(Color.decode(UIConstants.green));
+        panels.get(2).getComponent(0).setForeground(Color.white);
+        panels.get(2).getComponent(1).setVisible(true);
         revalidate();
         repaint();
     }
@@ -191,6 +225,28 @@ public class CommunicationTab extends javax.swing.JPanel {
                 }
             }
         });
+    }
+
+    private void setOrderListeners(JLabel upLabel, JLabel downLabel, final int i) {
+        upLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                Component[] components = contentPanel.getComponents();
+                contentPanel.removeAll();
+                Component temp = components[i];
+                components[i] = components[i - 1];
+                components[i - 1] = temp;
+
+                c.gridy = 1;
+                for (Component comp : components) {
+                    System.out.println(c.gridy);
+                    c.gridy++;
+                    contentPanel.add(comp, c);
+                }
+                contentPanel.validate();
+            }
+        });
+
     }
 
     /**

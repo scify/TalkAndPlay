@@ -50,6 +50,7 @@ public class InfoPanel extends javax.swing.JPanel {
         changeOrderLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         changeOrderTextArea = new javax.swing.JTextArea();
+        changeOrderButton = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(460, 655));
@@ -114,6 +115,17 @@ public class InfoPanel extends javax.swing.JPanel {
         changeOrderTextArea.setText("Πάτησε \"Αλλαγή σειράς\" για να αλλάξεις τη σειρά των λέξεων, και πάτησε \"Αλλαγή σειράς\" ξανά για να αποθηκεύσεις τις αλλαγές");
         jScrollPane2.setViewportView(changeOrderTextArea);
 
+        changeOrderButton.setBackground(new java.awt.Color(75, 161, 69));
+        changeOrderButton.setFont(changeOrderButton.getFont());
+        changeOrderButton.setForeground(new java.awt.Color(255, 255, 255));
+        changeOrderButton.setText("Αλλαγή σειράς");
+        changeOrderButton.setBorder(null);
+        changeOrderButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                changeOrderButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -131,12 +143,13 @@ public class InfoPanel extends javax.swing.JPanel {
                             .addComponent(addExplLabel)
                             .addComponent(changeOrderLabel)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(106, 106, 106)
                                 .addComponent(addWordButton)
                                 .addGap(18, 18, 18)
-                                .addComponent(backButton))
+                                .addComponent(backButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(changeOrderButton))
                             .addComponent(brokenFilesLabel))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 8, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -157,7 +170,8 @@ public class InfoPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addWordButton)
-                    .addComponent(backButton))
+                    .addComponent(backButton)
+                    .addComponent(changeOrderButton))
                 .addGap(49, 49, 49)
                 .addComponent(brokenFilesLabel)
                 .addGap(18, 18, 18)
@@ -184,6 +198,10 @@ public class InfoPanel extends javax.swing.JPanel {
     private void backButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseClicked
         parent.goBack();
     }//GEN-LAST:event_backButtonMouseClicked
+
+    private void changeOrderButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changeOrderButtonMouseClicked
+         parent.redrawCategoriesListWithOrder();
+    }//GEN-LAST:event_changeOrderButtonMouseClicked
 
     private void initCustomComponents() {
         setLayout(new GridLayout(0, 1, 0, 0));
@@ -219,6 +237,7 @@ public class InfoPanel extends javax.swing.JPanel {
         }
         guiHelper.drawButton(addWordButton);
         guiHelper.drawButton(backButton);
+        guiHelper.drawButton(changeOrderButton);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -228,6 +247,7 @@ public class InfoPanel extends javax.swing.JPanel {
     private javax.swing.JButton backButton;
     private javax.swing.JLabel brokenFilesLabel;
     private javax.swing.JPanel brokenFilesPanel;
+    private javax.swing.JButton changeOrderButton;
     private javax.swing.JLabel changeOrderLabel;
     private javax.swing.JTextArea changeOrderTextArea;
     private javax.swing.JLabel editExplLabel;

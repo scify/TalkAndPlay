@@ -155,18 +155,32 @@ public class SimilarityGamePanel extends BaseGamePanel {
     }
 
     private void congratulate() {
-        tileCreator.playAudio(getWinSound());
         setBottomMessage("");
         setTopMessage("");
 
-        ControlsPanel controls = new ControlsPanel(user, this);
+        final ControlsPanel controls = new ControlsPanel(user, this);
+        
+        tileCreator.playAudio(getWinSound(), new TileAction() {
+            @Override
+            public void act() {
+            }
+
+            @Override
+            public void audioFinished() {
+                controls.showControls();
+                controls.getSelector().setList(controls.getControls());
+                controls.getSelector().start();
+            }
+        });
+        
         topPanel.removeAll();
         topPanel.add(controls);
         topPanel.revalidate();
         topPanel.repaint();
-
-        controls.getSelector().setList(controls.getControls());
-        controls.getSelector().start();
+        
+        bottomPanel.removeAll();
+        topPanel.revalidate();
+        topPanel.repaint();
 
         parent.clearGrid();
         parent.addGrid(this);

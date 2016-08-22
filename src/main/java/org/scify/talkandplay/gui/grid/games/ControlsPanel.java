@@ -8,6 +8,7 @@ package org.scify.talkandplay.gui.grid.games;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -36,18 +37,18 @@ import org.scify.talkandplay.services.SensorService;
  * @author christina
  */
 public class ControlsPanel extends javax.swing.JPanel {
-
+    
     private User user;
     private SensorService sensorService;
-    private JPanel parent;
+    private JPanel parent, newGamePanel, playAgainPanel, exitPanel;
     private List<JPanel> controls;
     private Selector selector;
-
+    
     public ControlsPanel(User user, JPanel parent) {
         this.sensorService = new SensorService(user);
         this.user = user;
         this.parent = parent;
-
+        
         if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
             this.selector = new MouseSelector(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         } else if (user.getConfiguration().getNavigationSensor() != null) {
@@ -57,11 +58,11 @@ public class ControlsPanel extends javax.swing.JPanel {
         }
         
         this.selector.setDefaultBackgroundColor(UIConstants.grey);
-
+        
         initComponents();
         initCustomComponents();
     }
-
+    
     private void initCustomComponents() {
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -70,32 +71,40 @@ public class ControlsPanel extends javax.swing.JPanel {
         c.weighty = 1;
         c.gridx = 0;
         c.gridy = 0;
-
+        
         controls = new ArrayList();
-
+        
         JLabel congratsLabel = new JLabel(Message.getRandomCongrats());
-        congratsLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 24));
+        congratsLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 30));
         congratsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         congratsLabel.setBorder(new EmptyBorder(0, 0, 20, 0));
-
-        JPanel newGamePanel = drawControl("Νέο παιχνίδι");
-        JPanel playAgainPanel = drawControl("Παίξε το ίδιο ξανά");
-        JPanel exitPanel = drawControl("Έξοδος");
-
-        c.anchor = GridBagConstraints.CENTER;
-        add(congratsLabel, c);
+        JPanel congratsPanel = new JPanel();
+        congratsPanel.setBackground(Color.white);
+        congratsPanel.setLayout(new FlowLayout());
+        congratsPanel.add(congratsLabel);
+        
+        newGamePanel = drawControl("Νέο παιχνίδι");
+        playAgainPanel = drawControl("Παίξε το ίδιο ξανά");
+        exitPanel = drawControl("Έξοδος");
+        
+        c.gridwidth=3;
+        add(congratsPanel, c);
+        c.gridwidth=1;
         c.gridy++;
-        c.anchor = GridBagConstraints.FIRST_LINE_START;
         add(newGamePanel, c);
         c.gridx++;
         add(playAgainPanel, c);
         c.gridx++;
         add(exitPanel, c);
-
+        
+        newGamePanel.setVisible(false);
+        playAgainPanel.setVisible(false);
+        exitPanel.setVisible(false);
+        
         controls.add(newGamePanel);
         controls.add(playAgainPanel);
         controls.add(exitPanel);
-
+        
         newGamePanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) {
@@ -113,7 +122,7 @@ public class ControlsPanel extends javax.swing.JPanel {
                 }
             }
         });
-
+        
         playAgainPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) {
@@ -131,7 +140,7 @@ public class ControlsPanel extends javax.swing.JPanel {
                 }
             }
         });
-
+        
         exitPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) {
@@ -150,7 +159,7 @@ public class ControlsPanel extends javax.swing.JPanel {
             }
         });
     }
-
+    
     private void newGame() {
         if (parent instanceof StimulusReactionGamePanel) {
             ((StimulusReactionGamePanel) parent).newGame();
@@ -160,7 +169,7 @@ public class ControlsPanel extends javax.swing.JPanel {
             ((SimilarityGamePanel) parent).newGame();
         }
     }
-
+    
     private void playAgain() {
         if (parent instanceof StimulusReactionGamePanel) {
             ((StimulusReactionGamePanel) parent).playAgain();
@@ -170,7 +179,7 @@ public class ControlsPanel extends javax.swing.JPanel {
             ((SimilarityGamePanel) parent).playAgain();
         }
     }
-
+    
     private void exit() {
         if (parent instanceof StimulusReactionGamePanel) {
             ((StimulusReactionGamePanel) parent).exit();
@@ -180,15 +189,15 @@ public class ControlsPanel extends javax.swing.JPanel {
             ((SimilarityGamePanel) parent).exit();
         }
     }
-
+    
     private JPanel drawControl(String text) {
-
+        
         JLabel label = new JLabel(text);
         label.setBorder(new EmptyBorder(5, 5, 5, 5));
         label.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
         label.setAlignmentY(Component.CENTER_ALIGNMENT);
-
+        
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         panel.setBackground(Color.decode(UIConstants.grey));
@@ -196,17 +205,23 @@ public class ControlsPanel extends javax.swing.JPanel {
         panel.setMaximumSize(new Dimension(200, 100));
         panel.setMinimumSize(new Dimension(200, 100));
         panel.setBorder((new LineBorder(Color.white, 5)));
-
+        
         panel.add(label);
         return panel;
     }
-
+    
     public List<JPanel> getControls() {
         return controls;
     }
-
+    
     public Selector getSelector() {
         return selector;
+    }
+    
+    public void showControls() {
+        newGamePanel.setVisible(true);
+        playAgainPanel.setVisible(true);
+        exitPanel.setVisible(true);
     }
 
     /**

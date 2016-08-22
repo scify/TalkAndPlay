@@ -20,6 +20,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.grid.GridFrame;
@@ -28,6 +29,7 @@ import org.scify.talkandplay.gui.users.UserFormPanel;
 import org.scify.talkandplay.gui.users.UserPanel;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.utils.ConfigurationFile;
+import uk.co.caprica.vlcj.discovery.NativeDiscovery;
 
 /**
  *
@@ -90,15 +92,23 @@ public class MainPanel extends javax.swing.JPanel {
             userPanel.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     if (evt.getClickCount() == 2) {
-                        GridFrame imagesFrame;
-                        try {
-                            imagesFrame = new GridFrame(user.getName());
-                            imagesFrame.setLocationRelativeTo(null);
-                            imagesFrame.setTitle("Talk&Play");
-                            imagesFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                            imagesFrame.setVisible(true);
-                        } catch (IOException ex) {
-                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+
+                        boolean found = new NativeDiscovery().discover();
+                        if (found) {
+
+                            GridFrame imagesFrame;
+                            try {
+                                imagesFrame = new GridFrame(user.getName());
+                                imagesFrame.setLocationRelativeTo(null);
+                                imagesFrame.setTitle("Talk&Play");
+                                imagesFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                                imagesFrame.setVisible(true);
+                            } catch (IOException ex) {
+                                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(parent,
+                                    "Εγκατέστησε το VLC και δοκίμασε ξανά");
                         }
                     }
                 }

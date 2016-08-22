@@ -24,6 +24,24 @@
       <rows>3</rows>
       <columns>3</columns>
       <categories>
+        <category name="Ναι">
+          <rows>3</rows>
+          <columns>3</columns>
+          <image>resources/images/Ναι.png</image>
+          <sound />
+          <hasSound>true</hasSound>
+          <hasImage>true</hasImage>
+          <hasText>true</hasText>
+        </category>
+        <category name="Όχι">
+          <rows>3</rows>
+          <columns>3</columns>
+          <image>resources/images/Όχι.png</image>
+          <sound />
+          <hasSound>true</hasSound>
+          <hasImage>true</hasImage>
+          <hasText>true</hasText>
+        </category>
         <category name="Φαγητό">
           <rows>3</rows>
           <columns>3</columns>
@@ -452,6 +470,80 @@
             </category>
           </categories>
         </category>
+        <category name="Αλλαγή θέσης">
+          <rows>3</rows>
+          <columns>3</columns>
+          <image>resources/images/Αλλαγή θέσης/Ανέβασε κεφάλι.png</image>
+          <sound />
+          <hasSound>true</hasSound>
+          <hasImage>true</hasImage>
+          <hasText>true</hasText>
+          <categories>
+            <category name="Ανέβασε κεφάλι">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Αλλαγή θέσης/Ανέβασε κεφάλι.png</image>
+              <sound />
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+            <category name="Κατέβασε κεφάλι">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Αλλαγή θέσης/Κατέβασε κεφάλι.png</image>
+              <sound />
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+            <category name="Ανέβασε πόδια">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Αλλαγή θέσης/Ανέβασε πόδια.png</image>
+              <sound />
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+            <category name="Κατέβασε πόδια">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Αλλαγή θέσης/Κατέβασε πόδια.png</image>
+              <sound />
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+            <category name="Γύρνα με αριστερά">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Αλλαγή θέσης/Γύρνα με αριστερά.png</image>
+              <sound />
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+            <category name="Γύρνα με δεξιά">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Αλλαγή θέσης/Γύρνα με δεξιά.png</image>
+              <sound />
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+            <category name="Αναρρόφηση">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Αλλαγή θέσης/Αναρρόφηση.png</image>
+              <sound />
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+          </categories>
+        </category>
         <category name="Προσωπικό">
           <rows>3</rows>
           <columns>3</columns>
@@ -631,25 +723,25 @@
             <gameImages>
               <image>
                 <name />
-                <path>resources/images/games/αυτοκίνητο/αυτοκίνητο_1.png</path>
+                <path>resources/images/games/stimulus/αυτοκίνητο/αυτοκίνητο_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/αυτοκίνητο/αυτοκίνητο_2.png</path>
+                <path>resources/images/games/stimulus/αυτοκίνητο/αυτοκίνητο_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/αυτοκίνητο/αυτοκίνητο_3.png</path>
+                <path>resources/images/games/stimulus/αυτοκίνητο/αυτοκίνητο_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/αυτοκίνητο/αυτοκίνητο_4.png</path>
+                <path>resources/images/games/stimulus/αυτοκίνητο/αυτοκίνητο_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -665,25 +757,25 @@
             <gameImages>
               <image>
                 <name />
-                <path>resources/images/games/καράβι/καράβι_1.png</path>
+                <path>resources/images/games/stimulus/καράβι/καράβι_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/καράβι/καράβι_2.png</path>
+                <path>resources/images/games/stimulus/καράβι/καράβι_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/καράβι/καράβι_3.png</path>
+                <path>resources/images/games/stimulus/καράβι/καράβι_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/καράβι/καράβι_4.png</path>
+                <path>resources/images/games/stimulus/καράβι/καράβι_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -699,25 +791,25 @@
             <gameImages>
               <image>
                 <name />
-                <path>resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_1.png</path>
+                <path>resources/images/games/stimulus/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_2.png</path>
+                <path>resources/images/games/stimulus/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_3.png</path>
+                <path>resources/images/games/stimulus/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_4.png</path>
+                <path>resources/images/games/stimulus/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -733,25 +825,25 @@
             <gameImages>
               <image>
                 <name />
-                <path>resources/images/games/Μπαλόνι/Μπαλόνι_1.png</path>
+                <path>resources/images/games/stimulus/Μπαλόνι/Μπαλόνι_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/Μπαλόνι/Μπαλόνι_2.png</path>
+                <path>resources/images/games/stimulus/Μπαλόνι/Μπαλόνι_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/Μπαλόνι/Μπαλόνι_3.png</path>
+                <path>resources/images/games/stimulus/Μπαλόνι/Μπαλόνι_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/Μπαλόνι/Μπαλόνι_4.png</path>
+                <path>resources/images/games/stimulus/Μπαλόνι/Μπαλόνι_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -767,25 +859,25 @@
             <gameImages>
               <image>
                 <name />
-                <path>resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_1.png</path>
+                <path>resources/images/games/stimulus/Παιδί με μπάλα/παιδί με μπάλα_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_2.png</path>
+                <path>resources/images/games/stimulus/Παιδί με μπάλα/παιδί με μπάλα_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_3.png</path>
+                <path>resources/images/games/stimulus/Παιδί με μπάλα/παιδί με μπάλα_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_4.png</path>
+                <path>resources/images/games/stimulus/Παιδί με μπάλα/παιδί με μπάλα_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
