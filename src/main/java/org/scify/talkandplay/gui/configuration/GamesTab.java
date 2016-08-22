@@ -425,7 +425,6 @@ public class GamesTab extends javax.swing.JPanel {
     }
 
     public void stopPlayer() {
-        audioPlayer.getMediaPlayer().stop();
         audioPlayer.getMediaPlayer().release();
     }
 

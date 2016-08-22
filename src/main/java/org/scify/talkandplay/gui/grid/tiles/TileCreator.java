@@ -135,7 +135,6 @@ public class TileCreator {
      * Release the media player resources
      */
     public void freePlayerResources() {
-        audioPlayer.getMediaPlayer().stop();
         audioPlayer.getMediaPlayer().release();
     }
 

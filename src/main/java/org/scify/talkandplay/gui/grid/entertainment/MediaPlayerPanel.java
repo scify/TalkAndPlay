@@ -167,7 +167,6 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
     }
 
     public void stop() {
-        audioPlayer.getMediaPlayer().stop();
         audioPlayer.getMediaPlayer().release();
     }
 

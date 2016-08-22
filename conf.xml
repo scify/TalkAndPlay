@@ -11,15 +11,10 @@
       <image>true</image>
       <text>true</text>
       <selectionSensor>
-        <type>keyboard</type>
-        <keyCode>10</keyCode>
-        <keyChar />
+        <type>mouse</type>
+        <button>1</button>
+        <clickCount>1</clickCount>
       </selectionSensor>
-      <navigationSensor>
-        <type>keyboard</type>
-        <keyCode>32</keyCode>
-        <keyChar />
-      </navigationSensor>
     </configuration>
     <communication>
       <name>Επικοινωνία</name>
