@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <profiles>
   <profile preselected="false">
-    <name>demo</name>
-    <image>resources/users/cat_with_wig.jpg</image>
+    <name>Χρήστης</name>
+    <image>resources/users/default.png</image>
     <configuration>
       <rotationSpeed>1</rotationSpeed>
-      <defaultGridRow>2</defaultGridRow>
-      <defaultGridColumn>4</defaultGridColumn>
+      <defaultGridRow>3</defaultGridRow>
+      <defaultGridColumn>3</defaultGridColumn>
       <sound>true</sound>
       <image>true</image>
       <text>true</text>
@@ -452,6 +452,138 @@
             </category>
           </categories>
         </category>
+        <category name="Προσωπικό">
+          <rows>3</rows>
+          <columns>3</columns>
+          <image>resources/images/Προσωπικό/Νοσοκόμα.png</image>
+          <sound />
+          <hasSound>true</hasSound>
+          <hasImage>true</hasImage>
+          <hasText>true</hasText>
+          <categories>
+            <category name="Γιατρός">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Προσωπικό/Γιατρός.png</image>
+              <sound />
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+            <category name="Νοσοκόμα">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Προσωπικό/Νοσοκόμα.png</image>
+              <sound />
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+            <category name="Λογοθεραπευτής">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Προσωπικό/Λογοθεραπευτής.png</image>
+              <sound />
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+            <category name="Φυσιοθεραπευτής">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Προσωπικό/Φυσιοθεραπευτής.png</image>
+              <sound />
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+          </categories>
+        </category>
+        <category name="Συγγενείς">
+          <rows>3</rows>
+          <columns>3</columns>
+          <image>resources/images/Συγγενείς/Αδελφή.png</image>
+          <sound />
+          <hasSound>true</hasSound>
+          <hasImage>true</hasImage>
+          <hasText>true</hasText>
+          <categories>
+            <category name="Αδελφή">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Συγγενείς/Αδελφή.png</image>
+              <sound />
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+            <category name="Αδελφός">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Συγγενείς/Αδελφός.png</image>
+              <sound />
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+            <category name="Μητέρα">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Συγγενείς/Μητέρα.png</image>
+              <sound />
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+            <category name="Πατέρας">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Συγγενείς/Πατέρας.png</image>
+              <sound />
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+          </categories>
+        </category>
+        <category name="Ψυχαγωγία">
+          <rows>3</rows>
+          <columns>3</columns>
+          <image>resources/images/Ψυχαγωγία/Τηλεόραση.png</image>
+          <sound />
+          <hasSound>true</hasSound>
+          <hasImage>true</hasImage>
+          <hasText>true</hasText>
+          <categories>
+            <category name="Μουσική">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Ψυχαγωγία/Μουσική.png</image>
+              <sound />
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+            <category name="Ταινία">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Ψυχαγωγία/Ταινία.png</image>
+              <sound />
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+            <category name="Τηλεόραση">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Ψυχαγωγία/Τηλεόραση.png</image>
+              <sound />
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+          </categories>
+        </category>
       </categories>
     </communication>
     <entertainment>
@@ -679,20 +811,26 @@
             <gameImages>
               <image>
                 <name />
-                <path>resources/images/games/sequence1.png</path>
+                <path>resources/images/games/sequence/Καλύμβηση στη θάλασσα/κολύμβηση στη θάλασσα_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/sequence2.png</path>
+                <path>resources/images/games/sequence/Καλύμβηση στη θάλασσα/κολύμβηση στη θάλασσα_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/sequence3.png</path>
+                <path>resources/images/games/sequence/Καλύμβηση στη θάλασσα/κολύμβηση στη θάλασσα_3.png</path>
                 <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Καλύμβηση στη θάλασσα/κολύμβηση στη θάλασσα_4.png</path>
+                <order>4</order>
                 <enabled>true</enabled>
               </image>
             </gameImages>
@@ -707,25 +845,127 @@
             <gameImages>
               <image>
                 <name />
-                <path>resources/images/games/time.png</path>
+                <path>resources/images/games/sequence/Μεγαλώνει το λουλούδι/Μεγαλώνει το λουλούδι_1.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/time-1.png</path>
+                <path>resources/images/games/sequence/Μεγαλώνει το λουλούδι/Μεγαλώνει το λουλούδι_2.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/hours.png</path>
+                <path>resources/images/games/sequence/Μεγαλώνει το λουλούδι/Μεγαλώνει το λουλούδι_3.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/clock1.png</path>
+                <path>resources/images/games/sequence/Μεγαλώνει το λουλούδι/Μεγαλώνει το λουλούδι_4.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+          <game>
+            <name>Game 3</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Ντύνομαι/ντύνομαι_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Ντύνομαι/ντύνομαι_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Ντύνομαι/ντύνομαι_3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Ντύνομαι/ντύνομαι_4.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+          <game>
+            <name>Game 4</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Πάω βόλτα/πάω βόλτα_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Πάω βόλτα/πάω βόλτα_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Πάω βόλτα/πάω βόλτα_3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Πάω βόλτα/πάω βόλτα_4.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+          <game>
+            <name>Game 5</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Πάω στο γιατρό/πάω στο γιατρό_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Πάω στο γιατρό/πάω στο γιατρό_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Πάω στο γιατρό/πάω στο γιατρό_3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Πάω στο γιατρό/πάω στο γιατρό_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>
@@ -926,836 +1166,6 @@
               <image>
                 <name />
                 <path>resources/images/games/similarity/group14_2.png</path>
-                <order>2</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group14_3.png</path>
-                <order>3</order>
-                <enabled>true</enabled>
-              </image>
-            </gameImages>
-          </game>
-          <game>
-            <name>Game 8</name>
-            <enabled>true</enabled>
-            <image />
-            <difficulty>3</difficulty>
-            <winSound />
-            <errorSound />
-            <gameImages>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group16_1.png</path>
-                <order>1</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group16_2.png</path>
-                <order>2</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group16_3.png</path>
-                <order>3</order>
-                <enabled>true</enabled>
-              </image>
-            </gameImages>
-          </game>
-        </games>
-      </similarityGames>
-    </games>
-  </profile>
-  <profile preselected="false">
-    <name>test</name>
-    <image />
-    <configuration>
-      <rotationSpeed>2</rotationSpeed>
-      <defaultGridRow>4</defaultGridRow>
-      <defaultGridColumn>4</defaultGridColumn>
-      <sound>true</sound>
-      <image>true</image>
-      <text>true</text>
-      <selectionSensor>
-        <type>keyboard</type>
-        <keyCode>32</keyCode>
-        <keyChar />
-      </selectionSensor>
-    </configuration>
-    <communication>
-      <name>Επικοινωνία</name>
-      <enabled>true</enabled>
-      <image />
-      <sound />
-      <rows>2</rows>
-      <columns>3</columns>
-      <categories>
-        <category name="Λέξη">
-          <rows>2</rows>
-          <columns>3</columns>
-          <image>/home/xrist/Desktop/tp/resources/images/Φαγητό/Μπιφτέκι.png</image>
-          <sound>/home/xrist/Desktop/tp/resources/sounds/Φαγητό.mp3</sound>
-          <hasSound>true</hasSound>
-          <hasImage>true</hasImage>
-          <hasText>true</hasText>
-          <categories>
-            <category name="Μακαρόνια">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/resources/images/Φαγητό/Μακαρόνια.png</image>
-              <sound>/home/xrist/Desktop/tp/resources/sounds/Μακαρόνια.mp3</sound>
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
-            <category name="Τοστ">
-              <rows />
-              <columns />
-              <image>/home/xrist/Desktop/tp/resources/images/Φαγητό/τοστ.png</image>
-              <sound />
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-              <categories />
-            </category>
-            <category name="Χυμός">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/resources/images/Φαγητό/χυμός.png</image>
-              <sound />
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
-            <category name="Γάλα">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/resources/images/Φαγητό/γάλα.png</image>
-              <sound />
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
-            <category name="Σούπα">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/resources/images/Φαγητό/σούπα.png</image>
-              <sound />
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
-            <category name="Τυρί">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/resources/images/Φαγητό/τυρί.png</image>
-              <sound />
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
-            <category name="Γιαούρτι">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/resources/images/Φαγητό/γιαούρτι.png</image>
-              <sound />
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
-            <category name="Μπριζόλα">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/talkandplay/official images/Φαγητό/μπριζόλα.png</image>
-              <sound />
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
-            <category name="Ψωμί">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/talkandplay/official images/Φαγητό/ψωμί.png</image>
-              <sound />
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
-            <category name="Αγγούρι">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/resources/images/Φαγητό/αγγούρι.png</image>
-              <sound />
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
-            <category name="Μπιφτέκι">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/resources/images/Φαγητό/Μπιφτέκι.png</image>
-              <sound />
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
-          </categories>
-        </category>
-        <category name="φρούτα">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/xrist/Desktop/tp/resources/Φρούτα/πορτοκάλι.png</image>
-          <sound>/home/xrist/Desktop/tp/resources/sounds/φρούτα.mp3</sound>
-          <hasSound>true</hasSound>
-          <hasImage>true</hasImage>
-          <hasText>true</hasText>
-          <categories>
-            <category name="μήλο">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/resources/Φρούτα/μήλο.png</image>
-              <sound />
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
-            <category name="μπανάνα">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/resources/Φρούτα/μπανάνα.png</image>
-              <sound />
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
-            <category name="ροδάκινο">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/resources/Φρούτα/ροδάκινο.png</image>
-              <sound />
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
-          </categories>
-        </category>
-        <category name="Συναισθήματα">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/xrist/Desktop/tp/resources/Συναισθήματα/Χαρά.png</image>
-          <sound>/home/xrist/Desktop/tp/resources/sounds/Συναισθήματα.mp3</sound>
-          <hasSound>true</hasSound>
-          <hasImage>true</hasImage>
-          <hasText>true</hasText>
-          <categories>
-            <category name="Λύπη">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/resources/Συναισθήματα/Λύπη.png</image>
-              <sound />
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
-            <category name="Θυμός">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/resources/Συναισθήματα/Θυμός.png</image>
-              <sound />
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
-          </categories>
-        </category>
-        <category name="Θερμοκρασία">
-          <rows>3</rows>
-          <columns>3</columns>
-          <image>/home/xrist/Desktop/tp/resources/Θερμοκρασία/Ζεστό.png</image>
-          <sound>/home/xrist/Desktop/tp/resources/sounds/Θερμοκρασία.mp3</sound>
-          <hasSound>true</hasSound>
-          <hasImage>true</hasImage>
-          <hasText>true</hasText>
-          <categories>
-            <category name="Κρύο">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/resources/Θερμοκρασία/Κρύο.png</image>
-              <sound />
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
-            <category name="Ζεστό">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/resources/Θερμοκρασία/Ζεστό.png</image>
-              <sound />
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
-            <category name="Καυτό">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>/home/xrist/Desktop/tp/resources/Θερμοκρασία/Καυτό.png</image>
-              <sound />
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
-          </categories>
-        </category>
-      </categories>
-    </communication>
-    <entertainment>
-      <name>Ψυχαγωγία</name>
-      <enabled>true</enabled>
-      <image />
-      <sound />
-      <music>
-        <name>Μουσική</name>
-        <enabled>true</enabled>
-        <image />
-        <sound />
-        <path>/home/christina/Music/</path>
-        <playlistSize>10</playlistSize>
-      </music>
-      <video>
-        <name>Βίντεο</name>
-        <enabled>true</enabled>
-        <image />
-        <sound />
-        <path>/home/christina/Videos/</path>
-        <playlistSize>10</playlistSize>
-      </video>
-    </entertainment>
-    <games>
-      <name>Παιχνίδια</name>
-      <enabled>true</enabled>
-      <image />
-      <sound />
-    </games>
-  </profile>
-  <profile preselected="false">
-    <name>ttttt</name>
-    <image />
-    <configuration>
-      <rotationSpeed>2</rotationSpeed>
-      <defaultGridRow>3</defaultGridRow>
-      <defaultGridColumn>3</defaultGridColumn>
-      <sound>true</sound>
-      <image>true</image>
-      <text>true</text>
-      <selectionSensor>
-        <type>keyboard</type>
-        <keyCode>32</keyCode>
-        <keyChar />
-      </selectionSensor>
-    </configuration>
-    <communication>
-      <name>Επικοινωνία</name>
-      <enabled>true</enabled>
-      <image />
-      <sound />
-      <rows>3</rows>
-      <columns>3</columns>
-      <categories>
-        <category name="γδφγδφ">
-          <image>/home/christina/Pictures/filtra_anazitisis.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>true</hasImage>
-          <hasText>false</hasText>
-          <rows />
-          <columns />
-        </category>
-        <category name="δασδσα">
-          <image>/home/christina/Pictures/hmerominia_sumvasis.png</image>
-          <sound />
-          <hasSound>false</hasSound>
-          <hasImage>true</hasImage>
-          <hasText>false</hasText>
-          <rows />
-          <columns />
-        </category>
-      </categories>
-    </communication>
-    <entertainment>
-      <name>Ψυχαγωγία</name>
-      <enabled>true</enabled>
-      <image />
-      <sound />
-      <music>
-        <name>Μουσική</name>
-        <enabled>true</enabled>
-        <image />
-        <sound />
-        <path />
-        <playlistSize>10</playlistSize>
-      </music>
-      <video>
-        <name>Βίντεο</name>
-        <enabled>true</enabled>
-        <image />
-        <sound />
-        <path />
-        <playlistSize>10</playlistSize>
-      </video>
-    </entertainment>
-    <games>
-      <name>Παιχνίδια</name>
-      <image />
-      <sound />
-      <enabled>true</enabled>
-      <stimulusReactionGames>
-        <name>Ερέθισμα - Αντίδραση</name>
-        <image />
-        <sound />
-        <winSound />
-        <errorSound />
-        <enabled>true</enabled>
-        <games>
-          <game>
-            <name>Game 1</name>
-            <enabled>true</enabled>
-            <image />
-            <difficulty>4</difficulty>
-            <winSound />
-            <errorSound />
-            <gameImages>
-              <image>
-                <name />
-                <path>resources/images/games/αυτοκίνητο/αυτοκίνητο_1.png</path>
-                <order>1</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/αυτοκίνητο/αυτοκίνητο_2.png</path>
-                <order>2</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/αυτοκίνητο/αυτοκίνητο_3.png</path>
-                <order>3</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/αυτοκίνητο/αυτοκίνητο_4.png</path>
-                <order>4</order>
-                <enabled>true</enabled>
-              </image>
-            </gameImages>
-          </game>
-          <game>
-            <name>Game 2</name>
-            <enabled>true</enabled>
-            <image />
-            <difficulty>4</difficulty>
-            <winSound>resources/sounds/games/ship.mp3</winSound>
-            <errorSound>resources/sounds/games/errorSound.mp3</errorSound>
-            <gameImages>
-              <image>
-                <name />
-                <path>resources/images/games/καράβι/καράβι_1.png</path>
-                <order>1</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/καράβι/καράβι_2.png</path>
-                <order>2</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/καράβι/καράβι_3.png</path>
-                <order>3</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/καράβι/καράβι_4.png</path>
-                <order>4</order>
-                <enabled>true</enabled>
-              </image>
-            </gameImages>
-          </game>
-          <game>
-            <name>Game 3</name>
-            <enabled>true</enabled>
-            <image />
-            <difficulty>4</difficulty>
-            <winSound />
-            <errorSound />
-            <gameImages>
-              <image>
-                <name />
-                <path>resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_1.png</path>
-                <order>1</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_2.png</path>
-                <order>2</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_3.png</path>
-                <order>3</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/χαμογελαστό πρόσωπο/χαμογελαστό πρόσωπο_4.png</path>
-                <order>4</order>
-                <enabled>true</enabled>
-              </image>
-            </gameImages>
-          </game>
-          <game>
-            <name>Game 4</name>
-            <enabled>true</enabled>
-            <image />
-            <difficulty>4</difficulty>
-            <winSound />
-            <errorSound />
-            <gameImages>
-              <image>
-                <name />
-                <path>resources/images/games/Μπαλόνι/Μπαλόνι_1.png</path>
-                <order>1</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/Μπαλόνι/Μπαλόνι_2.png</path>
-                <order>2</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/Μπαλόνι/Μπαλόνι_3.png</path>
-                <order>3</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/Μπαλόνι/Μπαλόνι_4.png</path>
-                <order>4</order>
-                <enabled>true</enabled>
-              </image>
-            </gameImages>
-          </game>
-          <game>
-            <name>Game 5</name>
-            <enabled>true</enabled>
-            <image />
-            <difficulty>4</difficulty>
-            <winSound />
-            <errorSound />
-            <gameImages>
-              <image>
-                <name />
-                <path>resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_1.png</path>
-                <order>1</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_2.png</path>
-                <order>2</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_3.png</path>
-                <order>3</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/Παιδί με μπάλα/παιδί με μπάλα_4.png</path>
-                <order>4</order>
-                <enabled>true</enabled>
-              </image>
-            </gameImages>
-          </game>
-        </games>
-      </stimulusReactionGames>
-      <sequenceGames>
-        <name>Χρονικής Αλληλουχίας</name>
-        <image />
-        <sound />
-        <winSound />
-        <errorSound />
-        <enabled>true</enabled>
-        <games>
-          <game>
-            <name>Game 1</name>
-            <enabled>true</enabled>
-            <image />
-            <difficulty>4</difficulty>
-            <winSound />
-            <errorSound />
-            <gameImages>
-              <image>
-                <name />
-                <path>resources/images/games/sequence1.png</path>
-                <order>1</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/sequence2.png</path>
-                <order>2</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/sequence3.png</path>
-                <order>3</order>
-                <enabled>true</enabled>
-              </image>
-            </gameImages>
-          </game>
-          <game>
-            <name>Game 2</name>
-            <enabled>true</enabled>
-            <image />
-            <difficulty>4</difficulty>
-            <winSound />
-            <errorSound />
-            <gameImages>
-              <image>
-                <name />
-                <path>resources/images/games/time.png</path>
-                <order>1</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/time-1.png</path>
-                <order>2</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/hours.png</path>
-                <order>3</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/clock1.png</path>
-                <order>4</order>
-                <enabled>true</enabled>
-              </image>
-            </gameImages>
-          </game>
-        </games>
-      </sequenceGames>
-      <similarityGames>
-        <name>Βρες το όμοιο</name>
-        <image />
-        <sound />
-        <winSound>resources/sounds/games/winSound.mp3</winSound>
-        <errorSound>resources/sounds/games/errorSound.mp3</errorSound>
-        <enabled>true</enabled>
-        <games>
-          <game>
-            <name>Game 1</name>
-            <enabled>true</enabled>
-            <image />
-            <difficulty>3</difficulty>
-            <winSound />
-            <errorSound />
-            <gameImages>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group2_1.png</path>
-                <order>1</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group2_2.png</path>
-                <order>2</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group2_3.png</path>
-                <order>3</order>
-                <enabled>true</enabled>
-              </image>
-            </gameImages>
-          </game>
-          <game>
-            <name>Game 2</name>
-            <enabled>true</enabled>
-            <image />
-            <difficulty>3</difficulty>
-            <winSound />
-            <errorSound />
-            <gameImages>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group4_1.png</path>
-                <order>1</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group4_2.png</path>
-                <order>2</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group4_3.png</path>
-                <order>3</order>
-                <enabled>true</enabled>
-              </image>
-            </gameImages>
-          </game>
-          <game>
-            <name>Game 3</name>
-            <enabled>true</enabled>
-            <image />
-            <difficulty>3</difficulty>
-            <winSound />
-            <errorSound />
-            <gameImages>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group6_1.png</path>
-                <order>1</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group6_2.png</path>
-                <order>2</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group6_3.png</path>
-                <order>3</order>
-                <enabled>true</enabled>
-              </image>
-            </gameImages>
-          </game>
-          <game>
-            <name>Game 4</name>
-            <enabled>true</enabled>
-            <image />
-            <difficulty>3</difficulty>
-            <winSound />
-            <errorSound />
-            <gameImages>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group8_1.png</path>
-                <order>1</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group8_2.png</path>
-                <order>2</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group8_3.png</path>
-                <order>3</order>
-                <enabled>true</enabled>
-              </image>
-            </gameImages>
-          </game>
-          <game>
-            <name>Game 5</name>
-            <enabled>true</enabled>
-            <image />
-            <difficulty>3</difficulty>
-            <winSound />
-            <errorSound />
-            <gameImages>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group10_1.png</path>
-                <order>1</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group10_2.png</path>
-                <order>2</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group10_3.png</path>
-                <order>3</order>
-                <enabled>true</enabled>
-              </image>
-            </gameImages>
-          </game>
-          <game>
-            <name>Game 6</name>
-            <enabled>true</enabled>
-            <image />
-            <difficulty>3</difficulty>
-            <winSound />
-            <errorSound />
-            <gameImages>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group12_1.png</path>
-                <order>1</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group12_2.png</path>
-                <order>2</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group12_3.png</path>
-                <order>3</order>
-                <enabled>true</enabled>
-              </image>
-            </gameImages>
-          </game>
-          <game>
-            <name>Game 7</name>
-            <enabled>true</enabled>
-            <image />
-            <difficulty>3</difficulty>
-            <winSound />
-            <errorSound />
-            <gameImages>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group14_1.png</path>
-                <order>1</order>
-                <enabled>true</enabled>
-              </image>
-              <image>
-                <name />
-                <path>resources/images/games/similarity/group14_3.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
