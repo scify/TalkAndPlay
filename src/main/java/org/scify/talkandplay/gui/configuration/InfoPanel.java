@@ -238,6 +238,7 @@ public class InfoPanel extends javax.swing.JPanel {
         guiHelper.drawButton(addWordButton);
         guiHelper.drawButton(backButton);
         guiHelper.drawButton(changeOrderButton);
+        changeOrderButton.setVisible(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

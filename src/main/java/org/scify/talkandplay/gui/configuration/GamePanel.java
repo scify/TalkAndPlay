@@ -20,7 +20,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.games.Game;
 import org.scify.talkandplay.models.games.GameImage;
-import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
 
 /**
  *
@@ -33,6 +32,7 @@ public class GamePanel extends javax.swing.JPanel {
     private GamesTab parent;
     private List<JLabel> imgLabels;
     private List<JCheckBox> imgCheckboxes;
+    private ImageIcon defaultIcon, addSoundIcon, soundIcon, addIconHover, soundIconHover;
 
     private Font activeFont, inactiveFont;
 
@@ -48,6 +48,12 @@ public class GamePanel extends javax.swing.JPanel {
 
     private void initCustomComponents() {
 
+        defaultIcon = new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/no-photo.png")).getImage().getScaledInstance(90, 90, Image.SCALE_DEFAULT));
+        addSoundIcon = new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+        soundIcon = new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+        addIconHover=new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+        soundIconHover=new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+        
         imgLabels.add(img1Label);
         imgLabels.add(img2Label);
         imgLabels.add(img3Label);
@@ -84,11 +90,11 @@ public class GamePanel extends javax.swing.JPanel {
         soundLabel.setVerticalTextPosition(JLabel.BOTTOM);
 
         if (game.getWinSound() == null || game.getWinSound().isEmpty()) {
-            soundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+            soundLabel.setIcon(addSoundIcon);
             soundLabel.setText("Προσθήκη ήχου");
             removeSoundLabel.setVisible(false);
         } else {
-            soundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+            soundLabel.setIcon(soundIcon);
             soundLabel.setText("");
             removeSoundLabel.setVisible(true);
         }
@@ -117,7 +123,7 @@ public class GamePanel extends javax.swing.JPanel {
     private void setImageIcon(JLabel label, String path) {
 
         if (path == null || path.isEmpty() || !new File(path).exists()) {
-            label.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/no-photo.png")).getImage().getScaledInstance(90, 90, Image.SCALE_DEFAULT)));
+            label.setIcon(defaultIcon);
         } else {
             label.setIcon(new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH)));
         }
@@ -339,19 +345,19 @@ public class GamePanel extends javax.swing.JPanel {
             @Override
             public void mouseEntered(MouseEvent me) {
                 if (game.getWinSound() == null || game.getWinSound().isEmpty()) {
-                    soundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    soundLabel.setIcon(addIconHover);
                 } else {
-                    soundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
-                   parent.playMedia(game.getWinSound());
+                    soundLabel.setIcon(soundIconHover);
+                    parent.playMedia(game.getWinSound());
                 }
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
                 if (game.getWinSound() == null || game.getWinSound().isEmpty()) {
-                    soundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    soundLabel.setIcon(addSoundIcon);
                 } else {
-                    soundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    soundLabel.setIcon(soundIcon);
                 }
             }
 
@@ -365,7 +371,7 @@ public class GamePanel extends javax.swing.JPanel {
                 chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                     game.setWinSound(chooser.getSelectedFile().getAbsolutePath());
-                    soundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    soundLabel.setIcon(soundIcon);
                 }
             }
         });
@@ -374,13 +380,12 @@ public class GamePanel extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent me) {
                 game.setWinSound("");
-                soundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                soundLabel.setIcon(addIconHover);
                 removeSoundLabel.setVisible(false);
                 soundLabel.setText("Προσθήκη ήχου");
             }
         });
     }
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

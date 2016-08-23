@@ -34,6 +34,7 @@ public class CommunicationTab extends javax.swing.JPanel {
     private List<JPanel> panels;
     private ConfigurationPanel parent;
     private Font plainFont, boldFont;
+    private ImageIcon editIcon, deleteIcon, upIcon, downIcon;
     private int row;
 
     private GridBagConstraints c;
@@ -54,7 +55,12 @@ public class CommunicationTab extends javax.swing.JPanel {
         panels = new ArrayList();
         plainFont = new Font(UIConstants.mainFont, Font.PLAIN, 14);
         boldFont = new Font(UIConstants.mainFont, Font.BOLD, 14);
-
+        editIcon = new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/edit-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        deleteIcon=new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/delete-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        upIcon=new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/up-icon-white.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        downIcon=new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/down-icon-white.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        
+        
         //  setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         contentPanel.setLayout(new GridBagLayout());
         c = new GridBagConstraints();
@@ -95,15 +101,15 @@ public class CommunicationTab extends javax.swing.JPanel {
                 JPanel controlsPanel = new JPanel();
 
                 JLabel label = new JLabel(category.getName());
-                label.setBorder(new EmptyBorder(0, margin, 0, 0));
+                label.setBorder(new EmptyBorder(6, margin, 6, 0));
 
-                JLabel editLabel = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/edit-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-                JLabel deleteLabel = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/delete-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+                JLabel editLabel = new JLabel(editIcon);
+                JLabel deleteLabel = new JLabel(deleteIcon);
                 editLabel.setBorder(new EmptyBorder(0, 0, 0, 10));
 
                 if (withOrdering) {
-                    JLabel upLabel = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/up-icon-white.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-                    JLabel downLabel = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/down-icon-white.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+                    JLabel upLabel = new JLabel(upIcon);
+                    JLabel downLabel = new JLabel(downIcon);
                     upLabel.setBorder(new EmptyBorder(0, 0, 0, 10));
                     downLabel.setBorder(new EmptyBorder(0, 0, 0, 10));
 
@@ -118,6 +124,7 @@ public class CommunicationTab extends javax.swing.JPanel {
                 controlsPanel.setVisible(false);
                 controlsPanel.setBackground(Color.decode(UIConstants.green));
 
+                //bold font for the parent categories, plain for the children
                 if (category.getSubCategories().size() > 0) {
                     label.setFont(boldFont);
                 } else {
@@ -195,6 +202,7 @@ public class CommunicationTab extends javax.swing.JPanel {
                     panel.getComponent(0).setForeground(Color.black);
                     panel.getComponent(1).setVisible(false);
                 }
+                
                 panel.setBackground(Color.decode(UIConstants.green));
                 panel.getComponent(0).setForeground(Color.white);
                 panel.getComponent(1).setVisible(true);
