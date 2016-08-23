@@ -7,15 +7,20 @@ import java.util.ArrayList;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import org.scify.talkandplay.gui.helpers.UIConstants;
+import org.scify.talkandplay.utils.Updater;
 
 public class ApplicationLauncher {
 
     public static void main(String[] args) {
 
+        Updater updater = new Updater();
+        updater.run();
+
         setUI();
         MainFrame mainFrame = new MainFrame();
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
+
     }
 
     public static void setUI() {
