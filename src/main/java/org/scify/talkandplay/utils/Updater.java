@@ -33,12 +33,6 @@ public class Updater {
 
     private Properties properties;
 
-    private static final String TMP_DIRECTORY = System.getProperty("user.dir") + File.separator + "tmp/";
-    private static final String ZIP_FILE = "talkandplay.zip";
-    private static final String PROPERTIES_FILE = "properties.xml";
-    private static final String UPDATER_FILE = "updater.jar";
-    private static final String JAR_FILE = "talkandplay.jar";
-
     public Updater() {
         properties = new Properties();
     }
@@ -50,13 +44,17 @@ public class Updater {
             startUpdater();
             closeApp();
         }
+        // deleteTmpFolder();
+    }
+
+    private void deleteTmpFolder() {
+
     }
 
     private void downloadZip() {
         try {
             URL url = new URL(properties.getZipUrl());
-            System.out.println(properties.getZipUrl());
-            File file = new File(TMP_DIRECTORY + ZIP_FILE);
+            File file = new File(properties.getZipFile());
             FileUtils.copyURLToFile(url, file);
 
         } catch (MalformedURLException ex) {
@@ -68,11 +66,11 @@ public class Updater {
 
     private void extractZip() {
         try {
-            ZipInputStream zipIn = new ZipInputStream(new FileInputStream(TMP_DIRECTORY + ZIP_FILE));
+            ZipInputStream zipIn = new ZipInputStream(new FileInputStream(properties.getZipFile()));
             ZipEntry entry = zipIn.getNextEntry();
             // iterates over entries in the zip file
             while (entry != null) {
-                String filePath = TMP_DIRECTORY + entry.getName();
+                String filePath = entry.getName();
                 if (!entry.isDirectory()) {
                     BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath));
                     byte[] bytesIn = new byte[1024];
@@ -102,8 +100,8 @@ public class Updater {
 
     private void startUpdater() {
         try {
-            Process proc = Runtime.getRuntime().exec("java -jar " + TMP_DIRECTORY + UPDATER_FILE);
-            System.out.println("java -jar " + TMP_DIRECTORY + UPDATER_FILE);
+            System.out.println("java -jar " + properties.getUpdater());
+            Process proc = Runtime.getRuntime().exec("java -jar " + properties.getUpdater());
             InputStream in = proc.getInputStream();
             InputStream err = proc.getErrorStream();
         } catch (IOException ex) {
@@ -114,7 +112,7 @@ public class Updater {
     private boolean hasUpdate() {
         try {
             URL url = new URL(properties.getVersionFileUrl());
-            File file = new File(TMP_DIRECTORY + PROPERTIES_FILE);
+            File file = new File(properties.getPropertiesFile());
 
             FileUtils.copyURLToFile(url, file);
 

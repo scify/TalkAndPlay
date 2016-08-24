@@ -1,5 +1,10 @@
 package org.scify.talkandplay.gui.helpers;
 
+import java.io.File;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class UIConstants {
 
     private static UIConstants singleton = new UIConstants();
@@ -22,6 +27,8 @@ public class UIConstants {
     public static final String blue = "#5bd8ff";
 
     public static final String mainFont = "DejaVu Sans";
+
+    private String path;
 
     protected int width, height, rows, columns;
 
@@ -55,6 +62,15 @@ public class UIConstants {
 
     public void setColumns(int columns) {
         this.columns = columns;
+    }
+
+    public String getPath() {
+        try {
+            return new File(UIConstants.class.getProtectionDomain().getCodeSource().get‌​Location().toURI()).getParentFile().getAbsolutePath() + File.separator;
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(UIConstants.class.getName()).log(Level.SEVERE, null, ex);
+            return "";
+        }
     }
 
 }

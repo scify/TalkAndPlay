@@ -1,6 +1,5 @@
 package org.scify.talkandplay.gui.configuration;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.List;
