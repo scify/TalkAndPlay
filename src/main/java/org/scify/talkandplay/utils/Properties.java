@@ -6,13 +6,14 @@
 package org.scify.talkandplay.utils;
 
 import java.io.File;
-import java.io.PrintWriter;
-import java.net.URL;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 
 /**
+ * import org.jdom.input.SAXBuilder;
+ *
+ * /**
  * Holds the properties of the application
  *
  * @author christina
@@ -22,25 +23,30 @@ public class Properties {
     private String version;
     private String versionFileUrl;
     private String zipUrl;
+    private String tmpFolder;
     private String zipFile;
     private String propertiesFile;
     private String updater;
     private String jar;
+    private String jarPath;
 
     private Document configurationFile;
 
     public Properties() {
         try {
-            //String projectPath = System.getProperty("user.dir") + File.separator + "properties.xml";
-
-            String filePath = "properties.xml";
-            File file = new File(filePath);
-
-            if (!file.exists() || file.isDirectory()) {
-                PrintWriter writer = new PrintWriter(filePath, "UTF-8");
-                writer.println("<?xml version=\"1.0\"?>\n"
-                        + "<properties></properties>");
-                writer.close();
+            /*
+              If you run java -jar when not in the same dir with the jar,
+            the jar won't read any external files. So the path should be the absolute one.
+            However, when developing (i.e using Netbeans) the absolute path is not the correct one, so the default one is used
+             */
+            jarPath = (new File(Properties.class.getProtectionDomain().getCodeSource().getLocation().getPath())).getParentFile().getAbsolutePath();
+            jarPath = jarPath.replace("\\", "/");
+            System.out.println(jarPath + ", file separator " + File.separator);
+            String absolutePath = jarPath + File.separator + "properties.xml";
+            File file = new File(absolutePath);
+            if (!file.exists()) {
+                file = new File("properties.xml");
+                jarPath = "properties.xml";
             }
 
             SAXBuilder builder = new SAXBuilder();
@@ -60,6 +66,7 @@ public class Properties {
         setVersion(properties.getChildText("version"));
         setVersionFileUrl(properties.getChildText("versionFileUrl"));
         setZipUrl(properties.getChildText("zipUrl"));
+        setTmpFolder(properties.getChildText("tmpFolder"));
         setZipFile(properties.getChildText("zipFile"));
         setPropertiesFile(properties.getChildText("propertiesFile"));
         setUpdater(properties.getChildText("updater"));
@@ -120,6 +127,22 @@ public class Properties {
 
     public void setJar(String jar) {
         this.jar = jar;
+    }
+
+    public String getTmpFolder() {
+        return tmpFolder;
+    }
+
+    public void setTmpFolder(String tmpFolder) {
+        this.tmpFolder = tmpFolder;
+    }
+
+    public String getJarPath() {
+        return jarPath;
+    }
+
+    public void setJarPath(String jarPath) {
+        this.jarPath = jarPath;
     }
 
 }

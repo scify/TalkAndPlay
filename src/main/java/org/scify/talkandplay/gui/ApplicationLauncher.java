@@ -12,10 +12,10 @@ import org.scify.talkandplay.utils.Updater;
 public class ApplicationLauncher {
 
     public static void main(String[] args) {
-
+        /*
         Updater updater = new Updater();
         updater.run();
-
+         */
         setUI();
         MainFrame mainFrame = new MainFrame();
         mainFrame.setLocationRelativeTo(null);

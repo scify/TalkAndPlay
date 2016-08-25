@@ -5,7 +5,6 @@
  */
 package org.scify.talkandplay.utils;
 
-import static com.sun.org.apache.xerces.internal.xinclude.XIncludeHandler.BUFFER_SIZE;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,12 +19,11 @@ import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import org.apache.commons.io.FileUtils;
-import org.jdom.Document;
-import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
 
 /**
- * Checks if the jar should be updated
+ * Checks if the jar should be updated Download the zip containing the new jar
+ * and the updater Unzip it to a tmp folder Start the updater jar Close the
+ * current app Delete the tmp folder
  *
  * @author christina
  */
@@ -38,9 +36,11 @@ public class Updater {
     }
 
     public void run() {
+        System.out.println("URL: " + properties.getZipUrl());
+        System.out.println("Zip file: " + properties.getZipFile());
         if (hasUpdate()) {
-            downloadZip();
-            extractZip();
+            //  downloadZip();
+            // extractZip();
             startUpdater();
             closeApp();
         }
@@ -48,15 +48,21 @@ public class Updater {
     }
 
     private void deleteTmpFolder() {
-
+        try {
+            File dir = new File(properties.getJarPath() + File.separator + properties.getTmpFolder());
+            System.out.println("Deleting tmp folder, exists " + dir.exists());
+            FileUtils.cleanDirectory(dir);
+            FileUtils.deleteDirectory(dir);
+        } catch (IOException ex) {
+            Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void downloadZip() {
         try {
             URL url = new URL(properties.getZipUrl());
-            File file = new File(properties.getZipFile());
+            File file = new File(properties.getTmpFolder() + File.separator + properties.getZipFile());
             FileUtils.copyURLToFile(url, file);
-
         } catch (MalformedURLException ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -66,11 +72,12 @@ public class Updater {
 
     private void extractZip() {
         try {
-            ZipInputStream zipIn = new ZipInputStream(new FileInputStream(properties.getZipFile()));
+            ZipInputStream zipIn = new ZipInputStream(new FileInputStream(properties.getTmpFolder() + File.separator + properties.getZipFile()));
+            System.out.println(properties.getTmpFolder() + File.separator + properties.getZipFile());
             ZipEntry entry = zipIn.getNextEntry();
             // iterates over entries in the zip file
             while (entry != null) {
-                String filePath = entry.getName();
+                String filePath = properties.getTmpFolder() + File.separator + entry.getName();
                 if (!entry.isDirectory()) {
                     BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath));
                     byte[] bytesIn = new byte[1024];
@@ -85,6 +92,7 @@ public class Updater {
                 }
                 zipIn.closeEntry();
                 entry = zipIn.getNextEntry();
+                System.out.println("unziping " + filePath);
             }
             zipIn.close();
         } catch (FileNotFoundException ex) {
@@ -94,14 +102,10 @@ public class Updater {
         }
     }
 
-    private void closeApp() {
-        System.exit(0);
-    }
-
     private void startUpdater() {
         try {
-            System.out.println("java -jar " + properties.getUpdater());
-            Process proc = Runtime.getRuntime().exec("java -jar " + properties.getUpdater());
+            System.out.println("java -jar " + properties.getJarPath() + "/" + properties.getTmpFolder() + "/" + properties.getUpdater());
+            Process proc = Runtime.getRuntime().exec("java -jar " + properties.getJarPath() + "/" + properties.getTmpFolder() + "/" + properties.getUpdater());
             InputStream in = proc.getInputStream();
             InputStream err = proc.getErrorStream();
         } catch (IOException ex) {
@@ -109,10 +113,15 @@ public class Updater {
         }
     }
 
+    private void closeApp() {
+        System.exit(0);
+    }
+
     private boolean hasUpdate() {
-        try {
+        return true;
+        /* try {
             URL url = new URL(properties.getVersionFileUrl());
-            File file = new File(properties.getPropertiesFile());
+            File file = new File(properties.getTmpFolder() + properties.getPropertiesFile());
 
             FileUtils.copyURLToFile(url, file);
 
@@ -140,6 +149,6 @@ public class Updater {
         } catch (JDOMException ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
             return false;
-        }
+        }*/
     }
 }
