@@ -28,7 +28,7 @@
           <rows>3</rows>
           <columns>3</columns>
           <image>resources/images/Ναι.png</image>
-          <sound />
+          <sound>resources/sounds/Ναι.mp3</sound>
           <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
@@ -37,7 +37,7 @@
           <rows>3</rows>
           <columns>3</columns>
           <image>resources/images/Όχι.png</image>
-          <sound />
+          <sound>resources/sounds/Όχι.mp3</sound>
           <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
@@ -127,7 +127,7 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Φαγητό/νερό.png</image>
-              <sound />
+              <sound>resources/sounds/Νερό.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -369,7 +369,7 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Πόνος/Πόνος στην κοιλιά.png</image>
-              <sound />
+              <sound>resources/sounds/Πόνος στην κοιλιά.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -378,7 +378,7 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Πόνος/Πόνος στην πλάτη.png</image>
-              <sound />
+              <sound>resources/sounds/Πόνος στην πλάτη.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -463,7 +463,7 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Φαγούρα/Φαγούρα στην πλάτη.png</image>
-              <sound />
+              <sound>resources/sounds/Φαγούρα στην πλάτη.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -474,7 +474,7 @@
           <rows>3</rows>
           <columns>3</columns>
           <image>resources/images/Αλλαγή θέσης/Ανέβασε κεφάλι.png</image>
-          <sound />
+          <sound>resources/sounds/Αλλαγή θέσης.mp3</sound>
           <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
@@ -483,7 +483,7 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Αλλαγή θέσης/Ανέβασε κεφάλι.png</image>
-              <sound />
+              <sound>resources/sounds/Ανέβασε κεφάλι.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -492,7 +492,7 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Αλλαγή θέσης/Κατέβασε κεφάλι.png</image>
-              <sound />
+              <sound>resources/sounds/Κατέβασε κεφάλι.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -501,7 +501,7 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Αλλαγή θέσης/Ανέβασε πόδια.png</image>
-              <sound />
+              <sound>resources/sounds/Ανέβασε πόδια.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -510,7 +510,7 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Αλλαγή θέσης/Κατέβασε πόδια.png</image>
-              <sound />
+              <sound>resources/sounds/Κατέβασε πόδια.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -519,7 +519,7 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Αλλαγή θέσης/Γύρνα με αριστερά.png</image>
-              <sound />
+              <sound>resources/sounds/Γύρνα με αριστερά.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -528,7 +528,7 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Αλλαγή θέσης/Γύρνα με δεξιά.png</image>
-              <sound />
+              <sound>resources/sounds/Γύρνα με δεξιά.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -537,7 +537,7 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Αλλαγή θέσης/Αναρρόφηση.png</image>
-              <sound />
+              <sound>resources/sounds/Αναρρόφηση.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -548,7 +548,7 @@
           <rows>3</rows>
           <columns>3</columns>
           <image>resources/images/Προσωπικό/Νοσοκόμα.png</image>
-          <sound />
+          <sound>resources/sounds/Προσωπικό.mp3</sound>
           <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
@@ -557,7 +557,7 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Προσωπικό/Γιατρός.png</image>
-              <sound />
+              <sound>resources/sounds/Γιατρός.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -566,7 +566,7 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Προσωπικό/Νοσοκόμα.png</image>
-              <sound />
+              <sound>resources/sounds/Νοσοκόμα.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -575,7 +575,7 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Προσωπικό/Λογοθεραπευτής.png</image>
-              <sound />
+              <sound>resources/sounds/Λογοθεραπευτής.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -584,7 +584,7 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Προσωπικό/Φυσιοθεραπευτής.png</image>
-              <sound />
+              <sound>resources/sounds/Φυσιοθεραπευτής.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -595,25 +595,25 @@
           <rows>3</rows>
           <columns>3</columns>
           <image>resources/images/Συγγενείς/Αδελφή.png</image>
-          <sound />
+          <sound>resources/sounds/Συγγενείς.mp3</sound>
           <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
           <categories>
-            <category name="Αδελφή">
+            <category name="Αδερφή">
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Συγγενείς/Αδελφή.png</image>
-              <sound />
+              <sound>resources/sounds/Αδερφή.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
             </category>
-            <category name="Αδελφός">
+            <category name="Αδερφός">
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Συγγενείς/Αδελφός.png</image>
-              <sound />
+              <sound>resources/sounds/Αδερφός.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -622,7 +622,7 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Συγγενείς/Μητέρα.png</image>
-              <sound />
+              <sound>resources/sounds/Μητέρα.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -631,7 +631,7 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Συγγενείς/Πατέρας.png</image>
-              <sound />
+              <sound>resources/sounds/Πατέρας.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -642,7 +642,7 @@
           <rows>3</rows>
           <columns>3</columns>
           <image>resources/images/Ψυχαγωγία/Τηλεόραση.png</image>
-          <sound />
+          <sound>resources/sounds/Τηλεόραση.mp3</sound>
           <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
@@ -651,7 +651,7 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Ψυχαγωγία/Μουσική.png</image>
-              <sound />
+              <sound>resources/sounds/Μουσική.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -660,7 +660,7 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Ψυχαγωγία/Ταινία.png</image>
-              <sound />
+              <sound>resources/sounds/Ταινία.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -669,7 +669,7 @@
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Ψυχαγωγία/Τηλεόραση.png</image>
-              <sound />
+              <sound>resources/sounds/Τηλεόραση.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
