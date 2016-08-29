@@ -46,7 +46,7 @@ public class Properties {
             File file = new File(absolutePath);
             if (!file.exists()) {
                 file = new File("properties.xml");
-                jarPath = "properties.xml";
+                jarPath = "";
             }
 
             SAXBuilder builder = new SAXBuilder();

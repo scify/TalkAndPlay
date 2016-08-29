@@ -47,15 +47,17 @@ public class Updater {
             startUpdater();
             closeApp();
         }
-        deleteTmpFolder();
+       // deleteTmpFolder();
     }
 
     private void deleteTmpFolder() {
         try {
             File dir = new File(properties.getJarPath() + File.separator + properties.getTmpFolder());
             System.out.println("Deleting tmp folder, exists " + dir.exists());
-            FileUtils.cleanDirectory(dir);
-            FileUtils.deleteDirectory(dir);
+            if (dir.exists() && dir.isDirectory()) {
+                FileUtils.cleanDirectory(dir);
+                FileUtils.deleteDirectory(dir);
+            }
         } catch (IOException ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -76,7 +78,6 @@ public class Updater {
     private void extractZip() {
         try {
             ZipInputStream zipIn = new ZipInputStream(new FileInputStream(properties.getTmpFolder() + File.separator + properties.getZipFile()));
-            System.out.println(properties.getTmpFolder() + File.separator + properties.getZipFile());
             ZipEntry entry = zipIn.getNextEntry();
             // iterates over entries in the zip file
             while (entry != null) {
@@ -95,7 +96,6 @@ public class Updater {
                 }
                 zipIn.closeEntry();
                 entry = zipIn.getNextEntry();
-                System.out.println("unziping " + filePath);
             }
             zipIn.close();
         } catch (FileNotFoundException ex) {
@@ -124,7 +124,7 @@ public class Updater {
         boolean hasUpdate = false;
         try {
             URL url = new URL(properties.getVersionFileUrl());
-            File file = new File(properties.getTmpFolder() + properties.getPropertiesFile());
+            File file = new File(properties.getTmpFolder() + File.separator + properties.getPropertiesFile());
 
             FileUtils.copyURLToFile(url, file);
 
@@ -135,8 +135,8 @@ public class Updater {
 
                 String version = configurationFile.getRootElement().getChildText("version");
 
-                System.out.println(version+","+properties.getVersion());
-                
+                System.out.println(version + "," + properties.getVersion());
+
                 if (!properties.getVersion().equals(version)) {
                     hasUpdate = true;
                 }
@@ -149,7 +149,7 @@ public class Updater {
         } catch (JDOMException ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            System.out.println("Has update? "+hasUpdate);
+            System.out.println("Has update? " + hasUpdate);
             return hasUpdate;
         }
     }

@@ -13,7 +13,7 @@ public class ApplicationLauncher {
 
     public static void main(String[] args) {
 
-        /*  Updater updater = new Updater();
+        /* Updater updater = new Updater();
          updater.run();
          */
         setUI();
@@ -23,6 +23,9 @@ public class ApplicationLauncher {
 
     }
 
+    /**
+     * The general look and feel of the app
+     */
     public static void setUI() {
 
         ArrayList<Object> gradients = new ArrayList<Object>(5);
@@ -32,6 +35,7 @@ public class ApplicationLauncher {
         gradients.add(new Color(0xFFFFFF));
         gradients.add(new Color(0xFFFFFF));
 
+        //checkbox
         UIManager.put("CheckBox.border", Color.black);
         UIManager.put("CheckBox.gradient", gradients);
 
@@ -40,6 +44,7 @@ public class ApplicationLauncher {
         UIManager.put("ComboBox.selectionForeground", Color.white);
         UIManager.put("ComboBox.buttonDarkShadow", Color.black);
 
+        //scrollbar
         UIManager.put("ScrollBar.background", Color.white);
         UIManager.put("ScrollBar.thumbShadow", Color.decode(UIConstants.green));
         UIManager.put("ScrollBar.track", Color.decode(UIConstants.green));
@@ -56,6 +61,7 @@ public class ApplicationLauncher {
         UIManager.put("TabbedPane.selectedForeground", Color.white);
         UIManager.put("TabbedPane.contentBorderInsets", new Insets(1, 1, 1, 1));
 
+        //tooltip
         UIManager.put("ToolTip.foreground", Color.black);
         UIManager.put("ToolTip.background", Color.white);
         UIManager.put("ToolTip.border", new LineBorder(Color.decode(UIConstants.green), 1));
