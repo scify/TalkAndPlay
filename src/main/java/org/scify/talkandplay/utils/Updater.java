@@ -22,6 +22,8 @@ import org.apache.commons.io.FileUtils;
 import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
+import org.scify.talkandplay.gui.MainFrame;
+import org.scify.talkandplay.gui.UpdaterFrame;
 
 /**
  * Checks if the jar should be updated. Download the zip containing the new jar
@@ -42,12 +44,19 @@ public class Updater {
         System.out.println("URL: " + properties.getZipUrl());
         System.out.println("Zip file: " + properties.getZipFile());
         if (hasUpdate()) {
+            showFrame();
             downloadZip();
             extractZip();
             startUpdater();
             closeApp();
         }
-       // deleteTmpFolder();
+        deleteTmpFolder();
+    }
+
+    private void showFrame() {
+        UpdaterFrame updaterFrame = new UpdaterFrame();
+        updaterFrame.setLocationRelativeTo(null);
+        updaterFrame.setVisible(true);
     }
 
     private void deleteTmpFolder() {
