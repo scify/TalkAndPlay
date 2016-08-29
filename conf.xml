@@ -718,7 +718,7 @@
             <enabled>true</enabled>
             <image />
             <difficulty>4</difficulty>
-            <winSound />
+            <winSound>resources/sounds/games/car.mp3</winSound>
             <errorSound />
             <gameImages>
               <image>
@@ -786,7 +786,7 @@
             <enabled>true</enabled>
             <image />
             <difficulty>4</difficulty>
-            <winSound />
+            <winSound>resources/sounds/games/smile.mp3</winSound>
             <errorSound />
             <gameImages>
               <image>
@@ -820,7 +820,7 @@
             <enabled>true</enabled>
             <image />
             <difficulty>4</difficulty>
-            <winSound />
+            <winSound>resources/sounds/games/balloon.mp3</winSound>
             <errorSound />
             <gameImages>
               <image>
@@ -854,7 +854,7 @@
             <enabled>true</enabled>
             <image />
             <difficulty>4</difficulty>
-            <winSound />
+            <winSound>resources/sounds/games/ball-boy.mp3</winSound>
             <errorSound />
             <gameImages>
               <image>
@@ -1058,6 +1058,108 @@
               <image>
                 <name />
                 <path>resources/images/games/sequence/Πάω στο γιατρό/πάω στο γιατρό_4.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+          <game>
+            <name>Game 6</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Αγορά Προϊόντος/αγορά προϊόντος_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Αγορά Προϊόντος/αγορά προϊόντος_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Αγορά Προϊόντος/αγορά προϊόντος_3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Αγορά Προϊόντος/αγορά προϊόντος_4.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+          <game>
+            <name>Game 7</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Μετακίνηση με Λεωφορείο/μετακίνηση με λεωφορείο_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Μετακίνηση με Λεωφορείο/μετακίνηση με λεωφορείο_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Μετακίνηση με Λεωφορείο/μετακίνηση με λεωφορείο_3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Μετακίνηση με Λεωφορείο/μετακίνηση με λεωφορείο_4.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+          <game>
+            <name>Game 8</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Πληρωμή Λογαριασμού/πληρωμή λογαριασμου_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Πληρωμή Λογαριασμού/πληρωμή λογαριασμου_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Πληρωμή Λογαριασμού/πληρωμή λογαριασμου_3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/sequence/Πληρωμή Λογαριασμού/πληρωμή λογαριασμου_4.png</path>
                 <order>4</order>
                 <enabled>true</enabled>
               </image>

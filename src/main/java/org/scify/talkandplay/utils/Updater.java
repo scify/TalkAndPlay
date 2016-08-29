@@ -19,11 +19,14 @@ import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import org.apache.commons.io.FileUtils;
+import org.jdom.Document;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
 
 /**
- * Checks if the jar should be updated Download the zip containing the new jar
- * and the updater Unzip it to a tmp folder Start the updater jar Close the
- * current app Delete the tmp folder
+ * Checks if the jar should be updated. Download the zip containing the new jar
+ * and the updater. Unzip it to a tmp folder Start the updater jar. Close the
+ * current app. Delete the tmp folder
  *
  * @author christina
  */
@@ -39,12 +42,12 @@ public class Updater {
         System.out.println("URL: " + properties.getZipUrl());
         System.out.println("Zip file: " + properties.getZipFile());
         if (hasUpdate()) {
-            //  downloadZip();
-            // extractZip();
+            downloadZip();
+            extractZip();
             startUpdater();
             closeApp();
         }
-        // deleteTmpFolder();
+        deleteTmpFolder();
     }
 
     private void deleteTmpFolder() {
@@ -118,37 +121,36 @@ public class Updater {
     }
 
     private boolean hasUpdate() {
-        return true;
-        /* try {
+        boolean hasUpdate = false;
+        try {
             URL url = new URL(properties.getVersionFileUrl());
             File file = new File(properties.getTmpFolder() + properties.getPropertiesFile());
 
             FileUtils.copyURLToFile(url, file);
 
-            if (!file.exists() || file.isDirectory()) {
-                return false;
+            if (file.exists() && !file.isDirectory()) {
+
+                SAXBuilder builder = new SAXBuilder();
+                Document configurationFile = (Document) builder.build(file);
+
+                String version = configurationFile.getRootElement().getChildText("version");
+
+                System.out.println(version+","+properties.getVersion());
+                
+                if (!properties.getVersion().equals(version)) {
+                    hasUpdate = true;
+                }
             }
-
-            SAXBuilder builder = new SAXBuilder();
-            Document configurationFile = (Document) builder.build(file);
-
-            String version = configurationFile.getRootElement().getChildText("version");
-
-            if (!properties.getVersion().equals(version)) {
-                return true;
-            }
-
-            return false;
 
         } catch (MalformedURLException ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
         } catch (IOException ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
         } catch (JDOMException ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }*/
+        } finally {
+            System.out.println("Has update? "+hasUpdate);
+            return hasUpdate;
+        }
     }
 }
