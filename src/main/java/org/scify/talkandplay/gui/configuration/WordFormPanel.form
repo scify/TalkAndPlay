@@ -69,6 +69,8 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                                       <Component id="wordTextField" min="-2" pref="223" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="enabledCheckbox" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="step1Label" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="step2Label" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -96,7 +98,10 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="step1Label" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="wordTextField" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="wordTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="enabledCheckbox" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Component id="step2Label" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -364,6 +369,14 @@
           <Color blue="0" green="0" red="99" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="error"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="enabledCheckbox">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="&#x395;&#x3bd;&#x3b5;&#x3c1;&#x3b3;&#x3bf;&#x3c0;&#x3bf;&#x3b9;&#x3b7;&#x3bc;&#x3ad;&#x3bd;&#x3b7;"/>
       </Properties>
     </Component>
   </SubComponents>

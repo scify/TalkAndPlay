@@ -56,6 +56,7 @@ public class WordFormPanel extends javax.swing.JPanel {
 
     private void initCustomComponents() {
         categories = categoryService.getLinearCategories(user);
+        enabledCheckbox.setSelected(true);
         setBorder(new LineBorder(Color.decode(UIConstants.green), 1));
         setUI();
         setListeners();
@@ -96,6 +97,7 @@ public class WordFormPanel extends javax.swing.JPanel {
         closeLabel = new javax.swing.JLabel();
         categoriesComboBox = new javax.swing.JComboBox();
         errorLabel = new javax.swing.JLabel();
+        enabledCheckbox = new javax.swing.JCheckBox();
 
         backButton.setBackground(new java.awt.Color(75, 161, 69));
         backButton.setFont(backButton.getFont());
@@ -220,6 +222,9 @@ public class WordFormPanel extends javax.swing.JPanel {
         errorLabel.setForeground(new java.awt.Color(153, 0, 0));
         errorLabel.setText("error");
 
+        enabledCheckbox.setBackground(new java.awt.Color(255, 255, 255));
+        enabledCheckbox.setText("Ενεργοποιημένη");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -247,7 +252,9 @@ public class WordFormPanel extends javax.swing.JPanel {
                                     .addComponent(errorLabel)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(16, 16, 16)
-                                        .addComponent(wordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(wordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(enabledCheckbox))
                                     .addComponent(step1Label)
                                     .addComponent(step2Label)
                                     .addComponent(step3Label)
@@ -266,7 +273,9 @@ public class WordFormPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(step1Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(wordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(wordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(enabledCheckbox))
                 .addGap(16, 16, 16)
                 .addComponent(step2Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -301,6 +310,7 @@ public class WordFormPanel extends javax.swing.JPanel {
             newCategory.setName(wordTextField.getText());
             newCategory.setImage(imagePath);
             newCategory.setSound(soundPath);
+            newCategory.setEnabled(enabledCheckbox.isSelected());
             newCategory.setParentCategory(new Category(categoriesComboBox.getSelectedItem().toString()));
             /*  newCategory.setHasSound(soundCheckBox.isSelected());
              newCategory.setHasImage(imageCheckBox.isSelected());
@@ -465,7 +475,9 @@ public class WordFormPanel extends javax.swing.JPanel {
                 editStepsPanel.setVisible(false);
             }
 
+            enabledCheckbox.setSelected(category.isEnabled());
             wordTextField.setText(category.getName());
+            
             if (category.getImage() == null || category.getImage().isEmpty() || !(new File(category.getImage()).isFile())) {
                 uploadImageLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
             } else {
@@ -590,6 +602,7 @@ public class WordFormPanel extends javax.swing.JPanel {
     private javax.swing.JLabel closeLabel;
     private javax.swing.JTextField columnsTextField;
     private javax.swing.JPanel editStepsPanel;
+    private javax.swing.JCheckBox enabledCheckbox;
     private javax.swing.JLabel errorLabel;
     private javax.swing.JCheckBox imageCheckBox;
     private javax.swing.JLabel jLabel1;

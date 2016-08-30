@@ -47,18 +47,19 @@
           <columns>3</columns>
           <image>resources/images/Φαγητό/Μπιφτέκι.png</image>
           <sound>resources/sounds/Φαγητό.mp3</sound>
-          <hasSound>true</hasSound>
-          <hasImage>true</hasImage>
-          <hasText>true</hasText>
+          <hasSound>false</hasSound>
+          <hasImage>false</hasImage>
+          <hasText>false</hasText>
           <categories>
             <category name="Μακαρόνια">
-              <rows>3</rows>
-              <columns>3</columns>
+              <rows />
+              <columns />
               <image>resources/images/Φαγητό/Μακαρόνια.png</image>
               <sound>resources/sounds/Μακαρόνια.mp3</sound>
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
+              <hasSound>false</hasSound>
+              <hasImage>false</hasImage>
+              <hasText>false</hasText>
+              <enabled>true</enabled>
             </category>
             <category name="Πατάτες τηγανητές">
               <rows>3</rows>
@@ -178,6 +179,7 @@
               <hasText>true</hasText>
             </category>
           </categories>
+          <enabled>true</enabled>
         </category>
         <category name="Φρούτα">
           <rows />

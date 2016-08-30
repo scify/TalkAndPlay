@@ -150,6 +150,7 @@ public class CategoryService {
             categoryChild.setAttribute(new Attribute("name", category.getName()));
             categoryChild.addContent(new Element("image").setText(category.getImage()));
             categoryChild.addContent(new Element("sound").setText(category.getSound()));
+            categoryChild.addContent(new Element("enabled").setText(String.valueOf(category.isEnabled())));
             //categoryChild.addContent(new Element("order").setText(String.valueOf(category.getOrder())));
             categoryChild.addContent(new Element("hasSound").setText(String.valueOf(user.getConfiguration().hasSound())));
             categoryChild.addContent(new Element("hasImage").setText(String.valueOf(user.getConfiguration().hasImage())));
@@ -263,6 +264,12 @@ public class CategoryService {
             categoryNode.getChild("hasSound").setText(String.valueOf(categoryChild.hasSound()));
             categoryNode.getChild("hasImage").setText(String.valueOf(categoryChild.hasImage()));
             categoryNode.getChild("hasText").setText(String.valueOf(categoryChild.hasText()));
+
+            if (categoryNode.getChild("enabled") != null) {
+                categoryNode.getChild("enabled").setText(String.valueOf(categoryChild.isEnabled()));
+            } else {
+                categoryNode.addContent(new Element("enabled").setText(String.valueOf(categoryChild.isEnabled())));
+            }
 
             if (categoryChild.getRows() != null) {
                 categoryNode.getChild("rows").setText(String.valueOf(categoryChild.getRows()));

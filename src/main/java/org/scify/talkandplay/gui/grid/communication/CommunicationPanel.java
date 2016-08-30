@@ -73,8 +73,7 @@ public class CommunicationPanel extends BaseGridPanel {
     }
 
     /**
-     * Draw the categories and their sub categories. It may not look like it,
-     * but this klassy piece of code works.
+     * Draw the categories and their sub categories.
      *
      * @param category
      * @throws IOException
@@ -101,7 +100,7 @@ public class CommunicationPanel extends BaseGridPanel {
             if (category.getSubCategories().size() >= grid) {
                 int i;
                 for (i = stopped; i < (grid + stopped - 2); i++) {
-                    if (i < category.getSubCategories().size()) {
+                    if (i < category.getSubCategories().size() && category.getSubCategories().get(i).isEnabled()) {
                         JPanel panel = createCategoryItem(category.getSubCategories().get(i));
                         add(panel, c);
                         setGrid(category);
@@ -122,11 +121,13 @@ public class CommunicationPanel extends BaseGridPanel {
                 }
             } else {
                 for (Category childCategory : category.getSubCategories()) {
-                    JPanel panel = createCategoryItem(childCategory);
-                    add(panel, c);
-                    setGrid(category);
-                    panelList.add(panel);
-                    tileList.add(new Tile(panel, false));
+                    if (childCategory.isEnabled()) {
+                        JPanel panel = createCategoryItem(childCategory);
+                        add(panel, c);
+                        setGrid(category);
+                        panelList.add(panel);
+                        tileList.add(new Tile(panel, false));
+                    }
                 }
             }
         }

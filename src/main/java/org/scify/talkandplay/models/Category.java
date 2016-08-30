@@ -11,6 +11,7 @@ public class Category {
     private Integer rows, columns;
     private int order;
     private boolean editable;
+    private boolean enabled;
     private Category parentCategory;
     private List<Category> subCategories;
 
@@ -80,7 +81,6 @@ public class Category {
         this.order = order;
     }
 
-
     public String getImage() {
         return image;
     }
@@ -96,7 +96,6 @@ public class Category {
     public void setSound(String sound) {
         this.sound = sound;
     }
-
 
     public Category getParentCategory() {
         return parentCategory;
@@ -144,6 +143,14 @@ public class Category {
 
     public void setHasText(boolean hasText) {
         this.hasText = hasText;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
