@@ -170,7 +170,7 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
 
         JPanel finalImage = tileCreator.create("",
                 image.getImage(),
-                null,
+                getWinSound(),
                 new TileAction() {
                     @Override
                     public void act() {
@@ -187,9 +187,9 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
         gamePanel.repaint();
 
         ControlsPanel controls = new ControlsPanel(user, this);
-
         controlsPanel.add(controls);
-
+        
+        controls.showControls();
         controls.getSelector().setList(controls.getControls());
         controls.getSelector().start();
 

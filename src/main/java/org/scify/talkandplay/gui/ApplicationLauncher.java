@@ -13,9 +13,9 @@ public class ApplicationLauncher {
 
     public static void main(String[] args) {
 
-        Updater updater = new Updater();
+   /*     Updater updater = new Updater();
         updater.run();
-
+*/
         setUI();
         MainFrame mainFrame = new MainFrame();
         mainFrame.setLocationRelativeTo(null);
