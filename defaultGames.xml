@@ -176,6 +176,74 @@
                 <enabled>true</enabled>
               </image>
             </gameImages>
+          </game>          
+          <game>
+            <name>Game 6</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound>resources/sounds/games/car.mp3</winSound>
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>resources/images/games/stimulus/αυτοκίνητο2/αυτοκίνητο_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/stimulus/αυτοκίνητο2/αυτοκίνητο_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/stimulus/αυτοκίνητο2/αυτοκίνητο_3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/stimulus/αυτοκίνητο2/αυτοκίνητο_4.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+          <game>
+            <name>Game 7</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound>resources/sounds/games/ship.mp3</winSound>
+            <errorSound>resources/sounds/games/errorSound.mp3</errorSound>
+            <gameImages>
+              <image>
+                <name />
+                <path>resources/images/games/stimulus/καράβι2/καράβι_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/stimulus/καράβι2/καράβι_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/stimulus/καράβι2/καράβι_3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/stimulus/καράβι2/καράβι_4.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
           </game>
         </games>
       </stimulusReactionGames>
@@ -479,19 +547,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group2_1.png</path>
+                <path>resources/images/games/similarity/circle/large_blue.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group2_2.png</path>
+                <path>resources/images/games/similarity/circle/large_red.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group2_3.png</path>
+                <path>resources/images/games/similarity/circle/large_yellow.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -507,19 +575,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group4_1.png</path>
+                <path>resources/images/games/similarity/square/large_blue.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group4_2.png</path>
+                <path>resources/images/games/similarity/square/large_red.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group4_3.png</path>
+                <path>resources/images/games/similarity/square/large_yellow.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -535,19 +603,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group6_1.png</path>
+                <path>resources/images/games/similarity/triangle/large_blue.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group6_2.png</path>
+                <path>resources/images/games/similarity/triangle/large_red.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group6_3.png</path>
+                <path>resources/images/games/similarity/triangle/large_yellow.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -563,19 +631,19 @@
             <gameImages>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group8_1.png</path>
+                <path>resources/images/games/similarity/rhombus/large_blue.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group8_2.png</path>
+                <path>resources/images/games/similarity/rhombus/large_red.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group8_3.png</path>
+                <path>resources/images/games/similarity/rhombus/large_yellow.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
@@ -585,110 +653,270 @@
             <name>Game 5</name>
             <enabled>true</enabled>
             <image />
-            <difficulty>3</difficulty>
+            <difficulty>4</difficulty>
             <winSound />
             <errorSound />
             <gameImages>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group10_1.png</path>
+                <path>resources/images/games/similarity/circle/large_blue.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group10_2.png</path>
+                <path>resources/images/games/similarity/circle/xlarge_blue.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group10_3.png</path>
+                <path>resources/images/games/similarity/circle/small_blue.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
+              <image>
+                <name />
+                <path>resources/images/games/similarity/circle/xsmall_blue.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
             </gameImages>
-          </game>
+          </game>          
            <game>
             <name>Game 6</name>
             <enabled>true</enabled>
             <image />
-            <difficulty>3</difficulty>
+            <difficulty>4</difficulty>
             <winSound />
             <errorSound />
             <gameImages>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group12_1.png</path>
+                <path>resources/images/games/similarity/square/large_red.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group12_2.png</path>
+                <path>resources/images/games/similarity/square/xlarge_red.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group12_3.png</path>
+                <path>resources/images/games/similarity/square/small_red.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
+              <image>
+                <name />
+                <path>resources/images/games/similarity/square/xsmall_red.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
             </gameImages>
-          </game>
+          </game>          
            <game>
             <name>Game 7</name>
             <enabled>true</enabled>
             <image />
-            <difficulty>3</difficulty>
+            <difficulty>4</difficulty>
             <winSound />
             <errorSound />
             <gameImages>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group14_1.png</path>
+                <path>resources/images/games/similarity/triangle/large_red.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group14_3.png</path>
+                <path>resources/images/games/similarity/triangle/xlarge_red.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group14_3.png</path>
+                <path>resources/images/games/similarity/triangle/small_red.png</path>
                 <order>3</order>
                 <enabled>true</enabled>
               </image>
+              <image>
+                <name />
+                <path>resources/images/games/similarity/triangle/xsmall_red.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
             </gameImages>
-          </game>
+          </game>          
            <game>
             <name>Game 8</name>
             <enabled>true</enabled>
             <image />
-            <difficulty>3</difficulty>
+            <difficulty>4</difficulty>
             <winSound />
             <errorSound />
             <gameImages>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group16_1.png</path>
+                <path>resources/images/games/similarity/star/large_yellow.png</path>
                 <order>1</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group16_2.png</path>
+                <path>resources/images/games/similarity/star/xlarge_yellow.png</path>
                 <order>2</order>
                 <enabled>true</enabled>
               </image>
               <image>
                 <name />
-                <path>resources/images/games/similarity/group16_3.png</path>
+                <path>resources/images/games/similarity/star/small_yellow.png</path>
                 <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/similarity/star/xsmall_yellow.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>          
+           <game>
+            <name>Game 9</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>resources/images/games/similarity/rhombus/large_blue.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/similarity/rhombus/xlarge_blue.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/similarity/rhombus/small_blue.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/similarity/rhombus/xsmall_blue.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>          
+           <game>
+            <name>Game 10</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>resources/images/games/similarity/rhombus/large_blue.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/similarity/circle/large_blue.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/similarity/square/large_blue.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/similarity/star/large_blue.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>           
+           <game>
+            <name>Game 12</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>resources/images/games/similarity/triangle/large_yellow.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/similarity/rhombus/large_yellow.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/similarity/rhombusDown/large_yellow.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/similarity/star/large_yellow.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>          
+           <game>
+            <name>Game 13</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path>resources/images/games/similarity/pentagon/large_red.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/similarity/rhombus/large_red.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/similarity/square/large_red.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path>resources/images/games/similarity/rhombusThin/large_red.png</path>
+                <order>4</order>
                 <enabled>true</enabled>
               </image>
             </gameImages>
