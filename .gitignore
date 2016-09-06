@@ -3,3 +3,5 @@ nb-configuration.xml
 nbactions.xml
 lib/
 tmp/
+.idea/
+talkandplay.iml
