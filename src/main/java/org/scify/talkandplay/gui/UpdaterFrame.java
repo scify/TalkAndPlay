@@ -27,21 +27,36 @@ import javax.swing.border.EmptyBorder;
 public class UpdaterFrame extends javax.swing.JFrame {
 
     private JLabel messageLabel;
+    private JLabel messageLabel2;
+    private JLabel messageLabel3;
+    private String versionNumber;
 
-    public UpdaterFrame() {
+    public UpdaterFrame(String versionNumber) {
+        this.versionNumber = versionNumber;
         initComponents();
-        initCustomComponenets();
+        initCustomComponents();
     }
 
-    private void initCustomComponenets() {
+    private void initCustomComponents() {
         this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
         messageLabel = new JLabel();
-        messageLabel.setText("Γίνεται ενημέρωση της εφαρμογής, παρακαλώ περιμένετε");
+        messageLabel.setText("Γίνεται ενημέρωση της εφαρμογής (v."+versionNumber+"), παρακαλώ περιμένετε...");
         messageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         messageLabel.setBorder(new EmptyBorder(10, 0, 10, 0));
-
         this.getContentPane().add(messageLabel);
+
+        messageLabel2 = new JLabel();
+        messageLabel2.setText("Η διαδικασία μπορεί να διαρκέσει μερικά λεπτά.");
+        messageLabel2.setAlignmentX(Component.CENTER_ALIGNMENT);
+        messageLabel2.setBorder(new EmptyBorder(10, 0, 10, 0));
+        this.getContentPane().add(messageLabel2);
+
+        messageLabel3 = new JLabel();
+        messageLabel3.setText("Mε την ολοκλήρωση θα χρειαστεί να ανοίξετε την εφαρμογή ξανά");
+        messageLabel3.setAlignmentX(Component.CENTER_ALIGNMENT);
+        messageLabel3.setBorder(new EmptyBorder(10, 0, 10, 0));
+        this.getContentPane().add(messageLabel3);
     }
 
     /**

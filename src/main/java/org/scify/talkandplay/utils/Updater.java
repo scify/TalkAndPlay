@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
@@ -38,6 +39,7 @@ public class Updater {
 
     public Updater() {
         properties = new Properties();
+
     }
 
     public void run() {
@@ -46,22 +48,21 @@ public class Updater {
         if (hasUpdate()) {
             showFrame();
             downloadZip();
-            extractZip();
-            startUpdater();
+            ArrayList<String> tempfilesThatWillReplaceTheExisting = extractZip();
+            overrideFiles(tempfilesThatWillReplaceTheExisting);
             closeApp();
         }
-        deleteTmpFolder();
     }
 
     private void showFrame() {
-        UpdaterFrame updaterFrame = new UpdaterFrame();
+        UpdaterFrame updaterFrame = new UpdaterFrame(properties.getVersion());
         updaterFrame.setLocationRelativeTo(null);
         updaterFrame.setVisible(true);
     }
 
-    private void deleteTmpFolder() {
+/*    private void deleteTmpFolder() {
         try {
-            File dir = new File(properties.getJarPath() + File.separator + properties.getTmpFolder());
+            File dir = new File(this.properties.getApplicationFolder() + File.separator + properties.getTmpFolder());
             System.out.println("Deleting tmp folder, exists " + dir.exists());
             if (dir.exists() && dir.isDirectory()) {
                 FileUtils.cleanDirectory(dir);
@@ -70,7 +71,7 @@ public class Updater {
         } catch (IOException ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
 
     private void downloadZip() {
         try {
@@ -84,7 +85,8 @@ public class Updater {
         }
     }
 
-    private void extractZip() {
+    private ArrayList<String> extractZip() {
+        ArrayList<String> tempfilesThatWillReplaceTheExisting= new ArrayList<>();
         try {
             ZipInputStream zipIn = new ZipInputStream(new FileInputStream(properties.getTmpFolder() + File.separator + properties.getZipFile()));
             ZipEntry entry = zipIn.getNextEntry();
@@ -92,6 +94,7 @@ public class Updater {
             while (entry != null) {
                 String filePath = properties.getTmpFolder() + File.separator + entry.getName();
                 if (!entry.isDirectory()) {
+                    tempfilesThatWillReplaceTheExisting.add(filePath);
                     BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath));
                     byte[] bytesIn = new byte[1024];
                     int read = 0;
@@ -109,12 +112,42 @@ public class Updater {
             zipIn.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         } catch (IOException ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
+        return tempfilesThatWillReplaceTheExisting;
     }
 
-    private void startUpdater() {
+    private void overrideFiles(ArrayList<String> tempfilesThatWillReplaceTheExisting) {
+
+        if (tempfilesThatWillReplaceTheExisting!=null)
+        {
+            //all the source files are inside the tmp folder defined inside the properties.xml
+            //This process runs in the root folder
+            //all the destination files are on same folder as well (the root folder).
+
+            for (String source_file: tempfilesThatWillReplaceTheExisting) {
+                System.out.println("Overriding: " + source_file);
+                File source = new File(source_file);
+                String sourceFileName =source.getName();
+                //one folder above is the destination file...
+                File dest = new File(this.properties.getApplicationFolder()+ File.separator+sourceFileName);
+                if (source.isFile()) {
+                    try {
+                        FileUtils.deleteQuietly(dest);
+                        FileUtils.copyFile(source, dest);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+    }
+
+ /*   private void startUpdater() {
         try {
             System.out.println("java -jar " + properties.getJarPath() + "/" + properties.getTmpFolder() + "/" + properties.getUpdater());
             Process proc = Runtime.getRuntime().exec("java -jar " + properties.getJarPath() + "/" + properties.getTmpFolder() + "/" + properties.getUpdater());
@@ -123,7 +156,7 @@ public class Updater {
         } catch (IOException ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
 
     private void closeApp() {
         System.exit(0);
@@ -140,7 +173,7 @@ public class Updater {
             if (file.exists() && !file.isDirectory()) {
 
                 SAXBuilder builder = new SAXBuilder();
-                Document configurationFile = (Document) builder.build(file);
+                Document configurationFile =  builder.build(file);
 
                 String version = configurationFile.getRootElement().getChildText("version");
 

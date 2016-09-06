@@ -26,32 +26,27 @@ public class Properties {
     private String tmpFolder;
     private String zipFile;
     private String propertiesFile;
-    private String updater;
-    private String jar;
-    private String jarPath;
+    private String applicationFolder;
 
     private Document configurationFile;
 
     public Properties() {
         try {
-            /*
-              If you run java -jar when not in the same dir with the jar,
-            the jar won't read any external files. So the path should be the absolute one.
-            However, when developing (i.e using Netbeans) the absolute path is not the correct one, so the default one is used
-             */
-            jarPath = (new File(Properties.class.getProtectionDomain().getCodeSource().getLocation().getPath())).getParentFile().getAbsolutePath();
-            jarPath = jarPath.replace("\\", "/");
-            System.out.println(jarPath + ", file separator " + File.separator);
-            String absolutePath = jarPath + File.separator + "properties.xml";
+
+            applicationFolder = (new File(Properties.class
+                    .getProtectionDomain()
+                    .getCodeSource()
+                    .getLocation()
+                    .getPath())).getParentFile().getAbsolutePath();
+
+
+            String absolutePath = this.applicationFolder+ File.separator + "properties.xml";
             File file = new File(absolutePath);
             if (!file.exists()) {
                 file = new File("properties.xml");
-                jarPath = "";
             }
-
             SAXBuilder builder = new SAXBuilder();
-            configurationFile = (Document) builder.build(file);
-
+            configurationFile = builder.build(file);
             parseXML();
         } catch (Exception e) {
             e.printStackTrace(System.err);
@@ -69,8 +64,6 @@ public class Properties {
         setTmpFolder(properties.getChildText("tmpFolder"));
         setZipFile(properties.getChildText("zipFile"));
         setPropertiesFile(properties.getChildText("propertiesFile"));
-        setUpdater(properties.getChildText("updater"));
-        setJar(properties.getChildText("jar"));
     }
 
     public String getVersion() {
@@ -113,36 +106,17 @@ public class Properties {
         this.propertiesFile = propertiesFile;
     }
 
-    public String getUpdater() {
-        return updater;
-    }
-
-    public void setUpdater(String updater) {
-        this.updater = updater;
-    }
-
-    public String getJar() {
-        return jar;
-    }
-
-    public void setJar(String jar) {
-        this.jar = jar;
-    }
-
     public String getTmpFolder() {
-        return tmpFolder;
+        return System.getProperty("java.io.tmpdir");
     }
 
     public void setTmpFolder(String tmpFolder) {
         this.tmpFolder = tmpFolder;
     }
 
-    public String getJarPath() {
-        return jarPath;
+    public String getApplicationFolder() {
+        return applicationFolder;
     }
 
-    public void setJarPath(String jarPath) {
-        this.jarPath = jarPath;
-    }
 
 }
