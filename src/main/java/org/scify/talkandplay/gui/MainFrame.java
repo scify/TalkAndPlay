@@ -51,6 +51,8 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(51, 51, 255));
         jLabel1.setFont(jLabel1.getFont());
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
+        // Properties needed to get the application's version
+        // in order to display it on the bottom panel
         Properties prop = new Properties();
         jLabel1.setText("SciFY 2016 - version: " + prop.getVersion());
 
