@@ -14,6 +14,7 @@ import javax.swing.border.LineBorder;
 import org.scify.talkandplay.gui.configuration.ConfigurationPanel;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.utils.Properties;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -50,7 +51,8 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(51, 51, 255));
         jLabel1.setFont(jLabel1.getFont());
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel1.setText("SciFY 2016");
+        Properties prop = new Properties();
+        jLabel1.setText("SciFY 2016 - version: " + prop.getVersion());
 
         titlePanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -58,7 +60,7 @@ public class MainFrame extends javax.swing.JFrame {
         titlePanel.setLayout(titlePanelLayout);
         titlePanelLayout.setHorizontalGroup(
             titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 618, Short.MAX_VALUE)
         );
         titlePanelLayout.setVerticalGroup(
             titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,14 +81,13 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(logoLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(titlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(contentPaneLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(contentPaneLayout.createSequentialGroup()
-                        .addGap(736, 752, Short.MAX_VALUE)
-                        .addComponent(jLabel1))
-                    .addGroup(contentPaneLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         contentPaneLayout.setVerticalGroup(
