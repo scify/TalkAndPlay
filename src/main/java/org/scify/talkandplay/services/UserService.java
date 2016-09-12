@@ -35,6 +35,127 @@ public class UserService {
     }
 
     /**
+     * Copy a user's configuration to create a new one
+     */
+    public void createUserFromOldConfiguration() throws Exception {
+        Element profiles = configurationFile.getRootElement();
+        
+        //get the first user from users list
+        User user = configurationFile.getUsers().get(0);
+
+        //add the general profile info
+        Element profile = new Element("profile");
+        profile.addContent(new Element("name").setText(user.getName()));
+        profile.addContent(new Element("image").setText(user.getImage()));
+        profile.setAttribute(new Attribute("preselected", String.valueOf(user.isPreselected())));
+
+        //add the configurations
+        Element configuration = new Element("configuration");
+        configuration.addContent(new Element("rotationSpeed").setText(String.valueOf(user.getConfiguration().getRotationSpeed())));
+        configuration.addContent(new Element("defaultGridRow").setText(String.valueOf(user.getConfiguration().getDefaultGridRow())));
+        configuration.addContent(new Element("defaultGridColumn").setText(String.valueOf(user.getConfiguration().getDefaultGridColumn())));
+        configuration.addContent(new Element("sound").setText(String.valueOf(user.getConfiguration().hasSound())));
+        configuration.addContent(new Element("image").setText(String.valueOf(user.getConfiguration().hasImage())));
+        configuration.addContent(new Element("text").setText(String.valueOf(user.getConfiguration().hasText())));
+
+        //add the selection sensor
+        Element selectionSensor = new Element("selectionSensor");
+
+        if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
+            selectionSensor.addContent(new Element("type").setText("mouse"));
+            selectionSensor.addContent(new Element("button").setText(String.valueOf(((MouseSensor) user.getConfiguration().getSelectionSensor()).getButton())));
+            selectionSensor.addContent(new Element("clickCount").setText(String.valueOf(((MouseSensor) user.getConfiguration().getSelectionSensor()).getClickCount())));
+        } else if (user.getConfiguration().getSelectionSensor() instanceof KeyboardSensor) {
+            selectionSensor.addContent(new Element("type").setText("keyboard"));
+            selectionSensor.addContent(new Element("keyCode").setText(String.valueOf(((KeyboardSensor) user.getConfiguration().getSelectionSensor()).getKeyCode())));
+            selectionSensor.addContent(new Element("keyChar").setText(String.valueOf(((KeyboardSensor) user.getConfiguration().getSelectionSensor()).getKeyChar())));
+        }
+
+        //add the navigation sensor, if any
+        if (user.getConfiguration().getNavigationSensor() != null) {
+            Element navigationSensor = new Element("navigationSensor");
+
+            if (user.getConfiguration().getNavigationSensor() instanceof MouseSensor) {
+                navigationSensor.addContent(new Element("type").setText("mouse"));
+                navigationSensor.addContent(new Element("button").setText(String.valueOf(((MouseSensor) user.getConfiguration().getNavigationSensor()).getButton())));
+                navigationSensor.addContent(new Element("clickCount").setText(String.valueOf(((MouseSensor) user.getConfiguration().getNavigationSensor()).getClickCount())));
+            } else if (user.getConfiguration().getNavigationSensor() instanceof KeyboardSensor) {
+                navigationSensor.addContent(new Element("type").setText("keyboard"));
+                navigationSensor.addContent(new Element("keyCode").setText(String.valueOf(((KeyboardSensor) user.getConfiguration().getNavigationSensor()).getKeyCode())));
+                navigationSensor.addContent(new Element("keyChar").setText(String.valueOf(((KeyboardSensor) user.getConfiguration().getNavigationSensor()).getKeyChar())));
+            }
+            configuration.addContent(navigationSensor);
+        }
+
+        configuration.addContent(selectionSensor);
+        profile.addContent(configuration);
+
+        //add communication module settings
+        Element communication = new Element("communication");
+        Element categories = new Element("categories");
+
+        //add the first category settings
+        communication.addContent(new Element("name").setText("Επικοινωνία"));
+        communication.addContent(new Element("enabled").setText("true"));
+        communication.addContent(new Element("image"));
+        communication.addContent(new Element("sound"));
+        communication.addContent(new Element("rows").setText(String.valueOf(user.getConfiguration().getDefaultGridRow())));
+        communication.addContent(new Element("columns").setText(String.valueOf(user.getConfiguration().getDefaultGridColumn())));
+        communication.addContent(categories);
+
+        //add entertainment module settings
+        Element entertainment = new Element("entertainment");
+        entertainment.addContent(new Element("name").setText("Ψυχαγωγία"));
+        entertainment.addContent(new Element("enabled").setText("true"));
+        entertainment.addContent(new Element("image"));
+        entertainment.addContent(new Element("sound"));
+
+        //add music module settings
+        Element music = new Element("music");
+        music.addContent(new Element("name").setText("Μουσική"));
+        music.addContent(new Element("enabled").setText("true"));
+        music.addContent(new Element("image"));
+        music.addContent(new Element("sound"));
+        music.addContent(new Element("path"));
+        music.addContent(new Element("playlistSize").setText("10"));
+        entertainment.addContent(music);
+
+        //add video module settings
+        Element video = new Element("video");
+        video.addContent(new Element("name").setText("Βίντεο"));
+        video.addContent(new Element("enabled").setText("true"));
+        video.addContent(new Element("image"));
+        video.addContent(new Element("sound"));
+        video.addContent(new Element("path"));
+        video.addContent(new Element("playlistSize").setText("10"));
+        entertainment.addContent(video);
+
+        //add game module settings
+        Element games = new Element("games");
+        games.addContent(new Element("name").setText("Παιχνίδια"));
+        games.addContent(new Element("image"));
+        games.addContent(new Element("sound"));
+        games.addContent(new Element("enabled").setText("true"));
+
+        //set the default games
+        GameService gameService = new GameService();
+
+        List gamesList = gameService.setDefaultGames();
+        for (int i = 0; i < gamesList.size(); i++) {
+            Element elemCopy = (Element) ((Element) gamesList.get(i)).clone();
+            elemCopy.detach();
+            games.addContent(elemCopy);
+        }
+
+        profile.addContent(communication);
+        profile.addContent(entertainment);
+        profile.addContent(games);
+        profiles.addContent(profile);
+
+        configurationFile.update();
+    }
+    
+    /**
      * Save a user to the xml file
      *
      * @param user
@@ -152,7 +273,7 @@ public class UserService {
         profile.addContent(games);
         profiles.addContent(profile);
 
-        configurationFile.update();
+        configurationFile.update();        
     }
 
     /**

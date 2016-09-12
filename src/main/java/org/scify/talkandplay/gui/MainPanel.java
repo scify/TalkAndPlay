@@ -25,9 +25,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.helpers.UIConstants;
-import org.scify.talkandplay.gui.users.UserFormPanel;
 import org.scify.talkandplay.gui.users.UserPanel;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.services.UserService;
 import org.scify.talkandplay.utils.ConfigurationFile;
 import uk.co.caprica.vlcj.discovery.NativeDiscovery;
 
@@ -156,8 +156,6 @@ public class MainPanel extends javax.swing.JPanel {
         addUserPanel.add(nameLabel);
         usersPanel.add(addUserPanel);
 
-        final MainPanel currentPanel = this;
-
         imageLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent arg0) {
@@ -171,7 +169,17 @@ public class MainPanel extends javax.swing.JPanel {
 
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                parent.changePanel(new UserFormPanel(parent));
+                //TODO: remove!!! [USE TO CREATE NEW USER, USING THE FORM!!!]
+                //parent.changePanel(new UserFormPanel(parent));
+                UserService us = new UserService();
+                try {
+                    us.createUserFromOldConfiguration();
+                    //redirect to the main page [it is the same page but used
+                    //to refresh content and display the newly created user]
+                    parent.changePanel(new MainPanel(parent));
+                } catch(Exception ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }                
             }
         });
     }
