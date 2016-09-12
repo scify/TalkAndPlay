@@ -25,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.helpers.UIConstants;
+import org.scify.talkandplay.gui.users.UserFormPanel;
 import org.scify.talkandplay.gui.users.UserPanel;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.UserService;
@@ -169,14 +170,25 @@ public class MainPanel extends javax.swing.JPanel {
 
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                //TODO: remove!!! [USE TO CREATE NEW USER, USING THE FORM!!!]
-                //parent.changePanel(new UserFormPanel(parent));
                 UserService us = new UserService();
                 try {
-                    us.createUserFromOldConfiguration();
-                    //redirect to the main page [it is the same page but used
-                    //to refresh content and display the newly created user]
-                    parent.changePanel(new MainPanel(parent));
+                    boolean result = us.createUserFromOldConfiguration();
+                    /**
+                     * if user is successfully created from old user's 
+                     * configuration just refresh the page, else open the form 
+                     * that creates a new user
+                     */
+                    if(result){
+                        /**
+                         * redirect to the main page [it is the same page 
+                         * but used to refresh content and display the newly 
+                         * created user]
+                         */
+                        parent.changePanel(new MainPanel(parent));
+                    } else {
+                        // open form that creates new user
+                        parent.changePanel(new UserFormPanel(parent));
+                    }
                 } catch(Exception ex) {
                     Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }                

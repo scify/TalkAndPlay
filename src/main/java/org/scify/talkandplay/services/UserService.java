@@ -36,12 +36,23 @@ public class UserService {
 
     /**
      * Copy a user's configuration to create a new one
+     * 
+     * @return boolean(success of method)
      */
-    public void createUserFromOldConfiguration() throws Exception {
+    public boolean createUserFromOldConfiguration() throws Exception {
         Element profiles = configurationFile.getRootElement();
         
-        //get the first user from users list
-        User user = configurationFile.getUsers().get(0);
+        /**
+         * get the first user from users list or return false if it is not 
+         * existent
+         */
+        List<User> users = configurationFile.getUsers();
+        User user = null;
+        if (!users.isEmpty()){
+            user = users.get(0);
+        } else {
+            return false;
+        }
 
         //add the general profile info
         Element profile = new Element("profile");
@@ -153,6 +164,8 @@ public class UserService {
         profiles.addContent(profile);
 
         configurationFile.update();
+        
+        return true;
     }
     
     /**
