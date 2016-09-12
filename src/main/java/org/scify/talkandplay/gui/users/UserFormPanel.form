@@ -402,7 +402,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="sensorLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="3. &#x3a4;&#x3c1;&#x3cc;&#x3c0;&#x3bf;&#x3b9; &#x3b5;&#x3bd;&#x3b1;&#x3bb;&#x3bb;&#x3b1;&#x3b3;&#x3ae;&#x3c2; &#x3ba;&#x3b1;&#x3b9; &#x3c0;&#x3bb;&#x3bf;&#x3ae;&#x3b3;&#x3b7;&#x3c3;&#x3b7;&#x3c2;"/>
+            <Property name="text" type="java.lang.String" value="3. &#x3a4;&#x3c1;&#x3cc;&#x3c0;&#x3bf;&#x3b9; &#x3c0;&#x3bb;&#x3bf;&#x3ae;&#x3b3;&#x3b7;&#x3c3;&#x3b7;&#x3c2; &#x3ba;&#x3b1;&#x3b9; &#x3b5;&#x3c0;&#x3b9;&#x3bb;&#x3bf;&#x3b3;&#x3ae;&#x3c2;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="defaultGridSizeLabel">

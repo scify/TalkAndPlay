@@ -175,7 +175,7 @@ public class UserFormPanel extends javax.swing.JPanel {
 
         imageLabel.setText("2. Ανέβασε φωτογραφία χρήστη");
 
-        sensorLabel.setText("3. Τρόποι εναλλαγής και πλοήγησης");
+        sensorLabel.setText("3. Τρόποι πλοήγησης και επιλογής");
 
         defaultGridSizeLabel.setText("5. Καθόρισε μέγεθος πίνακα");
 
