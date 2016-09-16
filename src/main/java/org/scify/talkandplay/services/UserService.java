@@ -112,9 +112,31 @@ public class UserService {
         
         //add the general profile info
         Element profile = new Element("profile");
-        profile.addContent(new Element("name").setText(user.getName()));
+        
+        //get new unique user name
+        String newUserName = null;
+        int counter = 2;
+        boolean foundUserName = false;
+        while (!foundUserName){
+            String tempName = user.getName() + counter;
+            int counterCopy = counter;
+            for (User u : users) {
+                //if user name is found try again with the incremented counter
+                if (u.getName().equals(tempName)) {
+                    counter++;
+                    break;
+                }
+            }
+            //if the counter hasn't been changed, the unique user name has been found
+            if (counterCopy == counter) {
+                foundUserName = true;
+                newUserName = tempName;
+            }
+        }
+        
+        profile.addContent(new Element("name").setText(newUserName));
         profile.addContent(new Element("image").setText(user.getImage()));
-        profile.setAttribute(new Attribute("preselected", String.valueOf(user.isPreselected())));
+        profile.setAttribute(new Attribute("preselected", "false"));
 
         //add the configurations
         Element configuration = new Element("configuration");
