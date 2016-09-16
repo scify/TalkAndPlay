@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <properties>
-	<version>0.9.3</version>
+	<version>1.0</version>
 	<zipUrl>http://updates.scify.org/talk-n-play/talkandplay.zip</zipUrl>
 	<versionFileUrl>http://updates.scify.org/talk-n-play/properties.xml</versionFileUrl>
 	<zipFile>talkandplay.zip</zipFile>

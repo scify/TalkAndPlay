@@ -20,7 +20,7 @@
       <name>Επικοινωνία</name>
       <enabled>true</enabled>
       <image />
-      <sound>resources/sounds/Επικοινωνία.mp3</sound>
+      <sound />
       <rows>3</rows>
       <columns>3</columns>
       <categories>
@@ -52,14 +52,13 @@
           <hasText>false</hasText>
           <categories>
             <category name="Μακαρόνια">
-              <rows />
-              <columns />
+              <rows>3</rows>
+              <columns>3</columns>
               <image>resources/images/Φαγητό/Μακαρόνια.png</image>
               <sound>resources/sounds/Μακαρόνια.mp3</sound>
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
-              <enabled>true</enabled>
             </category>
             <category name="Πατάτες τηγανητές">
               <rows>3</rows>
@@ -179,11 +178,10 @@
               <hasText>true</hasText>
             </category>
           </categories>
-          <enabled>true</enabled>
         </category>
         <category name="Φρούτα">
-          <rows />
-          <columns />
+          <rows>3</rows>
+          <columns>3</columns>
           <image>resources/images/Φρούτα/πορτοκάλι.png</image>
           <sound>resources/sounds/Φρούτα.mp3</sound>
           <hasSound>true</hasSound>
@@ -684,29 +682,29 @@
       <name>Ψυχαγωγία</name>
       <enabled>true</enabled>
       <image />
-      <sound>resources/sounds/Ψυχαγωγία.mp3</sound>
+      <sound />
       <music>
         <name>Μουσική</name>
         <enabled>true</enabled>
         <image />
-        <sound>resources/sounds/Μουσική.mp3</sound>
-        <path>/home/christina/Music/</path>
+        <sound />
+        <path />
         <playlistSize>10</playlistSize>
       </music>
       <video>
         <name>Βίντεο</name>
         <enabled>true</enabled>
         <image />
-        <sound>resources/sounds/Βίντεο.mp3</sound>
-        <path>/home/christina/Videos/</path>
+        <sound />
+        <path />
         <playlistSize>10</playlistSize>
       </video>
     </entertainment>
     <games>
       <name>Παιχνίδια</name>
-      <enabled>true</enabled>
-      <sound>resources/sounds/Παιχνίδια.mp3</sound>
       <image />
+      <sound />
+      <enabled>true</enabled>
       <stimulusReactionGames>
         <name>Ερέθισμα - Αντίδραση</name>
         <image />

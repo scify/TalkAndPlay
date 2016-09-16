@@ -3,7 +3,9 @@ package org.scify.talkandplay.services;
 import java.util.List;
 import org.jdom.Attribute;
 import org.jdom.Element;
+import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.models.modules.CommunicationModule;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.utils.ConfigurationFile;
@@ -34,6 +36,60 @@ public class UserService {
         return user;
     }
 
+    private Element setNewUserCommunicationConfFromOldConfiguration(User user){
+        CommunicationModule cm = user.getCommunicationModule();
+                
+        Element communication = new Element("communication");
+        Element categories = new Element("categories");
+
+        //add the first category settings
+        communication.addContent(new Element("name").setText("Επικοινωνία"));
+        communication.addContent(new Element("enabled").setText("true"));
+        communication.addContent(new Element("image"));
+        communication.addContent(new Element("sound"));
+        communication.addContent(new Element("rows").setText(String.valueOf(user.getConfiguration().getDefaultGridRow())));
+        communication.addContent(new Element("columns").setText(String.valueOf(user.getConfiguration().getDefaultGridColumn())));        
+        
+        //add rest communication categories using the user's CommunicationModule
+        if (!cm.getCategories().isEmpty()) {
+            for (Category category : cm.getCategories()){
+                //create the main category
+                Element categoryEl = new Element("category").setAttribute("name", category.getName());
+                categoryEl.addContent(new Element("rows").setText(String.valueOf(user.getConfiguration().getDefaultGridRow())));
+                categoryEl.addContent(new Element("columns").setText(String.valueOf(user.getConfiguration().getDefaultGridColumn())));
+                categoryEl.addContent(new Element("image").setText(category.getImage()));
+                categoryEl.addContent(new Element("sound").setText(category.getSound()));
+                categoryEl.addContent(new Element("hasSound").setText(String.valueOf(category.hasSound())));
+                categoryEl.addContent(new Element("hasImage").setText(String.valueOf(category.hasImage())));                
+                categoryEl.addContent(new Element("hasText").setText(String.valueOf(category.hasText())));
+                
+                //add the subcategories
+                if (!category.getSubCategories().isEmpty()) {
+                    Element subcategoriesEl = new Element("categories");
+                    for (Category subcategory : category.getSubCategories()) {                        
+                        Element subcategoryEl = new Element("category").setAttribute("name", subcategory.getName());
+                        subcategoryEl.addContent(new Element("rows").setText(String.valueOf(user.getConfiguration().getDefaultGridRow())));
+                        subcategoryEl.addContent(new Element("columns").setText(String.valueOf(user.getConfiguration().getDefaultGridColumn())));
+                        subcategoryEl.addContent(new Element("image").setText(subcategory.getImage()));
+                        subcategoryEl.addContent(new Element("sound").setText(subcategory.getSound()));
+                        subcategoryEl.addContent(new Element("hasSound").setText(String.valueOf(subcategory.hasSound())));
+                        subcategoryEl.addContent(new Element("hasImage").setText(String.valueOf(subcategory.hasImage())));                
+                        subcategoryEl.addContent(new Element("hasText").setText(String.valueOf(subcategory.hasText())));
+                        subcategoriesEl.addContent(subcategoryEl);
+                    }
+                    categoryEl.addContent(subcategoriesEl);
+                }
+                
+                //add all the category inside the communication tag 
+                categories.addContent(categoryEl);
+            }
+        }
+        
+        communication.addContent(categories);
+        
+        return communication;
+    }
+    
     /**
      * Copy a user's configuration to create a new one
      * 
@@ -53,7 +109,7 @@ public class UserService {
         } else {
             return false;
         }
-
+        
         //add the general profile info
         Element profile = new Element("profile");
         profile.addContent(new Element("name").setText(user.getName()));
@@ -102,17 +158,7 @@ public class UserService {
         profile.addContent(configuration);
 
         //add communication module settings
-        Element communication = new Element("communication");
-        Element categories = new Element("categories");
-
-        //add the first category settings
-        communication.addContent(new Element("name").setText("Επικοινωνία"));
-        communication.addContent(new Element("enabled").setText("true"));
-        communication.addContent(new Element("image"));
-        communication.addContent(new Element("sound"));
-        communication.addContent(new Element("rows").setText(String.valueOf(user.getConfiguration().getDefaultGridRow())));
-        communication.addContent(new Element("columns").setText(String.valueOf(user.getConfiguration().getDefaultGridColumn())));
-        communication.addContent(categories);
+        Element communication = setNewUserCommunicationConfFromOldConfiguration(user);
 
         //add entertainment module settings
         Element entertainment = new Element("entertainment");
