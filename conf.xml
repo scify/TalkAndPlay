@@ -5,8 +5,8 @@
     <image>resources/users/default.png</image>
     <configuration>
       <rotationSpeed>1</rotationSpeed>
-      <defaultGridRow>3</defaultGridRow>
-      <defaultGridColumn>3</defaultGridColumn>
+      <defaultGridRow>4</defaultGridRow>
+      <defaultGridColumn>4</defaultGridColumn>
       <sound>true</sound>
       <image>true</image>
       <text>true</text>
@@ -642,7 +642,7 @@
           <rows>3</rows>
           <columns>3</columns>
           <image>resources/images/Ψυχαγωγία/Τηλεόραση.png</image>
-          <sound>resources/sounds/Τηλεόραση.mp3</sound>
+          <sound>resources/sounds/Διασκέδαση.mp3</sound>
           <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
