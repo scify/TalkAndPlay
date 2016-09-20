@@ -25,6 +25,7 @@ import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.BaseGridPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.tiles.TileAction;
+import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.games.GameImage;
 import org.scify.talkandplay.models.games.GameType;
@@ -51,7 +52,7 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
         this.selected = 0;
         this.game = game;
 
-        initComponents();
+        initComponents();        
         initCustomComponents();
     }
 
@@ -76,7 +77,7 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void initCustomComponents() {
+    private void initCustomComponents() {        
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         gamePanel = new JPanel();
@@ -130,10 +131,14 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
     }
 
     private JPanel createGameItem(GameImage image) {
-
+        //make the image in stimulus reaction games fill the whole screen
+        UIConstants.getInstance().setRows(1);
+        UIConstants.getInstance().setColumns(1);
+        initLayout();
+        
         final StimulusReactionGamePanel currentPanel = this;
         panelList.clear();
-
+                
         JPanel panel = tileCreator.create("",
                 image.getImage(),
                 image.getSound(),
@@ -170,7 +175,7 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
                     public boolean mute() {
                         return true;
                     }
-                });
+                });        
 
         panelList.add(panel);
         selector.setList(panelList);
