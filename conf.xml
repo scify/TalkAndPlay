@@ -5,8 +5,8 @@
     <image>resources/users/default.png</image>
     <configuration>
       <rotationSpeed>1</rotationSpeed>
-      <defaultGridRow>4</defaultGridRow>
-      <defaultGridColumn>4</defaultGridColumn>
+      <defaultGridRow>3</defaultGridRow>
+      <defaultGridColumn>3</defaultGridColumn>
       <sound>true</sound>
       <image>true</image>
       <text>true</text>
