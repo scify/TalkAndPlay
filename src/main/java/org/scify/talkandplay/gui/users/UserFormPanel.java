@@ -25,6 +25,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,9 +38,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.apache.commons.lang3.StringUtils;
+import org.jdom.Element;
+import org.jdom.output.XMLOutputter;
 import org.scify.talkandplay.gui.MainFrame;
 import org.scify.talkandplay.gui.MainPanel;
 import org.scify.talkandplay.gui.configuration.ConfigurationPanel;
+import org.scify.talkandplay.gui.helpers.GetUserConfigurationHelper;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
@@ -44,6 +51,7 @@ import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.UserService;
+import org.scify.talkandplay.utils.ConfigurationFile;
 
 public class UserFormPanel extends javax.swing.JPanel {
 
@@ -119,6 +127,7 @@ public class UserFormPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        saveToFileButton = new javax.swing.JButton();
 
         jToolBar1.setRollover(true);
 
@@ -234,6 +243,20 @@ public class UserFormPanel extends javax.swing.JPanel {
 
         jLabel3.setText("πλοήγηση:");
 
+        saveToFileButton.setBackground(new java.awt.Color(75, 161, 69));
+        saveToFileButton.setFont(saveToFileButton.getFont().deriveFont((float)18));
+        saveToFileButton.setForeground(new java.awt.Color(255, 255, 255));
+        saveToFileButton.setText("Αποθήκευση σε αρχείο");
+        saveToFileButton.setBorder(null);
+        saveToFileButton.setMaximumSize(new java.awt.Dimension(158, 15));
+        saveToFileButton.setMinimumSize(new java.awt.Dimension(158, 15));
+        saveToFileButton.setPreferredSize(new java.awt.Dimension(235, 62));
+        saveToFileButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                saveToFileButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout userPanelLayout = new javax.swing.GroupLayout(userPanel);
         userPanel.setLayout(userPanelLayout);
         userPanelLayout.setHorizontalGroup(
@@ -248,6 +271,8 @@ public class UserFormPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userPanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(saveToFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(saveAndBackButton)
                                 .addGap(6, 6, 6)))
                         .addComponent(saveAndNextButton))
@@ -346,7 +371,7 @@ public class UserFormPanel extends javax.swing.JPanel {
                         .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(userPanelLayout.createSequentialGroup()
                                 .addComponent(uploadImageLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(userPanelLayout.createSequentialGroup()
                                 .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(xLabel)
@@ -389,7 +414,8 @@ public class UserFormPanel extends javax.swing.JPanel {
                 .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveAndNextButton)
                     .addComponent(backButton)
-                    .addComponent(saveAndBackButton)))
+                    .addComponent(saveAndBackButton)
+                    .addComponent(saveToFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -599,6 +625,30 @@ public class UserFormPanel extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_saveAndBackButtonMouseClicked
+
+    private void saveToFileButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveToFileButtonMouseClicked
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Επίλεξε αρχείο");
+        chooser.setAcceptAllFileFilterUsed(false);
+        chooser.setFileFilter(new FileNameExtensionFilter("XML files", "xml"));
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+            File file = chooser.getSelectedFile();
+            try {
+                //get profile from configuration xml 
+                ConfigurationFile configurationFile = ConfigurationFile.getInstance();                
+                Element profile = configurationFile.getUserElement(user.getName());
+                //write profile to selected file
+                PrintWriter pw = new PrintWriter(file);
+                pw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+                XMLOutputter xmlout = new XMLOutputter();
+                xmlout.output(profile, pw);
+                pw.close();
+            } catch (Exception ex) {
+                Logger.getLogger(UserFormPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_saveToFileButtonMouseClicked
 
     /**
      * The action listeners for the text fields and radio buttons
@@ -869,6 +919,7 @@ public class UserFormPanel extends javax.swing.JPanel {
     private javax.swing.JTextField rowsTextField;
     private javax.swing.JButton saveAndBackButton;
     private javax.swing.JButton saveAndNextButton;
+    private javax.swing.JButton saveToFileButton;
     private javax.swing.JTextField selectionSensorTextField1;
     private javax.swing.JTextField selectionSensorTextField2;
     private javax.swing.JLabel sensorLabel;
