@@ -39,6 +39,7 @@ import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.games.Game;
 import org.scify.talkandplay.models.games.GameType;
 import org.scify.talkandplay.services.GameService;
+import org.scify.talkandplay.utils.ConfigurationHandler;
 import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
 
 public class GamesTab extends javax.swing.JPanel {
@@ -70,11 +71,13 @@ public class GamesTab extends javax.swing.JPanel {
         step1Label.setFont(font);
         step2Label.setFont(font);
         step3Label.setFont(font);
+        step4Label.setFont(font);
         step2Label.setVisible(false);
         step3Label.setVisible(false);
-        step3ExplLabel.setVisible(false);
+        step3ExplLabel.setVisible(false);        
         winSoundLabel.setVisible(false);
         errorSoundLabel.setVisible(false);
+        step4Label.setVisible(false);
         saveButton.setVisible(false);
         removeWinSoundLavel.setVisible(false);
         removeErrorSoundLavel.setVisible(false);
@@ -84,6 +87,7 @@ public class GamesTab extends javax.swing.JPanel {
         errorSoundLabel.setVerticalTextPosition(JLabel.BOTTOM);
 
         gamesPanel2.setLayout(new BoxLayout(gamesPanel2, BoxLayout.Y_AXIS));
+        gamesPanel4.setLayout(new BoxLayout(gamesPanel4, BoxLayout.Y_AXIS));
         gamesComboBox.setBorder(new LineBorder(Color.decode(UIConstants.green), 1));
         gamesComboBox.setFont(new Font(UIConstants.green, Font.PLAIN, 12));
 
@@ -95,8 +99,17 @@ public class GamesTab extends javax.swing.JPanel {
         setListeners();
     }
 
-    private void showGamesPerType(String type) {
-        gamesPanel2.removeAll();
+    public void showGamesPerType(String type) {
+        //refresh user from configuration file
+        ConfigurationHandler ch = new ConfigurationHandler();
+        for (User temp : ch.getUsers()) {
+            if (temp.getName().equals(user.getName())) {
+                user = temp;
+                break;
+            }
+        }
+        gamesPanel4.removeAll();
+        gamesPanel2.removeAll();        
         gamePanels.clear();
 
         for (GameType gt : user.getGameModule().getGameTypes()) {
@@ -114,9 +127,10 @@ public class GamesTab extends javax.swing.JPanel {
                 }
                 step2Label.setVisible(true);
                 step3Label.setVisible(true);
-                step3ExplLabel.setVisible(true);
+                step3ExplLabel.setVisible(true);                
                 winSoundLabel.setVisible(true);
                 errorSoundLabel.setVisible(true);
+                step4Label.setVisible(true);
                 saveButton.setVisible(true);
 
                 if (gameType.getWinSound() == null || gameType.getWinSound().isEmpty() || !(new File(gameType.getWinSound()).isFile())) {
@@ -136,19 +150,27 @@ public class GamesTab extends javax.swing.JPanel {
                     errorSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                     removeErrorSoundLavel.setVisible(true);
                 }
+                
+                //add new game
+                NewGamePanel newGamePanel = new NewGamePanel(this, user, gameType.getType());
+                gamesPanel4.add(newGamePanel);
             }
         } else {
             step2Label.setVisible(false);
             step3Label.setVisible(false);
-            step3ExplLabel.setVisible(false);
+            step3ExplLabel.setVisible(false);            
             winSoundLabel.setVisible(false);
             errorSoundLabel.setVisible(false);
+            step4Label.setVisible(false);
+            gamesPanel4.setVisible(false);
             saveButton.setVisible(false);
             gamesPanel2.add(new JLabel("Δεν υπάρχουν παιχνίδια σε αυτή την κατηγορία"));
         }
 
         gamesPanel2.revalidate();
         gamesPanel2.repaint();
+        gamesPanel4.revalidate();
+        gamesPanel4.repaint();
     }
 
     private void setListeners() {
@@ -286,12 +308,15 @@ public class GamesTab extends javax.swing.JPanel {
         errorSoundLabel = new javax.swing.JLabel();
         removeWinSoundLavel = new javax.swing.JLabel();
         removeErrorSoundLavel = new javax.swing.JLabel();
+        step4Label = new javax.swing.JLabel();
+        gamesPanel4 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         jScrollPane1.setBorder(null);
 
         wrapperPanel.setBackground(new java.awt.Color(255, 255, 255));
+        wrapperPanel.setForeground(new java.awt.Color(0, 0, 0));
 
         step1Label.setText("1. Επίλεξε κατηγορία παιχνιδιού");
 
@@ -335,35 +360,42 @@ public class GamesTab extends javax.swing.JPanel {
 
         removeErrorSoundLavel.setText("Αφαίρεση ήχου");
 
+        step4Label.setText("4. Προσθήκη νέου παιχνιδιού");
+
+        gamesPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        gamesPanel4.setToolTipText("");
+        gamesPanel4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        gamesPanel4.setOpaque(false);
+        gamesPanel4.setRequestFocusEnabled(false);
+
+        javax.swing.GroupLayout gamesPanel4Layout = new javax.swing.GroupLayout(gamesPanel4);
+        gamesPanel4.setLayout(gamesPanel4Layout);
+        gamesPanel4Layout.setHorizontalGroup(
+            gamesPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        gamesPanel4Layout.setVerticalGroup(
+            gamesPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 144, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout wrapperPanelLayout = new javax.swing.GroupLayout(wrapperPanel);
         wrapperPanel.setLayout(wrapperPanelLayout);
         wrapperPanelLayout.setHorizontalGroup(
             wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(wrapperPanelLayout.createSequentialGroup()
-                .addGroup(wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, wrapperPanelLayout.createSequentialGroup()
+                .addGroup(wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, wrapperPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(gamesPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(wrapperPanelLayout.createSequentialGroup()
-                        .addGroup(wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(wrapperPanelLayout.createSequentialGroup()
-                                .addGap(270, 270, 270)
-                                .addComponent(saveButton))
-                            .addGroup(wrapperPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(step3Label)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(wrapperPanelLayout.createSequentialGroup()
-                .addGroup(wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(wrapperPanelLayout.createSequentialGroup()
+                        .addComponent(step4Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, wrapperPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(step1Label)
                             .addComponent(step2Label)
                             .addComponent(gamesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(step3ExplLabel)))
-                    .addGroup(wrapperPanelLayout.createSequentialGroup()
+                            .addComponent(step3ExplLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, wrapperPanelLayout.createSequentialGroup()
                         .addGap(104, 104, 104)
                         .addGroup(wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(winSoundLabel)
@@ -375,7 +407,24 @@ public class GamesTab extends javax.swing.JPanel {
                             .addGroup(wrapperPanelLayout.createSequentialGroup()
                                 .addGap(116, 116, 116)
                                 .addComponent(removeErrorSoundLavel)))))
-                .addGap(0, 225, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(wrapperPanelLayout.createSequentialGroup()
+                .addGroup(wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(wrapperPanelLayout.createSequentialGroup()
+                        .addGroup(wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(wrapperPanelLayout.createSequentialGroup()
+                                .addGap(270, 270, 270)
+                                .addComponent(saveButton))
+                            .addGroup(wrapperPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(step3Label)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(wrapperPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(gamesPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(gamesPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         wrapperPanelLayout.setVerticalGroup(
             wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -400,7 +449,11 @@ public class GamesTab extends javax.swing.JPanel {
                 .addGroup(wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(removeWinSoundLavel)
                     .addComponent(removeErrorSoundLavel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
+                .addComponent(step4Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(gamesPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(saveButton)
                 .addContainerGap())
         );
@@ -441,12 +494,13 @@ public class GamesTab extends javax.swing.JPanel {
 
     public void stopPlayer() {
         audioPlayer.getMediaPlayer().release();
-    }
+    }    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel errorSoundLabel;
     private javax.swing.JComboBox gamesComboBox;
     private javax.swing.JPanel gamesPanel2;
+    private javax.swing.JPanel gamesPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel removeErrorSoundLavel;
     private javax.swing.JLabel removeWinSoundLavel;
@@ -455,6 +509,7 @@ public class GamesTab extends javax.swing.JPanel {
     private javax.swing.JLabel step2Label;
     private javax.swing.JLabel step3ExplLabel;
     private javax.swing.JLabel step3Label;
+    private javax.swing.JLabel step4Label;
     private javax.swing.JLabel winSoundLabel;
     private javax.swing.JPanel wrapperPanel;
     // End of variables declaration//GEN-END:variables
