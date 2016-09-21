@@ -37,9 +37,9 @@ public class UIConstants {
 
     public static final String grey = "#d2d4d3";
 
-    public static final String lightBlue = "#def7ff";
+    public static final String lightBlue = "#add8e6";
 
-    public static final String blue = "#5bd8ff";
+    public static final String blue = "#229ac1";
 
     public static final String mainFont = "DejaVu Sans";
 
