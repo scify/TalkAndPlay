@@ -631,19 +631,9 @@ public class UserFormPanel extends javax.swing.JPanel {
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             File file = chooser.getSelectedFile();
-            try {
-                //get profile from configuration xml 
-                ConfigurationFile configurationFile = ConfigurationFile.getInstance();                
-                Element profile = configurationFile.getUserElement(user.getName());
-                //write profile to selected file
-                PrintWriter pw = new PrintWriter(file);
-                pw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-                XMLOutputter xmlout = new XMLOutputter();
-                xmlout.output(profile, pw);
-                pw.close();
-            } catch (Exception ex) {
-                Logger.getLogger(UserFormPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            UserService us = new UserService();
+            //returns boolean to show success/failure of operation
+            us.storeUserToExternalFile(user.getName(), file);
         }
     }//GEN-LAST:event_saveToFileButtonMouseClicked
 

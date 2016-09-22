@@ -26,6 +26,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,11 +34,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.gui.users.UserFormPanel;
@@ -94,10 +97,10 @@ public class MainPanel extends javax.swing.JPanel {
 
         List<User> users = configurationFile.getUsers();
 
-        if (users.size() > 5) {
+        if (users.size() > 4) {
             usersPanel.setLayout(new GridLayout(0, 6));
         } else {
-            usersPanel.setLayout(new GridLayout(0, users.size() + 1));
+            usersPanel.setLayout(new GridLayout(0, users.size() + 2));
         }
 
         userPanelList = new ArrayList<>();
@@ -152,6 +155,7 @@ public class MainPanel extends javax.swing.JPanel {
             }
         }
         addUserPanel();
+        uploadUserPanel();
         usersPanel.repaint();
     }
 
@@ -211,6 +215,59 @@ public class MainPanel extends javax.swing.JPanel {
         });
     }
 
+    private void uploadUserPanel() {
+        JPanel uploadUserPanel = new JPanel();
+        uploadUserPanel.setLayout(new BoxLayout(uploadUserPanel, BoxLayout.Y_AXIS));
+        uploadUserPanel.setBackground(Color.white);
+
+        JLabel nameLabel = new JLabel("Φόρτωσε χρήστη από αρχείο");
+        final JLabel imageLabel = new JLabel(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/upload-icon.png")));
+
+        imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        nameLabel.setBorder(new EmptyBorder(5, 0, 20, 0));
+        nameLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 16));
+
+        uploadUserPanel.add(imageLabel);
+        uploadUserPanel.add(nameLabel);
+        usersPanel.add(uploadUserPanel);
+
+        imageLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent arg0) {
+                imageLabel.setIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/upload-icon.png")));
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent arg0) {
+                imageLabel.setIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/upload-icon-hover.png")));
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+                JFileChooser chooser = new JFileChooser();
+                chooser.setDialogTitle("Επίλεξε αρχείο");
+                chooser.setAcceptAllFileFilterUsed(false);
+                chooser.setFileFilter(new FileNameExtensionFilter("XML files", "xml"));
+                chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    File file = chooser.getSelectedFile();
+                    UserService us = new UserService();
+                    boolean result = us.uploadUserFromFile(file);
+                    //on success
+                    if (result) {
+                        /**
+                         * redirect to the main page [it is the same page 
+                         * but used to refresh content and display the newly 
+                         * uploaded user]
+                         */
+                        parent.changePanel(new MainPanel(parent));   
+                    }
+                }
+            }
+        });
+    }
+    
     public void updateUsersPanel(User user, String oldName) {
         for (UserPanel p : userPanelList) {
             if (p.getUser().getName().equals(oldName)) {

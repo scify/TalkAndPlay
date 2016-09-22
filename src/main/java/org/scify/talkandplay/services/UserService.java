@@ -15,9 +15,18 @@
 */
 package org.scify.talkandplay.services;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jdom.Attribute;
+import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.input.SAXBuilder;
+import org.jdom.output.XMLOutputter;
+import org.scify.talkandplay.gui.MainFrame;
+import org.scify.talkandplay.gui.users.UserFormPanel;
 import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.modules.CommunicationModule;
@@ -51,6 +60,28 @@ public class UserService {
         return user;
     }
 
+    private String getUniqueUserName(String userName, List<User> users) {
+        int counter = 2;
+        boolean foundUserName = false;
+        String tempName = null;
+        while (!foundUserName){
+            tempName = userName + counter;
+            int counterCopy = counter;
+            for (User u : users) {
+                //if user name is found try again with the incremented counter
+                if (u.getName().equals(tempName)) {
+                    counter++;
+                    break;
+                }
+            }
+            //if the counter hasn't been changed, the unique user name has been found
+            if (counterCopy == counter) {
+                foundUserName = true;
+            }
+        }
+        return tempName;
+    }
+    
     private Element setNewUserCommunicationConfFromOldConfiguration(User user){
         CommunicationModule cm = user.getCommunicationModule();
                 
@@ -129,25 +160,7 @@ public class UserService {
         Element profile = new Element("profile");
         
         //get new unique user name
-        String newUserName = null;
-        int counter = 2;
-        boolean foundUserName = false;
-        while (!foundUserName){
-            String tempName = user.getName() + counter;
-            int counterCopy = counter;
-            for (User u : users) {
-                //if user name is found try again with the incremented counter
-                if (u.getName().equals(tempName)) {
-                    counter++;
-                    break;
-                }
-            }
-            //if the counter hasn't been changed, the unique user name has been found
-            if (counterCopy == counter) {
-                foundUserName = true;
-                newUserName = tempName;
-            }
-        }
+        String newUserName = getUniqueUserName(user.getName(), users);        
         
         profile.addContent(new Element("name").setText(newUserName));
         profile.addContent(new Element("image").setText(user.getImage()));
@@ -444,7 +457,69 @@ public class UserService {
             }
         }
     }
-
+    
+    /**
+     * Check if name is already used
+     * 
+     * @param name
+     * @param users
+     * @return boolean
+     */
+    private boolean nameIsUsed(String name, List<User> users) {
+        for (User u : users) {
+            //if user name is found
+            if (u.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Upload a user from xml file
+     * 
+     * @param file
+     */
+    public boolean uploadUserFromFile(File file) {
+        try {
+            //get profile from selected file
+            SAXBuilder builder = new SAXBuilder();
+            Document profileXml = (Document) builder.build(file);
+            Element profile = profileXml.getRootElement();
+            profile.detach();
+            //check if profile name is unique
+            List<User> users = configurationFile.getUsers();
+            String name = profile.getChild("name").getText();
+            if (nameIsUsed(name, users)) {
+                profile.getChild("name").setText(getUniqueUserName(name, users));
+            }
+            Element profiles = configurationFile.getRootElement();
+            profiles.addContent(profile);
+            configurationFile.update();
+        } catch (Exception ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean storeUserToExternalFile(String userName, File file) {
+        try {
+            //get profile from configuration xml               
+            Element profile = configurationFile.getUserElement(userName);
+            //write profile to selected file
+            PrintWriter pw = new PrintWriter(file);
+            pw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+            XMLOutputter xmlout = new XMLOutputter();
+            xmlout.output(profile, pw);
+            pw.close();
+        } catch (Exception ex) {
+            Logger.getLogger(UserFormPanel.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+    }
+    
     /**
      * Remove a user from the xml file
      *
