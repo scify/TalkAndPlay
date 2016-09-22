@@ -122,34 +122,7 @@
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
-            </category>
-            <category name="Νερό">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>resources/images/Φαγητό/νερό.png</image>
-              <sound>resources/sounds/Νερό.mp3</sound>
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
-            <category name="Χυμός">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>resources/images/Φαγητό/χυμός.png</image>
-              <sound>resources/sounds/Χυμός.mp3</sound>
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
-            <category name="Γάλα">
-              <rows>3</rows>
-              <columns>3</columns>
-              <image>resources/images/Φαγητό/Γάλα.png</image>
-              <sound>resources/sounds/Γάλα.mp3</sound>
-              <hasSound>true</hasSound>
-              <hasImage>true</hasImage>
-              <hasText>true</hasText>
-            </category>
+            </category>            
             <category name="Γιαούρτι">
               <rows>3</rows>
               <columns>3</columns>
@@ -179,6 +152,44 @@
             </category>
           </categories>
         </category>
+				<category name="Ποτά">
+          <rows>3</rows>
+          <columns>3</columns>
+          <image>resources/images/Ποτά/χυμός.png</image>
+          <sound>resources/sounds/Ποτά.mp3</sound>
+          <hasSound>false</hasSound>
+          <hasImage>false</hasImage>
+          <hasText>false</hasText>
+          <categories>
+						<category name="Νερό">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Ποτά/νερό.png</image>
+              <sound>resources/sounds/Νερό.mp3</sound>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+            <category name="Χυμός">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Ποτά/χυμός.png</image>
+              <sound>resources/sounds/Χυμός.mp3</sound>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+            <category name="Γάλα">
+              <rows>3</rows>
+              <columns>3</columns>
+              <image>resources/images/Ποτά/Γάλα.png</image>
+              <sound>resources/sounds/Γάλα.mp3</sound>
+              <hasSound>true</hasSound>
+              <hasImage>true</hasImage>
+              <hasText>true</hasText>
+            </category>
+					</categories>
+				</category>
         <category name="Φρούτα">
           <rows>3</rows>
           <columns>3</columns>
