@@ -8,3 +8,5 @@ Talk and Play is a system that allows people with disabilities to:
 This way, they will be able to communicate, listen to music, watch movies and train for a quicker rehabilitation.
 
 The project is being developed by SciFY with the exclusive donation from [Stavros Niarchos Foundation](http://www.snf.org/en/).
+
+Icon made by [Yannick](http://www.flaticon.com/authors/yannick) from [Flaticon](www.flaticon.com)
