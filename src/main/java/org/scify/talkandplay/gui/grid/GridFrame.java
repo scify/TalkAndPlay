@@ -16,8 +16,6 @@
 package org.scify.talkandplay.gui.grid;
 
 import java.awt.GridBagConstraints;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.io.IOException;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;

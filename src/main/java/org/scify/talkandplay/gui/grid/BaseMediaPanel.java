@@ -25,6 +25,8 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -89,6 +91,8 @@ public class BaseMediaPanel extends BasePanel {
     }
 
     public void initLayout() {
+        setWindowListener();
+        
         setBorder(new EmptyBorder(0, 20, 20, 20));
         setBackground(Color.white);
         setLayout(new GridBagLayout());
@@ -193,5 +197,20 @@ public class BaseMediaPanel extends BasePanel {
                 }
             }
         }
+    }
+    
+    private void setWindowListener() {
+        parent.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
+                System.out.println("window closing?");
+                mediaPlayerPanel.stop();
+            }
+            
+            @Override
+            public void windowClosed(WindowEvent we) {
+                System.out.println("window closed");
+            }
+        });
     }
 }
