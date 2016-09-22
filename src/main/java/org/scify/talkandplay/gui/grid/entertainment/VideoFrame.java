@@ -18,6 +18,8 @@ package org.scify.talkandplay.gui.grid.entertainment;
 import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -76,8 +78,7 @@ public class VideoFrame extends javax.swing.JFrame {
 
         setTitle("Video Player");
         setVisible(false);
-        setIconImage((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/tp_logo_mini.png"))).getImage());
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setIconImage((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/tp_logo_mini.png"))).getImage());        
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         initComponents();
@@ -190,6 +191,8 @@ public class VideoFrame extends javax.swing.JFrame {
     }
 
     private void initCustomComponents() {
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
         videoPanel.add(parent.getMediaPlayerComponent(), BorderLayout.CENTER);
 
         wrapperPanel.setLayout(new BoxLayout(wrapperPanel, BoxLayout.Y_AXIS));
@@ -320,6 +323,15 @@ public class VideoFrame extends javax.swing.JFrame {
                     parent.getSelector().start();
                     dispose();
                 }
+            }
+        });
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {                 
+                selector.cancel();
+                mediaPlayer.stop();
+                parent.getSelector().start();
+                dispose();                
             }
         });
     }
