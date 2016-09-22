@@ -203,13 +203,7 @@ public class BaseMediaPanel extends BasePanel {
         parent.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent we) {
-                System.out.println("window closing?");
                 mediaPlayerPanel.stop();
-            }
-            
-            @Override
-            public void windowClosed(WindowEvent we) {
-                System.out.println("window closed");
             }
         });
     }
