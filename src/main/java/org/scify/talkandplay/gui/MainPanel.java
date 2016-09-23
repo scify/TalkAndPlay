@@ -191,7 +191,7 @@ public class MainPanel extends javax.swing.JPanel {
             public void mouseClicked(MouseEvent arg0) {
                 UserService us = new UserService();
                 try {
-                    boolean result = us.createUserFromOldConfiguration();
+                    boolean result = us.createUserAsCopyOfDefaultUser();
                     /**
                      * if user is successfully created from old user's 
                      * configuration just refresh the page, else open the form 

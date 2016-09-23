@@ -21,12 +21,12 @@ import org.scify.talkandplay.models.User;
 
 public class ConfigurationFile {
 
-    private ConfigurationHandler configurationHandler;
-    private List<User> users;
+    protected ConfigurationHandler configurationHandler;
+    protected List<User> users;
 
     private static ConfigurationFile instance = new ConfigurationFile();
 
-    private ConfigurationFile() {
+    protected ConfigurationFile() {
         init();
     }
 

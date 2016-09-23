@@ -53,16 +53,21 @@ import org.scify.talkandplay.models.sensors.Sensor;
  */
 public class ConfigurationHandler {
 
-    private Document configurationFile;
-    private List<User> users;
-    private String projectPath;
-    private Map<String, List<String>> userFiles;
-    private List<String> files;
-    private User currentUser;
+    protected Document configurationFile;
+    protected List<User> users;
+    protected String projectPath;
+    protected Map<String, List<String>> userFiles;
+    protected List<String> files;
+    protected User currentUser;
 
     public ConfigurationHandler() {
+        this(System.getProperty("user.dir") + File.separator + "conf.xml");
+    }
+    
+    public ConfigurationHandler(String sProjectPath) {
         try {
-            projectPath = System.getProperty("user.dir") + File.separator + "conf.xml";
+//            projectPath = System.getProperty("user.dir") + File.separator + "conf.xml";
+            projectPath = sProjectPath;
             File file = new File(projectPath);
             if (!file.exists() || file.isDirectory()) {
                 PrintWriter writer = new PrintWriter(projectPath, "UTF-8");
