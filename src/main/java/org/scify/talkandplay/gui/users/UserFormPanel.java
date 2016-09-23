@@ -26,7 +26,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,8 +35,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.apache.commons.lang3.StringUtils;
-import org.jdom.Element;
-import org.jdom.output.XMLOutputter;
 import org.scify.talkandplay.gui.MainFrame;
 import org.scify.talkandplay.gui.MainPanel;
 import org.scify.talkandplay.gui.configuration.ConfigurationPanel;
@@ -48,7 +45,6 @@ import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.UserService;
-import org.scify.talkandplay.utils.ConfigurationFile;
 
 public class UserFormPanel extends javax.swing.JPanel {
 
@@ -125,6 +121,7 @@ public class UserFormPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         saveToFileButton = new javax.swing.JButton();
+        successLabel = new javax.swing.JLabel();
 
         jToolBar1.setRollover(true);
 
@@ -254,14 +251,18 @@ public class UserFormPanel extends javax.swing.JPanel {
             }
         });
 
+        successLabel.setForeground(new java.awt.Color(0, 153, 0));
+        successLabel.setText("success");
+        successLabel.setToolTipText("");
+
         javax.swing.GroupLayout userPanelLayout = new javax.swing.GroupLayout(userPanel);
         userPanel.setLayout(userPanelLayout);
         userPanelLayout.setHorizontalGroup(
             userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userPanelLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
                 .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(userPanelLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
                         .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(userPanelLayout.createSequentialGroup()
                                 .addComponent(nameLabel)
@@ -276,35 +277,41 @@ public class UserFormPanel extends javax.swing.JPanel {
                     .addGroup(userPanelLayout.createSequentialGroup()
                         .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(userPanelLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(imageLabel)
-                            .addGroup(userPanelLayout.createSequentialGroup()
-                                .addGap(49, 49, 49)
-                                .addComponent(uploadImageLabel)))
-                        .addGap(89, 89, 89)
-                        .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(sensorLabel)
-                            .addGroup(userPanelLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
+                                .addGap(19, 19, 19)
                                 .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(manualScanRadioButton)
-                                    .addComponent(autoScanRadioButton)
                                     .addGroup(userPanelLayout.createSequentialGroup()
-                                        .addGap(21, 21, 21)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(imageLabel)
+                                    .addGroup(userPanelLayout.createSequentialGroup()
+                                        .addGap(49, 49, 49)
+                                        .addComponent(uploadImageLabel)))
+                                .addGap(89, 89, 89)
+                                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sensorLabel)
+                                    .addGroup(userPanelLayout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
                                         .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userPanelLayout.createSequentialGroup()
-                                                .addComponent(jLabel1)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(selectionSensorTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(manualScanRadioButton)
+                                            .addComponent(autoScanRadioButton)
                                             .addGroup(userPanelLayout.createSequentialGroup()
+                                                .addGap(21, 21, 21)
                                                 .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel3)
-                                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(selectionSensorTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(navigationSensorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userPanelLayout.createSequentialGroup()
+                                                        .addComponent(jLabel1)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(selectionSensorTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGroup(userPanelLayout.createSequentialGroup()
+                                                        .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(jLabel3)
+                                                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(selectionSensorTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(navigationSensorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))))))))
+                            .addGroup(userPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(successLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(160, 160, 160)
                         .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(userPanelLayout.createSequentialGroup()
@@ -366,9 +373,7 @@ public class UserFormPanel extends javax.swing.JPanel {
                                 .addComponent(defaultGridSizeLabel)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(userPanelLayout.createSequentialGroup()
-                                .addComponent(uploadImageLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(uploadImageLabel)
                             .addGroup(userPanelLayout.createSequentialGroup()
                                 .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(xLabel)
@@ -382,8 +387,13 @@ public class UserFormPanel extends javax.swing.JPanel {
                                     .addComponent(textCheckBox)
                                     .addComponent(imageCheckBox))
                                 .addGap(31, 31, 31)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 60, Short.MAX_VALUE)
+                        .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(saveAndNextButton)
+                            .addComponent(backButton)
+                            .addComponent(saveAndBackButton)
+                            .addComponent(saveToFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(userPanelLayout.createSequentialGroup()
                         .addComponent(sensorLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -406,13 +416,9 @@ public class UserFormPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(errorLabel)
-                        .addGap(10, 10, 10)))
-                .addGap(60, 60, 60)
-                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saveAndNextButton)
-                    .addComponent(backButton)
-                    .addComponent(saveAndBackButton)
-                    .addComponent(saveToFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(successLabel)
+                        .addGap(111, 111, 111))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -429,6 +435,7 @@ public class UserFormPanel extends javax.swing.JPanel {
 
     private void initCustomComponents() {
         errorLabel.setVisible(false);
+        successLabel.setVisible(false);
 
         setUI();
         setFocusListeners();
@@ -624,16 +631,16 @@ public class UserFormPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_saveAndBackButtonMouseClicked
 
     private void saveToFileButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveToFileButtonMouseClicked
-        JFileChooser chooser = new JFileChooser();
-        chooser.setDialogTitle("Επίλεξε αρχείο");
-        chooser.setAcceptAllFileFilterUsed(false);
-        chooser.setFileFilter(new FileNameExtensionFilter("XML files", "xml"));
-        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-            File file = chooser.getSelectedFile();
-            UserService us = new UserService();
-            //returns boolean to show success/failure of operation
-            us.storeUserToExternalFile(user.getName(), file);
+        UserService us = new UserService();
+        //returns boolean to show success/failure of operation
+        boolean result = us.storeUserToExternalFile(user.getName());
+        //on success print success message, else print error message
+        if (result) {
+            successLabel.setText("Το προφίλ αποθηκεύτηκε.");
+            successLabel.setVisible(true);
+        } else {
+            errorLabel.setText("Το προφίλ δεν αποθηκεύτηκε. Παρακαλώ δοκίμασε ξανά.");
+            errorLabel.setVisible(true);
         }
     }//GEN-LAST:event_saveToFileButtonMouseClicked
 
@@ -912,6 +919,7 @@ public class UserFormPanel extends javax.swing.JPanel {
     private javax.swing.JLabel sensorLabel;
     private javax.swing.JCheckBox soundCheckBox;
     private javax.swing.JTextArea step6ExplTextArea;
+    private javax.swing.JLabel successLabel;
     private javax.swing.JCheckBox textCheckBox;
     private javax.swing.JLabel tilesLabel;
     private javax.swing.JLabel uploadImageLabel;

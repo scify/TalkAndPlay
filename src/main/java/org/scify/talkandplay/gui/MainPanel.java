@@ -220,7 +220,7 @@ public class MainPanel extends javax.swing.JPanel {
         uploadUserPanel.setLayout(new BoxLayout(uploadUserPanel, BoxLayout.Y_AXIS));
         uploadUserPanel.setBackground(Color.white);
 
-        JLabel nameLabel = new JLabel("Φόρτωσε χρήστη από αρχείο");
+        JLabel nameLabel = new JLabel("Φόρτωσε χρήστη");
         final JLabel imageLabel = new JLabel(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/upload-icon.png")));
 
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);

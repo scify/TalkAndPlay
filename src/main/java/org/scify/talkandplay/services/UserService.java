@@ -503,8 +503,17 @@ public class UserService {
         return true;
     }
     
-    public boolean storeUserToExternalFile(String userName, File file) {
+    public boolean storeUserToExternalFile(String userName) {
         try {
+            //if folder does not exist, create it
+            String folderPath = System.getProperty("user.dir") + File.separator + "profiles";
+            File folder = new File(folderPath);
+            if (!folder.exists()) {
+                folder.mkdir();
+            }  
+            //set file
+            String filePath =  folderPath + File.separator + userName + ".xml";
+            File file = new File(filePath);
             //get profile from configuration xml               
             Element profile = configurationFile.getUserElement(userName);
             //write profile to selected file

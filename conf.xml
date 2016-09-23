@@ -122,7 +122,7 @@
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
-            </category>            
+            </category>
             <category name="Γιαούρτι">
               <rows>3</rows>
               <columns>3</columns>
@@ -152,7 +152,7 @@
             </category>
           </categories>
         </category>
-				<category name="Ποτά">
+        <category name="Ποτά">
           <rows>3</rows>
           <columns>3</columns>
           <image>resources/images/Ποτά/χυμός.png</image>
@@ -161,7 +161,7 @@
           <hasImage>false</hasImage>
           <hasText>false</hasText>
           <categories>
-						<category name="Νερό">
+            <category name="Νερό">
               <rows>3</rows>
               <columns>3</columns>
               <image>resources/images/Ποτά/νερό.png</image>
@@ -188,8 +188,8 @@
               <hasImage>true</hasImage>
               <hasText>true</hasText>
             </category>
-					</categories>
-				</category>
+          </categories>
+        </category>
         <category name="Φρούτα">
           <rows>3</rows>
           <columns>3</columns>
