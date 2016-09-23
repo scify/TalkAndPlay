@@ -17,6 +17,17 @@ package org.scify.talkandplay.models.modules;
 
 import java.net.URL;
 
+/**
+ * The Module class represents the information of an executable module (function)
+ * of TalkNPlay. The basic information related to the name, the representative
+ * image and the representative sound indicative of a module.
+ * Essentially the Module class allows serialization of the configuration data 
+ * of a module.
+ * <i>(This is not to be mixed with the Configuration class.)</i>
+ *
+ * Subclasses should specialize by adding subclass-specific configuration data.
+ * @author snik
+ */
 public class Module {
 
     private String name;

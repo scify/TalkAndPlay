@@ -16,9 +16,11 @@
 package org.scify.talkandplay.models.sensors;
 
 /**
- * A Sensor can be a mouse or keyboard
+ * The Sensor class represents a named object. 
  *
- * @author christina
+ * Subclasses should specialize by adding subclass-specific configuration data.
+ *
+ * @author christina, snik
  */
 public class Sensor {
 
@@ -38,5 +40,5 @@ public class Sensor {
     public void setName(String name) {
         this.name = name;
     }
-
+    
 }
