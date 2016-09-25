@@ -62,10 +62,10 @@ public class UserService {
                 break; // Leave the loop
             }
         }
-        
+
         return uRes;
     }
-    
+
     protected User findUser(User uToSeek) {
         User uRes = null;
         // Search through the users of configurationFile
@@ -77,17 +77,17 @@ public class UserService {
                 break; // Leave the loop
             }
         }
-        
+
         return uRes;
     }
-    
+
     public void appendUser(User uToSave) {
         // Search through the users of configurationFile
         List<User> currentUserList = configurationFile.getUsers();
         currentUserList.add(uToSave);
         saveNewList(currentUserList);
     }
-    
+
     public void updateUser(String sOldName, User uToUpdate) {
         // If we do find the guy
         User uFound = findUser(sOldName);
@@ -99,11 +99,11 @@ public class UserService {
             // add to the same index the updated version
             currentUserList.add(iLastIndex, uToUpdate);
             saveNewList(currentUserList);
-            
+
             return;
-        }        
+        }
     }
-    
+
     public void deleteUser(User uToDelete) {
         // If we do find the guy
         User uFound = findUser(uToDelete);
@@ -125,7 +125,7 @@ public class UserService {
         }
     }
     ///////////////////////////////////////////////////////////////////////////
-    
+
 
     /**
      * Find one user
@@ -143,8 +143,8 @@ public class UserService {
         List<User> user = configurationFile.getUsers();
 
         return user;
-    }    
-    
+    }
+
     private String getUniqueUserName(String userName, List<User> users) {
         int counter = 2;
         boolean foundUserName = false;
@@ -166,7 +166,7 @@ public class UserService {
         }
         return tempName;
     }
-    
+
     /**
      * Recursive function to get the user categories
      *
@@ -268,15 +268,15 @@ public class UserService {
             return categories;
         }
     }
-    
+
     /**
      * @param profile
-     * @return 
+     * @return
      */
     private User serializeUserFromXmlFile(Element profile) {
         /**
          * configuration
-         */         
+         */
         Configuration userConf = new Configuration();
         Element configurationEl = profile.getChild("configuration");
         userConf.setDefaultGridColumn(Integer.valueOf(configurationEl.getChildText("defaultGridColumn")));
@@ -311,15 +311,15 @@ public class UserService {
         userConf.setRotationSpeed(Integer.valueOf(configurationEl.getChild("rotationSpeed").getText()));
         userConf.setSound(Boolean.valueOf(configurationEl.getChild("sound").getText()));
         userConf.setText(Boolean.valueOf(configurationEl.getChild("text").getText()));
-        
+
         /**
          * communication
-         */        
+         */
         CommunicationModule userCommunication = new CommunicationModule();
         Element communicationEl = profile.getChild("communication");
         List<Category> categoriesArray = new ArrayList();
         Element categories = (Element) communicationEl.getChild("categories");
-        categoriesArray = getCategories(categories, categoriesArray, null);        
+        categoriesArray = getCategories(categories, categoriesArray, null);
         userCommunication.setName(communicationEl.getChildText("name"));
         userCommunication.setRows(Integer.parseInt(communicationEl.getChildText("rows")));
         userCommunication.setColumns(Integer.parseInt(communicationEl.getChildText("columns")));
@@ -335,19 +335,19 @@ public class UserService {
         }
         userCommunication.setEnabled(Boolean.valueOf(communicationEl.getChildText("enabled")));
         userCommunication.setCategories(categoriesArray);
-        
+
         //create default user object
         User user = new User();
         user.setName(profile.getChildText("name"));
         user.setImage(profile.getChildText("image"));
         user.setConfiguration(userConf);
-        user.setCommunicationModule(userCommunication);        
+        user.setCommunicationModule(userCommunication);
         return user;
     }
-    
+
     private Element setNewUserCommunicationConfFromUser(User user){
         CommunicationModule cm = user.getCommunicationModule();
-                
+
         Element communication = new Element("communication");
         Element categories = new Element("categories");
 
@@ -357,8 +357,8 @@ public class UserService {
         communication.addContent(new Element("image"));
         communication.addContent(new Element("sound"));
         communication.addContent(new Element("rows").setText(String.valueOf(user.getConfiguration().getDefaultGridRow())));
-        communication.addContent(new Element("columns").setText(String.valueOf(user.getConfiguration().getDefaultGridColumn())));        
-        
+        communication.addContent(new Element("columns").setText(String.valueOf(user.getConfiguration().getDefaultGridColumn())));
+
         //add rest communication categories using the user's CommunicationModule
         if (!cm.getCategories().isEmpty()) {
             for (Category category : cm.getCategories()){
@@ -369,51 +369,65 @@ public class UserService {
                 categoryEl.addContent(new Element("image").setText(category.getImage()));
                 categoryEl.addContent(new Element("sound").setText(category.getSound()));
                 categoryEl.addContent(new Element("hasSound").setText(String.valueOf(category.hasSound())));
-                categoryEl.addContent(new Element("hasImage").setText(String.valueOf(category.hasImage())));                
+                categoryEl.addContent(new Element("hasImage").setText(String.valueOf(category.hasImage())));
                 categoryEl.addContent(new Element("hasText").setText(String.valueOf(category.hasText())));
-                
+
                 //add the subcategories
                 if (!category.getSubCategories().isEmpty()) {
                     Element subcategoriesEl = new Element("categories");
-                    for (Category subcategory : category.getSubCategories()) {                        
+                    for (Category subcategory : category.getSubCategories()) {
                         Element subcategoryEl = new Element("category").setAttribute("name", subcategory.getName());
                         subcategoryEl.addContent(new Element("rows").setText(String.valueOf(user.getConfiguration().getDefaultGridRow())));
                         subcategoryEl.addContent(new Element("columns").setText(String.valueOf(user.getConfiguration().getDefaultGridColumn())));
                         subcategoryEl.addContent(new Element("image").setText(subcategory.getImage()));
                         subcategoryEl.addContent(new Element("sound").setText(subcategory.getSound()));
                         subcategoryEl.addContent(new Element("hasSound").setText(String.valueOf(subcategory.hasSound())));
-                        subcategoryEl.addContent(new Element("hasImage").setText(String.valueOf(subcategory.hasImage())));                
+                        subcategoryEl.addContent(new Element("hasImage").setText(String.valueOf(subcategory.hasImage())));
                         subcategoryEl.addContent(new Element("hasText").setText(String.valueOf(subcategory.hasText())));
                         subcategoriesEl.addContent(subcategoryEl);
                     }
                     categoryEl.addContent(subcategoriesEl);
                 }
-                
-                //add all the category inside the communication tag 
+
+                //add all the category inside the communication tag
                 categories.addContent(categoryEl);
             }
         }
-        
+
         communication.addContent(categories);
-        
+
         return communication;
     }
-    
+
+    public boolean createUserAsCopyOfDefaultUser() throws Exception {
+        //get default user from defaultUser.xml
+        String defUserFilePath = System.getProperty("user.dir") + File.separator + "defaultUser.xml";
+        UserService us = new UserService(defUserFilePath);
+        User defUser = us.findUser("Χρήστης");
+        //if user is found, append user and return true...
+        if (defUser != null) {
+            this.appendUser(defUser);
+            return true;
+        } else { //...else return false
+            return false;
+        }
+    }
+
     /**
      * Copy a user's configuration to create a new one
-     * 
+     *
      * @return boolean(success of method)
      */
-    public boolean createUserAsCopyOfDefaultUser() throws Exception {
+    public boolean createUserAsCopyOfDefaultUserTEST() throws Exception {
         //get default user file
         String filePath = System.getProperty("user.dir") + File.separator + "defaultUser.xml";
         File defaultUserFile = new File(filePath);
-        
+
         //get profile from selected file
         SAXBuilder builder = new SAXBuilder();
         Document profileXml = (Document) builder.build(defaultUserFile);
         Element defaultProfile = profileXml.getRootElement();
-        
+
         //get default user serialized
         User defaultUser = serializeUserFromXmlFile(defaultProfile);
         List<User> users = configurationFile.getUsers();
@@ -421,7 +435,7 @@ public class UserService {
             String newUserName = getUniqueUserName(defaultUser.getName(), users);
             defaultUser.setName(newUserName);
         }
-        
+
         Element profile = new Element("profile");
         profile.addContent(new Element("name").setText(defaultUser.getName()));
         profile.addContent(new Element("image").setText(defaultUser.getImage()));
@@ -522,10 +536,10 @@ public class UserService {
         configurationFile.getRootElement().addContent(profile);
 
         configurationFile.update();
-        
+
         return true;
     }
-    
+
     /**
      * Save a user to the xml file
      *
@@ -644,7 +658,7 @@ public class UserService {
         profile.addContent(games);
         profiles.addContent(profile);
 
-        configurationFile.update();        
+        configurationFile.update();
     }
 
     /**
@@ -719,10 +733,10 @@ public class UserService {
             }
         }
     }
-    
+
     /**
      * Check if name is already used
-     * 
+     *
      * @param name
      * @param users
      * @return boolean
@@ -736,10 +750,10 @@ public class UserService {
         }
         return false;
     }
-    
+
     /**
      * Upload a user from xml file
-     * 
+     *
      * @param file
      */
     public boolean uploadUserFromFile(File file) {
@@ -764,7 +778,7 @@ public class UserService {
         }
         return true;
     }
-    
+
     public boolean storeUserToExternalFile(String userName) {
         try {
             //if folder does not exist, create it
@@ -772,11 +786,11 @@ public class UserService {
             File folder = new File(folderPath);
             if (!folder.exists()) {
                 folder.mkdir();
-            }  
+            }
             //set file
             String filePath =  folderPath + File.separator + userName + ".xml";
             File file = new File(filePath);
-            //get profile from configuration xml               
+            //get profile from configuration xml
             Element profile = configurationFile.getUserElement(userName);
             //write profile to selected file
             PrintWriter pw = new PrintWriter(file);
@@ -790,7 +804,7 @@ public class UserService {
         }
         return true;
     }
-    
+
     /**
      * Remove a user from the xml file
      *
@@ -831,7 +845,7 @@ class UserConfFile extends ConfigurationFile {
         configurationHandler = new ConfigurationHandler();
         users = configurationHandler.getUsers();
     }
-    
+
     public void setUsers(List<User> newUsers) {
         this.users = newUsers;
     }
