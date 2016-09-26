@@ -81,11 +81,16 @@ public class UserService {
         return uRes;
     }
 
-    public void appendUser(User uToSave) {
+    public void appendUser(User uToSave) throws Exception {
         // Search through the users of configurationFile
         List<User> currentUserList = configurationFile.getUsers();
         currentUserList.add(uToSave);
         saveNewList(currentUserList);
+        try {
+            save(uToSave);
+        } catch (Exception ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void updateUser(String sOldName, User uToUpdate) {
@@ -117,8 +122,8 @@ public class UserService {
     }
 
     protected void saveNewList(List<User> currentUserList) {
-        ((UserConfFile)configurationFile).setUsers(currentUserList);
-        try {
+//        ((UserConfFile)configurationFile).setUsers(currentUserList);
+        try {            
             this.configurationFile.update();
         } catch (Exception ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
@@ -139,12 +144,32 @@ public class UserService {
         return user;
     }
 
+    /**
+     * 
+     * @return List<User>
+     */
     public List<User> getUsers() {
-        List<User> user = configurationFile.getUsers();
-
-        return user;
+        List<User> users = configurationFile.getUsers();
+        return users;
     }
 
+    /**
+     * Check if name is already used.
+     *
+     * @param name User name to check if it is used
+     * @param users All the users
+     * @return True if name is used, False otherwise
+     */
+    private boolean nameIsUsed(String name, List<User> users) {
+        for (User u : users) {
+            //if user name is found
+            if (u.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     private String getUniqueUserName(String userName, List<User> users) {
         int counter = 2;
         boolean foundUserName = false;
@@ -167,185 +192,28 @@ public class UserService {
         return tempName;
     }
 
-    /**
-     * Recursive function to get the user categories
-     *
-     * @param categoriesNode
-     * @param categories
-     * @return
-     */
-    private List<Category> getCategories(Element categoriesNode, List<Category> categories, Category parent) {
-
-        if (categoriesNode == null) {
-            return categories;
-        } else {
-            //get the user categories
-
-            for (int i = 0; i < categoriesNode.getChildren().size(); i++) {
-
-                Element categoryEl = (Element) categoriesNode.getChildren().get(i);
-
-                Category category = new Category(
-                        categoryEl.getAttributeValue("name"),
-                        categoryEl.getChildText("image"));
-
-                category.setSound(categoryEl.getChildText("sound"));
-
-                if (categoryEl.getChildText("rows") != null && !categoryEl.getChildText("rows").isEmpty()) {
-                    category.setRows(Integer.parseInt(categoryEl.getChildText("rows")));
+    public boolean createUserAsCopyOfDefaultUser() throws Exception {
+        //get default user from defaultUser.xml
+        String defUserFilePath = System.getProperty("user.dir") + File.separator + "defaultUser.xml";
+        UserService us = new UserService(defUserFilePath);
+        User defUser = us.findUser("Χρήστης");
+        //if user is found, append user and return true...
+        if (defUser != null) {
+            List<User> users = getUsers();
+            if (nameIsUsed(defUser.getName(), users)) {
+                String uniqueName = getUniqueUserName(defUser.getName(), users);
+                if (uniqueName != null) {
+                    defUser.setName(uniqueName);
                 }
-
-                if (categoryEl.getChildText("columns") != null && !categoryEl.getChildText("columns").isEmpty()) {
-                    category.setColumns(Integer.parseInt(categoryEl.getChildText("columns")));
-                }
-
-                if (categoryEl.getChildText("editable") != null) {
-                    category.setEditable(Boolean.parseBoolean(categoryEl.getChildText("editable")));
-                } else {
-                    category.setEditable(true);
-                }
-
-                if (parent != null) {
-                    category.setParentCategory(new Category(parent.getName()));
-                }
-
-                if (categoryEl.getChildText("editable") != null) {
-                    category.setEditable(Boolean.parseBoolean(categoryEl.getChildText("editable")));
-                } else {
-                    category.setEditable(true);
-                }
-
-                if (categoryEl.getChildText("order") != null) {
-                    category.setOrder(Integer.parseInt(categoryEl.getChildText("order")));
-                } else {
-                    category.setOrder(0);
-                }
-
-                if (categoryEl.getChildText("hasSound") != null) {
-                    category.setHasSound("true".equals(categoryEl.getChildText("hasSound")));
-                } else {
-                    category.setHasSound(true);
-                }
-
-                if (categoryEl.getChildText("hasImage") != null) {
-                    category.setHasImage("true".equals(categoryEl.getChildText("hasImage")));
-                } else {
-                    category.setHasImage(true);
-                }
-
-                if (categoryEl.getChildText("hasText") != null) {
-                    category.setHasText("true".equals(categoryEl.getChildText("hasText")));
-                } else {
-                    category.setHasText(true);
-                }
-
-                if (categoryEl.getChildText("enabled") != null) {
-                    category.setEnabled("true".equals(categoryEl.getChildText("enabled")));
-                } else {
-                    category.setEnabled(true);
-                }
-
-                if (parent != null) {
-                    category.setParentCategory(parent);
-                }
-
-                List<Category> categoriesArray = new ArrayList<>();
-
-                Element subCategories = (Element) categoryEl.getChild("categories");
-                categoriesArray = getCategories(subCategories, categoriesArray, category);
-
-                category.setSubCategories((ArrayList<Category>) categoriesArray);
-                categories.add(category);
-
-//                if (!categoryEl.getChildText("sound").isEmpty()) {
-//                    files.add(categoryEl.getChildText("sound"));
-//                }
-//                if (!categoryEl.getChildText("image").isEmpty()) {
-//                    files.add(categoryEl.getChildText("image"));
-//                }
-
             }
-            return categories;
+            this.appendUser(defUser);
+            return true;
+        } else { //...else return false
+            return false;
         }
     }
 
-    /**
-     * @param profile
-     * @return
-     */
-    private User serializeUserFromXmlFile(Element profile) {
-        /**
-         * configuration
-         */
-        Configuration userConf = new Configuration();
-        Element configurationEl = profile.getChild("configuration");
-        userConf.setDefaultGridColumn(Integer.valueOf(configurationEl.getChildText("defaultGridColumn")));
-        userConf.setDefaultGridRow(Integer.valueOf(configurationEl.getChildText("defaultGridRow")));
-        userConf.setImage(Boolean.valueOf(configurationEl.getChildText("image")));
-        //selection sensor
-        Element selectionSensorEl = configurationEl.getChild("selectionSensor");
-        Sensor selectionSensor = new Sensor();
-        if (selectionSensorEl != null) {
-            if ("mouse".equals(configurationEl.getChildText("type"))) {
-                selectionSensor = new MouseSensor(Integer.parseInt(selectionSensorEl.getChildText("button")),
-                        Integer.parseInt(selectionSensorEl.getChildText("clickCount")), selectionSensorEl.getChildText("type"));
-            } else if ("keyboard".equals(selectionSensorEl.getChildText("type"))) {
-                selectionSensor = new KeyboardSensor(Integer.parseInt(selectionSensorEl.getChildText("keyCode")),
-                        selectionSensorEl.getChildText("keyChar"), selectionSensorEl.getChildText("type"));
-            }
-            userConf.setSelectionSensor(selectionSensor);
-        }
-        //navigation sensor
-        Element navigationSensorEl = configurationEl.getChild("navigationSensor");
-        Sensor navigationSensor = new Sensor();
-        if (navigationSensorEl != null) {
-            if ("mouse".equals(navigationSensorEl.getChildText("type"))) {
-                navigationSensor = new MouseSensor(Integer.parseInt(navigationSensorEl.getChildText("button")),
-                        Integer.parseInt(navigationSensorEl.getChildText("clickCount")), navigationSensorEl.getChildText("type"));
-            } else if ("keyboard".equals(navigationSensorEl.getChildText("type"))) {
-                navigationSensor = new KeyboardSensor(Integer.parseInt(navigationSensorEl.getChildText("keyCode")),
-                        navigationSensorEl.getChildText("keyChar"), navigationSensorEl.getChildText("type"));
-            }
-            userConf.setNavigationSensor(navigationSensor);
-        }
-        userConf.setRotationSpeed(Integer.valueOf(configurationEl.getChild("rotationSpeed").getText()));
-        userConf.setSound(Boolean.valueOf(configurationEl.getChild("sound").getText()));
-        userConf.setText(Boolean.valueOf(configurationEl.getChild("text").getText()));
-
-        /**
-         * communication
-         */
-        CommunicationModule userCommunication = new CommunicationModule();
-        Element communicationEl = profile.getChild("communication");
-        List<Category> categoriesArray = new ArrayList();
-        Element categories = (Element) communicationEl.getChild("categories");
-        categoriesArray = getCategories(categories, categoriesArray, null);
-        userCommunication.setName(communicationEl.getChildText("name"));
-        userCommunication.setRows(Integer.parseInt(communicationEl.getChildText("rows")));
-        userCommunication.setColumns(Integer.parseInt(communicationEl.getChildText("columns")));
-        if (communicationEl.getChildText("image").isEmpty()) {
-            userCommunication.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/communication_module.png"));
-        } else {
-            userCommunication.setImage(communicationEl.getChildText("image"));
-        }
-        if (communicationEl.getChildText("sound").isEmpty()) {
-            userCommunication.setSound("resources/sounds/Επικοινωνία.mp3");
-        } else {
-            userCommunication.setSound(communicationEl.getChildText("sound"));
-        }
-        userCommunication.setEnabled(Boolean.valueOf(communicationEl.getChildText("enabled")));
-        userCommunication.setCategories(categoriesArray);
-
-        //create default user object
-        User user = new User();
-        user.setName(profile.getChildText("name"));
-        user.setImage(profile.getChildText("image"));
-        user.setConfiguration(userConf);
-        user.setCommunicationModule(userCommunication);
-        return user;
-    }
-
-    private Element setNewUserCommunicationConfFromUser(User user){
+    private Element getUserCommunicationConfXMLFormatted(User user){
         CommunicationModule cm = user.getCommunicationModule();
 
         Element communication = new Element("communication");
@@ -398,148 +266,7 @@ public class UserService {
 
         return communication;
     }
-
-    public boolean createUserAsCopyOfDefaultUser() throws Exception {
-        //get default user from defaultUser.xml
-        String defUserFilePath = System.getProperty("user.dir") + File.separator + "defaultUser.xml";
-        UserService us = new UserService(defUserFilePath);
-        User defUser = us.findUser("Χρήστης");
-        //if user is found, append user and return true...
-        if (defUser != null) {
-            this.appendUser(defUser);
-            return true;
-        } else { //...else return false
-            return false;
-        }
-    }
-
-    /**
-     * Copy a user's configuration to create a new one
-     *
-     * @return boolean(success of method)
-     */
-    public boolean createUserAsCopyOfDefaultUserTEST() throws Exception {
-        //get default user file
-        String filePath = System.getProperty("user.dir") + File.separator + "defaultUser.xml";
-        File defaultUserFile = new File(filePath);
-
-        //get profile from selected file
-        SAXBuilder builder = new SAXBuilder();
-        Document profileXml = (Document) builder.build(defaultUserFile);
-        Element defaultProfile = profileXml.getRootElement();
-
-        //get default user serialized
-        User defaultUser = serializeUserFromXmlFile(defaultProfile);
-        List<User> users = configurationFile.getUsers();
-        if (nameIsUsed(defaultUser.getName(), users)) {
-            String newUserName = getUniqueUserName(defaultUser.getName(), users);
-            defaultUser.setName(newUserName);
-        }
-
-        Element profile = new Element("profile");
-        profile.addContent(new Element("name").setText(defaultUser.getName()));
-        profile.addContent(new Element("image").setText(defaultUser.getImage()));
-        profile.setAttribute(new Attribute("preselected", "false"));
-
-        //add the configurations
-        Element configuration = new Element("configuration");
-        configuration.addContent(new Element("rotationSpeed").setText(String.valueOf(defaultUser.getConfiguration().getRotationSpeed())));
-        configuration.addContent(new Element("defaultGridRow").setText(String.valueOf(defaultUser.getConfiguration().getDefaultGridRow())));
-        configuration.addContent(new Element("defaultGridColumn").setText(String.valueOf(defaultUser.getConfiguration().getDefaultGridColumn())));
-        configuration.addContent(new Element("sound").setText(String.valueOf(defaultUser.getConfiguration().hasSound())));
-        configuration.addContent(new Element("image").setText(String.valueOf(defaultUser.getConfiguration().hasImage())));
-        configuration.addContent(new Element("text").setText(String.valueOf(defaultUser.getConfiguration().hasText())));
-
-        //add the selection sensor
-        Element selectionSensor = new Element("selectionSensor");
-
-        if (defaultUser.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
-            selectionSensor.addContent(new Element("type").setText("mouse"));
-            selectionSensor.addContent(new Element("button").setText(String.valueOf(((MouseSensor) defaultUser.getConfiguration().getSelectionSensor()).getButton())));
-            selectionSensor.addContent(new Element("clickCount").setText(String.valueOf(((MouseSensor) defaultUser.getConfiguration().getSelectionSensor()).getClickCount())));
-        } else if (defaultUser.getConfiguration().getSelectionSensor() instanceof KeyboardSensor) {
-            selectionSensor.addContent(new Element("type").setText("keyboard"));
-            selectionSensor.addContent(new Element("keyCode").setText(String.valueOf(((KeyboardSensor) defaultUser.getConfiguration().getSelectionSensor()).getKeyCode())));
-            selectionSensor.addContent(new Element("keyChar").setText(String.valueOf(((KeyboardSensor) defaultUser.getConfiguration().getSelectionSensor()).getKeyChar())));
-        }
-
-        //add the navigation sensor, if any
-        if (defaultUser.getConfiguration().getNavigationSensor() != null) {
-            Element navigationSensor = new Element("navigationSensor");
-
-            if (defaultUser.getConfiguration().getNavigationSensor() instanceof MouseSensor) {
-                navigationSensor.addContent(new Element("type").setText("mouse"));
-                navigationSensor.addContent(new Element("button").setText(String.valueOf(((MouseSensor) defaultUser.getConfiguration().getNavigationSensor()).getButton())));
-                navigationSensor.addContent(new Element("clickCount").setText(String.valueOf(((MouseSensor) defaultUser.getConfiguration().getNavigationSensor()).getClickCount())));
-            } else if (defaultUser.getConfiguration().getNavigationSensor() instanceof KeyboardSensor) {
-                navigationSensor.addContent(new Element("type").setText("keyboard"));
-                navigationSensor.addContent(new Element("keyCode").setText(String.valueOf(((KeyboardSensor) defaultUser.getConfiguration().getNavigationSensor()).getKeyCode())));
-                navigationSensor.addContent(new Element("keyChar").setText(String.valueOf(((KeyboardSensor) defaultUser.getConfiguration().getNavigationSensor()).getKeyChar())));
-            }
-            configuration.addContent(navigationSensor);
-        }
-
-        configuration.addContent(selectionSensor);
-        profile.addContent(configuration);
-
-        //add communication module settings
-        Element communication = setNewUserCommunicationConfFromUser(defaultUser);
-
-        //add entertainment module settings
-        Element entertainment = new Element("entertainment");
-        entertainment.addContent(new Element("name").setText("Ψυχαγωγία"));
-        entertainment.addContent(new Element("enabled").setText("true"));
-        entertainment.addContent(new Element("image"));
-        entertainment.addContent(new Element("sound"));
-
-        //add music module settings
-        Element music = new Element("music");
-        music.addContent(new Element("name").setText("Μουσική"));
-        music.addContent(new Element("enabled").setText("true"));
-        music.addContent(new Element("image"));
-        music.addContent(new Element("sound"));
-        music.addContent(new Element("path"));
-        music.addContent(new Element("playlistSize").setText("10"));
-        entertainment.addContent(music);
-
-        //add video module settings
-        Element video = new Element("video");
-        video.addContent(new Element("name").setText("Βίντεο"));
-        video.addContent(new Element("enabled").setText("true"));
-        video.addContent(new Element("image"));
-        video.addContent(new Element("sound"));
-        video.addContent(new Element("path"));
-        video.addContent(new Element("playlistSize").setText("10"));
-        entertainment.addContent(video);
-
-        //add game module settings
-        Element games = new Element("games");
-        games.addContent(new Element("name").setText("Παιχνίδια"));
-        games.addContent(new Element("image"));
-        games.addContent(new Element("sound"));
-        games.addContent(new Element("enabled").setText("true"));
-
-        //set the default games
-        GameService gameService = new GameService();
-
-        List gamesList = gameService.setDefaultGames();
-        for (int i = 0; i < gamesList.size(); i++) {
-            Element elemCopy = (Element) ((Element) gamesList.get(i)).clone();
-            elemCopy.detach();
-            games.addContent(elemCopy);
-        }
-
-        profile.addContent(communication);
-        profile.addContent(entertainment);
-        profile.addContent(games);
-        //add content as child of profiles tag
-        configurationFile.getRootElement().addContent(profile);
-
-        configurationFile.update();
-
-        return true;
-    }
-
+    
     /**
      * Save a user to the xml file
      *
@@ -597,17 +324,7 @@ public class UserService {
         profile.addContent(configuration);
 
         //add communication module settings
-        Element communication = new Element("communication");
-        Element categories = new Element("categories");
-
-        //add the first category settings
-        communication.addContent(new Element("name").setText("Επικοινωνία"));
-        communication.addContent(new Element("enabled").setText("true"));
-        communication.addContent(new Element("image"));
-        communication.addContent(new Element("sound"));
-        communication.addContent(new Element("rows").setText(String.valueOf(user.getConfiguration().getDefaultGridRow())));
-        communication.addContent(new Element("columns").setText(String.valueOf(user.getConfiguration().getDefaultGridColumn())));
-        communication.addContent(categories);
+        Element communication = getUserCommunicationConfXMLFormatted(user);
 
         //add entertainment module settings
         Element entertainment = new Element("entertainment");
@@ -732,23 +449,6 @@ public class UserService {
                 break;
             }
         }
-    }
-
-    /**
-     * Check if name is already used
-     *
-     * @param name
-     * @param users
-     * @return boolean
-     */
-    private boolean nameIsUsed(String name, List<User> users) {
-        for (User u : users) {
-            //if user name is found
-            if (u.getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
