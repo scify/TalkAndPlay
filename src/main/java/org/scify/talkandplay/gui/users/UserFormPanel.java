@@ -25,6 +25,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.List;
 import java.util.logging.Level;
@@ -631,15 +633,29 @@ public class UserFormPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_saveAndBackButtonMouseClicked
 
     private void saveToFileButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveToFileButtonMouseClicked
-        UserService us = new UserService();
-        //returns boolean to show success/failure of operation
-        boolean result = us.storeUserToExternalFile(user.getName());
-        //on success print success message, else print error message
-        if (result) {
-            successLabel.setText("Το προφίλ αποθηκεύτηκε.");
-            successLabel.setVisible(true);
+        final JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Επίλεξε αρχείο");
+        chooser.setAcceptAllFileFilterUsed(false);
+        chooser.setFileFilter(new FileNameExtensionFilter("XML files", "xml"));
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+            File file = chooser.getSelectedFile();        
+            UserService us = new UserService();
+            //returns boolean to show success/failure of operation
+            boolean result = us.storeUserToExternalFile(user.getName(), file.getAbsolutePath());
+            //on success print success message, else print error message
+            if (result) {
+                errorLabel.setVisible(false);
+                successLabel.setText("Το προφίλ αποθηκεύτηκε.");
+                successLabel.setVisible(true);
+            } else {
+                successLabel.setVisible(false);
+                errorLabel.setText("Το προφίλ δεν αποθηκεύτηκε. Παρακαλώ δοκίμασε ξανά.");
+                errorLabel.setVisible(true);
+            }
         } else {
-            errorLabel.setText("Το προφίλ δεν αποθηκεύτηκε. Παρακαλώ δοκίμασε ξανά.");
+            successLabel.setVisible(false);
+            errorLabel.setText("Παρακαλώ επιλέξτε φάκελο για την αποθήκευση του προφίλ.");
             errorLabel.setVisible(true);
         }
     }//GEN-LAST:event_saveToFileButtonMouseClicked

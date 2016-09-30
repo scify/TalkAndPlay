@@ -479,10 +479,9 @@ public class UserService {
         return true;
     }
 
-    public boolean storeUserToExternalFile(String userName) {
+    public boolean storeUserToExternalFile(String userName, String folderPath) {
         try {
             //if folder does not exist, create it
-            String folderPath = System.getProperty("user.dir") + File.separator + "profiles";
             File folder = new File(folderPath);
             if (!folder.exists()) {
                 folder.mkdir();
