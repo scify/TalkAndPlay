@@ -25,8 +25,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.List;
 import java.util.logging.Level;
@@ -634,9 +632,7 @@ public class UserFormPanel extends javax.swing.JPanel {
 
     private void saveToFileButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveToFileButtonMouseClicked
         final JFileChooser chooser = new JFileChooser();
-        chooser.setDialogTitle("Επίλεξε αρχείο");
-        chooser.setAcceptAllFileFilterUsed(false);
-        chooser.setFileFilter(new FileNameExtensionFilter("XML files", "xml"));
+        chooser.setDialogTitle("Επίλεξε φάκελο");
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             File file = chooser.getSelectedFile();        
@@ -653,10 +649,6 @@ public class UserFormPanel extends javax.swing.JPanel {
                 errorLabel.setText("Το προφίλ δεν αποθηκεύτηκε. Παρακαλώ δοκίμασε ξανά.");
                 errorLabel.setVisible(true);
             }
-        } else {
-            successLabel.setVisible(false);
-            errorLabel.setText("Παρακαλώ επιλέξτε φάκελο για την αποθήκευση του προφίλ.");
-            errorLabel.setVisible(true);
         }
     }//GEN-LAST:event_saveToFileButtonMouseClicked
 

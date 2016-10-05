@@ -16,7 +16,9 @@
 package org.scify.talkandplay.utils;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -703,7 +705,8 @@ public class ConfigurationHandler {
     public void writeToXmlFile() throws Exception {
         XMLOutputter xmlOutput = new XMLOutputter();
         xmlOutput.setFormat(Format.getPrettyFormat());
-        xmlOutput.output(configurationFile, new FileWriter(projectPath));
+        xmlOutput.output(configurationFile, new OutputStreamWriter(new FileOutputStream(new File(projectPath)), "UTF-8"));
+//        OutputStreamWriter osw = new OutputStreamWriter(new FileWriter(projectPath), "UTF-8");
     }
 
 }
