@@ -16,8 +16,8 @@
 package org.scify.talkandplay.services;
 
 import java.io.File;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,12 +29,10 @@ import org.jdom.output.XMLOutputter;
 import org.scify.talkandplay.gui.MainFrame;
 import org.scify.talkandplay.gui.users.UserFormPanel;
 import org.scify.talkandplay.models.Category;
-import org.scify.talkandplay.models.Configuration;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.modules.CommunicationModule;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
-import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.utils.ConfigurationFile;
 import org.scify.talkandplay.utils.ConfigurationHandler;
 
@@ -492,11 +490,11 @@ public class UserService {
             //get profile from configuration xml
             Element profile = configurationFile.getUserElement(userName);
             //write profile to selected file
-            PrintWriter pw = new PrintWriter(file);
-            pw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+            OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
+            osw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
             XMLOutputter xmlout = new XMLOutputter();
-            xmlout.output(profile, pw);
-            pw.close();
+            xmlout.output(profile, osw);
+            osw.close();
         } catch (Exception ex) {
             Logger.getLogger(UserFormPanel.class.getName()).log(Level.SEVERE, null, ex);
             return false;
