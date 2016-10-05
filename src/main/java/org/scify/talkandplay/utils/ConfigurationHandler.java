@@ -17,7 +17,6 @@ package org.scify.talkandplay.utils;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -68,7 +67,6 @@ public class ConfigurationHandler {
     
     public ConfigurationHandler(String sProjectPath) {
         try {
-//            projectPath = System.getProperty("user.dir") + File.separator + "conf.xml";
             projectPath = sProjectPath;
             File file = new File(projectPath);
             if (!file.exists() || file.isDirectory()) {
@@ -705,8 +703,8 @@ public class ConfigurationHandler {
     public void writeToXmlFile() throws Exception {
         XMLOutputter xmlOutput = new XMLOutputter();
         xmlOutput.setFormat(Format.getPrettyFormat());
-        xmlOutput.output(configurationFile, new OutputStreamWriter(new FileOutputStream(new File(projectPath)), "UTF-8"));
-//        OutputStreamWriter osw = new OutputStreamWriter(new FileWriter(projectPath), "UTF-8");
+        xmlOutput.output(configurationFile, new OutputStreamWriter(
+                new FileOutputStream(new File(projectPath)), "UTF-8"));
     }
 
 }
