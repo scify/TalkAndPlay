@@ -1,18 +1,18 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.scify.talkandplay.services;
 
 import java.io.File;
@@ -23,21 +23,21 @@ import org.jdom.input.SAXBuilder;
 import org.scify.talkandplay.models.games.Game;
 import org.scify.talkandplay.models.games.GameImage;
 import org.scify.talkandplay.models.games.GameType;
-import org.scify.talkandplay.utils.ConfigurationFile;
+import org.scify.talkandplay.utils.TalkAndPlayProfileConfiguration;
 
 public class GameService {
 
-    private ConfigurationFile configurationFile;
+    private TalkAndPlayProfileConfiguration talkAndPlayConfigurationFile;
 
     public GameService() {
-        this.configurationFile = ConfigurationFile.getInstance();
+        this.talkAndPlayConfigurationFile = TalkAndPlayProfileConfiguration.getInstance();
     }
 
     private String getUniqueGameName(List gamesList) {
         int counter = 1;
         String name = null;
         boolean foundUserName = false;
-        while (!foundUserName){
+        while (!foundUserName) {
             String tempName = "Custom Game " + counter;
             int counterCopy = counter;
             for (int i = 0; i < gamesList.size(); i++) {
@@ -56,14 +56,14 @@ public class GameService {
         }
         return name;
     }
-    
+
     public void createGame(String username, Game game, String type) throws Exception {
-        Element profile = configurationFile.getUserElement(username);
+        Element profile = talkAndPlayConfigurationFile.getConfigurationHandler().getUserElement(username);
 
         if (profile != null) {
-            
+
             List gamesList = profile.getChild("games").getChild(type + "s").getChild("games").getChildren("game");
-                       
+
             Element gameEl = new Element("game");
             gameEl.addContent(new Element("name").setText(getUniqueGameName(gamesList)));
             gameEl.addContent(new Element("enabled").setText(String.valueOf(true)));
@@ -72,7 +72,7 @@ public class GameService {
             gameEl.addContent(new Element("difficulty").setText(String.valueOf(game.getImages().size())));
             gameEl.addContent(new Element("winSound").setText(game.getWinSound()));
             gameEl.addContent(new Element("errorSound"));
-            
+
             //add images
             Element gameImagesChild = new Element("gameImages");
 
@@ -97,12 +97,12 @@ public class GameService {
             }
             gameEl.addContent(gameImagesChild);
             profile.getChild("games").getChild(type + "s").getChild("games").addContent(gameEl);
-            configurationFile.update();
+            talkAndPlayConfigurationFile.getConfigurationHandler().update();
         }
     }
-    
+
     public void updateGame(String username, Game game, String type) throws Exception {
-        Element profile = configurationFile.getUserElement(username);
+        Element profile = talkAndPlayConfigurationFile.getConfigurationHandler().getUserElement(username);
 
         if (profile != null) {
 
@@ -139,12 +139,12 @@ public class GameService {
                     gameEl.addContent(gameImagesChild);
                 }
             }
-            configurationFile.update();
+            talkAndPlayConfigurationFile.getConfigurationHandler().update();
         }
     }
 
     public void updateGameType(String username, GameType gameType) throws Exception {
-        Element profile = configurationFile.getUserElement(username);
+        Element profile = talkAndPlayConfigurationFile.getConfigurationHandler().getUserElement(username);
 
         if (profile != null) {
             Element gameTypeEl = profile.getChild("games").getChild(gameType.getType() + "s");
@@ -153,7 +153,7 @@ public class GameService {
                 gameTypeEl.getChild("winSound").setText(gameType.getWinSound());
                 gameTypeEl.getChild("errorSound").setText(gameType.getErrorSound());
 
-                configurationFile.update();
+                talkAndPlayConfigurationFile.getConfigurationHandler().update();
             }
         }
     }

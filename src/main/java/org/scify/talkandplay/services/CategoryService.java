@@ -1,18 +1,18 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.scify.talkandplay.services;
 
 import java.util.ArrayList;
@@ -21,15 +21,17 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.User;
-import org.scify.talkandplay.utils.ConfigurationFile;
+import org.scify.talkandplay.utils.TalkAndPlayProfileConfiguration;
 
 public class CategoryService {
 
-    private ConfigurationFile configurationFile;
+    private TalkAndPlayProfileConfiguration talkAndPlayProfilesConfigurationFile;
+    private UserService userService;
     private Category category;
 
     public CategoryService() {
-        this.configurationFile = ConfigurationFile.getInstance();
+        this.talkAndPlayProfilesConfigurationFile = TalkAndPlayProfileConfiguration.getInstance();
+        this.userService = new UserService();
     }
 
     public Category getCategory(String categoryName, User user) {
@@ -63,7 +65,7 @@ public class CategoryService {
     public List<Category> getCategories(String userName) {
         List<Category> categories = new ArrayList<>();
 
-        User user = configurationFile.getUser(userName);
+        User user = this.userService.getUser(userName);
 
         //set the communication category
         if (user.getCommunicationModule().isEnabled()) {
@@ -157,7 +159,7 @@ public class CategoryService {
      */
     public void save(Category category, User user) throws Exception {
 
-        Element profile = configurationFile.getUserElement(user.getName());
+        Element profile = talkAndPlayProfilesConfigurationFile.getConfigurationHandler().getUserElement(user.getName());
 
         if (profile != null) {
 
@@ -190,7 +192,7 @@ public class CategoryService {
                 attachToParent(profile.getChild("communication").getChild("categories"), category.getParentCategory().getName(), categoryChild);
             }
 
-            configurationFile.update();
+            talkAndPlayProfilesConfigurationFile.getConfigurationHandler().update();
         }
     }
 
@@ -202,7 +204,7 @@ public class CategoryService {
      */
     public List<Category> update(Category category, User user, String oldName, String oldParent) throws Exception {
 
-        Element profile = configurationFile.getUserElement(user.getName());
+        Element profile = talkAndPlayProfilesConfigurationFile.getConfigurationHandler().getUserElement(user.getName());
 
         if (profile != null) {
             if (!oldParent.equals(category.getParentCategory().getName())) {
@@ -212,8 +214,8 @@ public class CategoryService {
 
             updateToParent(profile.getChild("communication").getChild("categories"), oldName, category);
 
-            configurationFile.update();
-            return configurationFile.getUser(user.getName()).getCommunicationModule().getCategories();
+            talkAndPlayProfilesConfigurationFile.getConfigurationHandler().update();
+            return this.userService.getUser(user.getName()).getCommunicationModule().getCategories();
         } else {
             return null;
         }
@@ -226,13 +228,13 @@ public class CategoryService {
      * @param user
      */
     public void delete(String categoryName, User user) throws Exception {
-        Element profile = configurationFile.getUserElement(user.getName());
+        Element profile = talkAndPlayProfilesConfigurationFile.getConfigurationHandler().getUserElement(user.getName());
 
         if (profile != null) {
 
             deleteFromParent(profile.getChild("communication").getChild("categories"), categoryName);
 
-            configurationFile.update();
+            talkAndPlayProfilesConfigurationFile.getConfigurationHandler().update();
         }
     }
 

@@ -1,18 +1,18 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.scify.talkandplay.services;
 
 import java.io.File;
@@ -33,43 +33,36 @@ import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.modules.CommunicationModule;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
-import org.scify.talkandplay.utils.ConfigurationFile;
-import org.scify.talkandplay.utils.ConfigurationHandler;
+import org.scify.talkandplay.utils.TalkAndPlayProfileConfiguration;
 
 public class UserService {
 
-    private ConfigurationFile configurationFile;
+    private TalkAndPlayProfileConfiguration talkAndPlayProfileconfiguration;
 
     public UserService() {
-        this.configurationFile = ConfigurationFile.getInstance();
+        this.talkAndPlayProfileconfiguration = TalkAndPlayProfileConfiguration.getInstance();
     }
 
-    public UserService(String sConfFile) {
-        // Get a configuration file, based on the path given
-        this.configurationFile = new UserConfFile(sConfFile);
-    }
-
-    protected User findUser(String sName) {
-        User uRes = null;
-        // Search through the users of configurationFile
-        List<User> currentUserList = configurationFile.getUsers();
-        for (User uCur: currentUserList) {
-        // until you find the one saught
-            if (uCur.getName().equals(sName)) {
-                uRes = uCur;
-                break; // Leave the loop
+    public User getUser(String name) {
+        for (User user : talkAndPlayProfileconfiguration.getConfigurationHandler().getUsers()) {
+            if (user.getName().equals(name)) {
+                return user;
             }
         }
+        return null;
+    }
 
-        return uRes;
+    public List<User> getUsers() {
+        List<User> users = talkAndPlayProfileconfiguration.getConfigurationHandler().getUsers();
+        return users;
     }
 
     protected User findUser(User uToSeek) {
         User uRes = null;
         // Search through the users of configurationFile
-        List<User> currentUserList = configurationFile.getUsers();
-        for (User uCur: currentUserList) {
-        // until you find the one saught
+        List<User> currentUserList = talkAndPlayProfileconfiguration.getConfigurationHandler().getUsers();
+        for (User uCur : currentUserList) {
+            // until you find the one saught
             if (uCur.getName().equals(uToSeek.getName())) {
                 uRes = uCur;
                 break; // Leave the loop
@@ -81,7 +74,7 @@ public class UserService {
 
     public void appendUser(User uToSave) throws Exception {
         // Search through the users of configurationFile
-        List<User> currentUserList = configurationFile.getUsers();
+        List<User> currentUserList = talkAndPlayProfileconfiguration.getConfigurationHandler().getUsers();
         currentUserList.add(uToSave);
         saveNewList(currentUserList);
         try {
@@ -93,9 +86,9 @@ public class UserService {
 
     public void updateUser(String sOldName, User uToUpdate) {
         // If we do find the guy
-        User uFound = findUser(sOldName);
+        User uFound = getUser(sOldName);
         if (uFound != null) {
-            List<User> currentUserList = configurationFile.getUsers();
+            List<User> currentUserList = talkAndPlayProfileconfiguration.getConfigurationHandler().getUsers();
             // remove him, keeping the index
             int iLastIndex = currentUserList.indexOf(uFound);
             currentUserList.remove(uFound);
@@ -121,36 +114,18 @@ public class UserService {
 
     protected void saveNewList(List<User> currentUserList) {
 //        ((UserConfFile)configurationFile).setUsers(currentUserList);
-        try {            
-            this.configurationFile.update();
+        try {
+            this.talkAndPlayProfileconfiguration.getConfigurationHandler().update();
         } catch (Exception ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     ///////////////////////////////////////////////////////////////////////////
 
-
     /**
-     * Find one user
      *
-     * @param name
-     * @return
-     */
-    public User getUser(String name) {
-        User user = configurationFile.getUser(name);
-
-        return user;
-    }
-
-    /**
-     * 
      * @return List<User>
      */
-    public List<User> getUsers() {
-        List<User> users = configurationFile.getUsers();
-        return users;
-    }
-
     /**
      * Check if name is already used.
      *
@@ -158,21 +133,15 @@ public class UserService {
      * @param users All the users
      * @return True if name is used, False otherwise
      */
-    private boolean nameIsUsed(String name, List<User> users) {
-        for (User u : users) {
-            //if user name is found
-            if (u.getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
+    private boolean nameIsUsed(String name) {
+        return this.getUser(name) != null;  //if a user exists, then we already have him
     }
-    
+
     private String getUniqueUserName(String userName, List<User> users) {
         int counter = 2;
         boolean foundUserName = false;
         String tempName = null;
-        while (!foundUserName){
+        while (!foundUserName) {
             tempName = userName + counter;
             int counterCopy = counter;
             for (User u : users) {
@@ -190,16 +159,14 @@ public class UserService {
         return tempName;
     }
 
+    //todo: all of this should be in the configuraiton handler
+    // as a property : DefaultUser
     public boolean createUserAsCopyOfDefaultUser() throws Exception {
-        //get default user from defaultUser.xml
-        String defUserFilePath = System.getProperty("user.dir") + File.separator + "defaultUser.xml";
-        UserService us = new UserService(defUserFilePath);
-        User defUser = us.findUser("Χρήστης");
+        User defUser = this.talkAndPlayProfileconfiguration.getConfigurationHandler().getDefaultUser();
         //if user is found, append user and return true...
         if (defUser != null) {
-            List<User> users = getUsers();
-            if (nameIsUsed(defUser.getName(), users)) {
-                String uniqueName = getUniqueUserName(defUser.getName(), users);
+            if (nameIsUsed(defUser.getName())) {
+                String uniqueName = getUniqueUserName(defUser.getName(), getUsers());
                 if (uniqueName != null) {
                     defUser.setName(uniqueName);
                 }
@@ -211,7 +178,7 @@ public class UserService {
         }
     }
 
-    private Element getUserCommunicationConfXMLFormatted(User user){
+    private Element getUserCommunicationConfXMLFormatted(User user) {
         CommunicationModule cm = user.getCommunicationModule();
 
         Element communication = new Element("communication");
@@ -227,7 +194,7 @@ public class UserService {
 
         //add rest communication categories using the user's CommunicationModule
         if (!cm.getCategories().isEmpty()) {
-            for (Category category : cm.getCategories()){
+            for (Category category : cm.getCategories()) {
                 //create the main category
                 Element categoryEl = new Element("category").setAttribute("name", category.getName());
                 categoryEl.addContent(new Element("rows").setText(String.valueOf(user.getConfiguration().getDefaultGridRow())));
@@ -264,7 +231,7 @@ public class UserService {
 
         return communication;
     }
-    
+
     /**
      * Save a user to the xml file
      *
@@ -272,7 +239,7 @@ public class UserService {
      */
     public void save(User user) throws Exception {
 
-        Element profiles = configurationFile.getRootElement();
+        Element profiles = talkAndPlayProfileconfiguration.getConfigurationHandler().getRootElement();
 
         //add the general profile info
         Element profile = new Element("profile");
@@ -373,7 +340,7 @@ public class UserService {
         profile.addContent(games);
         profiles.addContent(profile);
 
-        configurationFile.update();
+        talkAndPlayProfileconfiguration.getConfigurationHandler().update();
     }
 
     /**
@@ -383,7 +350,7 @@ public class UserService {
      */
     public void update(User user, String oldName) throws Exception {
 
-        List profiles = configurationFile.getRootElement().getChildren();
+        List profiles = talkAndPlayProfileconfiguration.getConfigurationHandler().getRootElement().getChildren();
 
         //find the user from the users list
         for (int i = 0; i < profiles.size(); i++) {
@@ -443,12 +410,13 @@ public class UserService {
                     profile.getChild("image").setText(user.getImage());
                 }
 
-                configurationFile.update();
+                talkAndPlayProfileconfiguration.getConfigurationHandler().update();
                 break;
             }
         }
     }
 
+    //TODO: move to XMLConfigurationHandler
     /**
      * Upload a user from xml file
      *
@@ -462,20 +430,21 @@ public class UserService {
             Element profile = profileXml.getRootElement();
             profile.detach();
             //check if profile name is unique
-            List<User> users = configurationFile.getUsers();
+            List<User> users = talkAndPlayProfileconfiguration.getConfigurationHandler().getUsers();
             String name = profile.getChild("name").getText();
-            if (nameIsUsed(name, users)) {
+            if (nameIsUsed(name)) {
                 profile.getChild("name").setText(getUniqueUserName(name, users));
             }
-            Element profiles = configurationFile.getRootElement();
+            Element profiles = talkAndPlayProfileconfiguration.getConfigurationHandler().getRootElement();
             profiles.addContent(profile);
-            configurationFile.update();
+            talkAndPlayProfileconfiguration.getConfigurationHandler().update();
         } catch (Exception ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
         return true;
     }
+//TODO: move to XMLConfigurationHandler
 
     public boolean storeUserToExternalFile(String userName, String folderPath) {
         try {
@@ -485,10 +454,10 @@ public class UserService {
                 folder.mkdir();
             }
             //set file
-            String filePath =  folderPath + File.separator + userName + ".xml";
+            String filePath = folderPath + File.separator + userName + ".xml";
             File file = new File(filePath);
             //get profile from configuration xml
-            Element profile = configurationFile.getUserElement(userName);
+            Element profile = talkAndPlayProfileconfiguration.getConfigurationHandler().getUserElement(userName);
             //write profile to selected file
             OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
             osw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -509,7 +478,7 @@ public class UserService {
      */
     public void delete(User user) throws Exception {
 
-        List profiles = configurationFile.getRootElement().getChildren();
+        List profiles = talkAndPlayProfileconfiguration.getConfigurationHandler().getRootElement().getChildren();
 
         //find the user from the users list
         for (int i = 0; i < profiles.size(); i++) {
@@ -518,32 +487,29 @@ public class UserService {
 
             if (profile.getChildText("name").equals(user.getName())) {
                 profile.detach();
-                configurationFile.update();
+                talkAndPlayProfileconfiguration.getConfigurationHandler().update();
                 break;
             }
         }
     }
 
     public boolean hasBrokenFiles(String username) {
-        return configurationFile.hasBrokenFiles(username);
+        return talkAndPlayProfileconfiguration.getConfigurationHandler().hasBrokenFiles(username);
     }
 
     public List<String> getBrokenFiles(String username) {
-        return configurationFile.getBrokenFiles(username);
+        return talkAndPlayProfileconfiguration.getConfigurationHandler().getBrokenFiles(username);
     }
 }
 
-/**
- * Represents a set of users (stored in a file).
- * @author snik
- */
-class UserConfFile extends ConfigurationFile {
-    protected UserConfFile(String sFile) {
-        configurationHandler = new ConfigurationHandler();
-        users = configurationHandler.getUsers();
-    }
-
-    public void setUsers(List<User> newUsers) {
-        this.users = newUsers;
-    }
-}
+///**
+// * Represents a set of users (stored in a file).
+// *
+// * @author snik
+// */
+//class UserConfFile extends TalkAndPlayProfileConfiguration {
+//
+//    protected UserConfFile(String sFile) {
+//        xmlConfigurationHandler = new XMLConfigurationHandler(sFile);
+//    }
+//}

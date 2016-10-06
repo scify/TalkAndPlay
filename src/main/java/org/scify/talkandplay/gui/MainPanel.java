@@ -1,18 +1,18 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.scify.talkandplay.gui;
 
 import java.awt.Color;
@@ -42,7 +42,7 @@ import org.scify.talkandplay.gui.users.UserFormPanel;
 import org.scify.talkandplay.gui.users.UserPanel;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.UserService;
-import org.scify.talkandplay.utils.ConfigurationFile;
+import org.scify.talkandplay.utils.TalkAndPlayProfileConfiguration;
 import uk.co.caprica.vlcj.discovery.NativeDiscovery;
 
 /**
@@ -51,12 +51,12 @@ import uk.co.caprica.vlcj.discovery.NativeDiscovery;
  */
 public class MainPanel extends javax.swing.JPanel {
 
-    private ConfigurationFile configurationFile;
+    private TalkAndPlayProfileConfiguration talkAndPlayProfilesConfig;
     private List<UserPanel> userPanelList;
     private MainFrame parent;
 
     public MainPanel(MainFrame parent) {
-        this.configurationFile = ConfigurationFile.getInstance();
+        this.talkAndPlayProfilesConfig = TalkAndPlayProfileConfiguration.getInstance();
         this.parent = parent;
         initComponents();
         initCustomComponents();
@@ -90,7 +90,7 @@ public class MainPanel extends javax.swing.JPanel {
 
     private void initCustomComponents() {
 
-        List<User> users = configurationFile.getUsers();
+        List<User> users = talkAndPlayProfilesConfig.getConfigurationHandler().getUsers();
 
         if (users.size() > 4) {
             usersPanel.setLayout(new GridLayout(0, 6));
@@ -188,24 +188,24 @@ public class MainPanel extends javax.swing.JPanel {
                 try {
                     boolean result = us.createUserAsCopyOfDefaultUser();
                     /**
-                     * if user is successfully created from old user's 
-                     * configuration just refresh the page, else open the form 
+                     * if user is successfully created from old user's
+                     * configuration just refresh the page, else open the form
                      * that creates a new user
                      */
-                    if(result){
+                    if (result) {
                         /**
-                         * redirect to the main page [it is the same page 
-                         * but used to refresh content and display the newly 
-                         * created user]
+                         * redirect to the main page [it is the same page but
+                         * used to refresh content and display the newly created
+                         * user]
                          */
                         parent.changePanel(new MainPanel(parent));
                     } else {
                         // open form that creates new user
                         parent.changePanel(new UserFormPanel(parent));
                     }
-                } catch(Exception ex) {
+                } catch (Exception ex) {
                     Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }                
+                }
             }
         });
     }
@@ -252,17 +252,17 @@ public class MainPanel extends javax.swing.JPanel {
                     //on success
                     if (result) {
                         /**
-                         * redirect to the main page [it is the same page 
-                         * but used to refresh content and display the newly 
+                         * redirect to the main page [it is the same page but
+                         * used to refresh content and display the newly
                          * uploaded user]
                          */
-                        parent.changePanel(new MainPanel(parent));   
+                        parent.changePanel(new MainPanel(parent));
                     }
                 }
             }
         });
     }
-    
+
     public void updateUsersPanel(User user, String oldName) {
         for (UserPanel p : userPanelList) {
             if (p.getUser().getName().equals(oldName)) {

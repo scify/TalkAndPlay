@@ -1,30 +1,34 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.scify.talkandplay.utils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
@@ -52,41 +56,61 @@ import org.scify.talkandplay.models.sensors.Sensor;
  *
  * @author christina
  */
-public class ConfigurationHandler {
+public class XMLConfigurationHandler {
 
-    protected Document configurationFile;
+    protected String configurationFilePath;
+    protected String defaultUserConfigurationFilePath;
+    protected Document configurationXmlDocument;
+
     protected List<User> users;
-    protected String projectPath;
+    //for each user we add his files in a hashmap
     protected Map<String, List<String>> userFiles;
-    protected List<String> files;
+    //contains all the image and sound paths that were found in the xml configuration.
+    //we use this to check if all the paths exist on hard drive.
+    protected List<String> imageAndSoundFilePaths;
+    //the user that uses the application
     protected User currentUser;
+    // a hidden user that could be used to create new users
+    protected User defaultUser;
 
-    public ConfigurationHandler() {
-        this(System.getProperty("user.dir") + File.separator + "conf.xml");
+    public XMLConfigurationHandler() {
+        if ((System.getProperty("os.name")).toUpperCase().contains("WINDOWS")) {
+            //in order to debug this make sure you have in the AppData/Talk and Play/ directory the conf.xml
+            configurationFilePath = System.getenv("AppData") + File.separator + "Talk and Play" + File.separator + "conf.xml";
+        } else {
+            configurationFilePath = System.getProperty("user.dir") + File.separator + "conf.xml";
+        }
+        defaultUserConfigurationFilePath = System.getProperty("user.dir") + File.separator + "defaultUser.xml";
+
+        ParseConfigurationFile();
     }
-    
-    public ConfigurationHandler(String sProjectPath) {
+
+    private void ParseConfigurationFile() {
         try {
-            projectPath = sProjectPath;
-            File file = new File(projectPath);
-            if (!file.exists() || file.isDirectory()) {
-                PrintWriter writer = new PrintWriter(projectPath, "UTF-8");
-                writer.println("<?xml version=\"1.0\"?>\n"
-                        + "<profiles></profiles>");
-                writer.close();
-            }
-
-            SAXBuilder builder = new SAXBuilder();
-            configurationFile = (Document) builder.build(file);
-
-            parseXML();
+            File configurationFile = new File(configurationFilePath);
+            SaveEmptyConfigurationIfNotExists(configurationFile);
+            parseXML(configurationFile);
+            parseDefaultUserXml();
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }
     }
 
-    public Document getConfigurationFile() {
-        return configurationFile;
+    private void SaveEmptyConfigurationIfNotExists(File file) throws FileNotFoundException, UnsupportedEncodingException {
+        if (!file.exists() || file.isDirectory()) {
+            PrintWriter writer = new PrintWriter(configurationFilePath, "UTF-8");
+            writer.println("<?xml version=\"1.0\"?>\n"
+                    + "<profiles></profiles>");
+            writer.close();
+        }
+    }
+
+    public Document getConfigurationXmlDocument() {
+        return configurationXmlDocument;
+    }
+
+    public User getDefaultUser() {
+        return defaultUser;
     }
 
     public List<User> getUsers() {
@@ -94,12 +118,12 @@ public class ConfigurationHandler {
     }
 
     public Element getRootElement() {
-        return configurationFile.getRootElement();
+        return configurationXmlDocument.getRootElement();
     }
 
     public Element getUserElement(String name) throws Exception {
         Element userEl = null;
-        List profiles = configurationFile.getRootElement().getChildren();
+        List profiles = configurationXmlDocument.getRootElement().getChildren();
 
         for (int i = 0; i < profiles.size(); i++) {
 
@@ -112,45 +136,60 @@ public class ConfigurationHandler {
         return userEl;
     }
 
+    private void parseDefaultUserXml() throws JDOMException, IOException {
+        SAXBuilder builder = new SAXBuilder();
+        Document doc = (Document) builder.build(new File(defaultUserConfigurationFilePath));
+        Element xmlUserElement = (Element) doc.getRootElement().getChildren().get(0);
+        this.defaultUser = parseUserFromXml(xmlUserElement);
+    }
+
     /**
      * Parse the XML file that holds all users' configuration
      *
      * @return
      * @throws Exception
      */
-    private void parseXML() throws Exception {
+    private void parseXML(File file) throws Exception {
+        SAXBuilder builder = new SAXBuilder();
+        configurationXmlDocument = (Document) builder.build(file);
+
         userFiles = new HashMap();
         users = new ArrayList();
-        List usersEl = configurationFile.getRootElement().getChildren();
+        List usersEl = configurationXmlDocument.getRootElement().getChildren();
 
         for (int i = 0; i < usersEl.size(); i++) {
-
-            files = new ArrayList();
-            Element userEl = (Element) usersEl.get(i);
-            User user = new User(userEl.getChildText("name"), userEl.getChildText("image"));
+            imageAndSoundFilePaths = new ArrayList();
+            User user = parseUserFromXml((Element) usersEl.get(i));
             currentUser = user;
-
-            if (userEl.getAttributeValue("preselected") != null) {
-                user.setPreselected(Boolean.parseBoolean(userEl.getAttributeValue("preselected")));
-            } else {
-                user.setPreselected(false);
-            }
-
-            Element configuration = (Element) userEl.getChild("configuration");
-            user.setConfiguration(getConfiguration(configuration));
-
-            Element communication = (Element) userEl.getChild("communication");
-            user.setCommunicationModule(getCommunicationModule(communication));
-
-            Element entertainment = (Element) userEl.getChild("entertainment");
-            user.setEntertainmentModule(getEntertainmentModule(entertainment));
-
-            Element games = (Element) userEl.getChild("games");
-            user.setGameModule(getGameModule(games));
-
             users.add(user);
-            userFiles.put(user.getName(), files);
+            userFiles.put(user.getName(), imageAndSoundFilePaths);
         }
+    }
+
+    private User parseUserFromXml(Element userEl) {
+        imageAndSoundFilePaths = new ArrayList();
+        
+        User user = new User(userEl.getChildText("name"), userEl.getChildText("image"));
+        currentUser = user;
+        if (userEl.getAttributeValue("preselected") != null) {
+            user.setPreselected(Boolean.parseBoolean(userEl.getAttributeValue("preselected")));
+        } else {
+            user.setPreselected(false);
+        }
+
+        Element configuration = (Element) userEl.getChild("configuration");
+        user.setConfiguration(getConfiguration(configuration));
+
+        Element communication = (Element) userEl.getChild("communication");
+        user.setCommunicationModule(getCommunicationModule(imageAndSoundFilePaths, communication));
+
+        Element entertainment = (Element) userEl.getChild("entertainment");
+        user.setEntertainmentModule(getEntertainmentModule(entertainment));
+
+        Element games = (Element) userEl.getChild("games");
+        user.setGameModule(getGameModule(games));
+
+        return user;
     }
 
     /**
@@ -199,12 +238,13 @@ public class ConfigurationHandler {
         return configuration;
     }
 
-    private CommunicationModule getCommunicationModule(Element communicationNode) {
+    private CommunicationModule getCommunicationModule(List<String> imageAndSoundPathsToFill, Element communicationNode) {
         //set the communication module settings
         List<Category> categoriesArray = new ArrayList();
 
         Element categories = (Element) communicationNode.getChild("categories");
-        categoriesArray = getCategories(categories, categoriesArray, null);
+
+        categoriesArray = getCategories(imageAndSoundPathsToFill, categories, categoriesArray, null);
 
         CommunicationModule communicationModule = new CommunicationModule();
         communicationModule.setName(communicationNode.getChildText("name"));
@@ -560,7 +600,7 @@ public class ConfigurationHandler {
      * @param categories
      * @return
      */
-    private List<Category> getCategories(Element categoriesNode, List<Category> categories, Category parent) {
+    private List<Category> getCategories(List<String> imageAndSoundPaths, Element categoriesNode, List<Category> categories, Category parent) {
 
         if (categoriesNode == null) {
             return categories;
@@ -638,16 +678,16 @@ public class ConfigurationHandler {
                 List<Category> categoriesArray = new ArrayList<>();
 
                 Element subCategories = (Element) categoryEl.getChild("categories");
-                categoriesArray = getCategories(subCategories, categoriesArray, category);
+                categoriesArray = getCategories(imageAndSoundPaths, subCategories, categoriesArray, category);
 
                 category.setSubCategories((ArrayList<Category>) categoriesArray);
                 categories.add(category);
 
                 if (!categoryEl.getChildText("sound").isEmpty()) {
-                    files.add(categoryEl.getChildText("sound"));
+                    imageAndSoundPaths.add(categoryEl.getChildText("sound"));
                 }
                 if (!categoryEl.getChildText("image").isEmpty()) {
-                    files.add(categoryEl.getChildText("image"));
+                    imageAndSoundPaths.add(categoryEl.getChildText("image"));
                 }
 
             }
@@ -675,6 +715,11 @@ public class ConfigurationHandler {
         return false;
     }
 
+    public void update() throws Exception {
+        this.writeToXmlFile();
+        this.refreshXmlFile();
+    }
+
     public List<String> getBrokenFiles(String username) {
         List<String> brokenFiles = new ArrayList();
 
@@ -691,20 +736,18 @@ public class ConfigurationHandler {
         return brokenFiles;
     }
 
-    public void refreshXmlFile() throws Exception {
-        SAXBuilder builder = new SAXBuilder();
-        configurationFile = (Document) builder.build(new File(projectPath));
-        parseXML();
+    private void refreshXmlFile() throws Exception {
+        parseXML(new File(configurationFilePath));
     }
 
     /**
      * Write the new data to the xml file
      */
-    public void writeToXmlFile() throws Exception {
+    private void writeToXmlFile() throws Exception {
         XMLOutputter xmlOutput = new XMLOutputter();
         xmlOutput.setFormat(Format.getPrettyFormat());
-        xmlOutput.output(configurationFile, new OutputStreamWriter(
-                new FileOutputStream(new File(projectPath)), "UTF-8"));
+        xmlOutput.output(configurationXmlDocument, new OutputStreamWriter(
+                new FileOutputStream(new File(configurationFilePath)), "UTF-8"));
     }
 
 }
