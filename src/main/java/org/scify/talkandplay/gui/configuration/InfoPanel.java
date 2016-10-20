@@ -15,6 +15,7 @@
 */
 package org.scify.talkandplay.gui.configuration;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.List;
@@ -228,6 +229,10 @@ public class InfoPanel extends javax.swing.JPanel {
         changeOrderTextArea.setLineWrap(true);
         changeOrderTextArea.setWrapStyleWord(true);
         changeOrderTextArea.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        //todo: remove
+        changeOrderLabel.setText("");
+        changeOrderTextArea.setText("");
+        
         jScrollPane2.setBorder(null);
 
         List<String> brokenFiles = userService.getBrokenFiles(user.getName());
