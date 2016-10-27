@@ -21,7 +21,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -33,14 +32,18 @@ import org.apache.commons.io.FileUtils;
 import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
-import org.scify.talkandplay.gui.MainFrame;
 import org.scify.talkandplay.gui.UpdaterFrame;
 
 /**
- * Checks if the jar should be updated. Download the zip containing the new jar
- * and the updater. Unzip it to a tmp folder Start the updater jar. Close the
- * current app. Delete the tmp folder
- *
+ * UPDATE STEPS
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Checks if the jar should be updated.
+ * Show "updating" frame.
+ * Download the zip containing the new jar and the new properties.xml.
+ * Unzip it to a tmp folder.
+ * Override files to the installation folder.
+ * Close the current app.
+ * 
  * @author christina
  */
 public class Updater {
