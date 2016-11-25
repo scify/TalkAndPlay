@@ -16,6 +16,7 @@
 package org.scify.talkandplay.utils;
 
 import java.io.File;
+import java.net.URLDecoder;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
@@ -42,16 +43,14 @@ public class Properties {
 
     public Properties() {
         try {
-
-            applicationFolder = (new File(Properties.class
+            String encodedApplicationFolder = (new File(Properties.class
                     .getProtectionDomain()
                     .getCodeSource()
                     .getLocation()
                     .getPath())).getParentFile().getAbsolutePath();
+            applicationFolder = URLDecoder.decode(encodedApplicationFolder, "UTF-8");
 
-
-            String absolutePath = this.applicationFolder+ File.separator + "properties.xml";
-            File file = new File(absolutePath);
+            File file = new File(applicationFolder, "properties.xml");
             if (!file.exists()) {
                 file = new File("properties.xml");
             }
