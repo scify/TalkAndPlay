@@ -69,10 +69,16 @@ public class Properties {
 
         setVersion(properties.getChildText("version"));
         setVersionFileUrl(properties.getChildText("versionFileUrl"));
-        setZipUrl(properties.getChildText("zipUrl"));
         setTmpFolder(properties.getChildText("tmpFolder"));
-        setZipFile(properties.getChildText("zipFile"));
         setPropertiesFile(properties.getChildText("propertiesFile"));
+
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            setZipUrl(properties.getChildText("zipUrlWindows"));
+            setZipFile(properties.getChildText("zipFileWindows"));
+        } else {
+            setZipUrl(properties.getChildText("zipUrl"));
+            setZipFile(properties.getChildText("zipFile"));
+        }
     }
 
     public String getVersion() {
