@@ -37,8 +37,8 @@ import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.SensorService;
-import uk.co.caprica.vlcj.player.MediaPlayer;
-import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
+import uk.co.caprica.vlcj.player.base.MediaPlayer;
+import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 
 /**
@@ -133,11 +133,11 @@ public class VideoFrame extends javax.swing.JFrame {
 
     private void initMediaPlayer() {
 
-        mediaPlayer.addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
+        mediaPlayer.events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
             @Override
             public void playing(MediaPlayer mediaPlayer) {
-                mediaPlayer.mute(false);
-                mediaPlayer.setVolume(100);
+                mediaPlayer.audio().setMute(false);
+                mediaPlayer.audio().setVolume(100);
                 playerPanel.setPauseButton();
             }
 
@@ -172,8 +172,8 @@ public class VideoFrame extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    if (mediaPlayer.isFullScreen()) {
-                        mediaPlayer.setFullScreen(false);
+                    if (mediaPlayer.fullScreen().isFullScreen()) {
+                        mediaPlayer.fullScreen().set(false);
                     }
                 }
             }
@@ -182,8 +182,8 @@ public class VideoFrame extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
-                    if (mediaPlayer.isFullScreen()) {
-                        mediaPlayer.setFullScreen(false);
+                    if (mediaPlayer.fullScreen().isFullScreen()) {
+                        mediaPlayer.fullScreen().set(false);
                     }
                 }
             }
@@ -205,16 +205,17 @@ public class VideoFrame extends javax.swing.JFrame {
 
     public void playMedia(String file) {
         currentFile = file;
-        mediaPlayer.prepareMedia(file);
-        mediaPlayer.parseMedia();
+        mediaPlayer.media().prepare(file);
+        mediaPlayer.media().parsing().parse();
 
-        int secs = (int) (mediaPlayer.getMediaMeta().getLength() / 1000) % 60;
-        int mins = (int) ((mediaPlayer.getMediaMeta().getLength() / (1000 * 60)) % 60);
-        int hrs = (int) ((mediaPlayer.getMediaMeta().getLength() / (1000 * 60 * 60)) % 24);
+        long length = mediaPlayer.status().length();
+        int secs = (int) (length / 1000) % 60;
+        int mins = (int) ((length / (1000 * 60)) % 60);
+        int hrs = (int) ((length / (1000 * 60 * 60)) % 24);
 
         playerPanel.setEndLabel(Time.getTime(hrs, mins, secs));
         playerPanel.setPauseButton();
-        mediaPlayer.playMedia(file);
+        mediaPlayer.media().play(file);
         setVisible(true);
 
         selector.setDefaultBackgroundColor(UIConstants.grey);
@@ -261,51 +262,33 @@ public class VideoFrame extends javax.swing.JFrame {
         playerPanel.getPlayPanel().addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor) && mediaPlayer.isPlaying()) {
-                    mediaPlayer.pause();
-                } else if (sensorService.shouldSelect(sensor) && !mediaPlayer.isPlaying()) {
-                    mediaPlayer.play();
+                if (sensorService.shouldSelect(sensor) && mediaPlayer.status().isPlaying()) {
+                    mediaPlayer.controls().pause();
+                } else if (sensorService.shouldSelect(sensor) && !mediaPlayer.status().isPlaying()) {
+                    mediaPlayer.controls().play();
                 }
             }
         });
         playerPanel.getPlayPanel().addKeyListener(new KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
-                if (sensorService.shouldSelect(sensor) && mediaPlayer.isPlaying()) {
-                    mediaPlayer.pause();
-                } else if (sensorService.shouldSelect(sensor) && !mediaPlayer.isPlaying()) {
-                    mediaPlayer.play();
+                if (sensorService.shouldSelect(sensor) && mediaPlayer.status().isPlaying()) {
+                    mediaPlayer.controls().pause();
+                } else if (sensorService.shouldSelect(sensor) && !mediaPlayer.status().isPlaying()) {
+                    mediaPlayer.controls().play();
                 }
             }
         });
 
-        /* playerPanel.getFullscreenPanel().addMouseListener(new MouseAdapter() {
-         public void mouseClicked(java.awt.event.MouseEvent evt) {
-         Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
-         if (sensorService.shouldSelect(sensor)) {
-         videoPanel.setFocusable(true);
-         mediaPlayer.toggleFullScreen();
-         }
-         }
-         });
-         playerPanel.getFullscreenPanel().addKeyListener(new KeyAdapter() {
-         public void keyPressed(java.awt.event.KeyEvent evt) {
-         Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
-         if (sensorService.shouldSelect(sensor)) {
-         videoPanel.setFocusable(true);
-         mediaPlayer.toggleFullScreen();
-         }
-         }
-         });*/
         playerPanel.getExitPanel().addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    if (mediaPlayer.isPlaying()) {
-                        mediaPlayer.play();
+                    if (mediaPlayer.status().isPlaying()) {
+                        mediaPlayer.controls().play();
                     }
                     selector.cancel();
-                    mediaPlayer.stop();
+                    mediaPlayer.controls().stop();
                     parent.getSelector().start();
                     dispose();
                 }
@@ -315,11 +298,11 @@ public class VideoFrame extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
-                    if (mediaPlayer.isPlaying()) {
-                        mediaPlayer.play();
+                    if (mediaPlayer.status().isPlaying()) {
+                        mediaPlayer.controls().play();
                     }                    
                     selector.cancel();
-                    mediaPlayer.stop();
+                    mediaPlayer.controls().stop();
                     parent.getSelector().start();
                     dispose();
                 }
@@ -329,7 +312,7 @@ public class VideoFrame extends javax.swing.JFrame {
             @Override
             public void windowClosing(WindowEvent we) {                 
                 selector.cancel();
-                mediaPlayer.stop();
+                mediaPlayer.controls().stop();
                 parent.getSelector().start();
                 dispose();                
             }

@@ -40,7 +40,7 @@ import org.scify.talkandplay.models.games.Game;
 import org.scify.talkandplay.models.games.GameType;
 import org.scify.talkandplay.services.GameService;
 import org.scify.talkandplay.utils.XMLConfigurationHandler;
-import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
+import uk.co.caprica.vlcj.player.component.AudioPlayerComponent;
 
 public class GamesTab extends javax.swing.JPanel {
 
@@ -50,7 +50,7 @@ public class GamesTab extends javax.swing.JPanel {
     private ConfigurationPanel parent;
     private List<GamePanel> gamePanels;
     private String currentGameType, windSoundPath, errorSoundPath;
-    private AudioMediaPlayerComponent audioPlayer;
+    private AudioPlayerComponent audioPlayer;
     private GameType gameType = null;
 
     public GamesTab(User user, ConfigurationPanel parent) {
@@ -58,7 +58,7 @@ public class GamesTab extends javax.swing.JPanel {
         this.guiHelper = new GuiHelper();
         this.gameService = new GameService();
         this.parent = parent;
-        this.audioPlayer = new AudioMediaPlayerComponent();
+        this.audioPlayer = new AudioPlayerComponent();
 
         initComponents();
         initCustomComponents();
@@ -489,11 +489,11 @@ public class GamesTab extends javax.swing.JPanel {
     }//GEN-LAST:event_saveButtonMouseClicked
 
     public void playMedia(String path) {
-        audioPlayer.getMediaPlayer().playMedia(path);
+        audioPlayer.mediaPlayer().media().play(path);
     }
 
     public void stopPlayer() {
-        audioPlayer.getMediaPlayer().release();
+        audioPlayer.mediaPlayer().release();
     }    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

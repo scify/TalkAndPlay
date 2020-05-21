@@ -15,21 +15,19 @@
 */
 package org.scify.talkandplay.gui.grid.entertainment;
 
-import java.awt.Image;
-import java.io.File;
-import java.util.List;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.BaseMediaPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.selectors.Selector;
 import org.scify.talkandplay.gui.helpers.FileExtensions;
 import org.scify.talkandplay.models.User;
-import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
-import uk.co.caprica.vlcj.player.MediaPlayer;
-import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
+import uk.co.caprica.vlcj.player.base.MediaPlayer;
+import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
+import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.List;
 
 public class VideoPanel extends BaseMediaPanel {
 
@@ -80,7 +78,7 @@ public class VideoPanel extends BaseMediaPanel {
         } else {
 
             add(filesPanel, c);
-            mediaPlayerPanel.getAudioPlayer().getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
+            mediaPlayerPanel.getAudioPlayer().mediaPlayer().events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
                 @Override
                 public void finished(MediaPlayer mediaPlayer) {
                     setPlayButton();
@@ -117,24 +115,6 @@ public class VideoPanel extends BaseMediaPanel {
     public void playFile(String fileName) {
         selector.cancel();
         videoFrame = new VideoFrame(user, null, this, filesPanel);
-
-        /*  mediaPlayerComponent.getMediaPlayer().setFullScreenStrategy(
-         new DefaultAdaptiveRuntimeFullScreenStrategy(videoFrame) {
-         @Override
-         protected void beforeEnterFullScreen() {
-         System.out.println("fullscreen");
-         videoFrame.hidePanel();
-         videoFrame.pack();
-         }
-
-         @Override
-         protected void afterExitFullScreen() {
-         System.out.println("exit fullscreen");
-         videoFrame.showPanel();
-         videoFrame.pack();
-         }
-         });
-         */
         videoFrame.playMedia(getFilePath(fileName));
     }
 
@@ -167,10 +147,6 @@ public class VideoPanel extends BaseMediaPanel {
     }
 
     public EmbeddedMediaPlayer getMediaPlayer() {
-        return this.mediaPlayerComponent.getMediaPlayer();
+        return this.mediaPlayerComponent.mediaPlayer();
     }
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    // End of variables declaration//GEN-END:variables
 }

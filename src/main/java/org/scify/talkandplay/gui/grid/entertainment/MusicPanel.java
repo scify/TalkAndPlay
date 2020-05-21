@@ -40,8 +40,8 @@ import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
-import uk.co.caprica.vlcj.player.MediaPlayer;
-import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
+import uk.co.caprica.vlcj.player.base.MediaPlayer;
+import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
 
 public class MusicPanel extends BaseMediaPanel {
 
@@ -101,7 +101,7 @@ public class MusicPanel extends BaseMediaPanel {
             c.gridy++;
             add(playerPanel, c);
 
-            mediaPlayerPanel.getAudioPlayer().getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
+            mediaPlayerPanel.getAudioPlayer().mediaPlayer().events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
                 @Override
                 public void finished(MediaPlayer mediaPlayer) {
                     setPlayButton();
@@ -251,9 +251,9 @@ public class MusicPanel extends BaseMediaPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
-                    mediaPlayerPanel.getAudioPlayer().getMediaPlayer().pause();
+                    mediaPlayerPanel.getAudioPlayer().mediaPlayer().controls().pause();
                 } else if (sensorService.shouldSelect(sensor) && !mediaPlayerPanel.isPlaying()) {
-                    mediaPlayerPanel.getAudioPlayer().getMediaPlayer().play();
+                    mediaPlayerPanel.getAudioPlayer().mediaPlayer().controls().play();
                 }
             }
         });
@@ -261,9 +261,9 @@ public class MusicPanel extends BaseMediaPanel {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
-                    mediaPlayerPanel.getAudioPlayer().getMediaPlayer().pause();
+                    mediaPlayerPanel.getAudioPlayer().mediaPlayer().controls().pause();
                 } else if (sensorService.shouldSelect(sensor) && !mediaPlayerPanel.isPlaying()) {
-                    mediaPlayerPanel.getAudioPlayer().getMediaPlayer().play();
+                    mediaPlayerPanel.getAudioPlayer().mediaPlayer().controls().play();
                 }
             }
         });
@@ -327,7 +327,7 @@ public class MusicPanel extends BaseMediaPanel {
 
             filesPanel.setSelected(selected);
             currentFile = filesPanel.getFileList().get(selected);
-            mediaPlayerPanel.getAudioPlayer().getMediaPlayer().stop();
+            mediaPlayerPanel.getAudioPlayer().mediaPlayer().controls().stop();
             mediaPlayerPanel.playMedia(getFilePath(filesPanel.getFileList().get(selected)));
         }
     }
@@ -343,7 +343,7 @@ public class MusicPanel extends BaseMediaPanel {
 
             filesPanel.setSelected(selected);
             currentFile = filesPanel.getFileList().get(selected);
-            mediaPlayerPanel.getAudioPlayer().getMediaPlayer().stop();
+            mediaPlayerPanel.getAudioPlayer().mediaPlayer().controls().stop();
             mediaPlayerPanel.playMedia(getFilePath(filesPanel.getFileList().get(selected)));
         }
     }

@@ -24,9 +24,9 @@ import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.SensorService;
-import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
-import uk.co.caprica.vlcj.player.MediaPlayer;
-import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
+import uk.co.caprica.vlcj.player.base.MediaPlayer;
+import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
+import uk.co.caprica.vlcj.player.component.AudioPlayerComponent;
 
 /**
  * Creates the panel that holds a name and an image. Adds the mouse and keyboard
@@ -40,7 +40,7 @@ public class TileCreator {
     private TileAction tileAction;
     private SensorService sensorService;
     private GuiHelper guiHelper;
-    private AudioMediaPlayerComponent audioPlayer;
+    private AudioPlayerComponent audioPlayer;
     private static String DEFAULT_SOUND;
 
     public TileCreator(User user, int rows, int columns) {
@@ -50,7 +50,7 @@ public class TileCreator {
         this.user = user;
         this.sensorService = new SensorService(user);
         this.guiHelper = new GuiHelper(user);
-        this.audioPlayer = new AudioMediaPlayerComponent();
+        this.audioPlayer = new AudioPlayerComponent();
         initAudioPlayer();
     }
 
@@ -61,10 +61,10 @@ public class TileCreator {
      */
     private void initAudioPlayer() {
 
-        audioPlayer.getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
+        audioPlayer.mediaPlayer().events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
             @Override
             public void playing(MediaPlayer mediaPlayer) {
-                audioPlayer.getMediaPlayer().mute(false);
+                audioPlayer.mediaPlayer().audio().setMute(false);
             }
 
             @Override
@@ -150,7 +150,7 @@ public class TileCreator {
      * Release the media player resources
      */
     public void freePlayerResources() {
-        audioPlayer.getMediaPlayer().release();
+        audioPlayer.mediaPlayer().release();
     }
 
     /**
@@ -160,18 +160,18 @@ public class TileCreator {
      */
     public void playAudio(String sound) {
         if (sound != null && !sound.isEmpty()) {
-            audioPlayer.getMediaPlayer().playMedia(sound);
+            audioPlayer.mediaPlayer().media().play(sound);
         } else {
-            audioPlayer.getMediaPlayer().playMedia(DEFAULT_SOUND);
+            audioPlayer.mediaPlayer().media().play(DEFAULT_SOUND);
         }
     }
 
     public void playAudio(String sound, TileAction tileAction) {
         this.tileAction = tileAction;
         if (sound != null && !sound.isEmpty()) {
-             audioPlayer.getMediaPlayer().playMedia(sound);
+             audioPlayer.mediaPlayer().media().play(sound);
         } else {
-            audioPlayer.getMediaPlayer().playMedia(DEFAULT_SOUND);
+            audioPlayer.mediaPlayer().media().play(DEFAULT_SOUND);
         }
     }
 }

@@ -20,9 +20,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import org.scify.talkandplay.gui.helpers.Time;
 import org.scify.talkandplay.gui.helpers.UIConstants;
-import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
-import uk.co.caprica.vlcj.player.MediaPlayer;
-import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
+import uk.co.caprica.vlcj.player.base.MediaPlayer;
+import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
+import uk.co.caprica.vlcj.player.component.AudioPlayerComponent;
 
 /**
  *
@@ -30,12 +30,12 @@ import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
  */
 public class MediaPlayerPanel extends javax.swing.JPanel {
 
-    private AudioMediaPlayerComponent audioPlayer;
+    private AudioPlayerComponent audioPlayer;
     private JPanel parent;
 
     public MediaPlayerPanel(JPanel parent) {
         this.parent = parent;
-        this.audioPlayer = new AudioMediaPlayerComponent();
+        this.audioPlayer = new AudioPlayerComponent();
         initComponents();
         initAudioPlayer();
         initCustomComponents();
@@ -44,8 +44,8 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
     private void initAudioPlayer() {
 
         mediaSlider.setEnabled(false);
-        audioPlayer.getMediaPlayer().mute(false);
-        audioPlayer.getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
+        audioPlayer.mediaPlayer().audio().setMute(false);
+        audioPlayer.mediaPlayer().events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
 
             @Override
             public void opening(MediaPlayer mediaPlayer) {
@@ -53,18 +53,7 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
 
             @Override
             public void playing(MediaPlayer mediaPlayer) {
-                audioPlayer.getMediaPlayer().mute(false);
-                // audioPlayer.getMediaPlayer().setVolume(100);
-            }
-
-            @Override
-            public void finished(MediaPlayer mediaPlayer) {
-                if (parent instanceof MusicPanel) {
-                    //code to autoplay the next file
-                    // String nextFile = ((MusicPanel) parent).getNextFile();
-                    // ((MusicPanel) parent).setSelected();
-                    //  playMedia(((MusicPanel) parent).getFilePath(nextFile));
-                }
+                audioPlayer.mediaPlayer().audio().setMute(false);
             }
 
             @Override
@@ -83,16 +72,6 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
                 });
             }
         });
-
-        /*
-         gridFrame.addWindowListener(new WindowAdapter() {
-         @Override
-         public void windowClosing(WindowEvent e) {
-         audioPlayer.getMediaPlayer().stop();
-         audioPlayer.getMediaPlayer().stop();
-         e.getWindow().dispose();
-         }
-         });*/
     }
 
     private void initCustomComponents() {
@@ -103,15 +82,15 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
 
     public void playMedia(String path) {
         mediaSlider.setValue(0);
-        audioPlayer.getMediaPlayer().prepareMedia(path);
-        audioPlayer.getMediaPlayer().parseMedia();
-
-        int secs = (int) (audioPlayer.getMediaPlayer().getMediaMeta().getLength() / 1000) % 60;
-        int mins = (int) ((audioPlayer.getMediaPlayer().getMediaMeta().getLength() / (1000 * 60)) % 60);
-        int hrs = (int) ((audioPlayer.getMediaPlayer().getMediaMeta().getLength() / (1000 * 60 * 60)) % 24);
+        audioPlayer.mediaPlayer().media().prepare(path);
+        audioPlayer.mediaPlayer().media().parsing().parse();
+        long length = audioPlayer.mediaPlayer().status().length();
+        int secs = (int) (length / 1000) % 60;
+        int mins = (int) ((length / (1000 * 60)) % 60);
+        int hrs = (int) ((length / (1000 * 60 * 60)) % 24);
 
         endLabel.setText(Time.getTime(hrs, mins, secs));
-        audioPlayer.getMediaPlayer().playMedia(path);
+        audioPlayer.mediaPlayer().media().play(path);
     }
 
     /**
@@ -173,16 +152,16 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public AudioMediaPlayerComponent getAudioPlayer() {
+    public AudioPlayerComponent getAudioPlayer() {
         return this.audioPlayer;
     }
 
     public boolean isPlaying() {
-        return audioPlayer.getMediaPlayer().isPlaying();
+        return audioPlayer.mediaPlayer().status().isPlaying();
     }
 
     public void stop() {
-        audioPlayer.getMediaPlayer().release();
+        audioPlayer.mediaPlayer().release();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

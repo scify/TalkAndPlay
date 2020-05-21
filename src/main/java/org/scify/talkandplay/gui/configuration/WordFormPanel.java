@@ -39,7 +39,7 @@ import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.CategoryService;
 import org.scify.talkandplay.services.UserService;
-import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
+import uk.co.caprica.vlcj.player.component.AudioPlayerComponent;
 
 public class WordFormPanel extends javax.swing.JPanel {
 
@@ -51,7 +51,7 @@ public class WordFormPanel extends javax.swing.JPanel {
     private CategoryService categoryService;
     private UserService userService;
     private ConfigurationPanel parent;
-    private AudioMediaPlayerComponent audioPlayer;
+    private AudioPlayerComponent audioPlayer;
     private File currentDirectory;
 
     public WordFormPanel(User user, Category category, ConfigurationPanel parent) {
@@ -63,7 +63,7 @@ public class WordFormPanel extends javax.swing.JPanel {
         this.userService = new UserService();
         this.category = category;
         this.parent = parent;
-        this.audioPlayer = new AudioMediaPlayerComponent();
+        this.audioPlayer = new AudioPlayerComponent();
 
         initComponents();
         initCustomComponents();
@@ -482,10 +482,6 @@ public class WordFormPanel extends javax.swing.JPanel {
                 } else {
                     columnsTextField.setText(String.valueOf(category.getColumns()));
                 }
-
-                /* soundCheckBox.setSelected(category.hasSound());
-                 imageCheckBox.setSelected(category.hasImage());
-                 textCheckBox.setSelected(category.hasText());*/
             } else {
                 editStepsPanel.setVisible(false);
             }
@@ -554,7 +550,7 @@ public class WordFormPanel extends javax.swing.JPanel {
                     uploadSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 } else {
                     uploadSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
-                    audioPlayer.getMediaPlayer().playMedia(soundPath);
+                    audioPlayer.mediaPlayer().media().play(soundPath);
                 }
             }
 

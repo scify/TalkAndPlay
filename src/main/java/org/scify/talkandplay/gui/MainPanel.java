@@ -43,7 +43,7 @@ import org.scify.talkandplay.gui.users.UserPanel;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.UserService;
 import org.scify.talkandplay.utils.TalkAndPlayProfileConfiguration;
-import uk.co.caprica.vlcj.discovery.NativeDiscovery;
+import uk.co.caprica.vlcj.factory.discovery.NativeDiscovery;
 
 /**
  *
