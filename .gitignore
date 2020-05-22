@@ -8,3 +8,4 @@ talkandplay.iml
 classes/
 *.log
 sentry.properties
+*.exe
