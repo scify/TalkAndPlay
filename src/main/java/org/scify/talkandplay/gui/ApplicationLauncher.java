@@ -21,6 +21,8 @@ import java.awt.Insets;
 import java.util.ArrayList;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
+
+import io.sentry.Sentry;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.utils.Updater;
 
@@ -30,12 +32,12 @@ public class ApplicationLauncher {
 
         Updater updater = new Updater();
         updater.run();
-
+        Sentry.init();
         setUI();
         MainFrame mainFrame = new MainFrame();
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
-
+        Sentry.capture(new Exception("This is a Test Exception"));
     }
 
     /**

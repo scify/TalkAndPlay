@@ -7,3 +7,4 @@ tmp/
 talkandplay.iml
 classes/
 *.log
+sentry.properties
