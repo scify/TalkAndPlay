@@ -37,7 +37,6 @@ public class ApplicationLauncher {
         MainFrame mainFrame = new MainFrame();
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
-        Sentry.capture(new Exception("This is a Test Exception"));
     }
 
     /**
