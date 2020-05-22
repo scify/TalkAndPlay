@@ -6,3 +6,4 @@ tmp/
 .idea/
 talkandplay.iml
 classes/
+*.log
