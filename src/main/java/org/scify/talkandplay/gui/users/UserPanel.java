@@ -28,6 +28,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import io.sentry.Sentry;
 import org.scify.talkandplay.gui.MainFrame;
 import org.scify.talkandplay.gui.MainPanel;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
@@ -132,6 +134,7 @@ public class UserPanel extends javax.swing.JPanel {
                         parent.changePanel(new MainPanel(parent));
                     } catch (Exception ex) {
                         Logger.getLogger(UserPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        Sentry.capture(ex);
                     }
                 }
             }

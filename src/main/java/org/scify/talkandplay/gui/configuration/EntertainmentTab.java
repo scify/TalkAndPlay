@@ -23,6 +23,8 @@ import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+
+import io.sentry.Sentry;
 import org.apache.commons.lang3.StringUtils;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.models.User;
@@ -294,6 +296,7 @@ public class EntertainmentTab extends javax.swing.JPanel {
                 parent.displayMessage("Οι ρυθμίσεις αποθηκεύτηκαν!");
             } catch (Exception ex) {
                 Logger.getLogger(EntertainmentTab.class.getName()).log(Level.SEVERE, null, ex);
+                Sentry.capture(ex);
             }
         }
     }//GEN-LAST:event_saveButtonMouseClicked

@@ -17,6 +17,8 @@ package org.scify.talkandplay.services;
 
 import java.io.File;
 import java.util.List;
+
+import io.sentry.Sentry;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
@@ -174,6 +176,7 @@ public class GameService {
 
         } catch (Exception e) {
             e.printStackTrace(System.err);
+            Sentry.capture(e);
         }
         return games;
     }

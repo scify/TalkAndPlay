@@ -15,6 +15,7 @@
 */
 package org.scify.talkandplay.gui.grid;
 
+import io.sentry.Sentry;
 import org.scify.talkandplay.gui.grid.tiles.TileAction;
 import java.awt.Color;
 import java.io.IOException;
@@ -139,6 +140,7 @@ public class GridPanel extends BaseGridPanel {
             CommunicationPanel communicationPanel = new CommunicationPanel(user, parent);
         } catch (IOException ex) {
             Logger.getLogger(GridPanel.class.getName()).log(Level.SEVERE, null, ex);
+            Sentry.capture(ex);
         }
     }
 

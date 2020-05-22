@@ -15,6 +15,8 @@
 */
 package org.scify.talkandplay.gui.helpers;
 
+import io.sentry.Sentry;
+
 import java.io.File;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
@@ -84,6 +86,7 @@ public class UIConstants {
             return new File(UIConstants.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getAbsolutePath() + File.separator;
         } catch (URISyntaxException ex) {
             Logger.getLogger(UIConstants.class.getName()).log(Level.SEVERE, null, ex);
+            Sentry.capture(ex);
             return "";
         }
     }

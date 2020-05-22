@@ -18,6 +18,7 @@ package org.scify.talkandplay.utils;
 import java.io.File;
 import java.net.URLDecoder;
 
+import io.sentry.Sentry;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
@@ -67,6 +68,7 @@ public class Properties {
             logger.debug("Log4j appender configuration is successful !!");
         } catch (Exception e) {
             e.printStackTrace(System.err);
+            Sentry.capture(e);
         }
     }
 

@@ -21,6 +21,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import io.sentry.Sentry;
 import org.scify.talkandplay.gui.grid.BaseGridPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.tiles.TileAction;
@@ -231,12 +233,14 @@ public class CommunicationPanel extends BaseGridPanel {
                                 drawImages(rootCategory);
                             } catch (IOException ex) {
                                 Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+                                Sentry.capture(ex);
                             }
                         } else {
                             try {
                                 drawImages(category.getParentCategory());
                             } catch (IOException ex) {
                                 Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+                                Sentry.capture(ex);
                             }
                         }
                     }
@@ -275,6 +279,7 @@ public class CommunicationPanel extends BaseGridPanel {
                             drawImages(category);
                         } catch (IOException ex) {
                             Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+                            Sentry.capture(ex);
                         }
                     }
 
@@ -297,6 +302,7 @@ public class CommunicationPanel extends BaseGridPanel {
             drawImages(category);
         } catch (IOException ex) {
             Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
+            Sentry.capture(ex);
         }
     }
 

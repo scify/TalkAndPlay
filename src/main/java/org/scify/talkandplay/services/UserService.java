@@ -21,6 +21,8 @@ import java.io.OutputStreamWriter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import io.sentry.Sentry;
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -81,6 +83,7 @@ public class UserService {
             save(uToSave);
         } catch (Exception ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            Sentry.capture(ex);
         }
     }
 
@@ -118,6 +121,7 @@ public class UserService {
             this.talkAndPlayProfileconfiguration.getConfigurationHandler().update();
         } catch (Exception ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            Sentry.capture(ex);
         }
     }
     ///////////////////////////////////////////////////////////////////////////
@@ -440,6 +444,7 @@ public class UserService {
             talkAndPlayProfileconfiguration.getConfigurationHandler().update();
         } catch (Exception ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Sentry.capture(ex);
             return false;
         }
         return true;
@@ -466,6 +471,7 @@ public class UserService {
             osw.close();
         } catch (Exception ex) {
             Logger.getLogger(UserFormPanel.class.getName()).log(Level.SEVERE, null, ex);
+            Sentry.capture(ex);
             return false;
         }
         return true;

@@ -32,6 +32,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+
+import io.sentry.Sentry;
 import org.scify.talkandplay.gui.configuration.ConfigurationPanel;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
@@ -286,6 +288,7 @@ public class MainFrame extends javax.swing.JFrame {
                         Desktop.getDesktop().browse(new URI("http://scify.org"));
                     } catch (Exception ex) {
                         Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        Sentry.capture(ex);
                     }
                 }
             }
@@ -299,6 +302,7 @@ public class MainFrame extends javax.swing.JFrame {
                         Desktop.getDesktop().browse(new URI("http://www.snf.org/"));
                     } catch (Exception ex) {
                         Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        Sentry.capture(ex);
                     }
                 }
             }

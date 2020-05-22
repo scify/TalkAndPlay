@@ -36,6 +36,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import io.sentry.Sentry;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.gui.users.UserFormPanel;
@@ -205,6 +207,7 @@ public class MainPanel extends javax.swing.JPanel {
                     }
                 } catch (Exception ex) {
                     Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Sentry.capture(ex);
                 }
             }
         });

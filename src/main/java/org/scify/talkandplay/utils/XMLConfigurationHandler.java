@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import io.sentry.Sentry;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -93,6 +95,7 @@ public class XMLConfigurationHandler {
             parseDefaultUserXml();
         } catch (Exception e) {
             e.printStackTrace(System.err);
+            Sentry.capture(e);
         }
     }
 

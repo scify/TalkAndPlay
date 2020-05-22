@@ -34,6 +34,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import io.sentry.Sentry;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.gui.users.UserPanel;
 import org.scify.talkandplay.models.Category;
@@ -243,6 +245,7 @@ public class CommunicationTab extends javax.swing.JPanel {
                             parent.redrawCategoriesDropDown();
                         } catch (Exception ex) {
                             Logger.getLogger(UserPanel.class.getName()).log(Level.SEVERE, null, ex);
+                            Sentry.capture(ex);
                         }
                     }
                 }

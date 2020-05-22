@@ -28,6 +28,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+
+import io.sentry.Sentry;
 import org.apache.commons.io.FileUtils;
 import org.jdom.Document;
 import org.jdom.JDOMException;
@@ -93,8 +95,10 @@ public class Updater {
             FileUtils.copyURLToFile(url, file);
         } catch (MalformedURLException ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
+            Sentry.capture(ex);
         } catch (IOException ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
+            Sentry.capture(ex);
         }
     }
 
@@ -125,9 +129,11 @@ public class Updater {
             zipIn.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
+            Sentry.capture(ex);
             return null;
         } catch (IOException ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
+            Sentry.capture(ex);
             return null;
         }
         return tempfilesThatWillReplaceTheExisting;
@@ -153,6 +159,7 @@ public class Updater {
                         FileUtils.copyFile(source, dest);
                     } catch (IOException e) {
                         e.printStackTrace();
+                        Sentry.capture(e);
                     }
                 }
             }
@@ -199,10 +206,13 @@ public class Updater {
 
         } catch (MalformedURLException ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
+            Sentry.capture(ex);
         } catch (IOException ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
+            Sentry.capture(ex);
         } catch (JDOMException ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
+            Sentry.capture(ex);
         } finally {
             System.out.println("Has update? " + hasUpdate);
             return hasUpdate;
