@@ -129,7 +129,7 @@ public class Properties {
     }
 
     public String getTmpFolder() {
-        return System.getProperty("java.io.tmpdir");
+        return System.getProperty("java.io.tmpdir") + "TalkAndPlay" + File.separator;
     }
 
     public void setTmpFolder(String tmpFolder) {
@@ -139,6 +139,5 @@ public class Properties {
     public String getApplicationFolder() {
         return applicationFolder;
     }
-
 
 }

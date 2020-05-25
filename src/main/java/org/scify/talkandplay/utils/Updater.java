@@ -31,10 +31,12 @@ import java.util.zip.ZipInputStream;
 
 import io.sentry.Sentry;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.scify.talkandplay.gui.UpdaterFrame;
+import org.scify.talkandplay.gui.WindowsAdminMessageFrame;
 
 /**
  * UPDATE STEPS
@@ -51,28 +53,54 @@ import org.scify.talkandplay.gui.UpdaterFrame;
 public class Updater {
 
     private Properties properties;
+    UpdaterFrame updaterFrame;
+    WindowsAdminMessageFrame windowsAdminMessageFrame;
 
     public Updater() {
         properties = new Properties();
-
     }
 
     public void run() {
+        System.out.println("Is Admin:+ " + WindowsUtils.isAdmin());
         System.out.println("URL: " + properties.getZipUrl());
         System.out.println("Zip file: " + properties.getZipFile());
         if (hasUpdate()) {
-            showFrame();
-            downloadZip();
-            ArrayList<String> tempfilesThatWillReplaceTheExisting = extractZip();
-            overrideFiles(tempfilesThatWillReplaceTheExisting);
-            closeApp();
+            if(readyForUpdate())
+                doUpdate();
+            else
+                showWindowsAdminFrame();
         }
     }
 
+    public void doUpdate() {
+        showFrame();
+        downloadZip();
+        ArrayList<String> tempfilesThatWillReplaceTheExisting = extractZip();
+        overrideFiles(tempfilesThatWillReplaceTheExisting);
+        closeApp();
+    }
+
+    public static boolean readyForUpdate() {
+        if(!platformIsWindows())
+            return true;
+        return WindowsUtils.isAdmin();
+    }
+
+    public static boolean platformIsWindows() {
+        return System.getProperty("os.name").toUpperCase().contains("WINDOWS");
+    }
+
     private void showFrame() {
-        UpdaterFrame updaterFrame = new UpdaterFrame(properties.getVersion());
+        updaterFrame = new UpdaterFrame(properties.getVersion());
         updaterFrame.setLocationRelativeTo(null);
         updaterFrame.setVisible(true);
+    }
+
+    private void showWindowsAdminFrame() {
+        windowsAdminMessageFrame = new WindowsAdminMessageFrame();
+        windowsAdminMessageFrame.setLocationRelativeTo(null);
+        windowsAdminMessageFrame.setVisible(true);
+        windowsAdminMessageFrame.setAlwaysOnTop(true);
     }
 
 /*    private void deleteTmpFolder() {
@@ -91,6 +119,7 @@ public class Updater {
     private void downloadZip() {
         try {
             URL url = new URL(properties.getZipUrl());
+            System.out.println("Tmp folder: " + properties.getTmpFolder());
             File file = new File(properties.getTmpFolder() + File.separator + properties.getZipFile());
             FileUtils.copyURLToFile(url, file);
         } catch (MalformedURLException ex) {
@@ -109,7 +138,8 @@ public class Updater {
             ZipEntry entry = zipIn.getNextEntry();
             // iterates over entries in the zip file
             while (entry != null) {
-                String filePath = properties.getTmpFolder() + File.separator + entry.getName();
+                String filePath = properties.getTmpFolder() + entry.getName();
+                System.out.println("Extracting: " + filePath);
                 if (!entry.isDirectory()) {
                     tempfilesThatWillReplaceTheExisting.add(filePath);
                     BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath));
@@ -136,7 +166,6 @@ public class Updater {
     }
 
     private void overrideFiles(ArrayList<String> tempfilesThatWillReplaceTheExisting) {
-
         if (tempfilesThatWillReplaceTheExisting!=null)
         {
             //all the source files are inside the tmp folder defined inside the properties.xml
@@ -144,11 +173,12 @@ public class Updater {
             //all the destination files are on same folder as well (the root folder).
             System.out.println("Application Folder: " + this.properties.getApplicationFolder());
             for (String source_file: tempfilesThatWillReplaceTheExisting) {
-                System.out.println("Overriding: " + source_file);
                 File source = new File(source_file);
-                String sourceFileName =source.getName();
-                //one folder above is the destination file...
-                File dest = new File(this.properties.getApplicationFolder()+ File.separator+sourceFileName);
+                String targetFileName = this.properties.getApplicationFolder() +
+                        File.separator + StringUtils.substringAfter(source_file, properties.getTmpFolder());
+                File dest = new File(targetFileName);
+                System.out.println("Overriding: " + targetFileName + "\twith:\t" + source_file);
+
                 if (source.isFile()) {
                     try {
                         FileUtils.deleteQuietly(dest);

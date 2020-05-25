@@ -25,11 +25,12 @@ import javax.swing.border.LineBorder;
 import io.sentry.Sentry;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.utils.Updater;
+import org.scify.talkandplay.utils.WindowsUtils;
 
 public class ApplicationLauncher {
 
     public static void main(String[] args) {
-
+        System.out.println("Is Admin: " + WindowsUtils.isAdmin());
         Updater updater = new Updater();
         updater.run();
         Sentry.init();
