@@ -4,7 +4,5 @@
 	<versionFileUrl>http://updates.scify.org/talk-n-play/properties.xml</versionFileUrl>
 	<propertiesFile>properties.xml</propertiesFile>
 	<zipUrl>http://updates.scify.org/talk-n-play/talkandplay.zip</zipUrl>
-	<zipUrlWindows>http://updates.scify.org/talk-n-play/talkandplay_windows.zip</zipUrlWindows>
 	<zipFile>talkandplay.zip</zipFile>
-	<zipFileWindows>talkandplay_windows.zip</zipFileWindows>
 </properties>

@@ -127,10 +127,6 @@ public class Updater {
                 entry = zipIn.getNextEntry();
             }
             zipIn.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
-            Sentry.capture(ex);
-            return null;
         } catch (IOException ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
             Sentry.capture(ex);
