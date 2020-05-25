@@ -146,7 +146,7 @@ public class Updater {
             //all the source files are inside the tmp folder defined inside the properties.xml
             //This process runs in the root folder
             //all the destination files are on same folder as well (the root folder).
-
+            System.out.println("Application Folder: " + this.properties.getApplicationFolder());
             for (String source_file: tempfilesThatWillReplaceTheExisting) {
                 System.out.println("Overriding: " + source_file);
                 File source = new File(source_file);
@@ -197,7 +197,8 @@ public class Updater {
 
                 String version = configurationFile.getRootElement().getChildText("version");
 
-                System.out.println(version + "," + properties.getVersion());
+                System.out.println("Remote version:\t" + version);
+                System.out.println("Local version:\t"+ properties.getVersion());
 
                 if (!properties.getVersion().equals(version)) {
                     hasUpdate = true;

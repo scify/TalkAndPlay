@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <properties>
-	<version>2.0.0</version>
-	<versionFileUrl>http://updates.scify.org/talk-n-play/properties.xml</versionFileUrl>
+	<version>1.0.0</version>
+	<versionFileUrl>http://updates.scify.org/talk-n-play/properties-2020.xml</versionFileUrl>
 	<propertiesFile>properties.xml</propertiesFile>
-	<zipUrl>http://updates.scify.org/talk-n-play/talkandplay.zip</zipUrl>
-	<zipUrlWindows>http://updates.scify.org/talk-n-play/talkandplay_windows.zip</zipUrlWindows>
+	<zipUrl>http://updates.scify.org/talk-n-play/talkandplay-2020.zip</zipUrl>
+	<zipUrlWindows>http://updates.scify.org/talk-n-play/talkandplay_windows-2020.zip</zipUrlWindows>
 	<zipFile>talkandplay.zip</zipFile>
 	<zipFileWindows>talkandplay_windows.zip</zipFileWindows>
 </properties>
