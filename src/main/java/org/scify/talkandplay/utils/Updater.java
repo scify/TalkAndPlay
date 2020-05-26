@@ -54,15 +54,17 @@ public class Updater {
     private Properties properties;
     UpdaterFrame updaterFrame;
     WindowsAdminMessageFrame windowsAdminMessageFrame;
+    private String zipFilePath;
 
     public Updater() {
         properties = new Properties();
+        int index = properties.getZipUrl().lastIndexOf('/');
+        this.zipFilePath = properties.getTmpFolder() + File.separator + properties.getZipUrl().substring(index + 1);
     }
 
     public void run() {
         System.out.println("Current user can write to Application directory? " + FileSystemUtils.canWriteToApplicationDir());
         System.out.println("URL: " + properties.getZipUrl());
-        System.out.println("Zip file: " + properties.getZipFile());
         System.out.println("Tmp folder: " + properties.getTmpFolder());
         if (hasUpdate()) {
             if(readyForUpdate())
@@ -114,7 +116,7 @@ public class Updater {
         try {
             URL url = new URL(properties.getZipUrl());
             System.out.println("Tmp folder: " + properties.getTmpFolder());
-            File file = new File(properties.getTmpFolder() + File.separator + properties.getZipFile());
+            File file = new File(zipFilePath);
             FileUtils.copyURLToFile(url, file);
         } catch (MalformedURLException ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
@@ -128,7 +130,7 @@ public class Updater {
     private ArrayList<String> extractZip() {
         ArrayList<String> tempfilesThatWillReplaceTheExisting= new ArrayList<>();
         try {
-            ZipInputStream zipIn = new ZipInputStream(new FileInputStream(properties.getTmpFolder() + File.separator + properties.getZipFile()));
+            ZipInputStream zipIn = new ZipInputStream(new FileInputStream(zipFilePath));
             ZipEntry entry = zipIn.getNextEntry();
             // iterates over entries in the zip file
             while (entry != null) {

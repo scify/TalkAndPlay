@@ -38,8 +38,6 @@ public class Properties {
     private String version;
     private String versionFileUrl;
     private String zipUrl;
-    private String tmpFolder;
-    private String zipFile;
     private String propertiesFile;
     private String applicationFolder;
 
@@ -75,15 +73,10 @@ public class Properties {
     private void parseXML() throws Exception {
         Element properties = configurationFile.getRootElement();
 
-        System.out.println("versionFileUrl " + properties.getChildText("versionFileUrl"));
-
         setVersion(properties.getChildText("version"));
         setVersionFileUrl(properties.getChildText("versionFileUrl"));
-        setTmpFolder(properties.getChildText("tmpFolder"));
         setPropertiesFile(properties.getChildText("propertiesFile"));
         setZipUrl(properties.getChildText("zipUrl"));
-        setZipFile(properties.getChildText("zipFile"));
-
     }
 
     public String getVersion() {
@@ -112,14 +105,6 @@ public class Properties {
         this.zipUrl = zipUrl;
     }
 
-    public String getZipFile() {
-        return zipFile;
-    }
-
-    public void setZipFile(String zipFile) {
-        this.zipFile = zipFile;
-    }
-
     public String getPropertiesFile() {
         return propertiesFile;
     }
@@ -130,10 +115,6 @@ public class Properties {
 
     public String getTmpFolder() {
         return System.getProperty("java.io.tmpdir") + File.separator + "TalkAndPlay" + File.separator;
-    }
-
-    public void setTmpFolder(String tmpFolder) {
-        this.tmpFolder = tmpFolder;
     }
 
     public String getApplicationFolder() {
