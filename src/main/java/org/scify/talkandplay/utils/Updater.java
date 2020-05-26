@@ -118,10 +118,7 @@ public class Updater {
             System.out.println("Tmp folder: " + properties.getTmpFolder());
             File file = new File(zipFilePath);
             FileUtils.copyURLToFile(url, file);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
-            Sentry.capture(ex);
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
             Sentry.capture(ex);
         }
