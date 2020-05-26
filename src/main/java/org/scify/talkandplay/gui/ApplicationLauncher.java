@@ -25,7 +25,6 @@ import javax.swing.border.LineBorder;
 import io.sentry.Sentry;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.utils.Updater;
-import org.scify.talkandplay.utils.FileSystemUtils;
 
 public class ApplicationLauncher {
 
