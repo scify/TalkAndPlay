@@ -3,16 +3,12 @@ package org.scify.talkandplay.utils;
 import java.io.File;
 import java.io.IOException;
 
-public class WindowsUtils {
+public class FileSystemUtils {
 
-    private WindowsUtils() {  }
-
-    public static boolean isAdmin() {
-        return canWriteToApplicationDir();
-    }
+    private FileSystemUtils() {  }
 
     public static void main(String[] args) throws IOException {
-        System.out.println("Current user is admin ? " + WindowsUtils.isAdmin());
+        System.out.println("Current user can write to Application directory ? " + FileSystemUtils.canWriteToApplicationDir());
     }
 
     public static boolean canWriteToApplicationDir() {
@@ -33,5 +29,9 @@ public class WindowsUtils {
                 fileTest.delete();
         }
         return true;
+    }
+
+    public static boolean platformIsWindows() {
+        return System.getProperty("os.name").toUpperCase().contains("WINDOWS");
     }
 }

@@ -18,7 +18,6 @@ package org.scify.talkandplay.utils;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -61,7 +60,7 @@ public class Updater {
     }
 
     public void run() {
-        System.out.println("Is Admin:+ " + WindowsUtils.isAdmin());
+        System.out.println("Current user can write to Application directory? " + FileSystemUtils.canWriteToApplicationDir());
         System.out.println("URL: " + properties.getZipUrl());
         System.out.println("Zip file: " + properties.getZipFile());
         if (hasUpdate()) {
@@ -81,13 +80,7 @@ public class Updater {
     }
 
     public static boolean readyForUpdate() {
-        if(!platformIsWindows())
-            return true;
-        return WindowsUtils.isAdmin();
-    }
-
-    public static boolean platformIsWindows() {
-        return System.getProperty("os.name").toUpperCase().contains("WINDOWS");
+        return FileSystemUtils.canWriteToApplicationDir();
     }
 
     private void showFrame() {

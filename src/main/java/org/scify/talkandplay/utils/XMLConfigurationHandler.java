@@ -76,7 +76,7 @@ public class XMLConfigurationHandler {
     protected User defaultUser;
 
     public XMLConfigurationHandler() {
-        if ((System.getProperty("os.name")).toUpperCase().contains("WINDOWS")) {
+        if (FileSystemUtils.platformIsWindows()) {
             //in order to debug this make sure you have in the AppData/Talk and Play/ directory the conf.xml
             configurationFilePath = System.getenv("AppData") + File.separator + "Talk and Play" + File.separator + "conf.xml";
         } else {
