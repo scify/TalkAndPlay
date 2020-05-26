@@ -63,6 +63,7 @@ public class Updater {
         System.out.println("Current user can write to Application directory? " + FileSystemUtils.canWriteToApplicationDir());
         System.out.println("URL: " + properties.getZipUrl());
         System.out.println("Zip file: " + properties.getZipFile());
+        System.out.println("Tmp folder: " + properties.getTmpFolder());
         if (hasUpdate()) {
             if(readyForUpdate())
                 doUpdate();
