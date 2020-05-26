@@ -15,15 +15,6 @@
  */
 package org.scify.talkandplay.utils;
 
-import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
-
 import io.sentry.Sentry;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -33,6 +24,12 @@ import org.jdom.input.SAXBuilder;
 import org.scify.talkandplay.gui.UpdateErrorMessageFrame;
 import org.scify.talkandplay.gui.UpdaterFrame;
 import org.scify.talkandplay.gui.WindowsAdminMessageFrame;
+
+import java.io.*;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 /**
  * UPDATE STEPS
