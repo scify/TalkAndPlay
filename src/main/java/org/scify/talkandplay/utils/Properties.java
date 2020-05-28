@@ -44,6 +44,7 @@ public class Properties {
     private Document configurationFile;
 
     protected static Properties instance;
+    static Logger logger = Logger.getLogger(Properties.class);
 
     public static Properties getInstance() {
         if(instance == null)
@@ -62,11 +63,6 @@ public class Properties {
             SAXBuilder builder = new SAXBuilder();
             configurationFile = builder.build(file);
             parseXML();
-            //PropertiesConfigurator is used to configure logger from properties file
-            PropertyConfigurator.configure("log4j.properties");
-
-            //Log in console in and log file
-            logger.debug("Log4j appender configuration is successful !!");
         } catch (Exception e) {
             e.printStackTrace(System.err);
             Sentry.capture(e);
@@ -101,8 +97,6 @@ public class Properties {
     public String getZipUrl() {
         return zipUrl;
     }
-
-    static Logger logger = Logger.getLogger(Properties.class);
 
     public void setZipUrl(String zipUrl) {
         this.zipUrl = zipUrl;

@@ -23,12 +23,20 @@ import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
 import io.sentry.Sentry;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.scify.talkandplay.gui.helpers.UIConstants;
+import org.scify.talkandplay.utils.Properties;
 import org.scify.talkandplay.utils.Updater;
 
 public class ApplicationLauncher {
+    static Logger logger = Logger.getLogger(ApplicationLauncher.class);
 
     public static void main(String[] args) {
+        //PropertiesConfigurator is used to configure logger from properties file
+        PropertyConfigurator.configure("log4j.properties");
+        //Log in console in and log file
+        logger.debug("Log4j appender configuration is successful !!");
         Updater updater = new Updater();
         updater.run();
         Sentry.init();
