@@ -44,7 +44,7 @@ public class MainFrame extends javax.swing.JFrame {
     private final Properties prop;
     
     public MainFrame() {
-        prop = new Properties();
+        prop = Properties.getInstance();
         initComponents();
         initCustomComponents();
         openLinkToBrowser();

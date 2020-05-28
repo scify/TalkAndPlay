@@ -43,15 +43,25 @@ public class Properties {
 
     private Document configurationFile;
 
-    public Properties() {
-        try {
-            String encodedApplicationFolder = (new File(Properties.class
-                    .getProtectionDomain()
-                    .getCodeSource()
-                    .getLocation()
-                    .getPath())).getParentFile().getAbsolutePath();
-            applicationFolder = URLDecoder.decode(encodedApplicationFolder, "UTF-8");
+    protected static Properties instance;
 
+    public static Properties getInstance() {
+        if(instance == null)
+            instance = new Properties();
+        return instance;
+    }
+
+    private Properties() {
+        try {
+//            String encodedApplicationFolder = (new File(Properties.class
+//                    .getProtectionDomain()
+//                    .getCodeSource()
+//                    .getLocation()
+//                    .getPath())).getParentFile().getAbsolutePath();
+            String encodedApplicationFolder = System.getProperty("user.dir");
+            System.out.println("Current working dir: " + System.getProperty("user.dir"));
+            applicationFolder = URLDecoder.decode(encodedApplicationFolder, "UTF-8");
+            System.out.println("Application folder: " + applicationFolder);
             File file = new File(applicationFolder, "properties.xml");
             if (!file.exists()) {
                 file = new File("properties.xml");

@@ -12,7 +12,7 @@ public class FileSystemUtils {
     }
 
     public static boolean canWriteToApplicationDir() {
-        Properties properties = new Properties();
+        Properties properties = Properties.getInstance();
         File installDir = new File(properties.getApplicationFolder());
         System.out.println("Trying to write a temp file to " + properties.getApplicationFolder());
         if (!installDir.canWrite())

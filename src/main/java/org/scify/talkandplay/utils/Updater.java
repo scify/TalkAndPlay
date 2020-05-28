@@ -55,7 +55,7 @@ public class Updater {
     private String zipFilePath;
 
     public Updater() {
-        properties = new Properties();
+        properties = Properties.getInstance();
         int index = properties.getZipUrl().lastIndexOf('/');
         this.zipFilePath = properties.getTmpFolder() + File.separator + properties.getZipUrl().substring(index + 1);
     }
