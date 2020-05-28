@@ -265,7 +265,6 @@ public class CommunicationTab extends javax.swing.JPanel {
 
                 c.gridy = 1;
                 for (Component comp : components) {
-                    System.out.println(c.gridy);
                     c.gridy++;
                     contentPanel.add(comp, c);
                 }

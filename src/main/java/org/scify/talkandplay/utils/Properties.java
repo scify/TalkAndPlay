@@ -53,15 +53,8 @@ public class Properties {
 
     private Properties() {
         try {
-//            String encodedApplicationFolder = (new File(Properties.class
-//                    .getProtectionDomain()
-//                    .getCodeSource()
-//                    .getLocation()
-//                    .getPath())).getParentFile().getAbsolutePath();
-            String encodedApplicationFolder = System.getProperty("user.dir");
-            System.out.println("Current working dir: " + System.getProperty("user.dir"));
-            applicationFolder = URLDecoder.decode(encodedApplicationFolder, "UTF-8");
-            System.out.println("Application folder: " + applicationFolder);
+            applicationFolder = URLDecoder.decode(System.getProperty("user.dir"), "UTF-8");
+            logger.debug("Application folder: " + applicationFolder);
             File file = new File(applicationFolder, "properties.xml");
             if (!file.exists()) {
                 file = new File("properties.xml");

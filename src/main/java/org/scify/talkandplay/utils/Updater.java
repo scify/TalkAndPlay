@@ -18,6 +18,7 @@ package org.scify.talkandplay.utils;
 import io.sentry.Sentry;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
@@ -50,7 +51,8 @@ public class Updater {
     WindowsAdminMessageFrame windowsAdminMessageFrame;
     UpdateErrorMessageFrame updateErrorMessageFrame;
     private String zipFilePath;
-
+    static Logger logger = Logger.getLogger(Updater.class);
+    
     public Updater() {
         properties = Properties.getInstance();
         int index = properties.getZipUrl().lastIndexOf('/');
@@ -58,9 +60,9 @@ public class Updater {
     }
 
     public void run() {
-        System.out.println("Current user can write to Application directory? " + FileSystemUtils.canWriteToApplicationDir());
-        System.out.println("URL: " + properties.getZipUrl());
-        System.out.println("Tmp folder: " + properties.getTmpFolder());
+        logger.debug("Current user can write to Application directory? " + FileSystemUtils.canWriteToApplicationDir());
+        logger.debug("URL: " + properties.getZipUrl());
+        logger.debug("Tmp folder: " + properties.getTmpFolder());
         try {
             if (hasUpdate()) {
                 if (readyForUpdate())
@@ -112,7 +114,7 @@ public class Updater {
 
     private void downloadZip() throws IOException {
         URL url = new URL(properties.getZipUrl());
-        System.out.println("Tmp folder: " + properties.getTmpFolder());
+        logger.debug("Tmp folder: " + properties.getTmpFolder());
         File file = new File(zipFilePath);
         FileUtils.copyURLToFile(url, file);
     }
@@ -125,7 +127,7 @@ public class Updater {
         // iterates over entries in the zip file
         while (entry != null) {
             String filePath = properties.getTmpFolder() + entry.getName();
-            System.out.println("Extracting: " + filePath);
+            logger.debug("Extracting: " + filePath);
             if (!entry.isDirectory()) {
                 tempfilesThatWillReplaceTheExisting.add(filePath);
                 BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath));
@@ -152,13 +154,13 @@ public class Updater {
             //all the source files are inside the tmp folder defined inside the properties.xml
             //This process runs in the root folder
             //all the destination files are on same folder as well (the root folder).
-            System.out.println("Application Folder: " + this.properties.getApplicationFolder());
+            logger.debug("Application Folder: " + this.properties.getApplicationFolder());
             for (String source_file : tempfilesThatWillReplaceTheExisting) {
                 File source = new File(source_file);
                 String targetFileName = this.properties.getApplicationFolder() +
                         File.separator + StringUtils.substringAfter(source_file, properties.getTmpFolder());
                 File dest = new File(targetFileName);
-                System.out.println("Overriding: " + targetFileName + "\twith:\t" + source_file);
+                logger.debug("Overriding: " + targetFileName + "\twith:\t" + source_file);
 
                 if (source.isFile()) {
                     FileUtils.deleteQuietly(dest);
@@ -188,8 +190,8 @@ public class Updater {
 
             String version = configurationFile.getRootElement().getChildText("version");
 
-            System.out.println("Remote version:\t" + version);
-            System.out.println("Local version:\t" + properties.getVersion());
+            logger.debug("Remote version:\t" + version);
+            logger.debug("Local version:\t" + properties.getVersion());
 
             if (!properties.getVersion().equals(version)) {
                 hasUpdate = true;

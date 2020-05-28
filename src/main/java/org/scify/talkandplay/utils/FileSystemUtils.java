@@ -1,20 +1,23 @@
 package org.scify.talkandplay.utils;
 
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.IOException;
 
 public class FileSystemUtils {
-
+    static Logger logger = Logger.getLogger(Updater.class);
+    
     private FileSystemUtils() {  }
 
     public static void main(String[] args) throws IOException {
-        System.out.println("Current user can write to Application directory ? " + FileSystemUtils.canWriteToApplicationDir());
+        logger.debug("Current user can write to Application directory ? " + FileSystemUtils.canWriteToApplicationDir());
     }
 
     public static boolean canWriteToApplicationDir() {
         Properties properties = Properties.getInstance();
         File installDir = new File(properties.getApplicationFolder());
-        System.out.println("Trying to write a temp file to " + properties.getApplicationFolder());
+        logger.debug("Trying to write a temp file to " + properties.getApplicationFolder());
         if (!installDir.canWrite())
             return false;
 
