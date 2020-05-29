@@ -37,6 +37,13 @@ sentry.properties
 Once running, the app looks at the URL defined in the `versionFileUrl` field in `properties.xml` in order to check for an update version.
 If a new version is found, then the file defined in `zipUrl` is downloaded, extracted, and it's contents overwrite the resource files of the project.
 
+## Screenshots
+
+<img src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/screenshots/tnp-1.png" alt="screenshot">
+
+<img src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/screenshots/tnp-2.png" alt="screenshot">
+
+
 ## Development
 The project is being developed by SciFY with the exclusive donation from [Stavros Niarchos Foundation](http://www.snf.org/en/).
 
