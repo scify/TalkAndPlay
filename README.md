@@ -39,9 +39,9 @@ If a new version is found, then the file defined in `zipUrl` is downloaded, extr
 
 ## Screenshots
 
-<img src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/screenshots/tnp-1.png" alt="screenshot">
+<img height="300px" src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/screenshots/tnp1.png" alt="screenshot">
 
-<img src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/screenshots/tnp-2.png" alt="screenshot">
+<img height="300px" src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/screenshots/tnp2.png" alt="screenshot">
 
 
 ## Development
