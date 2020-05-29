@@ -1,7 +1,8 @@
 # TalkAndPlay
 
-<div style="text-align: center">
-<img src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/resources/tp_logo_small.png" alt="screenshot"></div>
+<p align="center">
+<img src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/resources/tp_logo_small.png" alt="screenshot">
+</p>
 
 ## About
 Talk and Play is a system that allows people with disabilities to:
