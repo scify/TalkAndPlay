@@ -39,10 +39,27 @@ If a new version is found, then the file defined in `zipUrl` is downloaded, extr
 
 ## Screenshots
 
-<img height="300px" src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/screenshots/tnp1.png" alt="screenshot">
+<img src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/screenshots/tnp1.png" alt="screenshot">
 
-<img height="300px" src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/screenshots/tnp2.png" alt="screenshot">
+<img src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/screenshots/tnp2.png" alt="screenshot">
 
+<img src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/screenshots/tnp3.png" alt="screenshot">
+
+<img src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/screenshots/tnp4.png" alt="screenshot">
+
+<img src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/screenshots/tnp5.png" alt="screenshot">
+
+<img src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/screenshots/tnp6.png" alt="screenshot">
+
+<img src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/screenshots/tnp7.png" alt="screenshot">
+
+<img src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/screenshots/tnp8.png" alt="screenshot">
+
+<img src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/screenshots/tnp9.png" alt="screenshot">
+
+<img src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/screenshots/tnp10.png" alt="screenshot">
+
+<img src="https://raw.githubusercontent.com/scify/TalkAndPlay/master/screenshots/tnp11.png" alt="screenshot">
 
 ## Development
 The project is being developed by SciFY with the exclusive donation from [Stavros Niarchos Foundation](http://www.snf.org/en/).
