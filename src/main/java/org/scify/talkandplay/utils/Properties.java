@@ -118,4 +118,10 @@ public class Properties {
         return applicationFolder;
     }
 
+    public String getApplicationDataFolder() {
+        if(FileSystemUtils.platformIsWindows())
+            return System.getenv("APPDATA") + File.separator + "Talk and Play";
+        return System.getProperty("user.home") + File.separator + ".Talk and Play";
+    }
+
 }

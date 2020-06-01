@@ -67,7 +67,7 @@ public class XMLConfigurationHandler {
     public XMLConfigurationHandler() {
 
         properties = Properties.getInstance();
-        configurationFilePath = System.getenv("APPDATA") + File.separator + "Talk and Play" + File.separator + "conf.xml";
+        configurationFilePath = properties.getApplicationDataFolder() + File.separator + "conf.xml";
         defaultUserConfigurationFilePath = properties.getApplicationFolder() + File.separator + "defaultUser.xml";
 
         initConfigurationFile();
