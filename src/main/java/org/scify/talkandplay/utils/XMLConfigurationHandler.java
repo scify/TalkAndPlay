@@ -15,19 +15,9 @@
  */
 package org.scify.talkandplay.utils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import io.sentry.Sentry;
+import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -35,22 +25,19 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 import org.scify.talkandplay.models.Category;
-import org.scify.talkandplay.models.modules.CommunicationModule;
 import org.scify.talkandplay.models.Configuration;
-import org.scify.talkandplay.models.modules.EntertainmentModule;
-import org.scify.talkandplay.models.modules.GameModule;
 import org.scify.talkandplay.models.User;
-import org.scify.talkandplay.models.games.Game;
-import org.scify.talkandplay.models.games.GameImage;
-import org.scify.talkandplay.models.games.GameType;
-import org.scify.talkandplay.models.games.SequenceGame;
-import org.scify.talkandplay.models.games.SimilarityGame;
-import org.scify.talkandplay.models.games.StimulusReactionGame;
-import org.scify.talkandplay.models.modules.MusicModule;
-import org.scify.talkandplay.models.modules.VideoModule;
+import org.scify.talkandplay.models.games.*;
+import org.scify.talkandplay.models.modules.*;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * ConfigurationHandler is responsible for parsing the xml and other xml-related
@@ -74,20 +61,26 @@ public class XMLConfigurationHandler {
     protected User currentUser;
     // a hidden user that could be used to create new users
     protected User defaultUser;
+    Properties properties;
+    static Logger logger = Logger.getLogger(XMLConfigurationHandler.class);
 
     public XMLConfigurationHandler() {
-        Properties properties = Properties.getInstance();
-        configurationFilePath = properties.getApplicationFolder() + File.separator + "conf.xml";
+
+        properties = Properties.getInstance();
+        configurationFilePath = System.getenv("APPDATA") + File.separator + "Talk and Play" + File.separator + "conf.xml";
         defaultUserConfigurationFilePath = properties.getApplicationFolder() + File.separator + "defaultUser.xml";
 
-        ParseConfigurationFile();
+        initConfigurationFile();
     }
 
-    private void ParseConfigurationFile() {
+    private void initConfigurationFile() {
         try {
             File configurationFile = new File(configurationFilePath);
-            SaveEmptyConfigurationIfNotExists(configurationFile);
-            parseXML(configurationFile);
+            if (!configurationFile.exists()) {
+                logger.info("Configuration file not found.");
+                createLocalConfigurationFile();
+            }
+            parseConfigurationFileXML();
             parseDefaultUserXml();
         } catch (Exception e) {
             e.printStackTrace(System.err);
@@ -95,8 +88,15 @@ public class XMLConfigurationHandler {
         }
     }
 
-    private void SaveEmptyConfigurationIfNotExists(File file) throws FileNotFoundException, UnsupportedEncodingException {
-        if (!file.exists() || file.isDirectory()) {
+    private void createLocalConfigurationFile() throws IOException {
+        String defaultConfigurationFilePath = properties.getApplicationFolder() + File.separator + "conf.xml";
+        File configurationFile = new File(configurationFilePath);
+        File defaultConfigurationFile = new File(defaultConfigurationFilePath);
+        if (defaultConfigurationFile.exists()) {
+            logger.info("Copying default configuration file from: " + defaultConfigurationFile + " to: " + configurationFilePath);
+            FileUtils.copyFile(defaultConfigurationFile, configurationFile);
+        } else {
+            logger.info("Default configuration file not found. Creating a new empty configuration file at:" + configurationFilePath);
             PrintWriter writer = new PrintWriter(configurationFilePath, "UTF-8");
             writer.println("<?xml version=\"1.0\"?>\n"
                     + "<profiles></profiles>");
@@ -144,9 +144,10 @@ public class XMLConfigurationHandler {
      * @return
      * @throws Exception
      */
-    private void parseXML(File file) throws Exception {
+    private void parseConfigurationFileXML() throws Exception {
+        File configurationFile = new File(configurationFilePath);
         SAXBuilder builder = new SAXBuilder();
-        configurationXmlDocument = (Document) builder.build(file);
+        configurationXmlDocument = builder.build(configurationFile);
 
         userFiles = new HashMap();
         users = new ArrayList();
@@ -712,7 +713,7 @@ public class XMLConfigurationHandler {
 
     public void update() throws Exception {
         this.writeToXmlFile();
-        this.refreshXmlFile();
+        this.parseConfigurationFileXML();
     }
 
     public List<String> getBrokenFiles(String username) {
@@ -729,10 +730,6 @@ public class XMLConfigurationHandler {
         }
 
         return brokenFiles;
-    }
-
-    private void refreshXmlFile() throws Exception {
-        parseXML(new File(configurationFilePath));
     }
 
     /**
