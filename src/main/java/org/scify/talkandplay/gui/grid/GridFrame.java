@@ -18,24 +18,26 @@ package org.scify.talkandplay.gui.grid;
 import java.awt.GridBagConstraints;
 import java.io.IOException;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.UserService;
+import org.scify.talkandplay.utils.ResourceManager;
+import org.scify.talkandplay.utils.ResourceType;
 
 public class GridFrame extends javax.swing.JFrame {
 
     private User user;
     private UserService userService;
     private GridBagConstraints c;
+    protected ResourceManager rm;
 
     public GridFrame(String userName) throws IOException {
         this.userService = new UserService();
         this.user = userService.getUser(userName);
-
+        this.rm = ResourceManager.getInstance();
         initComponents();
         initCustomComponents();
     }
@@ -95,7 +97,7 @@ public class GridFrame extends javax.swing.JFrame {
         UIConstants.getInstance().setHeight(getHeight());
         UIConstants.getInstance().setWidth(getWidth());
 
-        setIconImage((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/tp_logo_mini.png"))).getImage());
+        setIconImage(rm.getImage("tp_logo_mini.png", ResourceType.FROM_JAR));
         gridPanel.setLayout(new BoxLayout(gridPanel, BoxLayout.LINE_AXIS));
         gridPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 

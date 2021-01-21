@@ -24,6 +24,9 @@ import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.SensorService;
+import org.scify.talkandplay.utils.ImageResource;
+import org.scify.talkandplay.utils.ResourceManager;
+import org.scify.talkandplay.utils.ResourceType;
 import uk.co.caprica.vlcj.player.base.MediaPlayer;
 import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
 import uk.co.caprica.vlcj.player.component.AudioPlayerComponent;
@@ -42,11 +45,12 @@ public class TileCreator {
     private GuiHelper guiHelper;
     private AudioPlayerComponent audioPlayer;
     private static String DEFAULT_SOUND;
+    protected final ResourceManager rm;
 
     public TileCreator(User user, int rows, int columns) {
+        rm = ResourceManager.getInstance();
         DEFAULT_SOUND = new File("resources/sounds/default.mp3").getAbsolutePath();
         //   DEFAULT_SOUND = getClass().getResource("/org/scify/talkandplay/resources/sounds/cat.mp3").getPath();
-
         this.user = user;
         this.sensorService = new SensorService(user);
         this.guiHelper = new GuiHelper(user);
@@ -84,30 +88,20 @@ public class TileCreator {
      * @param tileAction
      * @return JPanel panel
      */
-    public JPanel create(String name, String image, String sound, TileAction tileAction) {
+    public JPanel create(String name, ImageResource image, String sound, TileAction tileAction) {
         JPanel panel = guiHelper.createImagePanel(image, name);
         addListeners(panel, sound, tileAction);
         return panel;
     }
 
-    public JPanel create(String name, String image, String sound) {
+    public JPanel create(String name, ImageResource image, String sound) {
         JPanel panel = guiHelper.createImagePanel(image, name);
-        return panel;
-    }
-
-    public JPanel create(String name, String image, URL imageURL, String sound, TileAction tileAction) {
-        JPanel panel;
-        if (image == null || image.isEmpty()) {
-            panel = guiHelper.createImagePanel(imageURL, name);
-        } else {
-            panel = guiHelper.createImagePanel(image, name);
-        }
-        addListeners(panel, sound, tileAction);
         return panel;
     }
 
     public JPanel createEmpty() {
-        JPanel panel = guiHelper.createImagePanel(getClass().getResource("/org/scify/talkandplay/resources/empty_pixel.png"), "");
+        ImageResource im = new ImageResource("empty_pixel.png", ResourceType.FROM_JAR);
+        JPanel panel = guiHelper.createImagePanel(im, "");
         return panel;
     }
 

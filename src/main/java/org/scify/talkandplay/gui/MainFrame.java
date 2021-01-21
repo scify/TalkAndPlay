@@ -19,32 +19,29 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 
 import io.sentry.Sentry;
-import org.scify.talkandplay.gui.configuration.ConfigurationPanel;
 import org.scify.talkandplay.gui.helpers.UIConstants;
-import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.utils.Properties;
+import org.scify.talkandplay.utils.ResourceManager;
+import org.scify.talkandplay.utils.ResourceType;
 
 public class MainFrame extends javax.swing.JFrame {
 
     private final Properties prop;
+    private final ResourceManager rm;
     
     public MainFrame() {
         prop = Properties.getInstance();
+        rm = ResourceManager.getInstance();
         initComponents();
         initCustomComponents();
         openLinkToBrowser();
@@ -77,7 +74,7 @@ public class MainFrame extends javax.swing.JFrame {
         contentPane.setBackground(new java.awt.Color(255, 255, 255));
         contentPane.setPreferredSize(new java.awt.Dimension(800, 720));
 
-        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/tp_logo_small.png"))); // NOI18N
+        logoLabel.setIcon(rm.getImageIcon("tp_logo_small.png", ResourceType.FROM_JAR)); // NOI18N
 
         jLabel1.setBackground(new java.awt.Color(51, 51, 255));
         jLabel1.setFont(jLabel1.getFont());
@@ -106,7 +103,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel2.setText("Δημιουργήθηκε από τη");
+        jLabel2.setText(rm.getTextOfXMLTag("createdBy"));
         jLabel2.setAlignmentY(0.0F);
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel2.setDoubleBuffered(true);
@@ -115,12 +112,12 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel2.setRequestFocusEnabled(false);
 
         scifyLogoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        scifyLogoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/logos/scify_logo_108.png"))); // NOI18N
+        scifyLogoLabel.setIcon(rm.getImageIcon("logos/scify_logo_108.png", ResourceType.FROM_JAR)); // NOI18N
         scifyLogoLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel4.setText("Αποκλειστική δωρεά");
+        jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
 
         niarchosLogoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/logos/snf_lg.png"))); // NOI18N
         niarchosLogoLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -201,15 +198,22 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void initCustomComponents() {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setIconImage((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/tp_logo_mini.png"))).getImage());
-
-        contentPanel.add(new MainPanel(this), BorderLayout.CENTER);
-
+        setIconImage(rm.getImage("tp_logo_mini.png", ResourceType.FROM_JAR));
+        contentPanel.add(new LanguageSelector(this), BorderLayout.CENTER);
         contentPanel.revalidate();
         contentPanel.repaint();
         revalidate();
         repaint();
         pack();
+    }
+
+    public void languageSelected() {
+        contentPanel.removeAll();
+        jLabel2.setText(rm.getTextOfXMLTag("createdBy"));
+        jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
+        contentPanel.add(new MainPanel(this), BorderLayout.CENTER);
+        revalidate();
+        repaint();
     }
 
     public void changePanel(JPanel newPanel) {
@@ -322,4 +326,5 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel scifyLogoLabel;
     private javax.swing.JPanel titlePanel;
     // End of variables declaration//GEN-END:variables
+
 }

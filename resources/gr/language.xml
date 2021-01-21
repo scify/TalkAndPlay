@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<languageTexts>
+    <language>Ελληνικά</language>
+    <vlcMissingMessage>Εγκατέστησε το VLC και δοκίμασε ξανά</vlcMissingMessage>
+    <createdBy>Δημιουργήθηκε από τη</createdBy>
+    <donationBy>Αποκλειστική δωρεά</donationBy>
+    <addUser>Πρόσθεσε νέο χρήστη</addUser>
+    <loadUser>Φόρτωσε χρήστη</loadUser>
+    <chooseFile>Επίλεξε αρχείο</chooseFile>
+    <preferences>ΠΡΟΤΙΜΗΣΕΙΣ</preferences>
+    <delete>ΔΙΑΓΡΑΦΗ</delete>
+    <filesNotFound>Κάποια αρχεία δεν μπορούν να βρεθούν</filesNotFound>
+    <userDeleteConfirmation>Είσαι σίγουρος/η ότι θες να διαγράψεις το χρήστη;</userDeleteConfirmation>
+    <defaultUserName>Χρήστης</defaultUserName>
+    <communicationName>Επικοινωνία</communicationName>
+    <entertainmentName>Ψυχαγωγία</entertainmentName>
+    <gamesName>Παιχνίδια</gamesName>
+    <categoryYes>Ναι</categoryYes>
+    <categoryNo>Όχι</categoryNo>
+    <categoryFood>Φαγητό</categoryFood>
+    <categoryPasta>Μακαρόνια</categoryPasta>
+    <categoryFrenchFries>Πατάτες τηγανητές</categoryFrenchFries>
+    <categoryBread>Ψωμί</categoryBread>
+    <categoryFrenchToast>Τοστ</categoryFrenchToast>
+    <categoryYogurt>Γιαούρτι</categoryYogurt>
+    <categoryCucumber>Αγγούρι</categoryCucumber>
+    <categoryTomato>Ντομάτα</categoryTomato>
+</languageTexts>

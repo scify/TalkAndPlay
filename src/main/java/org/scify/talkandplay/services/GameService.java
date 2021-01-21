@@ -72,7 +72,7 @@ public class GameService {
             gameEl.addContent(new Element("image"));
             //TODO: change that?
             gameEl.addContent(new Element("difficulty").setText(String.valueOf(game.getImages().size())));
-            gameEl.addContent(new Element("winSound").setText(game.getWinSound()));
+            gameEl.addContent(new Element("winSound").setText(game.getWinSound().getPath()));
             gameEl.addContent(new Element("errorSound"));
 
             //add images
@@ -90,7 +90,7 @@ public class GameService {
                 }
                 if (image != null) {
                     imageEl.addContent(new Element("name"));
-                    imageEl.addContent(new Element("path").setText(image.getImage()));
+                    imageEl.addContent(new Element("path").setText(image.getImage().getPath()));
                     imageEl.addContent(new Element("order").setText(String.valueOf(image.getOrder())));
                     imageEl.addContent(new Element("enabled").setText(String.valueOf(image.isEnabled())));
 
@@ -117,8 +117,8 @@ public class GameService {
                 if (game.getName().equals(gameEl.getChildText("name"))) {
 
                     gameEl.getChild("enabled").setText(String.valueOf(game.isEnabled()));
-                    gameEl.getChild("winSound").setText(game.getWinSound());
-                    gameEl.getChild("errorSound").setText(game.getErrorSound());
+                    gameEl.getChild("winSound").setText(game.getWinSound().getPath());
+                    gameEl.getChild("errorSound").setText(game.getErrorSound().getPath());
 
                     /*  gameEl.getAttribute("image").setValue(game.getImage());
                      gameEl.getAttribute("winSound").setValue(game.getWinSound());
@@ -132,7 +132,7 @@ public class GameService {
                         Element imageEl = new Element("image");
 
                         imageEl.addContent(new Element("name"));
-                        imageEl.addContent(new Element("path").setText(game.getImages().get(j).getImage()));
+                        imageEl.addContent(new Element("path").setText(game.getImages().get(j).getImage().getPath()));
                         imageEl.addContent(new Element("order").setText(String.valueOf(game.getImages().get(j).getOrder())));
                         imageEl.addContent(new Element("enabled").setText(String.valueOf(game.getImages().get(j).isEnabled())));
 
@@ -152,8 +152,8 @@ public class GameService {
             Element gameTypeEl = profile.getChild("games").getChild(gameType.getType() + "s");
 
             if (gameTypeEl != null) {
-                gameTypeEl.getChild("winSound").setText(gameType.getWinSound());
-                gameTypeEl.getChild("errorSound").setText(gameType.getErrorSound());
+                gameTypeEl.getChild("winSound").setText(gameType.getWinSound().getPath());
+                gameTypeEl.getChild("errorSound").setText(gameType.getErrorSound().getPath());
 
                 talkAndPlayConfigurationFile.getConfigurationHandler().update();
             }

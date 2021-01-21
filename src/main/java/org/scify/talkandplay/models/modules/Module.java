@@ -15,7 +15,9 @@
 */
 package org.scify.talkandplay.models.modules;
 
-import java.net.URL;
+import org.scify.talkandplay.utils.ImageResource;
+import org.scify.talkandplay.utils.ResourceType;
+import org.scify.talkandplay.utils.SoundResource;
 
 /**
  * The Module class represents the information of an executable module (function)
@@ -31,12 +33,9 @@ import java.net.URL;
 public class Module {
 
     private String name;
-    private String image;
-    private String sound;
+    private ImageResource imageResource;
+    private SoundResource soundResource;
     private boolean enabled;
-
-    //used only to display default ImageIcons from the app jar
-    private URL imageURL;
 
     public Module() {
     }
@@ -49,20 +48,20 @@ public class Module {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
+    public ImageResource getImageResource() {
+        return imageResource;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImage(String path, ResourceType resourceType) {
+        imageResource = new ImageResource(path, resourceType);
     }
 
-    public String getSound() {
-        return sound;
+    public SoundResource getSound() {
+        return soundResource;
     }
 
-    public void setSound(String sound) {
-        this.sound = sound;
+    public void setSound(String path, ResourceType resourceType) {
+        this.soundResource = new SoundResource(path, resourceType);
     }
 
     public boolean isEnabled() {
@@ -72,13 +71,4 @@ public class Module {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-
-    public URL getImageURL() {
-        return imageURL;
-    }
-
-    public void setImageURL(URL imageURL) {
-        this.imageURL = imageURL;
-    }
-
 }

@@ -15,29 +15,33 @@
 */
 package org.scify.talkandplay.models.games;
 
+import org.scify.talkandplay.utils.ImageResource;
+import org.scify.talkandplay.utils.ResourceType;
+import org.scify.talkandplay.utils.SoundResource;
+
 /**
  *
  * @author christina
  */
 public class GameImage {
 
-    private String name;
-    private String image;
-    private String sound;
-    private int order;
-    private boolean enabled;
+    protected String name;
+    protected ImageResource imageResource;
+    protected SoundResource soundResource;
+    protected int order;
+    protected boolean enabled;
 
     public GameImage() {
     }
 
-    public GameImage(String name, String image, int order) {
-        this.name = name;
-        this.image = image;
+    public GameImage(ImageResource imageResource, boolean enabled, int order) {
+        this.imageResource = imageResource;
+        this.enabled = enabled;
         this.order = order;
     }
 
-    public GameImage(String image, boolean enabled, int order) {
-        this.image = image;
+    public GameImage(String name, boolean enabled, int order) {
+        this.name = name;
         this.enabled = enabled;
         this.order = order;
     }
@@ -50,20 +54,21 @@ public class GameImage {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
+    public ImageResource getImage() {
+        return imageResource;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImage(String path, ResourceType resourceType) {
+        
+        this.imageResource = new ImageResource(path, resourceType);
     }
 
-    public String getSound() {
-        return sound;
+    public SoundResource getSound() {
+        return soundResource;
     }
 
-    public void setSound(String sound) {
-        this.sound = sound;
+    public void setSound(String path, ResourceType resourceType) {
+        this.soundResource = new SoundResource(path, resourceType);
     }
 
     public int getOrder() {

@@ -65,7 +65,6 @@ public class XMLConfigurationHandler {
     static Logger logger = Logger.getLogger(XMLConfigurationHandler.class);
 
     public XMLConfigurationHandler() {
-
         properties = Properties.getInstance();
         configurationFilePath = properties.getApplicationDataFolder() + File.separator + "conf.xml";
         defaultUserConfigurationFilePath = properties.getApplicationFolder() + File.separator + "defaultUser.xml";
@@ -164,7 +163,6 @@ public class XMLConfigurationHandler {
 
     private User parseUserFromXml(Element userEl) {
         imageAndSoundFilePaths = new ArrayList();
-
         User user = new User(userEl.getChildText("name"), userEl.getChildText("image"));
         currentUser = user;
         if (userEl.getAttributeValue("preselected") != null) {
@@ -192,7 +190,6 @@ public class XMLConfigurationHandler {
      * Get the configuration list for a certain user
      *
      * @param configurationNode
-     * @param profile
      * @return
      * @throws Exception
      */
@@ -249,16 +246,18 @@ public class XMLConfigurationHandler {
         communicationModule.setRows(currentUser.getConfiguration().getDefaultGridRow());
         communicationModule.setColumns(currentUser.getConfiguration().getDefaultGridColumn());
 
-        if (communicationNode.getChildText("image").isEmpty()) {
-            communicationModule.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/communication_module.png"));
+        String image = communicationNode.getChildText("image");
+        if (image.isEmpty()) {
+            communicationModule.setImage("defaultImgs/communication_module.png", ResourceType.FROM_JAR);
         } else {
-            communicationModule.setImage(communicationNode.getChildText("image"));
+            communicationModule.setImage(image, ResourceType.FROM_RESOURCES);
         }
 
-        if (communicationNode.getChildText("sound").isEmpty()) {
-            communicationModule.setSound("resources/sounds/Επικοινωνία.mp3");
+        String sound = communicationNode.getChildText("sound");
+        if (sound.isEmpty()) {
+            communicationModule.setSound("sounds/communication.mp3", ResourceType.FROM_RESOURCES);
         } else {
-            communicationModule.setSound(communicationNode.getChildText("sound"));
+            communicationModule.setSound(sound, ResourceType.FROM_RESOURCES);
         }
 
         communicationModule.setEnabled("true".equals(communicationNode.getChildText("enabled")));
@@ -271,61 +270,65 @@ public class XMLConfigurationHandler {
         //set the entertainment module settings
         EntertainmentModule entertainmentModule = new EntertainmentModule();
         entertainmentModule.setName(entertainmentNode.getChildText("name"));
-        entertainmentModule.setSound(entertainmentNode.getChildText("sound"));
         entertainmentModule.setEnabled("true".equals(entertainmentNode.getChildText("enabled")));
 
-        if (entertainmentNode.getChildText("image").isEmpty()) {
-            entertainmentModule.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/entertainment_module.png"));
+        String image = entertainmentNode.getChildText("image");
+        if (image.isEmpty()) {
+            entertainmentModule.setImage("defaultImgs/entertainment_module.png", ResourceType.FROM_JAR);
         } else {
-            entertainmentModule.setImage(entertainmentNode.getChildText("image"));
+            entertainmentModule.setImage(image, ResourceType.FROM_RESOURCES);
         }
 
-        if (entertainmentNode.getChildText("sound").isEmpty()) {
-            entertainmentModule.setSound("resources/sounds/Ψυχαγωγία.mp3");
+        String sound = entertainmentNode.getChildText("sound");
+        if (sound.isEmpty()) {
+            entertainmentModule.setSound("sounds/entertainment.mp3", ResourceType.FROM_RESOURCES);
         } else {
-            entertainmentModule.setSound(entertainmentNode.getChildText("sound"));
+            entertainmentModule.setSound(sound, ResourceType.FROM_RESOURCES);
         }
 
         //set the music module
         Element musicNode = (Element) entertainmentNode.getChild("music");
         MusicModule musicModule = new MusicModule();
         musicModule.setName(musicNode.getChildText("name"));
-        musicModule.setSound(musicNode.getChildText("sound"));
+        musicModule.setSound(musicNode.getChildText("sound"), ResourceType.FROM_RESOURCES);
         musicModule.setFolderPath(musicNode.getChildText("path"));
         musicModule.setPlaylistSize(Integer.parseInt(musicNode.getChildText("playlistSize")));
         musicModule.setEnabled("true".equals(musicNode.getChildText("name")));
 
-        if (musicNode.getChildText("image").isEmpty()) {
-            musicModule.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/music_module.png"));
+        String musicImage = musicNode.getChildText("image");
+        if (musicImage.isEmpty()) {
+            musicModule.setImage("defaultImgs/music_module.png", ResourceType.FROM_JAR);
         } else {
-            musicModule.setImage(musicNode.getChildText("image"));
+            musicModule.setImage(musicImage, ResourceType.FROM_RESOURCES);
         }
 
-        if (musicNode.getChildText("sound").isEmpty()) {
-            musicModule.setSound("resources/sounds/Μουσική.mp3");
+        String musicSound = musicNode.getChildText("sound");
+        if (musicSound.isEmpty()) {
+            musicModule.setSound("sounds/music.mp3", ResourceType.FROM_RESOURCES);
         } else {
-            musicModule.setSound(musicNode.getChildText("sound"));
+            musicModule.setSound(musicSound, ResourceType.FROM_RESOURCES);
         }
 
         //set the video module
         Element videoNode = (Element) entertainmentNode.getChild("video");
         VideoModule videoModule = new VideoModule();
         videoModule.setName(videoNode.getChildText("name"));
-        videoModule.setSound(videoNode.getChildText("sound"));
         videoModule.setFolderPath(videoNode.getChildText("path"));
         videoModule.setPlaylistSize(Integer.parseInt(videoNode.getChildText("playlistSize")));
         videoModule.setEnabled("true".equals(videoNode.getChildText("name")));
 
-        if (videoNode.getChildText("image").isEmpty()) {
-            videoModule.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/video_module.png"));
+        String videoImage = videoNode.getChildText("image");
+        if (videoImage.isEmpty()) {
+            videoModule.setImage("defaultImgs/video_module.png", ResourceType.FROM_JAR);
         } else {
-            videoModule.setImage(videoNode.getChildText("image"));
+            videoModule.setImage(videoImage, ResourceType.FROM_RESOURCES);
         }
 
-        if (videoNode.getChildText("sound").isEmpty()) {
-            videoModule.setSound("resources/sounds/Βίντεο.mp3");
+        String videoSound = videoNode.getChildText("sound");
+        if (videoSound.isEmpty()) {
+            videoModule.setSound("sounds/video.mp3", ResourceType.FROM_RESOURCES);
         } else {
-            videoModule.setSound(videoNode.getChildText("sound"));
+            videoModule.setSound(videoSound, ResourceType.FROM_RESOURCES);
         }
 
         entertainmentModule.setMusicModule(musicModule);
@@ -338,85 +341,93 @@ public class XMLConfigurationHandler {
         //set the game module settings
         GameModule gameModule = new GameModule();
         gameModule.setName(gameNode.getChildText("name"));
-        gameModule.setSound(gameNode.getChildText("sound"));
         gameModule.setEnabled("true".equals(gameNode.getChildText("enabled")));
 
-        if (gameNode.getChildText("image").isEmpty()) {
-            gameModule.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/games_module.png"));
+        String image = gameNode.getChildText("image");
+        if (image.isEmpty()) {
+            gameModule.setImage("defaultImgs/games_module.png", ResourceType.FROM_JAR);
         } else {
-            gameModule.setImage(gameNode.getChildText("image"));
+            gameModule.setImage(image, ResourceType.FROM_RESOURCES);
         }
 
-        if (gameNode.getChildText("sound").isEmpty()) {
-            gameModule.setSound("resources/sounds/Παιχνίδια.mp3");
+        String sound = gameNode.getChildText("sound");
+        if (sound.isEmpty()) {
+            gameModule.setSound("sounds/games.mp3", ResourceType.FROM_RESOURCES);
         } else {
-            gameModule.setSound(gameNode.getChildText("sound"));
+            gameModule.setSound(sound, ResourceType.FROM_RESOURCES);
         }
 
         //set the stimulus reaction games
         Element stimulusReactionGamesNode = gameNode.getChild("stimulusReactionGames");
         if (stimulusReactionGamesNode != null) {
-            GameType stimulusReactionType = new GameType(stimulusReactionGamesNode.getChildText("name"),
-                    stimulusReactionGamesNode.getChildText("image"),
-                    "true".equals(stimulusReactionGamesNode.getChildText("enabled")),
-                    "stimulusReactionGame");
+            String stimulusName = stimulusReactionGamesNode.getChildText("name");
 
-            if (stimulusReactionGamesNode.getChildText("sound").isEmpty()) {
-                stimulusReactionType.setSound("resources/sounds/Ερέθισμα - Αντίδραση.mp3");
+            boolean stimulusEnabled = "true".equals(stimulusReactionGamesNode.getChildText("enabled"));
+            GameType stimulusReactionType = new GameType(stimulusName, stimulusEnabled, "stimulusReactionGame");
+
+            String stimulusSound = stimulusReactionGamesNode.getChildText("sound");
+            if (stimulusSound.isEmpty()) {
+                stimulusReactionType.setSound("sounds/stimulus_reaction.mp3", ResourceType.FROM_RESOURCES);
             } else {
-                stimulusReactionType.setSound(stimulusReactionGamesNode.getChildText("sound"));
+                stimulusReactionType.setSound(stimulusSound, ResourceType.FROM_RESOURCES);
             }
 
-            if (stimulusReactionGamesNode.getChildText("image").isEmpty()) {
-                stimulusReactionType.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/stimulus_game.png"));
+            String stimulusImage = stimulusReactionGamesNode.getChildText("image");
+            if (stimulusImage.isEmpty()) {
+                stimulusReactionType.setImage("defaultImgs/stimulus_game.png", ResourceType.FROM_JAR);
             } else {
-                stimulusReactionType.setImage(stimulusReactionGamesNode.getChildText("image"));
+                stimulusReactionType.setImage(stimulusImage, ResourceType.FROM_RESOURCES);
             }
 
-            if (stimulusReactionGamesNode.getChildText("winSound").isEmpty()) {
-                stimulusReactionType.setWinSound(null);
+            String stimulusWinSound = stimulusReactionGamesNode.getChildText("winSound");
+            if (stimulusWinSound.isEmpty()) {
+                stimulusReactionType.setWinSound("", ResourceType.MISSING);
             } else {
-                stimulusReactionType.setWinSound(stimulusReactionGamesNode.getChildText("winSound"));
+                stimulusReactionType.setWinSound(stimulusWinSound, ResourceType.FROM_RESOURCES);
             }
 
-            if (stimulusReactionGamesNode.getChildText("errorSound").isEmpty()) {
-                stimulusReactionType.setErrorSound(null);
+            String stimulusErrorSound = stimulusReactionGamesNode.getChildText("errorSound");
+            if (stimulusErrorSound.isEmpty()) {
+                stimulusReactionType.setErrorSound("", ResourceType.MISSING);
             } else {
-                stimulusReactionType.setErrorSound(stimulusReactionGamesNode.getChildText("errorSound"));
+                stimulusReactionType.setErrorSound(stimulusErrorSound, ResourceType.FROM_RESOURCES);
             }
 
-            List gamesList = stimulusReactionGamesNode.getChild("games").getChildren();
+            List<Element> gamesList = stimulusReactionGamesNode.getChild("games").getChildren();
 
             for (int i = 0; i < gamesList.size(); i++) {
-                StimulusReactionGame game = new StimulusReactionGame(((Element) gamesList.get(i)).getChildText("name"),
-                        "true".equals(((Element) gamesList.get(i)).getChildText("enabled")),
-                        Integer.parseInt(((Element) gamesList.get(i)).getChildText("difficulty")));
+                Element e = gamesList.get(i);
+                String name = e.getChildText("name");
+                boolean enabled = "true".equals(e.getChildText("enabled"));
+                int difficulty = Integer.parseInt(e.getChildText("difficulty"));
+                StimulusReactionGame game = new StimulusReactionGame(name, enabled, difficulty);
 
-                if (((Element) gamesList.get(i)).getChildText("winSound") == null || ((Element) gamesList.get(i)).getChildText("winSound").isEmpty()) {
-                    game.setWinSound(null);
+
+                String winSound = e.getChildText("winSound");
+                if (winSound == null || winSound.isEmpty()) {
+                    game.setWinSound("sounds/win.mp3", ResourceType.FROM_JAR);
                 } else {
-                    game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
+                    game.setWinSound(winSound, ResourceType.FROM_RESOURCES);
                 }
 
-                if (((Element) gamesList.get(i)).getChildText("errorSound") == null || ((Element) gamesList.get(i)).getChildText("errorSound").isEmpty()) {
-                    game.setErrorSound(null);
+                String errorSound = e.getChildText("errorSound");
+                if (errorSound == null || errorSound.isEmpty()) {
+                    game.setErrorSound("sounds/error.mp3", ResourceType.FROM_JAR);
                 } else {
-                    game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
+                    game.setErrorSound(errorSound, ResourceType.FROM_RESOURCES);
                 }
 
-                if (((Element) gamesList.get(i)).getChildText("image").isEmpty()) {
-                    game.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/stimulus_game.png"));
+                String gameImage = e.getChildText("image");
+                if (gameImage.isEmpty()) {
+                    game.setImage("defaultImgs/stimulus_game.png", ResourceType.FROM_JAR);
                 } else {
-                    game.setImage(((Element) gamesList.get(i)).getChildText("image"));
+                    game.setImage(gameImage, ResourceType.FROM_RESOURCES);
                 }
 
-                List imagesList = ((Element) gamesList.get(i)).getChild("gameImages").getChildren();
+                List<Element> imagesList = e.getChild("gameImages").getChildren();
 
                 for (int j = 0; j < imagesList.size(); j++) {
-                    GameImage image = new GameImage(((Element) imagesList.get(j)).getChildText("path"),
-                            "true".equals(((Element) imagesList.get(j)).getChildText("enabled")),
-                            Integer.parseInt(((Element) imagesList.get(j)).getChildText("order")));
-                    game.getImages().add(image);
+                    game.getImages().add(extractGameImage(imagesList.get(j)));
                 }
 
                 game.setEnabledImages();
@@ -435,67 +446,72 @@ public class XMLConfigurationHandler {
         //set the sequence games
         Element sequenceGamesNode = gameNode.getChild("sequenceGames");
         if (sequenceGamesNode != null) {
-            GameType sequenceGameType = new GameType(sequenceGamesNode.getChildText("name"),
-                    sequenceGamesNode.getChildText("image"),
-                    "true".equals(sequenceGamesNode.getChildText("enabled")),
-                    "sequenceGame");
+            String sequenceGamesName = sequenceGamesNode.getChildText("name");
+            boolean enabled = "true".equals(sequenceGamesNode.getChildText("enabled"));
+            GameType sequenceGameType = new GameType(sequenceGamesName, enabled, "sequenceGame");
 
-            if (sequenceGamesNode.getChildText("sound").isEmpty()) {
-                sequenceGameType.setSound("resources/sounds/Χρονικής Αλληλουχίας.mp3");
+            String sequenceGamesSound = sequenceGamesNode.getChildText("sound");
+            if (sequenceGamesSound.isEmpty()) {
+                sequenceGameType.setSound("sounds/time_sequence.mp3", ResourceType.FROM_RESOURCES);
             } else {
-                sequenceGameType.setSound(sequenceGamesNode.getChildText("sound"));
+                sequenceGameType.setSound(sequenceGamesSound, ResourceType.FROM_RESOURCES);
             }
 
-            if (sequenceGamesNode.getChildText("image").isEmpty()) {
-                sequenceGameType.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/sequence_game.png"));
+            String sequenceGamesImage = sequenceGamesNode.getChildText("image");
+            if (sequenceGamesImage.isEmpty()) {
+                sequenceGameType.setImage("defaultImgs/sequence_game.png", ResourceType.FROM_JAR);
             } else {
-                sequenceGameType.setImage(sequenceGamesNode.getChildText("image"));
+                sequenceGameType.setImage(sequenceGamesImage, ResourceType.FROM_RESOURCES);
             }
 
-            if (sequenceGamesNode.getChildText("winSound").isEmpty()) {
-                sequenceGameType.setWinSound(null);
+            String winSound = sequenceGamesNode.getChildText("winSound");
+            if (winSound.isEmpty()) {
+                sequenceGameType.setWinSound("", ResourceType.MISSING);
             } else {
-                sequenceGameType.setWinSound(sequenceGamesNode.getChildText("winSound"));
+                sequenceGameType.setWinSound(winSound, ResourceType.FROM_RESOURCES);
             }
 
-            if (sequenceGamesNode.getChildText("errorSound").isEmpty()) {
-                sequenceGameType.setErrorSound(null);
+            String errorSound = sequenceGamesNode.getChildText("errorSound");
+            if (errorSound.isEmpty()) {
+                sequenceGameType.setErrorSound("", ResourceType.MISSING);
             } else {
-                sequenceGameType.setErrorSound(sequenceGamesNode.getChildText("errorSound"));
+                sequenceGameType.setErrorSound(errorSound, ResourceType.FROM_RESOURCES);
             }
 
             List gamesList = sequenceGamesNode.getChild("games").getChildren();
 
             for (int i = 0; i < gamesList.size(); i++) {
-                SequenceGame game = new SequenceGame(((Element) gamesList.get(i)).getChildText("name"),
-                        "true".equals(((Element) gamesList.get(i)).getChildText("enabled")),
-                        Integer.parseInt(((Element) gamesList.get(i)).getChildText("difficulty")));
+                Element e = (Element) gamesList.get(i);
+                String name = e.getChildText("name");
+                enabled = "true".equals(e.getChildText("enabled"));
+                int difficulty = Integer.parseInt(e.getChildText("difficulty"));
+                SequenceGame game = new SequenceGame(name, enabled, difficulty);
 
-                if (((Element) gamesList.get(i)).getChildText("winSound") == null || ((Element) gamesList.get(i)).getChildText("winSound").isEmpty()) {
-                    game.setWinSound(null);
+                winSound = e.getChildText("winSound");
+                if (winSound == null || winSound.isEmpty()) {
+                    game.setWinSound("sounds/win.mp3", ResourceType.FROM_JAR);
                 } else {
-                    game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
+                    game.setWinSound(winSound, ResourceType.FROM_RESOURCES);
                 }
 
-                if (((Element) gamesList.get(i)).getChildText("errorSound") == null || ((Element) gamesList.get(i)).getChildText("errorSound").isEmpty()) {
-                    game.setErrorSound(null);
+                errorSound = e.getChildText("errorSound");
+                if (errorSound == null || errorSound.isEmpty()) {
+                    game.setErrorSound("error/win.mp3", ResourceType.FROM_JAR);
                 } else {
-                    game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
+                    game.setErrorSound(errorSound, ResourceType.FROM_RESOURCES);
                 }
 
-                if (((Element) gamesList.get(i)).getChildText("image").isEmpty()) {
-                    game.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/sequence_game.png"));
+                image = e.getChildText("image");
+                if (image.isEmpty()) {
+                    game.setImage("defaultImgs/sequence_game.png", ResourceType.FROM_JAR);
                 } else {
-                    game.setImage(((Element) gamesList.get(i)).getChildText("image"));
+                    game.setImage(image, ResourceType.FROM_RESOURCES);
                 }
 
-                List imagesList = ((Element) gamesList.get(i)).getChild("gameImages").getChildren();
+                List<Element> imagesList = e.getChild("gameImages").getChildren();
 
                 for (int j = 0; j < imagesList.size(); j++) {
-                    GameImage image = new GameImage(((Element) imagesList.get(j)).getChildText("path"),
-                            "true".equals(((Element) imagesList.get(j)).getChildText("enabled")),
-                            Integer.parseInt(((Element) imagesList.get(j)).getChildText("order")));
-                    game.getImages().add(image);
+                    game.getImages().add(extractGameImage(imagesList.get(j)));
                 }
                 game.setEnabledImages();
                 sequenceGameType.getGames().add(game);
@@ -512,67 +528,73 @@ public class XMLConfigurationHandler {
         //set the similar games
         Element similarGamesNode = gameNode.getChild("similarityGames");
         if (similarGamesNode != null) {
-            GameType similarityGameType = new GameType(similarGamesNode.getChildText("name"),
-                    similarGamesNode.getChildText("image"),
-                    "true".equals(similarGamesNode.getChildText("enabled")),
-                    "similarityGame");
+            String name = similarGamesNode.getChildText("name");
+            boolean enabled = "true".equals(similarGamesNode.getChildText("enabled"));
+            GameType similarityGameType = new GameType(name, enabled, "similarityGame");
 
-            if (similarGamesNode.getChildText("sound").isEmpty()) {
-                similarityGameType.setSound("resources/sounds/Βρες το όμοιο.mp3");
+            String similarGamesSound = similarGamesNode.getChildText("sound");
+            if (similarGamesSound.isEmpty()) {
+                similarityGameType.setSound("sounds/find_the_similar.mp3", ResourceType.FROM_RESOURCES);
             } else {
-                similarityGameType.setSound(similarGamesNode.getChildText("sound"));
+                similarityGameType.setSound(similarGamesSound, ResourceType.FROM_RESOURCES);
             }
 
-            if (similarGamesNode.getChildText("image").isEmpty()) {
-                similarityGameType.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/similarity_game.png"));
+            String similarGamesImage = similarGamesNode.getChildText("image");
+            if (similarGamesImage.isEmpty()) {
+                similarityGameType.setImage("defaultImgs/similarity_game.png", ResourceType.FROM_JAR);
             } else {
-                similarityGameType.setImage(similarGamesNode.getChildText("image"));
+                similarityGameType.setImage(similarGamesImage, ResourceType.FROM_RESOURCES);
             }
 
-            if (similarGamesNode.getChildText("winSound").isEmpty()) {
-                similarityGameType.setWinSound(null);
+            String winSound = similarGamesNode.getChildText("winSound");
+            if (winSound == null || winSound.isEmpty()) {
+                similarityGameType.setWinSound("", ResourceType.MISSING);
             } else {
-                similarityGameType.setWinSound(similarGamesNode.getChildText("winSound"));
+                similarityGameType.setWinSound(winSound, ResourceType.FROM_RESOURCES);
             }
 
-            if (similarGamesNode.getChildText("errorSound").isEmpty()) {
-                similarityGameType.setErrorSound(null);
+            String errorSound = similarGamesNode.getChildText("errorSound");
+            if (errorSound == null || errorSound.isEmpty()) {
+                similarityGameType.setErrorSound("", ResourceType.MISSING);
             } else {
-                similarityGameType.setErrorSound(similarGamesNode.getChildText("errorSound"));
+                similarityGameType.setErrorSound(errorSound, ResourceType.FROM_RESOURCES);
             }
 
-            List gamesList = similarGamesNode.getChild("games").getChildren();
+
+            List<Element> gamesList = similarGamesNode.getChild("games").getChildren();
 
             for (int i = 0; i < gamesList.size(); i++) {
-                SimilarityGame game = new SimilarityGame(((Element) gamesList.get(i)).getChildText("name"),
-                        "true".equals(((Element) gamesList.get(i)).getChildText("enabled")),
-                        Integer.parseInt(((Element) gamesList.get(i)).getChildText("difficulty")));
+                Element e = gamesList.get(i);
+                name = e.getChildText("name");
+                enabled = "true".equals(e.getChildText("enabled"));
+                int difficulty = Integer.parseInt(e.getChildText("difficulty"));
+                SimilarityGame game = new SimilarityGame(name, enabled, difficulty);
 
-                if (((Element) gamesList.get(i)).getChildText("winSound") == null || ((Element) gamesList.get(i)).getChildText("winSound").isEmpty()) {
-                    game.setWinSound(null);
+                winSound = e.getChildText("winSound");
+                if (winSound == null || winSound.isEmpty()) {
+                    game.setWinSound("sounds/win.mp3", ResourceType.FROM_JAR);
                 } else {
-                    game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
+                    game.setWinSound(winSound, ResourceType.FROM_RESOURCES);
                 }
 
-                if (((Element) gamesList.get(i)).getChildText("errorSound") == null || ((Element) gamesList.get(i)).getChildText("errorSound").isEmpty()) {
-                    game.setErrorSound(null);
+                errorSound = e.getChildText("errorSound");
+                if (errorSound == null || errorSound.isEmpty()) {
+                    game.setErrorSound("error/win.mp3", ResourceType.FROM_JAR);
                 } else {
-                    game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
+                    game.setErrorSound(errorSound, ResourceType.FROM_RESOURCES);
                 }
 
-                if (((Element) gamesList.get(i)).getChildText("image").isEmpty()) {
-                    game.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/similarity_game.png"));
+                String gameImage = e.getChildText("image");
+                if (gameImage.isEmpty()) {
+                    game.setImage("defaultImgs/similarity_game.png", ResourceType.FROM_JAR);
                 } else {
-                    game.setImage(((Element) gamesList.get(i)).getChildText("image"));
+                    game.setImage(gameImage, ResourceType.FROM_RESOURCES);
                 }
 
-                List imagesList = ((Element) gamesList.get(i)).getChild("gameImages").getChildren();
+                List<Element> imagesList = e.getChild("gameImages").getChildren();
 
                 for (int j = 0; j < imagesList.size(); j++) {
-                    GameImage image = new GameImage(((Element) imagesList.get(j)).getChildText("path"),
-                            "true".equals(((Element) imagesList.get(j)).getChildText("enabled")),
-                            Integer.parseInt(((Element) imagesList.get(j)).getChildText("order")));
-                    game.getImages().add(image);
+                    game.getImages().add(extractGameImage(imagesList.get(j)));
                 }
                 game.setEnabledImages();
                 similarityGameType.getGames().add(game);
@@ -742,4 +764,11 @@ public class XMLConfigurationHandler {
                 new FileOutputStream(new File(configurationFilePath)), "UTF-8"));
     }
 
+    protected GameImage extractGameImage(Element element) {
+        String path = element.getChildText("path");
+        ImageResource imageResource = new ImageResource(path, ResourceType.FROM_RESOURCES);
+        boolean enabled = "true".equals(element.getChildText("enabled"));
+        int order = Integer.parseInt(element.getChildText("order"));
+        return new GameImage(imageResource, enabled, order);
+    }
 }

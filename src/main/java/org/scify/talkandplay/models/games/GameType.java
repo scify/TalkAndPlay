@@ -15,6 +15,10 @@
 */
 package org.scify.talkandplay.models.games;
 
+import org.scify.talkandplay.utils.ImageResource;
+import org.scify.talkandplay.utils.ResourceType;
+import org.scify.talkandplay.utils.SoundResource;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,28 +29,24 @@ import java.util.List;
  */
 public class GameType {
 
-    private String name;
-    private String image;
-    private String sound;
-    private String type;
-    private String winSound;
-    private String errorSound;
-    private boolean enabled;
+    protected String name;
+    protected ImageResource imageResource;
+    protected SoundResource soundResource;
+    protected String type;
+    protected SoundResource winSoundResource;
+    protected SoundResource errorSoundResource;
+    protected boolean enabled;
 
-    //used only to display default ImageIcons from the app jar
-    private URL imageURL;
-
-    private List<Game> games;
-    private List<Game> enabledGames;
+    protected List<Game> games;
+    protected List<Game> enabledGames;
 
     public GameType() {
         this.games = new ArrayList();
         this.enabledGames = new ArrayList();
     }
 
-    public GameType(String name, String image, boolean enabled, String type) {
+    public GameType(String name, boolean enabled, String type) {
         this.name = name;
-        this.image = image;
         this.enabled = enabled;
         this.type = type;
         this.games = new ArrayList();
@@ -61,20 +61,21 @@ public class GameType {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
+    public ImageResource getImage() {
+        return imageResource;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImage(String path, ResourceType resourceType) {
+
+        this.imageResource = new ImageResource(path, resourceType);
     }
 
-    public String getSound() {
-        return sound;
+    public SoundResource getSound() {
+        return soundResource;
     }
 
-    public void setSound(String sound) {
-        this.sound = sound;
+    public void setSound(String path, ResourceType resourceType) {
+        this.soundResource = new SoundResource(path, resourceType);
     }
 
     public boolean isEnabled() {
@@ -105,28 +106,20 @@ public class GameType {
         return enabledGames;
     }
 
-    public URL getImageURL() {
-        return imageURL;
+    public SoundResource getWinSound() {
+        return winSoundResource;
     }
 
-    public void setImageURL(URL imageURL) {
-        this.imageURL = imageURL;
+    public void setWinSound(String path, ResourceType resourceType) {
+        this.winSoundResource = new SoundResource(path, resourceType);
     }
 
-    public String getWinSound() {
-        return winSound;
+    public SoundResource getErrorSound() {
+        return errorSoundResource;
     }
 
-    public void setWinSound(String winSound) {
-        this.winSound = winSound;
-    }
-
-    public String getErrorSound() {
-        return errorSound;
-    }
-
-    public void setErrorSound(String errorSound) {
-        this.errorSound = errorSound;
+    public void setErrorSound(String path, ResourceType resourceType) {
+        this.errorSoundResource = new SoundResource(path, resourceType);
     }
 
 }

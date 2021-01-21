@@ -27,6 +27,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.utils.Properties;
+import org.scify.talkandplay.utils.ResourceManager;
 import org.scify.talkandplay.utils.Updater;
 
 public class ApplicationLauncher {

@@ -35,6 +35,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.games.Game;
 import org.scify.talkandplay.models.games.GameImage;
+import org.scify.talkandplay.utils.ImageResource;
+import org.scify.talkandplay.utils.ResourceManager;
+import org.scify.talkandplay.utils.ResourceType;
 
 /**
  *
@@ -48,7 +51,7 @@ public class GamePanel extends javax.swing.JPanel {
     private List<JLabel> imgLabels;
     private List<JCheckBox> imgCheckboxes;
     private ImageIcon defaultIcon, addSoundIcon, soundIcon, addIconHover, soundIconHover;
-
+    protected ResourceManager rm;
     private Font activeFont, inactiveFont;
 
     public GamePanel(Game game, GamesTab parent) {
@@ -56,18 +59,18 @@ public class GamePanel extends javax.swing.JPanel {
         this.parent = parent;
         this.imgLabels = new ArrayList();
         this.imgCheckboxes = new ArrayList();
-
+        this.rm = ResourceManager.getInstance();
         initComponents();
         initCustomComponents();
     }
 
     private void initCustomComponents() {
 
-        defaultIcon = new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/no-photo.png")).getImage().getScaledInstance(90, 90, Image.SCALE_DEFAULT));
-        addSoundIcon = new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
-        soundIcon = new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
-        addIconHover=new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
-        soundIconHover=new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+        defaultIcon = new ImageIcon(rm.getImage("no-photo.png", ResourceType.FROM_JAR).getScaledInstance(90, 90, Image.SCALE_DEFAULT));
+        addSoundIcon = new ImageIcon(rm.getImage("add-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+        soundIcon = new ImageIcon(rm.getImage("sound-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+        addIconHover=new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+        soundIconHover=new ImageIcon(rm.getImage("sound-icon-hover.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH));
         
         imgLabels.add(img1Label);
         imgLabels.add(img2Label);
@@ -104,7 +107,7 @@ public class GamePanel extends javax.swing.JPanel {
         soundLabel.setHorizontalTextPosition(JLabel.CENTER);
         soundLabel.setVerticalTextPosition(JLabel.BOTTOM);
 
-        if (game.getWinSound() == null || game.getWinSound().isEmpty()) {
+        if (game.getWinSound().getResourceType() == ResourceType.MISSING) {
             soundLabel.setIcon(addSoundIcon);
             soundLabel.setText("Προσθήκη ήχου");
             removeSoundLabel.setVisible(false);
@@ -135,12 +138,12 @@ public class GamePanel extends javax.swing.JPanel {
         setSoundListener();
     }
 
-    private void setImageIcon(JLabel label, String path) {
-
-        if (path == null || path.isEmpty() || !new File(path).exists()) {
+    private void setImageIcon(JLabel label, ImageResource image) {
+        ImageIcon imageIcon = rm.getImageIcon(image);
+        if (imageIcon == null) {
             label.setIcon(defaultIcon);
         } else {
-            label.setIcon(new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH)));
+            label.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH)));
         }
     }
 

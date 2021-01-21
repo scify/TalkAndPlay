@@ -1,18 +1,18 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -25,6 +25,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -32,6 +33,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
+
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.selectors.ManualTileSelector;
 import org.scify.talkandplay.gui.grid.tiles.TileCreator;
@@ -47,6 +49,9 @@ import org.scify.talkandplay.models.games.SequenceGame;
 import org.scify.talkandplay.models.games.SimilarityGame;
 import org.scify.talkandplay.models.games.StimulusReactionGame;
 import org.scify.talkandplay.models.sensors.MouseSensor;
+import org.scify.talkandplay.utils.ResourceManager;
+import org.scify.talkandplay.utils.ResourceType;
+import org.scify.talkandplay.utils.SoundResource;
 
 public class BaseGamePanel extends javax.swing.JPanel {
 
@@ -62,6 +67,7 @@ public class BaseGamePanel extends javax.swing.JPanel {
     protected List<GameImage> randomImages;
     protected ArrayList<JPanel> panelList;
     protected String previousGame;
+    protected ResourceManager rm;
 
     public BaseGamePanel(User user, GridFrame parent, String type, Game game, String previousGame) {
         this.user = user;
@@ -69,6 +75,7 @@ public class BaseGamePanel extends javax.swing.JPanel {
         this.type = type;
         this.game = game;
         this.previousGame = previousGame;
+        this.rm = ResourceManager.getInstance();
 
         if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
             this.selector = new MouseSelector(panelList, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
@@ -177,21 +184,17 @@ public class BaseGamePanel extends javax.swing.JPanel {
      * @return
      */
     protected String getWinSound() {
-        String sound = null;
-
-        if (game.getWinSound() != null && !game.getWinSound().isEmpty()) {
-            sound = game.getWinSound();
+        File soundFile = rm.getSound("sounds/games/winSound.mp3", ResourceType.FROM_RESOURCES);
+        if (game.getWinSound().getResourceType() != ResourceType.MISSING) {
+            soundFile = rm.getSound(game.getWinSound().getPath(), game.getWinSound().getResourceType());
         } else {
             for (GameType gameType : user.getGameModule().getGameTypes()) {
-                if (type.equals(gameType.getType()) && gameType.getWinSound() != null && !gameType.getWinSound().isEmpty()) {
-                    sound = gameType.getWinSound();
+                if (type.equals(gameType.getType()) && gameType.getWinSound().getResourceType() != ResourceType.MISSING) {
+                    soundFile = rm.getSound(game.getWinSound().getPath(), game.getWinSound().getResourceType());
                 }
             }
         }
-        if (sound == null) {
-            sound = "resources/sounds/games/winSound.mp3";
-        }
-        return sound;
+        return soundFile.getAbsolutePath();
     }
 
     /**
@@ -200,18 +203,13 @@ public class BaseGamePanel extends javax.swing.JPanel {
      * @return
      */
     protected String getErrorSound() {
-        String sound = null;
-
+        File soundFile = rm.getSound("sounds/games/errorSound.mp3", ResourceType.FROM_RESOURCES);
         for (GameType gameType : user.getGameModule().getGameTypes()) {
-            if (type.equals(gameType.getType()) && gameType.getErrorSound() != null && !gameType.getErrorSound().isEmpty()) {
-                sound = gameType.getErrorSound();
+            if (type.equals(gameType.getType()) && gameType.getErrorSound().getResourceType() != ResourceType.MISSING) {
+                soundFile = rm.getSound(gameType.getErrorSound().getPath(), gameType.getErrorSound().getResourceType());
             }
         }
-
-        if (sound == null) {
-            sound = "resources/sounds/games/errorSound.mp3";
-        }
-        return sound;
+        return soundFile.getAbsolutePath();
     }
 
     /**
@@ -226,12 +224,12 @@ public class BaseGamePanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

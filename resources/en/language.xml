@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<languageTexts>
+    <language>English</language>
+    <vlcMissingMessage>Please first install VLC and try again</vlcMissingMessage>
+    <createdBy>Created by</createdBy>
+    <donationBy>Exclusive donation</donationBy>
+    <addUser>Add user</addUser>
+    <loadUser>Load user</loadUser>
+    <chooseFile>Choose a file</chooseFile>
+    <preferences>PREFERENCES</preferences>
+    <delete>DELETE</delete>
+    <filesNotFound>Some files could not be found</filesNotFound>
+    <userDeleteConfirmation>Are you sure that you wish to delete this user?</userDeleteConfirmation>
+    <defaultUserName>User</defaultUserName>
+    <communicationName>Communication</communicationName>
+    <entertainmentName>Entertainment</entertainmentName>
+    <gamesName>Games</gamesName>
+    <categoryYes>Yes</categoryYes>
+    <categoryNo>No</categoryNo>
+    <categoryFood>Food</categoryFood>
+    <categoryPasta>Pasta</categoryPasta>
+    <categoryFrenchFries>French fries</categoryFrenchFries>
+    <categoryBread>Bread</categoryBread>
+    <categoryFrenchToast>French toast</categoryFrenchToast>
+    <categoryYogurt>Yogurt</categoryYogurt>
+    <categoryTomato>Tomato</categoryTomato>
+</languageTexts>
+
