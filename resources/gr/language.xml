@@ -4,6 +4,10 @@
     <vlcMissingMessage>Εγκατέστησε το VLC και δοκίμασε ξανά</vlcMissingMessage>
     <createdBy>Δημιουργήθηκε από τη</createdBy>
     <donationBy>Αποκλειστική δωρεά</donationBy>
+    <updateInProgress1>Γίνεται ενημέρωση της εφαρμογής</updateInProgress1>
+    <updateInProgress2>παρακαλώ περιμένετε...</updateInProgress2>
+    <updateInProgress3>Η διαδικασία μπορεί να διαρκέσει μερικά λεπτά.</updateInProgress3>
+    <updateInProgress4>Mε την ολοκλήρωση θα χρειαστεί να ανοίξετε την εφαρμογή ξανά.</updateInProgress4>
     <addUser>Πρόσθεσε νέο χρήστη</addUser>
     <loadUser>Φόρτωσε χρήστη</loadUser>
     <chooseFile>Επίλεξε αρχείο</chooseFile>
@@ -14,12 +18,58 @@
     <defaultUserName>Χρήστης</defaultUserName>
     <communicationName>Επικοινωνία</communicationName>
     <entertainmentName>Ψυχαγωγία</entertainmentName>
+    <musicName>Μουσική</musicName>
+    <previousSongs>Προηγούμενα τραγούδια</previousSongs>
+    <nextSongs>Επόμενα τραγούδια</nextSongs>
+    <musicControl>Χειριστήριο μουσικής</musicControl>
+    <playingNow>ΠΑΙΖΕΙ ΤΩΡΑ</playingNow>
+    <previousControl>Προηγούμενο</previousControl>
+    <nextControl>Επόμενο</nextControl>
+    <playControl>Αναπαραγωγή</playControl>
+    <pauseControl>Παύση</pauseControl>
+    <playingListControl>Λίστα</playingListControl>
+    <fullScreenControl>Πλήρης Οθόνη</fullScreenControl>
+    <exitControl>Έξοδος</exitControl>
+    <videoName>Βίντεο</videoName>
+    <previousVideos>Προηγούμενα video</previousVideos>
+    <nextVideos>Επόμενα video</nextVideos>
     <gamesName>Παιχνίδια</gamesName>
+    <addNewSound>Προσθήκη ήχου</addNewSound>
+    <selectImage>Διάλεξε εικόνα</selectImage>
+    <selectSound>Διάλεξε ήχο</selectSound>
+    <noFilesFound>Δεν υπάρχουν αρχεία</noFilesFound>
+    <noGamesInCategory>Δεν υπάρχουν παιχνίδια σε αυτή την κατηγορία</noGamesInCategory>
+    <noGames>Δεν υπάρχουν παιχνίδια</noGames>
+    <pleaseCreateNewGame>Παρακαλώ δημιουργείστε ένα παιχνίδι για να το προσθέσετε</pleaseCreateNewGame>
+    <chooseGame>[-- Επίλεξε παιχνίδι --]</chooseGame>
+    <stimulusReaction>Ερέθισμα - Αντίδραση</stimulusReaction>
+    <timeSequence>Χρονική αλληλουχία</timeSequence>
+    <findSimilar>Βρες το όμοιο</findSimilar>
+    <pressTheButtonOnTheSimilar>Πάτα το κουμπί πάνω στο όμοιο!</pressTheButtonOnTheSimilar>
+    <changesSaved>Οι αλλαγές αποθηκεύτηκαν!</changesSaved>
+    <chooseWord>[-- Επίλεξε λέξη --]</chooseWord>
+    <word>Λέξη</word>
+    <addNewWord>ΠΡΟΣΘΗΚΗ ΝΕΑΣ ΛΕΞΗΣ</addNewWord>
+    <editWord>ΕΠΕΞΕΡΓΑΣΙΑ ΛΕΞΗΣ</editWord>
+    <wordMustNotBeEmpty>Η λέξη δεν πρέπει να είναι κενή</wordMustNotBeEmpty>
+    <wordMustBeUnique>Η λέξη πρέπει να είναι μοναδική</wordMustBeUnique>
+    <wordMustHaveImage>Η λέξη πρέπει να έχει εικόνα</wordMustHaveImage>
+    <wordMustBelongToAnotherWord>Η λέξη πρέπει να ανήκει σε κάποια άλλη λέξη</wordMustBelongToAnotherWord>
+    <wordWasSaved>Η λέξη αποθηκεύτηκε!</wordWasSaved>
+    <back>Πίσω</back>
+    <more>Περισσότερα</more>
+    <pressTheButton>Πάτα το κουμπί!</pressTheButton>
+    <pressTheButtonToStart>Πάτα το κουμπί για να ξεκινήσεις!</pressTheButtonToStart>
+    <sequenceGameInfo>Βάλε στη σωστή σειρά τις κάρτες.</sequenceGameInfo>
     <categoryYes>Ναι</categoryYes>
     <categoryNo>Όχι</categoryNo>
     <categoryFood>Φαγητό</categoryFood>
     <categoryPasta>Μακαρόνια</categoryPasta>
     <categoryFrenchFries>Πατάτες τηγανητές</categoryFrenchFries>
+    <categoryBurger>Μπιφτέκι</categoryBurger>
+    <categorySteak>Μπριζόλα</categorySteak>
+    <categoryChicken>Κοτόπουλο</categoryChicken>
+    <categorySoup>Σούπα</categorySoup>
     <categoryBread>Ψωμί</categoryBread>
     <categoryFrenchToast>Τοστ</categoryFrenchToast>
     <categoryYogurt>Γιαούρτι</categoryYogurt>

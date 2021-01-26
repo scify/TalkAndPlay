@@ -30,6 +30,8 @@ import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.games.GameImage;
 import org.scify.talkandplay.models.games.GameType;
 import org.scify.talkandplay.models.games.StimulusReactionGame;
+import org.scify.talkandplay.utils.ResourceType;
+import org.scify.talkandplay.utils.SoundResource;
 
 public class StimulusReactionGamePanel extends BaseGridPanel {
 
@@ -186,7 +188,7 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
 
     private void congratulate(GameImage image) {
 
-        tileCreator.playAudio(getWinSound());
+        tileCreator.playAudio(getWinSound().getSound().getAbsolutePath());
 
         JPanel finalImage = tileCreator.create("",
                 image.getImage(),
@@ -244,20 +246,20 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
         parent.addGrid(gamesPanel);
     }
 
-    protected String getWinSound() {
-        String sound = null;
+    protected SoundResource getWinSound() {
+        SoundResource sound = null;
 
-        if (game.getWinSound() != null && !game.getWinSound().isEmpty()) {
+        if (game.getWinSound() != null && game.getWinSound().getResourceType() != ResourceType.MISSING) {
             sound = game.getWinSound();
         } else {
             for (GameType gameType : user.getGameModule().getGameTypes()) {
-                if ("stimulusReactionGame".equals(gameType.getType()) && gameType.getWinSound() != null && !gameType.getWinSound().isEmpty()) {
+                if ("stimulusReactionGame".equals(gameType.getType()) && gameType.getWinSound() != null && gameType.getWinSound().getResourceType() != ResourceType.MISSING) {
                     sound = gameType.getWinSound();
                 }
             }
         }
         if (sound == null) {
-            sound = "resources/sounds/games/winSound.mp3";
+            sound = new SoundResource("sounds/games/winSound.mp3", ResourceType.FROM_RESOURCES);
         }
         return sound;
     }

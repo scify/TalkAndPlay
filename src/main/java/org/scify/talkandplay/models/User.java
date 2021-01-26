@@ -18,6 +18,7 @@ package org.scify.talkandplay.models;
 import org.scify.talkandplay.models.modules.CommunicationModule;
 import org.scify.talkandplay.models.modules.EntertainmentModule;
 import org.scify.talkandplay.models.modules.GameModule;
+import org.scify.talkandplay.utils.ResourceManager;
 
 public class User {
 
@@ -29,26 +30,30 @@ public class User {
     private CommunicationModule communicationModule;
     private EntertainmentModule entertainmentModule;
     private GameModule gameModule;
+    private ResourceManager rm;
 
     public User() {
         configuration = new Configuration();
         communicationModule = new CommunicationModule();
         entertainmentModule = new EntertainmentModule();
         gameModule = new GameModule();
+        rm = ResourceManager.getInstance();
     }
 
     public User(String name) {
         this.name = name;
+        rm = ResourceManager.getInstance();
     }
 
     public User(String name, String image) {
         this.name = name;
         this.image = image;
         configuration = new Configuration();
+        rm = ResourceManager.getInstance();
     }
 
     public String getName() {
-        return name;
+        return rm.decodeTextIfRequired(name);
     }
 
     public void setName(String name) {

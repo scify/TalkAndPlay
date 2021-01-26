@@ -21,6 +21,7 @@ public class EntertainmentModule extends Module {
     private VideoModule videoModule;
 
     public EntertainmentModule() {
+        super();
     }
 
     public MusicModule getMusicModule() {

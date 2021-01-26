@@ -25,6 +25,7 @@ public class CommunicationModule extends Module {
     private List<Category> categories;
 
     public CommunicationModule() {
+        super();
     }
 
     public int getRows() {

@@ -21,6 +21,7 @@ public class VideoModule extends Module {
     private int playlistSize;
 
     public VideoModule() {
+        super();
     }
 
     public String getFolderPath() {

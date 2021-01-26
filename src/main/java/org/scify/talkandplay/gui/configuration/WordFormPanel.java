@@ -1,18 +1,18 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.scify.talkandplay.gui.configuration;
 
 import java.awt.Color;
@@ -33,12 +33,17 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.CategoryService;
 import org.scify.talkandplay.services.UserService;
+import org.scify.talkandplay.utils.ImageResource;
+import org.scify.talkandplay.utils.ResourceManager;
+import org.scify.talkandplay.utils.ResourceType;
+import org.scify.talkandplay.utils.SoundResource;
 import uk.co.caprica.vlcj.player.component.AudioPlayerComponent;
 
 public class WordFormPanel extends javax.swing.JPanel {
@@ -47,24 +52,26 @@ public class WordFormPanel extends javax.swing.JPanel {
     private User user;
     private Category category;
     private List<String> categories;
-    private String imagePath, soundPath;
+    private ImageResource imageResource;
+    private SoundResource soundResource;
     private CategoryService categoryService;
     private UserService userService;
     private ConfigurationPanel parent;
     private AudioPlayerComponent audioPlayer;
     private File currentDirectory;
+    protected ResourceManager rm;
 
     public WordFormPanel(User user, Category category, ConfigurationPanel parent) {
         this.guiHelper = new GuiHelper();
         this.user = user;
-        this.imagePath = null;
-        this.soundPath = null;
+        this.imageResource = null;
+        this.soundResource = null;
         this.categoryService = new CategoryService();
         this.userService = new UserService();
         this.category = category;
         this.parent = parent;
         this.audioPlayer = new AudioPlayerComponent();
-
+        this.rm = ResourceManager.getInstance();
         initComponents();
         initCustomComponents();
     }
@@ -185,47 +192,47 @@ public class WordFormPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout editStepsPanelLayout = new javax.swing.GroupLayout(editStepsPanel);
         editStepsPanel.setLayout(editStepsPanelLayout);
         editStepsPanelLayout.setHorizontalGroup(
-            editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(editStepsPanelLayout.createSequentialGroup()
-                .addGroup(editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(editStepsPanelLayout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addGroup(editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(editStepsPanelLayout.createSequentialGroup()
-                                .addComponent(rowsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(xLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(columnsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(editStepsPanelLayout.createSequentialGroup()
-                                .addComponent(soundCheckBox)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textCheckBox)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(imageCheckBox))
-                    .addComponent(step6Label)
-                    .addComponent(step7Label))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(editStepsPanelLayout.createSequentialGroup()
+                                .addGroup(editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel1)
+                                        .addGroup(editStepsPanelLayout.createSequentialGroup()
+                                                .addGap(64, 64, 64)
+                                                .addGroup(editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addGroup(editStepsPanelLayout.createSequentialGroup()
+                                                                .addComponent(rowsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(xLabel)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(columnsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(editStepsPanelLayout.createSequentialGroup()
+                                                                .addComponent(soundCheckBox)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(textCheckBox)))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(imageCheckBox))
+                                        .addComponent(step6Label)
+                                        .addComponent(step7Label))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         editStepsPanelLayout.setVerticalGroup(
-            editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(editStepsPanelLayout.createSequentialGroup()
-                .addComponent(step6Label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addGap(12, 12, 12)
-                .addGroup(editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rowsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(xLabel)
-                    .addComponent(columnsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(step7Label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addGroup(editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(soundCheckBox)
-                    .addComponent(textCheckBox)
-                    .addComponent(imageCheckBox)))
+                editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(editStepsPanelLayout.createSequentialGroup()
+                                .addComponent(step6Label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1)
+                                .addGap(12, 12, 12)
+                                .addGroup(editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(rowsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(xLabel)
+                                        .addComponent(columnsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(step7Label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                                .addGroup(editStepsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(soundCheckBox)
+                                        .addComponent(textCheckBox)
+                                        .addComponent(imageCheckBox)))
         );
 
         closeLabel.setText("closeLabel");
@@ -243,77 +250,77 @@ public class WordFormPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(titleLabel)
-                                .addGap(106, 106, 106)
-                                .addComponent(closeLabel))
-                            .addComponent(saveButton, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(editStepsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(uploadImageLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(uploadSoundLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(categoriesComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(step3ExplLabel)
-                                    .addComponent(errorLabel)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(16, 16, 16)
-                                        .addComponent(wordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(enabledCheckbox))
-                                    .addComponent(step1Label)
-                                    .addComponent(step2Label)
-                                    .addComponent(step3Label)
-                                    .addComponent(step4Label)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                                .addComponent(titleLabel)
+                                                                .addGap(106, 106, 106)
+                                                                .addComponent(closeLabel))
+                                                        .addComponent(saveButton, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(editStepsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(uploadImageLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(uploadSoundLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(categoriesComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(step3ExplLabel)
+                                                                        .addComponent(errorLabel)
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addGap(16, 16, 16)
+                                                                                .addComponent(wordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addGap(18, 18, 18)
+                                                                                .addComponent(enabledCheckbox))
+                                                                        .addComponent(step1Label)
+                                                                        .addComponent(step2Label)
+                                                                        .addComponent(step3Label)
+                                                                        .addComponent(step4Label)
+                                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(closeLabel)
-                    .addComponent(titleLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(step1Label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(wordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(enabledCheckbox))
-                .addGap(16, 16, 16)
-                .addComponent(step2Label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(uploadImageLabel)
-                .addGap(11, 11, 11)
-                .addComponent(step3Label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(step3ExplLabel)
-                .addGap(18, 18, 18)
-                .addComponent(uploadSoundLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(step4Label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(categoriesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(editStepsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(errorLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(saveButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(closeLabel)
+                                        .addComponent(titleLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(step1Label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(wordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(enabledCheckbox))
+                                .addGap(16, 16, 16)
+                                .addComponent(step2Label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(uploadImageLabel)
+                                .addGap(11, 11, 11)
+                                .addComponent(step3Label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(step3ExplLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(uploadSoundLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(step4Label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(categoriesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(editStepsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(errorLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(saveButton)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -323,8 +330,8 @@ public class WordFormPanel extends javax.swing.JPanel {
 
             Category newCategory = new Category();
             newCategory.setName(wordTextField.getText());
-            newCategory.setImage(imagePath);
-            newCategory.setSound(soundPath);
+            newCategory.setImage(imageResource);
+            newCategory.setSound(soundResource);
             newCategory.setEnabled(enabledCheckbox.isSelected());
             newCategory.setParentCategory(new Category(categoriesComboBox.getSelectedItem().toString()));
             /*  newCategory.setHasSound(soundCheckBox.isSelected());
@@ -348,7 +355,7 @@ public class WordFormPanel extends javax.swing.JPanel {
                 category = newCategory;
                 updateCategoriesComboBox();
                 parent.redrawCategoriesList();
-                parent.displayMessage("Η λέξη αποθηκεύτηκε!");
+                parent.displayMessage(rm.getTextOfXMLTag("wordWasSaved"));
                 parent.showInfoPanel();
             } catch (Exception ex) {
                 Logger.getLogger(WordFormPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -358,7 +365,7 @@ public class WordFormPanel extends javax.swing.JPanel {
 
     public void updateCategoriesComboBox() {
         categoriesComboBox.removeAllItems();
-        categoriesComboBox.addItem("[-- Επίλεξε λέξη --]");
+        categoriesComboBox.addItem(rm.getTextOfXMLTag("chooseWord"));
         List<String> categories = categoryService.getLinearCategories(userService.getUser(user.getName()));
         for (String category : categories) {
             categoriesComboBox.addItem(category);
@@ -376,7 +383,7 @@ public class WordFormPanel extends javax.swing.JPanel {
 
         //word should not be null
         if (name == null || name.isEmpty()) {
-            errorLabel.setText("Η λέξη δεν πρέπει να είναι κενή");
+            errorLabel.setText(rm.getTextOfXMLTag("wordMustNotBeEmpty"));
             errorLabel.setVisible(true);
             return false;
         }
@@ -385,7 +392,7 @@ public class WordFormPanel extends javax.swing.JPanel {
         if (category == null || (category != null && !category.getName().equals(name))) {
             for (String category : categories) {
                 if (category.equals(name)) {
-                    errorLabel.setText("Η λέξη πρέπει να είναι μοναδική");
+                    errorLabel.setText(rm.getTextOfXMLTag("wordMustBeUnique"));
                     errorLabel.setVisible(true);
                     return false;
                 }
@@ -393,15 +400,15 @@ public class WordFormPanel extends javax.swing.JPanel {
         }
 
         //image should be uploaded
-        if (imagePath == null) {
+        if (imageResource == null) {
             //TODO this is not correct, image might not be visible due to settings
-            errorLabel.setText("Η λέξη πρέπει να έχει εικόνα");
+            errorLabel.setText(rm.getTextOfXMLTag("wordMustHaveImage"));
             errorLabel.setVisible(true);
             return false;
         }
 
         if (categoriesComboBox.getSelectedIndex() == 0) {
-            errorLabel.setText("Η λέξη πρέπει να ανήκει σε κάποια λέξη");
+            errorLabel.setText(rm.getTextOfXMLTag("wordMustBelongToAnotherWord"));
             errorLabel.setVisible(true);
             return false;
         }
@@ -417,10 +424,10 @@ public class WordFormPanel extends javax.swing.JPanel {
     private void setUI() {
         errorLabel.setVisible(false);
 
-        closeLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/close-icon.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH)));
+        closeLabel.setIcon(new ImageIcon(rm.getImage("close-icon.png", ResourceType.FROM_JAR).getScaledInstance(15, 15, Image.SCALE_SMOOTH)));
         closeLabel.setText("");
 
-        titleLabel.setText("ΠΡΟΣΘΗΚΗ ΝΕΑΣ ΛΕΞΗΣ");
+        titleLabel.setText(rm.getTextOfXMLTag("addNewWord"));
         titleLabel.setFont(new Font(UIConstants.mainFont, Font.BOLD, 16));
         titleLabel.setForeground(Color.decode(UIConstants.green));
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -438,8 +445,8 @@ public class WordFormPanel extends javax.swing.JPanel {
         wordTextField.setFont(new Font(UIConstants.mainFont, Font.ITALIC, 14));
         wordTextField.setHorizontalAlignment(JTextField.CENTER);
 
-        uploadImageLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
-        uploadSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+        uploadImageLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+        uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
         uploadImageLabel.setText("");
         uploadSoundLabel.setText("");
         uploadImageLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -466,7 +473,7 @@ public class WordFormPanel extends javax.swing.JPanel {
         if (category == null) {
             editStepsPanel.setVisible(false);
         } else {
-            titleLabel.setText("ΕΠΕΞΕΡΓΑΣΙΑ ΛΕΞΗΣ");
+            titleLabel.setText(rm.getTextOfXMLTag("editWord"));
             //if the category has subcategories, fill the appropriate fields
             if (category.getSubCategories().size() > 0) {
                 editStepsPanel.setVisible(true);
@@ -488,23 +495,25 @@ public class WordFormPanel extends javax.swing.JPanel {
 
             enabledCheckbox.setSelected(category.isEnabled());
             wordTextField.setText(category.getName());
-            
-            if (category.getImage() == null || category.getImage().isEmpty() || !(new File(category.getImage()).isFile())) {
-                uploadImageLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+
+            Image image = rm.getImage(category.getImage());
+            if (image == null) {
+                uploadImageLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
             } else {
-                uploadImageLabel.setIcon(new ImageIcon(new ImageIcon(category.getImage()).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                uploadImageLabel.setIcon(new ImageIcon(image.getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
             }
 
-            if (category.getSound() == null || category.getSound().isEmpty() || !(new File(category.getSound()).isFile())) {
-                uploadSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+            File sound = rm.getSound(category.getSound());
+            if (sound == null) {
+                uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
             } else {
-                uploadSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
             }
 
             categoriesComboBox.setSelectedItem(category.getParentCategory().getName());
 
-            imagePath = category.getImage();
-            soundPath = category.getSound();
+            imageResource = category.getImage();
+            soundResource = category.getSound();
         }
     }
 
@@ -512,15 +521,15 @@ public class WordFormPanel extends javax.swing.JPanel {
         uploadImageLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent me) {
-                if (imagePath == null) {
-                    uploadImageLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                if (imageResource == null) {
+                    uploadImageLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 }
             }
 
             @Override
             public void mouseEntered(MouseEvent me) {
-                if (imagePath == null) {
-                    uploadImageLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                if (imageResource == null) {
+                    uploadImageLabel.setIcon(new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 }
             }
 
@@ -531,13 +540,13 @@ public class WordFormPanel extends javax.swing.JPanel {
                 if (currentDirectory != null) {
                     chooser.setCurrentDirectory(currentDirectory);
                 }
-                chooser.setDialogTitle("Διάλεξε εικόνα");
+                chooser.setDialogTitle(rm.getTextOfXMLTag("selectImage"));
                 chooser.setAcceptAllFileFilterUsed(false);
                 chooser.setFileFilter(new FileNameExtensionFilter("Image Files", "png", "jpg", "jpeg", "JPG", "JPEG", "gif"));
                 chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                    imagePath = chooser.getSelectedFile().getAbsolutePath();
-                    uploadImageLabel.setIcon(new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    imageResource = new ImageResource(chooser.getSelectedFile().getAbsolutePath(), ResourceType.FULL_PATH);
+                    uploadImageLabel.setIcon(new ImageIcon(rm.getImage(imageResource).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                     currentDirectory = chooser.getCurrentDirectory();
                 }
             }
@@ -546,20 +555,20 @@ public class WordFormPanel extends javax.swing.JPanel {
         uploadSoundLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent me) {
-                if (soundPath == null || soundPath.isEmpty()) {
-                    uploadSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                if (soundResource == null || soundResource.getResourceType() == ResourceType.MISSING) {
+                    uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 } else {
-                    uploadSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
-                    audioPlayer.mediaPlayer().media().play(soundPath);
+                    uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon-hover.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    audioPlayer.mediaPlayer().media().play(soundResource.getSound().getAbsolutePath());
                 }
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
-                if (soundPath == null || soundPath.isEmpty()) {
-                    uploadSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                if (soundResource == null || soundResource.getResourceType() == ResourceType.MISSING) {
+                    uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 } else {
-                    uploadSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 }
             }
 
@@ -571,13 +580,13 @@ public class WordFormPanel extends javax.swing.JPanel {
                     chooser.setCurrentDirectory(currentDirectory);
                 }
 
-                chooser.setDialogTitle("Διάλεξε ήχο");
+                chooser.setDialogTitle(rm.getTextOfXMLTag("selectSound"));
                 chooser.setAcceptAllFileFilterUsed(false);
                 chooser.setFileFilter(new FileNameExtensionFilter("Sound Files", "mp3", "wav", "wma", "mid"));
                 chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                    soundPath = chooser.getSelectedFile().getAbsolutePath();
-                    uploadSoundLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    soundResource = new SoundResource(chooser.getSelectedFile().getAbsolutePath(), ResourceType.FULL_PATH);
+                    uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                     currentDirectory = chooser.getCurrentDirectory();
                 }
             }
@@ -585,14 +594,14 @@ public class WordFormPanel extends javax.swing.JPanel {
 
         wordTextField.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent fe) {
-                if ("Λέξη".equals(wordTextField.getText())) {
+                if (rm.getTextOfXMLTag("word").equals(wordTextField.getText())) {
                     wordTextField.setText("");
                 }
             }
 
             public void focusLost(FocusEvent fe) {
                 if (wordTextField.getText().isEmpty()) {
-                    wordTextField.setText("Λέξη");
+                    wordTextField.setText(rm.getTextOfXMLTag("word"));
                 }
             }
         });

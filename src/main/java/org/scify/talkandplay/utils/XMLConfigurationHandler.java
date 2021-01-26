@@ -63,12 +63,13 @@ public class XMLConfigurationHandler {
     protected User defaultUser;
     Properties properties;
     static Logger logger = Logger.getLogger(XMLConfigurationHandler.class);
+    protected ResourceManager rm;
 
     public XMLConfigurationHandler() {
         properties = Properties.getInstance();
         configurationFilePath = properties.getApplicationDataFolder() + File.separator + "conf.xml";
         defaultUserConfigurationFilePath = properties.getApplicationFolder() + File.separator + "defaultUser.xml";
-
+        rm = ResourceManager.getInstance();
         initConfigurationFile();
     }
 
@@ -628,12 +629,13 @@ public class XMLConfigurationHandler {
             for (int i = 0; i < categoriesNode.getChildren().size(); i++) {
 
                 Element categoryEl = (Element) categoriesNode.getChildren().get(i);
+                String categoryName = categoryEl.getAttributeValue("name");
+                ImageResource categoryImage = new ImageResource(categoryEl.getChildText("image"), ResourceType.FROM_RESOURCES);
 
-                Category category = new Category(
-                        categoryEl.getAttributeValue("name"),
-                        categoryEl.getChildText("image"));
+                Category category = new Category(categoryName, categoryImage);
 
-                category.setSound(categoryEl.getChildText("sound"));
+                SoundResource categorySoundResource = new SoundResource(categoryEl.getChildText("sound"), ResourceType.FROM_RESOURCES);
+                category.setSound(categorySoundResource);
 
                 if (categoryEl.getChildText("rows") != null && !categoryEl.getChildText("rows").isEmpty()) {
                     category.setRows(Integer.parseInt(categoryEl.getChildText("rows")));
@@ -724,7 +726,8 @@ public class XMLConfigurationHandler {
         for (Map.Entry<String, List<String>> entry : userFiles.entrySet()) {
             if (entry.getKey().equals(username)) {
                 for (String path : entry.getValue()) {
-                    if (!(new File(path).isFile())) {
+                    File file = rm.getFileOfResource(path, ResourceType.FROM_RESOURCES);
+                    if (file == null || !file.isFile()) {
                         return true;
                     }
                 }

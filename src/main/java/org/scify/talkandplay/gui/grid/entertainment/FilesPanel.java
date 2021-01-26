@@ -1,18 +1,18 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -36,6 +36,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
 import org.scify.talkandplay.gui.grid.BaseMediaPanel;
 import org.scify.talkandplay.gui.grid.selectors.Selector;
 import org.scify.talkandplay.gui.helpers.UIConstants;
@@ -45,6 +46,8 @@ import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.SensorService;
+import org.scify.talkandplay.utils.ResourceManager;
+import org.scify.talkandplay.utils.ResourceType;
 
 public class FilesPanel extends javax.swing.JPanel {
 
@@ -59,6 +62,7 @@ public class FilesPanel extends javax.swing.JPanel {
     private String currentFile;
     private Selector selector;
     private SensorService sensorService;
+    protected ResourceManager rm;
 
     public FilesPanel(User user, List<File> files, BaseMediaPanel parent) {
         this.user = user;
@@ -68,7 +72,7 @@ public class FilesPanel extends javax.swing.JPanel {
         this.selector = parent.getSelector();
         this.sensorService = new SensorService(user);
         this.files = files;
-
+        this.rm = ResourceManager.getInstance();
         initComponents();
         initCustomComponents();
     }
@@ -98,30 +102,30 @@ public class FilesPanel extends javax.swing.JPanel {
 
         String prevText, nextText, backText;
         if (parent instanceof MusicPanel) {
-            prevText = "Προηγούμενα τραγούδια";
-            nextText = "Επόμενα τραγούδια";
-            backText = "Χειριστήριο";
+            prevText = rm.getTextOfXMLTag("previousSongs");
+            nextText = rm.getTextOfXMLTag("nextSongs");
+            backText = rm.getTextOfXMLTag("musicControl");
         } else {
-            prevText = "Προηγούμενα video";
-            nextText = "Επόμενα video";
-            backText = "Πίσω";
+            prevText = rm.getTextOfXMLTag("previousVideos");
+            nextText = rm.getTextOfXMLTag("nextVideos");
+            backText = rm.getTextOfXMLTag("back");
         }
 
         if (start == 0) {
-            prevSongs = drawControl(prevText, new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/left-icon-disabled.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "icon");
+            prevSongs = drawControl(prevText, new ImageIcon(rm.getImage("left-icon-disabled.png", ResourceType.FROM_JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "icon");
             prevSongs.getComponent(1).setForeground(Color.decode(UIConstants.disabledColor));
         } else {
-            prevSongs = drawControl(prevText, new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/left-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "icon");
+            prevSongs = drawControl(prevText, new ImageIcon(rm.getImage("left-icon.png", ResourceType.FROM_JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "icon");
         }
         if (end >= files.size()) {
-            nextSongs = drawControl(nextText, new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/right-icon-disabled.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "text");
+            nextSongs = drawControl(nextText, new ImageIcon(rm.getImage("right-icon-disabled.png", ResourceType.FROM_JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "text");
             nextSongs.getComponent(0).setForeground(Color.decode(UIConstants.disabledColor));
         } else {
-            nextSongs = drawControl(nextText, new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/right-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "text");
+            nextSongs = drawControl(nextText, new ImageIcon(rm.getImage("right-icon.png", ResourceType.FROM_JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "text");
         }
 
-        controls = drawControl(backText, new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/down-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "icon");
-        back = drawControl(backText, new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "icon");
+        controls = drawControl(backText, new ImageIcon(rm.getImage("down-icon.png", ResourceType.FROM_JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "icon");
+        back = drawControl(backText, new ImageIcon(rm.getImage("back-icon.png", ResourceType.FROM_JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "icon");
 
         add(prevSongs);
         panelList.add(prevSongs);
@@ -432,12 +436,12 @@ public class FilesPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

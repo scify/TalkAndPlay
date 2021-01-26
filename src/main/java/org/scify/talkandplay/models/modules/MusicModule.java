@@ -21,6 +21,7 @@ public class MusicModule extends Module {
     private int playlistSize;
 
     public MusicModule() {
+        super();
     }
 
     public String getFolderPath() {

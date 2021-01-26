@@ -4,6 +4,10 @@
     <vlcMissingMessage>Please first install VLC and try again</vlcMissingMessage>
     <createdBy>Created by</createdBy>
     <donationBy>Exclusive donation</donationBy>
+    <updateInProgress1>The application is updating</updateInProgress1>
+    <updateInProgress2>please wait...</updateInProgress2>
+    <updateInProgress3>The procedure might take a few minutes.</updateInProgress3>
+    <updateInProgress4>When update is completed, please restart the application.</updateInProgress4>
     <addUser>Add user</addUser>
     <loadUser>Load user</loadUser>
     <chooseFile>Choose a file</chooseFile>
@@ -14,15 +18,61 @@
     <defaultUserName>User</defaultUserName>
     <communicationName>Communication</communicationName>
     <entertainmentName>Entertainment</entertainmentName>
+    <musicName>Music</musicName>
+    <previousSongs>Previous songs</previousSongs>
+    <nextSongs>Next songs</nextSongs>
+    <musicControl>Music control</musicControl>
+    <playingNow>PLAYING NOW</playingNow>
+    <previousControl>Previous</previousControl>
+    <nextControl>Next</nextControl>
+    <playControl>Play</playControl>
+    <pauseControl>Pause</pauseControl>
+    <playingListControl>List</playingListControl>
+    <fullScreenControl>Full Screen</fullScreenControl>
+    <exitControl>Exit</exitControl>
+    <videoName>Video</videoName>
+    <previousVideos>Previous videos</previousVideos>
+    <nextVideos>Next videos</nextVideos>
     <gamesName>Games</gamesName>
+    <addNewSound>Add sound</addNewSound>
+    <selectImage>Select image</selectImage>
+    <selectSound>Select sound</selectSound>
+    <noFilesFound>No files found</noFilesFound>
+    <noGamesInCategory>There are no games in this category</noGamesInCategory>
+    <noGames>No games found</noGames>
+    <pleaseCreateNewGame>Please create a new game in  order to add it</pleaseCreateNewGame>
+    <chooseGame>[-- Select game --]</chooseGame>
+    <stimulusReaction>Stimulus - Reaction</stimulusReaction>
+    <timeSequence>Time sequence</timeSequence>
+    <findSimilar>Find the similar</findSimilar>
+    <pressTheButtonOnTheSimilar>Press the button on the similar!</pressTheButtonOnTheSimilar>
+    <changesSaved>Changes saved successfully!</changesSaved>
+    <word>Word</word>
+    <chooseWord>[-- Choose word --]</chooseWord>
+    <addNewWord>ADD NEW WORD</addNewWord>
+    <editWord>EDIT WORD</editWord>
+    <wordMustNotBeEmpty>The word must not be empty</wordMustNotBeEmpty>
+    <wordMustBeUnique>The word must be unique</wordMustBeUnique>
+    <wordMustHaveImage>The word must have an image</wordMustHaveImage>
+    <wordMustBelongToAnotherWord>The word must belong to another word</wordMustBelongToAnotherWord>
+    <wordWasSaved>The word was saved!</wordWasSaved>
+    <back>Back</back>
+    <more>More</more>
+    <pressTheButton>Press the button!</pressTheButton>
+    <pressTheButtonToStart>Press the button to start!</pressTheButtonToStart>
+    <sequenceGameInfo>Place the cards in the right order.</sequenceGameInfo>
     <categoryYes>Yes</categoryYes>
     <categoryNo>No</categoryNo>
     <categoryFood>Food</categoryFood>
     <categoryPasta>Pasta</categoryPasta>
     <categoryFrenchFries>French fries</categoryFrenchFries>
+    <categoryBurger>Burger</categoryBurger>
+    <categorySteak>Steak</categorySteak>
+    <categoryChicken>Chicken</categoryChicken>
+    <categorySoup>Soup</categorySoup>
     <categoryBread>Bread</categoryBread>
     <categoryFrenchToast>French toast</categoryFrenchToast>
     <categoryYogurt>Yogurt</categoryYogurt>
+    <categoryCucumber>Cucumber</categoryCucumber>
     <categoryTomato>Tomato</categoryTomato>
 </languageTexts>
-

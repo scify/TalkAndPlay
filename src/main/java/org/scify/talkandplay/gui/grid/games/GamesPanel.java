@@ -40,6 +40,9 @@ import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.SensorService;
+import org.scify.talkandplay.utils.ImageResource;
+import org.scify.talkandplay.utils.ResourceType;
+import org.scify.talkandplay.utils.SoundResource;
 
 public class GamesPanel extends BaseGridPanel {
 
@@ -108,7 +111,6 @@ public class GamesPanel extends BaseGridPanel {
 
         JPanel panel = tileCreator.create(gameType.getName(),
                 gameType.getImage(),
-                gameType.getImageURL(),
                 gameType.getSound(),
                 new TileAction() {
                     @Override
@@ -132,10 +134,9 @@ public class GamesPanel extends BaseGridPanel {
     }
 
     private JPanel createBackItem() {
-        JPanel panel = tileCreator.create("Πίσω",
-                null,
-                getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"),
-                null,
+        JPanel panel = tileCreator.create(rm.getTextOfXMLTag("back"),
+                new ImageResource("back-icon.png", ResourceType.FROM_JAR),
+                new SoundResource("", ResourceType.MISSING),
                 new TileAction() {
                     @Override
                     public void act() {
@@ -162,7 +163,7 @@ public class GamesPanel extends BaseGridPanel {
 
         if (hasGames("stimulusReactionGame")) {
 
-            ButtonPanel buttonPanel = new ButtonPanel("Πάτα το κουμπί!", "");
+            ButtonPanel buttonPanel = new ButtonPanel(rm.getTextOfXMLTag("pressTheButton"), "");
 
             buttonPanel.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent me) {
@@ -233,7 +234,7 @@ public class GamesPanel extends BaseGridPanel {
 
         if (hasGames("sequenceGame")) {
 
-            ButtonPanel buttonPanel = new ButtonPanel("Βάλε στη σωστή σειρά τις κάρτες.", "Πάτα το κουμπί για να ξεκινήσεις!");
+            ButtonPanel buttonPanel = new ButtonPanel(rm.getTextOfXMLTag("sequenceGameInfo"), rm.getTextOfXMLTag("pressTheButtonToStart"));
 
             buttonPanel.setFocusable(true);
             buttonPanel.addMouseListener(new MouseAdapter() {
@@ -304,8 +305,7 @@ public class GamesPanel extends BaseGridPanel {
         final SensorService sensorService = new SensorService(user);
 
         if (hasGames("similarityGame")) {
-            ButtonPanel buttonPanel = new ButtonPanel("Βρες το όμοιο.", "Πάτα το κουμπί για να ξεκινήσεις!");
-
+            ButtonPanel buttonPanel = new ButtonPanel(rm.getTextOfXMLTag("findSimilar") + ".", rm.getTextOfXMLTag("pressTheButtonToStart"));
             buttonPanel.setFocusable(true);
             buttonPanel.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent me) {
@@ -374,10 +374,10 @@ public class GamesPanel extends BaseGridPanel {
 
     private JPanel noGamePanel() {
         JLabel iconLabel = new JLabel();
-        iconLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png")).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
+        iconLabel.setIcon(new ImageIcon(rm.getImage("back-icon.png", ResourceType.FROM_JAR).getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
         iconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel fileLabel = new JLabel("Δεν υπάρχουν παιχνίδια");
+        JLabel fileLabel = new JLabel(rm.getTextOfXMLTag("noGames"));
         fileLabel.setFont(new Font(UIConstants.mainFont, Font.BOLD, 18));
         fileLabel.setBorder(new EmptyBorder(10, 10, 10, 10));
         fileLabel.setAlignmentX(Component.CENTER_ALIGNMENT);

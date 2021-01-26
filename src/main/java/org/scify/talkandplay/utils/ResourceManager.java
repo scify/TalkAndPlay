@@ -150,7 +150,10 @@ public class ResourceManager {
     }
 
     public Image getImage(ImageResource imageResource) {
-        return getImage(imageResource.path, imageResource.getResourceType());
+        if (imageResource == null)
+            return null;
+        else
+            return getImage(imageResource.path, imageResource.getResourceType());
     }
 
     public Image getImage(String path, ResourceType resourceType) {
@@ -194,35 +197,18 @@ public class ResourceManager {
     }
 
     public File getSound(String path, int languageIndex) {
-        File ret = new File(languageDirs.get(languageIndex), path);
-        if (!ret.exists()) {
-            ret = new File(defaultDir, path);
-            if (!ret.exists())
-                ret = null;
-        }
-        return ret;
+        return getFile(path, languageIndex);
     }
 
     public File getSound(SoundResource soundResource) {
-        return getSound(soundResource.getPath(), soundResource.getResourceType());
+        if (soundResource == null)
+            return null;
+        else
+            return getSound(soundResource.getPath(), soundResource.getResourceType());
     }
 
     public File getSound(String path, ResourceType resourceType) {
-        File ret = null;
-        switch (resourceType) {
-            case FROM_JAR:
-                ret = new File(JarResources.getFile(), path);
-                break;
-            case FROM_RESOURCES:
-                ret =  getSound(path, selectedLanguageIndex);
-                break;
-            case FULL_PATH:
-                ret = new File(path);
-                break;
-            default:
-                break;
-        }
-        return ret;
+        return getFileOfResource(path, resourceType);
     }
 
     public String getTextOfXMLTag(String tag) {
@@ -238,5 +224,33 @@ public class ResourceManager {
             s = getTextOfXMLTag(s);
         }
         return s;
+    }
+
+    public File getFileOfResource (String path, ResourceType resourceType) {
+        File ret = null;
+        switch (resourceType) {
+            case FROM_JAR:
+                ret = new File(JarResources.getFile(), path);
+                break;
+            case FROM_RESOURCES:
+                ret =  getFile(path, selectedLanguageIndex);
+                break;
+            case FULL_PATH:
+                ret = new File(path);
+                break;
+            default:
+                break;
+        }
+        return ret;
+    }
+
+    public File getFile(String path, int languageIndex) {
+        File ret = new File(languageDirs.get(languageIndex), path);
+        if (!ret.exists()) {
+            ret = new File(defaultDir, path);
+            if (!ret.exists())
+                ret = null;
+        }
+        return ret;
     }
 }

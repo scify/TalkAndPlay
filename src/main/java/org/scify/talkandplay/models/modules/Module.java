@@ -16,6 +16,7 @@
 package org.scify.talkandplay.models.modules;
 
 import org.scify.talkandplay.utils.ImageResource;
+import org.scify.talkandplay.utils.ResourceManager;
 import org.scify.talkandplay.utils.ResourceType;
 import org.scify.talkandplay.utils.SoundResource;
 
@@ -36,12 +37,14 @@ public class Module {
     private ImageResource imageResource;
     private SoundResource soundResource;
     private boolean enabled;
+    protected ResourceManager rm;
 
     public Module() {
+        this.rm = ResourceManager.getInstance();
     }
 
     public String getName() {
-        return name;
+        return rm.decodeTextIfRequired(name);
     }
 
     public void setName(String name) {

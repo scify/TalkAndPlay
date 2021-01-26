@@ -117,8 +117,8 @@
             <category name="{{ categoryFrenchToast }}">
               <rows>3</rows>
               <columns>3</columns>
-              <image>images/food/sandwich.png</image>
-              <sound>sounds/food/sandwich.mp3</sound>
+              <image>images/food/frenchToast.png</image>
+              <sound>sounds/food/frenchToast.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -160,7 +160,7 @@
       <image />
       <sound />
       <music>
-        <name>Μουσική</name>
+        <name>{{ musicName }}</name>
         <enabled>true</enabled>
         <image />
         <sound />
@@ -168,7 +168,7 @@
         <playlistSize>10</playlistSize>
       </music>
       <video>
-        <name>Βίντεο</name>
+        <name>{{ videoName }}</name>
         <enabled>true</enabled>
         <image />
         <sound />

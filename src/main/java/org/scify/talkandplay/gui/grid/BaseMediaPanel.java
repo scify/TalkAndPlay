@@ -51,6 +51,7 @@ import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.SensorService;
+import org.scify.talkandplay.utils.ResourceType;
 
 public class BaseMediaPanel extends BasePanel {
 
@@ -128,17 +129,17 @@ public class BaseMediaPanel extends BasePanel {
     protected void drawEmpty() {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-        JLabel noFiles = new JLabel("Δεν υπάρχουν αρχεία");
+        JLabel noFiles = new JLabel(rm.getTextOfXMLTag("noFilesFound"));
         noFiles.setBorder(new EmptyBorder(5, 5, 5, 5));
         noFiles.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
         noFiles.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel label = new JLabel("Πίσω");
+        JLabel label = new JLabel(rm.getTextOfXMLTag("back"));
         label.setBorder(new EmptyBorder(5, 5, 5, 5));
         label.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel icon = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/back-icon.png")).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
+        JLabel icon = new JLabel(new ImageIcon(rm.getImage("back-icon.png", ResourceType.FROM_JAR).getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
         icon.setBorder(new EmptyBorder(5, 5, 5, 5));
         icon.setAlignmentX(Component.CENTER_ALIGNMENT);
 

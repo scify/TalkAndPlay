@@ -29,11 +29,12 @@ import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.SensorService;
+import org.scify.talkandplay.utils.ImageResource;
 
 public class SimilarityGamePanel extends BaseGamePanel {
 
     private boolean endGame = false;
-    private String correctImage;
+    private ImageResource correctImage;
     private SensorService sensorService;
 
     public SimilarityGamePanel(User user, GridFrame parent, String previousGame) {
@@ -77,7 +78,7 @@ public class SimilarityGamePanel extends BaseGamePanel {
     private void initCustomComponents() {
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setTopMessage("Πάτα το κουμπί πάνω στο όμοιο!");
+        setTopMessage(rm.getTextOfXMLTag("pressTheButtonOnTheSimilar"));
         setBottomMessage("");
 
         int i = randomGenerator.nextInt(game.getEnabledImages().size());
@@ -129,7 +130,7 @@ public class SimilarityGamePanel extends BaseGamePanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    act(image.getImage());
+                    act(image.getImage().getPath());
                 }
             }
         });
@@ -138,7 +139,7 @@ public class SimilarityGamePanel extends BaseGamePanel {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
 
                 if (sensorService.shouldSelect(sensor)) {
-                    act(image.getImage());
+                    act(image.getImage().getPath());
                 }
             }
         });

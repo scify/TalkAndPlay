@@ -119,7 +119,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(153, 153, 153));
         jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
 
-        niarchosLogoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/logos/snf_lg.png"))); // NOI18N
+        niarchosLogoLabel.setIcon(rm.getImageIcon("logos/snf_lg.png", ResourceType.FROM_JAR)); // NOI18N
         niarchosLogoLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout contentPaneLayout = new javax.swing.GroupLayout(contentPane);

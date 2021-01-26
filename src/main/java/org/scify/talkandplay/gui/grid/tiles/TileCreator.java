@@ -27,6 +27,7 @@ import org.scify.talkandplay.services.SensorService;
 import org.scify.talkandplay.utils.ImageResource;
 import org.scify.talkandplay.utils.ResourceManager;
 import org.scify.talkandplay.utils.ResourceType;
+import org.scify.talkandplay.utils.SoundResource;
 import uk.co.caprica.vlcj.player.base.MediaPlayer;
 import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
 import uk.co.caprica.vlcj.player.component.AudioPlayerComponent;
@@ -88,13 +89,13 @@ public class TileCreator {
      * @param tileAction
      * @return JPanel panel
      */
-    public JPanel create(String name, ImageResource image, String sound, TileAction tileAction) {
+    public JPanel create(String name, ImageResource image, SoundResource sound, TileAction tileAction) {
         JPanel panel = guiHelper.createImagePanel(image, name);
         addListeners(panel, sound, tileAction);
         return panel;
     }
 
-    public JPanel create(String name, ImageResource image, String sound) {
+    public JPanel create(String name, ImageResource image, SoundResource sound) {
         JPanel panel = guiHelper.createImagePanel(image, name);
         return panel;
     }
@@ -105,7 +106,7 @@ public class TileCreator {
         return panel;
     }
 
-    private void addListeners(JPanel panel, final String sound, final TileAction tileAction) {
+    private void addListeners(JPanel panel, final SoundResource sound, final TileAction tileAction) {
         panel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
@@ -130,11 +131,11 @@ public class TileCreator {
      *
      * @param tileAction
      */
-    private void act(String sound, TileAction tileAction) {
+    private void act(SoundResource sound, TileAction tileAction) {
         tileAction.act();
         this.tileAction = tileAction;
         if (!this.tileAction.mute() && user.getConfiguration().hasSound()) {
-            playAudio(sound);
+            playAudio(sound.getSound().getAbsolutePath());
         } else {
             tileAction.audioFinished();
         }

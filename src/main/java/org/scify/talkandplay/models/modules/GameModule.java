@@ -25,6 +25,7 @@ public class GameModule extends Module {
     private List<GameType> gameTypes;
 
     public GameModule() {
+        super();
         this.gameTypes = new ArrayList();
     }
 

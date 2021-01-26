@@ -32,6 +32,8 @@ import org.scify.talkandplay.models.Tile;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.CategoryService;
 import org.scify.talkandplay.services.SensorService;
+import org.scify.talkandplay.utils.ImageResource;
+import org.scify.talkandplay.utils.ResourceType;
 
 public class CommunicationPanel extends BaseGridPanel {
 
@@ -39,9 +41,7 @@ public class CommunicationPanel extends BaseGridPanel {
 
     private CategoryService categoryService;
     private SensorService sensorService;
-
     private Category rootCategory;
-
     final CommunicationPanel currentPanel = this;
 
     private int grid;
@@ -217,9 +217,8 @@ public class CommunicationPanel extends BaseGridPanel {
      * @throws IOException
      */
     private JPanel createBackItem(final Category category, final boolean isRoot) throws IOException {
-        JPanel panel = tileCreator.create("Πίσω",
-                null,
-                getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"),
+        JPanel panel = tileCreator.create(rm.getTextOfXMLTag("back"),
+                new ImageResource("back-icon.png", ResourceType.FROM_JAR),
                 null,
                 new TileAction() {
                     @Override
@@ -267,9 +266,8 @@ public class CommunicationPanel extends BaseGridPanel {
      * @throws IOException
      */
     private JPanel createMoreItem(final Category category) throws IOException {
-        JPanel panel = tileCreator.create("Περισσότερα",
-                null,
-                getClass().getResource("/org/scify/talkandplay/resources/more-icon.png"),
+        JPanel panel = tileCreator.create(rm.getTextOfXMLTag("more"),
+                new ImageResource("more-icon.png", ResourceType.FROM_JAR),
                 null,
                 new TileAction() {
                     @Override

@@ -72,7 +72,7 @@ public class CategoryService {
             Category communication = new Category(user.getCommunicationModule().getName(),
                     user.getCommunicationModule().getRows(),
                     user.getCommunicationModule().getColumns(),
-                    user.getCommunicationModule().getImage());
+                    user.getCommunicationModule().getImageResource());
 
             List<Category> subCategories = new ArrayList<>();
 
@@ -84,7 +84,7 @@ public class CategoryService {
         if (user.getEntertainmentModule().isEnabled()) {
             Category entertainment = new Category();
             entertainment.setName(user.getEntertainmentModule().getName());
-            entertainment.setImage(user.getEntertainmentModule().getImage());
+            entertainment.setImage(user.getEntertainmentModule().getImageResource());
 
             categories.add(entertainment);
         }
@@ -93,7 +93,7 @@ public class CategoryService {
         if (user.getGameModule().isEnabled()) {
             Category games = new Category();
             games.setName(user.getGameModule().getName());
-            games.setImage(user.getGameModule().getImage());
+            games.setImage(user.getGameModule().getImageResource());
 
             categories.add(games);
         }
@@ -118,7 +118,7 @@ public class CategoryService {
         Category communication = new Category(user.getCommunicationModule().getName(),
                 user.getCommunicationModule().getRows(),
                 user.getCommunicationModule().getColumns(),
-                user.getCommunicationModule().getImage());
+                user.getCommunicationModule().getImageResource());
 
         List<Category> subCategories = user.getCommunicationModule().getCategories();
 
@@ -165,8 +165,8 @@ public class CategoryService {
 
             Element categoryChild = new Element("category");
             categoryChild.setAttribute(new Attribute("name", category.getName()));
-            categoryChild.addContent(new Element("image").setText(category.getImage()));
-            categoryChild.addContent(new Element("sound").setText(category.getSound()));
+            categoryChild.addContent(new Element("image").setText(category.getImage().getPath()));
+            categoryChild.addContent(new Element("sound").setText(category.getSound().getPath()));
             categoryChild.addContent(new Element("enabled").setText(String.valueOf(category.isEnabled())));
             //categoryChild.addContent(new Element("order").setText(String.valueOf(category.getOrder())));
             categoryChild.addContent(new Element("hasSound").setText(String.valueOf(user.getConfiguration().hasSound())));
@@ -224,7 +224,7 @@ public class CategoryService {
     /**
      * Delete a category
      *
-     * @param category
+     * @param categoryName
      * @param user
      */
     public void delete(String categoryName, User user) throws Exception {
@@ -268,7 +268,8 @@ public class CategoryService {
      * For a given category, find the category and update it
      *
      * @param categoryNode
-     * @param name
+     * @param oldName
+     *
      * @param categoryChild
      * @return
      */
@@ -303,13 +304,13 @@ public class CategoryService {
             if (categoryChild.getImage() == null) {
                 categoryNode.getChild("image").setText(categoryNode.getChildText("image"));
             } else {
-                categoryNode.getChild("image").setText(categoryChild.getImage());
+                categoryNode.getChild("image").setText(categoryChild.getImage().getPath());
             }
 
             if (categoryChild.getSound() == null) {
                 categoryNode.getChild("sound").setText(categoryNode.getChildText("sound"));
             } else {
-                categoryNode.getChild("sound").setText(categoryChild.getSound());
+                categoryNode.getChild("sound").setText(categoryChild.getSound().getPath());
             }
         } else {
             for (int i = 0; i < categoryNode.getChildren().size(); i++) {

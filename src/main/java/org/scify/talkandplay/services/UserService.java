@@ -35,13 +35,16 @@ import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.modules.CommunicationModule;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
+import org.scify.talkandplay.utils.ResourceManager;
 import org.scify.talkandplay.utils.TalkAndPlayProfileConfiguration;
 
 public class UserService {
 
     private TalkAndPlayProfileConfiguration talkAndPlayProfileconfiguration;
+    protected ResourceManager rm;
 
     public UserService() {
+        this.rm = ResourceManager.getInstance();
         this.talkAndPlayProfileconfiguration = TalkAndPlayProfileConfiguration.getInstance();
     }
 
@@ -134,7 +137,6 @@ public class UserService {
      * Check if name is already used.
      *
      * @param name User name to check if it is used
-     * @param users All the users
      * @return True if name is used, False otherwise
      */
     private boolean nameIsUsed(String name) {
@@ -189,7 +191,7 @@ public class UserService {
         Element categories = new Element("categories");
 
         //add the first category settings
-        communication.addContent(new Element("name").setText("Επικοινωνία"));
+        communication.addContent(new Element("name").setText(rm.getTextOfXMLTag("communicationName")));
         communication.addContent(new Element("enabled").setText("true"));
         communication.addContent(new Element("image"));
         communication.addContent(new Element("sound"));
@@ -203,8 +205,8 @@ public class UserService {
                 Element categoryEl = new Element("category").setAttribute("name", category.getName());
                 categoryEl.addContent(new Element("rows").setText(String.valueOf(user.getConfiguration().getDefaultGridRow())));
                 categoryEl.addContent(new Element("columns").setText(String.valueOf(user.getConfiguration().getDefaultGridColumn())));
-                categoryEl.addContent(new Element("image").setText(category.getImage()));
-                categoryEl.addContent(new Element("sound").setText(category.getSound()));
+                categoryEl.addContent(new Element("image").setText(category.getImage().getPath()));
+                categoryEl.addContent(new Element("sound").setText(category.getSound().getPath()));
                 categoryEl.addContent(new Element("hasSound").setText(String.valueOf(category.hasSound())));
                 categoryEl.addContent(new Element("hasImage").setText(String.valueOf(category.hasImage())));
                 categoryEl.addContent(new Element("hasText").setText(String.valueOf(category.hasText())));
@@ -216,8 +218,8 @@ public class UserService {
                         Element subcategoryEl = new Element("category").setAttribute("name", subcategory.getName());
                         subcategoryEl.addContent(new Element("rows").setText(String.valueOf(user.getConfiguration().getDefaultGridRow())));
                         subcategoryEl.addContent(new Element("columns").setText(String.valueOf(user.getConfiguration().getDefaultGridColumn())));
-                        subcategoryEl.addContent(new Element("image").setText(subcategory.getImage()));
-                        subcategoryEl.addContent(new Element("sound").setText(subcategory.getSound()));
+                        subcategoryEl.addContent(new Element("image").setText(subcategory.getImage().getPath()));
+                        subcategoryEl.addContent(new Element("sound").setText(subcategory.getSound().getPath()));
                         subcategoryEl.addContent(new Element("hasSound").setText(String.valueOf(subcategory.hasSound())));
                         subcategoryEl.addContent(new Element("hasImage").setText(String.valueOf(subcategory.hasImage())));
                         subcategoryEl.addContent(new Element("hasText").setText(String.valueOf(subcategory.hasText())));
@@ -297,14 +299,14 @@ public class UserService {
 
         //add entertainment module settings
         Element entertainment = new Element("entertainment");
-        entertainment.addContent(new Element("name").setText("Ψυχαγωγία"));
+        entertainment.addContent(new Element("name").setText(rm.getTextOfXMLTag("entertainmentName")));
         entertainment.addContent(new Element("enabled").setText("true"));
         entertainment.addContent(new Element("image"));
         entertainment.addContent(new Element("sound"));
 
         //add music module settings
         Element music = new Element("music");
-        music.addContent(new Element("name").setText("Μουσική"));
+        music.addContent(new Element("name").setText(rm.getTextOfXMLTag("musicName")));
         music.addContent(new Element("enabled").setText("true"));
         music.addContent(new Element("image"));
         music.addContent(new Element("sound"));
@@ -314,7 +316,7 @@ public class UserService {
 
         //add video module settings
         Element video = new Element("video");
-        video.addContent(new Element("name").setText("Βίντεο"));
+        video.addContent(new Element("name").setText(rm.getTextOfXMLTag("videoName")));
         video.addContent(new Element("enabled").setText("true"));
         video.addContent(new Element("image"));
         video.addContent(new Element("sound"));
@@ -324,7 +326,7 @@ public class UserService {
 
         //add game module settings
         Element games = new Element("games");
-        games.addContent(new Element("name").setText("Παιχνίδια"));
+        games.addContent(new Element("name").setText(rm.getTextOfXMLTag("gamesName")));
         games.addContent(new Element("image"));
         games.addContent(new Element("sound"));
         games.addContent(new Element("enabled").setText("true"));
@@ -350,7 +352,8 @@ public class UserService {
     /**
      * Update a user
      *
-     * @param name
+     * @param user
+     * @param oldName
      */
     public void update(User user, String oldName) throws Exception {
 

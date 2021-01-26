@@ -15,37 +15,44 @@
 */
 package org.scify.talkandplay.models;
 
+import org.scify.talkandplay.utils.ImageResource;
+import org.scify.talkandplay.utils.ResourceManager;
+import org.scify.talkandplay.utils.SoundResource;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Category {
 
     private String name;
-    private String image;
-    private String sound;
+    private ImageResource image;
+    private SoundResource sound;
     private Integer rows, columns;
     private int order;
     private boolean editable;
     private boolean enabled;
     private Category parentCategory;
     private List<Category> subCategories;
-
     private boolean hasSound;
     private boolean hasImage;
     private boolean hasText;
+    protected ResourceManager rm;
 
     public Category(String name) {
+        this.rm = ResourceManager.getInstance();
         this.name = name;
     }
 
     public Category(String name, List<Tile> tiles, Category parentCategory, List<Category> subCategories) {
+        this.rm = ResourceManager.getInstance();
         this.subCategories = new ArrayList<>();
         this.name = name;
         this.parentCategory = parentCategory;
         this.subCategories = subCategories;
     }
 
-    public Category(String name, Integer rows, Integer columns, String image) {
+    public Category(String name, Integer rows, Integer columns, ImageResource image) {
+        this.rm = ResourceManager.getInstance();
         this.subCategories = new ArrayList<>();
         this.rows = rows;
         this.columns = columns;
@@ -53,13 +60,15 @@ public class Category {
         this.image = image;
     }
 
-    public Category(String name, String image) {
+    public Category(String name, ImageResource image) {
+        this.rm = ResourceManager.getInstance();
         this.subCategories = new ArrayList<>();
         this.name = name;
         this.image = image;
     }
 
     public Category() {
+        this.rm = ResourceManager.getInstance();
 //        this.parentCategory = new Category();
         this.subCategories = new ArrayList<>();
     }
@@ -81,7 +90,7 @@ public class Category {
     }
 
     public String getName() {
-        return name;
+        return rm.decodeTextIfRequired(name);
     }
 
     public void setName(String name) {
@@ -96,19 +105,19 @@ public class Category {
         this.order = order;
     }
 
-    public String getImage() {
+    public ImageResource getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(ImageResource image) {
         this.image = image;
     }
 
-    public String getSound() {
+    public SoundResource getSound() {
         return sound;
     }
 
-    public void setSound(String sound) {
+    public void setSound(SoundResource sound) {
         this.sound = sound;
     }
 

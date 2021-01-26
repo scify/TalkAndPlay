@@ -1,18 +1,18 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.scify.talkandplay.gui.grid.entertainment;
 
 import java.awt.BorderLayout;
@@ -26,6 +26,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
 import org.scify.talkandplay.gui.grid.selectors.ButtonSelector;
 import org.scify.talkandplay.gui.grid.selectors.ManualButtonSelector;
 import org.scify.talkandplay.gui.grid.selectors.MouseSelector;
@@ -37,6 +38,8 @@ import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.SensorService;
+import org.scify.talkandplay.utils.ResourceManager;
+import org.scify.talkandplay.utils.ResourceType;
 import uk.co.caprica.vlcj.player.base.MediaPlayer;
 import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
@@ -56,6 +59,7 @@ public class VideoFrame extends javax.swing.JFrame {
     private Selector selector;
     private PlayerPanel playerPanel;
     private SensorService sensorService;
+    protected ResourceManager rm;
 
     public VideoFrame(User user, String currentFile, VideoPanel parent, FilesPanel filesPanel) {
         this.mediaPlayer = parent.getMediaPlayer();
@@ -65,6 +69,7 @@ public class VideoFrame extends javax.swing.JFrame {
         this.filesPanel = filesPanel;
         this.emptyPanel = new JPanel();
         this.sensorService = new SensorService(user);
+        this.rm = ResourceManager.getInstance();
 
         if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
             this.selector = new MouseSelector(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
@@ -78,7 +83,7 @@ public class VideoFrame extends javax.swing.JFrame {
 
         setTitle("Video Player");
         setVisible(false);
-        setIconImage((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/tp_logo_mini.png"))).getImage());        
+        setIconImage(rm.getImage("tp_logo_mini.png", ResourceType.FROM_JAR));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         initComponents();
@@ -105,27 +110,27 @@ public class VideoFrame extends javax.swing.JFrame {
         javax.swing.GroupLayout wrapperPanelLayout = new javax.swing.GroupLayout(wrapperPanel);
         wrapperPanel.setLayout(wrapperPanelLayout);
         wrapperPanelLayout.setHorizontalGroup(
-            wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+                wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 400, Short.MAX_VALUE)
         );
         wrapperPanelLayout.setVerticalGroup(
-            wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 44, Short.MAX_VALUE)
+                wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 44, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(videoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-            .addComponent(wrapperPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(videoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                        .addComponent(wrapperPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(videoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(wrapperPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(videoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(wrapperPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -192,7 +197,7 @@ public class VideoFrame extends javax.swing.JFrame {
 
     private void initCustomComponents() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
+
         videoPanel.add(parent.getMediaPlayerComponent(), BorderLayout.CENTER);
 
         wrapperPanel.setLayout(new BoxLayout(wrapperPanel, BoxLayout.Y_AXIS));
@@ -300,7 +305,7 @@ public class VideoFrame extends javax.swing.JFrame {
                 if (sensorService.shouldSelect(sensor)) {
                     if (mediaPlayer.status().isPlaying()) {
                         mediaPlayer.controls().play();
-                    }                    
+                    }
                     selector.cancel();
                     mediaPlayer.controls().stop();
                     parent.getSelector().start();
@@ -310,11 +315,11 @@ public class VideoFrame extends javax.swing.JFrame {
         });
         this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent we) {                 
+            public void windowClosing(WindowEvent we) {
                 selector.cancel();
                 mediaPlayer.controls().stop();
                 parent.getSelector().start();
-                dispose();                
+                dispose();
             }
         });
     }
