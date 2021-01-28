@@ -93,7 +93,7 @@ public class LanguageSelector extends javax.swing.JPanel {
     protected void initCloseButton() {
         closePanel = new JPanel();
         JLabel closeLabel = new JLabel();
-        closeLabel.setIcon(new ImageIcon(rm.getImage("close-icon.png", ResourceType.FROM_JAR).getScaledInstance(25, 25, Image.SCALE_SMOOTH)));
+        closeLabel.setIcon(new ImageIcon(rm.getImage("close-icon.png", ResourceType.JAR).getScaledInstance(25, 25, Image.SCALE_SMOOTH)));
         closeLabel.setBorder(new EmptyBorder(0, 10, 0, 0));
         closePanel.setLayout(new BoxLayout(closePanel, BoxLayout.Y_AXIS));
         closePanel.setBackground(Color.white);

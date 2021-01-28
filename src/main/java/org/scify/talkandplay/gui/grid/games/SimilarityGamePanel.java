@@ -36,12 +36,13 @@ public class SimilarityGamePanel extends BaseGamePanel {
     private boolean endGame = false;
     private ImageResource correctImage;
     private SensorService sensorService;
+    protected Message message;
 
     public SimilarityGamePanel(User user, GridFrame parent, String previousGame) {
         super(user, parent, "similarityGame", null, previousGame);
         this.previousGame = previousGame;
         this.sensorService = new SensorService(user);
-
+        message = Message.getInstance();
         initComponents();
         initCustomComponents();
     }
@@ -49,7 +50,7 @@ public class SimilarityGamePanel extends BaseGamePanel {
     public SimilarityGamePanel(User user, GridFrame parent, Game game) {
         super(user, parent, "similarityGame", game, "");
         this.sensorService = new SensorService(user);
-
+        message = Message.getInstance();
         initComponents();
         initCustomComponents();
     }
@@ -152,7 +153,7 @@ public class SimilarityGamePanel extends BaseGamePanel {
         if (image.equals(correctImage)) {
             congratulate();
         } else {
-            setBottomMessage(Message.getRandomError());
+            setBottomMessage(message.getRandomMistakeMessage());
             selector.cancel();
             tileCreator.playAudio(getErrorSound(), new TileAction() {
                 @Override

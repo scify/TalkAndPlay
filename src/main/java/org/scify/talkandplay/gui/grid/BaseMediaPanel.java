@@ -134,12 +134,12 @@ public class BaseMediaPanel extends BasePanel {
         noFiles.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
         noFiles.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel label = new JLabel(rm.getTextOfXMLTag("back"));
+        JLabel label = new JLabel(rm.getTextOfXMLTag("backButton"));
         label.setBorder(new EmptyBorder(5, 5, 5, 5));
         label.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel icon = new JLabel(new ImageIcon(rm.getImage("back-icon.png", ResourceType.FROM_JAR).getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
+        JLabel icon = new JLabel(new ImageIcon(rm.getImage("back-icon.png", ResourceType.JAR).getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
         icon.setBorder(new EmptyBorder(5, 5, 5, 5));
         icon.setAlignmentX(Component.CENTER_ALIGNMENT);
 

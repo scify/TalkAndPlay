@@ -129,8 +129,8 @@ public class EntertainmentPanel extends BaseGridPanel {
     }
 
     private JPanel createBackItem() {
-        JPanel panel = tileCreator.create(rm.getTextOfXMLTag("back"),
-                new ImageResource("back-icon.png", ResourceType.FROM_JAR),
+        JPanel panel = tileCreator.create(rm.getTextOfXMLTag("backButton"),
+                new ImageResource("back-icon.png", ResourceType.JAR),
                 null,
                 new TileAction() {
                     @Override

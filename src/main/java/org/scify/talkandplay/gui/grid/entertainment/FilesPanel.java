@@ -108,24 +108,24 @@ public class FilesPanel extends javax.swing.JPanel {
         } else {
             prevText = rm.getTextOfXMLTag("previousVideos");
             nextText = rm.getTextOfXMLTag("nextVideos");
-            backText = rm.getTextOfXMLTag("back");
+            backText = rm.getTextOfXMLTag("backButton");
         }
 
         if (start == 0) {
-            prevSongs = drawControl(prevText, new ImageIcon(rm.getImage("left-icon-disabled.png", ResourceType.FROM_JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "icon");
+            prevSongs = drawControl(prevText, new ImageIcon(rm.getImage("left-icon-disabled.png", ResourceType.JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "icon");
             prevSongs.getComponent(1).setForeground(Color.decode(UIConstants.disabledColor));
         } else {
-            prevSongs = drawControl(prevText, new ImageIcon(rm.getImage("left-icon.png", ResourceType.FROM_JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "icon");
+            prevSongs = drawControl(prevText, new ImageIcon(rm.getImage("left-icon.png", ResourceType.JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "icon");
         }
         if (end >= files.size()) {
-            nextSongs = drawControl(nextText, new ImageIcon(rm.getImage("right-icon-disabled.png", ResourceType.FROM_JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "text");
+            nextSongs = drawControl(nextText, new ImageIcon(rm.getImage("right-icon-disabled.png", ResourceType.JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "text");
             nextSongs.getComponent(0).setForeground(Color.decode(UIConstants.disabledColor));
         } else {
-            nextSongs = drawControl(nextText, new ImageIcon(rm.getImage("right-icon.png", ResourceType.FROM_JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "text");
+            nextSongs = drawControl(nextText, new ImageIcon(rm.getImage("right-icon.png", ResourceType.JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "text");
         }
 
-        controls = drawControl(backText, new ImageIcon(rm.getImage("down-icon.png", ResourceType.FROM_JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "icon");
-        back = drawControl(backText, new ImageIcon(rm.getImage("back-icon.png", ResourceType.FROM_JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "icon");
+        controls = drawControl(backText, new ImageIcon(rm.getImage("down-icon.png", ResourceType.JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "icon");
+        back = drawControl(backText, new ImageIcon(rm.getImage("back-icon.png", ResourceType.JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH)), "icon");
 
         add(prevSongs);
         panelList.add(prevSongs);

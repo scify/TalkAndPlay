@@ -25,7 +25,6 @@ import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.net.URL;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -75,15 +74,14 @@ public class GuiHelper {
     /**
      * Get the icon for a user, or no photo
      *
-     * @param path
+     * @param image
      * @return
      */
-    public ImageIcon getIcon(String path) {
-        if (path != null && new File(path).isFile()) {
-            return new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
-
+    public ImageIcon getIcon(ImageResource image) {
+        if (image != null) {
+            return new ImageIcon(image.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
         } else {
-            return new ImageIcon(rm.getImage("no-photo.png", ResourceType.FROM_JAR).getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+            return new ImageIcon(rm.getImage("no-photo.png", ResourceType.JAR).getScaledInstance(150, 150, Image.SCALE_DEFAULT));
         }
     }
 
@@ -114,16 +112,16 @@ public class GuiHelper {
     /**
      * Get a round icon
      *
-     * @param path
+     * @param imageResource
      * @return
      */
-    public ImageIcon getRoundIcon(String path) {
+    public ImageIcon getRoundIcon(ImageResource imageResource) {
         //first scale the image to the desired dimensions
         BufferedImage master = new BufferedImage(DEFAULT_WIDTH, DEFAULT_HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = master.createGraphics();
-        Image image = rm.getImage(path, ResourceType.FROM_RESOURCES);
+        Image image = imageResource.getImage();
         if (image == null) {
-            g2d.drawImage(new ImageIcon(rm.getImage("no-photo.png", ResourceType.FROM_JAR).getScaledInstance(DEFAULT_WIDTH, DEFAULT_WIDTH, Image.SCALE_SMOOTH)).getImage(), 0, 0, null);
+            g2d.drawImage(new ImageIcon(rm.getImage("no-photo.png", ResourceType.JAR).getScaledInstance(DEFAULT_WIDTH, DEFAULT_WIDTH, Image.SCALE_SMOOTH)).getImage(), 0, 0, null);
         } else {
             g2d.drawImage(new ImageIcon(image.getScaledInstance(DEFAULT_WIDTH, DEFAULT_WIDTH, Image.SCALE_SMOOTH)).getImage(), 0, 0, null);
         }

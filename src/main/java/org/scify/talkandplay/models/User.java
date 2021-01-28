@@ -18,12 +18,13 @@ package org.scify.talkandplay.models;
 import org.scify.talkandplay.models.modules.CommunicationModule;
 import org.scify.talkandplay.models.modules.EntertainmentModule;
 import org.scify.talkandplay.models.modules.GameModule;
+import org.scify.talkandplay.utils.ImageResource;
 import org.scify.talkandplay.utils.ResourceManager;
 
 public class User {
 
     private String name;
-    private String image;
+    private ImageResource image;
     private boolean preselected;
 
     private Configuration configuration;
@@ -45,7 +46,7 @@ public class User {
         rm = ResourceManager.getInstance();
     }
 
-    public User(String name, String image) {
+    public User(String name, ImageResource image) {
         this.name = name;
         this.image = image;
         configuration = new Configuration();
@@ -60,11 +61,11 @@ public class User {
         this.name = name;
     }
 
-    public String getImage() {
+    public ImageResource getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(ImageResource image) {
         this.image = image;
     }
 

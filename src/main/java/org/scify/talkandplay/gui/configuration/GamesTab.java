@@ -22,7 +22,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -99,9 +98,9 @@ public class GamesTab extends javax.swing.JPanel {
         gamesComboBox.setFont(new Font(UIConstants.green, Font.PLAIN, 12));
 
         gamesComboBox.addItem(rm.getTextOfXMLTag("chooseGame"));
-        gamesComboBox.addItem(rm.getTextOfXMLTag("stimulusReaction"));
-        gamesComboBox.addItem(rm.getTextOfXMLTag("timeSequence"));
-        gamesComboBox.addItem(rm.getTextOfXMLTag("findSimilar"));
+        gamesComboBox.addItem(rm.getTextOfXMLTag("gameTypeStimulusReaction"));
+        gamesComboBox.addItem(rm.getTextOfXMLTag("gameTypeTimeSequence"));
+        gamesComboBox.addItem(rm.getTextOfXMLTag("gameTypeFindTheSimilar"));
 
         setListeners();
     }
@@ -141,18 +140,18 @@ public class GamesTab extends javax.swing.JPanel {
                 saveButton.setVisible(true);
 
                 winSound = gameType.getWinSound();
-                if (winSound.getResourceType() == ResourceType.MISSING) {
-                    winSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                if (winSound == null) {
+                    winSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 } else {
-                    winSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    winSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                     removeWinSoundLavel.setVisible(true);
                 }
 
                 errorSound = gameType.getErrorSound();
-                if (errorSound.getResourceType() == ResourceType.MISSING) {
-                    errorSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                if (errorSound == null) {
+                    errorSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 } else {
-                    errorSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    errorSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                     removeErrorSoundLavel.setVisible(true);
                 }
 
@@ -183,20 +182,20 @@ public class GamesTab extends javax.swing.JPanel {
         winSoundLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent me) {
-                if (winSound == null || winSound.getResourceType() == ResourceType.MISSING) {
-                    winSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                if (winSound == null) {
+                    winSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 } else {
-                    winSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon-hover.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    winSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon-hover.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                     playMedia(rm.getSound(winSound).getAbsolutePath());
                 }
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
-                if (winSound == null || winSound.getResourceType() == ResourceType.MISSING) {
-                    winSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                if (winSound == null) {
+                    winSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 } else {
-                    winSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    winSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 }
             }
 
@@ -209,9 +208,9 @@ public class GamesTab extends javax.swing.JPanel {
                 chooser.setFileFilter(new FileNameExtensionFilter("Sound Files", "mp3", "wav", "wma", "mid"));
                 chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                    winSound = new SoundResource(chooser.getSelectedFile().getAbsolutePath(), ResourceType.FULL_PATH);
-                    winSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
-                    gameType.setWinSound(winSound.getPath(), winSound.getResourceType());
+                    winSound = new SoundResource(chooser.getSelectedFile().getAbsolutePath(), ResourceType.LOCAL);
+                    winSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    gameType.setWinSound(new SoundResource(winSound.getPath(), winSound.getResourceType()));
                     removeWinSoundLavel.setVisible(true);
                 }
             }
@@ -220,20 +219,20 @@ public class GamesTab extends javax.swing.JPanel {
         errorSoundLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent me) {
-                if (errorSound == null || errorSound.getResourceType() == ResourceType.MISSING) {
-                    errorSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                if (errorSound == null) {
+                    errorSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 } else {
-                    errorSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon-hover.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    errorSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon-hover.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                     playMedia(rm.getSound(errorSound).getAbsolutePath());
                 }
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
-                if (errorSound == null || errorSound.getResourceType() == ResourceType.MISSING) {
-                    errorSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                if (errorSound == null) {
+                    errorSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 } else {
-                    errorSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    errorSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 }
             }
 
@@ -246,9 +245,9 @@ public class GamesTab extends javax.swing.JPanel {
                 chooser.setFileFilter(new FileNameExtensionFilter("Sound Files", "mp3", "wav", "wma", "mid"));
                 chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                    errorSound = new SoundResource(chooser.getSelectedFile().getAbsolutePath(), ResourceType.FULL_PATH);
-                    errorSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
-                    gameType.setErrorSound(errorSound.getPath(), errorSound.getResourceType());
+                    errorSound = new SoundResource(chooser.getSelectedFile().getAbsolutePath(), ResourceType.LOCAL);
+                    errorSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    gameType.setErrorSound(new SoundResource(errorSound.getPath(), errorSound.getResourceType()));
                     removeErrorSoundLavel.setVisible(true);
                 }
             }
@@ -257,13 +256,13 @@ public class GamesTab extends javax.swing.JPanel {
         gamesComboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent ie) {
-                if (rm.getTextOfXMLTag("stimulusReaction").equals(ie.getItem())) {
+                if (rm.getTextOfXMLTag("gameTypeStimulusReaction").equals(ie.getItem())) {
                     showGamesPerType("stimulusReactionGame");
                     currentGameType = "stimulusReactionGames";
-                } else if (rm.getTextOfXMLTag("timeSequence").equals(ie.getItem())) {
+                } else if (rm.getTextOfXMLTag("gameTypeTimeSequence").equals(ie.getItem())) {
                     showGamesPerType("sequenceGame");
                     currentGameType = "sequenceGames";
-                } else if (rm.getTextOfXMLTag("findSimilar").equals(ie.getItem())) {
+                } else if (rm.getTextOfXMLTag("gameTypeFindTheSimilar").equals(ie.getItem())) {
                     showGamesPerType("similarityGame");
                     currentGameType = "similarityGames";
                 }
@@ -273,21 +272,20 @@ public class GamesTab extends javax.swing.JPanel {
         removeWinSoundLavel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                gameType.setWinSound("", ResourceType.MISSING);
-                winSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                gameType.setWinSound(null);
+                winSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 removeWinSoundLavel.setVisible(false);
-                winSound = new SoundResource("", ResourceType.MISSING);
+                winSound = null;
             }
         });
 
         removeErrorSoundLavel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                gameType.setErrorSound("", ResourceType.MISSING);
-                errorSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                gameType.setErrorSound(null);
+                errorSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 removeErrorSoundLavel.setVisible(false);
-                errorSound = new SoundResource("", ResourceType.MISSING);
-                ;
+                errorSound = null;;
             }
         });
     }
@@ -324,11 +322,11 @@ public class GamesTab extends javax.swing.JPanel {
         wrapperPanel.setBackground(new java.awt.Color(255, 255, 255));
         wrapperPanel.setForeground(new java.awt.Color(0, 0, 0));
 
-        step1Label.setText("1. Επίλεξε κατηγορία παιχνιδιού");
+        step1Label.setText("1. " + rm.getTextOfXMLTag("selectGameCategory"));
 
         gamesComboBox.setBackground(new java.awt.Color(255, 255, 255));
 
-        step2Label.setText("2. Διαχειρίσου τις διαθέσιμες ομάδες εικόνων");
+        step2Label.setText("2. " + rm.getTextOfXMLTag("configureAvailableImageGroups"));
 
         gamesPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -346,7 +344,7 @@ public class GamesTab extends javax.swing.JPanel {
         saveButton.setBackground(new java.awt.Color(75, 161, 69));
         saveButton.setFont(saveButton.getFont());
         saveButton.setForeground(new java.awt.Color(255, 255, 255));
-        saveButton.setText("Αποθήκευση");
+        saveButton.setText(rm.getTextOfXMLTag("saveButton"));
         saveButton.setBorder(null);
         saveButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -354,19 +352,19 @@ public class GamesTab extends javax.swing.JPanel {
             }
         });
 
-        step3Label.setText("3. Βάλε ήχους επιβράβευσης και λάθους ");
+        step3Label.setText("3. " + rm.getTextOfXMLTag("addSoundsForCongratulationsAndMistakes") + " ");
 
-        step3ExplLabel.setText("(θα χρησιμοποιηθούν προεπιλεγμένοι ήχοι αν δεν ανεβάσεις ήχο)");
+        step3ExplLabel.setText("(" + rm.getTextOfXMLTag("addSoundsForCongratulationsAndMistakes2") + ")");
 
-        winSoundLabel.setText("επιβράβευση");
+        winSoundLabel.setText(rm.getTextOfXMLTag("congratulation"));
 
-        errorSoundLabel.setText("σφάλμα");
+        errorSoundLabel.setText(rm.getTextOfXMLTag("mistake"));
 
-        removeWinSoundLavel.setText("Αφαίρεση ήχου");
+        removeWinSoundLavel.setText(rm.getTextOfXMLTag("removeSound"));
 
-        removeErrorSoundLavel.setText("Αφαίρεση ήχου");
+        removeErrorSoundLavel.setText(rm.getTextOfXMLTag("removeSound"));
 
-        step4Label.setText("4. Προσθήκη νέου παιχνιδιού");
+        step4Label.setText("4. " + rm.getTextOfXMLTag("addNewGame"));
 
         gamesPanel4.setBackground(new java.awt.Color(255, 255, 255));
         gamesPanel4.setToolTipText("");

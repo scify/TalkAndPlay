@@ -249,17 +249,17 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
     protected SoundResource getWinSound() {
         SoundResource sound = null;
 
-        if (game.getWinSound() != null && game.getWinSound().getResourceType() != ResourceType.MISSING) {
+        if (game.getWinSound() != null) {
             sound = game.getWinSound();
         } else {
             for (GameType gameType : user.getGameModule().getGameTypes()) {
-                if ("stimulusReactionGame".equals(gameType.getType()) && gameType.getWinSound() != null && gameType.getWinSound().getResourceType() != ResourceType.MISSING) {
+                if ("stimulusReactionGame".equals(gameType.getType()) && gameType.getWinSound() != null) {
                     sound = gameType.getWinSound();
                 }
             }
         }
         if (sound == null) {
-            sound = new SoundResource("sounds/games/winSound.mp3", ResourceType.FROM_RESOURCES);
+            sound = new SoundResource("sounds/games/winSound.mp3", ResourceType.BUNDLE);
         }
         return sound;
     }

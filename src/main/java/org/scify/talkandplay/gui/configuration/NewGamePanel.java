@@ -76,10 +76,10 @@ public class NewGamePanel extends javax.swing.JPanel {
 
     private void initCustomComponents() {
 
-        addIcon = new ImageIcon(rm.getImage("add-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH));
-        soundIcon = new ImageIcon(rm.getImage("sound-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH));
-        addIconHover = new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH));
-        soundIconHover = new ImageIcon(rm.getImage("sound-icon-hover.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+        addIcon = new ImageIcon(rm.getImage("add-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+        soundIcon = new ImageIcon(rm.getImage("sound-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+        addIconHover = new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+        soundIconHover = new ImageIcon(rm.getImage("sound-icon-hover.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH));
 
         imgLabels.add(img1Label);
         imgLabels.add(img2Label);
@@ -159,7 +159,7 @@ public class NewGamePanel extends javax.swing.JPanel {
         soundLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent me) {
-                if (game.getWinSound() == null || game.getWinSound().getResourceType() == ResourceType.MISSING) {
+                if (game.getWinSound() == null) {
                     soundLabel.setIcon(addIconHover);
                 } else {
                     soundLabel.setIcon(soundIconHover);
@@ -169,7 +169,7 @@ public class NewGamePanel extends javax.swing.JPanel {
 
             @Override
             public void mouseExited(MouseEvent me) {
-                if (game.getWinSound() == null || game.getWinSound().getResourceType() == ResourceType.MISSING) {
+                if (game.getWinSound() == null) {
                     soundLabel.setIcon(addIcon);
                 } else {
                     soundLabel.setIcon(soundIcon);
@@ -185,7 +185,7 @@ public class NewGamePanel extends javax.swing.JPanel {
                 chooser.setFileFilter(new FileNameExtensionFilter("Sound Files", "mp3", "wav", "wma", "mid"));
                 chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                    game.setWinSound(chooser.getSelectedFile().getAbsolutePath(), ResourceType.FULL_PATH);
+                    game.setWinSound(new SoundResource(chooser.getSelectedFile().getAbsolutePath(), ResourceType.LOCAL));
                     soundLabel.setIcon(soundIcon);
                     soundLabel.setText("");
                     removeSoundLabel.setVisible(true);
@@ -196,7 +196,7 @@ public class NewGamePanel extends javax.swing.JPanel {
         removeSoundLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                game.setWinSound("", ResourceType.MISSING);
+                game.setWinSound(null);
                 soundLabel.setIcon(addIconHover);
                 removeSoundLabel.setVisible(false);
                 soundLabel.setText(rm.getTextOfXMLTag("addNewSound"));

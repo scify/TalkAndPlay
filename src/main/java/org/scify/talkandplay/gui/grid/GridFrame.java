@@ -97,7 +97,7 @@ public class GridFrame extends javax.swing.JFrame {
         UIConstants.getInstance().setHeight(getHeight());
         UIConstants.getInstance().setWidth(getWidth());
 
-        setIconImage(rm.getImage("tp_logo_mini.png", ResourceType.FROM_JAR));
+        setIconImage(rm.getImage("tp_logo_mini.png", ResourceType.JAR));
         gridPanel.setLayout(new BoxLayout(gridPanel, BoxLayout.LINE_AXIS));
         gridPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 

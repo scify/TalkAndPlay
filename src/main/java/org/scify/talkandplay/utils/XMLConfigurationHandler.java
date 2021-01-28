@@ -164,7 +164,12 @@ public class XMLConfigurationHandler {
 
     private User parseUserFromXml(Element userEl) {
         imageAndSoundFilePaths = new ArrayList();
-        User user = new User(userEl.getChildText("name"), userEl.getChildText("image"));
+        String userName = userEl.getChildText("name");
+        Element imageElement = userEl.getChild("image");
+        String imagePath = imageElement.getText();
+        String imageType = imageElement.getAttributeValue("resourceType");
+        ResourceType imageResourceType = ResourceType.valueOf(imageType);
+        User user = new User(userName, new ImageResource(imagePath, imageResourceType));
         currentUser = user;
         if (userEl.getAttributeValue("preselected") != null) {
             user.setPreselected(Boolean.parseBoolean(userEl.getAttributeValue("preselected")));
@@ -249,16 +254,16 @@ public class XMLConfigurationHandler {
 
         String image = communicationNode.getChildText("image");
         if (image.isEmpty()) {
-            communicationModule.setImage("defaultImgs/communication_module.png", ResourceType.FROM_JAR);
+            communicationModule.setImage(new ImageResource("defaultImgs/communication_module.png", ResourceType.JAR));
         } else {
-            communicationModule.setImage(image, ResourceType.FROM_RESOURCES);
+            communicationModule.setImage(new ImageResource(image, ResourceType.BUNDLE));
         }
 
         String sound = communicationNode.getChildText("sound");
         if (sound.isEmpty()) {
-            communicationModule.setSound("sounds/communication.mp3", ResourceType.FROM_RESOURCES);
+            communicationModule.setSound(new SoundResource("sounds/communication.mp3", ResourceType.BUNDLE));
         } else {
-            communicationModule.setSound(sound, ResourceType.FROM_RESOURCES);
+            communicationModule.setSound(new SoundResource(sound, ResourceType.BUNDLE));
         }
 
         communicationModule.setEnabled("true".equals(communicationNode.getChildText("enabled")));
@@ -275,39 +280,39 @@ public class XMLConfigurationHandler {
 
         String image = entertainmentNode.getChildText("image");
         if (image.isEmpty()) {
-            entertainmentModule.setImage("defaultImgs/entertainment_module.png", ResourceType.FROM_JAR);
+            entertainmentModule.setImage(new ImageResource("defaultImgs/entertainment_module.png", ResourceType.JAR));
         } else {
-            entertainmentModule.setImage(image, ResourceType.FROM_RESOURCES);
+            entertainmentModule.setImage(new ImageResource(image, ResourceType.BUNDLE));
         }
 
         String sound = entertainmentNode.getChildText("sound");
         if (sound.isEmpty()) {
-            entertainmentModule.setSound("sounds/entertainment.mp3", ResourceType.FROM_RESOURCES);
+            entertainmentModule.setSound(new SoundResource("sounds/entertainment.mp3", ResourceType.BUNDLE));
         } else {
-            entertainmentModule.setSound(sound, ResourceType.FROM_RESOURCES);
+            entertainmentModule.setSound(new SoundResource(sound, ResourceType.BUNDLE));
         }
 
         //set the music module
         Element musicNode = (Element) entertainmentNode.getChild("music");
         MusicModule musicModule = new MusicModule();
         musicModule.setName(musicNode.getChildText("name"));
-        musicModule.setSound(musicNode.getChildText("sound"), ResourceType.FROM_RESOURCES);
+        musicModule.setSound(new SoundResource(musicNode.getChildText("sound"), ResourceType.BUNDLE));
         musicModule.setFolderPath(musicNode.getChildText("path"));
         musicModule.setPlaylistSize(Integer.parseInt(musicNode.getChildText("playlistSize")));
         musicModule.setEnabled("true".equals(musicNode.getChildText("name")));
 
         String musicImage = musicNode.getChildText("image");
         if (musicImage.isEmpty()) {
-            musicModule.setImage("defaultImgs/music_module.png", ResourceType.FROM_JAR);
+            musicModule.setImage(new ImageResource("defaultImgs/music_module.png", ResourceType.JAR));
         } else {
-            musicModule.setImage(musicImage, ResourceType.FROM_RESOURCES);
+            musicModule.setImage(new ImageResource(musicImage, ResourceType.BUNDLE));
         }
 
         String musicSound = musicNode.getChildText("sound");
         if (musicSound.isEmpty()) {
-            musicModule.setSound("sounds/music.mp3", ResourceType.FROM_RESOURCES);
+            musicModule.setSound(new SoundResource("sounds/music.mp3", ResourceType.BUNDLE));
         } else {
-            musicModule.setSound(musicSound, ResourceType.FROM_RESOURCES);
+            musicModule.setSound(new SoundResource(musicSound, ResourceType.BUNDLE));
         }
 
         //set the video module
@@ -320,16 +325,16 @@ public class XMLConfigurationHandler {
 
         String videoImage = videoNode.getChildText("image");
         if (videoImage.isEmpty()) {
-            videoModule.setImage("defaultImgs/video_module.png", ResourceType.FROM_JAR);
+            videoModule.setImage(new ImageResource("defaultImgs/video_module.png", ResourceType.JAR));
         } else {
-            videoModule.setImage(videoImage, ResourceType.FROM_RESOURCES);
+            videoModule.setImage(new ImageResource(videoImage, ResourceType.BUNDLE));
         }
 
         String videoSound = videoNode.getChildText("sound");
         if (videoSound.isEmpty()) {
-            videoModule.setSound("sounds/video.mp3", ResourceType.FROM_RESOURCES);
+            videoModule.setSound(new SoundResource("sounds/video.mp3", ResourceType.BUNDLE));
         } else {
-            videoModule.setSound(videoSound, ResourceType.FROM_RESOURCES);
+            videoModule.setSound(new SoundResource(videoSound, ResourceType.BUNDLE));
         }
 
         entertainmentModule.setMusicModule(musicModule);
@@ -346,16 +351,16 @@ public class XMLConfigurationHandler {
 
         String image = gameNode.getChildText("image");
         if (image.isEmpty()) {
-            gameModule.setImage("defaultImgs/games_module.png", ResourceType.FROM_JAR);
+            gameModule.setImage(new ImageResource("defaultImgs/games_module.png", ResourceType.JAR));
         } else {
-            gameModule.setImage(image, ResourceType.FROM_RESOURCES);
+            gameModule.setImage(new ImageResource(image, ResourceType.BUNDLE));
         }
 
         String sound = gameNode.getChildText("sound");
         if (sound.isEmpty()) {
-            gameModule.setSound("sounds/games.mp3", ResourceType.FROM_RESOURCES);
+            gameModule.setSound(new SoundResource("sounds/games.mp3", ResourceType.BUNDLE));
         } else {
-            gameModule.setSound(sound, ResourceType.FROM_RESOURCES);
+            gameModule.setSound(new SoundResource(sound, ResourceType.BUNDLE));
         }
 
         //set the stimulus reaction games
@@ -368,30 +373,30 @@ public class XMLConfigurationHandler {
 
             String stimulusSound = stimulusReactionGamesNode.getChildText("sound");
             if (stimulusSound.isEmpty()) {
-                stimulusReactionType.setSound("sounds/stimulus_reaction.mp3", ResourceType.FROM_RESOURCES);
+                stimulusReactionType.setSound(new SoundResource("sounds/stimulus_reaction.mp3", ResourceType.BUNDLE));
             } else {
-                stimulusReactionType.setSound(stimulusSound, ResourceType.FROM_RESOURCES);
+                stimulusReactionType.setSound(new SoundResource(stimulusSound, ResourceType.BUNDLE));
             }
 
             String stimulusImage = stimulusReactionGamesNode.getChildText("image");
             if (stimulusImage.isEmpty()) {
-                stimulusReactionType.setImage("defaultImgs/stimulus_game.png", ResourceType.FROM_JAR);
+                stimulusReactionType.setImage(new ImageResource("defaultImgs/stimulus_game.png", ResourceType.JAR));
             } else {
-                stimulusReactionType.setImage(stimulusImage, ResourceType.FROM_RESOURCES);
+                stimulusReactionType.setImage(new ImageResource(stimulusImage, ResourceType.BUNDLE));
             }
 
             String stimulusWinSound = stimulusReactionGamesNode.getChildText("winSound");
             if (stimulusWinSound.isEmpty()) {
-                stimulusReactionType.setWinSound("", ResourceType.MISSING);
+                stimulusReactionType.setWinSound(null);
             } else {
-                stimulusReactionType.setWinSound(stimulusWinSound, ResourceType.FROM_RESOURCES);
+                stimulusReactionType.setWinSound(new SoundResource(stimulusWinSound, ResourceType.BUNDLE));
             }
 
             String stimulusErrorSound = stimulusReactionGamesNode.getChildText("errorSound");
             if (stimulusErrorSound.isEmpty()) {
-                stimulusReactionType.setErrorSound("", ResourceType.MISSING);
+                stimulusReactionType.setErrorSound(null);
             } else {
-                stimulusReactionType.setErrorSound(stimulusErrorSound, ResourceType.FROM_RESOURCES);
+                stimulusReactionType.setErrorSound(new SoundResource(stimulusErrorSound, ResourceType.BUNDLE));
             }
 
             List<Element> gamesList = stimulusReactionGamesNode.getChild("games").getChildren();
@@ -406,23 +411,23 @@ public class XMLConfigurationHandler {
 
                 String winSound = e.getChildText("winSound");
                 if (winSound == null || winSound.isEmpty()) {
-                    game.setWinSound("sounds/win.mp3", ResourceType.FROM_JAR);
+                    game.setWinSound(new SoundResource("sounds/win.mp3", ResourceType.JAR));
                 } else {
-                    game.setWinSound(winSound, ResourceType.FROM_RESOURCES);
+                    game.setWinSound(new SoundResource(winSound, ResourceType.BUNDLE));
                 }
 
                 String errorSound = e.getChildText("errorSound");
                 if (errorSound == null || errorSound.isEmpty()) {
-                    game.setErrorSound("sounds/error.mp3", ResourceType.FROM_JAR);
+                    game.setErrorSound(new SoundResource("sounds/error.mp3", ResourceType.JAR));
                 } else {
-                    game.setErrorSound(errorSound, ResourceType.FROM_RESOURCES);
+                    game.setErrorSound(new SoundResource(errorSound, ResourceType.BUNDLE));
                 }
 
                 String gameImage = e.getChildText("image");
                 if (gameImage.isEmpty()) {
-                    game.setImage("defaultImgs/stimulus_game.png", ResourceType.FROM_JAR);
+                    game.setImage(new ImageResource("defaultImgs/stimulus_game.png", ResourceType.JAR));
                 } else {
-                    game.setImage(gameImage, ResourceType.FROM_RESOURCES);
+                    game.setImage(new ImageResource(gameImage, ResourceType.BUNDLE));
                 }
 
                 List<Element> imagesList = e.getChild("gameImages").getChildren();
@@ -453,30 +458,30 @@ public class XMLConfigurationHandler {
 
             String sequenceGamesSound = sequenceGamesNode.getChildText("sound");
             if (sequenceGamesSound.isEmpty()) {
-                sequenceGameType.setSound("sounds/time_sequence.mp3", ResourceType.FROM_RESOURCES);
+                sequenceGameType.setSound(new SoundResource("sounds/time_sequence.mp3", ResourceType.BUNDLE));
             } else {
-                sequenceGameType.setSound(sequenceGamesSound, ResourceType.FROM_RESOURCES);
+                sequenceGameType.setSound(new SoundResource(sequenceGamesSound, ResourceType.BUNDLE));
             }
 
             String sequenceGamesImage = sequenceGamesNode.getChildText("image");
             if (sequenceGamesImage.isEmpty()) {
-                sequenceGameType.setImage("defaultImgs/sequence_game.png", ResourceType.FROM_JAR);
+                sequenceGameType.setImage(new ImageResource("defaultImgs/sequence_game.png", ResourceType.JAR));
             } else {
-                sequenceGameType.setImage(sequenceGamesImage, ResourceType.FROM_RESOURCES);
+                sequenceGameType.setImage(new ImageResource(sequenceGamesImage, ResourceType.BUNDLE));
             }
 
             String winSound = sequenceGamesNode.getChildText("winSound");
             if (winSound.isEmpty()) {
-                sequenceGameType.setWinSound("", ResourceType.MISSING);
+                sequenceGameType.setWinSound(null);
             } else {
-                sequenceGameType.setWinSound(winSound, ResourceType.FROM_RESOURCES);
+                sequenceGameType.setWinSound(new SoundResource(winSound, ResourceType.BUNDLE));
             }
 
             String errorSound = sequenceGamesNode.getChildText("errorSound");
             if (errorSound.isEmpty()) {
-                sequenceGameType.setErrorSound("", ResourceType.MISSING);
+                sequenceGameType.setErrorSound(null);
             } else {
-                sequenceGameType.setErrorSound(errorSound, ResourceType.FROM_RESOURCES);
+                sequenceGameType.setErrorSound(new SoundResource(errorSound, ResourceType.BUNDLE));
             }
 
             List gamesList = sequenceGamesNode.getChild("games").getChildren();
@@ -490,23 +495,23 @@ public class XMLConfigurationHandler {
 
                 winSound = e.getChildText("winSound");
                 if (winSound == null || winSound.isEmpty()) {
-                    game.setWinSound("sounds/win.mp3", ResourceType.FROM_JAR);
+                    game.setWinSound(new SoundResource("sounds/win.mp3", ResourceType.JAR));
                 } else {
-                    game.setWinSound(winSound, ResourceType.FROM_RESOURCES);
+                    game.setWinSound(new SoundResource(winSound, ResourceType.BUNDLE));
                 }
 
                 errorSound = e.getChildText("errorSound");
                 if (errorSound == null || errorSound.isEmpty()) {
-                    game.setErrorSound("error/win.mp3", ResourceType.FROM_JAR);
+                    game.setErrorSound(new SoundResource("error/win.mp3", ResourceType.JAR));
                 } else {
-                    game.setErrorSound(errorSound, ResourceType.FROM_RESOURCES);
+                    game.setErrorSound(new SoundResource(errorSound, ResourceType.BUNDLE));
                 }
 
                 image = e.getChildText("image");
                 if (image.isEmpty()) {
-                    game.setImage("defaultImgs/sequence_game.png", ResourceType.FROM_JAR);
+                    game.setImage(new ImageResource("defaultImgs/sequence_game.png", ResourceType.JAR));
                 } else {
-                    game.setImage(image, ResourceType.FROM_RESOURCES);
+                    game.setImage(new ImageResource(image, ResourceType.BUNDLE));
                 }
 
                 List<Element> imagesList = e.getChild("gameImages").getChildren();
@@ -535,30 +540,30 @@ public class XMLConfigurationHandler {
 
             String similarGamesSound = similarGamesNode.getChildText("sound");
             if (similarGamesSound.isEmpty()) {
-                similarityGameType.setSound("sounds/find_the_similar.mp3", ResourceType.FROM_RESOURCES);
+                similarityGameType.setSound(new SoundResource("sounds/find_the_similar.mp3", ResourceType.BUNDLE));
             } else {
-                similarityGameType.setSound(similarGamesSound, ResourceType.FROM_RESOURCES);
+                similarityGameType.setSound(new SoundResource(similarGamesSound, ResourceType.BUNDLE));
             }
 
             String similarGamesImage = similarGamesNode.getChildText("image");
             if (similarGamesImage.isEmpty()) {
-                similarityGameType.setImage("defaultImgs/similarity_game.png", ResourceType.FROM_JAR);
+                similarityGameType.setImage(new ImageResource("defaultImgs/similarity_game.png", ResourceType.JAR));
             } else {
-                similarityGameType.setImage(similarGamesImage, ResourceType.FROM_RESOURCES);
+                similarityGameType.setImage(new ImageResource(similarGamesImage, ResourceType.BUNDLE));
             }
 
             String winSound = similarGamesNode.getChildText("winSound");
             if (winSound == null || winSound.isEmpty()) {
-                similarityGameType.setWinSound("", ResourceType.MISSING);
+                similarityGameType.setWinSound(null);
             } else {
-                similarityGameType.setWinSound(winSound, ResourceType.FROM_RESOURCES);
+                similarityGameType.setWinSound(new SoundResource(winSound, ResourceType.BUNDLE));
             }
 
             String errorSound = similarGamesNode.getChildText("errorSound");
             if (errorSound == null || errorSound.isEmpty()) {
-                similarityGameType.setErrorSound("", ResourceType.MISSING);
+                similarityGameType.setErrorSound(null);
             } else {
-                similarityGameType.setErrorSound(errorSound, ResourceType.FROM_RESOURCES);
+                similarityGameType.setErrorSound(new SoundResource(errorSound, ResourceType.BUNDLE));
             }
 
 
@@ -573,23 +578,23 @@ public class XMLConfigurationHandler {
 
                 winSound = e.getChildText("winSound");
                 if (winSound == null || winSound.isEmpty()) {
-                    game.setWinSound("sounds/win.mp3", ResourceType.FROM_JAR);
+                    game.setWinSound(new SoundResource("sounds/win.mp3", ResourceType.JAR));
                 } else {
-                    game.setWinSound(winSound, ResourceType.FROM_RESOURCES);
+                    game.setWinSound(new SoundResource(winSound, ResourceType.BUNDLE));
                 }
 
                 errorSound = e.getChildText("errorSound");
                 if (errorSound == null || errorSound.isEmpty()) {
-                    game.setErrorSound("error/win.mp3", ResourceType.FROM_JAR);
+                    game.setErrorSound(new SoundResource("error/win.mp3", ResourceType.JAR));
                 } else {
-                    game.setErrorSound(errorSound, ResourceType.FROM_RESOURCES);
+                    game.setErrorSound(new SoundResource(errorSound, ResourceType.BUNDLE));
                 }
 
                 String gameImage = e.getChildText("image");
                 if (gameImage.isEmpty()) {
-                    game.setImage("defaultImgs/similarity_game.png", ResourceType.FROM_JAR);
+                    game.setImage(new ImageResource("defaultImgs/similarity_game.png", ResourceType.JAR));
                 } else {
-                    game.setImage(gameImage, ResourceType.FROM_RESOURCES);
+                    game.setImage(new ImageResource(gameImage, ResourceType.BUNDLE));
                 }
 
                 List<Element> imagesList = e.getChild("gameImages").getChildren();
@@ -630,11 +635,11 @@ public class XMLConfigurationHandler {
 
                 Element categoryEl = (Element) categoriesNode.getChildren().get(i);
                 String categoryName = categoryEl.getAttributeValue("name");
-                ImageResource categoryImage = new ImageResource(categoryEl.getChildText("image"), ResourceType.FROM_RESOURCES);
+                ImageResource categoryImage = new ImageResource(categoryEl.getChildText("image"), ResourceType.BUNDLE);
 
                 Category category = new Category(categoryName, categoryImage);
 
-                SoundResource categorySoundResource = new SoundResource(categoryEl.getChildText("sound"), ResourceType.FROM_RESOURCES);
+                SoundResource categorySoundResource = new SoundResource(categoryEl.getChildText("sound"), ResourceType.BUNDLE);
                 category.setSound(categorySoundResource);
 
                 if (categoryEl.getChildText("rows") != null && !categoryEl.getChildText("rows").isEmpty()) {
@@ -726,7 +731,7 @@ public class XMLConfigurationHandler {
         for (Map.Entry<String, List<String>> entry : userFiles.entrySet()) {
             if (entry.getKey().equals(username)) {
                 for (String path : entry.getValue()) {
-                    File file = rm.getFileOfResource(path, ResourceType.FROM_RESOURCES);
+                    File file = rm.getFileOfResource(path, ResourceType.BUNDLE);
                     if (file == null || !file.isFile()) {
                         return true;
                     }
@@ -747,7 +752,8 @@ public class XMLConfigurationHandler {
         for (Map.Entry<String, List<String>> entry : userFiles.entrySet()) {
             if (entry.getKey().equals(username)) {
                 for (String path : entry.getValue()) {
-                    if (!(new File(path).isFile())) {
+                    File file = rm.getFileOfResource(path, ResourceType.BUNDLE);
+                    if (file == null || !file.isFile()) {
                         brokenFiles.add(path);
                     }
                 }
@@ -769,7 +775,7 @@ public class XMLConfigurationHandler {
 
     protected GameImage extractGameImage(Element element) {
         String path = element.getChildText("path");
-        ImageResource imageResource = new ImageResource(path, ResourceType.FROM_RESOURCES);
+        ImageResource imageResource = new ImageResource(path, ResourceType.BUNDLE);
         boolean enabled = "true".equals(element.getChildText("enabled"));
         int order = Integer.parseInt(element.getChildText("order"));
         return new GameImage(imageResource, enabled, order);

@@ -19,6 +19,7 @@ import java.awt.Font;
 import javax.swing.JTextArea;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.gui.helpers.UIConstants;
+import org.scify.talkandplay.utils.ResourceManager;
 
 /**
  *
@@ -28,12 +29,13 @@ public class GamesInfoPanel extends javax.swing.JPanel {
 
     private ConfigurationPanel parent;
     private GuiHelper guiHelper;
+    protected ResourceManager rm;
     
     
     public GamesInfoPanel(ConfigurationPanel parent) {
         this.parent=parent;
         this.guiHelper = new GuiHelper();
-        
+        this.rm = ResourceManager.getInstance();
         initComponents();
         initCustomComponents();
     }
@@ -93,38 +95,42 @@ public class GamesInfoPanel extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(460, 558));
         setMinimumSize(new java.awt.Dimension(460, 558));
 
-        step1Label.setText("1. Επίλεξε κατηγορία");
+        step1Label.setText("1. " + rm.getTextOfXMLTag("selectCategory"));
 
-        step2Label.setText("2. Διαθεσιμότητα  ");
+        step2Label.setText("2. " + rm.getTextOfXMLTag("availability") + "  ");
 
-        step3Label.setText("3. Επίπεδο δυσκολίας  ");
+        step3Label.setText("3. " + rm.getTextOfXMLTag("difficultyLevel") +"  ");
 
-        step4Label.setText("4. Αποθήκευση  ");
+        step4Label.setText("4. " + rm.getTextOfXMLTag("saveButton") + "  ");
 
         step1TextArea.setColumns(20);
         step1TextArea.setRows(5);
-        step1TextArea.setText("Επίλεξε κατηγορία για να διαχειριστείς τα παιχνίδια. Οι διαθέσιμες κατηγορίες είναι:\n        A. Ερέθισμα - Αντίδραση\n        B. Χρονική αλληλουχία\n        C. Βρες το όμοιο");
+        String selectCategoryText = rm.getTextOfXMLTag("selectCategoryText") +
+                "\n\tA. " + rm.getTextOfXMLTag("gameTypeStimulusReaction") +
+                "\n\tB. " + rm.getTextOfXMLTag("gameTypeTimeSequence") +
+                "\n\tC. " + rm.getTextOfXMLTag("gameTypeFindTheSimilar");
+        step1TextArea.setText(selectCategoryText);
         jScrollPane1.setViewportView(step1TextArea);
 
         step2TextArea.setColumns(20);
         step2TextArea.setRows(5);
-        step2TextArea.setText("Επίλεξε ποιά παιχνίδια θα είναι διαθέσιμα στο χρήστη πατώντας “Διαθέσιμο” ή “Μη Διαθέσιμο”, αντίστοιχα.");
+        step2TextArea.setText(rm.getTextOfXMLTag("selectAvailabilityText"));
         jScrollPane3.setViewportView(step2TextArea);
 
         step4TextArea.setColumns(20);
         step4TextArea.setRows(5);
-        step4TextArea.setText("Στο κάτω μέρος της λίστας των παιχνιδιών βρες το κουμπί “Αποθήκευση” και πάτησέ το για να αποθηκεύσεις τις επιλογές σου.");
+        step4TextArea.setText(rm.getTextOfXMLTag("selectAvailabilitySaveText"));
         jScrollPane4.setViewportView(step4TextArea);
 
         step3TextArea.setColumns(20);
         step3TextArea.setRows(5);
-        step3TextArea.setText("Ρύθμισε το επίπεδο δυσκολίας για κάθε παιχνίδι ενεργοποιώντας σε κάθε τετράδα τις εικόνες που επιθυμείς. Για να ενεργοποιήσεις μία εικόνα, κάνε κλικ στο κουτί ακριβώς από κάτω της.");
+        step3TextArea.setText(rm.getTextOfXMLTag("selectDifficultyLevelText"));
         jScrollPane2.setViewportView(step3TextArea);
 
         backButton.setBackground(new java.awt.Color(75, 161, 69));
         backButton.setFont(backButton.getFont());
         backButton.setForeground(new java.awt.Color(255, 255, 255));
-        backButton.setText("Πίσω");
+        backButton.setText(rm.getTextOfXMLTag("backButton"));
         backButton.setBorder(null);
         backButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

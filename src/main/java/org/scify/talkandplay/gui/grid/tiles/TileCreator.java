@@ -16,7 +16,6 @@
 package org.scify.talkandplay.gui.grid.tiles;
 
 import java.io.File;
-import java.net.URL;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.models.User;
@@ -101,7 +100,7 @@ public class TileCreator {
     }
 
     public JPanel createEmpty() {
-        ImageResource im = new ImageResource("empty_pixel.png", ResourceType.FROM_JAR);
+        ImageResource im = new ImageResource("empty_pixel.png", ResourceType.JAR);
         JPanel panel = guiHelper.createImagePanel(im, "");
         return panel;
     }

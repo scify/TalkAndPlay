@@ -51,7 +51,6 @@ import org.scify.talkandplay.models.games.StimulusReactionGame;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.utils.ResourceManager;
 import org.scify.talkandplay.utils.ResourceType;
-import org.scify.talkandplay.utils.SoundResource;
 
 public class BaseGamePanel extends javax.swing.JPanel {
 
@@ -184,12 +183,12 @@ public class BaseGamePanel extends javax.swing.JPanel {
      * @return
      */
     protected String getWinSound() {
-        File soundFile = rm.getSound("sounds/games/winSound.mp3", ResourceType.FROM_RESOURCES);
-        if (game.getWinSound().getResourceType() != ResourceType.MISSING) {
+        File soundFile = rm.getSound("sounds/games/winSound.mp3", ResourceType.BUNDLE);
+        if (game.getWinSound() != null) {
             soundFile = rm.getSound(game.getWinSound().getPath(), game.getWinSound().getResourceType());
         } else {
             for (GameType gameType : user.getGameModule().getGameTypes()) {
-                if (type.equals(gameType.getType()) && gameType.getWinSound().getResourceType() != ResourceType.MISSING) {
+                if (type.equals(gameType.getType()) && gameType.getWinSound() != null) {
                     soundFile = rm.getSound(game.getWinSound().getPath(), game.getWinSound().getResourceType());
                 }
             }
@@ -203,9 +202,9 @@ public class BaseGamePanel extends javax.swing.JPanel {
      * @return
      */
     protected String getErrorSound() {
-        File soundFile = rm.getSound("sounds/games/errorSound.mp3", ResourceType.FROM_RESOURCES);
+        File soundFile = rm.getSound("sounds/games/errorSound.mp3", ResourceType.BUNDLE);
         for (GameType gameType : user.getGameModule().getGameTypes()) {
-            if (type.equals(gameType.getType()) && gameType.getErrorSound().getResourceType() != ResourceType.MISSING) {
+            if (type.equals(gameType.getType()) && gameType.getErrorSound() != null) {
                 soundFile = rm.getSound(gameType.getErrorSound().getPath(), gameType.getErrorSound().getResourceType());
             }
         }

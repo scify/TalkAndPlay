@@ -1,18 +1,18 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -26,9 +26,11 @@ import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
 import org.scify.talkandplay.gui.helpers.UIConstants;
+import org.scify.talkandplay.utils.ResourceManager;
+import org.scify.talkandplay.utils.ResourceType;
 
 /**
  *
@@ -37,11 +39,12 @@ import org.scify.talkandplay.gui.helpers.UIConstants;
 public class ButtonPanel extends javax.swing.JPanel {
 
     private String msg1, msg2;
+    protected ResourceManager rm;
 
     public ButtonPanel(String msg1, String msg2) {
         this.msg1 = msg1;
         this.msg2 = msg2;
-
+        this.rm = ResourceManager.getInstance();
         initComponents();
         initCustomComponents();
     }
@@ -55,11 +58,11 @@ public class ButtonPanel extends javax.swing.JPanel {
         JLabel msg2Label = new JLabel(msg2);
         msg1Label.setFont(font);
         msg2Label.setFont(font);
-        msg1Label.setAlignmentX(Component.CENTER_ALIGNMENT);        
+        msg1Label.setAlignmentX(Component.CENTER_ALIGNMENT);
         msg2Label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel imgLabel = new JLabel();
-        imgLabel.setIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/button.png")));
+        imgLabel.setIcon(rm.getImageIcon("button.png", ResourceType.JAR));
         imgLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         add(msg1Label);
@@ -81,12 +84,12 @@ public class ButtonPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

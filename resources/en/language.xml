@@ -10,7 +10,37 @@
     <updateInProgress4>When update is completed, please restart the application.</updateInProgress4>
     <addUser>Add user</addUser>
     <loadUser>Load user</loadUser>
+    <addUserModePanelTitle>User addition</addUserModePanelTitle>
+    <editUserModePanelTitle>User editing</editUserModePanelTitle>
+    <writeUserName>Write a user name</writeUserName>
+    <uploadUserImage>Upload user photo</uploadUserImage>
+    <configureNavigationAndSelection>Configure navigation and selection</configureNavigationAndSelection>
+    <configureMatrixSize>Configure the matrix size</configureMatrixSize>
+    <configureWords>Configure words</configureWords>
+    <configureWordsExtra>Field 5 can also be configured saperately for each word, during a later step.</configureWordsExtra>
+    <sound>Sound</sound>
+    <verbal>Verbal</verbal>
+    <image>Image</image>
+    <automatically>Automatically</automatically>
+    <manualy>Manualy</manualy>
+    <selection>selection</selection>
+    <navigation>navigation</navigation>
+    <userNamePlaceholder>User name</userNamePlaceholder>
+    <selectRotationSpeed>Select rotation speed</selectRotationSpeed>
+    <userNameErrorMessage>The user name must not be blank</userNameErrorMessage>
+    <userNameErrorMessage2>The user name already exists</userNameErrorMessage2>
+    <rawsAndColumnsErrorMessage>The raws and columns of the matrix must be integers, between 2 and 6.</rawsAndColumnsErrorMessage>
+    <selectionButtonErrorMessage>The selection button should not be empty</selectionButtonErrorMessage>
+    <selectionAndNavigationButtonsErrorMessage>The selection and navigation buttons should not be empty</selectionAndNavigationButtonsErrorMessage>
+    <selectionAndNavigationButtonsErrorMessage2>The selection and navigation buttons should be different</selectionAndNavigationButtonsErrorMessage2>
     <chooseFile>Choose a file</chooseFile>
+    <profileSavedMessage>The profile was saved.</profileSavedMessage>
+    <profileNotSavedMessage>The profile was not saved. Please try again.</profileNotSavedMessage>
+    <selectKey>Select key</selectKey>
+    <key>key</key>
+    <leftClick>left click</leftClick>
+    <rightClick>right click</rightClick>
+    <middleClick>middle click</middleClick>
     <preferences>PREFERENCES</preferences>
     <delete>DELETE</delete>
     <filesNotFound>Some files could not be found</filesNotFound>
@@ -18,6 +48,20 @@
     <defaultUserName>User</defaultUserName>
     <communicationName>Communication</communicationName>
     <entertainmentName>Entertainment</entertainmentName>
+    <gamesName>Games</gamesName>
+    <newGameButton>New game</newGameButton>
+    <replayGameButton>Play it again</replayGameButton>
+    <saveButton>Save</saveButton>
+    <exitButton>Exit</exitButton>
+    <backButton>Back</backButton>
+    <saveAndContinue>Save and continue</saveAndContinue>
+    <saveAndExit>Save and exit</saveAndExit>
+    <saveToFile>Save to file</saveToFile>
+    <congratulationMessage1>Bravo!</congratulationMessage1>
+    <congratulationMessage2>You made it!</congratulationMessage2>
+    <congratulationMessage3>That's right!</congratulationMessage3>
+    <mistakeMessage1>Wrong. Try again!</mistakeMessage1>
+    <mistakeMessage2>Try again.</mistakeMessage2>
     <musicName>Music</musicName>
     <previousSongs>Previous songs</previousSongs>
     <nextSongs>Next songs</nextSongs>
@@ -29,34 +73,65 @@
     <pauseControl>Pause</pauseControl>
     <playingListControl>List</playingListControl>
     <fullScreenControl>Full Screen</fullScreenControl>
-    <exitControl>Exit</exitControl>
     <videoName>Video</videoName>
     <previousVideos>Previous videos</previousVideos>
     <nextVideos>Next videos</nextVideos>
-    <gamesName>Games</gamesName>
     <addNewSound>Add sound</addNewSound>
     <selectImage>Select image</selectImage>
     <selectSound>Select sound</selectSound>
     <noFilesFound>No files found</noFilesFound>
+    <edit>Edit</edit>
+    <editText>Click a word to edit it.</editText>
+    <addition>Addition</addition>
+    <newWordButton>New word</newWordButton>
+    <additionText>To add a new word press:</additionText>
+    <communicationTabFilesNotFoundErrorMessage>These files could not be found</communicationTabFilesNotFoundErrorMessage>
+    <selectCategory>Select category</selectCategory>
+    <selectGameCategory>Select game category</selectGameCategory>
+    <configureAvailableImageGroups>Configure the available groups of images</configureAvailableImageGroups>
+    <addSoundsForCongratulationsAndMistakes>Add sounds for congratulations and mistakes</addSoundsForCongratulationsAndMistakes>
+    <addSoundsForCongratulationsAndMistakes2>default sounds will be used if you do not add new ones</addSoundsForCongratulationsAndMistakes2>
+    <congratulation>congratulation</congratulation>
+    <mistake>mistake</mistake>
+    <removeSound>Remove sound</removeSound>
+    <addNewGame>Add new game</addNewGame>
+    <selectCategoryText>Select a category in order to configure its games. The available categories are:</selectCategoryText>
+    <availability>Availability</availability>
+    <selectAvailabilityText>Choose which games will be available to the user by selecting “Available” or “Not Available”, respectively.</selectAvailabilityText>
+    <selectAvailabilitySaveText>Under the list of games, use the "Save" button to save your choices.</selectAvailabilitySaveText>
+    <difficultyLevel>Difficulty level</difficultyLevel>
+    <selectDifficultyLevelText>Adjust the difficulty level for every game by selecting the images you wish for each quartet. To select an image, click the button under it.</selectDifficultyLevelText>
     <noGamesInCategory>There are no games in this category</noGamesInCategory>
     <noGames>No games found</noGames>
     <pleaseCreateNewGame>Please create a new game in  order to add it</pleaseCreateNewGame>
     <chooseGame>[-- Select game --]</chooseGame>
-    <stimulusReaction>Stimulus - Reaction</stimulusReaction>
-    <timeSequence>Time sequence</timeSequence>
-    <findSimilar>Find the similar</findSimilar>
+    <gameTypeStimulusReaction>Stimulus - Reaction</gameTypeStimulusReaction>
+    <gameTypeTimeSequence>Time sequence</gameTypeTimeSequence>
+    <gameTypeFindTheSimilar>Find the similar</gameTypeFindTheSimilar>
     <pressTheButtonOnTheSimilar>Press the button on the similar!</pressTheButtonOnTheSimilar>
     <changesSaved>Changes saved successfully!</changesSaved>
-    <word>Word</word>
+    <userPreferences>User preferences</userPreferences>
+    <chooseDirectory>Choose directory</chooseDirectory>
+    <musicDirectory>Music directory</musicDirectory>
+    <videoDirectory>Video directory</videoDirectory>
+    <amount>Amount</amount>
+    <chooseMusicDirectory>Choose music directory</chooseMusicDirectory>
+    <errorMusicDirectory>Please choose correctly the music directory.</errorMusicDirectory>
+    <chooseVideoDirectory>Choose video directory</chooseVideoDirectory>
+    <errorVideoDirectory>Please choose correctly the video directory.</errorVideoDirectory>
+    <defineAmountOfItemsPerPage>Define the amount of songs and videos per page</defineAmountOfItemsPerPage>
+    <errorAmountOfSongs>Please choose the amount of songs correctly.</errorAmountOfSongs>
+    <errorAmountOfSongs2>Please choose the amount of songs between 6 and 10.</errorAmountOfSongs2>
     <chooseWord>[-- Choose word --]</chooseWord>
+    <word>Word</word>
     <addNewWord>ADD NEW WORD</addNewWord>
     <editWord>EDIT WORD</editWord>
     <wordMustNotBeEmpty>The word must not be empty</wordMustNotBeEmpty>
     <wordMustBeUnique>The word must be unique</wordMustBeUnique>
     <wordMustHaveImage>The word must have an image</wordMustHaveImage>
     <wordMustBelongToAnotherWord>The word must belong to another word</wordMustBelongToAnotherWord>
+    <wordDeleteConfirmation>Are you sure that you wish to delete the word?</wordDeleteConfirmation>
     <wordWasSaved>The word was saved!</wordWasSaved>
-    <back>Back</back>
     <more>More</more>
     <pressTheButton>Press the button!</pressTheButton>
     <pressTheButtonToStart>Press the button to start!</pressTheButtonToStart>

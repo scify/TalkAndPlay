@@ -159,13 +159,13 @@ public class ResourceManager {
     public Image getImage(String path, ResourceType resourceType) {
         Image ret = null;
         switch (resourceType) {
-            case FROM_JAR:
+            case JAR:
                 ret = getJarImage(path);
                 break;
-            case FROM_RESOURCES:
+            case BUNDLE:
                 ret =  getImageOfLanguage(path);
                 break;
-            case FULL_PATH:
+            case LOCAL:
                 ret = getFullPathImage(path);
                 break;
             default:
@@ -181,13 +181,13 @@ public class ResourceManager {
     public ImageIcon getImageIcon(String path, ResourceType resourceType) {
         ImageIcon ret = null;
         switch (resourceType) {
-            case FROM_JAR:
+            case JAR:
                 ret = getJarImageIcon(path);
                 break;
-            case FROM_RESOURCES:
+            case BUNDLE:
                 ret =  getImageIconOfLanguage(path);
                 break;
-            case FULL_PATH:
+            case LOCAL:
                 ret = getFullPathImageIcon(path);
                 break;
             default:
@@ -229,13 +229,13 @@ public class ResourceManager {
     public File getFileOfResource (String path, ResourceType resourceType) {
         File ret = null;
         switch (resourceType) {
-            case FROM_JAR:
+            case JAR:
                 ret = new File(JarResources.getFile(), path);
                 break;
-            case FROM_RESOURCES:
+            case BUNDLE:
                 ret =  getFile(path, selectedLanguageIndex);
                 break;
-            case FULL_PATH:
+            case LOCAL:
                 ret = new File(path);
                 break;
             default:

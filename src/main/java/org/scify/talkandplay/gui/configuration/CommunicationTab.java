@@ -42,6 +42,8 @@ import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.CategoryService;
 import org.scify.talkandplay.services.UserService;
+import org.scify.talkandplay.utils.ResourceManager;
+import org.scify.talkandplay.utils.ResourceType;
 
 public class CommunicationTab extends javax.swing.JPanel {
 
@@ -53,7 +55,7 @@ public class CommunicationTab extends javax.swing.JPanel {
     private Font plainFont, boldFont;
     private ImageIcon editIcon, deleteIcon, upIcon, downIcon;
     private int row;
-
+    protected ResourceManager rm;
     private GridBagConstraints c;
 
     private static final int MARGIN = 20;
@@ -63,7 +65,7 @@ public class CommunicationTab extends javax.swing.JPanel {
         this.parent = parent;
         this.userService = new UserService();
         this.categoryService = new CategoryService();
-
+        this.rm = ResourceManager.getInstance();
         initComponents();
         initCustomComponents();
     }
@@ -72,10 +74,10 @@ public class CommunicationTab extends javax.swing.JPanel {
         panels = new ArrayList();
         plainFont = new Font(UIConstants.mainFont, Font.PLAIN, 14);
         boldFont = new Font(UIConstants.mainFont, Font.BOLD, 14);
-        editIcon = new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/edit-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
-        deleteIcon=new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/delete-icon.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
-        upIcon=new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/up-icon-white.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
-        downIcon=new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/down-icon-white.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        editIcon = new ImageIcon(rm.getImage("edit-icon.png", ResourceType.JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        deleteIcon=new ImageIcon(rm.getImage("delete-icon.png", ResourceType.JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        upIcon=new ImageIcon(rm.getImage("up-icon-white.png", ResourceType.JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        downIcon=new ImageIcon(rm.getImage("down-icon-white.png", ResourceType.JAR).getScaledInstance(20, 20, Image.SCALE_SMOOTH));
         
         
         //  setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -237,7 +239,7 @@ public class CommunicationTab extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent me) {
                 if (me.getClickCount() == 1) {
-                    int dialogResult = JOptionPane.showConfirmDialog(null, "Είσαι σίγουρος/η ότι θες να διαγράψεις τη λέξη;", "Warning", 0);
+                    int dialogResult = JOptionPane.showConfirmDialog(null, rm.getTextOfXMLTag("wordDeleteConfirmation"), "Warning", 0);
                     if (dialogResult == JOptionPane.YES_OPTION) {
                         try {
                             categoryService.delete(category, user);

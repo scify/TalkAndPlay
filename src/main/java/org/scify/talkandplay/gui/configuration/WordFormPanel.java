@@ -424,7 +424,7 @@ public class WordFormPanel extends javax.swing.JPanel {
     private void setUI() {
         errorLabel.setVisible(false);
 
-        closeLabel.setIcon(new ImageIcon(rm.getImage("close-icon.png", ResourceType.FROM_JAR).getScaledInstance(15, 15, Image.SCALE_SMOOTH)));
+        closeLabel.setIcon(new ImageIcon(rm.getImage("close-icon.png", ResourceType.JAR).getScaledInstance(15, 15, Image.SCALE_SMOOTH)));
         closeLabel.setText("");
 
         titleLabel.setText(rm.getTextOfXMLTag("addNewWord"));
@@ -445,8 +445,8 @@ public class WordFormPanel extends javax.swing.JPanel {
         wordTextField.setFont(new Font(UIConstants.mainFont, Font.ITALIC, 14));
         wordTextField.setHorizontalAlignment(JTextField.CENTER);
 
-        uploadImageLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
-        uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+        uploadImageLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+        uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
         uploadImageLabel.setText("");
         uploadSoundLabel.setText("");
         uploadImageLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -498,16 +498,16 @@ public class WordFormPanel extends javax.swing.JPanel {
 
             Image image = rm.getImage(category.getImage());
             if (image == null) {
-                uploadImageLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                uploadImageLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
             } else {
                 uploadImageLabel.setIcon(new ImageIcon(image.getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
             }
 
             File sound = rm.getSound(category.getSound());
             if (sound == null) {
-                uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
             } else {
-                uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
             }
 
             categoriesComboBox.setSelectedItem(category.getParentCategory().getName());
@@ -522,14 +522,14 @@ public class WordFormPanel extends javax.swing.JPanel {
             @Override
             public void mouseExited(MouseEvent me) {
                 if (imageResource == null) {
-                    uploadImageLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    uploadImageLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 }
             }
 
             @Override
             public void mouseEntered(MouseEvent me) {
                 if (imageResource == null) {
-                    uploadImageLabel.setIcon(new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    uploadImageLabel.setIcon(new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 }
             }
 
@@ -545,7 +545,7 @@ public class WordFormPanel extends javax.swing.JPanel {
                 chooser.setFileFilter(new FileNameExtensionFilter("Image Files", "png", "jpg", "jpeg", "JPG", "JPEG", "gif"));
                 chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                    imageResource = new ImageResource(chooser.getSelectedFile().getAbsolutePath(), ResourceType.FULL_PATH);
+                    imageResource = new ImageResource(chooser.getSelectedFile().getAbsolutePath(), ResourceType.LOCAL);
                     uploadImageLabel.setIcon(new ImageIcon(rm.getImage(imageResource).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                     currentDirectory = chooser.getCurrentDirectory();
                 }
@@ -555,20 +555,20 @@ public class WordFormPanel extends javax.swing.JPanel {
         uploadSoundLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent me) {
-                if (soundResource == null || soundResource.getResourceType() == ResourceType.MISSING) {
-                    uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                if (soundResource == null) {
+                    uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 } else {
-                    uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon-hover.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon-hover.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                     audioPlayer.mediaPlayer().media().play(soundResource.getSound().getAbsolutePath());
                 }
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
-                if (soundResource == null || soundResource.getResourceType() == ResourceType.MISSING) {
-                    uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                if (soundResource == null) {
+                    uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 } else {
-                    uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 }
             }
 
@@ -585,8 +585,8 @@ public class WordFormPanel extends javax.swing.JPanel {
                 chooser.setFileFilter(new FileNameExtensionFilter("Sound Files", "mp3", "wav", "wma", "mid"));
                 chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                    soundResource = new SoundResource(chooser.getSelectedFile().getAbsolutePath(), ResourceType.FULL_PATH);
-                    uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.FROM_JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+                    soundResource = new SoundResource(chooser.getSelectedFile().getAbsolutePath(), ResourceType.LOCAL);
+                    uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                     currentDirectory = chooser.getCurrentDirectory();
                 }
             }

@@ -20,7 +20,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.net.URL;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -76,7 +75,7 @@ public class TilePanel extends javax.swing.JPanel {
 
         Image img;
         if (!hasImage) {
-            img = rm.getImage("empty_pixel.png", ResourceType.FROM_JAR);
+            img = rm.getImage("empty_pixel.png", ResourceType.JAR);
         } else {
             img = rm.getImage(image.getPath(), image.getResourceType());
         }

@@ -133,13 +133,13 @@ public class VideoPanel extends BaseMediaPanel {
 
     private void setPlayButton() {
         ((JLabel) playPanel.getComponent(0)).setText(rm.getTextOfXMLTag("playControl"));
-        ((JLabel) playPanel.getComponent(1)).setIcon(new ImageIcon(rm.getImage("play-button.png", ResourceType.FROM_JAR).getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+        ((JLabel) playPanel.getComponent(1)).setIcon(new ImageIcon(rm.getImage("play-button.png", ResourceType.JAR).getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 
     }
 
     private void setPauseButton() {
         ((JLabel) playPanel.getComponent(0)).setText(rm.getTextOfXMLTag("pauseControl"));
-        ((JLabel) playPanel.getComponent(1)).setIcon(new ImageIcon(rm.getImage("pause-button.png", ResourceType.FROM_JAR).getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+        ((JLabel) playPanel.getComponent(1)).setIcon(new ImageIcon(rm.getImage("pause-button.png", ResourceType.JAR).getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 
     }
 

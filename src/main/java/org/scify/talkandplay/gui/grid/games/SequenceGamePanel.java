@@ -32,6 +32,7 @@ import org.scify.talkandplay.services.SensorService;
 public class SequenceGamePanel extends BaseGamePanel {
 
     private SensorService sensorService;
+    protected Message message;
 
     private int correctImages;
 
@@ -39,7 +40,7 @@ public class SequenceGamePanel extends BaseGamePanel {
         super(user, parent, "sequenceGame", null, previousGame);
         this.correctImages = 1;
         this.sensorService = new SensorService(user);
-
+        message = Message.getInstance();
         initComponents();
         initCustomComponents();
     }
@@ -48,7 +49,7 @@ public class SequenceGamePanel extends BaseGamePanel {
         super(user, parent, "sequenceGame", game, "");
         this.correctImages = 1;
         this.sensorService = new SensorService(user);
-
+        message = Message.getInstance();
         initComponents();
         initCustomComponents();
     }
@@ -148,7 +149,7 @@ public class SequenceGamePanel extends BaseGamePanel {
             topPanel.revalidate();
             topPanel.repaint();
         } else if (correctImages == order) {
-            setBottomMessage(Message.getRandomCongrats());
+            setBottomMessage(message.getRandomCongratsMessage());
             selector.cancel();
             correctImages++;
             redrawGamesPanel();
@@ -162,7 +163,7 @@ public class SequenceGamePanel extends BaseGamePanel {
             selector.setList(panelList);
             selector.start();
         } else {
-            setBottomMessage(Message.getRandomError());
+            setBottomMessage(message.getRandomMistakeMessage());
             selector.cancel();
             tileCreator.playAudio(getErrorSound(), new TileAction() {
                 @Override

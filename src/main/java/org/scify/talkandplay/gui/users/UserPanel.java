@@ -116,7 +116,7 @@ public class UserPanel extends javax.swing.JPanel {
 
         JLabel nameLabel;
         if (userService.hasBrokenFiles(user.getName())) {
-            nameLabel = new JLabel(user.getName(), rm.getImageIcon("warning.png", ResourceType.FROM_JAR), JLabel.RIGHT);
+            nameLabel = new JLabel(user.getName(), rm.getImageIcon("warning.png", ResourceType.JAR), JLabel.RIGHT);
             nameLabel.setToolTipText(rm.getTextOfXMLTag("filesNotFound"));
         } else {
             nameLabel = new JLabel(user.getName());

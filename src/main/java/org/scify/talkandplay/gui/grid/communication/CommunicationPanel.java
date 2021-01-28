@@ -217,8 +217,8 @@ public class CommunicationPanel extends BaseGridPanel {
      * @throws IOException
      */
     private JPanel createBackItem(final Category category, final boolean isRoot) throws IOException {
-        JPanel panel = tileCreator.create(rm.getTextOfXMLTag("back"),
-                new ImageResource("back-icon.png", ResourceType.FROM_JAR),
+        JPanel panel = tileCreator.create(rm.getTextOfXMLTag("backButton"),
+                new ImageResource("back-icon.png", ResourceType.JAR),
                 null,
                 new TileAction() {
                     @Override
@@ -267,7 +267,7 @@ public class CommunicationPanel extends BaseGridPanel {
      */
     private JPanel createMoreItem(final Category category) throws IOException {
         JPanel panel = tileCreator.create(rm.getTextOfXMLTag("more"),
-                new ImageResource("more-icon.png", ResourceType.FROM_JAR),
+                new ImageResource("more-icon.png", ResourceType.JAR),
                 null,
                 new TileAction() {
                     @Override

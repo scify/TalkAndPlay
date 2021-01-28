@@ -2,7 +2,7 @@
 <profiles>
   <profile preselected="false">
     <name>{{ defaultUserName }}</name>
-    <image>users/default.png</image>
+    <image resourceType="BUNDLE">users/default.png</image>
     <configuration>
       <rotationSpeed>1</rotationSpeed>
       <defaultGridRow>3</defaultGridRow>

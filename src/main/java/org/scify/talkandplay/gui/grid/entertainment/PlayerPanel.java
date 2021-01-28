@@ -27,7 +27,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BoxLayout;
@@ -77,11 +76,11 @@ public class PlayerPanel extends javax.swing.JPanel {
         c.weightx = 1;
         c.weighty = 1;
 
-        prevPanel = drawButton(rm.getTextOfXMLTag("previousControl"), rm.getImage("prev-button.png", ResourceType.FROM_JAR));
-        playPanel = drawButton(rm.getTextOfXMLTag("playControl"), rm.getImage("play-button.png", ResourceType.FROM_JAR));
-        nextPanel = drawButton(rm.getTextOfXMLTag("nextControl"), rm.getImage("next-button.png", ResourceType.FROM_JAR));
-        fullScreenPanel = drawButton(rm.getTextOfXMLTag("fullScreenControl"), rm.getImage("fullscreen-icon.png", ResourceType.FROM_JAR));
-        exitPanel = drawButton(rm.getTextOfXMLTag("exitControl"), rm.getImage("exit-icon.png", ResourceType.FROM_JAR));
+        prevPanel = drawButton(rm.getTextOfXMLTag("previousControl"), rm.getImage("prev-button.png", ResourceType.JAR));
+        playPanel = drawButton(rm.getTextOfXMLTag("playControl"), rm.getImage("play-button.png", ResourceType.JAR));
+        nextPanel = drawButton(rm.getTextOfXMLTag("nextControl"), rm.getImage("next-button.png", ResourceType.JAR));
+        fullScreenPanel = drawButton(rm.getTextOfXMLTag("fullScreenControl"), rm.getImage("fullscreen-icon.png", ResourceType.JAR));
+        exitPanel = drawButton(rm.getTextOfXMLTag("exitButton"), rm.getImage("exit-icon.png", ResourceType.JAR));
 
         c.gridwidth = 5;
         add(durationPanel, c);
@@ -129,12 +128,12 @@ public class PlayerPanel extends javax.swing.JPanel {
 
     public void setPlayButton() {
         ((JLabel) playPanel.getComponent(0)).setText(rm.getTextOfXMLTag("playControl"));
-        ((JLabel) playPanel.getComponent(1)).setIcon(new ImageIcon(rm.getImage("play-button.png", ResourceType.FROM_JAR).getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+        ((JLabel) playPanel.getComponent(1)).setIcon(new ImageIcon(rm.getImage("play-button.png", ResourceType.JAR).getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
     }
 
     public void setPauseButton() {
         ((JLabel) playPanel.getComponent(0)).setText(rm.getTextOfXMLTag("pauseControl"));
-        ((JLabel) playPanel.getComponent(1)).setIcon(new ImageIcon(rm.getImage("pause-button.png", ResourceType.FROM_JAR).getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+        ((JLabel) playPanel.getComponent(1)).setIcon(new ImageIcon(rm.getImage("pause-button.png", ResourceType.JAR).getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
     }
 
     public void setDurationSlider(int iPos) {

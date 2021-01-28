@@ -134,9 +134,9 @@ public class GamesPanel extends BaseGridPanel {
     }
 
     private JPanel createBackItem() {
-        JPanel panel = tileCreator.create(rm.getTextOfXMLTag("back"),
-                new ImageResource("back-icon.png", ResourceType.FROM_JAR),
-                new SoundResource("", ResourceType.MISSING),
+        JPanel panel = tileCreator.create(rm.getTextOfXMLTag("backButton"),
+                new ImageResource("back-icon.png", ResourceType.JAR),
+                null,
                 new TileAction() {
                     @Override
                     public void act() {
@@ -305,7 +305,7 @@ public class GamesPanel extends BaseGridPanel {
         final SensorService sensorService = new SensorService(user);
 
         if (hasGames("similarityGame")) {
-            ButtonPanel buttonPanel = new ButtonPanel(rm.getTextOfXMLTag("findSimilar") + ".", rm.getTextOfXMLTag("pressTheButtonToStart"));
+            ButtonPanel buttonPanel = new ButtonPanel(rm.getTextOfXMLTag("gameTypeFindTheSimilar") + ".", rm.getTextOfXMLTag("pressTheButtonToStart"));
             buttonPanel.setFocusable(true);
             buttonPanel.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent me) {
@@ -374,7 +374,7 @@ public class GamesPanel extends BaseGridPanel {
 
     private JPanel noGamePanel() {
         JLabel iconLabel = new JLabel();
-        iconLabel.setIcon(new ImageIcon(rm.getImage("back-icon.png", ResourceType.FROM_JAR).getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
+        iconLabel.setIcon(new ImageIcon(rm.getImage("back-icon.png", ResourceType.JAR).getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
         iconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel fileLabel = new JLabel(rm.getTextOfXMLTag("noGames"));

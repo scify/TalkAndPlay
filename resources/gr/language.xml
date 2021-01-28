@@ -10,7 +10,37 @@
     <updateInProgress4>Mε την ολοκλήρωση θα χρειαστεί να ανοίξετε την εφαρμογή ξανά.</updateInProgress4>
     <addUser>Πρόσθεσε νέο χρήστη</addUser>
     <loadUser>Φόρτωσε χρήστη</loadUser>
+    <addUserModePanelTitle>Προσθήκη χρήστη</addUserModePanelTitle>
+    <editUserModePanelTitle>Επεξεργασία χρήστη</editUserModePanelTitle>
+    <writeUserName>Γράψε όνομα χρήστη</writeUserName>
+    <uploadUserImage>Ανέβασε φωτογραφία χρήστη</uploadUserImage>
+    <configureNavigationAndSelection>Τρόποι πλοήγησης και επιλογής</configureNavigationAndSelection>
+    <configureMatrixSize>Καθόρισε μέγεθος πίνακα</configureMatrixSize>
+    <configureWords>Εμφάνιση λέξεων</configureWords>
+    <configureWordsExtra>Το πεδίο 5 μπορεί να ρυθμιστεί και ανεξάρτητα για κάθε σύνολο λέξεων σε επόμενο στάδιο.</configureWordsExtra>
+    <sound>Ήχος</sound>
+    <verbal>Λεκτικό</verbal>
+    <image>Εικόνα</image>
+    <automatically>Αυτόματα</automatically>
+    <manually>Χειροκίνητα</manually>
+    <selection>επιλογή</selection>
+    <navigation>πλοήγηση</navigation>
+    <userNamePlaceholder>Όνομα χρήστη</userNamePlaceholder>
+    <selectRotationSpeed>Επίλεξε ταχύτητα εναλλαγής</selectRotationSpeed>
+    <userNameErrorMessage>Το όνομα χρήστη δεν πρέπει να είναι κενό</userNameErrorMessage>
+    <userNameErrorMessage2>Το όνομα χρήστη υπάρχει ήδη</userNameErrorMessage2>
+    <rawsAndColumnsErrorMessage>Οι κολώνες και οι στήλες του πίνακα πρέπει να είναι ακέραιοι, μεταξύ των ψηφίων 2 και 6.</rawsAndColumnsErrorMessage>
+    <selectionButtonErrorMessage>Το κουμπί επιλογής δεν πρέπει να είναι κενό</selectionButtonErrorMessage>
+    <selectionAndNavigationButtonsErrorMessage>Τα κουμπιά επιλογής και πλοήγησης δεν πρέπει να είναι κενά</selectionAndNavigationButtonsErrorMessage>
+    <selectionAndNavigationButtonsErrorMessage2>Τα κουμπιά επιλογής και πλοήγησης πρέπει να είναι διαφορετικά</selectionAndNavigationButtonsErrorMessage2>
     <chooseFile>Επίλεξε αρχείο</chooseFile>
+    <profileSavedMessage>Το προφίλ αποθηκεύτηκε.</profileSavedMessage>
+    <profileNotSavedMessage>Το προφίλ δεν αποθηκεύτηκε. Παρακαλώ δοκίμασε ξανά.</profileNotSavedMessage>
+    <selectKey>Όρισε κουμπί επιλογής</selectKey>
+    <key>πλήκτρο</key>
+    <leftClick>αριστερό κλικ</leftClick>
+    <rightClick>δεξί κλικ</rightClick>
+    <middleClick>μεσαία κλικ</middleClick>
     <preferences>ΠΡΟΤΙΜΗΣΕΙΣ</preferences>
     <delete>ΔΙΑΓΡΑΦΗ</delete>
     <filesNotFound>Κάποια αρχεία δεν μπορούν να βρεθούν</filesNotFound>
@@ -18,6 +48,20 @@
     <defaultUserName>Χρήστης</defaultUserName>
     <communicationName>Επικοινωνία</communicationName>
     <entertainmentName>Ψυχαγωγία</entertainmentName>
+    <gamesName>Παιχνίδια</gamesName>
+    <newGameButton>Νέο παιχνίδι</newGameButton>
+    <replayGameButton>Παίξε το ίδιο ξανά</replayGameButton>
+    <saveButton>Αποθήκευση</saveButton>
+    <exitButton>Έξοδος</exitButton>
+    <backButton>Πίσω</backButton>
+    <saveAndContinue>Αποθήκευση και συνέχεια</saveAndContinue>
+    <saveAndExit>Αποθήκευση και έξοδος</saveAndExit>
+    <saveToFile>Αποθήκευση σε αρχείο</saveToFile>
+    <congratulationMessage1>Μπράβο!</congratulationMessage1>
+    <congratulationMessage2>Τα κατάφερες!</congratulationMessage2>
+    <congratulationMessage3>Σωστά!</congratulationMessage3>
+    <mistakeMessage1>Λάθος. Προσπάθησε ξανά!</mistakeMessage1>
+    <mistakeMessage2>Προσπάθησε ξανά.</mistakeMessage2>
     <musicName>Μουσική</musicName>
     <previousSongs>Προηγούμενα τραγούδια</previousSongs>
     <nextSongs>Επόμενα τραγούδια</nextSongs>
@@ -29,24 +73,55 @@
     <pauseControl>Παύση</pauseControl>
     <playingListControl>Λίστα</playingListControl>
     <fullScreenControl>Πλήρης Οθόνη</fullScreenControl>
-    <exitControl>Έξοδος</exitControl>
     <videoName>Βίντεο</videoName>
     <previousVideos>Προηγούμενα video</previousVideos>
     <nextVideos>Επόμενα video</nextVideos>
-    <gamesName>Παιχνίδια</gamesName>
     <addNewSound>Προσθήκη ήχου</addNewSound>
     <selectImage>Διάλεξε εικόνα</selectImage>
     <selectSound>Διάλεξε ήχο</selectSound>
     <noFilesFound>Δεν υπάρχουν αρχεία</noFilesFound>
+    <edit>Επεξεργασία</edit>
+    <editText>Κάνε κλικ πάνω σε κάποια λέξη για να την επεξεργαστείς.</editText>
+    <addition>Προσθήκη</addition>
+    <newWordButton>Νέα λέξη</newWordButton>
+    <additionText>Για να προσθέσεις νέα λέξη πάτα το κουμπί:</additionText>
+    <communicationTabFilesNotFoundErrorMessage>Τα παρακάτω αρχεία δεν μπορούν να βρεθούν</communicationTabFilesNotFoundErrorMessage>
+    <selectCategory>Επίλεξε κατηγορία</selectCategory>
+    <selectGameCategory>Επίλεξε κατηγορία παιχνιδιού</selectGameCategory>
+    <configureAvailableImageGroups>Διαχειρίσου τις διαθέσιμες ομάδες εικόνων</configureAvailableImageGroups>
+    <addSoundsForCongratulationsAndMistakes>Βάλε ήχους επιβράβευσης και λάθους</addSoundsForCongratulationsAndMistakes>
+    <addSoundsForCongratulationsAndMistakes2>θα χρησιμοποιηθούν προεπιλεγμένοι ήχοι αν δεν ανεβάσεις ήχο</addSoundsForCongratulationsAndMistakes2>
+    <congratulation>επιβράβευση</congratulation>
+    <mistake>σφάλμα</mistake>
+    <removeSound>Αφαίρεση ήχου</removeSound>
+    <addNewGame>Προσθήκη νέου παιχνιδιού</addNewGame>
+    <selectCategoryText>Επίλεξε κατηγορία για να διαχειριστείς τα παιχνίδια. Οι διαθέσιμες κατηγορίες είναι:</selectCategoryText>
+    <availability>Διαθεσιμότητα</availability>
+    <selectAvailabilityText>Επίλεξε ποιά παιχνίδια θα είναι διαθέσιμα στο χρήστη πατώντας “Διαθέσιμο” ή “Μη Διαθέσιμο”, αντίστοιχα.</selectAvailabilityText>
+    <selectAvailabilitySaveText>Στο κάτω μέρος της λίστας των παιχνιδιών βρες το κουμπί “Αποθήκευση” και πάτησέ το για να αποθηκεύσεις τις επιλογές σου.</selectAvailabilitySaveText>
+    <difficultyLevel>Επίπεδο δυσκολίας</difficultyLevel>
+    <selectDifficultyLevelText>Ρύθμισε το επίπεδο δυσκολίας για κάθε παιχνίδι ενεργοποιώντας σε κάθε τετράδα τις εικόνες που επιθυμείς. Για να ενεργοποιήσεις μία εικόνα, κάνε κλικ στο κουτί ακριβώς από κάτω της.</selectDifficultyLevelText>
     <noGamesInCategory>Δεν υπάρχουν παιχνίδια σε αυτή την κατηγορία</noGamesInCategory>
     <noGames>Δεν υπάρχουν παιχνίδια</noGames>
     <pleaseCreateNewGame>Παρακαλώ δημιουργείστε ένα παιχνίδι για να το προσθέσετε</pleaseCreateNewGame>
     <chooseGame>[-- Επίλεξε παιχνίδι --]</chooseGame>
-    <stimulusReaction>Ερέθισμα - Αντίδραση</stimulusReaction>
-    <timeSequence>Χρονική αλληλουχία</timeSequence>
-    <findSimilar>Βρες το όμοιο</findSimilar>
+    <gameTypeStimulusReaction>Ερέθισμα - Αντίδραση</gameTypeStimulusReaction>
+    <gameTypeTimeSequence>Χρονική αλληλουχία</gameTypeTimeSequence>
+    <gameTypeFindTheSimilar>Βρες το όμοιο</gameTypeFindTheSimilar>
     <pressTheButtonOnTheSimilar>Πάτα το κουμπί πάνω στο όμοιο!</pressTheButtonOnTheSimilar>
     <changesSaved>Οι αλλαγές αποθηκεύτηκαν!</changesSaved>
+    <userPreferences>Προτιμήσεις χρήστη</userPreferences>
+    <chooseDirectory>Διάλεξε φάκελο</chooseDirectory>
+    <musicDirectory>Φάκελος μουσικής</musicDirectory>
+    <videoDirectory>Φάκελος βίντεο</videoDirectory>
+    <amount>Πλήθος</amount>
+    <chooseMusicDirectory>Επίλεξε φάκελο μουσικής</chooseMusicDirectory>
+    <errorMusicDirectory>Ο φάκελος μουσικής πρέπει να οριστεί σωστά.</errorMusicDirectory>
+    <chooseVideoDirectory>Επίλεξε φάκελο video</chooseVideoDirectory>
+    <errorVideoDirectory>Ο φάκελος video πρέπει να οριστεί σωστά.</errorVideoDirectory>
+    <defineAmountOfItemsPerPage>Όρισε πλήθος τραγουδιών και video ανά σελίδα</defineAmountOfItemsPerPage>
+    <errorAmountOfSongs>Το πλήθος τραγουδιών πρέπει οριστεί σωστά.</errorAmountOfSongs>
+    <errorAmountOfSongs2>Το πλήθος τραγουδιών πρέπει να είναι μεταξύ 6 και 10.</errorAmountOfSongs2>
     <chooseWord>[-- Επίλεξε λέξη --]</chooseWord>
     <word>Λέξη</word>
     <addNewWord>ΠΡΟΣΘΗΚΗ ΝΕΑΣ ΛΕΞΗΣ</addNewWord>
@@ -55,8 +130,8 @@
     <wordMustBeUnique>Η λέξη πρέπει να είναι μοναδική</wordMustBeUnique>
     <wordMustHaveImage>Η λέξη πρέπει να έχει εικόνα</wordMustHaveImage>
     <wordMustBelongToAnotherWord>Η λέξη πρέπει να ανήκει σε κάποια άλλη λέξη</wordMustBelongToAnotherWord>
+    <wordDeleteConfirmation>Είσαι σίγουρος/η ότι θες να διαγράψεις τη λέξη;</wordDeleteConfirmation>
     <wordWasSaved>Η λέξη αποθηκεύτηκε!</wordWasSaved>
-    <back>Πίσω</back>
     <more>Περισσότερα</more>
     <pressTheButton>Πάτα το κουμπί!</pressTheButton>
     <pressTheButtonToStart>Πάτα το κουμπί για να ξεκινήσεις!</pressTheButtonToStart>

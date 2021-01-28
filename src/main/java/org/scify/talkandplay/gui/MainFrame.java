@@ -74,7 +74,7 @@ public class MainFrame extends javax.swing.JFrame {
         contentPane.setBackground(new java.awt.Color(255, 255, 255));
         contentPane.setPreferredSize(new java.awt.Dimension(800, 720));
 
-        logoLabel.setIcon(rm.getImageIcon("tp_logo_small.png", ResourceType.FROM_JAR)); // NOI18N
+        logoLabel.setIcon(rm.getImageIcon("tp_logo_small.png", ResourceType.JAR)); // NOI18N
 
         jLabel1.setBackground(new java.awt.Color(51, 51, 255));
         jLabel1.setFont(jLabel1.getFont());
@@ -112,14 +112,14 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel2.setRequestFocusEnabled(false);
 
         scifyLogoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        scifyLogoLabel.setIcon(rm.getImageIcon("logos/scify_logo_108.png", ResourceType.FROM_JAR)); // NOI18N
+        scifyLogoLabel.setIcon(rm.getImageIcon("logos/scify_logo_108.png", ResourceType.JAR)); // NOI18N
         scifyLogoLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(153, 153, 153));
         jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
 
-        niarchosLogoLabel.setIcon(rm.getImageIcon("logos/snf_lg.png", ResourceType.FROM_JAR)); // NOI18N
+        niarchosLogoLabel.setIcon(rm.getImageIcon("logos/snf_lg.png", ResourceType.JAR)); // NOI18N
         niarchosLogoLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout contentPaneLayout = new javax.swing.GroupLayout(contentPane);
@@ -198,7 +198,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void initCustomComponents() {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setIconImage(rm.getImage("tp_logo_mini.png", ResourceType.FROM_JAR));
+        setIconImage(rm.getImage("tp_logo_mini.png", ResourceType.JAR));
         contentPanel.add(new LanguageSelector(this), BorderLayout.CENTER);
         contentPanel.revalidate();
         contentPanel.repaint();

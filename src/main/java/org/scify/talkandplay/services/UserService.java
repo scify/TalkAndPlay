@@ -35,7 +35,9 @@ import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.modules.CommunicationModule;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
+import org.scify.talkandplay.utils.ImageResource;
 import org.scify.talkandplay.utils.ResourceManager;
+import org.scify.talkandplay.utils.ResourceType;
 import org.scify.talkandplay.utils.TalkAndPlayProfileConfiguration;
 
 public class UserService {
@@ -250,7 +252,7 @@ public class UserService {
         //add the general profile info
         Element profile = new Element("profile");
         profile.addContent(new Element("name").setText(user.getName()));
-        profile.addContent(new Element("image").setText(user.getImage()));
+        profile.addContent(new Element("image").setText(user.getImage().getPath()));
         profile.setAttribute(new Attribute("preselected", String.valueOf(user.isPreselected())));
 
         //add the configurations
@@ -412,9 +414,13 @@ public class UserService {
 
                 if (user.getImage() == null) {
                     profile.getChild("image").setText(profile.getChildText("image"));
-                    user.setImage(profile.getChildText("image"));
+                    Element imageElement = profile.getChild("image");
+                    String imagePath = imageElement.getText();
+                    String imageType = imageElement.getAttributeValue("resourceType");
+                    ResourceType imageResourceType = ResourceType.valueOf(imageType);
+                    user.setImage(new ImageResource(imagePath, imageResourceType));
                 } else {
-                    profile.getChild("image").setText(user.getImage());
+                    profile.getChild("image").setText(user.getImage().getPath());
                 }
 
                 talkAndPlayProfileconfiguration.getConfigurationHandler().update();

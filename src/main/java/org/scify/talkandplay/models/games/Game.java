@@ -61,32 +61,32 @@ public class Game {
         return imageResource;
     }
 
-    public void setImage(String path, ResourceType resourceType) {
-        this.imageResource = new ImageResource(path, resourceType);
+    public void setImage(ImageResource imageResource) {
+        this.imageResource = imageResource;
     }
 
     public SoundResource getSound() {
         return soundResource;
     }
 
-    public void setSound(String path, ResourceType resourceType) {
-        this.soundResource = new SoundResource(path, resourceType);
+    public void setSound(SoundResource soundResource) {
+        this.soundResource = soundResource;
     }
 
     public SoundResource getWinSound() {
         return winSoundResource;
     }
 
-    public void setWinSound(String path, ResourceType resourceType) {
-        this.winSoundResource = new SoundResource(path, resourceType);
+    public void setWinSound(SoundResource soundResource) {
+        this.winSoundResource = soundResource;
     }
 
     public SoundResource getErrorSound() {
         return errorSoundResource;
     }
 
-    public void setErrorSound(String path, ResourceType resourceType) {
-        this.errorSoundResource = new SoundResource(path, resourceType);
+    public void setErrorSound(SoundResource soundResource) {
+        this.errorSoundResource = soundResource;
     }
 
     public boolean isEnabled() {

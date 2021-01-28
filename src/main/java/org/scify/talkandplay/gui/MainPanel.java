@@ -163,7 +163,7 @@ public class MainPanel extends javax.swing.JPanel {
         addUserPanel.setBackground(Color.white);
 
         JLabel nameLabel = new JLabel(rm.getTextOfXMLTag("addUser"));
-        final JLabel imageLabel = new JLabel(rm.getImageIcon("add-icon.png", ResourceType.FROM_JAR));
+        final JLabel imageLabel = new JLabel(rm.getImageIcon("add-icon.png", ResourceType.JAR));
 
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -177,12 +177,12 @@ public class MainPanel extends javax.swing.JPanel {
         imageLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent arg0) {
-                imageLabel.setIcon(rm.getImageIcon("add-icon.png", ResourceType.FROM_JAR));
+                imageLabel.setIcon(rm.getImageIcon("add-icon.png", ResourceType.JAR));
             }
 
             @Override
             public void mouseEntered(MouseEvent arg0) {
-                imageLabel.setIcon(rm.getImageIcon("add-icon-hover.png", ResourceType.FROM_JAR));
+                imageLabel.setIcon(rm.getImageIcon("add-icon-hover.png", ResourceType.JAR));
             }
 
             @Override
@@ -220,7 +220,7 @@ public class MainPanel extends javax.swing.JPanel {
         uploadUserPanel.setBackground(Color.white);
 
         JLabel nameLabel = new JLabel(rm.getTextOfXMLTag("loadUser"));
-        final JLabel imageLabel = new JLabel(rm.getImageIcon("upload-icon.png", ResourceType.FROM_JAR));
+        final JLabel imageLabel = new JLabel(rm.getImageIcon("upload-icon.png", ResourceType.JAR));
 
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -234,12 +234,12 @@ public class MainPanel extends javax.swing.JPanel {
         imageLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent arg0) {
-                imageLabel.setIcon(rm.getImageIcon("upload-icon.png", ResourceType.FROM_JAR));
+                imageLabel.setIcon(rm.getImageIcon("upload-icon.png", ResourceType.JAR));
             }
 
             @Override
             public void mouseEntered(MouseEvent arg0) {
-                imageLabel.setIcon(rm.getImageIcon("upload-icon-hover.png", ResourceType.FROM_JAR));
+                imageLabel.setIcon(rm.getImageIcon("upload-icon-hover.png", ResourceType.JAR));
             }
 
             @Override

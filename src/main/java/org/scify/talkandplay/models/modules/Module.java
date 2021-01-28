@@ -55,16 +55,16 @@ public class Module {
         return imageResource;
     }
 
-    public void setImage(String path, ResourceType resourceType) {
-        imageResource = new ImageResource(path, resourceType);
+    public void setImage(ImageResource imageResource) {
+        this.imageResource = imageResource;
     }
 
     public SoundResource getSound() {
         return soundResource;
     }
 
-    public void setSound(String path, ResourceType resourceType) {
-        this.soundResource = new SoundResource(path, resourceType);
+    public void setSound(SoundResource soundResource) {
+        this.soundResource = soundResource;
     }
 
     public boolean isEnabled() {

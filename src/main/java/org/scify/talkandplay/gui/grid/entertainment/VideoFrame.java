@@ -22,7 +22,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -83,7 +82,7 @@ public class VideoFrame extends javax.swing.JFrame {
 
         setTitle("Video Player");
         setVisible(false);
-        setIconImage(rm.getImage("tp_logo_mini.png", ResourceType.FROM_JAR));
+        setIconImage(rm.getImage("tp_logo_mini.png", ResourceType.JAR));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         initComponents();
