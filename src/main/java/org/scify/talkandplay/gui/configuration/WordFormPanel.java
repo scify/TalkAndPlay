@@ -124,35 +124,35 @@ public class WordFormPanel extends javax.swing.JPanel {
         backButton.setBackground(new java.awt.Color(75, 161, 69));
         backButton.setFont(backButton.getFont());
         backButton.setForeground(new java.awt.Color(255, 255, 255));
-        backButton.setText("Πίσω");
+        backButton.setText(rm.getTextOfXMLTag("backButton"));
         backButton.setBorder(null);
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        titleLabel.setText("ΠΡΟΣΘΗΚΗ ΝΕΑΣ ΛΕΞΗΣ");
+        titleLabel.setText(rm.getTextOfXMLTag("addNewWord"));
 
-        step1Label.setText("1. Γράψε λέξη");
+        step1Label.setText("1. " + rm.getTextOfXMLTag("writeWord"));
 
         wordTextField.setBackground(new java.awt.Color(255, 255, 255));
         wordTextField.setForeground(new java.awt.Color(51, 51, 51));
-        wordTextField.setText("Λέξη");
+        wordTextField.setText(rm.getTextOfXMLTag("word"));
 
-        step2Label.setText("2. Ανέβασε φωτογραφία");
+        step2Label.setText("2. " + rm.getTextOfXMLTag("uploadImage"));
 
-        step3Label.setText("3. Ανέβασε ηχητικό");
+        step3Label.setText("3. " + rm.getTextOfXMLTag("uploadSound"));
 
-        step3ExplLabel.setText("Εάν δεν ανεβάσεις ηχητικό, θα παίζει προκαθορισμένος ήχος.");
+        step3ExplLabel.setText(rm.getTextOfXMLTag("uploadSoundWarning"));
 
         uploadSoundLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         uploadSoundLabel.setText("upload");
 
-        step4Label.setText("4. Επίλεξε πού ανήκει η λέξη");
+        step4Label.setText("4. " + rm.getTextOfXMLTag("wordBelongsToSelection"));
 
         step4ExplTextArea.setEditable(false);
         step4ExplTextArea.setBackground(new java.awt.Color(255, 255, 255));
         step4ExplTextArea.setColumns(20);
         step4ExplTextArea.setRows(5);
-        step4ExplTextArea.setText("Επίλεξε την λέξη στην οποία υπάγεται η λέξη που προσθέτεις εδώ, ή επίλεξε “ΕΠΙΚΟΙΝΩΝΙΑ” εάν πρόκειται για εντελώς νέα κατηγορία λέξεων.\n");
+        step4ExplTextArea.setText(rm.getTextOfXMLTag("wordBelongsToSelection2") + "\n");
         step4ExplTextArea.setBorder(null);
         jScrollPane1.setViewportView(step4ExplTextArea);
 
@@ -162,7 +162,7 @@ public class WordFormPanel extends javax.swing.JPanel {
         saveButton.setBackground(new java.awt.Color(75, 161, 69));
         saveButton.setFont(saveButton.getFont());
         saveButton.setForeground(new java.awt.Color(255, 255, 255));
-        saveButton.setText("Αποθήκευση λέξης");
+        saveButton.setText(rm.getTextOfXMLTag("saveWord"));
         saveButton.setBorder(null);
         saveButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -174,20 +174,20 @@ public class WordFormPanel extends javax.swing.JPanel {
 
         xLabel.setText("x");
 
-        step7Label.setText("6. Εμφάνιση πίνακα");
+        step7Label.setText("6. " + rm.getTextOfXMLTag("showMatrix"));
 
         imageCheckBox.setBackground(new java.awt.Color(255, 255, 255));
-        imageCheckBox.setText("Εικόνα");
+        imageCheckBox.setText(rm.getTextOfXMLTag("image"));
 
         textCheckBox.setBackground(new java.awt.Color(255, 255, 255));
-        textCheckBox.setText("Λεκτικό");
+        textCheckBox.setText(rm.getTextOfXMLTag("verbal"));
 
         soundCheckBox.setBackground(new java.awt.Color(255, 255, 255));
-        soundCheckBox.setText("Ήχος");
+        soundCheckBox.setText(rm.getTextOfXMLTag("sound"));
 
-        step6Label.setText("5. Καθόρισε μέγεθος πίνακα");
+        step6Label.setText("5. " + rm.getTextOfXMLTag("configureMatrixSize"));
 
-        jLabel1.setText("(άφησε κενό για προεπιλέγμενο μέγεθος πίνακα)");
+        jLabel1.setText("(" + rm.getTextOfXMLTag("configureMatrixSize2") + ")");
 
         javax.swing.GroupLayout editStepsPanelLayout = new javax.swing.GroupLayout(editStepsPanel);
         editStepsPanel.setLayout(editStepsPanelLayout);
@@ -245,7 +245,7 @@ public class WordFormPanel extends javax.swing.JPanel {
         errorLabel.setText("error");
 
         enabledCheckbox.setBackground(new java.awt.Color(255, 255, 255));
-        enabledCheckbox.setText("Ενεργοποιημένη");
+        enabledCheckbox.setText(rm.getTextOfXMLTag("activated"));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

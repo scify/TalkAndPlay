@@ -14,8 +14,12 @@
     <editUserModePanelTitle>Επεξεργασία χρήστη</editUserModePanelTitle>
     <writeUserName>Γράψε όνομα χρήστη</writeUserName>
     <uploadUserImage>Ανέβασε φωτογραφία χρήστη</uploadUserImage>
+    <uploadImage>Ανέβασε φωτογραφία</uploadImage>
+    <uploadSound>Ανέβασε ηχητικό</uploadSound>
+    <uploadSoundWarning>Εάν δεν ανεβάσεις ηχητικό, θα παίζει προκαθορισμένος ήχος.</uploadSoundWarning>
     <configureNavigationAndSelection>Τρόποι πλοήγησης και επιλογής</configureNavigationAndSelection>
     <configureMatrixSize>Καθόρισε μέγεθος πίνακα</configureMatrixSize>
+    <configureMatrixSize2>άφησε κενό για προεπιλέγμενο μέγεθος πίνακα</configureMatrixSize2>
     <configureWords>Εμφάνιση λέξεων</configureWords>
     <configureWordsExtra>Το πεδίο 5 μπορεί να ρυθμιστεί και ανεξάρτητα για κάθε σύνολο λέξεων σε επόμενο στάδιο.</configureWordsExtra>
     <sound>Ήχος</sound>
@@ -25,6 +29,7 @@
     <manually>Χειροκίνητα</manually>
     <selection>επιλογή</selection>
     <navigation>πλοήγηση</navigation>
+    <activated>Ενεργοποιημένη</activated>
     <userNamePlaceholder>Όνομα χρήστη</userNamePlaceholder>
     <selectRotationSpeed>Επίλεξε ταχύτητα εναλλαγής</selectRotationSpeed>
     <userNameErrorMessage>Το όνομα χρήστη δεν πρέπει να είναι κενό</userNameErrorMessage>
@@ -57,6 +62,7 @@
     <saveAndContinue>Αποθήκευση και συνέχεια</saveAndContinue>
     <saveAndExit>Αποθήκευση και έξοδος</saveAndExit>
     <saveToFile>Αποθήκευση σε αρχείο</saveToFile>
+    <saveWord>Αποθήκευση λέξης</saveWord>
     <congratulationMessage1>Μπράβο!</congratulationMessage1>
     <congratulationMessage2>Τα κατάφερες!</congratulationMessage2>
     <congratulationMessage3>Σωστά!</congratulationMessage3>
@@ -126,9 +132,13 @@
     <word>Λέξη</word>
     <addNewWord>ΠΡΟΣΘΗΚΗ ΝΕΑΣ ΛΕΞΗΣ</addNewWord>
     <editWord>ΕΠΕΞΕΡΓΑΣΙΑ ΛΕΞΗΣ</editWord>
+    <writeWord>Γράψε λέξη</writeWord>
     <wordMustNotBeEmpty>Η λέξη δεν πρέπει να είναι κενή</wordMustNotBeEmpty>
     <wordMustBeUnique>Η λέξη πρέπει να είναι μοναδική</wordMustBeUnique>
     <wordMustHaveImage>Η λέξη πρέπει να έχει εικόνα</wordMustHaveImage>
+    <wordBelongsToSelection>Επίλεξε πού ανήκει η λέξη</wordBelongsToSelection>
+    <wordBelongsToSelection2>Επίλεξε την λέξη στην οποία υπάγεται η λέξη που προσθέτεις εδώ, ή επίλεξε "ΕΠΙΚΟΙΝΩΝΙΑ" εάν πρόκειται για εντελώς νέα κατηγορία λέξεων.</wordBelongsToSelection2>
+    <showMatrix>Εμφάνιση πίνακα</showMatrix>
     <wordMustBelongToAnotherWord>Η λέξη πρέπει να ανήκει σε κάποια άλλη λέξη</wordMustBelongToAnotherWord>
     <wordDeleteConfirmation>Είσαι σίγουρος/η ότι θες να διαγράψεις τη λέξη;</wordDeleteConfirmation>
     <wordWasSaved>Η λέξη αποθηκεύτηκε!</wordWasSaved>

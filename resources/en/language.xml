@@ -14,8 +14,12 @@
     <editUserModePanelTitle>User editing</editUserModePanelTitle>
     <writeUserName>Write a user name</writeUserName>
     <uploadUserImage>Upload user photo</uploadUserImage>
+    <uploadImage>Upload image</uploadImage>
+    <uploadSound>Upload sound</uploadSound>
+    <uploadSoundWarning>If no sound is uploaded the default sound will be used.</uploadSoundWarning>
     <configureNavigationAndSelection>Configure navigation and selection</configureNavigationAndSelection>
     <configureMatrixSize>Configure the matrix size</configureMatrixSize>
+    <configureMatrixSize2>leave blank to use the default size</configureMatrixSize2>
     <configureWords>Configure words</configureWords>
     <configureWordsExtra>Field 5 can also be configured saperately for each word, during a later step.</configureWordsExtra>
     <sound>Sound</sound>
@@ -25,6 +29,7 @@
     <manualy>Manualy</manualy>
     <selection>selection</selection>
     <navigation>navigation</navigation>
+    <activated>Activated</activated>
     <userNamePlaceholder>User name</userNamePlaceholder>
     <selectRotationSpeed>Select rotation speed</selectRotationSpeed>
     <userNameErrorMessage>The user name must not be blank</userNameErrorMessage>
@@ -57,6 +62,7 @@
     <saveAndContinue>Save and continue</saveAndContinue>
     <saveAndExit>Save and exit</saveAndExit>
     <saveToFile>Save to file</saveToFile>
+    <saveWord>Save word</saveWord>
     <congratulationMessage1>Bravo!</congratulationMessage1>
     <congratulationMessage2>You made it!</congratulationMessage2>
     <congratulationMessage3>That's right!</congratulationMessage3>
@@ -126,10 +132,14 @@
     <word>Word</word>
     <addNewWord>ADD NEW WORD</addNewWord>
     <editWord>EDIT WORD</editWord>
+    <writeWord>Write the word</writeWord>
     <wordMustNotBeEmpty>The word must not be empty</wordMustNotBeEmpty>
     <wordMustBeUnique>The word must be unique</wordMustBeUnique>
     <wordMustHaveImage>The word must have an image</wordMustHaveImage>
+    <wordBelongsToSelection>Select where does this word belong to</wordBelongsToSelection>
     <wordMustBelongToAnotherWord>The word must belong to another word</wordMustBelongToAnotherWord>
+    <wordBelongsToSelection2>Select the word that this word belongs to, or select "COMMUNICATION" if this is a new category of words.</wordBelongsToSelection2>
+    <showMatrix>Show matrix</showMatrix>
     <wordDeleteConfirmation>Are you sure that you wish to delete the word?</wordDeleteConfirmation>
     <wordWasSaved>The word was saved!</wordWasSaved>
     <more>More</more>
