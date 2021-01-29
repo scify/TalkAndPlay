@@ -150,7 +150,7 @@ public class SimilarityGamePanel extends BaseGamePanel {
 
     private void act(String image) {
 
-        if (image.equals(correctImage)) {
+        if (image.equals(correctImage.getPath())) {
             congratulate();
         } else {
             setBottomMessage(message.getRandomMistakeMessage());

@@ -77,7 +77,7 @@ public class SequenceGamePanel extends BaseGamePanel {
 
     private void initCustomComponents() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBottomMessage("Ποια εικόνα πρέπει να μπει πρώτη; Πάτα το κουμπί πάνω της!");
+        setBottomMessage(rm.getTextOfXMLTag("sequenceGameInfo2"));
 
         //draw the images in a random order
         List<GameImage> tmpImages = new ArrayList(game.getEnabledImages());

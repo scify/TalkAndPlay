@@ -44,7 +44,6 @@ import org.scify.talkandplay.utils.ResourceType;
 import org.scify.talkandplay.utils.SoundResource;
 
 /**
- *
  * @author snik
  */
 public class NewGamePanel extends javax.swing.JPanel {
@@ -230,41 +229,41 @@ public class NewGamePanel extends javax.swing.JPanel {
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setAutoscrolls(true);
 
-        img1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/no-photo.png"))); // NOI18N
+        img1Label.setIcon(rm.getImageIcon("no-photo.png", ResourceType.JAR)); // NOI18N
         img1Label.setMaximumSize(new java.awt.Dimension(90, 90));
         img1Label.setMinimumSize(new java.awt.Dimension(90, 90));
         img1Label.setPreferredSize(new java.awt.Dimension(90, 90));
         img1Label.setVerifyInputWhenFocusTarget(false);
 
-        img2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/no-photo.png"))); // NOI18N
+        img2Label.setIcon(rm.getImageIcon("no-photo.png", ResourceType.JAR)); // NOI18N
         img2Label.setMaximumSize(new java.awt.Dimension(90, 90));
         img2Label.setMinimumSize(new java.awt.Dimension(90, 90));
         img2Label.setPreferredSize(new java.awt.Dimension(90, 90));
         img2Label.setVerifyInputWhenFocusTarget(false);
 
-        img3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/no-photo.png"))); // NOI18N
+        img3Label.setIcon(rm.getImageIcon("no-photo.png", ResourceType.JAR)); // NOI18N
         img3Label.setMaximumSize(new java.awt.Dimension(90, 90));
         img3Label.setMinimumSize(new java.awt.Dimension(90, 90));
         img3Label.setPreferredSize(new java.awt.Dimension(90, 90));
         img3Label.setVerifyInputWhenFocusTarget(false);
 
-        img4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/no-photo.png"))); // NOI18N
+        img4Label.setIcon(rm.getImageIcon("no-photo.png", ResourceType.JAR)); // NOI18N
         img4Label.setMaximumSize(new java.awt.Dimension(90, 90));
         img4Label.setMinimumSize(new java.awt.Dimension(90, 90));
         img4Label.setPreferredSize(new java.awt.Dimension(90, 90));
         img4Label.setVerifyInputWhenFocusTarget(false);
 
-        addNewButton.setText("Πρόσθεσέ το");
+        addNewButton.setText(rm.getTextOfXMLTag("add"));
         addNewButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addNewButtonMouseClicked(evt);
             }
         });
 
-        soundLabel.setText("Προσθήκη ήχου");
+        soundLabel.setText(rm.getTextOfXMLTag("addNewSound"));
         soundLabel.setAlignmentY(0.0F);
 
-        removeSoundLabel.setText("Αφαίρεση ήχου");
+        removeSoundLabel.setText(rm.getTextOfXMLTag("removeSound"));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -305,7 +304,7 @@ public class NewGamePanel extends javax.swing.JPanel {
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        instructionLabel.setText("Για να φαίνεται όμορφο και σωστό,  προτιμήστε να ανεβάσετε τετράγωνες εικόνες");
+        instructionLabel.setText(rm.getTextOfXMLTag("uploadImageInfo"));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

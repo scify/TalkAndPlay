@@ -15,6 +15,7 @@
     <writeUserName>Write a user name</writeUserName>
     <uploadUserImage>Upload user photo</uploadUserImage>
     <uploadImage>Upload image</uploadImage>
+    <uploadImageInfo>For better results, try uploading square images</uploadImageInfo>
     <uploadSound>Upload sound</uploadSound>
     <uploadSoundWarning>If no sound is uploaded the default sound will be used.</uploadSoundWarning>
     <configureNavigationAndSelection>Configure navigation and selection</configureNavigationAndSelection>
@@ -86,6 +87,7 @@
     <selectImage>Select image</selectImage>
     <selectSound>Select sound</selectSound>
     <noFilesFound>No files found</noFilesFound>
+    <add>Add</add>
     <edit>Edit</edit>
     <editText>Click a word to edit it.</editText>
     <addition>Addition</addition>
@@ -103,6 +105,8 @@
     <addNewGame>Add new game</addNewGame>
     <selectCategoryText>Select a category in order to configure its games. The available categories are:</selectCategoryText>
     <availability>Availability</availability>
+    <available>Available</available>
+    <unavailable>Unavailable</unavailable>
     <selectAvailabilityText>Choose which games will be available to the user by selecting “Available” or “Not Available”, respectively.</selectAvailabilityText>
     <selectAvailabilitySaveText>Under the list of games, use the "Save" button to save your choices.</selectAvailabilitySaveText>
     <difficultyLevel>Difficulty level</difficultyLevel>
@@ -146,6 +150,7 @@
     <pressTheButton>Press the button!</pressTheButton>
     <pressTheButtonToStart>Press the button to start!</pressTheButtonToStart>
     <sequenceGameInfo>Place the cards in the right order.</sequenceGameInfo>
+    <sequenceGameInfo2>Which image should be first? Press the button on it!</sequenceGameInfo2>
     <categoryYes>Yes</categoryYes>
     <categoryNo>No</categoryNo>
     <categoryFood>Food</categoryFood>

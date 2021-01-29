@@ -15,6 +15,7 @@
     <writeUserName>Γράψε όνομα χρήστη</writeUserName>
     <uploadUserImage>Ανέβασε φωτογραφία χρήστη</uploadUserImage>
     <uploadImage>Ανέβασε φωτογραφία</uploadImage>
+    <uploadImageInfo>Για να φαίνεται όμορφο και σωστό,  προτιμήστε να ανεβάσετε τετράγωνες εικόνες</uploadImageInfo>
     <uploadSound>Ανέβασε ηχητικό</uploadSound>
     <uploadSoundWarning>Εάν δεν ανεβάσεις ηχητικό, θα παίζει προκαθορισμένος ήχος.</uploadSoundWarning>
     <configureNavigationAndSelection>Τρόποι πλοήγησης και επιλογής</configureNavigationAndSelection>
@@ -86,6 +87,7 @@
     <selectImage>Διάλεξε εικόνα</selectImage>
     <selectSound>Διάλεξε ήχο</selectSound>
     <noFilesFound>Δεν υπάρχουν αρχεία</noFilesFound>
+    <add>Πρόσθεσε</add>
     <edit>Επεξεργασία</edit>
     <editText>Κάνε κλικ πάνω σε κάποια λέξη για να την επεξεργαστείς.</editText>
     <addition>Προσθήκη</addition>
@@ -103,6 +105,8 @@
     <addNewGame>Προσθήκη νέου παιχνιδιού</addNewGame>
     <selectCategoryText>Επίλεξε κατηγορία για να διαχειριστείς τα παιχνίδια. Οι διαθέσιμες κατηγορίες είναι:</selectCategoryText>
     <availability>Διαθεσιμότητα</availability>
+    <available>Διαθέσιμο</available>
+    <unavailable>Μη διαθέσιμο</unavailable>
     <selectAvailabilityText>Επίλεξε ποιά παιχνίδια θα είναι διαθέσιμα στο χρήστη πατώντας “Διαθέσιμο” ή “Μη Διαθέσιμο”, αντίστοιχα.</selectAvailabilityText>
     <selectAvailabilitySaveText>Στο κάτω μέρος της λίστας των παιχνιδιών βρες το κουμπί “Αποθήκευση” και πάτησέ το για να αποθηκεύσεις τις επιλογές σου.</selectAvailabilitySaveText>
     <difficultyLevel>Επίπεδο δυσκολίας</difficultyLevel>
@@ -112,7 +116,7 @@
     <pleaseCreateNewGame>Παρακαλώ δημιουργείστε ένα παιχνίδι για να το προσθέσετε</pleaseCreateNewGame>
     <chooseGame>[-- Επίλεξε παιχνίδι --]</chooseGame>
     <gameTypeStimulusReaction>Ερέθισμα - Αντίδραση</gameTypeStimulusReaction>
-    <gameTypeTimeSequence>Χρονική αλληλουχία</gameTypeTimeSequence>
+    <gameTypeTimeSequence>Χρονικής Αλληλουχίας</gameTypeTimeSequence>
     <gameTypeFindTheSimilar>Βρες το όμοιο</gameTypeFindTheSimilar>
     <pressTheButtonOnTheSimilar>Πάτα το κουμπί πάνω στο όμοιο!</pressTheButtonOnTheSimilar>
     <changesSaved>Οι αλλαγές αποθηκεύτηκαν!</changesSaved>
@@ -146,6 +150,7 @@
     <pressTheButton>Πάτα το κουμπί!</pressTheButton>
     <pressTheButtonToStart>Πάτα το κουμπί για να ξεκινήσεις!</pressTheButtonToStart>
     <sequenceGameInfo>Βάλε στη σωστή σειρά τις κάρτες.</sequenceGameInfo>
+    <sequenceGameInfo2>Ποια εικόνα πρέπει να μπει πρώτη; Πάτα το κουμπί πάνω της!</sequenceGameInfo2>
     <categoryYes>Ναι</categoryYes>
     <categoryNo>Όχι</categoryNo>
     <categoryFood>Φαγητό</categoryFood>

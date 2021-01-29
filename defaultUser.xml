@@ -27,8 +27,8 @@
         <category name="{{ categoryYes }}">
           <rows>3</rows>
           <columns>3</columns>
-          <image>images/yes.png</image>
-          <sound>sounds/yes.mp3</sound>
+          <image resourceType="BUNDLE">images/yes.png</image>
+          <sound resourceType="BUNDLE">sounds/yes.mp3</sound>
           <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
@@ -36,8 +36,8 @@
         <category name="{{ categoryNo }}">
           <rows>3</rows>
           <columns>3</columns>
-          <image>images/no.png</image>
-          <sound>sounds/no.mp3</sound>
+          <image resourceType="BUNDLE">images/no.png</image>
+          <sound resourceType="BUNDLE">sounds/no.mp3</sound>
           <hasSound>true</hasSound>
           <hasImage>true</hasImage>
           <hasText>true</hasText>
@@ -45,8 +45,8 @@
         <category name="{{ categoryFood }}">
           <rows>3</rows>
           <columns>3</columns>
-          <image>images/food/burger.png</image>
-          <sound>sounds/food/food.mp3</sound>
+          <image resourceType="BUNDLE">images/food/burger.png</image>
+          <sound resourceType="BUNDLE">sounds/food/food.mp3</sound>
           <hasSound>false</hasSound>
           <hasImage>false</hasImage>
           <hasText>false</hasText>
@@ -54,8 +54,8 @@
             <category name="{{ categoryPasta }}">
               <rows>3</rows>
               <columns>3</columns>
-              <image>images/food/pasta.png</image>
-              <sound>sounds/food/pasta.mp3</sound>
+              <image resourceType="BUNDLE">images/food/pasta.png</image>
+              <sound resourceType="BUNDLE">sounds/food/pasta.mp3</sound>
               <hasSound>false</hasSound>
               <hasImage>false</hasImage>
               <hasText>false</hasText>
@@ -63,8 +63,8 @@
             <category name="{{ categoryFrenchFries }}">
               <rows>3</rows>
               <columns>3</columns>
-              <image>images/food/frenchFries.png</image>
-              <sound>sounds/food/frenchFries.mp3</sound>
+              <image resourceType="BUNDLE">images/food/frenchFries.png</image>
+              <sound resourceType="BUNDLE">sounds/food/frenchFries.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -72,8 +72,8 @@
             <category name="{{ categoryBurger }}">
               <rows>3</rows>
               <columns>3</columns>
-              <image>images/food/burger.png</image>
-              <sound>sounds/food/burger.mp3</sound>
+              <image resourceType="BUNDLE">images/food/burger.png</image>
+              <sound resourceType="BUNDLE">sounds/food/burger.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -81,8 +81,8 @@
             <category name="{{ categorySteak }}">
               <rows>3</rows>
               <columns>3</columns>
-              <image>images/food/steak.png</image>
-              <sound>sounds/food/steak.mp3</sound>
+              <image resourceType="BUNDLE">images/food/steak.png</image>
+              <sound resourceType="BUNDLE">sounds/food/steak.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -90,8 +90,8 @@
             <category name="{{ categoryChicken }}">
               <rows>3</rows>
               <columns>3</columns>
-              <image>images/food/chicken.png</image>
-              <sound>sounds/food/chicken.mp3</sound>
+              <image resourceType="BUNDLE">images/food/chicken.png</image>
+              <sound resourceType="BUNDLE">sounds/food/chicken.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -99,8 +99,8 @@
             <category name="{{ categorySoup }}">
               <rows>3</rows>
               <columns>3</columns>
-              <image>images/food/soup.png</image>
-              <sound>sounds/food/soup.mp3</sound>
+              <image resourceType="BUNDLE">images/food/soup.png</image>
+              <sound resourceType="BUNDLE">sounds/food/soup.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -108,8 +108,8 @@
             <category name="{{ categoryBread }}">
               <rows>3</rows>
               <columns>3</columns>
-              <image>images/food/bread.png</image>
-              <sound>sounds/food/bread.mp3</sound>
+              <image resourceType="BUNDLE">images/food/bread.png</image>
+              <sound resourceType="BUNDLE">sounds/food/bread.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -117,8 +117,8 @@
             <category name="{{ categoryFrenchToast }}">
               <rows>3</rows>
               <columns>3</columns>
-              <image>images/food/frenchToast.png</image>
-              <sound>sounds/food/frenchToast.mp3</sound>
+              <image resourceType="BUNDLE">images/food/frenchToast.png</image>
+              <sound resourceType="BUNDLE">sounds/food/frenchToast.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -126,8 +126,8 @@
             <category name="{{ categoryYogurt }}">
               <rows>3</rows>
               <columns>3</columns>
-              <image>images/food/yogurt.png</image>
-              <sound>sounds/food/yogurt.mp3</sound>
+              <image resourceType="BUNDLE">images/food/yogurt.png</image>
+              <sound resourceType="BUNDLE">sounds/food/yogurt.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -135,8 +135,8 @@
             <category name="{{ categoryCucumber }}">
               <rows>3</rows>
               <columns>3</columns>
-              <image>images/food/cucumber.png</image>
-              <sound>sounds/food/cucumber.mp3</sound>
+              <image resourceType="BUNDLE">images/food/cucumber.png</image>
+              <sound resourceType="BUNDLE">sounds/food/cucumber.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -144,8 +144,8 @@
             <category name="{{ categoryTomato }}">
               <rows>3</rows>
               <columns>3</columns>
-              <image>images/food/tomato.png</image>
-              <sound>sounds/food/tomato.mp3</sound>
+              <image resourceType="BUNDLE">images/food/tomato.png</image>
+              <sound resourceType="BUNDLE">sounds/food/tomato.mp3</sound>
               <hasSound>true</hasSound>
               <hasImage>true</hasImage>
               <hasText>true</hasText>
@@ -181,6 +181,132 @@
       <image />
       <sound />
       <enabled>true</enabled>
+      <stimulusReactionGames>
+        <name>{{ gameTypeStimulusReaction }}</name>
+        <image />
+        <sound />
+        <winSound />
+        <errorSound />
+        <enabled>true</enabled>
+        <games>
+          <game>
+            <name>Game 1</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound resourceType="BUNDLE">sounds/games/car.mp3</winSound>
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path resourceType="BUNDLE">images/games/stimulus/car/car_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path resourceType="BUNDLE">images/games/stimulus/car/car_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path resourceType="BUNDLE">images/games/stimulus/car/car_3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path resourceType="BUNDLE">images/games/stimulus/car/car_4.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+        </games>
+      </stimulusReactionGames>
+      <sequenceGames>
+        <name>{{ gameTypeTimeSequence }}</name>
+        <image />
+        <sound />
+        <winSound />
+        <errorSound />
+        <enabled>true</enabled>
+        <games>
+          <game>
+            <name>Game 1</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>4</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path resourceType="BUNDLE">images/games/sequence/sea_swimming/sea_swimming_1.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path resourceType="BUNDLE">images/games/sequence/sea_swimming/sea_swimming_2.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path resourceType="BUNDLE">images/games/sequence/sea_swimming/sea_swimming_3.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path resourceType="BUNDLE">images/games/sequence/sea_swimming/sea_swimming_4.png</path>
+                <order>4</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+        </games>
+      </sequenceGames>
+      <similarityGames>
+        <name>{{ gameTypeFindTheSimilar }}</name>
+        <image />
+        <sound />
+        <winSound resourceType="BUNDLE">sounds/games/winSound.mp3</winSound>
+        <errorSound resourceType="BUNDLE">sounds/games/errorSound.mp3</errorSound>
+        <enabled>true</enabled>
+        <games>
+          <game>
+            <name>Game 1</name>
+            <enabled>true</enabled>
+            <image />
+            <difficulty>3</difficulty>
+            <winSound />
+            <errorSound />
+            <gameImages>
+              <image>
+                <name />
+                <path resourceType="BUNDLE">images/games/similarity/circle/large_blue.png</path>
+                <order>1</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path resourceType="BUNDLE">images/games/similarity/circle/large_red.png</path>
+                <order>2</order>
+                <enabled>true</enabled>
+              </image>
+              <image>
+                <name />
+                <path resourceType="BUNDLE">images/games/similarity/circle/large_yellow.png</path>
+                <order>3</order>
+                <enabled>true</enabled>
+              </image>
+            </gameImages>
+          </game>
+        </games>
+      </similarityGames>
     </games>
   </profile>
 </profiles>

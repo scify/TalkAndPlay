@@ -176,47 +176,47 @@ public class GamePanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        img1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/no-photo.png"))); // NOI18N
+        img1Label.setIcon(rm.getImageIcon("no-photo.png", ResourceType.JAR)); // NOI18N
         img1Label.setMaximumSize(new java.awt.Dimension(90, 90));
         img1Label.setMinimumSize(new java.awt.Dimension(90, 90));
         img1Label.setPreferredSize(new java.awt.Dimension(90, 90));
         img1Label.setVerifyInputWhenFocusTarget(false);
 
-        img2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/no-photo.png"))); // NOI18N
+        img2Label.setIcon(rm.getImageIcon("no-photo.png", ResourceType.JAR)); // NOI18N
         img2Label.setMaximumSize(new java.awt.Dimension(90, 90));
         img2Label.setMinimumSize(new java.awt.Dimension(90, 90));
         img2Label.setPreferredSize(new java.awt.Dimension(90, 90));
         img2Label.setVerifyInputWhenFocusTarget(false);
 
-        img3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/no-photo.png"))); // NOI18N
+        img3Label.setIcon(rm.getImageIcon("no-photo.png", ResourceType.JAR)); // NOI18N
         img3Label.setMaximumSize(new java.awt.Dimension(90, 90));
         img3Label.setMinimumSize(new java.awt.Dimension(90, 90));
         img3Label.setPreferredSize(new java.awt.Dimension(90, 90));
         img3Label.setVerifyInputWhenFocusTarget(false);
 
-        img4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/no-photo.png"))); // NOI18N
+        img4Label.setIcon(rm.getImageIcon("no-photo.png", ResourceType.JAR)); // NOI18N
         img4Label.setMaximumSize(new java.awt.Dimension(90, 90));
         img4Label.setMinimumSize(new java.awt.Dimension(90, 90));
         img4Label.setPreferredSize(new java.awt.Dimension(90, 90));
         img4Label.setVerifyInputWhenFocusTarget(false);
 
-        activeButton.setText("Διαθέσιμο");
+        activeButton.setText(rm.getTextOfXMLTag("available"));
         activeButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 activeButtonMouseClicked(evt);
             }
         });
 
-        inactiveButton.setText("Μη διαθέσιμο");
+        inactiveButton.setText(rm.getTextOfXMLTag("unavailable"));
         inactiveButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 inactiveButtonMouseClicked(evt);
             }
         });
 
-        soundLabel.setText("Προσθήκη ήχου");
+        soundLabel.setText(rm.getTextOfXMLTag("addNewSound"));
 
-        removeSoundLabel.setText("Αφαίρεση ήχου");
+        removeSoundLabel.setText(rm.getTextOfXMLTag("removeSound"));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

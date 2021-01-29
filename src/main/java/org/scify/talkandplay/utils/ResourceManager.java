@@ -175,6 +175,8 @@ public class ResourceManager {
     }
 
     public ImageIcon getImageIcon(ImageResource imageResource) {
+        if (imageResource == null)
+            return null;
         return getImageIcon(imageResource.path, imageResource.getResourceType());
     }
 

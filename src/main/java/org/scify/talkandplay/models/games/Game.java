@@ -16,6 +16,7 @@
 package org.scify.talkandplay.models.games;
 
 import org.scify.talkandplay.utils.ImageResource;
+import org.scify.talkandplay.utils.ResourceManager;
 import org.scify.talkandplay.utils.ResourceType;
 import org.scify.talkandplay.utils.SoundResource;
 
@@ -37,12 +38,15 @@ public class Game {
     private boolean enabled;
     private List<GameImage> images;
     private List<GameImage> enabledImages;
+    protected ResourceManager rm;
 
     public Game() {
+        this.rm = ResourceManager.getInstance();
         this.images = new ArrayList();
     }
 
     public Game(String name, boolean enabled) {
+        this.rm = ResourceManager.getInstance();
         this.name = name;
         this.enabled = enabled;
         this.images = new ArrayList();
@@ -50,7 +54,7 @@ public class Game {
     }
 
     public String getName() {
-        return name;
+        return rm.decodeTextIfRequired(name);
     }
 
     public void setName(String name) {
