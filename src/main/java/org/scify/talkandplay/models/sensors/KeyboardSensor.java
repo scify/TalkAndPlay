@@ -26,30 +26,37 @@ public class KeyboardSensor extends Sensor {
     private int keyCode;
     private String keyChar;
 
-    public KeyboardSensor() {
-        super();
-    }
-
     public KeyboardSensor(int keyCode, String keyChar, String name) {
         super(name);
         this.keyCode = keyCode;
         this.keyChar = keyChar;
     }
 
-    public int getKeyCode() {
-        return keyCode;
+    public KeyboardSensor getCopy() {
+        return new KeyboardSensor(keyCode, keyChar, name);
     }
 
-    public void setKeyCode(int keyCode) {
-        this.keyCode = keyCode;
+    public int getKeyCode() {
+        return keyCode;
     }
 
     public String getKeyChar() {
         return keyChar;
     }
 
-    public void setKeyChar(String keyChar) {
-        this.keyChar = keyChar;
+    @Override
+    public boolean isAltered(Sensor sensor) {
+        if (super.isAltered(sensor))
+            return true;
+        else if (sensor instanceof KeyboardSensor) {
+            KeyboardSensor s = (KeyboardSensor) sensor;
+            if (s.keyCode != keyCode)
+                return true;
+            if (!s.keyChar.equals(keyChar))
+                return true;
+            return false;
+        } else
+            return true;
     }
 
 }

@@ -53,8 +53,41 @@ public class Game {
         this.enabledImages = new ArrayList();
     }
 
+    public Game getCopy() {
+        Game game = new Game(name, enabled);
+        if (imageResource == null)
+            game.imageResource = null;
+        else
+            game.imageResource = imageResource.getCopy();
+        if (soundResource == null)
+            game.soundResource = null;
+        else
+            game.soundResource = soundResource.getCopy();
+        if (winSoundResource == null)
+            game.winSoundResource = null;
+        else
+            game.winSoundResource = winSoundResource.getCopy();
+        if (errorSoundResource == null)
+            game.errorSoundResource = null;
+        else
+            game.errorSoundResource = errorSoundResource.getCopy();
+
+        for (GameImage image: images) {
+            game.images.add(image.getCopy());
+        }
+
+        for (GameImage image: enabledImages) {
+            game.enabledImages.add(image.getCopy());
+        }
+        return game;
+    }
+
     public String getName() {
         return rm.decodeTextIfRequired(name);
+    }
+
+    public String getNameUnmodified() {
+        return name;
     }
 
     public void setName(String name) {

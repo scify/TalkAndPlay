@@ -23,9 +23,6 @@ public class SimilarityGame extends Game {
 
     private int difficulty;
 
-    public SimilarityGame() {
-    }
-
     public SimilarityGame(String name, boolean enabled, int difficulty) {
         super(name, enabled);
         this.difficulty = difficulty;

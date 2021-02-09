@@ -12,6 +12,10 @@ public class SoundResource {
         this.resourceType = resourceType;
     }
 
+    public SoundResource getCopy() {
+        return new SoundResource(path, resourceType);
+    }
+
     public String getPath() {
         return path;
     }
@@ -22,5 +26,12 @@ public class SoundResource {
 
     public File getSound() {
         return rm.getSound(path, resourceType);
+    }
+
+    public boolean isAltered (SoundResource soundResource) {
+        if (path.equals(soundResource.path) && resourceType == soundResource.getResourceType())
+            return false;
+        else
+            return true;
     }
 }

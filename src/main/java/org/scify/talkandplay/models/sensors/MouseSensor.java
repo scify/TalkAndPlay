@@ -26,14 +26,14 @@ public class MouseSensor extends Sensor {
     private int button;
     private int clickCount;
 
-    public MouseSensor() {
-        super();
-    }
-
     public MouseSensor(int button, int clickCount, String name) {
         super(name);
         this.button = button;
         this.clickCount = clickCount;
+    }
+
+    public MouseSensor getCopy() {
+        return new MouseSensor(button, clickCount, name);
     }
 
     public int getButton() {
@@ -52,4 +52,18 @@ public class MouseSensor extends Sensor {
         this.clickCount = clickCount;
     }
 
+    @Override
+    public boolean isAltered(Sensor sensor) {
+        if (super.isAltered(sensor))
+            return true;
+        else if (sensor instanceof MouseSensor) {
+            MouseSensor s = (MouseSensor) sensor;
+            if (s.button != button)
+                return true;
+            if (s.clickCount != button)
+                return true;
+            return false;
+        } else
+            return true;
+    }
 }

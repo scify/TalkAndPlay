@@ -47,6 +47,27 @@ public class Module {
         return rm.decodeTextIfRequired(name);
     }
 
+    public String getNameUnmodified() {
+        return name;
+    }
+
+    public boolean isAltered(Module module) {
+        if (!name.equals(module.name))
+            return true;
+        if ((imageResource != null && module.imageResource != null && imageResource.isAltered(module.imageResource)) ||
+                (imageResource != null && module.imageResource == null) ||
+                (imageResource == null && module.imageResource != null))
+            return true;
+
+        if ((soundResource != null && module.soundResource != null && soundResource.isAltered(module.soundResource)) ||
+                (soundResource != null && module.soundResource == null) ||
+                (soundResource == null && module.soundResource != null))
+            return true;
+        if (enabled != module.enabled)
+            return true;
+        return false;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -59,7 +80,7 @@ public class Module {
         this.imageResource = imageResource;
     }
 
-    public SoundResource getSound() {
+    public SoundResource getSoundResource() {
         return soundResource;
     }
 

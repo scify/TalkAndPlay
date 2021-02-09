@@ -15,6 +15,8 @@
 */
 package org.scify.talkandplay.models;
 
+import org.scify.talkandplay.models.sensors.KeyboardSensor;
+import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 
 public class Configuration {
@@ -30,6 +32,62 @@ public class Configuration {
     private Sensor navigationSensor;
 
     public Configuration() {
+
+    }
+
+    public Configuration getCopy() {
+        Configuration configuration = new Configuration();
+        configuration.rotationSpeed = rotationSpeed;
+        configuration.defaultGridRow = defaultGridRow;
+        configuration.defaultGridColumn = defaultGridColumn;
+        configuration.sound = sound;
+        configuration.image = image;
+        configuration.text = text;
+
+        if (selectionSensor == null)
+            configuration.selectionSensor = null;
+        else if (selectionSensor instanceof MouseSensor)
+            configuration.selectionSensor = ((MouseSensor) selectionSensor).getCopy();
+        else if (selectionSensor instanceof KeyboardSensor)
+            configuration.selectionSensor = ((KeyboardSensor) selectionSensor).getCopy();
+
+        if (navigationSensor == null)
+            configuration.navigationSensor = null;
+        else if (navigationSensor instanceof MouseSensor)
+            configuration.navigationSensor = ((MouseSensor) navigationSensor).getCopy();
+        else if (navigationSensor instanceof KeyboardSensor)
+            configuration.navigationSensor = ((KeyboardSensor) navigationSensor).getCopy();
+
+        return configuration;
+    }
+
+    public boolean isAltered(Configuration configuration) {
+        if (configuration.rotationSpeed != rotationSpeed)
+            return true;
+        if (configuration.defaultGridRow != defaultGridRow)
+            return true;
+        if (configuration.defaultGridColumn != defaultGridColumn)
+            return true;
+        if (configuration.sound != sound)
+            return true;
+        if (configuration.image != image)
+            return true;
+        if (configuration.text != text)
+            return true;
+
+        if (configuration.selectionSensor != null && selectionSensor != null && configuration.selectionSensor.isAltered(selectionSensor) ||
+                configuration.selectionSensor != null && selectionSensor == null ||
+                configuration.selectionSensor == null && selectionSensor != null
+        )
+            return true;
+
+        if (configuration.navigationSensor != null && navigationSensor != null && configuration.navigationSensor.isAltered(navigationSensor) ||
+                configuration.navigationSensor != null && navigationSensor == null ||
+                configuration.navigationSensor == null && navigationSensor != null
+        )
+            return true;
+
+        return false;
     }
 
     public int getRotationSpeed() {
@@ -95,5 +153,4 @@ public class Configuration {
     public void setText(boolean text) {
         this.text = text;
     }
-
 }

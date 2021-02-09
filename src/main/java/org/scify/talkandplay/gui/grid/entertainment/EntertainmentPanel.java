@@ -93,7 +93,7 @@ public class EntertainmentPanel extends BaseGridPanel {
     private JPanel createMusicItem() {
         JPanel panel = tileCreator.create(user.getEntertainmentModule().getMusicModule().getName(),
                 user.getEntertainmentModule().getMusicModule().getImageResource(),
-                user.getEntertainmentModule().getMusicModule().getSound(),
+                user.getEntertainmentModule().getMusicModule().getSoundResource(),
                 new TileAction() {
                     @Override
                     public void act() {
@@ -112,7 +112,7 @@ public class EntertainmentPanel extends BaseGridPanel {
     private JPanel createVideoItem() {
         JPanel panel = tileCreator.create(user.getEntertainmentModule().getVideoModule().getName(),
                 user.getEntertainmentModule().getVideoModule().getImageResource(),
-                user.getEntertainmentModule().getVideoModule().getSound(),
+                user.getEntertainmentModule().getVideoModule().getSoundResource(),
                 new TileAction() {
                     @Override
                     public void act() {

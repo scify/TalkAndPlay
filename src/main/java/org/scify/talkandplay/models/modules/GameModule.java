@@ -33,6 +33,14 @@ public class GameModule extends Module {
         return gameTypes;
     }
 
+    public GameType getGameType(String name) {
+        for (GameType gameType: gameTypes) {
+            if (gameType.getType().equals(name))
+                return gameType;
+        }
+        return null;
+    }
+
     public void setGameTypes(List<GameType> gameTypes) {
         this.gameTypes = gameTypes;
     }

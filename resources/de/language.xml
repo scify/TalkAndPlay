@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<languageTexts>
+    <language>German</language>
+    <vlcMissingMessage>Please first install VLC and try again</vlcMissingMessage>
+    <createdBy>Created by</createdBy>
+    <donationBy>Exclusive donation</donationBy>
+    <updateInProgress1>The application is updating</updateInProgress1>
+    <updateInProgress2>please wait...</updateInProgress2>
+    <updateInProgress3>The procedure might take a few minutes.</updateInProgress3>
+    <updateInProgress4>When update is completed, please restart the application.</updateInProgress4>
+    <addUser>Neuen Benutzer hinzufügen</addUser>
+    <loadUser>einen Benutzer laden</loadUser>
+    <addUserModePanelTitle>User addition</addUserModePanelTitle>
+    <editUserModePanelTitle>Benutzer bearbeiten</editUserModePanelTitle>
+    <writeUserName>Einen Benutzernamen eingeben</writeUserName>
+    <uploadUserImage>Benutzerfoto hochladen</uploadUserImage>
+    <uploadImage>Bild hochladen</uploadImage>
+    <uploadImageInfo>Damit es schön und passend aussieht, laden Sie bestenfalls quadratische Bilder hoch.</uploadImageInfo>
+    <uploadSound>Audio-Datei hochladen</uploadSound>
+    <uploadSoundWarning>Wenn Sie kein Audio hochladen, wird ein vordefinierter Ton abgespielt.</uploadSoundWarning>
+    <configureNavigationAndSelection>Navigations- und Auswahlmodus</configureNavigationAndSelection>
+    <configureMatrixSize>Größe der Tabelle angeben</configureMatrixSize>
+    <configureMatrixSize2>leave blank to use the default size</configureMatrixSize2>
+    <configureWords>Wörter Anzeigen</configureWords>
+    <configureWordsExtra>Das Feld 5 kann auch für jedes im nächsten Schritt eingestellte Wort unabhängig eingestellt werden.</configureWordsExtra>
+    <sound>Aussprache</sound>
+    <verbal>Ausgeschrieben</verbal>
+    <image>Bild</image>
+    <automatically>Automatisch</automatically>
+    <manualy>Μanuell</manualy>
+    <selection>auswählen</selection>
+    <navigation>Navigation</navigation>
+    <activated>Aktiviert</activated>
+    <userNamePlaceholder>Benutzernamen</userNamePlaceholder>
+    <selectRotationSpeed>Toggle-Geschwindigkeit wählen</selectRotationSpeed>
+    <userNameErrorMessage>The user name must not be blank</userNameErrorMessage>
+    <userNameErrorMessage2>The user name already exists</userNameErrorMessage2>
+    <rawsAndColumnsErrorMessage>The raws and columns of the matrix must be integers, between 2 and 6.</rawsAndColumnsErrorMessage>
+    <selectionButtonErrorMessage>The selection button should not be empty</selectionButtonErrorMessage>
+    <selectionAndNavigationButtonsErrorMessage>The selection and navigation buttons should not be empty</selectionAndNavigationButtonsErrorMessage>
+    <selectionAndNavigationButtonsErrorMessage2>The selection and navigation buttons should be different</selectionAndNavigationButtonsErrorMessage2>
+    <chooseFile>Choose a file</chooseFile>
+    <profileSavedMessage>The profile was saved.</profileSavedMessage>
+    <profileNotSavedMessage>The profile was not saved. Please try again.</profileNotSavedMessage>
+    <selectKey>Optionsfeld setzen</selectKey>
+    <key>key</key>
+    <leftClick>Linksklick</leftClick>
+    <rightClick>right click</rightClick>
+    <middleClick>middle click</middleClick>
+    <preferences>Präferenzen</preferences>
+    <delete>Löschen</delete>
+    <filesNotFound>Some files could not be found</filesNotFound>
+    <userDeleteConfirmation>Sind Sie sicher, dass Sie den Benutzer löschen wollen?</userDeleteConfirmation>
+    <defaultUserName>Benutzer</defaultUserName>
+    <communicationName>Kontakt</communicationName>
+    <entertainmentName>Unterhaltung</entertainmentName>
+    <gamesName>Spiele</gamesName>
+    <newGameButton>Neues Spiel</newGameButton>
+    <replayGameButton>Das Gleiche noch einmal spielen</replayGameButton>
+    <saveButton>Speichern</saveButton>
+    <exitButton>Beenden</exitButton>
+    <backButton>Zurück</backButton>
+    <saveAndContinue>Speichern und fortfahren</saveAndContinue>
+    <saveAndExit>Speichern und schließen</saveAndExit>
+    <saveToFile>In Datei speichern</saveToFile>
+    <saveWord>Wort speichern</saveWord>
+    <congratulationMessage1>Gut gemacht!</congratulationMessage1>
+    <congratulationMessage2>Du hast es geschafft!</congratulationMessage2>
+    <congratulationMessage3>Korrekt!</congratulationMessage3>
+    <mistakeMessage1>Fehler! Erneut versuchen.</mistakeMessage1>
+    <mistakeMessage2>Erneut versuchen.</mistakeMessage2>
+    <musicName>Musik</musicName>
+    <previousSongs>Vorherige Lieder</previousSongs>
+    <nextSongs>Nächste Lieder</nextSongs>
+    <musicControl>Music control</musicControl>
+    <playingNow>PLAYING NOW</playingNow>
+    <previousControl>Vorherige</previousControl>
+    <nextControl>Nächste</nextControl>
+    <playControl>Abspielen</playControl>
+    <pauseControl>Pause</pauseControl>
+    <playingListControl>Liste</playingListControl>
+    <fullScreenControl>Full Screen</fullScreenControl>
+    <videoName>Video</videoName>
+    <previousVideos>Vorheriges Video</previousVideos>
+    <nextVideos>Nächstes Video</nextVideos>
+    <addNewSound>Audio hinzufügen</addNewSound>
+    <selectImage>Select image</selectImage>
+    <selectSound>Select sound</selectSound>
+    <noFilesFound>No files found</noFilesFound>
+    <add>Add</add>
+    <edit>Bearbeiten</edit>
+    <editText>Klicken Sie auf ein Wort, um es zu bearbeiten.</editText>
+    <addition>Hinzufügen</addition>
+    <newWordButton>Neues Wort</newWordButton>
+    <additionText>To add a new word press:</additionText>
+    <communicationTabFilesNotFoundErrorMessage>These files could not be found</communicationTabFilesNotFoundErrorMessage>
+    <selectCategory>Kategorie auswählen</selectCategory>
+    <selectGameCategory>Spielkategorie auswählen</selectGameCategory>
+    <configureAvailableImageGroups>Verfügbare Bildgruppen verwalten</configureAvailableImageGroups>
+    <addSoundsForCongratulationsAndMistakes>Belohnungs- und Fehlersoundeffekt hinzufügen</addSoundsForCongratulationsAndMistakes>
+    <addSoundsForCongratulationsAndMistakes2>Es werden Standardtöne verwendet, wenn Sie kein Audio hochladen</addSoundsForCongratulationsAndMistakes2>
+    <congratulation>Belohnung</congratulation>
+    <mistake>Fehler</mistake>
+    <removeSound>Audio entfernen</removeSound>
+    <addNewGame>Neues Spiel hinzufügen</addNewGame>
+    <selectCategoryText>Wählen Sie eine Kategorie aus, um die Spiele zu verwalten. Die verfügbaren Kategorien sind:</selectCategoryText>
+    <availability>Verfügbarkeit</availability>
+    <available>Verfügbar</available>
+    <unavailable>Nicht verfügbar</unavailable>
+    <selectAvailabilityText>Wählen Sie aus, welche Spiele für den Benutzer verfügbar sein sollen, indem Sie auf "Verfügbar" bzw. "Nicht verfügbar" klicken.</selectAvailabilityText>
+    <selectAvailabilitySaveText>Suchen Sie am unteren Ende der Spieleliste die Schaltfläche "Speichern" und drücken Sie sie, um Ihre Auswahl zu speichern.</selectAvailabilitySaveText>
+    <difficultyLevel>Schwierigkeitsgrad</difficultyLevel>
+    <selectDifficultyLevelText>"Stellen Sie den Schwierigkeitsgrad für jedes Spiel ein, indem Sie die gewünschten Bilder in in jedem Quartett aktivieren. Um ein Bild zu aktivieren, klicken Sie auf das Feld direkt unter dem Bild."</selectDifficultyLevelText>
+    <noGamesInCategory>There are no games in this category</noGamesInCategory>
+    <noGames>No games found</noGames>
+    <pleaseCreateNewGame>Please create a new game in  order to add it</pleaseCreateNewGame>
+    <chooseGame>[-- Spiel auswählen --]</chooseGame>
+    <gameTypeStimulusReaction>Reiz - Reaktion</gameTypeStimulusReaction>
+    <gameTypeTimeSequence>Reihenfolge finden</gameTypeTimeSequence>
+    <gameTypeFindTheSimilar>Paare finden</gameTypeFindTheSimilar>
+    <pressTheButtonOnTheSimilar>Drücken Sie die Taste auf dem gefundenen Paar.</pressTheButtonOnTheSimilar>
+    <changesSaved>Änderungen gespeichert!</changesSaved>
+    <userPreferences>Benutzereinstellungen</userPreferences>
+    <chooseDirectory>Choose directory</chooseDirectory>
+    <musicDirectory>Musikdatei</musicDirectory>
+    <videoDirectory>Videodatei</videoDirectory>
+    <amount>Amount</amount>
+    <chooseMusicDirectory>Einen Musikdatei auswählen</chooseMusicDirectory>
+    <errorMusicDirectory>Die Musikdatei muss richtig eingestellt sein.</errorMusicDirectory>
+    <chooseVideoDirectory>Eine Videodatei auswählen</chooseVideoDirectory>
+    <errorVideoDirectory>Die Videodatei muss richtig eingestellt sein.</errorVideoDirectory>
+    <defineAmountOfItemsPerPage>Anzahl der Lieder und Videos pro Seite festlegen</defineAmountOfItemsPerPage>
+    <errorAmountOfSongs>Die Anzahl der Lieder muss korrekt eingestellt sein.</errorAmountOfSongs>
+    <errorAmountOfSongs2>Die Anzahl der Lieder muss zwischen 6 und 10 liegen.</errorAmountOfSongs2>
+    <chooseWord>[-- Wort auswählen --]</chooseWord>
+    <word>Wort</word>
+    <addNewWord>NEUES WORT HINZUFÜGEN</addNewWord>
+    <editWord>WORTVERARBEITUNG</editWord>
+    <writeWord>Schreiben Sie ein Wort</writeWord>
+    <wordMustNotBeEmpty>The word must not be empty</wordMustNotBeEmpty>
+    <wordMustBeUnique>The word must be unique</wordMustBeUnique>
+    <wordMustHaveImage>Das Wort muss ein Bild haben.</wordMustHaveImage>
+    <wordBelongsToSelection>Wählen Sie, wo das Wort hingehört</wordBelongsToSelection>
+    <wordMustBelongToAnotherWord>Das Wort muss zu einem Wort der ersten Ebene gehören. (Beispiel Lebensmittel -> Spaghetti)</wordMustBelongToAnotherWord>
+    <wordBelongsToSelection2>Wählen Sie das Wort der ersten Ebene aus, zu dem das neue Wort, das Sie hier hinzugefügt haben, gehören soll oder wählen Sie "KOMMUNIKATION", wenn es sich um eine ganz neue Kategorie von Wörtern handelt.</wordBelongsToSelection2>
+    <showMatrix>Show matrix</showMatrix>
+    <wordDeleteConfirmation>Are you sure that you wish to delete the word?</wordDeleteConfirmation>
+    <wordWasSaved>Das Wort ist gespeichert!</wordWasSaved>
+    <more>More</more>
+    <pressTheButton>Drücken Sie die Taste!</pressTheButton>
+    <pressTheButtonToStart>Drücken Sie die Taste zum Starten!</pressTheButtonToStart>
+    <sequenceGameInfo>Ordnen Sie die Karten in der richtigen Reihenfolge an.</sequenceGameInfo>
+    <sequenceGameInfo2>Welches Bild soll zuerst kommen? Drücken Sie die entsprechende Taste.</sequenceGameInfo2>
+    <categoryYes>Ja</categoryYes>
+    <categoryNo>Nein</categoryNo>
+    <categoryFood>Essen</categoryFood>
+    <categoryPasta>Spaghetti</categoryPasta>
+    <categoryFrenchFries>Pommes frites</categoryFrenchFries>
+    <categoryBurger>Hacksteak</categoryBurger>
+    <categorySteak>Steak</categorySteak>
+    <categoryChicken>Huhn</categoryChicken>
+    <categorySoup>Suppe</categorySoup>
+    <categoryBread>Brot</categoryBread>
+    <categoryFrenchToast>Toast</categoryFrenchToast>
+    <categoryYogurt>Joghurt</categoryYogurt>
+    <categoryCucumber>Gurke</categoryCucumber>
+    <categoryTomato>Tomate</categoryTomato>
+</languageTexts>

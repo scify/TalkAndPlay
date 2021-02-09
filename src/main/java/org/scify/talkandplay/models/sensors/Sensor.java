@@ -24,10 +24,7 @@ package org.scify.talkandplay.models.sensors;
  */
 public class Sensor {
 
-    private String name;
-
-    public Sensor() {
-    }
+    protected String name;
 
     public Sensor(String name) {
         this.name = name;
@@ -39,6 +36,13 @@ public class Sensor {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isAltered(Sensor sensor) {
+        if (name.equals(sensor.name))
+            return false;
+        else
+            return true;
     }
     
 }

@@ -141,9 +141,9 @@
     <wordMustBeUnique>Η λέξη πρέπει να είναι μοναδική</wordMustBeUnique>
     <wordMustHaveImage>Η λέξη πρέπει να έχει εικόνα</wordMustHaveImage>
     <wordBelongsToSelection>Επίλεξε πού ανήκει η λέξη</wordBelongsToSelection>
-    <wordBelongsToSelection2>Επίλεξε την λέξη στην οποία υπάγεται η λέξη που προσθέτεις εδώ, ή επίλεξε "ΕΠΙΚΟΙΝΩΝΙΑ" εάν πρόκειται για εντελώς νέα κατηγορία λέξεων.</wordBelongsToSelection2>
+    <wordBelongsToSelection2>Επίλεξε τη λέξη πρώτου επιπέδου στην οποία θέλεις να ανήκει η νέα λέξη που προσθέτεις εδώ, ή επίλεξε ‘ΕΠΙΚΟΙΝΩΝΙΑ’ εάν πρόκειται για εντελώς νέα κατηγορία λέξεων.</wordBelongsToSelection2>
     <showMatrix>Εμφάνιση πίνακα</showMatrix>
-    <wordMustBelongToAnotherWord>Η λέξη πρέπει να ανήκει σε κάποια άλλη λέξη</wordMustBelongToAnotherWord>
+    <wordMustBelongToAnotherWord>Η λέξη πρέπει να ανήκει σε κάποια λέξη πρώτου επιπέδου. (Παράδειγμα Φαγητό -> Μακαρόνια)</wordMustBelongToAnotherWord>
     <wordDeleteConfirmation>Είσαι σίγουρος/η ότι θες να διαγράψεις τη λέξη;</wordDeleteConfirmation>
     <wordWasSaved>Η λέξη αποθηκεύτηκε!</wordWasSaved>
     <more>Περισσότερα</more>

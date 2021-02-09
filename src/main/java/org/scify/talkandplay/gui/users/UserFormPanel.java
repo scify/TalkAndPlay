@@ -50,18 +50,6 @@ public class UserFormPanel extends javax.swing.JPanel {
     private Sensor navigationSensor;
     protected ResourceManager rm;
 
-    public UserFormPanel(MainFrame parent) {
-        this.guiHelper = new GuiHelper();
-        this.parent = parent;
-        this.userService = new UserService();
-        this.user = null;
-        this.selectionSensor = null;
-        this.navigationSensor = null;
-        this.rm = ResourceManager.getInstance();
-        initComponents();
-        initCustomComponents();
-    }
-
     public UserFormPanel(MainFrame parent, User user) {
         this.guiHelper = new GuiHelper();
         this.parent = parent;
@@ -578,11 +566,7 @@ public class UserFormPanel extends javax.swing.JPanel {
             newUser.getConfiguration().setImage(imageCheckBox.isSelected());
             newUser.getConfiguration().setText(textCheckBox.isSelected());
             try {
-                if (user == null) {
-                    userService.save(newUser);
-                } else {
-                    userService.update(newUser, user.getName());
-                }
+                userService.update(newUser, user.getName());
                 parent.changePanel(new ConfigurationPanel(newUser.getName(), parent));
             } catch (Exception ex) {
                 Logger.getLogger(UserFormPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -617,11 +601,7 @@ public class UserFormPanel extends javax.swing.JPanel {
             newUser.getConfiguration().setText(textCheckBox.isSelected());
 
             try {
-                if (user == null) {
-                    userService.save(newUser);
-                } else {
-                    userService.update(newUser, user.getName());
-                }
+                userService.update(newUser, user.getName());
                 parent.changePanel(new MainPanel(parent));
             } catch (Exception ex) {
                 Logger.getLogger(UserFormPanel.class.getName()).log(Level.SEVERE, null, ex);

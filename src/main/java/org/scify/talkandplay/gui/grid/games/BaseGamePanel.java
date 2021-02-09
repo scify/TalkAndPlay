@@ -136,25 +136,37 @@ public class BaseGamePanel extends javax.swing.JPanel {
     protected void getRandomGame() {
         for (GameType gameType : user.getGameModule().getGameTypes()) {
             if (type.equals(gameType.getType())) {
-                for (int j = 0; j < gameType.getGames().size(); j++) {
-                    int i = randomGenerator.nextInt(gameType.getGames().size());
-                    if (gameType.getGames().get(i).isEnabled()
-                            && ((previousGame == null || previousGame.isEmpty())
-                            || (previousGame != null && !previousGame.isEmpty() && !gameType.getGames().get(i).getName().equals(previousGame)))) {
-
-                        if (type.equals("stimulusReactionGame")) {
-                            game = (StimulusReactionGame) gameType.getGames().get(i);
-                        } else if (type.equals("sequenceGame")) {
-                            game = (SequenceGame) gameType.getGames().get(i);
-                        } else if (type.equals("similarityGame")) {
-                            game = (SimilarityGame) gameType.getGames().get(i);
-                        }
-                        break;
+                List<Game> enabledGames = new ArrayList<>();
+                for (Game game : gameType.getGames()) {
+                    if (game.isEnabled())
+                        enabledGames.add(game);
+                }
+                int randomInput = enabledGames.size();
+                Game ret = null;
+                if (randomInput == 0)
+                    return;
+                else if (randomInput == 1)
+                    ret = enabledGames.get(0);
+                else {
+                    while (ret == null) {
+                        int i = randomGenerator.nextInt(randomInput);
+                        if (previousGame == null || previousGame.isEmpty())
+                            ret = enabledGames.get(i);
+                        else if (!enabledGames.get(i).getName().equals(previousGame))
+                            ret = enabledGames.get(i);
                     }
+                }
+                if (type.equals("stimulusReactionGame")) {
+                    game = (StimulusReactionGame) ret;
+                } else if (type.equals("sequenceGame")) {
+                    game = (SequenceGame) ret;
+                } else if (type.equals("similarityGame")) {
+                    game = (SimilarityGame) ret;
                 }
             }
         }
     }
+
 
     protected void setTopMessage(String text) {
         topMsgPanel.setVisible(true);

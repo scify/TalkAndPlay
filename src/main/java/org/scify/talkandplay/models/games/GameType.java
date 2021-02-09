@@ -17,15 +17,11 @@ package org.scify.talkandplay.models.games;
 
 import org.scify.talkandplay.utils.ImageResource;
 import org.scify.talkandplay.utils.ResourceManager;
-import org.scify.talkandplay.utils.ResourceType;
 import org.scify.talkandplay.utils.SoundResource;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
- *
  * @author christina
  */
 public class GameType {
@@ -39,20 +35,53 @@ public class GameType {
     protected boolean enabled;
     protected ResourceManager rm;
 
-    protected List<Game> games;
-    protected List<Game> enabledGames;
+    protected HashMap<String, Game> games;
+    protected HashSet<String> enabledGames;
 
     public GameType(String name, boolean enabled, String type) {
         this.name = name;
         this.enabled = enabled;
         this.type = type;
-        this.games = new ArrayList();
-        this.enabledGames = new ArrayList();
+        this.games = new HashMap<>();
+        this.enabledGames = new HashSet<>();
         this.rm = ResourceManager.getInstance();
+    }
+
+    public GameType getCopy() {
+        GameType gameType = new GameType(name, enabled, type);
+        if (imageResource == null)
+            gameType.imageResource = null;
+        else
+            gameType.imageResource = imageResource.getCopy();
+        if (soundResource == null)
+            gameType.soundResource = null;
+        else
+            gameType.soundResource = soundResource.getCopy();
+        if (winSoundResource == null)
+            gameType.winSoundResource = null;
+        else
+            gameType.winSoundResource = winSoundResource.getCopy();
+        if (errorSoundResource == null)
+            gameType.errorSoundResource = null;
+        else
+            gameType.errorSoundResource = errorSoundResource.getCopy();
+
+        for (Map.Entry<String, Game> game : games.entrySet()) {
+            gameType.games.put(game.getKey(), game.getValue().getCopy());
+        }
+
+        for (String gameName : enabledGames) {
+            gameType.enabledGames.add(gameName);
+        }
+        return gameType;
     }
 
     public String getName() {
         return rm.decodeTextIfRequired(name);
+    }
+
+    public String getNameUnmodified() {
+        return name;
     }
 
     public void setName(String name) {
@@ -93,15 +122,45 @@ public class GameType {
     }
 
     public List<Game> getGames() {
-        return games;
+        List<Game> gamesList = new ArrayList<>();
+        for (Game game : games.values()) {
+            gamesList.add(game);
+        }
+        return gamesList;
     }
 
-    public void setGames(List<Game> games) {
-        this.games = games;
+    public void enableGame(String gameName) {
+        enabledGames.add(gameName);
+    }
+
+    public void disableGame(String gameName) {
+        enabledGames.remove(gameName);
+    }
+
+    public void addGame(Game game) {
+        String gameName = game.getName();
+        games.put(gameName, game);
+        if (game.isEnabled())
+            enableGame(gameName);
+        else
+            disableGame(gameName);
+    }
+
+    public Game getGame(String name) {
+        return games.get(name);
     }
 
     public List<Game> getEnabledGames() {
-        return enabledGames;
+        List<Game> enabledGamesList = new ArrayList<>();
+        for (Game game : games.values()) {
+            if (enabledGames.contains(game.getName()))
+                enabledGamesList.add(game);
+        }
+        return enabledGamesList;
+    }
+
+    public boolean containsGame (String gameName) {
+        return games.containsKey(gameName);
     }
 
     public SoundResource getWinSound() {

@@ -1,12 +1,12 @@
 /**
  * Copyright 2016 SciFY
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,23 +35,22 @@ import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.modules.CommunicationModule;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
-import org.scify.talkandplay.utils.ImageResource;
-import org.scify.talkandplay.utils.ResourceManager;
-import org.scify.talkandplay.utils.ResourceType;
-import org.scify.talkandplay.utils.TalkAndPlayProfileConfiguration;
+import org.scify.talkandplay.utils.*;
 
 public class UserService {
 
-    private TalkAndPlayProfileConfiguration talkAndPlayProfileconfiguration;
+    protected TalkAndPlayProfileConfiguration talkAndPlayProfileconfiguration;
+    protected XMLConfigurationHandler xmlConfHandler;
     protected ResourceManager rm;
 
     public UserService() {
         this.rm = ResourceManager.getInstance();
         this.talkAndPlayProfileconfiguration = TalkAndPlayProfileConfiguration.getInstance();
+        this.xmlConfHandler = talkAndPlayProfileconfiguration.getConfigurationHandler();
     }
 
     public User getUser(String name) {
-        for (User user : talkAndPlayProfileconfiguration.getConfigurationHandler().getUsers()) {
+        for (User user : xmlConfHandler.getUsers()) {
             if (user.getName().equals(name)) {
                 return user;
             }
@@ -84,12 +83,6 @@ public class UserService {
         List<User> currentUserList = talkAndPlayProfileconfiguration.getConfigurationHandler().getUsers();
         currentUserList.add(uToSave);
         saveNewList(currentUserList);
-        try {
-            save(uToSave);
-        } catch (Exception ex) {
-            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
-            Sentry.capture(ex);
-        }
     }
 
     public void updateUser(String sOldName, User uToUpdate) {
@@ -105,18 +98,6 @@ public class UserService {
             saveNewList(currentUserList);
 
             return;
-        }
-    }
-
-    public void deleteUser(User uToDelete) {
-        // If we do find the guy
-        User uFound = findUser(uToDelete);
-        if (uFound != null) {
-            List<User> currentUserList = getUsers();
-            // remove him
-            currentUserList.remove(uFound);
-            // update
-            saveNewList(currentUserList);
         }
     }
 
@@ -167,23 +148,16 @@ public class UserService {
         return tempName;
     }
 
-    //todo: all of this should be in the configuraiton handler
-    // as a property : DefaultUser
-    public boolean createUserAsCopyOfDefaultUser() throws Exception {
-        User defUser = this.talkAndPlayProfileconfiguration.getConfigurationHandler().getDefaultUser();
-        //if user is found, append user and return true...
-        if (defUser != null) {
-            if (nameIsUsed(defUser.getName())) {
-                String uniqueName = getUniqueUserName(defUser.getName(), getUsers());
-                if (uniqueName != null) {
-                    defUser.setName(uniqueName);
-                }
+    public void createUserAsCopyOfDefaultUser() throws Exception {
+        String name = xmlConfHandler.getDefaultUser().getName();
+        if (nameIsUsed(name)) {
+            String uniqueName = getUniqueUserName(name, getUsers());
+            if (uniqueName != null) {
+                name = uniqueName;
             }
-            this.appendUser(defUser);
-            return true;
-        } else { //...else return false
-            return false;
         }
+        xmlConfHandler.createNewUser(name);
+        xmlConfHandler.update();
     }
 
     private Element getUserCommunicationConfXMLFormatted(User user) {
@@ -253,7 +227,7 @@ public class UserService {
         Element profile = new Element("profile");
         profile.addContent(new Element("name").setText(user.getName()));
         profile.addContent(new Element("image").setText(user.getImage().getPath()));
-        profile.setAttribute(new Attribute("preselected", String.valueOf(user.isPreselected())));
+        //profile.setAttribute(new Attribute("preselected", String.valueOf(user.isDefaultUserProfile())));
 
         //add the configurations
         Element configuration = new Element("configuration");
@@ -336,12 +310,12 @@ public class UserService {
         //set the default games
         GameService gameService = new GameService();
 
-        List gamesList = gameService.setDefaultGames();
+        /*//List gamesList = gameService.setDefaultGames();
         for (int i = 0; i < gamesList.size(); i++) {
             Element elemCopy = (Element) ((Element) gamesList.get(i)).clone();
             elemCopy.detach();
             games.addContent(elemCopy);
-        }
+        }*/
 
         profile.addContent(communication);
         profile.addContent(entertainment);
@@ -358,78 +332,12 @@ public class UserService {
      * @param oldName
      */
     public void update(User user, String oldName) throws Exception {
-
-        List profiles = talkAndPlayProfileconfiguration.getConfigurationHandler().getRootElement().getChildren();
-
-        //find the user from the users list
-        for (int i = 0; i < profiles.size(); i++) {
-
-            Element profile = (Element) profiles.get(i);
-
-            if (profile.getChildText("name").equals(oldName)) {
-
-                profile.getChild("name").setText(user.getName());
-                profile.getChild("configuration").getChild("rotationSpeed").setText(String.valueOf(user.getConfiguration().getRotationSpeed()));
-                profile.getChild("configuration").getChild("defaultGridRow").setText(String.valueOf(user.getConfiguration().getDefaultGridRow()));
-                profile.getChild("configuration").getChild("defaultGridColumn").setText(String.valueOf(user.getConfiguration().getDefaultGridColumn()));
-                profile.getChild("configuration").getChild("sound").setText(String.valueOf(user.getConfiguration().hasSound()));
-                profile.getChild("configuration").getChild("image").setText(String.valueOf(user.getConfiguration().hasImage()));
-                profile.getChild("configuration").getChild("text").setText(String.valueOf(user.getConfiguration().hasText()));
-
-                profile.setAttribute(new Attribute("preselected", String.valueOf(user.isPreselected())));
-
-                Element selectionSensor = new Element("selectionSensor");
-
-                if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
-                    selectionSensor.addContent(new Element("type").setText("mouse"));
-                    selectionSensor.addContent(new Element("button").setText(String.valueOf(((MouseSensor) user.getConfiguration().getSelectionSensor()).getButton())));
-                    selectionSensor.addContent(new Element("clickCount").setText(String.valueOf(((MouseSensor) user.getConfiguration().getSelectionSensor()).getClickCount())));
-                } else if (user.getConfiguration().getSelectionSensor() instanceof KeyboardSensor) {
-                    selectionSensor.addContent(new Element("type").setText("keyboard"));
-                    selectionSensor.addContent(new Element("keyCode").setText(String.valueOf(((KeyboardSensor) user.getConfiguration().getSelectionSensor()).getKeyCode())));
-                    selectionSensor.addContent(new Element("keyChar").setText(String.valueOf(((KeyboardSensor) user.getConfiguration().getSelectionSensor()).getKeyChar())));
-                }
-
-                profile.getChild("configuration").removeChild("selectionSensor");
-                profile.getChild("configuration").addContent(selectionSensor);
-
-                if (user.getConfiguration().getNavigationSensor() != null) {
-                    Element navigationSensor = new Element("navigationSensor");
-
-                    if (user.getConfiguration().getNavigationSensor() instanceof MouseSensor) {
-                        navigationSensor.addContent(new Element("type").setText("mouse"));
-                        navigationSensor.addContent(new Element("button").setText(String.valueOf(((MouseSensor) user.getConfiguration().getNavigationSensor()).getButton())));
-                        navigationSensor.addContent(new Element("clickCount").setText(String.valueOf(((MouseSensor) user.getConfiguration().getNavigationSensor()).getClickCount())));
-                    } else if (user.getConfiguration().getNavigationSensor() instanceof KeyboardSensor) {
-                        navigationSensor.addContent(new Element("type").setText("keyboard"));
-                        navigationSensor.addContent(new Element("keyCode").setText(String.valueOf(((KeyboardSensor) user.getConfiguration().getNavigationSensor()).getKeyCode())));
-                        navigationSensor.addContent(new Element("keyChar").setText(String.valueOf(((KeyboardSensor) user.getConfiguration().getNavigationSensor()).getKeyChar())));
-                    }
-
-                    profile.getChild("configuration").removeChild("navigationSensor");
-                    profile.getChild("configuration").addContent(navigationSensor);
-                } else {
-                    profile.getChild("configuration").removeChild("navigationSensor");
-                }
-
-                if (user.getImage() == null) {
-                    profile.getChild("image").setText(profile.getChildText("image"));
-                    Element imageElement = profile.getChild("image");
-                    String imagePath = imageElement.getText();
-                    String imageType = imageElement.getAttributeValue("resourceType");
-                    ResourceType imageResourceType = ResourceType.valueOf(imageType);
-                    user.setImage(new ImageResource(imagePath, imageResourceType));
-                } else {
-                    profile.getChild("image").setText(user.getImage().getPath());
-                }
-
-                talkAndPlayProfileconfiguration.getConfigurationHandler().update();
-                break;
-            }
-        }
+        xmlConfHandler.updateUser(oldName, user.getName(), user.getImage(), user.getConfiguration());
+        xmlConfHandler.update();
     }
 
     //TODO: move to XMLConfigurationHandler
+
     /**
      * Upload a user from xml file
      *
@@ -461,29 +369,15 @@ public class UserService {
 //TODO: move to XMLConfigurationHandler
 
     public boolean storeUserToExternalFile(String userName, String folderPath) {
-        try {
-            //if folder does not exist, create it
-            File folder = new File(folderPath);
-            if (!folder.exists()) {
-                folder.mkdir();
-            }
-            //set file
-            String filePath = folderPath + File.separator + userName + ".xml";
-            File file = new File(filePath);
-            //get profile from configuration xml
-            Element profile = talkAndPlayProfileconfiguration.getConfigurationHandler().getUserElement(userName);
-            //write profile to selected file
-            OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
-            osw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-            XMLOutputter xmlout = new XMLOutputter();
-            xmlout.output(profile, osw);
-            osw.close();
-        } catch (Exception ex) {
-            Logger.getLogger(UserFormPanel.class.getName()).log(Level.SEVERE, null, ex);
-            Sentry.capture(ex);
-            return false;
-        }
-        return true;
+        //if folder does not exist, create it
+        File folder = new File(folderPath);
+        if (!folder.exists())
+            folder.mkdir();
+
+        //set file
+        String filePath = folderPath + File.separator + userName + ".xml";
+        File file = new File(filePath);
+        return xmlConfHandler.exportUserToFile(userName, file);
     }
 
     /**
@@ -492,39 +386,15 @@ public class UserService {
      * @param user
      */
     public void delete(User user) throws Exception {
-
-        List profiles = talkAndPlayProfileconfiguration.getConfigurationHandler().getRootElement().getChildren();
-
-        //find the user from the users list
-        for (int i = 0; i < profiles.size(); i++) {
-
-            Element profile = (Element) profiles.get(i);
-
-            if (profile.getChildText("name").equals(user.getName())) {
-                profile.detach();
-                talkAndPlayProfileconfiguration.getConfigurationHandler().update();
-                break;
-            }
-        }
+        xmlConfHandler.deleteUser(user.getName());
+        xmlConfHandler.update();
     }
 
     public boolean hasBrokenFiles(String username) {
-        return talkAndPlayProfileconfiguration.getConfigurationHandler().hasBrokenFiles(username);
+        return xmlConfHandler.hasBrokenFiles(username);
     }
 
     public List<String> getBrokenFiles(String username) {
-        return talkAndPlayProfileconfiguration.getConfigurationHandler().getBrokenFiles(username);
+        return xmlConfHandler.getBrokenFiles(username);
     }
 }
-
-///**
-// * Represents a set of users (stored in a file).
-// *
-// * @author snik
-// */
-//class UserConfFile extends TalkAndPlayProfileConfiguration {
-//
-//    protected UserConfFile(String sFile) {
-//        xmlConfigurationHandler = new XMLConfigurationHandler(sFile);
-//    }
-//}

@@ -25,32 +25,18 @@ public class User {
 
     private String name;
     private ImageResource image;
-    private boolean preselected;
-
     private Configuration configuration;
+
     private CommunicationModule communicationModule;
     private EntertainmentModule entertainmentModule;
     private GameModule gameModule;
     private ResourceManager rm;
 
-    public User() {
-        configuration = new Configuration();
-        communicationModule = new CommunicationModule();
-        entertainmentModule = new EntertainmentModule();
-        gameModule = new GameModule();
-        rm = ResourceManager.getInstance();
-    }
-
-    public User(String name) {
-        this.name = name;
-        rm = ResourceManager.getInstance();
-    }
-
     public User(String name, ImageResource image) {
+        rm = ResourceManager.getInstance();
         this.name = name;
         this.image = image;
         configuration = new Configuration();
-        rm = ResourceManager.getInstance();
     }
 
     public String getName() {
@@ -67,14 +53,6 @@ public class User {
 
     public void setImage(ImageResource image) {
         this.image = image;
-    }
-
-    public boolean isPreselected() {
-        return preselected;
-    }
-
-    public void setPreselected(boolean preselected) {
-        this.preselected = preselected;
     }
 
     public Configuration getConfiguration() {

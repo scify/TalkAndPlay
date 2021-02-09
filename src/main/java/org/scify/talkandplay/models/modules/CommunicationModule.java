@@ -15,6 +15,9 @@
 */
 package org.scify.talkandplay.models.modules;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import org.scify.talkandplay.models.Category;
 
@@ -23,9 +26,14 @@ public class CommunicationModule extends Module {
     private int rows;
     private int columns;
     private List<Category> categories;
+    private HashMap<String, Integer> categoriesDict;
+    protected HashMap<String, HashSet<String>> supportedLangPerCat;
 
     public CommunicationModule() {
         super();
+        categories = new ArrayList<>();
+        categoriesDict = new HashMap<>();
+        supportedLangPerCat = new HashMap<>();
     }
 
     public int getRows() {
@@ -44,13 +52,39 @@ public class CommunicationModule extends Module {
         this.columns = columns;
     }
 
+    public void addCategory(Category category) {
+        categories.add(category);
+        categoriesDict.put(category.getNameUnmodified(), categories.size() - 1);
+        HashSet<String> languages = new HashSet<>();
+        supportedLangPerCat.put(category.getNameUnmodified(), languages);
+    }
+
     public List<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
+    public void addLanguageToCategory(String category, String language) {
+        supportedLangPerCat.get(category).add(language);
+    }
 
+    public boolean isLanguageSupportedByCategory (String category, String language) {
+        if (supportedLangPerCat.get(category).contains(language))
+            return true;
+        else
+            return false;
+    }
+
+    public String getSupportedLanguages (String category) {
+        String languages = "";
+        for (String language: supportedLangPerCat.get(category)) {
+            languages = language + " ";
+        }
+        return languages.trim();
+    }
+
+    public Category getCategory(String categoryName) {
+        int index = categoriesDict.get(categoryName);
+        return categories.get(index);
     }
 
 }

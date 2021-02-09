@@ -31,9 +31,6 @@ public class GameImage {
     protected int order;
     protected boolean enabled;
 
-    public GameImage() {
-    }
-
     public GameImage(ImageResource imageResource, boolean enabled, int order) {
         this.imageResource = imageResource;
         this.enabled = enabled;
@@ -44,6 +41,22 @@ public class GameImage {
         this.name = name;
         this.enabled = enabled;
         this.order = order;
+    }
+
+    public GameImage getCopy() {
+        GameImage gameImage = new GameImage(name, enabled, order);
+
+        if (imageResource == null)
+            gameImage.imageResource = null;
+        else
+            gameImage.imageResource = imageResource.getCopy();
+
+        if (soundResource == null)
+            gameImage.soundResource = null;
+        else
+            gameImage.soundResource = soundResource.getCopy();
+
+        return gameImage;
     }
 
     public String getName() {

@@ -159,25 +159,4 @@ public class GameService {
             }
         }
     }
-
-    public List setDefaultGames() {
-        List games = null;
-        try {
-            String filePath = System.getProperty("user.dir") + File.separator + "defaultGames.xml";
-            File file = new File(filePath);
-            if (!file.exists() || file.isDirectory()) {
-                return games;
-            }
-
-            SAXBuilder builder = new SAXBuilder();
-            Document configurationFile = (Document) builder.build(file);
-
-            games = configurationFile.getRootElement().getChildren();
-
-        } catch (Exception e) {
-            e.printStackTrace(System.err);
-            Sentry.capture(e);
-        }
-        return games;
-    }
 }
