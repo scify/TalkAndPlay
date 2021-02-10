@@ -1,18 +1,18 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.scify.talkandplay.models;
 
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
@@ -62,29 +62,20 @@ public class Configuration {
     }
 
     public boolean isAltered(Configuration configuration) {
-        if (configuration.rotationSpeed != rotationSpeed)
-            return true;
-        if (configuration.defaultGridRow != defaultGridRow)
-            return true;
-        if (configuration.defaultGridColumn != defaultGridColumn)
-            return true;
-        if (configuration.sound != sound)
-            return true;
-        if (configuration.image != image)
-            return true;
-        if (configuration.text != text)
+        if (configuration.rotationSpeed != rotationSpeed ||
+                configuration.defaultGridRow != defaultGridRow ||
+                configuration.defaultGridColumn != defaultGridColumn ||
+                configuration.sound != sound ||
+                configuration.image != image ||
+                configuration.text != text)
             return true;
 
-        if (configuration.selectionSensor != null && selectionSensor != null && configuration.selectionSensor.isAltered(selectionSensor) ||
-                configuration.selectionSensor != null && selectionSensor == null ||
-                configuration.selectionSensor == null && selectionSensor != null
-        )
+        if (selectionSensor != null && selectionSensor.isAltered(configuration.selectionSensor) ||
+                selectionSensor == null && configuration.selectionSensor != null)
             return true;
 
-        if (configuration.navigationSensor != null && navigationSensor != null && configuration.navigationSensor.isAltered(navigationSensor) ||
-                configuration.navigationSensor != null && navigationSensor == null ||
-                configuration.navigationSensor == null && navigationSensor != null
-        )
+        if (navigationSensor != null && navigationSensor.isAltered(configuration.navigationSensor) ||
+                navigationSensor == null && configuration.navigationSensor != null)
             return true;
 
         return false;

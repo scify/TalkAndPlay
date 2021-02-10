@@ -29,6 +29,8 @@ public class SoundResource {
     }
 
     public boolean isAltered (SoundResource soundResource) {
+        if (soundResource == null)
+            return true;
         if (path.equals(soundResource.path) && resourceType == soundResource.getResourceType())
             return false;
         else

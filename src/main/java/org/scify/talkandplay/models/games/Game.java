@@ -1,20 +1,21 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.scify.talkandplay.models.games;
 
+import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.utils.ImageResource;
 import org.scify.talkandplay.utils.ResourceManager;
 import org.scify.talkandplay.utils.ResourceType;
@@ -72,14 +73,51 @@ public class Game {
         else
             game.errorSoundResource = errorSoundResource.getCopy();
 
-        for (GameImage image: images) {
+        for (GameImage image : images) {
             game.images.add(image.getCopy());
         }
 
-        for (GameImage image: enabledImages) {
+        for (GameImage image : enabledImages) {
             game.enabledImages.add(image.getCopy());
         }
         return game;
+    }
+
+    public boolean isAltered(Game game) {
+        if (!name.equals(game.name) || enabled != game.enabled)
+            return true;
+
+        if ((imageResource != null && imageResource.isAltered(game.imageResource)) ||
+                (imageResource == null && game.imageResource != null))
+            return true;
+
+        if ((soundResource != null && soundResource.isAltered(game.soundResource)) ||
+                (soundResource == null && game.soundResource != null))
+            return true;
+
+        if ((winSoundResource != null && winSoundResource.isAltered(game.winSoundResource)) ||
+                (winSoundResource == null && game.winSoundResource != null))
+            return true;
+
+        if ((errorSoundResource != null && errorSoundResource.isAltered(game.errorSoundResource)) ||
+                (errorSoundResource == null && game.errorSoundResource != null))
+            return true;
+
+        List<GameImage> gameImages = game.images;
+        List<GameImage> enabledGameImages = game.enabledImages;
+        if (images.size() != gameImages.size() || enabledImages.size() != enabledGameImages.size())
+            return true;
+        else {
+            for (int i = 0; i < images.size(); i++) {
+                if (images.get(i).isAltered(gameImages.get(i)))
+                    return true;
+            }
+            for (int i = 0; i < enabledImages.size(); i++) {
+                if (enabledImages.get(i).isAltered(enabledGameImages.get(i)))
+                    return true;
+            }
+        }
+        return false;
     }
 
     public String getName() {

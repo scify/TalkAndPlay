@@ -159,29 +159,25 @@
                         <winSound resourceType="BUNDLE">sounds/games/car.mp3</winSound>
                         <errorSound/>
                         <gameImages>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/stimulus/car/car_1.png</path>
                                 <order>1</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/stimulus/car/car_2.png</path>
                                 <order>2</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/stimulus/car/car_3.png</path>
                                 <order>3</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/stimulus/car/car_4.png</path>
                                 <order>4</order>
-                                <enabled>true</enabled>
                             </image>
                         </gameImages>
                     </game>
@@ -191,29 +187,25 @@
                         <winSound resourceType="BUNDLE">sounds/games/ship.mp3</winSound>
                         <errorSound resourceType="BUNDLE">sounds/games/errorSound.mp3</errorSound>
                         <gameImages>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/stimulus/ship/ship_1.png</path>
                                 <order>1</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/stimulus/ship/ship_2.png</path>
                                 <order>2</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/stimulus/ship/ship_3.png</path>
                                 <order>3</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/stimulus/ship/ship_4.png</path>
                                 <order>4</order>
-                                <enabled>true</enabled>
                             </image>
                         </gameImages>
                     </game>
@@ -264,29 +256,25 @@
                         <winSound/>
                         <errorSound/>
                         <gameImages>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/sequence/sea_swimming/sea_swimming_1.png</path>
                                 <order>1</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/sequence/sea_swimming/sea_swimming_2.png</path>
                                 <order>2</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/sequence/sea_swimming/sea_swimming_3.png</path>
                                 <order>3</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/sequence/sea_swimming/sea_swimming_4.png</path>
                                 <order>4</order>
-                                <enabled>true</enabled>
                             </image>
                         </gameImages>
                     </game>
@@ -296,33 +284,29 @@
                         <winSound/>
                         <errorSound/>
                         <gameImages>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/sequence/flower_growing/flower_growing_1.png
                                 </path>
                                 <order>1</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/sequence/flower_growing/flower_growing_2.png
                                 </path>
                                 <order>2</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/sequence/flower_growing/flower_growing_3.png
                                 </path>
                                 <order>3</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/sequence/flower_growing/flower_growing_4.png
                                 </path>
                                 <order>4</order>
-                                <enabled>true</enabled>
                             </image>
                         </gameImages>
                     </game>
@@ -332,29 +316,25 @@
                         <winSound/>
                         <errorSound/>
                         <gameImages>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/sequence/dressing/dressing_1.png</path>
                                 <order>1</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/sequence/dressing/dressing_2.png</path>
                                 <order>2</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/sequence/dressing/dressing_3.png</path>
                                 <order>3</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/sequence/dressing/dressing_4.png</path>
                                 <order>4</order>
-                                <enabled>true</enabled>
                             </image>
                         </gameImages>
                     </game>
@@ -373,23 +353,20 @@
                         <winSound/>
                         <errorSound/>
                         <gameImages>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/similarity/circle/large_blue.png</path>
                                 <order>1</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/similarity/circle/large_red.png</path>
                                 <order>2</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/similarity/circle/large_yellow.png</path>
                                 <order>3</order>
-                                <enabled>true</enabled>
                             </image>
                         </gameImages>
                     </game>
@@ -399,23 +376,20 @@
                         <winSound/>
                         <errorSound/>
                         <gameImages>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/similarity/square/large_blue.png</path>
                                 <order>1</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/similarity/square/large_red.png</path>
                                 <order>2</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/similarity/square/large_yellow.png</path>
                                 <order>3</order>
-                                <enabled>true</enabled>
                             </image>
                         </gameImages>
                     </game>
@@ -425,23 +399,20 @@
                         <winSound/>
                         <errorSound/>
                         <gameImages>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/similarity/triangle/large_blue.png</path>
                                 <order>1</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/similarity/triangle/large_red.png</path>
                                 <order>2</order>
-                                <enabled>true</enabled>
                             </image>
-                            <image>
+                            <image enabled="true">
                                 <name/>
                                 <path resourceType="BUNDLE">images/games/similarity/triangle/large_yellow.png</path>
                                 <order>3</order>
-                                <enabled>true</enabled>
                             </image>
                         </gameImages>
                     </game>

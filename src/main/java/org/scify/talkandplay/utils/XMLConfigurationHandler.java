@@ -785,7 +785,7 @@ public class XMLConfigurationHandler {
         String resourceTypeStr = pathEl.getAttributeValue("resourceType");
         ResourceType resourceType = ResourceType.valueOf(resourceTypeStr);
         ImageResource imageResource = new ImageResource(path, resourceType);
-        boolean enabled = "true".equals(element.getChildText("enabled"));
+        boolean enabled = "true".equals(element.getAttributeValue("enabled"));
         int order = Integer.parseInt(element.getChildText("order"));
         return new GameImage(imageResource, enabled, order);
     }
@@ -885,6 +885,8 @@ public class XMLConfigurationHandler {
 
     protected Element convertToXMLElement(String name, ImageResource imageResource) {
         Element e = new Element(name);
+        if (imageResource == null)
+            return e;
         e.addContent(imageResource.path);
         e.setAttribute("resourceType", imageResource.resourceType.name());
         return e;
@@ -892,6 +894,8 @@ public class XMLConfigurationHandler {
 
     protected Element convertToXMLElement(String name, SoundResource soundResource) {
         Element e = new Element(name);
+        if (soundResource == null)
+            return e;
         e.addContent(soundResource.path);
         e.setAttribute("resourceType", soundResource.resourceType.name());
         return e;
@@ -992,16 +996,16 @@ public class XMLConfigurationHandler {
     protected Element convertToXMLElement(GameModule gameModule, GameModule defaultGameMod) {
         Element gameModuleEl = convertToXMLElement("game", "enabled", gameModule.isEnabled());
 
-        String gameTypeStr = "stimulusReactionGames";
-        Element stimulusReactionGamesEl = convertToXMLElement(gameTypeStr, gameModule.getGameType(gameTypeStr), defaultGameMod);
+        String gameTypeStr = "stimulusReactionGame";
+        Element stimulusReactionGamesEl = convertToXMLElement(gameTypeStr + "s", gameModule.getGameType(gameTypeStr), defaultGameMod);
         gameModuleEl.addContent(stimulusReactionGamesEl);
 
-        gameTypeStr = "sequenceGames";
-        Element sequenceGamesEl = convertToXMLElement(gameTypeStr, gameModule.getGameType(gameTypeStr), defaultGameMod);
+        gameTypeStr = "sequenceGame";
+        Element sequenceGamesEl = convertToXMLElement(gameTypeStr + "s", gameModule.getGameType(gameTypeStr), defaultGameMod);
         gameModuleEl.addContent(sequenceGamesEl);
 
-        gameTypeStr = "similarityGames";
-        Element similarityGamesEl = convertToXMLElement(gameTypeStr, gameModule.getGameType(gameTypeStr), defaultGameMod);
+        gameTypeStr = "similarityGame";
+        Element similarityGamesEl = convertToXMLElement(gameTypeStr + "s", gameModule.getGameType(gameTypeStr), defaultGameMod);
         gameModuleEl.addContent(similarityGamesEl);
 
         return gameModuleEl;
@@ -1009,9 +1013,52 @@ public class XMLConfigurationHandler {
 
     protected Element convertToXMLElement(String gameTypeStr, GameType gameType, GameModule defaultGameMod) {
         Element gameTypeEl = convertToXMLElement(gameTypeStr, "enabled", gameType.isEnabled());
+        Element games = new Element("games");
+        if (defaultGameMod == null) {
+            gameTypeEl.addContent(convertToXMLElement("image", gameType.getImage()));
+            gameTypeEl.addContent(convertToXMLElement("sound", gameType.getSound()));
+            gameTypeEl.addContent(convertToXMLElement("winSound", gameType.getWinSound()));
+            gameTypeEl.addContent(convertToXMLElement("errorSound", gameType.getErrorSound()));
+        } else {
+            GameType defGameType = defaultGameMod.getGameType(gameTypeStr);
 
+            ImageResource imageResource = gameType.getImage();
+            if (imageResource == null || imageResource.isAltered(defGameType.getImage()))
+                gameTypeEl.addContent(convertToXMLElement("image", imageResource));
+            else
+                gameTypeEl.addContent(new Element("image"));
 
+            SoundResource soundResource = gameType.getSound();
+            if (soundResource == null || soundResource.isAltered(defGameType.getSound()))
+                gameTypeEl.addContent(convertToXMLElement("sound", soundResource));
+            else
+                gameTypeEl.addContent(new Element("sound"));
 
+            SoundResource winSoundResource = gameType.getWinSound();
+            if (winSoundResource == null || winSoundResource.isAltered(defGameType.getWinSound()))
+                gameTypeEl.addContent(convertToXMLElement("winSound", winSoundResource));
+            else
+                gameTypeEl.addContent(new Element("winSound"));
+
+            SoundResource errorSoundResource = gameType.getErrorSound();
+            if (errorSoundResource == null || errorSoundResource.isAltered(defGameType.getErrorSound()))
+                gameTypeEl.addContent(convertToXMLElement("errorSound", errorSoundResource));
+            else
+                gameTypeEl.addContent(new Element("errorSound"));
+        }
+
+        GameType defGameType =  null;
+        if (defaultGameMod != null)
+            defGameType = defaultGameMod.getGameType(gameTypeStr);
+
+        for (Game game : gameType.getGames()) {
+            String name = game.getNameUnmodified();
+            Element gameEl = convertToXMLElement(game, gameTypeStr);
+            if (defaultGameMod == null || defGameType.getGame(name) == null || defGameType.getGame(name).isAltered(game))
+                games.addContent(gameEl);
+        }
+
+        gameTypeEl.addContent(games);
         return gameTypeEl;
     }
 
@@ -1042,6 +1089,39 @@ public class XMLConfigurationHandler {
         return categoryEl;
     }
 
+    protected Element convertToXMLElement(Game game, String gameTypeStr) {
+        Element gameEl = convertToXMLElement("game", "name", game.getNameUnmodified(), "enabled", game.isEnabled());
+        gameEl.addContent(convertToXMLElement("image", game.getImage()));
+        String difficulty = "";
+        switch (gameTypeStr) {
+            case "stimulusReactionGame":
+                difficulty = ((StimulusReactionGame) game).getDifficulty() + "";
+                break;
+            case "sequenceGame":
+                difficulty = ((SequenceGame) game).getDifficulty() + "";
+                break;
+            case "similarityGame":
+                difficulty = ((SimilarityGame) game).getDifficulty() + "";
+                break;
+            default:
+        }
+        gameEl.addContent(new Element("difficulty").setText(difficulty));
+        gameEl.addContent(convertToXMLElement("winSound", game.getWinSound()));
+        gameEl.addContent(convertToXMLElement("errorSound", game.getErrorSound()));
+
+        Element gameImagesEl = new Element("gameImages");
+        for (GameImage gameImage : game.getImages()) {
+            Element imageEl = convertToXMLElement("image", "enabled", gameImage.isEnabled());
+            imageEl.addContent(new Element("name").setText(gameImage.getName()));
+            imageEl.addContent(convertToXMLElement("path", gameImage.getImage()));
+            imageEl.addContent(new Element("order").setText(gameImage.getOrder() + ""));
+            gameImagesEl.addContent(imageEl);
+        }
+        gameEl.addContent(gameImagesEl);
+
+        return gameEl;
+    }
+
     protected Element convertToXMLElement(String name, boolean value) {
         if (value)
             return new Element(name).setText("true");
@@ -1054,6 +1134,15 @@ public class XMLConfigurationHandler {
             return new Element(name).setAttribute(attributeName, "true");
         else
             return new Element(name).setAttribute(attributeName, "false");
+    }
+
+    protected Element convertToXMLElement(String name, String attributeName1, String value1, String attributeName2, boolean value2) {
+        Element e = new Element(name);
+        e.setAttribute(attributeName1, value1);
+        if (value2)
+            return e.setAttribute(attributeName2, "true");
+        else
+            return e.setAttribute(attributeName2, "false");
     }
 
     public boolean exportUserToFile(String name, File file) {

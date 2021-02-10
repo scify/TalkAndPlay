@@ -15,6 +15,7 @@
 */
 package org.scify.talkandplay.models.games;
 
+import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.utils.ImageResource;
 import org.scify.talkandplay.utils.ResourceType;
 import org.scify.talkandplay.utils.SoundResource;
@@ -57,6 +58,19 @@ public class GameImage {
             gameImage.soundResource = soundResource.getCopy();
 
         return gameImage;
+    }
+
+    public boolean isAltered(GameImage gameImage) {
+        if (!name.equals(gameImage.name) || order != gameImage.order || enabled != gameImage.enabled)
+            return true;
+
+        if ((imageResource != null && imageResource.isAltered(gameImage.imageResource)) || (imageResource == null && gameImage.imageResource != null))
+            return true;
+
+        if ((soundResource != null && soundResource.isAltered(gameImage.soundResource)) || (soundResource == null && gameImage.soundResource != null))
+            return true;
+
+        return false;
     }
 
     public String getName() {

@@ -41,7 +41,9 @@ public class ImageResource {
     }
 
     public boolean isAltered (ImageResource imageResource) {
-        if (path.equals(imageResource.path) && resourceType == imageResource.getResourceType())
+        if (imageResource == null)
+            return true;
+        else if (path.equals(imageResource.path) && resourceType == imageResource.getResourceType())
             return false;
         else
             return true;

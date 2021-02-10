@@ -90,14 +90,10 @@ public class Category {
         if (!name.equals(category.name))
             return true;
 
-        if ((image != null && category.image != null && image.isAltered(category.image)) ||
-                (image != null && category.image == null) ||
-                (image == null && category.image != null))
+        if ((image != null && image.isAltered(category.image)) || (image == null && category.image != null))
             return true;
 
-        if ((sound != null && category.sound != null && sound.isAltered(category.sound)) ||
-                (sound != null && category.sound == null) ||
-                (sound == null && category.sound != null))
+        if ((sound != null && sound.isAltered(category.sound)) || (sound == null && category.sound != null))
             return true;
 
         if (category.rows != rows || category.columns != columns || category.order != order ||
@@ -106,12 +102,13 @@ public class Category {
             return true;
 
         List<Category> subCats = category.getSubCategories();
-        for (int i = 0; i < subCategories.size(); i++) {
-            if (i >= subCats.size())
-                return true;
-            else {
+        if (subCategories.size() != subCats.size())
+            return true;
+        else {
+            for (int i = 0; i < subCategories.size(); i++) {
                 if (subCategories.get(i).isAltered(subCats.get(i)))
                     return true;
+
             }
         }
         return false;
