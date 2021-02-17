@@ -477,15 +477,8 @@ public class GamesTab extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButtonMouseClicked
-        for (GamePanel panel : gamePanels) {
-            try {
-                gameService.updateGame(user.getName(), panel.getGame(), currentGameType);
-            } catch (Exception ex) {
-                Logger.getLogger(GamesTab.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
         try {
-            gameService.updateGameType(user.getName(), gameCollection);
+            gameService.update(user);
         } catch (Exception ex) {
             Logger.getLogger(GamesTab.class.getName()).log(Level.SEVERE, null, ex);
         }

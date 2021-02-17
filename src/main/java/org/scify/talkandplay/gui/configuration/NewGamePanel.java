@@ -36,9 +36,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
-import org.scify.talkandplay.models.games.Game;
-import org.scify.talkandplay.models.games.GameImage;
+import org.scify.talkandplay.models.games.*;
 import org.scify.talkandplay.services.GameService;
+import org.scify.talkandplay.utils.ImageResource;
 import org.scify.talkandplay.utils.ResourceManager;
 import org.scify.talkandplay.utils.ResourceType;
 import org.scify.talkandplay.utils.SoundResource;
@@ -61,7 +61,18 @@ public class NewGamePanel extends javax.swing.JPanel {
     private Font buttonFont;
 
     public NewGamePanel(GamesTab parent, User user, String gameType) {
-        this.game = new Game();
+        switch (gameType) {
+            case "stimulusReactionGame":
+                this.game = new StimulusReactionGame("", true, 4);
+                break;
+            case "sequenceGame":
+                this.game = new SequenceGame("", true, 4);
+                break;
+            case "similarityGame":
+                this.game = new SimilarityGame("", true, 4);
+                break;
+            default:
+        }
         this.gameService = new GameService();
         this.parent = parent;
         this.user = user;
@@ -133,7 +144,8 @@ public class NewGamePanel extends javax.swing.JPanel {
                             gameImages.remove(j);
                         }
                     }
-                    gameImages.add(new GameImage(path, true, i + 1));
+                    ImageResource imageResource = new ImageResource(path, ResourceType.LOCAL);
+                    gameImages.add(new GameImage(imageResource, true, i + 1));
                 }
             }
 
@@ -339,7 +351,7 @@ public class NewGamePanel extends javax.swing.JPanel {
         game.setImages(gameImages);
         if (validateGame()) {
             try {
-                gameService.createGame(user.getName(), game, gameType);
+                gameService.createGame(user, game, gameType);
                 parent.showGamesPerType(gameType);
             } catch (Exception ex) {
                 Logger.getLogger(GamesTab.class.getName()).log(Level.SEVERE, null, ex);

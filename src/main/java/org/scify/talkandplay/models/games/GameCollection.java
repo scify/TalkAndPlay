@@ -36,15 +36,15 @@ public class GameCollection {
     protected SoundResource winSoundResource;
     protected SoundResource errorSoundResource;
 
-    protected HashMap<String, Game> games;
-    protected HashSet<String> enabledGames;
+    protected List<Game> games;
+    protected HashMap<String, Integer> indexes;
 
     public GameCollection(String name, boolean enabled, String gameType) {
         this.name = name;
         this.enabled = enabled;
         this.gameType = gameType;
-        this.games = new HashMap<>();
-        this.enabledGames = new HashSet<>();
+        this.games = new ArrayList<>();
+        this.indexes = new HashMap<>();
         this.rm = ResourceManager.getInstance();
     }
 
@@ -69,13 +69,24 @@ public class GameCollection {
         if (gameCollection.errorSoundResource != null)
             errorSoundResource = new SoundResource(gameCollection.errorSoundResource);
 
-        games = new HashMap<>();
-        enabledGames = new HashSet<>();
-        for (Map.Entry<String, Game> game : games.entrySet()) {
-            gameCollection.games.put(game.getKey(), new Game(game.getValue()));
-        }
-        for (String gameName : enabledGames) {
-            gameCollection.enabledGames.add(gameName);
+        games = new ArrayList<>();
+        indexes = new HashMap<>();
+        for (Game game: gameCollection.getGames()) {
+            int index = games.size();
+            indexes.put(game.getNameUnmodified(), index);
+            switch (gameType) {
+                case "stimulusReactionGame":
+                    gameCollection.addGame(new StimulusReactionGame((StimulusReactionGame) game));
+                    break;
+                case "sequenceGame":
+                    gameCollection.addGame(new SequenceGame((SequenceGame) game));
+                    break;
+                case "similarityGame":
+                    gameCollection.addGame(new SimilarityGame((SimilarityGame) game));
+                    break;
+                default:
+            }
+
         }
     }
 
@@ -125,45 +136,34 @@ public class GameCollection {
     }
 
     public List<Game> getGames() {
-        List<Game> gamesList = new ArrayList<>();
-        for (Game game : games.values()) {
-            gamesList.add(game);
-        }
-        return gamesList;
-    }
-
-    public void enableGame(String gameName) {
-        enabledGames.add(gameName);
-    }
-
-    public void disableGame(String gameName) {
-        enabledGames.remove(gameName);
+        return games;
     }
 
     public void addGame(Game game) {
-        String gameName = game.getName();
-        games.put(gameName, game);
-        if (game.isEnabled())
-            enableGame(gameName);
-        else
-            disableGame(gameName);
+        String gameName = game.getNameUnmodified();
+        int index = games.size();
+        games.add(game);
+        indexes.put(gameName, index);
     }
 
     public Game getGame(String name) {
-        return games.get(name);
+        if (indexes.containsKey(name)) {
+            return games.get(indexes.get(name));
+        } else
+            return null;
     }
 
     public List<Game> getEnabledGames() {
         List<Game> enabledGamesList = new ArrayList<>();
-        for (Game game : games.values()) {
-            if (enabledGames.contains(game.getName()))
+        for (Game game: games){
+            if (game.isEnabled())
                 enabledGamesList.add(game);
         }
         return enabledGamesList;
     }
 
     public boolean containsGame (String gameName) {
-        return games.containsKey(gameName);
+        return indexes.containsKey(gameName);
     }
 
     public SoundResource getWinSound() {

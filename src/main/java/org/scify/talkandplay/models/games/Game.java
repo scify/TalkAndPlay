@@ -18,11 +18,11 @@ package org.scify.talkandplay.models.games;
 import org.scify.talkandplay.utils.ImageResource;
 import org.scify.talkandplay.utils.ResourceManager;
 import org.scify.talkandplay.utils.SoundResource;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author christina
  */
 public class Game {
@@ -34,7 +34,6 @@ public class Game {
     protected SoundResource errorSoundResource;
     protected boolean enabled;
     protected List<GameImage> images;
-    protected List<GameImage> enabledImages;
     protected ResourceManager rm;
 
     public Game() {
@@ -47,7 +46,6 @@ public class Game {
         this.name = name;
         this.enabled = enabled;
         this.images = new ArrayList();
-        this.enabledImages = new ArrayList();
     }
 
     public Game(Game game) {
@@ -71,13 +69,8 @@ public class Game {
 
         enabled = game.enabled;
         images = new ArrayList<>();
-        enabledImages = new ArrayList<>();
         for (GameImage image : game.images) {
             images.add(new GameImage(image));
-        }
-
-        for (GameImage image : game.enabledImages) {
-            enabledImages.add(new GameImage(image));
         }
     }
 
@@ -102,16 +95,11 @@ public class Game {
             return true;
 
         List<GameImage> gameImages = game.images;
-        List<GameImage> enabledGameImages = game.enabledImages;
-        if (images.size() != gameImages.size() || enabledImages.size() != enabledGameImages.size())
+        if (images.size() != gameImages.size())
             return true;
         else {
             for (int i = 0; i < images.size(); i++) {
                 if (images.get(i).isAltered(gameImages.get(i)))
-                    return true;
-            }
-            for (int i = 0; i < enabledImages.size(); i++) {
-                if (enabledImages.get(i).isAltered(enabledGameImages.get(i)))
                     return true;
             }
         }
@@ -171,15 +159,12 @@ public class Game {
     }
 
     public List<GameImage> getEnabledImages() {
-        return enabledImages;
-    }
-
-    public void setEnabledImages() {
-        for (GameImage image : images) {
-            if (image.isEnabled()) {
-                enabledImages.add(image);
-            }
+        List<GameImage> enabledImages = new ArrayList<>();
+        for (GameImage gameImage : images) {
+            if (gameImage.isEnabled())
+                enabledImages.add(gameImage);
         }
+        return enabledImages;
     }
 
     public List<GameImage> getImages() {

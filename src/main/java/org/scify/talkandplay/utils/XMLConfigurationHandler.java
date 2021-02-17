@@ -458,15 +458,6 @@ public class XMLConfigurationHandler {
             }
 
             extractGames(stimulusReactionType, stimulusReactionGamesNode);
-            if (!isDefault) {
-                List<Game> defaultGames = defaultUser.getGameModule().getGameCollection("stimulusReactionGame").getGames();
-                for (Game game : defaultGames) {
-                    String gameName = game.getNameUnmodified();
-                    if (!stimulusReactionType.containsGame(gameName)) {
-                        stimulusReactionType.addGame(new StimulusReactionGame((StimulusReactionGame) game));
-                    }
-                }
-            }
             gameModule.getGameTypes().add(stimulusReactionType);
         }
         //set the sequence games
@@ -486,15 +477,6 @@ public class XMLConfigurationHandler {
             }
 
             extractGames(sequenceGameCollection, sequenceGamesNode);
-            if (!isDefault) {
-                List<Game> defaultGames = defaultUser.getGameModule().getGameCollection("sequenceGame").getGames();
-                for (Game game : defaultGames) {
-                    String gameName = game.getNameUnmodified();
-                    if (!sequenceGameCollection.containsGame(gameName)) {
-                        sequenceGameCollection.addGame(new SequenceGame((SequenceGame) game));
-                    }
-                }
-            }
             gameModule.getGameTypes().add(sequenceGameCollection);
         }
 
@@ -514,15 +496,6 @@ public class XMLConfigurationHandler {
                 extractGameCollectionFields(similarityGameCollection, similarGamesNode, defaultGameCollection);
             }
             extractGames(similarityGameCollection, similarGamesNode);
-            if (!isDefault) {
-                List<Game> defaultGames = defaultUser.getGameModule().getGameCollection("similarityGame").getGames();
-                for (Game game : defaultGames) {
-                    String gameName = game.getNameUnmodified();
-                    if (!similarityGameCollection.containsGame(gameName)) {
-                        similarityGameCollection.addGame(new SimilarityGame((SimilarityGame) game));
-                    }
-                }
-            }
             gameModule.getGameTypes().add(similarityGameCollection);
         }
 
@@ -566,7 +539,8 @@ public class XMLConfigurationHandler {
                 String enabled = gameEl.getAttributeValue("enabled");
                 //check if Game has altered data or default should be used
                 if (gameEl.getChildren().isEmpty()) {
-                    Game defGame = defaultUser.getGameModule().getGameCollection(gameCollection.getName()).getGame(name);
+
+                    Game defGame = defaultUser.getGameModule().getGameCollection(gameCollection.getGameType()).getGame(name);
                     Game game = null;
 
                     switch (gameCollection.getGameType()) {
@@ -633,7 +607,6 @@ public class XMLConfigurationHandler {
                     for (Element gameImage : gameImages)
                         game.getImages().add(extractGameImage(gameImage));
 
-                    game.setEnabledImages();
                     gameCollection.addGame(game);
                 }
             }
@@ -752,19 +725,28 @@ public class XMLConfigurationHandler {
 
         Element games = new Element("games").setAttribute("enabled", "true");
 
-        Element stimulusReactionGamesEl = convertToXMLElement("stimulusReactionGames", "enabled", true);
-        stimulusReactionGamesEl.addContent(new Element("games"));
-        games.addContent(stimulusReactionGamesEl);
+        games.addContent(createDefaultGameCollectionElement("stimulusReactionGames", defaultUser.getGameModule().getGameCollection("stimulusReactionGame")));
+        games.addContent(createDefaultGameCollectionElement("sequenceGames", defaultUser.getGameModule().getGameCollection("sequenceGame")));
+        games.addContent(createDefaultGameCollectionElement("similarityGames", defaultUser.getGameModule().getGameCollection("similarityGame")));
 
-        Element sequenceGamesEl = convertToXMLElement("sequenceGames", "enabled", true);
-        sequenceGamesEl.addContent(new Element("games"));
-        games.addContent(sequenceGamesEl);
-
-        Element similarityGamesEl = convertToXMLElement("similarityGames", "enabled", true);
-        games.addContent(similarityGamesEl);
         profile.addContent(games);
 
         return profile;
+    }
+
+    protected Element createDefaultGameCollectionElement(String name, GameCollection defGameCollection) {
+        Element gameColEl = convertToXMLElement(name, "enabled", true);
+        gameColEl.addContent(new Element("image"));
+        gameColEl.addContent(new Element("sound"));
+        gameColEl.addContent(new Element("winSound"));
+        gameColEl.addContent(new Element("errorSound"));
+        Element gamesEl = new Element("games");
+        for (Game game : defGameCollection.getGames()) {
+            Element gameEl = convertToXMLElement("game", "name", game.getNameUnmodified(), "enabled", game.isEnabled());
+            gamesEl.addContent(gameEl);
+        }
+        gameColEl.addContent(gamesEl);
+        return gameColEl;
     }
 
     public void deleteUser(String name) {
@@ -902,7 +884,7 @@ public class XMLConfigurationHandler {
                 Element categoryEl = convertToXMLElement(category, communicationModule.getSupportedLanguages(catName));
                 categoriesEl.addContent(categoryEl);
             } else {
-                Element categoryEl = convertToXMLElement("category", "name",  catName, "enabled", category.isEnabled());
+                Element categoryEl = convertToXMLElement("category", "name", catName, "enabled", category.isEnabled());
                 categoriesEl.addContent(categoryEl);
             }
         }
@@ -990,7 +972,7 @@ public class XMLConfigurationHandler {
 
     protected Element convertToXMLElement(String gameType, GameCollection gameCollection, GameModule defaultGameMod) {
         Element gameCollectionEl = convertToXMLElement(gameType + "s", "enabled", gameCollection.isEnabled());
-        Element games = new Element("games");
+        Element gamesEl = new Element("games");
         if (defaultGameMod == null) {
             gameCollectionEl.addContent(convertToXMLElement("image", gameCollection.getImage()));
             gameCollectionEl.addContent(convertToXMLElement("sound", gameCollection.getSound()));
@@ -1000,42 +982,65 @@ public class XMLConfigurationHandler {
             GameCollection defGameCollection = defaultGameMod.getGameCollection(gameType);
 
             ImageResource imageResource = gameCollection.getImage();
-            if (imageResource == null || imageResource.isAltered(defGameCollection.getImage()))
-                gameCollectionEl.addContent(convertToXMLElement("image", imageResource));
-            else
+            if (imageResource == null) {
+                gameCollection.setImage(defGameCollection.getImage());
                 gameCollectionEl.addContent(new Element("image"));
+            } else if (imageResource.isAltered(defGameCollection.getImage())) {
+                gameCollectionEl.addContent(convertToXMLElement("image", imageResource));
+            } else {
+                gameCollectionEl.addContent(new Element("image"));
+            }
 
             SoundResource soundResource = gameCollection.getSound();
-            if (soundResource == null || soundResource.isAltered(defGameCollection.getSound()))
-                gameCollectionEl.addContent(convertToXMLElement("sound", soundResource));
-            else
+            if (soundResource == null) {
+                gameCollection.setSound(defGameCollection.getSound());
                 gameCollectionEl.addContent(new Element("sound"));
+            } else if (soundResource.isAltered(defGameCollection.getSound())) {
+                gameCollectionEl.addContent(convertToXMLElement("sound", soundResource));
+            } else {
+                gameCollectionEl.addContent(new Element("sound"));
+            }
+
 
             SoundResource winSoundResource = gameCollection.getWinSound();
-            if (winSoundResource == null || winSoundResource.isAltered(defGameCollection.getWinSound()))
-                gameCollectionEl.addContent(convertToXMLElement("winSound", winSoundResource));
-            else
+            if (winSoundResource == null) {
+                gameCollection.setWinSound(defGameCollection.getWinSound());
                 gameCollectionEl.addContent(new Element("winSound"));
+            } else if (winSoundResource.isAltered(defGameCollection.getWinSound())) {
+                gameCollectionEl.addContent(convertToXMLElement("winSound", winSoundResource));
+            } else {
+                gameCollectionEl.addContent(new Element("winSound"));
+            }
+
 
             SoundResource errorSoundResource = gameCollection.getErrorSound();
-            if (errorSoundResource == null || errorSoundResource.isAltered(defGameCollection.getErrorSound()))
-                gameCollectionEl.addContent(convertToXMLElement("errorSound", errorSoundResource));
-            else
+            if (errorSoundResource == null) {
+                gameCollection.setErrorSound(defGameCollection.getErrorSound());
                 gameCollectionEl.addContent(new Element("errorSound"));
+            } else if (errorSoundResource.isAltered(defGameCollection.getErrorSound())) {
+                gameCollectionEl.addContent(convertToXMLElement("errorSound", errorSoundResource));
+            } else {
+                gameCollectionEl.addContent(new Element("errorSound"));
+            }
+
         }
 
         GameCollection defGameCollection = null;
-        if (defaultGameMod != null)
+        if (defaultGameMod != null) {
             defGameCollection = defaultGameMod.getGameCollection(gameType);
+        }
+
 
         for (Game game : gameCollection.getGames()) {
             String name = game.getNameUnmodified();
             Element gameEl = convertToXMLElement(game, gameCollection);
             if (defaultGameMod == null || defGameCollection.getGame(name) == null || defGameCollection.getGame(name).isAltered(game))
-                games.addContent(gameEl);
+                gamesEl.addContent(gameEl);
+            else
+                gamesEl.addContent(convertToXMLElement("game", "name", game.getNameUnmodified(), "enabled", game.isEnabled()));
         }
 
-        gameCollectionEl.addContent(games);
+        gameCollectionEl.addContent(gamesEl);
         return gameCollectionEl;
     }
 
