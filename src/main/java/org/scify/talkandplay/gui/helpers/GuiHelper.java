@@ -119,11 +119,10 @@ public class GuiHelper {
         //first scale the image to the desired dimensions
         BufferedImage master = new BufferedImage(DEFAULT_WIDTH, DEFAULT_HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = master.createGraphics();
-        Image image = imageResource.getImage();
-        if (image == null) {
+        if (imageResource == null) {
             g2d.drawImage(new ImageIcon(rm.getImage("no-photo.png", ResourceType.JAR).getScaledInstance(DEFAULT_WIDTH, DEFAULT_WIDTH, Image.SCALE_SMOOTH)).getImage(), 0, 0, null);
         } else {
-            g2d.drawImage(new ImageIcon(image.getScaledInstance(DEFAULT_WIDTH, DEFAULT_WIDTH, Image.SCALE_SMOOTH)).getImage(), 0, 0, null);
+            g2d.drawImage(new ImageIcon(imageResource.getImage().getScaledInstance(DEFAULT_WIDTH, DEFAULT_WIDTH, Image.SCALE_SMOOTH)).getImage(), 0, 0, null);
         }
         g2d.dispose();
 

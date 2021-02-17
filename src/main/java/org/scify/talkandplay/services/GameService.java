@@ -15,16 +15,12 @@
  */
 package org.scify.talkandplay.services;
 
-import java.io.File;
 import java.util.List;
 
-import io.sentry.Sentry;
-import org.jdom.Document;
 import org.jdom.Element;
-import org.jdom.input.SAXBuilder;
 import org.scify.talkandplay.models.games.Game;
 import org.scify.talkandplay.models.games.GameImage;
-import org.scify.talkandplay.models.games.GameType;
+import org.scify.talkandplay.models.games.GameCollection;
 import org.scify.talkandplay.utils.TalkAndPlayProfileConfiguration;
 
 public class GameService {
@@ -145,15 +141,15 @@ public class GameService {
         }
     }
 
-    public void updateGameType(String username, GameType gameType) throws Exception {
+    public void updateGameType(String username, GameCollection gameCollection) throws Exception {
         Element profile = talkAndPlayConfigurationFile.getConfigurationHandler().getUserElement(username);
 
         if (profile != null) {
-            Element gameTypeEl = profile.getChild("games").getChild(gameType.getType() + "s");
+            Element gameTypeEl = profile.getChild("games").getChild(gameCollection.getGameType() + "s");
 
             if (gameTypeEl != null) {
-                gameTypeEl.getChild("winSound").setText(gameType.getWinSound().getPath());
-                gameTypeEl.getChild("errorSound").setText(gameType.getErrorSound().getPath());
+                gameTypeEl.getChild("winSound").setText(gameCollection.getWinSound().getPath());
+                gameTypeEl.getChild("errorSound").setText(gameCollection.getErrorSound().getPath());
 
                 talkAndPlayConfigurationFile.getConfigurationHandler().update();
             }

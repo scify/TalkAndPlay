@@ -43,6 +43,20 @@ public class Module {
         this.rm = ResourceManager.getInstance();
     }
 
+    public Module(Module module) {
+        name = module.name;
+        enabled = module.enabled;
+        rm = ResourceManager.getInstance();
+
+        imageResource = null;
+        if (module.imageResource != null)
+            imageResource = new ImageResource(module.imageResource);
+
+        soundResource = null;
+        if (module.soundResource != null)
+            soundResource = new SoundResource(module.soundResource);
+    }
+
     public String getName() {
         return rm.decodeTextIfRequired(name);
     }

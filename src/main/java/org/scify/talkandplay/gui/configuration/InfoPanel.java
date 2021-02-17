@@ -121,29 +121,7 @@ public class InfoPanel extends javax.swing.JPanel {
         );
 
         jScrollPane1.setViewportView(brokenFilesPanel);
-        /*
-        String changeOrderText = rm.getTextOfXMLTag("alterOrder");
-        changeOrderLabel.setText("3. " + changeOrderText);
 
-        jScrollPane2.setBorder(null);
-
-        changeOrderTextArea.setColumns(20);
-        changeOrderTextArea.setRows(5);
-        changeOrderTextArea.setText(rm.getTextOfXMLTag("alterOrderText") + ": \"" + changeOrderText + "\"\n" +
-               rm.getTextOfXMLTag("alterOrderText2") + ": \"" + changeOrderText + "\"");
-        jScrollPane2.setViewportView(changeOrderTextArea);
-
-        changeOrderButton.setBackground(new java.awt.Color(75, 161, 69));
-        changeOrderButton.setFont(changeOrderButton.getFont());
-        changeOrderButton.setForeground(new java.awt.Color(255, 255, 255));
-        changeOrderButton.setText(changeOrderText);
-        changeOrderButton.setBorder(null);
-        changeOrderButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                changeOrderButtonMouseClicked(evt);
-            }
-        });
-        */
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(

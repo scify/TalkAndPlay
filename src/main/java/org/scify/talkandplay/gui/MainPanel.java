@@ -39,7 +39,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import io.sentry.Sentry;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.helpers.UIConstants;
-import org.scify.talkandplay.gui.users.UserFormPanel;
 import org.scify.talkandplay.gui.users.UserPanel;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.UserService;
@@ -131,16 +130,6 @@ public class MainPanel extends javax.swing.JPanel {
                 }
             });
             userPanelList.add(userPanel);
-        }
-        repaintUsers();
-    }
-
-    public void removeUser(User selectedUser) {
-        for (UserPanel p : userPanelList) {
-            if (p.getUser().equals(selectedUser)) {
-                usersPanel.remove(p);
-                break;
-            }
         }
         repaintUsers();
     }
@@ -250,26 +239,6 @@ public class MainPanel extends javax.swing.JPanel {
                 }
             }
         });
-    }
-
-    public void updateUsersPanel(User user, String oldName) {
-        for (UserPanel p : userPanelList) {
-            if (p.getUser().getName().equals(oldName)) {
-                p.repaintPanel(user);
-                break;
-            }
-        }
-        repaintUsers();
-    }
-
-    public void removeFromUsersPanel(String removeUser) {
-        for (UserPanel p : userPanelList) {
-            if (p.getUser().getName().equals(removeUser)) {
-                usersPanel.remove(p);
-                break;
-            }
-        }
-        repaintUsers();
     }
 
     public List<UserPanel> getUsersPanel() {

@@ -51,7 +51,7 @@ public class WordFormPanel extends javax.swing.JPanel {
     private GuiHelper guiHelper;
     private User user;
     private Category category;
-    private List<String> categories;
+    private List<Category> categories;
     private ImageResource imageResource;
     private SoundResource soundResource;
     private CategoryService categoryService;
@@ -328,31 +328,17 @@ public class WordFormPanel extends javax.swing.JPanel {
 
         if (validateCategory()) {
 
-            Category newCategory = new Category();
-            newCategory.setName(wordTextField.getText());
+            Category newCategory = new Category(wordTextField.getText());
+            newCategory.setEnabled(enabledCheckbox.isSelected());
             newCategory.setImage(imageResource);
             newCategory.setSound(soundResource);
-            newCategory.setEnabled(enabledCheckbox.isSelected());
-            newCategory.setParentCategory(new Category(categoriesComboBox.getSelectedItem().toString()));
-            /*  newCategory.setHasSound(soundCheckBox.isSelected());
-             newCategory.setHasImage(imageCheckBox.isSelected());
-             newCategory.setHasText(textCheckBox.isSelected());*/
-
-            if (rowsTextField.getText() != null && !rowsTextField.getText().isEmpty()) {
-                newCategory.setRows(Integer.parseInt(rowsTextField.getText()));
-            }
-
-            if (columnsTextField.getText() != null && !columnsTextField.getText().isEmpty()) {
-                newCategory.setColumns(Integer.parseInt(columnsTextField.getText()));
-            }
-
+            Category selectedCat = (Category) categoriesComboBox.getSelectedItem();
+            if (selectedCat.getName().equals(user.getCommunicationModule().getName()))
+                newCategory.setParentCategory(null);
+            else
+                newCategory.setParentCategory(selectedCat);
             try {
-                if (category == null) {
-                    categoryService.save(newCategory, user);
-                } else {
-                    categoryService.update(newCategory, user, category.getName(), category.getParentCategory().getName());
-                }
-                category = newCategory;
+                categoryService.save(category, newCategory, user);
                 updateCategoriesComboBox();
                 parent.redrawCategoriesList();
                 parent.displayMessage(rm.getTextOfXMLTag("wordWasSaved"));
@@ -366,15 +352,19 @@ public class WordFormPanel extends javax.swing.JPanel {
     public void updateCategoriesComboBox() {
         categoriesComboBox.removeAllItems();
         categoriesComboBox.addItem(rm.getTextOfXMLTag("chooseWord"));
-        List<String> categories = categoryService.getLinearCategories(userService.getUser(user.getName()));
-        for (String category : categories) {
-            categoriesComboBox.addItem(category);
-        }
+        List<Category> categories = categoryService.getLinearCategories(userService.getUser(user.getName()));
 
-        if (category != null) {
-            categoriesComboBox.removeItem(category.getName());
-            categoriesComboBox.setSelectedItem(category.getParentCategory().getName());
+        Category parent = null;
+        for (Category cat : categories) {
+            if (category == null || !category.getNameUnmodified().equals(cat.getNameUnmodified()))
+                categoriesComboBox.addItem(cat);
+            if (category != null && category.getParentCategory() != null && category.getParentCategory().getNameUnmodified().equals(cat.getNameUnmodified()))
+                parent = cat;
         }
+        if (category == null || category.getParentCategory() == null)
+            categoriesComboBox.setSelectedIndex(1);
+        else
+            categoriesComboBox.setSelectedItem(parent);
     }
 
     private boolean validateCategory() {
@@ -390,8 +380,8 @@ public class WordFormPanel extends javax.swing.JPanel {
 
         //word should be unique
         if (category == null || (category != null && !category.getName().equals(name))) {
-            for (String category : categories) {
-                if (category.equals(name)) {
+            for (Category category : categories) {
+                if (category.getName().equals(name)) {
                     errorLabel.setText(rm.getTextOfXMLTag("wordMustBeUnique"));
                     errorLabel.setVisible(true);
                     return false;
@@ -509,8 +499,6 @@ public class WordFormPanel extends javax.swing.JPanel {
             } else {
                 uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
             }
-
-            categoriesComboBox.setSelectedItem(category.getParentCategory().getName());
 
             imageResource = category.getImage();
             soundResource = category.getSound();

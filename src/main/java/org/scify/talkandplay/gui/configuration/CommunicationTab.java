@@ -97,7 +97,7 @@ public class CommunicationTab extends javax.swing.JPanel {
 
         contentPanel.add(titlePanel(), c);
 
-        drawCategories(user.getCommunicationModule().getCategories(), MARGIN, false);
+        drawCategories(user.getCommunicationModule().getCategoriesOfSelectedLanguage(), MARGIN, false);
     }
 
     /**
@@ -150,7 +150,7 @@ public class CommunicationTab extends javax.swing.JPanel {
                     label.setFont(plainFont);
                 }
 
-                setListeners(panel, editLabel, deleteLabel, category.getName());
+                setListeners(panel, editLabel, deleteLabel, category);
 
                 panel.add(label, BorderLayout.LINE_START);
                 panel.add(controlsPanel, BorderLayout.LINE_END);
@@ -171,7 +171,7 @@ public class CommunicationTab extends javax.swing.JPanel {
         contentPanel.add(titlePanel(), c);
 
         user = userService.getUser(user.getName());
-        drawCategories(user.getCommunicationModule().getCategories(), MARGIN, false);
+        drawCategories(user.getCommunicationModule().getCategoriesOfSelectedLanguage(), MARGIN, false);
 
         revalidate();
         repaint();
@@ -182,7 +182,7 @@ public class CommunicationTab extends javax.swing.JPanel {
         contentPanel.add(titlePanel(), c);
 
         user = userService.getUser(user.getName());
-        drawCategories(user.getCommunicationModule().getCategories(), MARGIN, true);
+        drawCategories(user.getCommunicationModule().getCategoriesOfSelectedLanguage(), MARGIN, true);
 
         //set the first panel as the selected one
         if (panels.size() > 0) {
@@ -210,7 +210,7 @@ public class CommunicationTab extends javax.swing.JPanel {
         return panel;
     }
 
-    private void setListeners(final JPanel panel, JLabel editLabel, JLabel deleteLabel, final String category) {
+    private void setListeners(final JPanel panel, JLabel editLabel, JLabel deleteLabel, Category category) {
         //add the green background when a panel is clicked
         panel.addMouseListener(new MouseAdapter() {
             @Override
@@ -231,7 +231,7 @@ public class CommunicationTab extends javax.swing.JPanel {
         editLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                parent.addPanel(new WordFormPanel(user, categoryService.getCategory(category, user), parent));
+                parent.addPanel(new WordFormPanel(user, category, parent));
             }
         });
 
@@ -242,7 +242,7 @@ public class CommunicationTab extends javax.swing.JPanel {
                     int dialogResult = JOptionPane.showConfirmDialog(null, rm.getTextOfXMLTag("wordDeleteConfirmation"), "Warning", 0);
                     if (dialogResult == JOptionPane.YES_OPTION) {
                         try {
-                            categoryService.delete(category, user);
+                            categoryService.delete(category, user, true);
                             redrawCategoriesList();
                             parent.redrawCategoriesDropDown();
                         } catch (Exception ex) {

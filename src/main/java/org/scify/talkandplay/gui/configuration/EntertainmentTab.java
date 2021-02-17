@@ -292,6 +292,7 @@ public class EntertainmentTab extends javax.swing.JPanel {
             user.getEntertainmentModule().getMusicModule().setFolderPath(musicPathTextField.getText());
             user.getEntertainmentModule().getMusicModule().setPlaylistSize(Integer.parseInt(songSumTextField.getText()));
             user.getEntertainmentModule().getVideoModule().setFolderPath(videoPathTextField.getText());
+            user.getEntertainmentModule().getVideoModule().setPlaylistSize(Integer.parseInt(songSumTextField.getText()));
 
             try {
                 moduleService.update(user);

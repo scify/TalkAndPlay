@@ -566,7 +566,7 @@ public class UserFormPanel extends javax.swing.JPanel {
             newUser.getConfiguration().setImage(imageCheckBox.isSelected());
             newUser.getConfiguration().setText(textCheckBox.isSelected());
             try {
-                userService.update(newUser, user.getName());
+                userService.update(user, newUser);
                 parent.changePanel(new ConfigurationPanel(newUser.getName(), parent));
             } catch (Exception ex) {
                 Logger.getLogger(UserFormPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -601,7 +601,7 @@ public class UserFormPanel extends javax.swing.JPanel {
             newUser.getConfiguration().setText(textCheckBox.isSelected());
 
             try {
-                userService.update(newUser, user.getName());
+                userService.update(user, newUser);
                 parent.changePanel(new MainPanel(parent));
             } catch (Exception ex) {
                 Logger.getLogger(UserFormPanel.class.getName()).log(Level.SEVERE, null, ex);

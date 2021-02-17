@@ -17,6 +17,7 @@ package org.scify.talkandplay.gui.grid.games;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
@@ -81,6 +82,7 @@ public class SimilarityGamePanel extends BaseGamePanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setTopMessage(rm.getTextOfXMLTag("pressTheButtonOnTheSimilar"));
         setBottomMessage("");
+        Random randomGenerator = new Random();
 
         int i = randomGenerator.nextInt(game.getEnabledImages().size());
         correctImage = game.getEnabledImages().get(i).getImage();

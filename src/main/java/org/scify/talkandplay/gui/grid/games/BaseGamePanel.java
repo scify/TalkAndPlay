@@ -28,12 +28,10 @@ import java.awt.GridBagLayout;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
-
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.selectors.ManualTileSelector;
 import org.scify.talkandplay.gui.grid.tiles.TileCreator;
@@ -44,10 +42,7 @@ import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.games.Game;
 import org.scify.talkandplay.models.games.GameImage;
-import org.scify.talkandplay.models.games.GameType;
-import org.scify.talkandplay.models.games.SequenceGame;
-import org.scify.talkandplay.models.games.SimilarityGame;
-import org.scify.talkandplay.models.games.StimulusReactionGame;
+import org.scify.talkandplay.models.games.GameCollection;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.utils.ResourceManager;
 import org.scify.talkandplay.utils.ResourceType;
@@ -58,20 +53,19 @@ public class BaseGamePanel extends javax.swing.JPanel {
     protected GridFrame parent;
     protected Game game;
     protected GridBagConstraints c1;
-    protected Random randomGenerator;
     protected Selector selector;
     protected TileCreator tileCreator;
-    protected String type;
+    protected String gameType;
     protected JPanel topPanel, bottomPanel, topMsgPanel, bottomMsgPanel;
     protected List<GameImage> randomImages;
     protected ArrayList<JPanel> panelList;
     protected String previousGame;
     protected ResourceManager rm;
 
-    public BaseGamePanel(User user, GridFrame parent, String type, Game game, String previousGame) {
+    public BaseGamePanel(User user, GridFrame parent, String gameType, Game game, String previousGame) {
         this.user = user;
         this.parent = parent;
-        this.type = type;
+        this.gameType = gameType;
         this.game = game;
         this.previousGame = previousGame;
         this.rm = ResourceManager.getInstance();
@@ -121,52 +115,11 @@ public class BaseGamePanel extends javax.swing.JPanel {
 
         panelList = new ArrayList();
         randomImages = new ArrayList();
-        randomGenerator = new Random();
 
-        if (game == null) {
-            getRandomGame();
-        }
+        if (game == null)
+            game = user.getGameModule().getRandomGame(gameType, previousGame);
+
     }
-
-    /**
-     * Select a random game based on its type
-     *
-     * @return
-     */
-    protected void getRandomGame() {
-        for (GameType gameType : user.getGameModule().getGameTypes()) {
-            if (type.equals(gameType.getType())) {
-                List<Game> enabledGames = new ArrayList<>();
-                for (Game game : gameType.getGames()) {
-                    if (game.isEnabled())
-                        enabledGames.add(game);
-                }
-                int randomInput = enabledGames.size();
-                Game ret = null;
-                if (randomInput == 0)
-                    return;
-                else if (randomInput == 1)
-                    ret = enabledGames.get(0);
-                else {
-                    while (ret == null) {
-                        int i = randomGenerator.nextInt(randomInput);
-                        if (previousGame == null || previousGame.isEmpty())
-                            ret = enabledGames.get(i);
-                        else if (!enabledGames.get(i).getName().equals(previousGame))
-                            ret = enabledGames.get(i);
-                    }
-                }
-                if (type.equals("stimulusReactionGame")) {
-                    game = (StimulusReactionGame) ret;
-                } else if (type.equals("sequenceGame")) {
-                    game = (SequenceGame) ret;
-                } else if (type.equals("similarityGame")) {
-                    game = (SimilarityGame) ret;
-                }
-            }
-        }
-    }
-
 
     protected void setTopMessage(String text) {
         topMsgPanel.setVisible(true);
@@ -199,8 +152,8 @@ public class BaseGamePanel extends javax.swing.JPanel {
         if (game.getWinSound() != null) {
             soundFile = rm.getSound(game.getWinSound().getPath(), game.getWinSound().getResourceType());
         } else {
-            for (GameType gameType : user.getGameModule().getGameTypes()) {
-                if (type.equals(gameType.getType()) && gameType.getWinSound() != null) {
+            for (GameCollection gameCollection : user.getGameModule().getGameTypes()) {
+                if (gameType.equals(gameCollection.getGameType()) && gameCollection.getWinSound() != null) {
                     soundFile = rm.getSound(game.getWinSound().getPath(), game.getWinSound().getResourceType());
                 }
             }
@@ -215,9 +168,9 @@ public class BaseGamePanel extends javax.swing.JPanel {
      */
     protected String getErrorSound() {
         File soundFile = rm.getSound("sounds/games/errorSound.mp3", ResourceType.BUNDLE);
-        for (GameType gameType : user.getGameModule().getGameTypes()) {
-            if (type.equals(gameType.getType()) && gameType.getErrorSound() != null) {
-                soundFile = rm.getSound(gameType.getErrorSound().getPath(), gameType.getErrorSound().getResourceType());
+        for (GameCollection gameCollection : user.getGameModule().getGameTypes()) {
+            if (gameType.equals(gameCollection.getGameType()) && gameCollection.getErrorSound() != null) {
+                soundFile = rm.getSound(gameCollection.getErrorSound().getPath(), gameCollection.getErrorSound().getResourceType());
             }
         }
         return soundFile.getAbsolutePath();

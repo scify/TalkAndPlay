@@ -24,56 +24,59 @@ import java.util.*;
 /**
  * @author christina
  */
-public class GameType {
+public class GameCollection {
 
     protected String name;
-    protected ImageResource imageResource;
-    protected SoundResource soundResource;
-    protected String type;
-    protected SoundResource winSoundResource;
-    protected SoundResource errorSoundResource;
+    protected String gameType;
     protected boolean enabled;
     protected ResourceManager rm;
+
+    protected ImageResource imageResource;
+    protected SoundResource soundResource;
+    protected SoundResource winSoundResource;
+    protected SoundResource errorSoundResource;
 
     protected HashMap<String, Game> games;
     protected HashSet<String> enabledGames;
 
-    public GameType(String name, boolean enabled, String type) {
+    public GameCollection(String name, boolean enabled, String gameType) {
         this.name = name;
         this.enabled = enabled;
-        this.type = type;
+        this.gameType = gameType;
         this.games = new HashMap<>();
         this.enabledGames = new HashSet<>();
         this.rm = ResourceManager.getInstance();
     }
 
-    public GameType getCopy() {
-        GameType gameType = new GameType(name, enabled, type);
-        if (imageResource == null)
-            gameType.imageResource = null;
-        else
-            gameType.imageResource = imageResource.getCopy();
-        if (soundResource == null)
-            gameType.soundResource = null;
-        else
-            gameType.soundResource = soundResource.getCopy();
-        if (winSoundResource == null)
-            gameType.winSoundResource = null;
-        else
-            gameType.winSoundResource = winSoundResource.getCopy();
-        if (errorSoundResource == null)
-            gameType.errorSoundResource = null;
-        else
-            gameType.errorSoundResource = errorSoundResource.getCopy();
+    public GameCollection(GameCollection gameCollection) {
+        name = gameCollection.name;
+        enabled = gameCollection.enabled;
+        gameType = gameCollection.gameType;
 
+        imageResource = null;
+        if (gameCollection.imageResource != null)
+            imageResource = new ImageResource(gameCollection.imageResource);
+
+        soundResource = null;
+        if (gameCollection.soundResource != null)
+            soundResource = new SoundResource(gameCollection.soundResource);
+
+        winSoundResource = null;
+        if (gameCollection.winSoundResource != null)
+            winSoundResource = new SoundResource(gameCollection.winSoundResource);
+
+        errorSoundResource = null;
+        if (gameCollection.errorSoundResource != null)
+            errorSoundResource = new SoundResource(gameCollection.errorSoundResource);
+
+        games = new HashMap<>();
+        enabledGames = new HashSet<>();
         for (Map.Entry<String, Game> game : games.entrySet()) {
-            gameType.games.put(game.getKey(), game.getValue().getCopy());
+            gameCollection.games.put(game.getKey(), new Game(game.getValue()));
         }
-
         for (String gameName : enabledGames) {
-            gameType.enabledGames.add(gameName);
+            gameCollection.enabledGames.add(gameName);
         }
-        return gameType;
     }
 
     public String getName() {
@@ -113,12 +116,12 @@ public class GameType {
         this.enabled = enabled;
     }
 
-    public String getType() {
-        return type;
+    public String getGameType() {
+        return gameType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setGameType(String gameType) {
+        this.gameType = gameType;
     }
 
     public List<Game> getGames() {

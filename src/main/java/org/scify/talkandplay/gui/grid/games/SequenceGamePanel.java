@@ -17,6 +17,7 @@ package org.scify.talkandplay.gui.grid.games;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
@@ -78,7 +79,7 @@ public class SequenceGamePanel extends BaseGamePanel {
     private void initCustomComponents() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBottomMessage(rm.getTextOfXMLTag("sequenceGameInfo2"));
-
+        Random randomGenerator = new Random();
         //draw the images in a random order
         List<GameImage> tmpImages = new ArrayList(game.getEnabledImages());
         int i;

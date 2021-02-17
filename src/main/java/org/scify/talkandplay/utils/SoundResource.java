@@ -2,38 +2,17 @@ package org.scify.talkandplay.utils;
 
 import java.io.File;
 
-public class SoundResource {
-    protected String path;
-    protected ResourceType resourceType;
-    protected ResourceManager rm = ResourceManager.getInstance();
+public class SoundResource extends MultimediaResource {
 
     public SoundResource(String path, ResourceType resourceType) {
-        this.path = path;
-        this.resourceType = resourceType;
+        super(path, resourceType);
     }
 
-    public SoundResource getCopy() {
-        return new SoundResource(path, resourceType);
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public ResourceType getResourceType() {
-        return resourceType;
+    public SoundResource(SoundResource soundResource) {
+        super(soundResource);
     }
 
     public File getSound() {
         return rm.getSound(path, resourceType);
-    }
-
-    public boolean isAltered (SoundResource soundResource) {
-        if (soundResource == null)
-            return true;
-        if (path.equals(soundResource.path) && resourceType == soundResource.getResourceType())
-            return false;
-        else
-            return true;
     }
 }

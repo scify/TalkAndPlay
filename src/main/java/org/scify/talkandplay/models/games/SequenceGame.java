@@ -28,6 +28,11 @@ public class SequenceGame extends Game {
         this.difficulty = difficulty;
     }
 
+    public SequenceGame(SequenceGame sequenceGame) {
+        super(sequenceGame);
+        this.difficulty = sequenceGame.difficulty;
+    }
+
     public int getDifficulty() {
         return difficulty;
     }

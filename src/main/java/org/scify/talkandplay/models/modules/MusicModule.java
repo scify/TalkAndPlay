@@ -15,9 +15,6 @@
  */
 package org.scify.talkandplay.models.modules;
 
-import org.scify.talkandplay.utils.ImageResource;
-import org.scify.talkandplay.utils.SoundResource;
-
 public class MusicModule extends Module {
 
     private String folderPath;
@@ -27,23 +24,10 @@ public class MusicModule extends Module {
         super();
     }
 
-    public MusicModule getCopy() {
-        MusicModule musicModule = new MusicModule();
-        musicModule.setFolderPath(folderPath);
-        musicModule.playlistSize = playlistSize;
-        musicModule.setName(getName());
-        ImageResource imageResource = getImageResource();
-        if (imageResource == null)
-            musicModule.setImage(null);
-        else
-            musicModule.setImage(imageResource.getCopy());
-        SoundResource soundResource = getSoundResource();
-        if (soundResource == null)
-            musicModule.setSound(null);
-        else
-            musicModule.setSound(soundResource.getCopy());
-        musicModule.setEnabled(this.isEnabled());
-        return musicModule;
+    public MusicModule(MusicModule musicModule) {
+        super(musicModule);
+        folderPath = musicModule.folderPath;
+        playlistSize = musicModule.playlistSize;
     }
 
     public boolean isAltered(MusicModule module) {

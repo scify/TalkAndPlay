@@ -15,13 +15,9 @@
  */
 package org.scify.talkandplay.models.games;
 
-import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.utils.ImageResource;
 import org.scify.talkandplay.utils.ResourceManager;
-import org.scify.talkandplay.utils.ResourceType;
 import org.scify.talkandplay.utils.SoundResource;
-
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,14 +27,14 @@ import java.util.List;
  */
 public class Game {
 
-    private String name;
-    private ImageResource imageResource;
-    private SoundResource soundResource;
-    private SoundResource winSoundResource;
-    private SoundResource errorSoundResource;
-    private boolean enabled;
-    private List<GameImage> images;
-    private List<GameImage> enabledImages;
+    protected String name;
+    protected ImageResource imageResource;
+    protected SoundResource soundResource;
+    protected SoundResource winSoundResource;
+    protected SoundResource errorSoundResource;
+    protected boolean enabled;
+    protected List<GameImage> images;
+    protected List<GameImage> enabledImages;
     protected ResourceManager rm;
 
     public Game() {
@@ -54,33 +50,35 @@ public class Game {
         this.enabledImages = new ArrayList();
     }
 
-    public Game getCopy() {
-        Game game = new Game(name, enabled);
-        if (imageResource == null)
-            game.imageResource = null;
-        else
-            game.imageResource = imageResource.getCopy();
-        if (soundResource == null)
-            game.soundResource = null;
-        else
-            game.soundResource = soundResource.getCopy();
-        if (winSoundResource == null)
-            game.winSoundResource = null;
-        else
-            game.winSoundResource = winSoundResource.getCopy();
-        if (errorSoundResource == null)
-            game.errorSoundResource = null;
-        else
-            game.errorSoundResource = errorSoundResource.getCopy();
+    public Game(Game game) {
+        rm = ResourceManager.getInstance();
+        name = game.name;
+        imageResource = null;
+        if (game.imageResource != null)
+            imageResource = new ImageResource(game.imageResource);
 
-        for (GameImage image : images) {
-            game.images.add(image.getCopy());
+        soundResource = null;
+        if (game.soundResource != null)
+            soundResource = new SoundResource(game.soundResource);
+
+        winSoundResource = null;
+        if (game.winSoundResource != null)
+            winSoundResource = new SoundResource(game.winSoundResource);
+
+        errorSoundResource = null;
+        if (game.errorSoundResource != null)
+            errorSoundResource = new SoundResource(game.errorSoundResource);
+
+        enabled = game.enabled;
+        images = new ArrayList<>();
+        enabledImages = new ArrayList<>();
+        for (GameImage image : game.images) {
+            images.add(new GameImage(image));
         }
 
-        for (GameImage image : enabledImages) {
-            game.enabledImages.add(image.getCopy());
+        for (GameImage image : game.enabledImages) {
+            enabledImages.add(new GameImage(image));
         }
-        return game;
     }
 
     public boolean isAltered(Game game) {

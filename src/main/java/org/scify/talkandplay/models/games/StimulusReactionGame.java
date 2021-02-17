@@ -24,6 +24,11 @@ public class StimulusReactionGame extends Game {
         this.difficulty = difficulty;
     }
 
+    public StimulusReactionGame(StimulusReactionGame stimulusReactionGame) {
+        super(stimulusReactionGame);
+        this.difficulty = stimulusReactionGame.difficulty;
+    }
+
     public int getDifficulty() {
         return difficulty;
     }

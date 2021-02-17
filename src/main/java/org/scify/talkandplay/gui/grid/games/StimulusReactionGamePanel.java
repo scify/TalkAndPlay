@@ -18,6 +18,7 @@ package org.scify.talkandplay.gui.grid.games;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -28,7 +29,7 @@ import org.scify.talkandplay.gui.grid.tiles.TileAction;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.games.GameImage;
-import org.scify.talkandplay.models.games.GameType;
+import org.scify.talkandplay.models.games.GameCollection;
 import org.scify.talkandplay.models.games.StimulusReactionGame;
 import org.scify.talkandplay.utils.ResourceType;
 import org.scify.talkandplay.utils.SoundResource;
@@ -94,28 +95,15 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
         panelList = new ArrayList();
 
         if (game == null) {
-            //select a random game
-            Random randomGenerator = new Random();
-            for (GameType gameType : user.getGameModule().getGameTypes()) {
-                if ("stimulusReactionGame".equals(gameType.getType())) {
-                    for (int j = 0; j < gameType.getGames().size(); j++) {
-                        int i = randomGenerator.nextInt(gameType.getGames().size());
-                        if (gameType.getGames().get(i).isEnabled()
-                                && ((previousGame == null || previousGame.isEmpty())
-                                || (previousGame != null && !previousGame.isEmpty() && !gameType.getGames().get(i).getName().equals(previousGame)))) {
-                            game = (StimulusReactionGame) gameType.getGames().get(i);
-                            break;
-                        }
-                    }
-                }
-            }
+            game = (StimulusReactionGame)user.getGameModule().getRandomGame("stimulusReactionGame", previousGame);
         }
 
         if (game == null) {
             //TODO fix
             gamePanel.add(new JLabel("No games"));
         } else {
-            JPanel gameImage = createGameItem(game.getEnabledImages().get(0));
+            List<GameImage> enabledImages = game.getEnabledImages();
+            JPanel gameImage = createGameItem(enabledImages.get(0));
             gamePanel.add(gameImage);
             panelList.add(gameImage);
 
@@ -252,9 +240,9 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
         if (game.getWinSound() != null) {
             sound = game.getWinSound();
         } else {
-            for (GameType gameType : user.getGameModule().getGameTypes()) {
-                if ("stimulusReactionGame".equals(gameType.getType()) && gameType.getWinSound() != null) {
-                    sound = gameType.getWinSound();
+            for (GameCollection gameCollection : user.getGameModule().getGameTypes()) {
+                if ("stimulusReactionGame".equals(gameCollection.getGameType()) && gameCollection.getWinSound() != null) {
+                    sound = gameCollection.getWinSound();
                 }
             }
         }

@@ -32,8 +32,10 @@ public class MouseSensor extends Sensor {
         this.clickCount = clickCount;
     }
 
-    public MouseSensor getCopy() {
-        return new MouseSensor(button, clickCount, name);
+    public MouseSensor(MouseSensor mouseSensor) {
+        super(mouseSensor);
+        button = mouseSensor.button;
+        clickCount = mouseSensor.clickCount;
     }
 
     public int getButton() {

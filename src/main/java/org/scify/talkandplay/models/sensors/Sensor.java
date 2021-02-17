@@ -30,6 +30,10 @@ public class Sensor {
         this.name = name;
     }
 
+    public Sensor(Sensor sensor) {
+        name = sensor.name;
+    }
+
     public String getName() {
         return name;
     }

@@ -35,14 +35,13 @@ import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.tiles.TileAction;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
-import org.scify.talkandplay.models.games.GameType;
+import org.scify.talkandplay.models.games.GameCollection;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.SensorService;
 import org.scify.talkandplay.utils.ImageResource;
 import org.scify.talkandplay.utils.ResourceType;
-import org.scify.talkandplay.utils.SoundResource;
 
 public class GamesPanel extends BaseGridPanel {
 
@@ -81,8 +80,8 @@ public class GamesPanel extends BaseGridPanel {
 
         panelList = new ArrayList();
 
-        for (GameType gameType : user.getGameModule().getGameTypes()) {
-            JPanel gamePanel = createGameItem(gameType);
+        for (GameCollection gameCollection : user.getGameModule().getGameTypes()) {
+            JPanel gamePanel = createGameItem(gameCollection);
             add(gamePanel, c);
             c.gridx++;
             panelList.add(gamePanel);
@@ -107,11 +106,11 @@ public class GamesPanel extends BaseGridPanel {
         selector.start();
     }
 
-    private JPanel createGameItem(final GameType gameType) {
+    private JPanel createGameItem(final GameCollection gameCollection) {
 
-        JPanel panel = tileCreator.create(gameType.getName(),
-                gameType.getImage(),
-                gameType.getSound(),
+        JPanel panel = tileCreator.create(gameCollection.getName(),
+                gameCollection.getImage(),
+                gameCollection.getSound(),
                 new TileAction() {
                     @Override
                     public void act() {
@@ -120,11 +119,11 @@ public class GamesPanel extends BaseGridPanel {
 
                     @Override
                     public void audioFinished() {
-                        if ("stimulusReactionGame".equals(gameType.getType())) {
+                        if ("stimulusReactionGame".equals(gameCollection.getGameType())) {
                             showStimulusReactionGame();
-                        } else if ("sequenceGame".equals(gameType.getType())) {
+                        } else if ("sequenceGame".equals(gameCollection.getGameType())) {
                             showSequenceGame();
-                        } else if ("similarityGame".equals(gameType.getType())) {
+                        } else if ("similarityGame".equals(gameCollection.getGameType())) {
                             showSimilarityGame();
                         }
                     }
@@ -396,8 +395,8 @@ public class GamesPanel extends BaseGridPanel {
     private boolean hasGames(String type) {
         boolean hasGames = true;
 
-        for (GameType gameType : user.getGameModule().getGameTypes()) {
-            if (type.equals(gameType.getType()) && gameType.getEnabledGames().size() == 0) {
+        for (GameCollection gameCollection : user.getGameModule().getGameTypes()) {
+            if (type.equals(gameCollection.getGameType()) && gameCollection.getEnabledGames().size() == 0) {
                 hasGames = false;
                 break;
             }

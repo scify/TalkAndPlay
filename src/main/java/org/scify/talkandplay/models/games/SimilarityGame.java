@@ -28,6 +28,11 @@ public class SimilarityGame extends Game {
         this.difficulty = difficulty;
     }
 
+    public SimilarityGame(SimilarityGame similarityGame) {
+        super(similarityGame);
+        this.difficulty = similarityGame.difficulty;
+    }
+
     public int getDifficulty() {
         return difficulty;
     }
@@ -35,5 +40,4 @@ public class SimilarityGame extends Game {
     public void setDifficulty(int difficulty) {
         this.difficulty = difficulty;
     }
-
 }

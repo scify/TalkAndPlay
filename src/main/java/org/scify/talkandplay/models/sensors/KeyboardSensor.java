@@ -32,8 +32,10 @@ public class KeyboardSensor extends Sensor {
         this.keyChar = keyChar;
     }
 
-    public KeyboardSensor getCopy() {
-        return new KeyboardSensor(keyCode, keyChar, name);
+    public KeyboardSensor(KeyboardSensor keyboardSensor) {
+        super(keyboardSensor);
+        keyCode = keyboardSensor.keyCode;
+        keyChar = keyboardSensor.keyChar;
     }
 
     public int getKeyCode() {

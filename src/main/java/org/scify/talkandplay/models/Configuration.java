@@ -35,30 +35,30 @@ public class Configuration {
 
     }
 
-    public Configuration getCopy() {
-        Configuration configuration = new Configuration();
-        configuration.rotationSpeed = rotationSpeed;
-        configuration.defaultGridRow = defaultGridRow;
-        configuration.defaultGridColumn = defaultGridColumn;
-        configuration.sound = sound;
-        configuration.image = image;
-        configuration.text = text;
+    public Configuration(Configuration configuration) {
+        rotationSpeed = configuration.rotationSpeed;
+        defaultGridRow = configuration.defaultGridRow;
+        defaultGridColumn = configuration.defaultGridColumn;
+        sound = configuration.sound;
+        image = configuration.image;
+        text = configuration.text;
 
-        if (selectionSensor == null)
-            configuration.selectionSensor = null;
-        else if (selectionSensor instanceof MouseSensor)
-            configuration.selectionSensor = ((MouseSensor) selectionSensor).getCopy();
-        else if (selectionSensor instanceof KeyboardSensor)
-            configuration.selectionSensor = ((KeyboardSensor) selectionSensor).getCopy();
+        selectionSensor = null;
+        if (configuration.selectionSensor != null) {
+            if (configuration.selectionSensor instanceof MouseSensor)
+                selectionSensor = new MouseSensor((MouseSensor) configuration.selectionSensor);
+            else if (configuration.selectionSensor instanceof KeyboardSensor)
+                selectionSensor = new KeyboardSensor((KeyboardSensor) configuration.selectionSensor);
+        }
 
-        if (navigationSensor == null)
-            configuration.navigationSensor = null;
-        else if (navigationSensor instanceof MouseSensor)
-            configuration.navigationSensor = ((MouseSensor) navigationSensor).getCopy();
-        else if (navigationSensor instanceof KeyboardSensor)
-            configuration.navigationSensor = ((KeyboardSensor) navigationSensor).getCopy();
+        navigationSensor = null;
+        if (configuration.navigationSensor != null) {
+            if (configuration.navigationSensor instanceof MouseSensor)
+                navigationSensor = new MouseSensor((MouseSensor) configuration.navigationSensor);
+            else if (configuration.navigationSensor instanceof KeyboardSensor)
+                navigationSensor = new KeyboardSensor((KeyboardSensor) configuration.navigationSensor);
+        }
 
-        return configuration;
     }
 
     public boolean isAltered(Configuration configuration) {

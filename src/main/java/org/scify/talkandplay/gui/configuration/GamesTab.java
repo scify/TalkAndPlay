@@ -37,7 +37,7 @@ import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.games.Game;
-import org.scify.talkandplay.models.games.GameType;
+import org.scify.talkandplay.models.games.GameCollection;
 import org.scify.talkandplay.services.GameService;
 import org.scify.talkandplay.utils.ResourceManager;
 import org.scify.talkandplay.utils.ResourceType;
@@ -55,7 +55,7 @@ public class GamesTab extends javax.swing.JPanel {
     private String currentGameType;
     private SoundResource winSound, errorSound;
     private AudioPlayerComponent audioPlayer;
-    private GameType gameType = null;
+    private GameCollection gameCollection = null;
     private ResourceManager rm;
 
     public GamesTab(User user, ConfigurationPanel parent) {
@@ -118,15 +118,15 @@ public class GamesTab extends javax.swing.JPanel {
         gamesPanel2.removeAll();
         gamePanels.clear();
 
-        for (GameType gt : user.getGameModule().getGameTypes()) {
-            if (type.equals(gt.getType())) {
-                gameType = gt;
+        for (GameCollection gt : user.getGameModule().getGameTypes()) {
+            if (type.equals(gt.getGameType())) {
+                gameCollection = gt;
             }
         }
 
-        if (gameType != null) {
-            if (gameType.getGames().size() > 0) {
-                for (Game game : gameType.getGames()) {
+        if (gameCollection != null) {
+            if (gameCollection.getGames().size() > 0) {
+                for (Game game : gameCollection.getGames()) {
                     GamePanel gamePanel = new GamePanel(game, this);
                     gamesPanel2.add(gamePanel);
                     gamePanels.add(gamePanel);
@@ -139,7 +139,7 @@ public class GamesTab extends javax.swing.JPanel {
                 step4Label.setVisible(true);
                 saveButton.setVisible(true);
 
-                winSound = gameType.getWinSound();
+                winSound = gameCollection.getWinSound();
                 if (winSound == null) {
                     winSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 } else {
@@ -147,7 +147,7 @@ public class GamesTab extends javax.swing.JPanel {
                     removeWinSoundLavel.setVisible(true);
                 }
 
-                errorSound = gameType.getErrorSound();
+                errorSound = gameCollection.getErrorSound();
                 if (errorSound == null) {
                     errorSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 } else {
@@ -156,7 +156,7 @@ public class GamesTab extends javax.swing.JPanel {
                 }
 
                 //add new game
-                NewGamePanel newGamePanel = new NewGamePanel(this, user, gameType.getType());
+                NewGamePanel newGamePanel = new NewGamePanel(this, user, gameCollection.getGameType());
                 gamesPanel4.add(newGamePanel);
             }
         } else {
@@ -210,7 +210,7 @@ public class GamesTab extends javax.swing.JPanel {
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                     winSound = new SoundResource(chooser.getSelectedFile().getAbsolutePath(), ResourceType.LOCAL);
                     winSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
-                    gameType.setWinSound(new SoundResource(winSound.getPath(), winSound.getResourceType()));
+                    gameCollection.setWinSound(new SoundResource(winSound.getPath(), winSound.getResourceType()));
                     removeWinSoundLavel.setVisible(true);
                 }
             }
@@ -247,7 +247,7 @@ public class GamesTab extends javax.swing.JPanel {
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                     errorSound = new SoundResource(chooser.getSelectedFile().getAbsolutePath(), ResourceType.LOCAL);
                     errorSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
-                    gameType.setErrorSound(new SoundResource(errorSound.getPath(), errorSound.getResourceType()));
+                    gameCollection.setErrorSound(new SoundResource(errorSound.getPath(), errorSound.getResourceType()));
                     removeErrorSoundLavel.setVisible(true);
                 }
             }
@@ -272,7 +272,7 @@ public class GamesTab extends javax.swing.JPanel {
         removeWinSoundLavel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                gameType.setWinSound(null);
+                gameCollection.setWinSound(null);
                 winSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 removeWinSoundLavel.setVisible(false);
                 winSound = null;
@@ -282,7 +282,7 @@ public class GamesTab extends javax.swing.JPanel {
         removeErrorSoundLavel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                gameType.setErrorSound(null);
+                gameCollection.setErrorSound(null);
                 errorSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 removeErrorSoundLavel.setVisible(false);
                 errorSound = null;;
@@ -485,7 +485,7 @@ public class GamesTab extends javax.swing.JPanel {
             }
         }
         try {
-            gameService.updateGameType(user.getName(), gameType);
+            gameService.updateGameType(user.getName(), gameCollection);
         } catch (Exception ex) {
             Logger.getLogger(GamesTab.class.getName()).log(Level.SEVERE, null, ex);
         }
