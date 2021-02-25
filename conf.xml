@@ -19,64 +19,314 @@
         <communication enabled="true">
             <name>{{ communicationName }}</name>
             <image resourceType="JAR">defaultImgs/communication_module.png</image>
-            <sound resourceType="BUNDLE">sounds/communication.mp3</sound>
+            <sound resourceType="BUNDLE">sounds/communication/communication.mp3</sound>
             <categories>
                 <category name="{{ categoryYes }}" enabled="true" languages="en de gr">
-                    <image resourceType="BUNDLE">images/yes.png</image>
-                    <sound resourceType="BUNDLE">sounds/yes.mp3</sound>        
+                    <image resourceType="BUNDLE">images/communication/yes.png</image>
+                    <sound resourceType="BUNDLE">sounds/communication/yes.mp3</sound>        
                 </category>
-                <category name="{{ categoryNo }}" enabled="true" languages="de gr">
-                    <image resourceType="BUNDLE">images/no.png</image>
-                    <sound resourceType="BUNDLE">sounds/no.mp3</sound>            
+                <category name="{{ categoryNo }}" enabled="true" languages="en de gr">
+                    <image resourceType="BUNDLE">images/communication/no.png</image>
+                    <sound resourceType="BUNDLE">sounds/communication/no.mp3</sound>            
                 </category>
                 <category name="{{ categoryFood }}" enabled="true" languages="en de gr">
-                    <image resourceType="BUNDLE">images/food/burger.png</image>
-                    <sound resourceType="BUNDLE">sounds/food/food.mp3</sound>                    
+                    <image resourceType="BUNDLE">images/communication/food/burger.png</image>
+                    <sound resourceType="BUNDLE">sounds/communication/food/food.mp3</sound>                    
                     <categories>
                         <category name="{{ categoryPasta }}" enabled="true">
-                            <image resourceType="BUNDLE">images/food/pasta.png</image>
-                            <sound resourceType="BUNDLE">sounds/food/pasta.mp3</sound>                            
+                            <image resourceType="BUNDLE">images/communication/food/pasta.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/food/pasta.mp3</sound>                            
                         </category>
                         <category name="{{ categoryFrenchFries }}" enabled="true">
-                            <image resourceType="BUNDLE">images/food/frenchFries.png</image>
-                            <sound resourceType="BUNDLE">sounds/food/frenchFries.mp3</sound>                    
+                            <image resourceType="BUNDLE">images/communication/food/frenchFries.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/food/frenchFries.mp3</sound>                    
                         </category>
                         <category name="{{ categoryBurger }}" enabled="true">
-                            <image resourceType="BUNDLE">images/food/burger.png</image>
-                            <sound resourceType="BUNDLE">sounds/food/burger.mp3</sound>                            
+                            <image resourceType="BUNDLE">images/communication/food/burger.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/food/burger.mp3</sound>                            
                         </category>
                         <category name="{{ categorySteak }}" enabled="true">
-                            <image resourceType="BUNDLE">images/food/steak.png</image>
-                            <sound resourceType="BUNDLE">sounds/food/steak.mp3</sound>                            
+                            <image resourceType="BUNDLE">images/communication/food/steak.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/food/steak.mp3</sound>                            
                         </category>
                         <category name="{{ categoryChicken }}" enabled="true">
-                            <image resourceType="BUNDLE">images/food/chicken.png</image>
-                            <sound resourceType="BUNDLE">sounds/food/chicken.mp3</sound>                            
+                            <image resourceType="BUNDLE">images/communication/food/chicken.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/food/chicken.mp3</sound>                            
                         </category>
                         <category name="{{ categorySoup }}" enabled="true">
-                            <image resourceType="BUNDLE">images/food/soup.png</image>
-                            <sound resourceType="BUNDLE">sounds/food/soup.mp3</sound>                            
+                            <image resourceType="BUNDLE">images/communication/food/soup.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/food/soup.mp3</sound>                            
                         </category>
                         <category name="{{ categoryBread }}" enabled="true">
-                            <image resourceType="BUNDLE">images/food/bread.png</image>
-                            <sound resourceType="BUNDLE">sounds/food/bread.mp3</sound>                            
+                            <image resourceType="BUNDLE">images/communication/food/bread.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/food/bread.mp3</sound>                            
                         </category>
                         <category name="{{ categoryFrenchToast }}" enabled="true">
-                            <image resourceType="BUNDLE">images/food/frenchToast.png</image>
-                            <sound resourceType="BUNDLE">sounds/food/frenchToast.mp3</sound>                            
+                            <image resourceType="BUNDLE">images/communication/food/frenchToast.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/food/frenchToast.mp3</sound>                            
                         </category>
                         <category name="{{ categoryYogurt }}" enabled="true">
-                            <image resourceType="BUNDLE">images/food/yogurt.png</image>
-                            <sound resourceType="BUNDLE">sounds/food/yogurt.mp3</sound>                            
+                            <image resourceType="BUNDLE">images/communication/food/yogurt.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/food/yogurt.mp3</sound>                            
                         </category>
                         <category name="{{ categoryCucumber }}" enabled="true">
-                            <image resourceType="BUNDLE">images/food/cucumber.png</image>
-                            <sound resourceType="BUNDLE">sounds/food/cucumber.mp3</sound>                            
+                            <image resourceType="BUNDLE">images/communication/food/cucumber.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/food/cucumber.mp3</sound>                            
                         </category>
                         <category name="{{ categoryTomato }}" enabled="true">
-                            <image resourceType="BUNDLE">images/food/tomato.png</image>
-                            <sound resourceType="BUNDLE">sounds/food/tomato.mp3</sound>                            
+                            <image resourceType="BUNDLE">images/communication/food/tomato.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/food/tomato.mp3</sound>                            
                         </category>
+                    </categories>
+                </category>
+                <category name="{{ categoryDrinks }}" enabled="true" languages="en de gr">
+                    <image resourceType="BUNDLE">images/communication/drinks/juice.png</image>
+                    <sound resourceType="BUNDLE">sounds/communication/drinks/drinks.mp3</sound>                    
+                    <categories>
+                        <category name="{{ categoryWater }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/drinks/water.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/drinks/water.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryJuice }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/drinks/juice.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/drinks/juice.mp3</sound>                    
+                        </category>
+                        <category name="{{ categoryMilk }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/drinks/milk.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/drinks/milk.mp3</sound>                            
+                        </category>
+                    </categories>
+                </category>
+                <category name="{{ categoryFruits }}" enabled="true" languages="en de gr">
+                    <image resourceType="BUNDLE">images/communication/fruits/orange.png</image>
+                    <sound resourceType="BUNDLE">sounds/communication/fruits/fruits.mp3</sound>                    
+                    <categories>
+                        <category name="{{ categoryApple }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/fruits/apple.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/fruits/apple.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryBanana }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/fruits/banana.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/fruits/banana.mp3</sound>                    
+                        </category>
+                        <category name="{{ categoryPeach }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/fruits/peach.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/fruits/peach.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryPear }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/fruits/pear.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/fruits/pear.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryWatermelon }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/fruits/watermelon.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/fruits/watermelon.mp3</sound>                    
+                        </category>
+                        <category name="{{ categoryOrange }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/fruits/orange.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/fruits/orange.mp3</sound>                            
+                        </category>
+                    </categories>
+                </category>
+                <category name="{{ categoryToilet }}" enabled="true" languages="en de gr">
+                    <image resourceType="BUNDLE">images/communication/toilet/toilet.png</image>
+                    <sound resourceType="BUNDLE">sounds/communication/toilet/toilet.mp3</sound>                    
+                    <categories>
+                        <category name="{{ categoryDiaperChange }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/toilet/diaperPee.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/toilet/diaperChange.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryDiaperChange }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/toilet/diaperPoop.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/toilet/diaperChange.mp3</sound>                    
+                        </category>                    
+                    </categories>
+                </category>
+                <category name="{{ categoryEmotions }}" enabled="true" languages="en de gr">
+                    <image resourceType="BUNDLE">images/communication/emotions/joy.png</image>
+                    <sound resourceType="BUNDLE">sounds/communication/emotions/emotions.mp3</sound>                    
+                    <categories>
+                        <category name="{{ categoryJoy }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/emotions/joy.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/emotions/joy.mp3</sound>                            
+                        </category>
+                        <category name="{{ categorySadness }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/emotions/sadness.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/emotions/sadness.mp3</sound>                    
+                        </category>
+                        <category name="{{ categoryAnger }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/emotions/anger.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/emotions/anger.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryDisgust }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/emotions/disgust.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/emotions/disgust.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryFear }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/emotions/fear.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/emotions/fear.mp3</sound>                    
+                        </category>                    
+                    </categories>
+                </category>
+                <category name="{{ categoryPain }}" enabled="true" languages="en de gr">
+                    <image resourceType="BUNDLE">images/communication/pain/feelPain.png</image>
+                    <sound resourceType="BUNDLE">sounds/communication/pain/feelPain.mp3</sound>                    
+                    <categories>
+                        <category name="{{ categoryHeadInPain }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/pain/headInPain.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/pain/headInPain.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryLegInPain }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/pain/legInPain.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/pain/legInPain.mp3</sound>                    
+                        </category>
+                        <category name="{{ categoryHandInPain }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/pain/handInPain.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/pain/handInPain.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryBellyInPain }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/pain/bellyInPain.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/pain/bellyInPain.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryBackInPain }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/pain/backInPain.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/pain/backInPain.mp3</sound>                    
+                        </category>                    
+                    </categories>
+                </category>
+                <category name="{{ categoryTemperature }}" enabled="true" languages="en de gr">
+                    <image resourceType="BUNDLE">images/communication/temperature/feelHot.png</image>
+                    <sound resourceType="BUNDLE">sounds/communication/temperature/temperature.mp3</sound>                    
+                    <categories>
+                        <category name="{{ categoryCold }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/temperature/cold.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/temperature/cold.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryWarm }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/temperature/warm.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/temperature/warm.mp3</sound>                    
+                        </category>
+                        <category name="{{ categoryHot }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/temperature/hot.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/temperature/hot.mp3</sound>                            
+                        </category>                        
+                    </categories>
+                </category>
+                <category name="{{ categoryItch }}" enabled="true" languages="en de gr">
+                    <image resourceType="BUNDLE">images/communication/itch/itch.png</image>
+                    <sound resourceType="BUNDLE">sounds/communication/itch/itch.mp3</sound>                    
+                    <categories>
+                        <category name="{{ categoryItchyHead }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/itch/itchyHead.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/itch/itchyHead.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryItchyLeg }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/itch/itchyLeg.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/itch/itchyLeg.mp3</sound>                    
+                        </category>
+                        <category name="{{ categoryItchyHand }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/itch/itchyHand.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/itch/itchyHand.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryItchyBack }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/itch/itchyBack.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/itch/itchyBack.mp3</sound>                            
+                        </category>                        
+                    </categories>
+                </category>
+                <category name="{{ categoryAlterPosition }}" enabled="true" languages="en de gr">
+                    <image resourceType="BUNDLE">images/communication/alterPosition/raiseHead.png</image>
+                    <sound resourceType="BUNDLE">sounds/communication/alterPosition/alterPosition.mp3</sound>                    
+                    <categories>
+                        <category name="{{ categoryRaiseMyHead }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/alterPosition/raiseHead.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/alterPosition/raiseHead.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryLowerMyHead }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/alterPosition/lowerHead.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/alterPosition/lowerHead.mp3</sound>                    
+                        </category>
+                        <category name="{{ categoryRaiseMyLegs }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/alterPosition/raiseLegs.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/alterPosition/raiseLegs.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryLowerMyLegs }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/alterPosition/lowerLegs.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/alterPosition/lowerLegs.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryTurnMeLeft }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/alterPosition/turnMeLeft.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/alterPosition/turnMeLeft.mp3</sound>                    
+                        </category>                    
+                        <category name="{{ categoryTurnMeRight }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/alterPosition/turnMeRight.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/alterPosition/turnMeRight.mp3</sound>                    
+                        </category>                    
+                        <category name="{{ categorySuction }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/alterPosition/suction.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/alterPosition/suction.mp3</sound>                    
+                        </category>                    
+                    </categories>
+                </category>
+                <category name="{{ categoryStaff }}" enabled="true" languages="en de gr">
+                    <image resourceType="BUNDLE">images/communication/staff/nurse.png</image>
+                    <sound resourceType="BUNDLE">sounds/communication/staff/staff.mp3</sound>                    
+                    <categories>
+                        <category name="{{ categoryDoctor }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/staff/doctor.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/staff/doctor.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryNurse }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/staff/nurse.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/staff/nurse.mp3</sound>                    
+                        </category>
+                        <category name="{{ categorySpeechTherapist }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/staff/speechTherapist.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/staff/speechTherapist.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryPhysiotherapist }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/staff/physiotherapist.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/staff/physiotherapist.mp3</sound>                            
+                        </category>                        
+                    </categories>
+                </category>
+                <category name="{{ categoryRelatives }}" enabled="true" languages="en de gr">
+                    <image resourceType="BUNDLE">images/communication/relatives/sister.png</image>
+                    <sound resourceType="BUNDLE">sounds/communication/relatives/relatives.mp3</sound>                    
+                    <categories>
+                        <category name="{{ categorySister }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/relatives/sister.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/relatives/sister.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryBrother }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/relatives/brother.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/relatives/brother.mp3</sound>                    
+                        </category>
+                        <category name="{{ categoryMother }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/relatives/mother.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/relatives/mother.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryFather }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/relatives/father.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/relatives/father.mp3</sound>                            
+                        </category>                        
+                    </categories>
+                </category>
+                <category name="{{ categoryEntertainment }}" enabled="true" languages="en de gr">
+                    <image resourceType="BUNDLE">images/communication/entertainment/television.png</image>
+                    <sound resourceType="BUNDLE">sounds/communication/entertainment/entertainment.mp3</sound>                    
+                    <categories>
+                        <category name="{{ categoryMusic }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/entertainment/music.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/entertainment/music.mp3</sound>                            
+                        </category>
+                        <category name="{{ categoryMovie }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/entertainment/movie.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/entertainment/movie.mp3</sound>                    
+                        </category>
+                        <category name="{{ categoryTelevision }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/entertainment/television.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/entertainment/television.mp3</sound>                            
+                        </category>                            
                     </categories>
                 </category>
             </categories>
@@ -84,18 +334,18 @@
         <entertainment enabled="true">
             <name>{{ entertainmentName }}</name>
             <image resourceType="JAR">defaultImgs/entertainment_module.png</image>
-            <sound resourceType="BUNDLE">sounds/entertainment.mp3</sound>
+            <sound resourceType="BUNDLE">sounds/entertainment/entertainment.mp3</sound>
             <music enabled="true">
                 <name>{{ musicName }}</name>
                 <image resourceType="JAR">defaultImgs/music_module.png</image>
-                <sound resourceType="BUNDLE">sounds/music.mp3</sound>
+                <sound resourceType="BUNDLE">sounds/entertainment/music.mp3</sound>
                 <path/>
                 <playlistSize>10</playlistSize>
             </music>
             <video enabled="true">
                 <name>{{ videoName }}</name>
                 <image resourceType="JAR">defaultImgs/video_module.png</image>
-                <sound resourceType="BUNDLE">sounds/video.mp3</sound>
+                <sound resourceType="BUNDLE">sounds/entertainment/video.mp3</sound>
                 <path/>
                 <playlistSize>10</playlistSize>
             </video>
@@ -103,11 +353,11 @@
         <games enabled="true">
             <name>{{ gamesName }}</name>
             <image resourceType="JAR">defaultImgs/games_module.png</image>
-            <sound resourceType="BUNDLE">sounds/games.mp3</sound>
+            <sound resourceType="BUNDLE">sounds/games/games.mp3</sound>
             <stimulusReactionGames enabled="true">
                 <name>{{ gameTypeStimulusReaction }}</name>
                 <image resourceType="JAR">defaultImgs/stimulus_game.png</image>
-                <sound resourceType="BUNDLE">sounds/stimulus_reaction.mp3</sound>
+                <sound resourceType="BUNDLE">sounds/games/stimulus_reaction.mp3</sound>
                 <winSound resourceType="JAR">sounds/win.mp3</winSound>
                 <errorSound resourceType="JAR">sounds/error.mp3</errorSound>
                 <games>
@@ -135,10 +385,50 @@
                         <difficulty>4</difficulty>
                         <winSound resourceType="BUNDLE">sounds/games/smile.mp3</winSound>                    
                         <gameImages>
-                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/stimulus/smiling_face/smiling_face_1.png</gameImage>
-                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/stimulus/smiling_face/smiling_face_2.png</gameImage>
-                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/stimulus/smiling_face/smiling_face_3.png</gameImage>
-                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/stimulus/smiling_face/smiling_face_4.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/stimulus/smilingFace/smilingFace_1.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/stimulus/smilingFace/smilingFace_2.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/stimulus/smilingFace/smilingFace_3.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/stimulus/smilingFace/smilingFace_4.png</gameImage>
+                        </gameImages>
+                    </game>
+                    <game name="Game 4" enabled="true">                
+                        <difficulty>4</difficulty>
+                        <winSound resourceType="BUNDLE">sounds/games/balloon.mp3</winSound>                    
+                        <gameImages>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/stimulus/balloon/balloon_1.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/stimulus/balloon/balloon_2.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/stimulus/balloon/balloon_3.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/stimulus/balloon/balloon_4.png</gameImage>
+                        </gameImages>
+                    </game>
+                    <game name="Game 5" enabled="true">                
+                        <difficulty>4</difficulty>
+                        <winSound resourceType="BUNDLE">sounds/games/childWithBall.mp3</winSound>                    
+                        <gameImages>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/stimulus/childWithBall/childWithBall_1.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/stimulus/childWithBall/childWithBall_2.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/stimulus/childWithBall/childWithBall_3.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/stimulus/childWithBall/childWithBall_4.png</gameImage>
+                        </gameImages>
+                    </game>
+                    <game name="Game 6" enabled="true">                
+                        <difficulty>4</difficulty>
+                        <winSound resourceType="BUNDLE">sounds/games/car.mp3</winSound>                    
+                        <gameImages>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/stimulus/car2/car_1.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/stimulus/car2/car_2.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/stimulus/car2/car_3.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/stimulus/car2/car_4.png</gameImage>
+                        </gameImages>
+                    </game>
+                    <game name="Game 7" enabled="true">                
+                        <difficulty>4</difficulty>
+                        <winSound resourceType="BUNDLE">sounds/games/ship.mp3</winSound>                    
+                        <gameImages>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/stimulus/ship2/ship_1.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/stimulus/ship2/ship_2.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/stimulus/ship2/ship_3.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/stimulus/ship2/ship_4.png</gameImage>
                         </gameImages>
                     </game>
                 </games>
@@ -146,26 +436,26 @@
             <sequenceGames enabled="true">
                 <name>{{ gameTypeTimeSequence }}</name>
                 <image resourceType="JAR">defaultImgs/sequence_game.png</image>
-                <sound resourceType="BUNDLE">sounds/time_sequence.mp3</sound>
+                <sound resourceType="BUNDLE">sounds/games/time_sequence.mp3</sound>
                 <winSound resourceType="JAR">sounds/win.mp3</winSound>
                 <errorSound resourceType="JAR">sounds/error.mp3</errorSound>
                 <games>
                     <game name="Game 1" enabled="true">                
                         <difficulty>4</difficulty>                    
                         <gameImages>
-                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/sequence/sea_swimming/sea_swimming_1.png</gameImage>
-                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/sequence/sea_swimming/sea_swimming_2.png</gameImage>
-                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/sequence/sea_swimming/sea_swimming_3.png</gameImage>
-                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/sequence/sea_swimming/sea_swimming_4.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/sequence/seaSwimming/seaSwimming_1.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/sequence/seaSwimming/seaSwimming_2.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/sequence/seaSwimming/seaSwimming_3.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/sequence/seaSwimming/seaSwimming_4.png</gameImage>
                         </gameImages>
                     </game>
                     <game name="Game 2" enabled="true">                        
                         <difficulty>4</difficulty>                        
                         <gameImages>
-                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/sequence/flower_growing/flower_growing_1.png</gameImage>
-                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/sequence/flower_growing/flower_growing_2.png</gameImage>
-                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/sequence/flower_growing/flower_growing_3.png</gameImage>
-                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/sequence/flower_growing/flower_growing_4.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/sequence/flowerGrowing/flowerGrowing_1.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/sequence/flowerGrowing/flowerGrowing_2.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/sequence/flowerGrowing/flowerGrowing_3.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/sequence/flowerGrowing/flowerGrowing_4.png</gameImage>
                         </gameImages>
                     </game>
                     <game name="Game 3" enabled="true">                        
@@ -177,14 +467,59 @@
                             <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/sequence/dressing/dressing_4.png</gameImage>
                         </gameImages>
                     </game>
+                    <game name="Game 4" enabled="true">                        
+                        <difficulty>4</difficulty>                        
+                        <gameImages>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/sequence/carRide/carRide_1.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/sequence/carRide/carRide_2.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/sequence/carRide/carRide_3.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/sequence/carRide/carRide_4.png</gameImage>
+                        </gameImages>
+                    </game>
+                    <game name="Game 5" enabled="true">                        
+                        <difficulty>4</difficulty>                        
+                        <gameImages>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/sequence/visitDoctor/visitDoctor_1.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/sequence/visitDoctor/visitDoctor_2.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/sequence/visitDoctor/visitDoctor_3.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/sequence/visitDoctor/visitDoctor_4.png</gameImage>
+                        </gameImages>
+                    </game>
+                    <game name="Game 6" enabled="true">                        
+                        <difficulty>4</difficulty>                        
+                        <gameImages>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/sequence/shopping/shopping_1.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/sequence/shopping/shopping_2.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/sequence/shopping/shopping_3.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/sequence/shopping/shopping_4.png</gameImage>
+                        </gameImages>
+                    </game>
+                    <game name="Game 7" enabled="true">                        
+                        <difficulty>4</difficulty>                        
+                        <gameImages>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/sequence/usingBus/usingBus_1.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/sequence/usingBus/usingBus_2.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/sequence/usingBus/usingBus_3.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/sequence/usingBus/usingBus_4.png</gameImage>
+                        </gameImages>
+                    </game>
+                    <game name="Game 8" enabled="true">                        
+                        <difficulty>4</difficulty>                        
+                        <gameImages>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/sequence/payBill/payBill_1.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/sequence/payBill/payBill_2.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/sequence/payBill/payBill_3.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/sequence/payBill/payBill_4.png</gameImage>
+                        </gameImages>
+                    </game>
                 </games>
             </sequenceGames>
             <similarityGames enabled="true">
                 <name>{{ gameTypeFindTheSimilar }}</name>
                 <image resourceType="JAR">defaultImgs/similarity_game.png</image>
-                <sound resourceType="BUNDLE">sounds/stimulus_reaction.mp3</sound>
-                <winSound resourceType="BUNDLE">sounds/games/winSound.mp3</winSound>
-                <errorSound resourceType="BUNDLE">sounds/games/errorSound.mp3</errorSound>
+                <sound resourceType="BUNDLE">sounds/games/stimulus_reaction.mp3</sound>
+                <winSound resourceType="JAR">sounds/winSound.mp3</winSound>
+                <errorSound resourceType="JAR">sounds/errorSound.mp3</errorSound>
                 <games>
                     <game name="Game 1" enabled="true">                    
                         <difficulty>3</difficulty>                        
@@ -208,6 +543,85 @@
                             <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/similarity/triangle/large_blue.png</gameImage>
                             <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/similarity/triangle/large_red.png</gameImage>
                             <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/similarity/triangle/large_yellow.png</gameImage>
+                        </gameImages>
+                    </game>
+                    <game name="Game 4" enabled="true">                        
+                        <difficulty>3</difficulty>                                                
+                        <gameImages>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/similarity/rhombus/large_blue.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/similarity/rhombus/large_red.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/similarity/rhombus/large_yellow.png</gameImage>
+                        </gameImages>
+                    </game>
+                    <game name="Game 5" enabled="true">                        
+                        <difficulty>4</difficulty>                                                
+                        <gameImages>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/similarity/circle/xlarge_blue.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/similarity/circle/small_blue.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/similarity/circle/xsmall_blue.png</gameImage>
+                        </gameImages>
+                    </game>
+                    <game name="Game 6" enabled="true">                        
+                        <difficulty>4</difficulty>                                                
+                        <gameImages>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/similarity/square/large_red.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/similarity/square/xlarge_red.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/similarity/square/small_red.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/similarity/square/xsmall_red.png</gameImage>
+                        </gameImages>
+                    </game>
+                    <game name="Game 7" enabled="true">                        
+                        <difficulty>4</difficulty>                                                
+                        <gameImages>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/similarity/triangle/large_red.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/similarity/triangle/xlarge_red.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/similarity/triangle/small_red.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/similarity/triangle/xsmall_red.png</gameImage>
+                        </gameImages>
+                    </game>
+                    <game name="Game 8" enabled="true">                        
+                        <difficulty>4</difficulty>                                                
+                        <gameImages>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/similarity/star/large_yellow.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/similarity/star/xlarge_yellow.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/similarity/star/small_yellow.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/similarity/star/xsmall_yellow.png</gameImage>
+                        </gameImages>
+                    </game>
+                    <game name="Game 9" enabled="true">                        
+                        <difficulty>4</difficulty>                                                
+                        <gameImages>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/similarity/rhombus/large_blue.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/similarity/rhombus/xlarge_blue.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/similarity/rhombus/small_blue.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/similarity/rhombus/xsmall_blue.png</gameImage>
+                        </gameImages>
+                    </game>
+                    <game name="Game 10" enabled="true">                        
+                        <difficulty>4</difficulty>                                                
+                        <gameImages>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/similarity/rhombus/large_blue.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/similarity/circle/large_blue.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/similarity/square/large_blue.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/similarity/star/large_blue.png</gameImage>
+                        </gameImages>
+                    </game>
+                    <game name="Game 11" enabled="true">                        
+                        <difficulty>4</difficulty>                                                
+                        <gameImages>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/similarity/triangle/large_yellow.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/similarity/rhombus/large_yellow.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/similarity/rhombusDown/large_yellow.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/similarity/star/large_yellow.png</gameImage>
+                        </gameImages>
+                    </game>
+                    <game name="Game 12" enabled="true">                        
+                        <difficulty>4</difficulty>                                                
+                        <gameImages>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="1">images/games/similarity/pentagon/large_red.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="2">images/games/similarity/rhombus/large_red.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="3">images/games/similarity/square/large_red.png</gameImage>
+                            <gameImage enabled="true" resourceType="BUNDLE" order="4">images/games/similarity/rhombusThin/large_red.png</gameImage>
                         </gameImages>
                     </game>
                 </games>

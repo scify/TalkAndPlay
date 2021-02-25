@@ -165,4 +165,60 @@
     <categoryYogurt>Γιαούρτι</categoryYogurt>
     <categoryCucumber>Αγγούρι</categoryCucumber>
     <categoryTomato>Ντομάτα</categoryTomato>
+    <categoryDrinks>Ποτά</categoryDrinks>
+    <categoryWater>Νερό</categoryWater>
+    <categoryJuice>Χυμός</categoryJuice>
+    <categoryMilk>Γάλα</categoryMilk>
+    <categoryFruits>Φρούτα</categoryFruits>
+    <categoryApple>Μήλο</categoryApple>
+    <categoryBanana>Μπανάνα</categoryBanana>
+    <categoryOrange>Πορτοκάλι</categoryOrange>
+    <categoryPeach>Ροδάκινο</categoryPeach>
+    <categoryPear>Αχλάδι</categoryPear>
+    <categoryWatermelon>Καρπούζι</categoryWatermelon>
+    <categoryToilet>Τουαλέτα</categoryToilet>
+    <categoryDiaperChange>Αλλαγή πάνας</categoryDiaperChange>
+    <categoryEmotions>Συναισθήματα</categoryEmotions>
+    <categoryJoy>Χαρά</categoryJoy>
+    <categorySadness>Λύπη</categorySadness>
+    <categoryAnger>Θυμός</categoryAnger>
+    <categoryDisgust>Αηδία</categoryDisgust>
+    <categoryFear>Φόβος</categoryFear>
+    <categoryPain>Πόνος</categoryPain>
+    <categoryHeadInPain>Πόνος στο κεφάλι</categoryHeadInPain>
+    <categoryLegInPain>Πόνος στο πόδι</categoryLegInPain>
+    <categoryHandInPain>Πόνος στο χέρι</categoryHandInPain>
+    <categoryBellyInPain>Πόνος στην κοιλιά</categoryBellyInPain>
+    <categoryBackInPain>Πόνος στην πλάτη</categoryBackInPain>
+    <categoryTemperature>Θερμοκρασία</categoryTemperature>
+    <categoryCold>Κρύο</categoryCold>
+    <categoryWarm>Ζεστό</categoryWarm>
+    <categoryHot>Καυτό</categoryHot>
+    <categoryItch>Φαγούρα</categoryItch>
+    <categoryItchyLeg>Φαγούρα στο πόδι</categoryItchyLeg>
+    <categoryItchyHead>Φαγούρα στο κεφάλι</categoryItchyHead>
+    <categoryItchyHand>Φαγούρα στο χέρι</categoryItchyHand>
+    <categoryItchyBack>Φαγούρα στην πλάτη</categoryItchyBack>
+    <categoryAlterPosition>Αλλαγή θέσης</categoryAlterPosition>
+    <categoryRaiseMyHead>Ανέβασε κεφάλι</categoryRaiseMyHead>
+    <categoryLowerMyHead>Κατέβασε κεφάλι</categoryLowerMyHead>
+    <categoryRaiseMyLegs>Ανέβασε πόδια</categoryRaiseMyLegs>
+    <categoryLowerMyLegs>Κατέβασε πόδια</categoryLowerMyLegs>
+    <categoryTurnMeLeft>Γύρνα με αριστερά</categoryTurnMeLeft>
+    <categoryTurnMeRight>Γύρνα με δεξιά</categoryTurnMeRight>
+    <categorySuction>Αναρρόφηση</categorySuction>
+    <categoryStaff>Προσωπικό</categoryStaff>
+    <categoryDoctor>Γιατρός</categoryDoctor>
+    <categoryNurse>Νοσοκόμα</categoryNurse>
+    <categorySpeechTherapist>Λογοθεραπευτής</categorySpeechTherapist>
+    <categoryPhysiotherapist>Φυσιοθεραπευτής</categoryPhysiotherapist>
+    <categoryRelatives>Συγγενείς</categoryRelatives>
+    <categorySister>Αδερφή</categorySister>
+    <categoryBrother>Αδερφός</categoryBrother>
+    <categoryMother>Μητέρα</categoryMother>
+    <categoryFather>Πατέρας</categoryFather>
+    <categoryEntertainment>Ψυχαγωγία</categoryEntertainment>
+    <categoryMusic>Μουσική</categoryMusic>
+    <categoryMovie>Ταινία</categoryMovie>
+    <categoryTelevision>Τηλεόραση</categoryTelevision>
 </languageTexts>

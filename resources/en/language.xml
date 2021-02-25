@@ -165,4 +165,60 @@
     <categoryYogurt>Yogurt</categoryYogurt>
     <categoryCucumber>Cucumber</categoryCucumber>
     <categoryTomato>Tomato</categoryTomato>
+    <categoryDrinks>Drinks</categoryDrinks>
+    <categoryWater>Water</categoryWater>
+    <categoryJuice>Juice</categoryJuice>
+    <categoryMilk>Milk</categoryMilk>
+    <categoryFruits>Fruits</categoryFruits>
+    <categoryApple>Apple</categoryApple>
+    <categoryBanana>Banana</categoryBanana>
+    <categoryOrange>Orange</categoryOrange>
+    <categoryPeach>Peach</categoryPeach>
+    <categoryPear>Pear</categoryPear>
+    <categoryWatermelon>Watermelon</categoryWatermelon>
+    <categoryToilet>Toilet</categoryToilet>
+    <categoryDiaperChange>Change diaper</categoryDiaperChange>
+    <categoryEmotions>Emotions</categoryEmotions>
+    <categoryJoy>Joy</categoryJoy>
+    <categorySadness>Sadness</categorySadness>
+    <categoryAnger>Anger</categoryAnger>
+    <categoryDisgust>Disgust</categoryDisgust>
+    <categoryFear>Fear</categoryFear>
+    <categoryPain>Pain</categoryPain>
+    <categoryHeadInPain>Head in pain</categoryHeadInPain>
+    <categoryLegInPain>Leg in pain</categoryLegInPain>
+    <categoryHandInPain>Hand in pain</categoryHandInPain>
+    <categoryBellyInPain>Belly in pain</categoryBellyInPain>
+    <categoryBackInPain>Back in pain</categoryBackInPain>
+    <categoryTemperature>Temperature</categoryTemperature>
+    <categoryCold>Cold</categoryCold>
+    <categoryWarm>Warm</categoryWarm>
+    <categoryHot>Hot</categoryHot>
+    <categoryItch>Itch</categoryItch>
+    <categoryItchyLeg>Itchy Leg</categoryItchyLeg>
+    <categoryItchyHead>Itchy Head</categoryItchyHead>
+    <categoryItchyHand>Itchy Hand</categoryItchyHand>
+    <categoryItchyBack>Itchy Back</categoryItchyBack>
+    <categoryAlterPosition>Alter position</categoryAlterPosition>
+    <categoryRaiseMyHead>Raise my head</categoryRaiseMyHead>
+    <categoryLowerMyHead>Lower my head</categoryLowerMyHead>
+    <categoryRaiseMyLegs>Raise my legs</categoryRaiseMyLegs>
+    <categoryLowerMyLegs>Lower my legs</categoryLowerMyLegs>
+    <categoryTurnMeLeft>Turn me left</categoryTurnMeLeft>
+    <categoryTurnMeRight>Turn me right</categoryTurnMeRight>
+    <categorySuction>Suction</categorySuction>
+    <categoryStaff>Staff</categoryStaff>
+    <categoryDoctor>Doctor</categoryDoctor>
+    <categoryNurse>Nurse</categoryNurse>
+    <categorySpeechTherapist>Speech Therapist</categorySpeechTherapist>
+    <categoryPhysiotherapist>Physiotherapist</categoryPhysiotherapist>
+    <categoryRelatives>Relatives</categoryRelatives>
+    <categorySister>Sister</categorySister>
+    <categoryBrother>Brother</categoryBrother>
+    <categoryMother>Mother</categoryMother>
+    <categoryFather>Father</categoryFather>
+    <categoryEntertainment>Entertainment</categoryEntertainment>
+    <categoryMusic>Music</categoryMusic>
+    <categoryMovie>Movie</categoryMovie>
+    <categoryTelevision>Television</categoryTelevision>
 </languageTexts>
