@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <languageTexts>
     <language>German</language>
-    <vlcMissingMessage>Please first install VLC and try again</vlcMissingMessage>
-    <createdBy>Created by</createdBy>
-    <donationBy>Exclusive donation</donationBy>
-    <updateInProgress1>The application is updating</updateInProgress1>
-    <updateInProgress2>please wait...</updateInProgress2>
-    <updateInProgress3>The procedure might take a few minutes.</updateInProgress3>
-    <updateInProgress4>When update is completed, please restart the application.</updateInProgress4>
+    <vlcMissingMessage>VLC installieren und erneut versuchen</vlcMissingMessage>
+    <createdBy>Erstellt von</createdBy>
+    <donationBy>Sonderangebot</donationBy>
+    <updateInProgress1>Die Anwendung wird aktualisiert</updateInProgress1>
+    <updateInProgress2>Bitte warten...</updateInProgress2>
+    <updateInProgress3>Dieser Vorgang kann einige Minuten dauern.</updateInProgress3>
+    <updateInProgress4>Nach Fertigstellung müssen Sie die Anwendung erneut starten.</updateInProgress4>
     <addUser>Neuen Benutzer hinzufügen</addUser>
     <loadUser>einen Benutzer laden</loadUser>
-    <addUserModePanelTitle>User addition</addUserModePanelTitle>
+    <addUserModePanelTitle>Benutzer hinzufügen</addUserModePanelTitle>
     <editUserModePanelTitle>Benutzer bearbeiten</editUserModePanelTitle>
     <writeUserName>Einen Benutzernamen eingeben</writeUserName>
     <uploadUserImage>Benutzerfoto hochladen</uploadUserImage>
@@ -20,7 +20,7 @@
     <uploadSoundWarning>Wenn Sie kein Audio hochladen, wird ein vordefinierter Ton abgespielt.</uploadSoundWarning>
     <configureNavigationAndSelection>Navigations- und Auswahlmodus</configureNavigationAndSelection>
     <configureMatrixSize>Größe der Tabelle angeben</configureMatrixSize>
-    <configureMatrixSize2>leave blank to use the default size</configureMatrixSize2>
+    <configureMatrixSize2>Leerzeichen für Standard-Tabellengröße lassen</configureMatrixSize2>
     <configureWords>Wörter Anzeigen</configureWords>
     <configureWordsExtra>Das Feld 5 kann auch für jedes im nächsten Schritt eingestellte Wort unabhängig eingestellt werden.</configureWordsExtra>
     <sound>Aussprache</sound>
@@ -33,23 +33,23 @@
     <activated>Aktiviert</activated>
     <userNamePlaceholder>Benutzernamen</userNamePlaceholder>
     <selectRotationSpeed>Toggle-Geschwindigkeit wählen</selectRotationSpeed>
-    <userNameErrorMessage>The user name must not be blank</userNameErrorMessage>
-    <userNameErrorMessage2>The user name already exists</userNameErrorMessage2>
-    <rawsAndColumnsErrorMessage>The raws and columns of the matrix must be integers, between 2 and 6.</rawsAndColumnsErrorMessage>
-    <selectionButtonErrorMessage>The selection button should not be empty</selectionButtonErrorMessage>
-    <selectionAndNavigationButtonsErrorMessage>The selection and navigation buttons should not be empty</selectionAndNavigationButtonsErrorMessage>
-    <selectionAndNavigationButtonsErrorMessage2>The selection and navigation buttons should be different</selectionAndNavigationButtonsErrorMessage2>
-    <chooseFile>Choose a file</chooseFile>
-    <profileSavedMessage>The profile was saved.</profileSavedMessage>
-    <profileNotSavedMessage>The profile was not saved. Please try again.</profileNotSavedMessage>
+    <userNameErrorMessage>Das Feld für den Benutzernamen darf nicht leer sein</userNameErrorMessage>
+    <userNameErrorMessage2>TDieser Benutzername existiert bereits</userNameErrorMessage2>
+    <rawsAndColumnsErrorMessage>Die Spalten und Zeilen der Matrix müssen Ganzzahlen sein, zwischen den Ziffern 2 und 6.</rawsAndColumnsErrorMessage>
+    <selectionButtonErrorMessage>Das Auswahlfeld darf nicht leer sein</selectionButtonErrorMessage>
+    <selectionAndNavigationButtonsErrorMessage>Die Auswahl- und Navigationsfelder dürfen nicht leer sein</selectionAndNavigationButtonsErrorMessage>
+    <selectionAndNavigationButtonsErrorMessage2>Die Auswahl- und Navigationsfelder müssen unterschiedlich sein</selectionAndNavigationButtonsErrorMessage2>
+    <chooseFile>Datei auswählen</chooseFile>
+    <profileSavedMessage>Das Profil wurde gespeichert.</profileSavedMessage>
+    <profileNotSavedMessage>Das Profil wurde nicht gespeichert. Bitte versuchen Sie es erneut.</profileNotSavedMessage>
     <selectKey>Optionsfeld setzen</selectKey>
-    <key>key</key>
+    <key>Taste</key>
     <leftClick>Linksklick</leftClick>
-    <rightClick>right click</rightClick>
-    <middleClick>middle click</middleClick>
+    <rightClick>Rechtsklick</rightClick>
+    <middleClick>Mittelklick</middleClick>
     <preferences>Präferenzen</preferences>
     <delete>Löschen</delete>
-    <filesNotFound>Some files could not be found</filesNotFound>
+    <filesNotFound>Einige Dateien konnten nicht gefunden werden</filesNotFound>
     <userDeleteConfirmation>Sind Sie sicher, dass Sie den Benutzer löschen wollen?</userDeleteConfirmation>
     <defaultUserName>Benutzer</defaultUserName>
     <communicationName>Kontakt</communicationName>
@@ -72,28 +72,28 @@
     <musicName>Musik</musicName>
     <previousSongs>Vorherige Lieder</previousSongs>
     <nextSongs>Nächste Lieder</nextSongs>
-    <musicControl>Music control</musicControl>
-    <playingNow>PLAYING NOW</playingNow>
+    <musicControl>Musiksteuerung</musicControl>
+    <playingNow>spielt gerade</playingNow>
     <previousControl>Vorherige</previousControl>
     <nextControl>Nächste</nextControl>
     <playControl>Abspielen</playControl>
     <pauseControl>Pause</pauseControl>
     <playingListControl>Liste</playingListControl>
-    <fullScreenControl>Full Screen</fullScreenControl>
+    <fullScreenControl>Vollbild</fullScreenControl>
     <videoName>Video</videoName>
     <previousVideos>Vorheriges Video</previousVideos>
     <nextVideos>Nächstes Video</nextVideos>
     <addNewSound>Audio hinzufügen</addNewSound>
-    <selectImage>Select image</selectImage>
-    <selectSound>Select sound</selectSound>
-    <noFilesFound>No files found</noFilesFound>
-    <add>Add</add>
+    <selectImage>Wählen Sie ein Bild</selectImage>
+    <selectSound>Wählen Sie die Aussprache </selectSound>
+    <noFilesFound>Es gibt keine Dateien</noFilesFound>
+    <add>Hinzufügen</add>
     <edit>Bearbeiten</edit>
     <editText>Klicken Sie auf ein Wort, um es zu bearbeiten.</editText>
     <addition>Hinzufügen</addition>
     <newWordButton>Neues Wort</newWordButton>
-    <additionText>To add a new word press:</additionText>
-    <communicationTabFilesNotFoundErrorMessage>These files could not be found</communicationTabFilesNotFoundErrorMessage>
+    <additionText>Um ein neues Wort hinzuzufügen, drücken Sie die Taste</additionText>
+    <communicationTabFilesNotFoundErrorMessage>Die ausgewählte Datei kann nicht gefunden werden</communicationTabFilesNotFoundErrorMessage>
     <selectCategory>Kategorie auswählen</selectCategory>
     <selectGameCategory>Spielkategorie auswählen</selectGameCategory>
     <configureAvailableImageGroups>Verfügbare Bildgruppen verwalten</configureAvailableImageGroups>
@@ -111,9 +111,9 @@
     <selectAvailabilitySaveText>Suchen Sie am unteren Ende der Spieleliste die Schaltfläche "Speichern" und drücken Sie sie, um Ihre Auswahl zu speichern.</selectAvailabilitySaveText>
     <difficultyLevel>Schwierigkeitsgrad</difficultyLevel>
     <selectDifficultyLevelText>"Stellen Sie den Schwierigkeitsgrad für jedes Spiel ein, indem Sie die gewünschten Bilder in in jedem Quartett aktivieren. Um ein Bild zu aktivieren, klicken Sie auf das Feld direkt unter dem Bild."</selectDifficultyLevelText>
-    <noGamesInCategory>There are no games in this category</noGamesInCategory>
-    <noGames>No games found</noGames>
-    <pleaseCreateNewGame>Please create a new game in  order to add it</pleaseCreateNewGame>
+    <noGamesInCategory>Es sind keine Spiele in dieser Kategorie vorhanden</noGamesInCategory>
+    <noGames>Es gibt keine Spiele</noGames>
+    <pleaseCreateNewGame>Bitte erstellen Sie ein Spiel, um es hinzuzufügen</pleaseCreateNewGame>
     <chooseGame>[-- Spiel auswählen --]</chooseGame>
     <gameTypeStimulusReaction>Reiz - Reaktion</gameTypeStimulusReaction>
     <gameTypeTimeSequence>Reihenfolge finden</gameTypeTimeSequence>
@@ -121,10 +121,10 @@
     <pressTheButtonOnTheSimilar>Drücken Sie die Taste auf dem gefundenen Paar.</pressTheButtonOnTheSimilar>
     <changesSaved>Änderungen gespeichert!</changesSaved>
     <userPreferences>Benutzereinstellungen</userPreferences>
-    <chooseDirectory>Choose directory</chooseDirectory>
+    <chooseDirectory>Einen Ordner auswählen</chooseDirectory>
     <musicDirectory>Musikdatei</musicDirectory>
     <videoDirectory>Videodatei</videoDirectory>
-    <amount>Amount</amount>
+    <amount>Anzahl</amount>
     <chooseMusicDirectory>Einen Musikdatei auswählen</chooseMusicDirectory>
     <errorMusicDirectory>Die Musikdatei muss richtig eingestellt sein.</errorMusicDirectory>
     <chooseVideoDirectory>Eine Videodatei auswählen</chooseVideoDirectory>
@@ -137,14 +137,14 @@
     <addNewWord>NEUES WORT HINZUFÜGEN</addNewWord>
     <editWord>WORTVERARBEITUNG</editWord>
     <writeWord>Schreiben Sie ein Wort</writeWord>
-    <wordMustNotBeEmpty>The word must not be empty</wordMustNotBeEmpty>
-    <wordMustBeUnique>The word must be unique</wordMustBeUnique>
+    <wordMustNotBeEmpty>Das Wort darf nicht leer sein</wordMustNotBeEmpty>
+    <wordMustBeUnique>Das Wort muss einzigartig sein</wordMustBeUnique>
     <wordMustHaveImage>Das Wort muss ein Bild haben.</wordMustHaveImage>
     <wordBelongsToSelection>Wählen Sie, wo das Wort hingehört</wordBelongsToSelection>
     <wordMustBelongToAnotherWord>Das Wort muss zu einem Wort der ersten Ebene gehören. (Beispiel Lebensmittel -> Spaghetti)</wordMustBelongToAnotherWord>
     <wordBelongsToSelection2>Wählen Sie das Wort der ersten Ebene aus, zu dem das neue Wort, das Sie hier hinzugefügt haben, gehören soll oder wählen Sie "KOMMUNIKATION", wenn es sich um eine ganz neue Kategorie von Wörtern handelt.</wordBelongsToSelection2>
-    <showMatrix>Show matrix</showMatrix>
-    <wordDeleteConfirmation>Are you sure that you wish to delete the word?</wordDeleteConfirmation>
+    <showMatrix>Tabellenanzeige</showMatrix>
+    <wordDeleteConfirmation>Sind Sie sicher, dass Sie das Wort löschen wollen?</wordDeleteConfirmation>
     <wordWasSaved>Das Wort ist gespeichert!</wordWasSaved>
     <more>More</more>
     <pressTheButton>Drücken Sie die Taste!</pressTheButton>
@@ -165,60 +165,60 @@
     <categoryYogurt>Joghurt</categoryYogurt>
     <categoryCucumber>Gurke</categoryCucumber>
     <categoryTomato>Tomate</categoryTomato>
-    <categoryDrinks>Drinks</categoryDrinks>
-    <categoryWater>Water</categoryWater>
-    <categoryJuice>Juice</categoryJuice>
-    <categoryMilk>Milk</categoryMilk>
-    <categoryFruits>Fruits</categoryFruits>
-    <categoryApple>Apple</categoryApple>
-    <categoryBanana>Banana</categoryBanana>
+    <categoryDrinks>Getränke</categoryDrinks>
+    <categoryWater>Wasser</categoryWater>
+    <categoryJuice>Saft</categoryJuice>
+    <categoryMilk>Milch</categoryMilk>
+    <categoryFruits>Obst</categoryFruits>
+    <categoryApple>Apfel</categoryApple>
+    <categoryBanana>Banane</categoryBanana>
     <categoryOrange>Orange</categoryOrange>
-    <categoryPeach>Peach</categoryPeach>
-    <categoryPear>Pear</categoryPear>
-    <categoryWatermelon>Watermelon</categoryWatermelon>
-    <categoryToilet>Toilet</categoryToilet>
-    <categoryDiaperChange>Change diaper</categoryDiaperChange>
-    <categoryEmotions>Emotions</categoryEmotions>
-    <categoryJoy>Joy</categoryJoy>
-    <categorySadness>Sadness</categorySadness>
-    <categoryAnger>Anger</categoryAnger>
-    <categoryDisgust>Disgust</categoryDisgust>
-    <categoryFear>Fear</categoryFear>
-    <categoryPain>Pain</categoryPain>
-    <categoryHeadInPain>Head in pain</categoryHeadInPain>
-    <categoryLegInPain>Leg in pain</categoryLegInPain>
-    <categoryHandInPain>Hand in pain</categoryHandInPain>
-    <categoryBellyInPain>Belly in pain</categoryBellyInPain>
-    <categoryBackInPain>Back in pain</categoryBackInPain>
-    <categoryTemperature>Temperature</categoryTemperature>
-    <categoryCold>Cold</categoryCold>
+    <categoryPeach>Pfirsich</categoryPeach>
+    <categoryPear>Birne</categoryPear>
+    <categoryWatermelon>Wassermelone</categoryWatermelon>
+    <categoryToilet>Badezimmer</categoryToilet>
+    <categoryDiaperChange>Windelwechsel</categoryDiaperChange>
+    <categoryEmotions>Gefühle</categoryEmotions>
+    <categoryJoy>Freude</categoryJoy>
+    <categorySadness>Trauer</categorySadness>
+    <categoryAnger>Wut</categoryAnger>
+    <categoryDisgust>Ekel</categoryDisgust>
+    <categoryFear>Angst</categoryFear>
+    <categoryPain>Schmerz</categoryPain>
+    <categoryHeadInPain>Kopfschmerzen</categoryHeadInPain>
+    <categoryLegInPain>Beinschmerzen</categoryLegInPain>
+    <categoryHandInPain>Schmerzen an der Hand</categoryHandInPain>
+    <categoryBellyInPain>Abdominalschmerzen</categoryBellyInPain>
+    <categoryBackInPain>Rückenschmerz</categoryBackInPain>
+    <categoryTemperature>Temperatur</categoryTemperature>
+    <categoryCold>Kalt</categoryCold>
     <categoryWarm>Warm</categoryWarm>
-    <categoryHot>Hot</categoryHot>
-    <categoryItch>Itch</categoryItch>
-    <categoryItchyLeg>Itchy Leg</categoryItchyLeg>
-    <categoryItchyHead>Itchy Head</categoryItchyHead>
-    <categoryItchyHand>Itchy Hand</categoryItchyHand>
-    <categoryItchyBack>Itchy Back</categoryItchyBack>
-    <categoryAlterPosition>Alter position</categoryAlterPosition>
-    <categoryRaiseMyHead>Raise my head</categoryRaiseMyHead>
-    <categoryLowerMyHead>Lower my head</categoryLowerMyHead>
-    <categoryRaiseMyLegs>Raise my legs</categoryRaiseMyLegs>
-    <categoryLowerMyLegs>Lower my legs</categoryLowerMyLegs>
-    <categoryTurnMeLeft>Turn me left</categoryTurnMeLeft>
-    <categoryTurnMeRight>Turn me right</categoryTurnMeRight>
-    <categorySuction>Suction</categorySuction>
-    <categoryStaff>Staff</categoryStaff>
-    <categoryDoctor>Doctor</categoryDoctor>
-    <categoryNurse>Nurse</categoryNurse>
-    <categorySpeechTherapist>Speech Therapist</categorySpeechTherapist>
-    <categoryPhysiotherapist>Physiotherapist</categoryPhysiotherapist>
-    <categoryRelatives>Relatives</categoryRelatives>
-    <categorySister>Sister</categorySister>
-    <categoryBrother>Brother</categoryBrother>
-    <categoryMother>Mother</categoryMother>
-    <categoryFather>Father</categoryFather>
-    <categoryEntertainment>Entertainment</categoryEntertainment>
-    <categoryMusic>Music</categoryMusic>
-    <categoryMovie>Movie</categoryMovie>
-    <categoryTelevision>Television</categoryTelevision>
+    <categoryHot>Heiß</categoryHot>
+    <categoryItch>Juckreiz</categoryItch>
+    <categoryItchyLeg>Juckreiz am Bein</categoryItchyLeg>
+    <categoryItchyHead>Juckreiz am Kopf</categoryItchyHead>
+    <categoryItchyHand>Juckreiz an der Hand</categoryItchyHand>
+    <categoryItchyBack>Juckreiz am Rücken</categoryItchyBack>
+    <categoryAlterPosition>Neupositionierung</categoryAlterPosition>
+    <categoryRaiseMyHead>den Kopf anheben</categoryRaiseMyHead>
+    <categoryLowerMyHead>den Kopf senken</categoryLowerMyHead>
+    <categoryRaiseMyLegs>Die Beine hochlegen</categoryRaiseMyLegs>
+    <categoryLowerMyLegs>Die Beine senken</categoryLowerMyLegs>
+    <categoryTurnMeLeft>Dreh mich auf links</categoryTurnMeLeft>
+    <categoryTurnMeRight>Dreh mich auf rechts</categoryTurnMeRight>
+    <categorySuction>Absaugen</categorySuction>
+    <categoryStaff>Personal</categoryStaff>
+    <categoryDoctor>Arzt</categoryDoctor>
+    <categoryNurse>Krankenschwester</categoryNurse>
+    <categorySpeechTherapist>Sprachtherapeut</categorySpeechTherapist>
+    <categoryPhysiotherapist>Physiotherapeut</categoryPhysiotherapist>
+    <categoryRelatives>Verwandtschaftsverhältnis</categoryRelatives>
+    <categorySister>Schwester</categorySister>
+    <categoryBrother>Bruder</categoryBrother>
+    <categoryMother>Mutter</categoryMother>
+    <categoryFather>Vater</categoryFather>
+    <categoryFun>Unterhaltung</categoryFun>
+    <categoryMusic>Musik</categoryMusic>
+    <categoryMovie>Film</categoryMovie>
+    <categoryTelevision>Fernseher</categoryTelevision>
 </languageTexts>

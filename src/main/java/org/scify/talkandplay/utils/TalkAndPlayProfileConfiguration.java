@@ -15,13 +15,6 @@
  */
 package org.scify.talkandplay.utils;
 
-import java.util.List;
-import org.jdom.Element;
-import org.scify.talkandplay.models.User;
-
-// singleton class. There exists only on configuration on the app
-// that holds the user information.
-// its basically a wrapper of the Configuration handler.
 public class TalkAndPlayProfileConfiguration {
 
     protected XMLConfigurationHandler xmlConfigurationHandler;

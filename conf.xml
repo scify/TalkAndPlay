@@ -311,21 +311,21 @@
                         </category>                        
                     </categories>
                 </category>
-                <category name="{{ categoryEntertainment }}" enabled="true" languages="en de gr">
-                    <image resourceType="BUNDLE">images/communication/entertainment/television.png</image>
-                    <sound resourceType="BUNDLE">sounds/communication/entertainment/entertainment.mp3</sound>                    
+                <category name="{{ categoryFun }}" enabled="true" languages="en de gr">
+                    <image resourceType="BUNDLE">images/communication/fun/television.png</image>
+                    <sound resourceType="BUNDLE">sounds/communication/fun/fun.mp3</sound>                    
                     <categories>
                         <category name="{{ categoryMusic }}" enabled="true">
-                            <image resourceType="BUNDLE">images/communication/entertainment/music.png</image>
-                            <sound resourceType="BUNDLE">sounds/communication/entertainment/music.mp3</sound>                            
+                            <image resourceType="BUNDLE">images/communication/fun/music.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/fun/music.mp3</sound>                            
                         </category>
                         <category name="{{ categoryMovie }}" enabled="true">
-                            <image resourceType="BUNDLE">images/communication/entertainment/movie.png</image>
-                            <sound resourceType="BUNDLE">sounds/communication/entertainment/movie.mp3</sound>                    
+                            <image resourceType="BUNDLE">images/communication/fun/movie.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/fun/movie.mp3</sound>                    
                         </category>
                         <category name="{{ categoryTelevision }}" enabled="true">
-                            <image resourceType="BUNDLE">images/communication/entertainment/television.png</image>
-                            <sound resourceType="BUNDLE">sounds/communication/entertainment/television.mp3</sound>                            
+                            <image resourceType="BUNDLE">images/communication/fun/television.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/fun/television.mp3</sound>                            
                         </category>                            
                     </categories>
                 </category>
