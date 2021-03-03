@@ -151,74 +151,74 @@
     <pressTheButtonToStart>Drücken Sie die Taste zum Starten!</pressTheButtonToStart>
     <sequenceGameInfo>Ordnen Sie die Karten in der richtigen Reihenfolge an.</sequenceGameInfo>
     <sequenceGameInfo2>Welches Bild soll zuerst kommen? Drücken Sie die entsprechende Taste.</sequenceGameInfo2>
-    <categoryYes>Ja</categoryYes>
-    <categoryNo>Nein</categoryNo>
-    <categoryFood>Essen</categoryFood>
-    <categoryPasta>Spaghetti</categoryPasta>
-    <categoryFrenchFries>Pommes frites</categoryFrenchFries>
-    <categoryBurger>Hacksteak</categoryBurger>
-    <categorySteak>Steak</categorySteak>
-    <categoryChicken>Huhn</categoryChicken>
-    <categorySoup>Suppe</categorySoup>
-    <categoryBread>Brot</categoryBread>
-    <categoryFrenchToast>Toast</categoryFrenchToast>
-    <categoryYogurt>Joghurt</categoryYogurt>
-    <categoryCucumber>Gurke</categoryCucumber>
-    <categoryTomato>Tomate</categoryTomato>
-    <categoryDrinks>Getränke</categoryDrinks>
-    <categoryWater>Wasser</categoryWater>
-    <categoryJuice>Saft</categoryJuice>
-    <categoryMilk>Milch</categoryMilk>
-    <categoryFruits>Obst</categoryFruits>
-    <categoryApple>Apfel</categoryApple>
-    <categoryBanana>Banane</categoryBanana>
-    <categoryOrange>Orange</categoryOrange>
-    <categoryPeach>Pfirsich</categoryPeach>
-    <categoryPear>Birne</categoryPear>
-    <categoryWatermelon>Wassermelone</categoryWatermelon>
-    <categoryToilet>Badezimmer</categoryToilet>
-    <categoryDiaperChange>Windelwechsel</categoryDiaperChange>
-    <categoryEmotions>Gefühle</categoryEmotions>
-    <categoryJoy>Freude</categoryJoy>
-    <categorySadness>Trauer</categorySadness>
-    <categoryAnger>Wut</categoryAnger>
-    <categoryDisgust>Ekel</categoryDisgust>
-    <categoryFear>Angst</categoryFear>
-    <categoryPain>Schmerz</categoryPain>
-    <categoryHeadInPain>Kopfschmerzen</categoryHeadInPain>
-    <categoryLegInPain>Beinschmerzen</categoryLegInPain>
-    <categoryHandInPain>Schmerzen an der Hand</categoryHandInPain>
-    <categoryBellyInPain>Abdominalschmerzen</categoryBellyInPain>
-    <categoryBackInPain>Rückenschmerz</categoryBackInPain>
-    <categoryTemperature>Temperatur</categoryTemperature>
-    <categoryCold>Kalt</categoryCold>
-    <categoryWarm>Warm</categoryWarm>
-    <categoryHot>Heiß</categoryHot>
-    <categoryItch>Juckreiz</categoryItch>
-    <categoryItchyLeg>Juckreiz am Bein</categoryItchyLeg>
-    <categoryItchyHead>Juckreiz am Kopf</categoryItchyHead>
-    <categoryItchyHand>Juckreiz an der Hand</categoryItchyHand>
-    <categoryItchyBack>Juckreiz am Rücken</categoryItchyBack>
-    <categoryAlterPosition>Neupositionierung</categoryAlterPosition>
-    <categoryRaiseMyHead>den Kopf anheben</categoryRaiseMyHead>
-    <categoryLowerMyHead>den Kopf senken</categoryLowerMyHead>
-    <categoryRaiseMyLegs>Die Beine hochlegen</categoryRaiseMyLegs>
-    <categoryLowerMyLegs>Die Beine senken</categoryLowerMyLegs>
-    <categoryTurnMeLeft>Dreh mich auf links</categoryTurnMeLeft>
-    <categoryTurnMeRight>Dreh mich auf rechts</categoryTurnMeRight>
-    <categorySuction>Absaugen</categorySuction>
-    <categoryStaff>Personal</categoryStaff>
-    <categoryDoctor>Arzt</categoryDoctor>
-    <categoryNurse>Krankenschwester</categoryNurse>
-    <categorySpeechTherapist>Sprachtherapeut</categorySpeechTherapist>
-    <categoryPhysiotherapist>Physiotherapeut</categoryPhysiotherapist>
-    <categoryRelatives>Verwandtschaftsverhältnis</categoryRelatives>
-    <categorySister>Schwester</categorySister>
-    <categoryBrother>Bruder</categoryBrother>
-    <categoryMother>Mutter</categoryMother>
-    <categoryFather>Vater</categoryFather>
-    <categoryFun>Unterhaltung</categoryFun>
-    <categoryMusic>Musik</categoryMusic>
-    <categoryMovie>Film</categoryMovie>
-    <categoryTelevision>Fernseher</categoryTelevision>
+    <communicationCat id="0" subId= "0">Ja</communicationCat>
+    <communicationCat id="1" subId= "0">Nein</communicationCat>
+    <communicationCat id="2" subId= "0">Essen</communicationCat>
+    <communicationCat id="2" subId= "1">Spaghetti</communicationCat>
+    <communicationCat id="2" subId= "2">Pommes frites</communicationCat>
+    <communicationCat id="2" subId= "3">Hacksteak</communicationCat>
+    <communicationCat id="2" subId= "4">Steak</communicationCat>
+    <communicationCat id="2" subId= "5">Huhn</communicationCat>
+    <communicationCat id="2" subId= "6">Suppe</communicationCat>
+    <communicationCat id="2" subId= "7">Brot</communicationCat>
+    <communicationCat id="2" subId= "8">Toast</communicationCat>
+    <communicationCat id="2" subId= "9">Joghurt</communicationCat>
+    <communicationCat id="2" subId= "10">Gurke</communicationCat>
+    <communicationCat id="2" subId= "11">Tomate</communicationCat>
+    <communicationCat id="3" subId= "0">Getränke</communicationCat>
+    <communicationCat id="3" subId= "1">Wasser</communicationCat>
+    <communicationCat id="3" subId= "2">Saft</communicationCat>
+    <communicationCat id="3" subId= "3">Milch</communicationCat>
+    <communicationCat id="4" subId= "0">Obst</communicationCat>
+    <communicationCat id="4" subId= "1">Apfel</communicationCat>
+    <communicationCat id="4" subId= "2">Banane</communicationCat>
+    <communicationCat id="4" subId= "3">Orange</communicationCat>
+    <communicationCat id="4" subId= "4">Pfirsich</communicationCat>
+    <communicationCat id="4" subId= "5">Birne</communicationCat>
+    <communicationCat id="4" subId= "6">Wassermelone</communicationCat>
+    <communicationCat id="5" subId= "0">Badezimmer</communicationCat>
+    <communicationCat id="5" subId= "1">Windelwechsel</communicationCat>
+    <communicationCat id="6" subId= "0">Gefühle</communicationCat>
+    <communicationCat id="6" subId= "1">Freude</communicationCat>
+    <communicationCat id="6" subId= "2">Trauer</communicationCat>
+    <communicationCat id="6" subId= "3">Wut</communicationCat>
+    <communicationCat id="6" subId= "4">Ekel</communicationCat>
+    <communicationCat id="6" subId= "5">Angst</communicationCat>
+    <communicationCat id="7" subId= "0">Schmerz</communicationCat>
+    <communicationCat id="7" subId= "1">Kopfschmerzen</communicationCat>
+    <communicationCat id="7" subId= "2">Beinschmerzen</communicationCat>
+    <communicationCat id="7" subId= "3">Schmerzen an der Hand</communicationCat>
+    <communicationCat id="7" subId= "4">Abdominalschmerzen</communicationCat>
+    <communicationCat id="7" subId= "5">Rückenschmerz</communicationCat>
+    <communicationCat id="8" subId= "0">Temperatur</communicationCat>
+    <communicationCat id="8" subId= "1">Kalt</communicationCat>
+    <communicationCat id="8" subId= "2">Warm</communicationCat>
+    <communicationCat id="8" subId= "3">Heiß</communicationCat>
+    <communicationCat id="9" subId= "0">Juckreiz</communicationCat>
+    <communicationCat id="9" subId= "1">Juckreiz am Bein</communicationCat>
+    <communicationCat id="9" subId= "2">Juckreiz am Kopf</communicationCat>
+    <communicationCat id="9" subId= "3">Juckreiz an der Hand</communicationCat>
+    <communicationCat id="9" subId= "4">Juckreiz am Rücken</communicationCat>
+    <communicationCat id="10" subId= "0">Neupositionierung</communicationCat>
+    <communicationCat id="10" subId= "1">den Kopf anheben</communicationCat>
+    <communicationCat id="10" subId= "2">den Kopf senken</communicationCat>
+    <communicationCat id="10" subId= "3">Die Beine hochlegen</communicationCat>
+    <communicationCat id="10" subId= "4">Die Beine senken</communicationCat>
+    <communicationCat id="10" subId= "5">Dreh mich auf links</communicationCat>
+    <communicationCat id="10" subId= "6">Dreh mich auf rechts</communicationCat>
+    <communicationCat id="10" subId= "7">Absaugen</communicationCat>
+    <communicationCat id="11" subId= "0">Personal</communicationCat>
+    <communicationCat id="11" subId= "1">Arzt</communicationCat>
+    <communicationCat id="11" subId= "2">Krankenschwester</communicationCat>
+    <communicationCat id="11" subId= "3">Sprachtherapeut</communicationCat>
+    <communicationCat id="11" subId= "4">Physiotherapeut</communicationCat>
+    <communicationCat id="12" subId= "0">Verwandtschaftsverhältnis</communicationCat>
+    <communicationCat id="12" subId= "1">Schwester</communicationCat>
+    <communicationCat id="12" subId= "2">Bruder</communicationCat>
+    <communicationCat id="12" subId= "3">Mutter</communicationCat>
+    <communicationCat id="12" subId= "4">Vater</communicationCat>
+    <communicationCat id="13" subId= "0">Unterhaltung</communicationCat>
+    <communicationCat id="13" subId= "1">Musik</communicationCat>
+    <communicationCat id="13" subId= "2">Film</communicationCat>
+    <communicationCat id="13" subId= "3">Fernseher</communicationCat>
 </languageTexts>

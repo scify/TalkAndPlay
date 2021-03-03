@@ -151,74 +151,74 @@
     <pressTheButtonToStart>Press the button to start!</pressTheButtonToStart>
     <sequenceGameInfo>Place the cards in the right order.</sequenceGameInfo>
     <sequenceGameInfo2>Which image should be first? Press the button on it!</sequenceGameInfo2>
-    <categoryYes>Yes</categoryYes>
-    <categoryNo>No</categoryNo>
-    <categoryFood>Food</categoryFood>
-    <categoryPasta>Pasta</categoryPasta>
-    <categoryFrenchFries>French fries</categoryFrenchFries>
-    <categoryBurger>Burger</categoryBurger>
-    <categorySteak>Steak</categorySteak>
-    <categoryChicken>Chicken</categoryChicken>
-    <categorySoup>Soup</categorySoup>
-    <categoryBread>Bread</categoryBread>
-    <categoryFrenchToast>French toast</categoryFrenchToast>
-    <categoryYogurt>Yogurt</categoryYogurt>
-    <categoryCucumber>Cucumber</categoryCucumber>
-    <categoryTomato>Tomato</categoryTomato>
-    <categoryDrinks>Drinks</categoryDrinks>
-    <categoryWater>Water</categoryWater>
-    <categoryJuice>Juice</categoryJuice>
-    <categoryMilk>Milk</categoryMilk>
-    <categoryFruits>Fruits</categoryFruits>
-    <categoryApple>Apple</categoryApple>
-    <categoryBanana>Banana</categoryBanana>
-    <categoryOrange>Orange</categoryOrange>
-    <categoryPeach>Peach</categoryPeach>
-    <categoryPear>Pear</categoryPear>
-    <categoryWatermelon>Watermelon</categoryWatermelon>
-    <categoryToilet>Toilet</categoryToilet>
-    <categoryDiaperChange>Change diaper</categoryDiaperChange>
-    <categoryEmotions>Emotions</categoryEmotions>
-    <categoryJoy>Joy</categoryJoy>
-    <categorySadness>Sadness</categorySadness>
-    <categoryAnger>Anger</categoryAnger>
-    <categoryDisgust>Disgust</categoryDisgust>
-    <categoryFear>Fear</categoryFear>
-    <categoryPain>Pain</categoryPain>
-    <categoryHeadInPain>Head in pain</categoryHeadInPain>
-    <categoryLegInPain>Leg in pain</categoryLegInPain>
-    <categoryHandInPain>Hand in pain</categoryHandInPain>
-    <categoryBellyInPain>Belly in pain</categoryBellyInPain>
-    <categoryBackInPain>Back in pain</categoryBackInPain>
-    <categoryTemperature>Temperature</categoryTemperature>
-    <categoryCold>Cold</categoryCold>
-    <categoryWarm>Warm</categoryWarm>
-    <categoryHot>Hot</categoryHot>
-    <categoryItch>Itch</categoryItch>
-    <categoryItchyLeg>Itchy Leg</categoryItchyLeg>
-    <categoryItchyHead>Itchy Head</categoryItchyHead>
-    <categoryItchyHand>Itchy Hand</categoryItchyHand>
-    <categoryItchyBack>Itchy Back</categoryItchyBack>
-    <categoryAlterPosition>Alter position</categoryAlterPosition>
-    <categoryRaiseMyHead>Raise my head</categoryRaiseMyHead>
-    <categoryLowerMyHead>Lower my head</categoryLowerMyHead>
-    <categoryRaiseMyLegs>Raise my legs</categoryRaiseMyLegs>
-    <categoryLowerMyLegs>Lower my legs</categoryLowerMyLegs>
-    <categoryTurnMeLeft>Turn me left</categoryTurnMeLeft>
-    <categoryTurnMeRight>Turn me right</categoryTurnMeRight>
-    <categorySuction>Suction</categorySuction>
-    <categoryStaff>Staff</categoryStaff>
-    <categoryDoctor>Doctor</categoryDoctor>
-    <categoryNurse>Nurse</categoryNurse>
-    <categorySpeechTherapist>Speech Therapist</categorySpeechTherapist>
-    <categoryPhysiotherapist>Physiotherapist</categoryPhysiotherapist>
-    <categoryRelatives>Relatives</categoryRelatives>
-    <categorySister>Sister</categorySister>
-    <categoryBrother>Brother</categoryBrother>
-    <categoryMother>Mother</categoryMother>
-    <categoryFather>Father</categoryFather>
-    <categoryFun>Fun</categoryFun>
-    <categoryMusic>Music</categoryMusic>
-    <categoryMovie>Movie</categoryMovie>
-    <categoryTelevision>Television</categoryTelevision>
+    <communicationCat id="0" subId= "0">Yes</communicationCat>
+    <communicationCat id="1" subId= "0">No</communicationCat>
+    <communicationCat id="2" subId= "0">Food</communicationCat>
+    <communicationCat id="2" subId= "1">Pasta</communicationCat>
+    <communicationCat id="2" subId= "2">French fries</communicationCat>
+    <communicationCat id="2" subId= "3">Burger</communicationCat>
+    <communicationCat id="2" subId= "4">Steak</communicationCat>
+    <communicationCat id="2" subId= "5">Chicken</communicationCat>
+    <communicationCat id="2" subId= "6">Soup</communicationCat>
+    <communicationCat id="2" subId= "7">Bread</communicationCat>
+    <communicationCat id="2" subId= "8">French toast</communicationCat>
+    <communicationCat id="2" subId= "9">Yogurt</communicationCat>
+    <communicationCat id="2" subId= "10">Cucumber</communicationCat>
+    <communicationCat id="2" subId= "11">Tomato</communicationCat>
+    <communicationCat id="3" subId= "0">Drinks</communicationCat>
+    <communicationCat id="3" subId= "1">Water</communicationCat>
+    <communicationCat id="3" subId= "2">Juice</communicationCat>
+    <communicationCat id="3" subId= "3">Milk</communicationCat>
+    <communicationCat id="4" subId= "0">Fruits</communicationCat>
+    <communicationCat id="4" subId= "1">Apple</communicationCat>
+    <communicationCat id="4" subId= "2">Banana</communicationCat>
+    <communicationCat id="4" subId= "3">Orange</communicationCat>
+    <communicationCat id="4" subId= "4">Peach</communicationCat>
+    <communicationCat id="4" subId= "5">Pear</communicationCat>
+    <communicationCat id="4" subId= "6">Watermelon</communicationCat>
+    <communicationCat id="5" subId= "0">Toilet</communicationCat>
+    <communicationCat id="5" subId= "1">Change diaper</communicationCat>
+    <communicationCat id="6" subId= "0">Emotions</communicationCat>
+    <communicationCat id="6" subId= "1">Joy</communicationCat>
+    <communicationCat id="6" subId= "2">Sadness</communicationCat>
+    <communicationCat id="6" subId= "3">Anger</communicationCat>
+    <communicationCat id="6" subId= "4">Disgust</communicationCat>
+    <communicationCat id="6" subId= "5">Fear</communicationCat>
+    <communicationCat id="7" subId= "0">Pain</communicationCat>
+    <communicationCat id="7" subId= "1">Head in pain</communicationCat>
+    <communicationCat id="7" subId= "2">Leg in pain</communicationCat>
+    <communicationCat id="7" subId= "3">Hand in pain</communicationCat>
+    <communicationCat id="7" subId= "4">Belly in pain</communicationCat>
+    <communicationCat id="7" subId= "5">Back in pain</communicationCat>
+    <communicationCat id="8" subId= "0">Temperature</communicationCat>
+    <communicationCat id="8" subId= "1">Cold</communicationCat>
+    <communicationCat id="8" subId= "2">Warm</communicationCat>
+    <communicationCat id="8" subId= "3">Hot</communicationCat>
+    <communicationCat id="9" subId= "0">Itch</communicationCat>
+    <communicationCat id="9" subId= "1">Itchy Leg</communicationCat>
+    <communicationCat id="9" subId= "2">Itchy Head</communicationCat>
+    <communicationCat id="9" subId= "3">Itchy Hand</communicationCat>
+    <communicationCat id="9" subId= "4">Itchy Back</communicationCat>
+    <communicationCat id="10" subId= "0">Alter position</communicationCat>
+    <communicationCat id="10" subId= "1">Raise my head</communicationCat>
+    <communicationCat id="10" subId= "2">Lower my head</communicationCat>
+    <communicationCat id="10" subId= "3">Raise my legs</communicationCat>
+    <communicationCat id="10" subId= "4">Lower my legs</communicationCat>
+    <communicationCat id="10" subId= "5">Turn me left</communicationCat>
+    <communicationCat id="10" subId= "6">Turn me right</communicationCat>
+    <communicationCat id="10" subId= "7">Suction</communicationCat>
+    <communicationCat id="11" subId= "0">Staff</communicationCat>
+    <communicationCat id="11" subId= "1">Doctor</communicationCat>
+    <communicationCat id="11" subId= "2">Nurse</communicationCat>
+    <communicationCat id="11" subId= "3">Speech Therapist</communicationCat>
+    <communicationCat id="11" subId= "4">Physiotherapist</communicationCat>
+    <communicationCat id="12" subId= "0">Relatives</communicationCat>
+    <communicationCat id="12" subId= "1">Sister</communicationCat>
+    <communicationCat id="12" subId= "2">Brother</communicationCat>
+    <communicationCat id="12" subId= "3">Mother</communicationCat>
+    <communicationCat id="12" subId= "4">Father</communicationCat>
+    <communicationCat id="13" subId= "0">Fun</communicationCat>
+    <communicationCat id="13" subId= "1">Music</communicationCat>
+    <communicationCat id="13" subId= "2">Movie</communicationCat>
+    <communicationCat id="13" subId= "3">Television</communicationCat>            
 </languageTexts>

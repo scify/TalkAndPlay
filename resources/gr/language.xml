@@ -151,74 +151,74 @@
     <pressTheButtonToStart>Πάτα το κουμπί για να ξεκινήσεις!</pressTheButtonToStart>
     <sequenceGameInfo>Βάλε στη σωστή σειρά τις κάρτες.</sequenceGameInfo>
     <sequenceGameInfo2>Ποια εικόνα πρέπει να μπει πρώτη; Πάτα το κουμπί πάνω της!</sequenceGameInfo2>
-    <categoryYes>Ναι</categoryYes>
-    <categoryNo>Όχι</categoryNo>
-    <categoryFood>Φαγητό</categoryFood>
-    <categoryPasta>Μακαρόνια</categoryPasta>
-    <categoryFrenchFries>Πατάτες τηγανητές</categoryFrenchFries>
-    <categoryBurger>Μπιφτέκι</categoryBurger>
-    <categorySteak>Μπριζόλα</categorySteak>
-    <categoryChicken>Κοτόπουλο</categoryChicken>
-    <categorySoup>Σούπα</categorySoup>
-    <categoryBread>Ψωμί</categoryBread>
-    <categoryFrenchToast>Τοστ</categoryFrenchToast>
-    <categoryYogurt>Γιαούρτι</categoryYogurt>
-    <categoryCucumber>Αγγούρι</categoryCucumber>
-    <categoryTomato>Ντομάτα</categoryTomato>
-    <categoryDrinks>Ποτά</categoryDrinks>
-    <categoryWater>Νερό</categoryWater>
-    <categoryJuice>Χυμός</categoryJuice>
-    <categoryMilk>Γάλα</categoryMilk>
-    <categoryFruits>Φρούτα</categoryFruits>
-    <categoryApple>Μήλο</categoryApple>
-    <categoryBanana>Μπανάνα</categoryBanana>
-    <categoryOrange>Πορτοκάλι</categoryOrange>
-    <categoryPeach>Ροδάκινο</categoryPeach>
-    <categoryPear>Αχλάδι</categoryPear>
-    <categoryWatermelon>Καρπούζι</categoryWatermelon>
-    <categoryToilet>Τουαλέτα</categoryToilet>
-    <categoryDiaperChange>Αλλαγή πάνας</categoryDiaperChange>
-    <categoryEmotions>Συναισθήματα</categoryEmotions>
-    <categoryJoy>Χαρά</categoryJoy>
-    <categorySadness>Λύπη</categorySadness>
-    <categoryAnger>Θυμός</categoryAnger>
-    <categoryDisgust>Αηδία</categoryDisgust>
-    <categoryFear>Φόβος</categoryFear>
-    <categoryPain>Πόνος</categoryPain>
-    <categoryHeadInPain>Πόνος στο κεφάλι</categoryHeadInPain>
-    <categoryLegInPain>Πόνος στο πόδι</categoryLegInPain>
-    <categoryHandInPain>Πόνος στο χέρι</categoryHandInPain>
-    <categoryBellyInPain>Πόνος στην κοιλιά</categoryBellyInPain>
-    <categoryBackInPain>Πόνος στην πλάτη</categoryBackInPain>
-    <categoryTemperature>Θερμοκρασία</categoryTemperature>
-    <categoryCold>Κρύο</categoryCold>
-    <categoryWarm>Ζεστό</categoryWarm>
-    <categoryHot>Καυτό</categoryHot>
-    <categoryItch>Φαγούρα</categoryItch>
-    <categoryItchyLeg>Φαγούρα στο πόδι</categoryItchyLeg>
-    <categoryItchyHead>Φαγούρα στο κεφάλι</categoryItchyHead>
-    <categoryItchyHand>Φαγούρα στο χέρι</categoryItchyHand>
-    <categoryItchyBack>Φαγούρα στην πλάτη</categoryItchyBack>
-    <categoryAlterPosition>Αλλαγή θέσης</categoryAlterPosition>
-    <categoryRaiseMyHead>Ανέβασε κεφάλι</categoryRaiseMyHead>
-    <categoryLowerMyHead>Κατέβασε κεφάλι</categoryLowerMyHead>
-    <categoryRaiseMyLegs>Ανέβασε πόδια</categoryRaiseMyLegs>
-    <categoryLowerMyLegs>Κατέβασε πόδια</categoryLowerMyLegs>
-    <categoryTurnMeLeft>Γύρνα με αριστερά</categoryTurnMeLeft>
-    <categoryTurnMeRight>Γύρνα με δεξιά</categoryTurnMeRight>
-    <categorySuction>Αναρρόφηση</categorySuction>
-    <categoryStaff>Προσωπικό</categoryStaff>
-    <categoryDoctor>Γιατρός</categoryDoctor>
-    <categoryNurse>Νοσοκόμα</categoryNurse>
-    <categorySpeechTherapist>Λογοθεραπευτής</categorySpeechTherapist>
-    <categoryPhysiotherapist>Φυσιοθεραπευτής</categoryPhysiotherapist>
-    <categoryRelatives>Συγγενείς</categoryRelatives>
-    <categorySister>Αδερφή</categorySister>
-    <categoryBrother>Αδερφός</categoryBrother>
-    <categoryMother>Μητέρα</categoryMother>
-    <categoryFather>Πατέρας</categoryFather>
-    <categoryFun>Διασκέδαση</categoryFun>
-    <categoryMusic>Μουσική</categoryMusic>
-    <categoryMovie>Ταινία</categoryMovie>
-    <categoryTelevision>Τηλεόραση</categoryTelevision>
+    <communicationCat id="0" subId= "0">Ναι</communicationCat>
+    <communicationCat id="1" subId= "0">Όχι</communicationCat>
+    <communicationCat id="2" subId= "0">Φαγητό</communicationCat>
+    <communicationCat id="2" subId= "1">Μακαρόνια</communicationCat>
+    <communicationCat id="2" subId= "2">Πατάτες τηγανητές</communicationCat>
+    <communicationCat id="2" subId= "3">Μπιφτέκι</communicationCat>
+    <communicationCat id="2" subId= "4">Μπριζόλα</communicationCat>
+    <communicationCat id="2" subId= "5">Κοτόπουλο</communicationCat>
+    <communicationCat id="2" subId= "6">Σούπα</communicationCat>
+    <communicationCat id="2" subId= "7">Ψωμί</communicationCat>
+    <communicationCat id="2" subId= "8">Τοστ</communicationCat>
+    <communicationCat id="2" subId= "9">Γιαούρτι</communicationCat>
+    <communicationCat id="2" subId= "10">Αγγούρι</communicationCat>
+    <communicationCat id="2" subId= "11">Ντομάτα</communicationCat>
+    <communicationCat id="3" subId= "0">Ποτά</communicationCat>
+    <communicationCat id="3" subId= "1">Νερό</communicationCat>
+    <communicationCat id="3" subId= "2">Χυμός</communicationCat>
+    <communicationCat id="3" subId= "3">Γάλα</communicationCat>
+    <communicationCat id="4" subId= "0">Φρούτα</communicationCat>
+    <communicationCat id="4" subId= "1">Μήλο</communicationCat>
+    <communicationCat id="4" subId= "2">Μπανάνα</communicationCat>
+    <communicationCat id="4" subId= "3">Πορτοκάλι</communicationCat>
+    <communicationCat id="4" subId= "4">Ροδάκινο</communicationCat>
+    <communicationCat id="4" subId= "5">Αχλάδι</communicationCat>
+    <communicationCat id="4" subId= "6">Καρπούζι</communicationCat>
+    <communicationCat id="5" subId= "0">Τουαλέτα</communicationCat>
+    <communicationCat id="5" subId= "1">Αλλαγή πάνας</communicationCat>
+    <communicationCat id="6" subId= "0">Συναισθήματα</communicationCat>
+    <communicationCat id="6" subId= "1">Χαρά</communicationCat>
+    <communicationCat id="6" subId= "2">Λύπη</communicationCat>
+    <communicationCat id="6" subId= "3">Θυμός</communicationCat>
+    <communicationCat id="6" subId= "4">Αηδία</communicationCat>
+    <communicationCat id="6" subId= "5">Φόβος</communicationCat>
+    <communicationCat id="7" subId= "0">Πόνος</communicationCat>
+    <communicationCat id="7" subId= "1">Πόνος στο κεφάλι</communicationCat>
+    <communicationCat id="7" subId= "2">Πόνος στο πόδι</communicationCat>
+    <communicationCat id="7" subId= "3">Πόνος στο χέρι</communicationCat>
+    <communicationCat id="7" subId= "4">Πόνος στην κοιλιά</communicationCat>
+    <communicationCat id="7" subId= "5">Πόνος στην πλάτη</communicationCat>
+    <communicationCat id="8" subId= "0">Θερμοκρασία</communicationCat>
+    <communicationCat id="8" subId= "1">Κρύο</communicationCat>
+    <communicationCat id="8" subId= "2">Ζεστό</communicationCat>
+    <communicationCat id="8" subId= "3">Καυτό</communicationCat>
+    <communicationCat id="9" subId= "0">Φαγούρα</communicationCat>
+    <communicationCat id="9" subId= "1">Φαγούρα στο πόδι</communicationCat>
+    <communicationCat id="9" subId= "2">Φαγούρα στο κεφάλι</communicationCat>
+    <communicationCat id="9" subId= "3">Φαγούρα στο χέρι</communicationCat>
+    <communicationCat id="9" subId= "4">Φαγούρα στην πλάτη</communicationCat>
+    <communicationCat id="10" subId= "0">Αλλαγή θέσης</communicationCat>
+    <communicationCat id="10" subId= "1">Ανέβασε κεφάλι</communicationCat>
+    <communicationCat id="10" subId= "2">Κατέβασε κεφάλι</communicationCat>
+    <communicationCat id="10" subId= "3">Ανέβασε πόδια</communicationCat>
+    <communicationCat id="10" subId= "4">Κατέβασε πόδια</communicationCat>
+    <communicationCat id="10" subId= "5">Γύρνα με αριστερά</communicationCat>
+    <communicationCat id="10" subId= "6">Γύρνα με δεξιά</communicationCat>
+    <communicationCat id="10" subId= "7">Αναρρόφηση</communicationCat>
+    <communicationCat id="11" subId= "0">Προσωπικό</communicationCat>
+    <communicationCat id="11" subId= "1">Γιατρός</communicationCat>
+    <communicationCat id="11" subId= "2">Νοσοκόμα</communicationCat>
+    <communicationCat id="11" subId= "3">Λογοθεραπευτής</communicationCat>
+    <communicationCat id="11" subId= "4">Φυσιοθεραπευτής</communicationCat>
+    <communicationCat id="12" subId= "0">Συγγενείς</communicationCat>
+    <communicationCat id="12" subId= "1">Αδερφή</communicationCat>
+    <communicationCat id="12" subId= "2">Αδερφός</communicationCat>
+    <communicationCat id="12" subId= "3">Μητέρα</communicationCat>
+    <communicationCat id="12" subId= "4">Πατέρας</communicationCat>
+    <communicationCat id="13" subId= "0">Διασκέδαση</communicationCat>
+    <communicationCat id="13" subId= "1">Μουσική</communicationCat>
+    <communicationCat id="13" subId= "2">Ταινία</communicationCat>
+    <communicationCat id="13" subId= "3">Τηλεόραση</communicationCat>    
 </languageTexts>

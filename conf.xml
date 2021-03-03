@@ -21,309 +21,309 @@
             <image resourceType="JAR">defaultImgs/communication_module.png</image>
             <sound resourceType="BUNDLE">sounds/communication/communication.mp3</sound>
             <categories>
-                <category name="{{ categoryYes }}" enabled="true" languages="en de gr">
+                <category name="{{ 0:0 }}" enabled="true" languages="en de gr">
                     <image resourceType="BUNDLE">images/communication/yes.png</image>
                     <sound resourceType="BUNDLE">sounds/communication/yes.mp3</sound>        
                 </category>
-                <category name="{{ categoryNo }}" enabled="true" languages="en de gr">
+                <category name="{{ 1:0 }}" enabled="true" languages="en de gr">
                     <image resourceType="BUNDLE">images/communication/no.png</image>
                     <sound resourceType="BUNDLE">sounds/communication/no.mp3</sound>            
                 </category>
-                <category name="{{ categoryFood }}" enabled="true" languages="en de gr">
+                <category name="{{ 2:0 }}" enabled="true" languages="en de gr">
                     <image resourceType="BUNDLE">images/communication/food/burger.png</image>
                     <sound resourceType="BUNDLE">sounds/communication/food/food.mp3</sound>                    
                     <categories>
-                        <category name="{{ categoryPasta }}" enabled="true">
+                        <category name="{{ 2:1 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/food/pasta.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/food/pasta.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryFrenchFries }}" enabled="true">
+                        <category name="{{ 2:2 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/food/frenchFries.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/food/frenchFries.mp3</sound>                    
                         </category>
-                        <category name="{{ categoryBurger }}" enabled="true">
+                        <category name="{{ 2:3 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/food/burger.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/food/burger.mp3</sound>                            
                         </category>
-                        <category name="{{ categorySteak }}" enabled="true">
+                        <category name="{{ 2:4 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/food/steak.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/food/steak.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryChicken }}" enabled="true">
+                        <category name="{{ 2:5 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/food/chicken.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/food/chicken.mp3</sound>                            
                         </category>
-                        <category name="{{ categorySoup }}" enabled="true">
+                        <category name="{{ 2:6 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/food/soup.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/food/soup.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryBread }}" enabled="true">
+                        <category name="{{ 2:7 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/food/bread.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/food/bread.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryFrenchToast }}" enabled="true">
+                        <category name="{{ 2:8 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/food/frenchToast.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/food/frenchToast.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryYogurt }}" enabled="true">
+                        <category name="{{ 2:9 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/food/yogurt.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/food/yogurt.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryCucumber }}" enabled="true">
+                        <category name="{{ 2:10 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/food/cucumber.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/food/cucumber.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryTomato }}" enabled="true">
+                        <category name="{{ 2:11 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/food/tomato.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/food/tomato.mp3</sound>                            
                         </category>
                     </categories>
                 </category>
-                <category name="{{ categoryDrinks }}" enabled="true" languages="en de gr">
+                <category name="{{ 3:0 }}" enabled="true" languages="en de gr">
                     <image resourceType="BUNDLE">images/communication/drinks/juice.png</image>
                     <sound resourceType="BUNDLE">sounds/communication/drinks/drinks.mp3</sound>                    
                     <categories>
-                        <category name="{{ categoryWater }}" enabled="true">
+                        <category name="{{ 3:1 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/drinks/water.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/drinks/water.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryJuice }}" enabled="true">
+                        <category name="{{ 3:2 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/drinks/juice.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/drinks/juice.mp3</sound>                    
                         </category>
-                        <category name="{{ categoryMilk }}" enabled="true">
+                        <category name="{{ 3:3 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/drinks/milk.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/drinks/milk.mp3</sound>                            
                         </category>
                     </categories>
                 </category>
-                <category name="{{ categoryFruits }}" enabled="true" languages="en de gr">
+                <category name="{{ 4:0 }}" enabled="true" languages="en de gr">
                     <image resourceType="BUNDLE">images/communication/fruits/orange.png</image>
                     <sound resourceType="BUNDLE">sounds/communication/fruits/fruits.mp3</sound>                    
                     <categories>
-                        <category name="{{ categoryApple }}" enabled="true">
+                        <category name="{{ 4:1 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/fruits/apple.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/fruits/apple.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryBanana }}" enabled="true">
+                        <category name="{{ 4:2 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/fruits/banana.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/fruits/banana.mp3</sound>                    
                         </category>
-                        <category name="{{ categoryPeach }}" enabled="true">
+                        <category name="{{ 4:3 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/fruits/peach.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/fruits/peach.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryPear }}" enabled="true">
+                        <category name="{{ 4:4 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/fruits/pear.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/fruits/pear.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryWatermelon }}" enabled="true">
+                        <category name="{{ 4:5 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/fruits/watermelon.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/fruits/watermelon.mp3</sound>                    
                         </category>
-                        <category name="{{ categoryOrange }}" enabled="true">
+                        <category name="{{ 4:6 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/fruits/orange.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/fruits/orange.mp3</sound>                            
                         </category>
                     </categories>
                 </category>
-                <category name="{{ categoryToilet }}" enabled="true" languages="en de gr">
+                <category name="{{ 5:0 }}" enabled="true" languages="en de gr">
                     <image resourceType="BUNDLE">images/communication/toilet/toilet.png</image>
                     <sound resourceType="BUNDLE">sounds/communication/toilet/toilet.mp3</sound>                    
                     <categories>
-                        <category name="{{ categoryDiaperChange }}" enabled="true">
+                        <category name="{{ 5:1 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/toilet/diaperPee.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/toilet/diaperChange.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryDiaperChange }}" enabled="true">
+                        <category name="{{ 5:1 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/toilet/diaperPoop.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/toilet/diaperChange.mp3</sound>                    
                         </category>                    
                     </categories>
                 </category>
-                <category name="{{ categoryEmotions }}" enabled="true" languages="en de gr">
+                <category name="{{ 6:0 }}" enabled="true" languages="en de gr">
                     <image resourceType="BUNDLE">images/communication/emotions/joy.png</image>
                     <sound resourceType="BUNDLE">sounds/communication/emotions/emotions.mp3</sound>                    
                     <categories>
-                        <category name="{{ categoryJoy }}" enabled="true">
+                        <category name="{{ 6:1 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/emotions/joy.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/emotions/joy.mp3</sound>                            
                         </category>
-                        <category name="{{ categorySadness }}" enabled="true">
+                        <category name="{{ 6:2 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/emotions/sadness.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/emotions/sadness.mp3</sound>                    
                         </category>
-                        <category name="{{ categoryAnger }}" enabled="true">
+                        <category name="{{ 6:3 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/emotions/anger.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/emotions/anger.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryDisgust }}" enabled="true">
+                        <category name="{{ 6:4 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/emotions/disgust.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/emotions/disgust.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryFear }}" enabled="true">
+                        <category name="{{ 6:5 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/emotions/fear.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/emotions/fear.mp3</sound>                    
                         </category>                    
                     </categories>
                 </category>
-                <category name="{{ categoryPain }}" enabled="true" languages="en de gr">
+                <category name="{{ 7:0 }}" enabled="true" languages="en de gr">
                     <image resourceType="BUNDLE">images/communication/pain/feelPain.png</image>
                     <sound resourceType="BUNDLE">sounds/communication/pain/feelPain.mp3</sound>                    
                     <categories>
-                        <category name="{{ categoryHeadInPain }}" enabled="true">
+                        <category name="{{ 7:1 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/pain/headInPain.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/pain/headInPain.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryLegInPain }}" enabled="true">
+                        <category name="{{ 7:2 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/pain/legInPain.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/pain/legInPain.mp3</sound>                    
                         </category>
-                        <category name="{{ categoryHandInPain }}" enabled="true">
+                        <category name="{{ 7:3 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/pain/handInPain.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/pain/handInPain.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryBellyInPain }}" enabled="true">
+                        <category name="{{ 7:4 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/pain/bellyInPain.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/pain/bellyInPain.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryBackInPain }}" enabled="true">
+                        <category name="{{ 7:5 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/pain/backInPain.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/pain/backInPain.mp3</sound>                    
                         </category>                    
                     </categories>
                 </category>
-                <category name="{{ categoryTemperature }}" enabled="true" languages="en de gr">
+                <category name="{{ 8:0 }}" enabled="true" languages="en de gr">
                     <image resourceType="BUNDLE">images/communication/temperature/feelHot.png</image>
                     <sound resourceType="BUNDLE">sounds/communication/temperature/temperature.mp3</sound>                    
                     <categories>
-                        <category name="{{ categoryCold }}" enabled="true">
+                        <category name="{{ 8:1 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/temperature/cold.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/temperature/cold.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryWarm }}" enabled="true">
+                        <category name="{{ 8:2 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/temperature/warm.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/temperature/warm.mp3</sound>                    
                         </category>
-                        <category name="{{ categoryHot }}" enabled="true">
+                        <category name="{{ 8:3 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/temperature/hot.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/temperature/hot.mp3</sound>                            
                         </category>                        
                     </categories>
                 </category>
-                <category name="{{ categoryItch }}" enabled="true" languages="en de gr">
+                <category name="{{ 9:0 }}" enabled="true" languages="en de gr">
                     <image resourceType="BUNDLE">images/communication/itch/itch.png</image>
                     <sound resourceType="BUNDLE">sounds/communication/itch/itch.mp3</sound>                    
                     <categories>
-                        <category name="{{ categoryItchyHead }}" enabled="true">
+                        <category name="{{ 9:1 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/itch/itchyHead.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/itch/itchyHead.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryItchyLeg }}" enabled="true">
+                        <category name="{{ 9:2 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/itch/itchyLeg.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/itch/itchyLeg.mp3</sound>                    
                         </category>
-                        <category name="{{ categoryItchyHand }}" enabled="true">
+                        <category name="{{ 9:3 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/itch/itchyHand.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/itch/itchyHand.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryItchyBack }}" enabled="true">
+                        <category name="{{ 9:4 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/itch/itchyBack.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/itch/itchyBack.mp3</sound>                            
                         </category>                        
                     </categories>
                 </category>
-                <category name="{{ categoryAlterPosition }}" enabled="true" languages="en de gr">
+                <category name="{{ 10:0 }}" enabled="true" languages="en de gr">
                     <image resourceType="BUNDLE">images/communication/alterPosition/raiseHead.png</image>
                     <sound resourceType="BUNDLE">sounds/communication/alterPosition/alterPosition.mp3</sound>                    
                     <categories>
-                        <category name="{{ categoryRaiseMyHead }}" enabled="true">
+                        <category name="{{ 10:1 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/alterPosition/raiseHead.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/alterPosition/raiseHead.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryLowerMyHead }}" enabled="true">
+                        <category name="{{ 10:2 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/alterPosition/lowerHead.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/alterPosition/lowerHead.mp3</sound>                    
                         </category>
-                        <category name="{{ categoryRaiseMyLegs }}" enabled="true">
+                        <category name="{{ 10:3 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/alterPosition/raiseLegs.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/alterPosition/raiseLegs.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryLowerMyLegs }}" enabled="true">
+                        <category name="{{ 10:4 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/alterPosition/lowerLegs.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/alterPosition/lowerLegs.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryTurnMeLeft }}" enabled="true">
+                        <category name="{{ 10:5 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/alterPosition/turnMeLeft.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/alterPosition/turnMeLeft.mp3</sound>                    
                         </category>                    
-                        <category name="{{ categoryTurnMeRight }}" enabled="true">
+                        <category name="{{ 10:6 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/alterPosition/turnMeRight.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/alterPosition/turnMeRight.mp3</sound>                    
                         </category>                    
-                        <category name="{{ categorySuction }}" enabled="true">
+                        <category name="{{ 10:7 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/alterPosition/suction.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/alterPosition/suction.mp3</sound>                    
                         </category>                    
                     </categories>
                 </category>
-                <category name="{{ categoryStaff }}" enabled="true" languages="en de gr">
+                <category name="{{ 11:0 }}" enabled="true" languages="en de gr">
                     <image resourceType="BUNDLE">images/communication/staff/nurse.png</image>
                     <sound resourceType="BUNDLE">sounds/communication/staff/staff.mp3</sound>                    
                     <categories>
-                        <category name="{{ categoryDoctor }}" enabled="true">
+                        <category name="{{ 11:1 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/staff/doctor.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/staff/doctor.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryNurse }}" enabled="true">
+                        <category name="{{ 11:2 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/staff/nurse.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/staff/nurse.mp3</sound>                    
                         </category>
-                        <category name="{{ categorySpeechTherapist }}" enabled="true">
+                        <category name="{{ 11:3 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/staff/speechTherapist.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/staff/speechTherapist.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryPhysiotherapist }}" enabled="true">
+                        <category name="{{ 11:4 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/staff/physiotherapist.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/staff/physiotherapist.mp3</sound>                            
                         </category>                        
                     </categories>
                 </category>
-                <category name="{{ categoryRelatives }}" enabled="true" languages="en de gr">
+                <category name="{{ 12:0 }}" enabled="true" languages="en de gr">
                     <image resourceType="BUNDLE">images/communication/relatives/sister.png</image>
                     <sound resourceType="BUNDLE">sounds/communication/relatives/relatives.mp3</sound>                    
                     <categories>
-                        <category name="{{ categorySister }}" enabled="true">
+                        <category name="{{ 12:1 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/relatives/sister.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/relatives/sister.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryBrother }}" enabled="true">
+                        <category name="{{ 12:2 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/relatives/brother.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/relatives/brother.mp3</sound>                    
                         </category>
-                        <category name="{{ categoryMother }}" enabled="true">
+                        <category name="{{ 12:3 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/relatives/mother.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/relatives/mother.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryFather }}" enabled="true">
+                        <category name="{{ 12:4 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/relatives/father.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/relatives/father.mp3</sound>                            
                         </category>                        
                     </categories>
                 </category>
-                <category name="{{ categoryFun }}" enabled="true" languages="en de gr">
+                <category name="{{ 13:0 }}" enabled="true" languages="en de gr">
                     <image resourceType="BUNDLE">images/communication/fun/television.png</image>
                     <sound resourceType="BUNDLE">sounds/communication/fun/fun.mp3</sound>                    
                     <categories>
-                        <category name="{{ categoryMusic }}" enabled="true">
+                        <category name="{{ 13:1 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/fun/music.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/fun/music.mp3</sound>                            
                         </category>
-                        <category name="{{ categoryMovie }}" enabled="true">
+                        <category name="{{ 13:2 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/fun/movie.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/fun/movie.mp3</sound>                    
                         </category>
-                        <category name="{{ categoryTelevision }}" enabled="true">
+                        <category name="{{ 13:3 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/fun/television.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/fun/television.mp3</sound>                            
                         </category>                            

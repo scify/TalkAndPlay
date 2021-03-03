@@ -61,7 +61,11 @@ public class ResourceManager {
                         Iterator<Element> iter = languageTexts.iterator();
                         while (iter.hasNext()) {
                             Element e = iter.next();
-                            texts.put(e.getName(), e.getValue());
+                            String name = e.getName();
+                            if (name.equals("communicationCat")) {
+                                name = e.getAttributeValue("id") + ":" + e.getAttributeValue("subId");
+                            }
+                            texts.put(name, e.getValue());
                         }
                     } catch (Exception e) {
                         logger.error("language.xml file for language " + dirName + " not found");
