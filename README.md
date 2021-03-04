@@ -29,8 +29,6 @@ In order to run the file, the **active working directory** must have the followi
 ```bash
 resources/
 conf.xml
-defaultGames.xml
-defaultUser.xml
 log4j.properties
 properties.xml
 sentry.properties

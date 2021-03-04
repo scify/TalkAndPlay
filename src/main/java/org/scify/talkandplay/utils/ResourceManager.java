@@ -19,15 +19,15 @@ import java.util.List;
 public class ResourceManager {
 
     static Logger logger = Logger.getLogger(ApplicationLauncher.class);
+    protected final String JarResourcesPath = "/org/scify/talkandplay/resources/";
+    //protected final URL JarResources = getClass().getResource();
+    protected final File dataResources = new File("resources");
+    protected List<String> languages;
+    protected int selectedLanguageIndex;
+    protected List<File> languageDirs;
+    protected File defaultDir;
 
-    private final URL JarResources = getClass().getResource("/org/scify/talkandplay/resources");
-    private final File dataResources = new File("resources");
-    private List<String> languages;
-    private int selectedLanguageIndex;
-    private List<File> languageDirs;
-    private File defaultDir;
-
-    private List<HashMap<String, String>> languageTexts;
+    protected List<HashMap<String, String>> languageTexts;
 
     protected static ResourceManager instance;
 
@@ -104,13 +104,15 @@ public class ResourceManager {
     }
 
     protected Image getJarImage(String resource) {
-        File resourceFile = new File(JarResources.getFile(), resource);
-        return this.getImage(resourceFile);
+        ImageIcon imageIcon = getJarImageIcon(resource);
+        return (imageIcon.getImage());
     }
 
     protected ImageIcon getJarImageIcon(String resource) {
-        File resourceFile = new File(JarResources.getFile(), resource);
-        return this.getImageIcon(resourceFile);
+        URL resourceURL = getClass().getResource(JarResourcesPath + resource);
+        if (resourceURL == null)
+            return null;
+        return new ImageIcon(resourceURL);
     }
 
     protected Image getImageOfLanguage(String resource) {
@@ -235,9 +237,6 @@ public class ResourceManager {
     public File getFileOfResource (String path, ResourceType resourceType) {
         File ret = null;
         switch (resourceType) {
-            case JAR:
-                ret = new File(JarResources.getFile(), path);
-                break;
             case BUNDLE:
                 ret =  getFile(path, selectedLanguageIndex);
                 break;

@@ -358,8 +358,8 @@
                 <name>{{ gameTypeStimulusReaction }}</name>
                 <image resourceType="JAR">defaultImgs/stimulus_game.png</image>
                 <sound resourceType="BUNDLE">sounds/games/stimulus_reaction.mp3</sound>
-                <winSound resourceType="JAR">sounds/win.mp3</winSound>
-                <errorSound resourceType="JAR">sounds/error.mp3</errorSound>
+                <winSound resourceType="BUNDLE">sounds/win.mp3</winSound>
+                <errorSound resourceType="BUNDLE">sounds/error.mp3</errorSound>
                 <games>
                     <game name="Game 1" enabled="true">            
                         <difficulty>4</difficulty>
@@ -437,8 +437,8 @@
                 <name>{{ gameTypeTimeSequence }}</name>
                 <image resourceType="JAR">defaultImgs/sequence_game.png</image>
                 <sound resourceType="BUNDLE">sounds/games/time_sequence.mp3</sound>
-                <winSound resourceType="JAR">sounds/win.mp3</winSound>
-                <errorSound resourceType="JAR">sounds/error.mp3</errorSound>
+                <winSound resourceType="BUNDLE">sounds/win.mp3</winSound>
+                <errorSound resourceType="BUNDLE">sounds/error.mp3</errorSound>
                 <games>
                     <game name="Game 1" enabled="true">                
                         <difficulty>4</difficulty>                    
@@ -518,8 +518,8 @@
                 <name>{{ gameTypeFindTheSimilar }}</name>
                 <image resourceType="JAR">defaultImgs/similarity_game.png</image>
                 <sound resourceType="BUNDLE">sounds/games/stimulus_reaction.mp3</sound>
-                <winSound resourceType="JAR">sounds/winSound.mp3</winSound>
-                <errorSound resourceType="JAR">sounds/errorSound.mp3</errorSound>
+                <winSound resourceType="BUNDLE">sounds/winSound.mp3</winSound>
+                <errorSound resourceType="BUNDLE">sounds/errorSound.mp3</errorSound>
                 <games>
                     <game name="Game 1" enabled="true">                    
                         <difficulty>3</difficulty>                        
