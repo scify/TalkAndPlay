@@ -110,8 +110,8 @@ public class MainPanel extends javax.swing.JPanel {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     if (evt.getClickCount() == 2) {
 
-                        boolean found = new NativeDiscovery().discover();
-                        if (found) {
+                        /*boolean found = new NativeDiscovery().discover();
+                        if (found) {*/
 
                             GridFrame imagesFrame;
                             try {
@@ -123,9 +123,9 @@ public class MainPanel extends javax.swing.JPanel {
                             } catch (IOException ex) {
                                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                        } else {
+                        /*} else {
                             JOptionPane.showMessageDialog(parent, rm.getTextOfXMLTag("vlcMissingMessage"));
-                        }
+                        }*/
                     }
                 }
             });

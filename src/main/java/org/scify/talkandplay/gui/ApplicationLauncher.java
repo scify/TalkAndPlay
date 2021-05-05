@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
+import com.sun.javafx.application.PlatformImpl;
 import io.sentry.Sentry;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -45,6 +46,7 @@ public class ApplicationLauncher {
         MainFrame mainFrame = new MainFrame();
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
+        PlatformImpl.startup(() -> {});
     }
 
     /**

@@ -58,7 +58,7 @@ public class GridPanel extends BaseGridPanel {
         panelList = new ArrayList<>();
 
         if (user.getCommunicationModule().isEnabled()) {
-            JPanel communicationPanel = tileCreator.create(user.getCommunicationModule().getName(),
+             JPanel communicationPanel = tileCreator.create(user.getCommunicationModule().getName(),
                     user.getCommunicationModule().getImageResource(),
                     user.getCommunicationModule().getSoundResource(),
                     new TileAction() {
