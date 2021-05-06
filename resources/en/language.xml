@@ -184,6 +184,7 @@
     <communicationCat id="6" subId= "3">Anger</communicationCat>
     <communicationCat id="6" subId= "4">Disgust</communicationCat>
     <communicationCat id="6" subId= "5">Fear</communicationCat>
+	<communicationCat id="6" subId= "6">Love</communicationCat>
     <communicationCat id="7" subId= "0">Pain</communicationCat>
     <communicationCat id="7" subId= "1">Head-pain</communicationCat>
     <communicationCat id="7" subId= "2">Leg-pain</communicationCat>

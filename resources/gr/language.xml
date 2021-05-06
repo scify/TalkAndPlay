@@ -184,6 +184,7 @@
     <communicationCat id="6" subId= "3">Θυμός</communicationCat>
     <communicationCat id="6" subId= "4">Αηδία</communicationCat>
     <communicationCat id="6" subId= "5">Φόβος</communicationCat>
+	<communicationCat id="6" subId= "6">Αγάπη</communicationCat>
     <communicationCat id="7" subId= "0">Πόνος</communicationCat>
     <communicationCat id="7" subId= "1">Πόνος στο κεφάλι</communicationCat>
     <communicationCat id="7" subId= "2">Πόνος στο πόδι</communicationCat>

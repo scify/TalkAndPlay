@@ -164,7 +164,11 @@
                         <category name="{{ 6:5 }}" enabled="true">
                             <image resourceType="BUNDLE">images/communication/emotions/fear.png</image>
                             <sound resourceType="BUNDLE">sounds/communication/emotions/fear.mp3</sound>                    
-                        </category>                    
+                        </category>
+						<category name="{{ 6:6 }}" enabled="true">
+                            <image resourceType="BUNDLE">images/communication/emotions/love.png</image>
+                            <sound resourceType="BUNDLE">sounds/communication/emotions/love.mp3</sound>                    
+                        </category>						
                     </categories>
                 </category>
                 <category name="{{ 7:0 }}" enabled="true" languages="en de gr">
