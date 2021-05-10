@@ -15,24 +15,19 @@
  */
 package org.scify.talkandplay.gui.grid.entertainment;
 
+import javafx.scene.media.MediaPlayer;
 import org.scify.talkandplay.gui.grid.BaseMediaPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.selectors.Selector;
 import org.scify.talkandplay.gui.helpers.FileExtensions;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.utils.ResourceType;
-import uk.co.caprica.vlcj.player.base.MediaPlayer;
-import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
-import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
-import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
 public class VideoPanel extends BaseMediaPanel {
-
-    private EmbeddedMediaPlayerComponent mediaPlayerComponent;
 
     private JPanel playPanel;
     private VideoFrame videoFrame;
@@ -41,7 +36,6 @@ public class VideoPanel extends BaseMediaPanel {
         super(user, parent,
                 user.getEntertainmentModule().getVideoModule().getFolderPath(),
                 FileExtensions.getVideoExtensions());
-        mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
         filesPanel = new FilesPanel(user, files, this);
 
         initComponents();
@@ -79,7 +73,7 @@ public class VideoPanel extends BaseMediaPanel {
         } else {
 
             add(filesPanel, c);
-            mediaPlayerPanel.getAudioPlayer().mediaPlayer().events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
+            /*mediaPlayerPanel.getAudioPlayer().mediaPlayer().events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
                 @Override
                 public void finished(MediaPlayer mediaPlayer) {
                     setPlayButton();
@@ -94,7 +88,7 @@ public class VideoPanel extends BaseMediaPanel {
                 public void paused(MediaPlayer mediaPlayer) {
                     setPlayButton();
                 }
-            });
+            });*/
         }
 
         revalidate();
@@ -143,11 +137,18 @@ public class VideoPanel extends BaseMediaPanel {
 
     }
 
-    public EmbeddedMediaPlayerComponent getMediaPlayerComponent() {
+    /*public EmbeddedMediaPlayerComponent getMediaPlayerComponent() {
         return this.mediaPlayerComponent;
+    }*/
+
+    public MediaPlayerPanel getMediaPlayerPanel() {
+        return this.mediaPlayerPanel;
     }
 
-    public EmbeddedMediaPlayer getMediaPlayer() {
-        return this.mediaPlayerComponent.mediaPlayer();
+    public void disposeMediaPlayer() {
+        MediaPlayer mediaPlayer = this.mediaPlayerPanel.getMediaPlayer();
+        if (mediaPlayer != null) {
+            this.mediaPlayerPanel.stop();
+        }
     }
 }

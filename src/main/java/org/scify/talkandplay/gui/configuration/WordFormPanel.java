@@ -34,6 +34,8 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.Category;
@@ -44,7 +46,6 @@ import org.scify.talkandplay.utils.ImageResource;
 import org.scify.talkandplay.utils.ResourceManager;
 import org.scify.talkandplay.utils.ResourceType;
 import org.scify.talkandplay.utils.SoundResource;
-import uk.co.caprica.vlcj.player.component.AudioPlayerComponent;
 
 public class WordFormPanel extends javax.swing.JPanel {
 
@@ -57,7 +58,7 @@ public class WordFormPanel extends javax.swing.JPanel {
     private CategoryService categoryService;
     private UserService userService;
     private ConfigurationPanel parent;
-    private AudioPlayerComponent audioPlayer;
+    private MediaPlayer audioPlayer;
     private File currentDirectory;
     protected ResourceManager rm;
 
@@ -70,7 +71,7 @@ public class WordFormPanel extends javax.swing.JPanel {
         this.userService = new UserService();
         this.category = category;
         this.parent = parent;
-        this.audioPlayer = new AudioPlayerComponent();
+        this.audioPlayer = null;
         this.rm = ResourceManager.getInstance();
         initComponents();
         initCustomComponents();
@@ -547,7 +548,23 @@ public class WordFormPanel extends javax.swing.JPanel {
                     uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
                 } else {
                     uploadSoundLabel.setIcon(new ImageIcon(rm.getImage("sound-icon-hover.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
-                    audioPlayer.mediaPlayer().media().play(soundResource.getSound().getAbsolutePath());
+                    Media media = new Media(new File(soundResource.getSound().getAbsolutePath()).toURI().toString());
+                    if (audioPlayer != null) {
+                        audioPlayer.stop();
+                        audioPlayer.dispose();
+                        audioPlayer = null;
+                    }
+                    audioPlayer = new MediaPlayer(media);
+                    audioPlayer.setOnEndOfMedia(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (audioPlayer != null) {
+                                audioPlayer.dispose();
+                                audioPlayer = null;
+                            }
+                        }
+                    });
+                    audioPlayer.play();
                 }
             }
 

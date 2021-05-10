@@ -26,6 +26,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import org.scify.talkandplay.gui.grid.selectors.ButtonSelector;
 import org.scify.talkandplay.gui.grid.selectors.ManualButtonSelector;
 import org.scify.talkandplay.gui.grid.selectors.MouseSelector;
@@ -39,9 +41,6 @@ import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.SensorService;
 import org.scify.talkandplay.utils.ResourceManager;
 import org.scify.talkandplay.utils.ResourceType;
-import uk.co.caprica.vlcj.player.base.MediaPlayer;
-import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
-import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 
 /**
  *
@@ -49,7 +48,7 @@ import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
  */
 public class VideoFrame extends javax.swing.JFrame {
 
-    private EmbeddedMediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer;
     private JPanel emptyPanel;
     private VideoPanel parent;
     private FilesPanel filesPanel;
@@ -61,7 +60,7 @@ public class VideoFrame extends javax.swing.JFrame {
     protected ResourceManager rm;
 
     public VideoFrame(User user, String currentFile, VideoPanel parent, FilesPanel filesPanel) {
-        this.mediaPlayer = parent.getMediaPlayer();
+        this.mediaPlayer = parent.getMediaPlayerPanel().getMediaPlayer();
         this.currentFile = currentFile;
         this.user = user;
         this.parent = parent;
@@ -137,7 +136,7 @@ public class VideoFrame extends javax.swing.JFrame {
 
     private void initMediaPlayer() {
 
-        mediaPlayer.events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
+        /*mediaPlayer.events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
             @Override
             public void playing(MediaPlayer mediaPlayer) {
                 mediaPlayer.audio().setMute(false);
@@ -170,26 +169,26 @@ public class VideoFrame extends javax.swing.JFrame {
                     }
                 });
             }
-        });
+        });*/
 
         videoPanel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor)) {
+                /*if (sensorService.shouldSelect(sensor)) {
                     if (mediaPlayer.fullScreen().isFullScreen()) {
                         mediaPlayer.fullScreen().set(false);
                     }
-                }
+                }*/
             }
         });
         videoPanel.addKeyListener(new KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
-                if (sensorService.shouldSelect(sensor)) {
+                /*if (sensorService.shouldSelect(sensor)) {
                     if (mediaPlayer.fullScreen().isFullScreen()) {
                         mediaPlayer.fullScreen().set(false);
                     }
-                }
+                }*/
             }
         });
     }
@@ -197,7 +196,9 @@ public class VideoFrame extends javax.swing.JFrame {
     private void initCustomComponents() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        videoPanel.add(parent.getMediaPlayerComponent(), BorderLayout.CENTER);
+
+
+        //videoPanel.add(parent.getMediaPlayerComponent(), BorderLayout.CENTER);
 
         wrapperPanel.setLayout(new BoxLayout(wrapperPanel, BoxLayout.Y_AXIS));
         wrapperPanel.add(playerPanel);
@@ -209,17 +210,21 @@ public class VideoFrame extends javax.swing.JFrame {
 
     public void playMedia(String file) {
         currentFile = file;
-        mediaPlayer.media().prepare(file);
-        mediaPlayer.media().parsing().parse();
+        //mediaPlayer.media().prepare(file);
+        //mediaPlayer.media().parsing().parse();
+        Media media = new Media(new File(file).toURI().toString());
 
-        long length = mediaPlayer.status().length();
+        mediaPlayer = new MediaPlayer(media);
+
+
+        double length = mediaPlayer.getMedia().getDuration().toMillis();
         int secs = (int) (length / 1000) % 60;
         int mins = (int) ((length / (1000 * 60)) % 60);
         int hrs = (int) ((length / (1000 * 60 * 60)) % 24);
 
         playerPanel.setEndLabel(Time.getTime(hrs, mins, secs));
         playerPanel.setPauseButton();
-        mediaPlayer.media().play(file);
+        mediaPlayer.play();
         setVisible(true);
 
         selector.setDefaultBackgroundColor(UIConstants.grey);
@@ -266,20 +271,20 @@ public class VideoFrame extends javax.swing.JFrame {
         playerPanel.getPlayPanel().addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor) && mediaPlayer.status().isPlaying()) {
-                    mediaPlayer.controls().pause();
-                } else if (sensorService.shouldSelect(sensor) && !mediaPlayer.status().isPlaying()) {
-                    mediaPlayer.controls().play();
+                if (sensorService.shouldSelect(sensor) && mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING)) {
+                    mediaPlayer.pause();
+                } else if (sensorService.shouldSelect(sensor) && !mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING)) {
+                    mediaPlayer.play();
                 }
             }
         });
         playerPanel.getPlayPanel().addKeyListener(new KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
-                if (sensorService.shouldSelect(sensor) && mediaPlayer.status().isPlaying()) {
-                    mediaPlayer.controls().pause();
-                } else if (sensorService.shouldSelect(sensor) && !mediaPlayer.status().isPlaying()) {
-                    mediaPlayer.controls().play();
+                if (sensorService.shouldSelect(sensor) && mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING)) {
+                    mediaPlayer.pause();
+                } else if (sensorService.shouldSelect(sensor) && !mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING)) {
+                    mediaPlayer.play();
                 }
             }
         });
@@ -288,11 +293,11 @@ public class VideoFrame extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    if (mediaPlayer.status().isPlaying()) {
-                        mediaPlayer.controls().play();
+                    if (mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING)) {
+                        mediaPlayer.play();
                     }
                     selector.cancel();
-                    mediaPlayer.controls().stop();
+                    mediaPlayer.stop();
                     parent.getSelector().start();
                     dispose();
                 }
@@ -302,11 +307,11 @@ public class VideoFrame extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
-                    if (mediaPlayer.status().isPlaying()) {
-                        mediaPlayer.controls().play();
+                    if (mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING)) {
+                        mediaPlayer.play();
                     }
                     selector.cancel();
-                    mediaPlayer.controls().stop();
+                    mediaPlayer.stop();
                     parent.getSelector().start();
                     dispose();
                 }
@@ -316,7 +321,7 @@ public class VideoFrame extends javax.swing.JFrame {
             @Override
             public void windowClosing(WindowEvent we) {
                 selector.cancel();
-                mediaPlayer.controls().stop();
+                mediaPlayer.stop();
                 parent.getSelector().start();
                 dispose();
             }

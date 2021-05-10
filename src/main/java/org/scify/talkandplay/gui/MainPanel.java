@@ -45,7 +45,6 @@ import org.scify.talkandplay.services.UserService;
 import org.scify.talkandplay.utils.ResourceManager;
 import org.scify.talkandplay.utils.ResourceType;
 import org.scify.talkandplay.utils.TalkAndPlayProfileConfiguration;
-import uk.co.caprica.vlcj.factory.discovery.NativeDiscovery;
 
 /**
  * @author christina

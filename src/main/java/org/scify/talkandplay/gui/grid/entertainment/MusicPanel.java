@@ -41,8 +41,6 @@ import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.utils.ResourceType;
-import uk.co.caprica.vlcj.player.base.MediaPlayer;
-import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
 
 public class MusicPanel extends BaseMediaPanel {
 
@@ -102,7 +100,7 @@ public class MusicPanel extends BaseMediaPanel {
             c.gridy++;
             add(playerPanel, c);
 
-            mediaPlayerPanel.getAudioPlayer().mediaPlayer().events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
+            /*mediaPlayerPanel.getAudioPlayer().mediaPlayer().events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
                 @Override
                 public void finished(MediaPlayer mediaPlayer) {
                     setPlayButton();
@@ -119,7 +117,7 @@ public class MusicPanel extends BaseMediaPanel {
                 public void paused(MediaPlayer mediaPlayer) {
                     setPlayButton();
                 }
-            });
+            });*/
         }
 
         revalidate();
@@ -252,9 +250,9 @@ public class MusicPanel extends BaseMediaPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
-                    mediaPlayerPanel.getAudioPlayer().mediaPlayer().controls().pause();
+                    mediaPlayerPanel.getMediaPlayer().pause();
                 } else if (sensorService.shouldSelect(sensor) && !mediaPlayerPanel.isPlaying()) {
-                    mediaPlayerPanel.getAudioPlayer().mediaPlayer().controls().play();
+                    mediaPlayerPanel.getMediaPlayer().play();
                 }
             }
         });
@@ -262,9 +260,11 @@ public class MusicPanel extends BaseMediaPanel {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor) && mediaPlayerPanel.isPlaying()) {
-                    mediaPlayerPanel.getAudioPlayer().mediaPlayer().controls().pause();
+                    mediaPlayerPanel.getMediaPlayer().pause();
+                    setPlayButton();
                 } else if (sensorService.shouldSelect(sensor) && !mediaPlayerPanel.isPlaying()) {
-                    mediaPlayerPanel.getAudioPlayer().mediaPlayer().controls().play();
+                    mediaPlayerPanel.getMediaPlayer().play();
+                    setPauseButton();
                 }
             }
         });
@@ -328,7 +328,7 @@ public class MusicPanel extends BaseMediaPanel {
 
             filesPanel.setSelected(selected);
             currentFile = filesPanel.getFileList().get(selected);
-            mediaPlayerPanel.getAudioPlayer().mediaPlayer().controls().stop();
+            mediaPlayerPanel.getMediaPlayer().stop();
             mediaPlayerPanel.playMedia(getFilePath(filesPanel.getFileList().get(selected)));
         }
     }
@@ -344,7 +344,7 @@ public class MusicPanel extends BaseMediaPanel {
 
             filesPanel.setSelected(selected);
             currentFile = filesPanel.getFileList().get(selected);
-            mediaPlayerPanel.getAudioPlayer().mediaPlayer().controls().stop();
+            mediaPlayerPanel.getMediaPlayer().stop();
             mediaPlayerPanel.playMedia(getFilePath(filesPanel.getFileList().get(selected)));
         }
     }

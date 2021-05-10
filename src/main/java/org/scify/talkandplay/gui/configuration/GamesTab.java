@@ -22,6 +22,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -33,6 +34,9 @@ import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import jdk.jfr.MemoryAddress;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
@@ -43,7 +47,6 @@ import org.scify.talkandplay.utils.ResourceManager;
 import org.scify.talkandplay.utils.ResourceType;
 import org.scify.talkandplay.utils.SoundResource;
 import org.scify.talkandplay.utils.XMLConfigurationHandler;
-import uk.co.caprica.vlcj.player.component.AudioPlayerComponent;
 
 public class GamesTab extends javax.swing.JPanel {
 
@@ -54,18 +57,17 @@ public class GamesTab extends javax.swing.JPanel {
     private List<GamePanel> gamePanels;
     private String currentGameType;
     private SoundResource winSound, errorSound;
-    private AudioPlayerComponent audioPlayer;
     private GameCollection gameCollection = null;
     private ResourceManager rm;
+    MediaPlayer audioPlayer;
 
     public GamesTab(User user, ConfigurationPanel parent) {
         this.user = user;
         this.guiHelper = new GuiHelper();
         this.gameService = new GameService();
         this.parent = parent;
-        this.audioPlayer = new AudioPlayerComponent();
         this.rm = ResourceManager.getInstance();
-
+        audioPlayer = null;
         initComponents();
         initCustomComponents();
     }
@@ -486,11 +488,16 @@ public class GamesTab extends javax.swing.JPanel {
     }//GEN-LAST:event_saveButtonMouseClicked
 
     public void playMedia(String path) {
-        audioPlayer.mediaPlayer().media().play(path);
+        Media media = new Media(new File(path).toURI().toString());
+        audioPlayer = new MediaPlayer(media);
+        audioPlayer.play();
     }
 
     public void stopPlayer() {
-        audioPlayer.mediaPlayer().release();
+        if (audioPlayer != null) {
+            audioPlayer.dispose();
+            audioPlayer = null;
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
