@@ -24,6 +24,7 @@ import javax.swing.border.LineBorder;
 
 import com.sun.javafx.application.PlatformImpl;
 import io.sentry.Sentry;
+import javafx.application.Platform;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.scify.talkandplay.gui.helpers.UIConstants;
@@ -47,6 +48,7 @@ public class ApplicationLauncher {
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
         PlatformImpl.startup(() -> {});
+        Platform.setImplicitExit(false);
     }
 
     /**

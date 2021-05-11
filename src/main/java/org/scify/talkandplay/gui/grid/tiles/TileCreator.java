@@ -168,6 +168,7 @@ public class TileCreator {
         audioPlayer.setOnEndOfMedia(new Runnable() {
             @Override
             public void run() {
+                audioPlayer.dispose();
                 tileAction.audioFinished();
             }
         });

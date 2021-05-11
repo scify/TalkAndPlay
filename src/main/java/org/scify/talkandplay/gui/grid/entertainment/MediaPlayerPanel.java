@@ -17,10 +17,7 @@ package org.scify.talkandplay.gui.grid.entertainment;
 
 import java.awt.Font;
 import java.io.File;
-import java.time.Clock;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
 import javafx.application.Platform;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -68,36 +65,7 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
     }
 
     private void initAudioPlayer() {
-
         mediaSlider.setEnabled(false);
-        //audioPlayer.mediaPlayer().audio().setMute(false);
-        /*audioPlayer.mediaPlayer().events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
-
-            @Override
-            public void opening(MediaPlayer mediaPlayer) {
-            }
-
-            @Override
-            public void playing(MediaPlayer mediaPlayer) {
-                audioPlayer.mediaPlayer().audio().setMute(false);
-            }
-
-            @Override
-            public void positionChanged(MediaPlayer mp, float f) {
-                int iPos = (int) (f * 100.0);
-                mediaSlider.setValue(iPos);
-            }
-
-            @Override
-            public void timeChanged(MediaPlayer mediaPlayer, final long newTime) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        startLabel.setText(String.format("%s", Time.formatTime(newTime)));
-                    }
-                });
-            }
-        });*/
     }
 
     private void initCustomComponents() {
@@ -106,7 +74,7 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
         endLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
     }
 
-    public void playMedia(String path) {
+    public void playMedia(String path, boolean isVideo) {
         mediaSlider.setValue(0);
 
         Media media = new Media(new File(path).toURI().toString());
@@ -123,7 +91,8 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
             }
         });
         mediaPlayer.play();
-        startTimer();
+        if(!isVideo)
+            startTimer();
     }
 
     /**

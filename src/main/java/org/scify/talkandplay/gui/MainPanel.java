@@ -108,23 +108,16 @@ public class MainPanel extends javax.swing.JPanel {
             userPanel.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     if (evt.getClickCount() == 2) {
-
-                        /*boolean found = new NativeDiscovery().discover();
-                        if (found) {*/
-
-                            GridFrame imagesFrame;
-                            try {
-                                imagesFrame = new GridFrame(user.getName());
-                                imagesFrame.setLocationRelativeTo(null);
-                                imagesFrame.setTitle("Talk&Play");
-                                imagesFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                                imagesFrame.setVisible(true);
-                            } catch (IOException ex) {
-                                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        /*} else {
-                            JOptionPane.showMessageDialog(parent, rm.getTextOfXMLTag("vlcMissingMessage"));
-                        }*/
+                        GridFrame imagesFrame;
+                        try {
+                            imagesFrame = new GridFrame(user.getName());
+                            imagesFrame.setLocationRelativeTo(null);
+                            imagesFrame.setTitle("Talk&Play");
+                            imagesFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                            imagesFrame.setVisible(true);
+                        } catch (IOException ex) {
+                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 }
             });

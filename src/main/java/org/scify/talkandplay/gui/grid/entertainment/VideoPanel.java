@@ -73,22 +73,6 @@ public class VideoPanel extends BaseMediaPanel {
         } else {
 
             add(filesPanel, c);
-            /*mediaPlayerPanel.getAudioPlayer().mediaPlayer().events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
-                @Override
-                public void finished(MediaPlayer mediaPlayer) {
-                    setPlayButton();
-                }
-
-                @Override
-                public void playing(MediaPlayer mediaPlayer) {
-                    setPauseButton();
-                }
-
-                @Override
-                public void paused(MediaPlayer mediaPlayer) {
-                    setPlayButton();
-                }
-            });*/
         }
 
         revalidate();
@@ -146,9 +130,9 @@ public class VideoPanel extends BaseMediaPanel {
     }
 
     public void disposeMediaPlayer() {
-        MediaPlayer mediaPlayer = this.mediaPlayerPanel.getMediaPlayer();
+        MediaPlayer mediaPlayer = mediaPlayerPanel.getMediaPlayer();
         if (mediaPlayer != null) {
-            this.mediaPlayerPanel.stop();
+            mediaPlayerPanel.stop();
         }
     }
 }

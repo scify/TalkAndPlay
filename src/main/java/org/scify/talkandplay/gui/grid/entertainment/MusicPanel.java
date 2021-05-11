@@ -99,25 +99,6 @@ public class MusicPanel extends BaseMediaPanel {
             add(mediaPlayerPanel, c);
             c.gridy++;
             add(playerPanel, c);
-
-            /*mediaPlayerPanel.getAudioPlayer().mediaPlayer().events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
-                @Override
-                public void finished(MediaPlayer mediaPlayer) {
-                    setPlayButton();
-                    playingNow.setText(" ");
-                }
-
-                @Override
-                public void playing(MediaPlayer mediaPlayer) {
-                    setPauseButton();
-                    playingNow.setText(rm.getTextOfXMLTag("playingNow") + ": " + currentFile);
-                }
-
-                @Override
-                public void paused(MediaPlayer mediaPlayer) {
-                    setPlayButton();
-                }
-            });*/
         }
 
         revalidate();
@@ -200,7 +181,7 @@ public class MusicPanel extends BaseMediaPanel {
     public void playFile(String fileName) {
         currentFile = fileName;
         selector.cancel();
-        mediaPlayerPanel.playMedia(getFilePath(fileName));
+        mediaPlayerPanel.playMedia(getFilePath(fileName), false);
         setPauseButton();
         selector.setList(controlsList);
         selector.start();
@@ -329,7 +310,7 @@ public class MusicPanel extends BaseMediaPanel {
             filesPanel.setSelected(selected);
             currentFile = filesPanel.getFileList().get(selected);
             mediaPlayerPanel.getMediaPlayer().stop();
-            mediaPlayerPanel.playMedia(getFilePath(filesPanel.getFileList().get(selected)));
+            mediaPlayerPanel.playMedia(getFilePath(filesPanel.getFileList().get(selected)), false);
         }
     }
 
@@ -345,7 +326,7 @@ public class MusicPanel extends BaseMediaPanel {
             filesPanel.setSelected(selected);
             currentFile = filesPanel.getFileList().get(selected);
             mediaPlayerPanel.getMediaPlayer().stop();
-            mediaPlayerPanel.playMedia(getFilePath(filesPanel.getFileList().get(selected)));
+            mediaPlayerPanel.playMedia(getFilePath(filesPanel.getFileList().get(selected)), false);
         }
     }
 

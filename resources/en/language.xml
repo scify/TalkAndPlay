@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <languageTexts>
     <language>English</language>
-    <vlcMissingMessage>Please first install VLC and try again</vlcMissingMessage>
     <createdBy>Created by</createdBy>
     <donationBy>Exclusive donation</donationBy>
     <updateInProgress1>The application is updating</updateInProgress1>
