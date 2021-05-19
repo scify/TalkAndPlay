@@ -65,17 +65,19 @@ public class XMLConfigurationHandler {
     public XMLConfigurationHandler() {
         properties = Properties.getInstance();
         configurationFilePath = properties.getApplicationDataFolder() + File.separator + "conf.xml";
-        //defaultUserConfigurationFilePath = properties.getApplicationFolder() + File.separator + "defaultUser.xml";
         rm = ResourceManager.getInstance();
         initConfigurationFile();
     }
 
     private void initConfigurationFile() {
         try {
+            logger.info("Searching for conf.xml at: " + configurationFilePath);
             File configurationFile = new File(configurationFilePath);
             if (!configurationFile.exists()) {
                 logger.info("Configuration file not found.");
                 createLocalConfigurationFile();
+            } else {
+                logger.info("Loading:" +configurationFilePath);
             }
             if (parseConfigurationFileXML(true))
                 writeToXmlFile();
