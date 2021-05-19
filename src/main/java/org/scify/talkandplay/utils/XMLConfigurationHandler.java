@@ -46,7 +46,8 @@ import java.util.logging.Level;
  */
 public class XMLConfigurationHandler {
 
-    protected String configurationFilePath;
+    protected String localConfFilePath;
+    protected String globalConfFilePath;
     //protected String defaultUserConfigurationFilePath;
     protected Document configurationXmlDocument;
 
@@ -64,20 +65,31 @@ public class XMLConfigurationHandler {
 
     public XMLConfigurationHandler() {
         properties = Properties.getInstance();
-        configurationFilePath = properties.getApplicationDataFolder() + File.separator + "conf.xml";
+        localConfFilePath = properties.getApplicationDataFolder() + File.separator + "conf.xml";
+        globalConfFilePath = properties.getApplicationFolder() + File.separator + "conf.xml";
         rm = ResourceManager.getInstance();
         initConfigurationFile();
     }
 
     private void initConfigurationFile() {
         try {
-            logger.info("Searching for conf.xml at: " + configurationFilePath);
-            File configurationFile = new File(configurationFilePath);
-            if (!configurationFile.exists()) {
-                logger.info("Configuration file not found.");
+            double versionOfGlobalConf = getConfVersion(globalConfFilePath);
+            logger.info("Searching for conf.xml at: " + localConfFilePath);
+            File localConfFile = new File(localConfFilePath);
+            if (!localConfFile.exists()) {
+                logger.info("Local conf.xml file not found!");
                 createLocalConfigurationFile();
             } else {
-                logger.info("Loading:" +configurationFilePath);
+                logger.info("Loading version of: " + localConfFilePath);
+                double versionOfLocalConf = getConfVersion(localConfFilePath);
+                logger.info("Global version: " + versionOfGlobalConf);
+                logger.info("Local version: " + versionOfLocalConf);
+                if (versionOfLocalConf == versionOfGlobalConf) {
+                    logger.info("Same versions found. Loading: " + localConfFilePath);
+                } else {
+                    logger.info("Versions differ creating a new local conf.xml");
+                    createLocalConfigurationFile();
+                }
             }
             if (parseConfigurationFileXML(true))
                 writeToXmlFile();
@@ -89,19 +101,10 @@ public class XMLConfigurationHandler {
     }
 
     private void createLocalConfigurationFile() throws IOException {
-        String defaultConfigurationFilePath = properties.getApplicationFolder() + File.separator + "conf.xml";
-        File configurationFile = new File(configurationFilePath);
-        File defaultConfigurationFile = new File(defaultConfigurationFilePath);
-        if (defaultConfigurationFile.exists()) {
-            logger.info("Copying default configuration file from: " + defaultConfigurationFile + " to: " + configurationFilePath);
-            FileUtils.copyFile(defaultConfigurationFile, configurationFile);
-        } else {
-            logger.info("Default configuration file not found. Creating a new empty configuration file at:" + configurationFilePath);
-            PrintWriter writer = new PrintWriter(configurationFilePath, "UTF-8");
-            writer.println("<?xml version=\"1.0\"?>\n"
-                    + "<profiles></profiles>");
-            writer.close();
-        }
+        File globalConfigurationFile = new File(globalConfFilePath);
+        File localConfigurationFile = new File(localConfFilePath);
+        logger.info("Copying default configuration file from: " + globalConfFilePath + " to: " + localConfFilePath);
+        FileUtils.copyFile(globalConfigurationFile, localConfigurationFile);
     }
 
     public User getDefaultUser() {
@@ -120,6 +123,15 @@ public class XMLConfigurationHandler {
         return null;
     }
 
+    protected double getConfVersion(String fileName) throws Exception {
+        File configurationFile = new File(fileName);
+        SAXBuilder builder = new SAXBuilder();
+        Document xmlDoc = builder.build(configurationFile);
+        Element root = xmlDoc.getRootElement();
+        String version = root.getChild("defaultProfile").getAttributeValue("version");
+        return Double.parseDouble(version);
+    }
+
     /**
      * Parse the XML file that holds all users' configuration
      *
@@ -130,7 +142,7 @@ public class XMLConfigurationHandler {
 
         boolean needsSave = false;
 
-        File configurationFile = new File(configurationFilePath);
+        File configurationFile = new File(localConfFilePath);
         SAXBuilder builder = new SAXBuilder();
         configurationXmlDocument = builder.build(configurationFile);
         userFiles = new HashMap();
@@ -693,7 +705,7 @@ public class XMLConfigurationHandler {
         XMLOutputter xmlOutput = new XMLOutputter();
         xmlOutput.setFormat(Format.getPrettyFormat());
         xmlOutput.output(configurationXmlDocument, new OutputStreamWriter(
-                new FileOutputStream(new File(configurationFilePath)), "UTF-8"));
+                new FileOutputStream(new File(localConfFilePath)), "UTF-8"));
     }
 
     protected Element createNewProfile(String name) {
