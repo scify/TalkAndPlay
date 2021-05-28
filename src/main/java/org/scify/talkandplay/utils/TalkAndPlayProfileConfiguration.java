@@ -26,12 +26,14 @@ public class TalkAndPlayProfileConfiguration {
 
     public TalkAndPlayProfileConfiguration(File dataDir) {
         this.dataDir = dataDir;
-        xmlConfigurationHandler = new XMLConfigurationHandler(dataDir);
+        xmlConfigurationHandler = null;
         instance = this;
     }
     
     public XMLConfigurationHandler getConfigurationHandler()
     {
+        if (xmlConfigurationHandler == null)
+            xmlConfigurationHandler = new XMLConfigurationHandler(dataDir);
         return xmlConfigurationHandler;
     }
 
