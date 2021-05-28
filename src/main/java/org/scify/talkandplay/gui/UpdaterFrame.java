@@ -51,9 +51,9 @@ public class UpdaterFrame extends javax.swing.JFrame {
 
     public UpdaterFrame(String versionNumber) {
         this.versionNumber = versionNumber;
+        this.rm = ResourceManager.getInstance();
         initComponents();
         initCustomComponents();
-        this.rm = ResourceManager.getInstance();
     }
 
     private void initCustomComponents() {

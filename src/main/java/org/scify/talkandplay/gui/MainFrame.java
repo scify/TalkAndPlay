@@ -34,14 +34,16 @@ import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.utils.Properties;
 import org.scify.talkandplay.utils.ResourceManager;
 import org.scify.talkandplay.utils.ResourceType;
+import org.scify.talkandplay.utils.Updater;
 
 public class MainFrame extends javax.swing.JFrame {
 
     private final Properties prop;
+    protected final Updater updater;
     private final ResourceManager rm;
     
     public MainFrame() {
-
+        updater = new Updater();
         prop = Properties.getInstance();
         rm = ResourceManager.getInstance();
         initComponents();
@@ -210,12 +212,25 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     public void languageSelected() {
-        contentPanel.removeAll();
-        jLabel2.setText(rm.getTextOfXMLTag("createdBy"));
-        jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
-        contentPanel.add(new MainPanel(this), BorderLayout.CENTER);
-        revalidate();
-        repaint();
+        boolean willUpdate = false;
+        try {
+            if (updater.hasUpdate()) {
+                willUpdate = updater.run();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Sentry.capture(e);
+            // show frame that something went wrong and OK button to continue to the app
+            updater.showUpdateErrorMessageFrame();
+        }
+        if (!willUpdate) {
+            contentPanel.removeAll();
+            jLabel2.setText(rm.getTextOfXMLTag("createdBy"));
+            jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
+            contentPanel.add(new MainPanel(this), BorderLayout.CENTER);
+            revalidate();
+            repaint();
+        }
     }
 
     public void changePanel(JPanel newPanel) {
