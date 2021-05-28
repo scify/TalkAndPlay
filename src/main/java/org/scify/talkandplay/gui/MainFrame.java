@@ -21,6 +21,7 @@ import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,6 +41,7 @@ public class MainFrame extends javax.swing.JFrame {
     private final ResourceManager rm;
     
     public MainFrame() {
+
         prop = Properties.getInstance();
         rm = ResourceManager.getInstance();
         initComponents();
@@ -80,7 +82,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel1.setFont(jLabel1.getFont());
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("SciFY 2016 - version: " + prop.getVersion());
+        jLabel1.setText("SciFY 2021 - version: " + prop.getVersion());
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         titlePanel.setBackground(new java.awt.Color(255, 255, 255));

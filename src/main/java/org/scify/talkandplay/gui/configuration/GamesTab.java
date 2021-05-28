@@ -43,10 +43,7 @@ import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.games.Game;
 import org.scify.talkandplay.models.games.GameCollection;
 import org.scify.talkandplay.services.GameService;
-import org.scify.talkandplay.utils.ResourceManager;
-import org.scify.talkandplay.utils.ResourceType;
-import org.scify.talkandplay.utils.SoundResource;
-import org.scify.talkandplay.utils.XMLConfigurationHandler;
+import org.scify.talkandplay.utils.*;
 
 public class GamesTab extends javax.swing.JPanel {
 
@@ -109,7 +106,7 @@ public class GamesTab extends javax.swing.JPanel {
 
     public void showGamesPerType(String type) {
         //refresh user from configuration file
-        XMLConfigurationHandler ch = new XMLConfigurationHandler();
+        XMLConfigurationHandler ch = TalkAndPlayProfileConfiguration.getInstance().getConfigurationHandler();
         for (User temp : ch.getUsers()) {
             if (temp.getName().equals(user.getName())) {
                 user = temp;

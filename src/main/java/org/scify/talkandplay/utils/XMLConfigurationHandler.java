@@ -46,8 +46,9 @@ import java.util.logging.Level;
  */
 public class XMLConfigurationHandler {
 
-    protected String localConfFilePath;
-    protected String globalConfFilePath;
+    protected File dataDir;
+    protected File localConfFile;
+    protected File globalConfFile;
     //protected String defaultUserConfigurationFilePath;
     protected Document configurationXmlDocument;
 
@@ -63,29 +64,29 @@ public class XMLConfigurationHandler {
     static Logger logger = Logger.getLogger(XMLConfigurationHandler.class);
     protected ResourceManager rm;
 
-    public XMLConfigurationHandler() {
+    public XMLConfigurationHandler(File dataDir) {
+        this.dataDir = dataDir;
         properties = Properties.getInstance();
-        localConfFilePath = properties.getApplicationDataFolder() + File.separator + "conf.xml";
-        globalConfFilePath = properties.getApplicationFolder() + File.separator + "conf.xml";
+        localConfFile = new File(dataDir, "conf.xml");
+        globalConfFile = new File(properties.getApplicationFolder() + File.separator + "conf.xml");
         rm = ResourceManager.getInstance();
         initConfigurationFile();
     }
 
     private void initConfigurationFile() {
         try {
-            double versionOfGlobalConf = getConfVersion(globalConfFilePath);
-            logger.info("Searching for conf.xml at: " + localConfFilePath);
-            File localConfFile = new File(localConfFilePath);
+            double versionOfGlobalConf = getConfVersion(globalConfFile);
+            logger.info("Searching for conf.xml at: " + localConfFile.getAbsolutePath());
             if (!localConfFile.exists()) {
                 logger.info("Local conf.xml file not found!");
                 createLocalConfigurationFile();
             } else {
-                logger.info("Loading version of: " + localConfFilePath);
-                double versionOfLocalConf = getConfVersion(localConfFilePath);
+                logger.info("Loading version of: " + localConfFile.getAbsolutePath());
+                double versionOfLocalConf = getConfVersion(localConfFile.getAbsoluteFile());
                 logger.info("Global version: " + versionOfGlobalConf);
                 logger.info("Local version: " + versionOfLocalConf);
                 if (versionOfLocalConf == versionOfGlobalConf) {
-                    logger.info("Same versions found. Loading: " + localConfFilePath);
+                    logger.info("Versions match, loading: " + localConfFile.getAbsolutePath());
                 } else {
                     logger.info("Versions differ creating a new local conf.xml");
                     createLocalConfigurationFile();
@@ -101,10 +102,8 @@ public class XMLConfigurationHandler {
     }
 
     private void createLocalConfigurationFile() throws IOException {
-        File globalConfigurationFile = new File(globalConfFilePath);
-        File localConfigurationFile = new File(localConfFilePath);
-        logger.info("Copying default configuration file from: " + globalConfFilePath + " to: " + localConfFilePath);
-        FileUtils.copyFile(globalConfigurationFile, localConfigurationFile);
+        logger.info("Copying default configuration file from: " + globalConfFile.getAbsolutePath() + " to: " + localConfFile.getAbsolutePath());
+        FileUtils.copyFile(globalConfFile, localConfFile);
     }
 
     public User getDefaultUser() {
@@ -123,10 +122,9 @@ public class XMLConfigurationHandler {
         return null;
     }
 
-    protected double getConfVersion(String fileName) throws Exception {
-        File configurationFile = new File(fileName);
+    protected double getConfVersion(File file) throws Exception {
         SAXBuilder builder = new SAXBuilder();
-        Document xmlDoc = builder.build(configurationFile);
+        Document xmlDoc = builder.build(file);
         Element root = xmlDoc.getRootElement();
         String version = root.getChild("defaultProfile").getAttributeValue("version");
         return Double.parseDouble(version);
@@ -142,9 +140,8 @@ public class XMLConfigurationHandler {
 
         boolean needsSave = false;
 
-        File configurationFile = new File(localConfFilePath);
         SAXBuilder builder = new SAXBuilder();
-        configurationXmlDocument = builder.build(configurationFile);
+        configurationXmlDocument = builder.build(localConfFile);
         userFiles = new HashMap();
         users = new ArrayList();
 
@@ -705,7 +702,7 @@ public class XMLConfigurationHandler {
         XMLOutputter xmlOutput = new XMLOutputter();
         xmlOutput.setFormat(Format.getPrettyFormat());
         xmlOutput.output(configurationXmlDocument, new OutputStreamWriter(
-                new FileOutputStream(new File(localConfFilePath)), "UTF-8"));
+                new FileOutputStream(localConfFile), "UTF-8"));
     }
 
     protected Element createNewProfile(String name) {

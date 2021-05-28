@@ -69,7 +69,7 @@ public class Properties {
         }
     }
 
-    private void parseXML() throws Exception {
+    private void parseXML() {
         Element properties = configurationFile.getRootElement();
 
         setVersion(properties.getChildText("version"));
@@ -117,13 +117,4 @@ public class Properties {
     public String getApplicationFolder() {
         return applicationFolder;
     }
-
-    public String getApplicationDataFolder() {
-        if(FileSystemUtils.platformIsWindows()) {
-            String path = System.getenv("APPDATA") + File.separator + "Talk and Play";
-            return path;
-        }
-        return System.getProperty("user.home") + File.separator + ".Talk and Play";
-    }
-
 }

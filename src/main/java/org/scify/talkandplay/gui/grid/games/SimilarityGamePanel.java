@@ -15,6 +15,7 @@
 */
 package org.scify.talkandplay.gui.grid.games;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -139,10 +140,15 @@ public class SimilarityGamePanel extends BaseGamePanel {
         });
         panel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
+                int keyCode = evt.getKeyCode();
+                if (keyCode == KeyEvent.VK_ESCAPE) {
+                    exit();
+                } else {
+                    Sensor sensor = new KeyboardSensor(keyCode, String.valueOf(evt.getKeyChar()), "keyboard");
 
-                if (sensorService.shouldSelect(sensor)) {
-                    act(image.getImage().getPath());
+                    if (sensorService.shouldSelect(sensor)) {
+                        act(image.getImage().getPath());
+                    }
                 }
             }
         });

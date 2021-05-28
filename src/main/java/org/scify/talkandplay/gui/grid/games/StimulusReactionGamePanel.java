@@ -17,6 +17,7 @@ package org.scify.talkandplay.gui.grid.games;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -31,6 +32,8 @@ import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.games.GameImage;
 import org.scify.talkandplay.models.games.GameCollection;
 import org.scify.talkandplay.models.games.StimulusReactionGame;
+import org.scify.talkandplay.models.sensors.KeyboardSensor;
+import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.utils.ResourceType;
 import org.scify.talkandplay.utils.SoundResource;
 
@@ -165,7 +168,16 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
                     public boolean mute() {
                         return true;
                     }
-                });        
+                });
+
+        panel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                int keyCode = evt.getKeyCode();
+                if (keyCode == KeyEvent.VK_ESCAPE) {
+                    exit();
+                }
+            }
+        });
 
         panelList.add(panel);
         selector.setList(panelList);
