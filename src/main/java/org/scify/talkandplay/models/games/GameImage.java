@@ -1,19 +1,23 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.scify.talkandplay.models.games;
+
+import org.scify.talkandplay.utils.ImageResource;
+import org.scify.talkandplay.utils.ResourceType;
+import org.scify.talkandplay.utils.SoundResource;
 
 /**
  *
@@ -21,25 +25,50 @@ package org.scify.talkandplay.models.games;
  */
 public class GameImage {
 
-    private String name;
-    private String image;
-    private String sound;
-    private int order;
-    private boolean enabled;
+    protected String name;
+    protected ImageResource imageResource;
+    protected SoundResource soundResource;
+    protected int order;
+    protected boolean enabled;
 
-    public GameImage() {
-    }
-
-    public GameImage(String name, String image, int order) {
-        this.name = name;
-        this.image = image;
-        this.order = order;
-    }
-
-    public GameImage(String image, boolean enabled, int order) {
-        this.image = image;
+    public GameImage(ImageResource imageResource, boolean enabled, int order) {
+        this.name = "";
+        this.imageResource = imageResource;
         this.enabled = enabled;
         this.order = order;
+    }
+
+    public GameImage(String name, boolean enabled, int order) {
+        this.name = name;
+        this.enabled = enabled;
+        this.order = order;
+    }
+
+    public GameImage(GameImage gameImage) {
+        name = gameImage.name;
+        enabled = gameImage.enabled;
+        order = gameImage.order;
+
+        imageResource = null;
+        if (gameImage.imageResource != null)
+            imageResource = new ImageResource(gameImage.imageResource);
+
+        soundResource = null;
+        if (gameImage.soundResource != null)
+            soundResource = new SoundResource(gameImage.soundResource);
+    }
+
+    public boolean isAltered(GameImage gameImage) {
+        if (!name.equals(gameImage.name) || order != gameImage.order || enabled != gameImage.enabled)
+            return true;
+
+        if ((imageResource != null && imageResource.isAltered(gameImage.imageResource)) || (imageResource == null && gameImage.imageResource != null))
+            return true;
+
+        if ((soundResource != null && soundResource.isAltered(gameImage.soundResource)) || (soundResource == null && gameImage.soundResource != null))
+            return true;
+
+        return false;
     }
 
     public String getName() {
@@ -50,20 +79,21 @@ public class GameImage {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
+    public ImageResource getImage() {
+        return imageResource;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImage(String path, ResourceType resourceType) {
+
+        this.imageResource = new ImageResource(path, resourceType);
     }
 
-    public String getSound() {
-        return sound;
+    public SoundResource getSound() {
+        return soundResource;
     }
 
-    public void setSound(String sound) {
-        this.sound = sound;
+    public void setSound(String path, ResourceType resourceType) {
+        this.soundResource = new SoundResource(path, resourceType);
     }
 
     public int getOrder() {

@@ -23,6 +23,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.utils.ResourceManager;
 
 public class TabsPanel extends javax.swing.JPanel {
 
@@ -31,11 +32,12 @@ public class TabsPanel extends javax.swing.JPanel {
     private CommunicationTab communicationPanel;
     private EntertainmentTab entertainmentPanel;
     private GamesTab gamesPanel;
+    protected ResourceManager rm;
 
     public TabsPanel(User user, ConfigurationPanel parent) {
         this.user = user;
         this.parent = parent;
-
+        this.rm = ResourceManager.getInstance();
         initComponents();
         initCustomComponents();
     }
@@ -73,9 +75,9 @@ public class TabsPanel extends javax.swing.JPanel {
         entertainmentPanel = new EntertainmentTab(user, parent);
         gamesPanel = new GamesTab(user, parent);
 
-        tabsPanel.addTab("Επικοινωνία", communicationPanel);
-        tabsPanel.addTab("Ψυχαγωγία", entertainmentPanel);
-        tabsPanel.addTab("Παιχνίδια", gamesPanel);
+        tabsPanel.addTab(rm.getTextOfXMLTag("communicationName"), communicationPanel);
+        tabsPanel.addTab(rm.getTextOfXMLTag("entertainmentName"), entertainmentPanel);
+        tabsPanel.addTab(rm.getTextOfXMLTag("gamesName"), gamesPanel);
 
         tabsPanel.setSelectedIndex(0);
         tabsPanel.setForegroundAt(0, Color.white);

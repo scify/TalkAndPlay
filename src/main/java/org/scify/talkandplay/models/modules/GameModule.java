@@ -17,23 +17,51 @@ package org.scify.talkandplay.models.modules;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import org.scify.talkandplay.models.games.Game;
-import org.scify.talkandplay.models.games.GameType;
+import org.scify.talkandplay.models.games.GameCollection;
 
 public class GameModule extends Module {
 
-    private List<GameType> gameTypes;
+    protected List<GameCollection> gameCollections;
+    protected Random randomGenerator;
 
     public GameModule() {
-        this.gameTypes = new ArrayList();
+        super();
+        randomGenerator = new Random();
+        this.gameCollections = new ArrayList();
     }
 
-    public List<GameType> getGameTypes() {
-        return gameTypes;
+    public List<GameCollection> getGameTypes() {
+        return gameCollections;
     }
 
-    public void setGameTypes(List<GameType> gameTypes) {
-        this.gameTypes = gameTypes;
+    public GameCollection getGameCollection(String name) {
+        for (GameCollection gameCollection : gameCollections) {
+            if (gameCollection.getGameType().equals(name))
+                return gameCollection;
+        }
+        return null;
     }
 
+    public Game getRandomGame(String gameType, String previousGame) {
+        GameCollection gameCollection = getGameCollection(gameType);
+        List<Game> enabledGames = gameCollection.getEnabledGames();
+        int randomInput = enabledGames.size();
+        if (randomInput == 0)
+            return null;
+        else if (randomInput == 1)
+            return enabledGames.get(0);
+        else {
+            Game ret = null;
+            while (ret == null) {
+                int i = randomGenerator.nextInt(randomInput);
+                if (previousGame == null || previousGame.isEmpty())
+                    ret = enabledGames.get(i);
+                else if (!enabledGames.get(i).getName().equals(previousGame))
+                    ret = enabledGames.get(i);
+            }
+            return ret;
+        }
+    }
 }

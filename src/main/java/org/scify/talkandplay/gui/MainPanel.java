@@ -1,12 +1,12 @@
 /**
  * Copyright 2016 SciFY
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -40,15 +39,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import io.sentry.Sentry;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.helpers.UIConstants;
-import org.scify.talkandplay.gui.users.UserFormPanel;
 import org.scify.talkandplay.gui.users.UserPanel;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.UserService;
+import org.scify.talkandplay.utils.ResourceManager;
+import org.scify.talkandplay.utils.ResourceType;
 import org.scify.talkandplay.utils.TalkAndPlayProfileConfiguration;
-import uk.co.caprica.vlcj.factory.discovery.NativeDiscovery;
 
 /**
- *
  * @author christina
  */
 public class MainPanel extends javax.swing.JPanel {
@@ -56,10 +54,12 @@ public class MainPanel extends javax.swing.JPanel {
     private TalkAndPlayProfileConfiguration talkAndPlayProfilesConfig;
     private List<UserPanel> userPanelList;
     private MainFrame parent;
+    private final ResourceManager rm;
 
     public MainPanel(MainFrame parent) {
         this.talkAndPlayProfilesConfig = TalkAndPlayProfileConfiguration.getInstance();
         this.parent = parent;
+        rm = ResourceManager.getInstance();
         initComponents();
         initCustomComponents();
     }
@@ -81,12 +81,12 @@ public class MainPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(usersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(usersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(usersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(usersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -108,38 +108,20 @@ public class MainPanel extends javax.swing.JPanel {
             userPanel.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     if (evt.getClickCount() == 2) {
-
-                        boolean found = new NativeDiscovery().discover();
-                        if (found) {
-
-                            GridFrame imagesFrame;
-                            try {
-                                imagesFrame = new GridFrame(user.getName());
-                                imagesFrame.setLocationRelativeTo(null);
-                                imagesFrame.setTitle("Talk&Play");
-                                imagesFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                                imagesFrame.setVisible(true);
-                            } catch (IOException ex) {
-                                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(parent,
-                                    "Εγκατέστησε το VLC και δοκίμασε ξανά");
+                        GridFrame imagesFrame;
+                        try {
+                            imagesFrame = new GridFrame(user.getName());
+                            imagesFrame.setLocationRelativeTo(null);
+                            imagesFrame.setTitle("Talk&Play");
+                            imagesFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                            imagesFrame.setVisible(true);
+                        } catch (IOException ex) {
+                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 }
             });
             userPanelList.add(userPanel);
-        }
-        repaintUsers();
-    }
-
-    public void removeUser(User selectedUser) {
-        for (UserPanel p : userPanelList) {
-            if (p.getUser().equals(selectedUser)) {
-                usersPanel.remove(p);
-                break;
-            }
         }
         repaintUsers();
     }
@@ -161,8 +143,8 @@ public class MainPanel extends javax.swing.JPanel {
         addUserPanel.setLayout(new BoxLayout(addUserPanel, BoxLayout.Y_AXIS));
         addUserPanel.setBackground(Color.white);
 
-        JLabel nameLabel = new JLabel("Πρόσθεσε νέο χρήστη");
-        final JLabel imageLabel = new JLabel(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")));
+        JLabel nameLabel = new JLabel(rm.getTextOfXMLTag("addUser"));
+        final JLabel imageLabel = new JLabel(rm.getImageIcon("add-icon.png", ResourceType.JAR));
 
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -176,35 +158,20 @@ public class MainPanel extends javax.swing.JPanel {
         imageLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent arg0) {
-                imageLabel.setIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")));
+                imageLabel.setIcon(rm.getImageIcon("add-icon.png", ResourceType.JAR));
             }
 
             @Override
             public void mouseEntered(MouseEvent arg0) {
-                imageLabel.setIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon-hover.png")));
+                imageLabel.setIcon(rm.getImageIcon("add-icon-hover.png", ResourceType.JAR));
             }
 
             @Override
             public void mouseClicked(MouseEvent arg0) {
                 UserService us = new UserService();
                 try {
-                    boolean result = us.createUserAsCopyOfDefaultUser();
-                    /**
-                     * if user is successfully created from old user's
-                     * configuration just refresh the page, else open the form
-                     * that creates a new user
-                     */
-                    if (result) {
-                        /**
-                         * redirect to the main page [it is the same page but
-                         * used to refresh content and display the newly created
-                         * user]
-                         */
-                        parent.changePanel(new MainPanel(parent));
-                    } else {
-                        // open form that creates new user
-                        parent.changePanel(new UserFormPanel(parent));
-                    }
+                    us.createUserAsCopyOfDefaultUser();
+                    parent.changePanel(new MainPanel(parent));
                 } catch (Exception ex) {
                     Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
                     Sentry.capture(ex);
@@ -218,8 +185,8 @@ public class MainPanel extends javax.swing.JPanel {
         uploadUserPanel.setLayout(new BoxLayout(uploadUserPanel, BoxLayout.Y_AXIS));
         uploadUserPanel.setBackground(Color.white);
 
-        JLabel nameLabel = new JLabel("Φόρτωσε χρήστη");
-        final JLabel imageLabel = new JLabel(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/upload-icon.png")));
+        JLabel nameLabel = new JLabel(rm.getTextOfXMLTag("loadUser"));
+        final JLabel imageLabel = new JLabel(rm.getImageIcon("upload-icon.png", ResourceType.JAR));
 
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -233,18 +200,18 @@ public class MainPanel extends javax.swing.JPanel {
         imageLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent arg0) {
-                imageLabel.setIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/upload-icon.png")));
+                imageLabel.setIcon(rm.getImageIcon("upload-icon.png", ResourceType.JAR));
             }
 
             @Override
             public void mouseEntered(MouseEvent arg0) {
-                imageLabel.setIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/upload-icon-hover.png")));
+                imageLabel.setIcon(rm.getImageIcon("upload-icon-hover.png", ResourceType.JAR));
             }
 
             @Override
             public void mouseClicked(MouseEvent arg0) {
                 JFileChooser chooser = new JFileChooser();
-                chooser.setDialogTitle("Επίλεξε αρχείο");
+                chooser.setDialogTitle(rm.getTextOfXMLTag("chooseFile"));
                 chooser.setAcceptAllFileFilterUsed(false);
                 chooser.setFileFilter(new FileNameExtensionFilter("XML files", "xml"));
                 chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -264,26 +231,6 @@ public class MainPanel extends javax.swing.JPanel {
                 }
             }
         });
-    }
-
-    public void updateUsersPanel(User user, String oldName) {
-        for (UserPanel p : userPanelList) {
-            if (p.getUser().getName().equals(oldName)) {
-                p.repaintPanel(user);
-                break;
-            }
-        }
-        repaintUsers();
-    }
-
-    public void removeFromUsersPanel(String removeUser) {
-        for (UserPanel p : userPanelList) {
-            if (p.getUser().getName().equals(removeUser)) {
-                usersPanel.remove(p);
-                break;
-            }
-        }
-        repaintUsers();
     }
 
     public List<UserPanel> getUsersPanel() {

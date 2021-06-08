@@ -23,7 +23,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -36,6 +35,8 @@ import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.UserService;
+import org.scify.talkandplay.utils.ResourceManager;
+import org.scify.talkandplay.utils.ResourceType;
 
 public class UserPanel extends javax.swing.JPanel {
 
@@ -43,6 +44,7 @@ public class UserPanel extends javax.swing.JPanel {
     private User user;
     private GuiHelper guiHelper;
     private UserService userService;
+    private final ResourceManager rm;
 
     /**
      * Creates new form ProfilePanel
@@ -52,12 +54,14 @@ public class UserPanel extends javax.swing.JPanel {
     }
 
     public UserPanel() {
+        rm = ResourceManager.getInstance();
         initComponents();
     }
 
     public UserPanel(MainFrame mainFrame, User user) {
         this.parent = mainFrame;
         this.user = user;
+        rm = ResourceManager.getInstance();
         this.guiHelper = new GuiHelper();
         this.userService = new UserService();
         initComponents();
@@ -98,22 +102,22 @@ public class UserPanel extends javax.swing.JPanel {
     private void initCustomComponents() {
         profilePanel.setLayout(new BoxLayout(profilePanel, BoxLayout.Y_AXIS));
         profilePanel.setBorder(new EmptyBorder(0, 0, 0, 20));
-        JLabel imageLabel = new JLabel(guiHelper.getRoundIcon((user.getImage())));
+        JLabel imageLabel = new JLabel(guiHelper.getRoundIcon(user.getImage()));
 
         JPanel controlsPanel = new JPanel();
         controlsPanel.setBackground(Color.white);
         controlsPanel.setBorder(new EmptyBorder(5, 0, 0, 0));
         controlsPanel.setLayout(new BoxLayout(controlsPanel, BoxLayout.X_AXIS));
-        JLabel editLabel = new JLabel("ΠΡΟΤΙΜΗΣΕΙΣ");
-        JLabel deleteLabel = new JLabel("ΔΙΑΓΡΑΦΗ");
+        JLabel editLabel = new JLabel(rm.getTextOfXMLTag("preferences"));
+        JLabel deleteLabel = new JLabel(rm.getTextOfXMLTag("delete"));
         controlsPanel.add(editLabel);
         controlsPanel.add(Box.createRigidArea(new Dimension(10, 0)));
         controlsPanel.add(deleteLabel);
 
         JLabel nameLabel;
         if (userService.hasBrokenFiles(user.getName())) {
-            nameLabel = new JLabel(user.getName(), new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/warning.png")), JLabel.RIGHT);
-            nameLabel.setToolTipText("Κάποια αρχεία δεν μπορούν να βρεθούν");
+            nameLabel = new JLabel(user.getName(), rm.getImageIcon("warning.png", ResourceType.JAR), JLabel.RIGHT);
+            nameLabel.setToolTipText(rm.getTextOfXMLTag("filesNotFound"));
         } else {
             nameLabel = new JLabel(user.getName());
         }
@@ -127,7 +131,7 @@ public class UserPanel extends javax.swing.JPanel {
 
         deleteLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                int dialogResult = JOptionPane.showConfirmDialog(null, "Είσαι σίγουρος/η ότι θες να διαγράψεις το χρήστη;", "Warning", 0);
+                int dialogResult = JOptionPane.showConfirmDialog(null, rm.getTextOfXMLTag("userDeleteConfirmation"), "Warning", 0);
                 if (dialogResult == JOptionPane.YES_OPTION) {
                     try {
                         userService.delete(user);

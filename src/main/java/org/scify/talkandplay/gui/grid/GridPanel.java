@@ -1,22 +1,23 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.scify.talkandplay.gui.grid;
 
 import io.sentry.Sentry;
 import org.scify.talkandplay.gui.grid.tiles.TileAction;
+
 import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
+
 import org.scify.talkandplay.gui.grid.communication.CommunicationPanel;
 import org.scify.talkandplay.gui.grid.entertainment.EntertainmentPanel;
 import org.scify.talkandplay.gui.grid.games.GamesPanel;
@@ -56,10 +58,9 @@ public class GridPanel extends BaseGridPanel {
         panelList = new ArrayList<>();
 
         if (user.getCommunicationModule().isEnabled()) {
-            JPanel communicationPanel = tileCreator.create(user.getCommunicationModule().getName(),
-                    user.getCommunicationModule().getImage(),
-                    user.getCommunicationModule().getImageURL(),
-                    user.getCommunicationModule().getSound(),
+             JPanel communicationPanel = tileCreator.create(user.getCommunicationModule().getName(),
+                    user.getCommunicationModule().getImageResource(),
+                    user.getCommunicationModule().getSoundResource(),
                     new TileAction() {
                         @Override
                         public void act() {
@@ -78,9 +79,8 @@ public class GridPanel extends BaseGridPanel {
 
         if (user.getEntertainmentModule().isEnabled()) {
             JPanel entertainmentPanel = tileCreator.create(user.getEntertainmentModule().getName(),
-                    user.getEntertainmentModule().getImage(),
-                    user.getEntertainmentModule().getImageURL(),
-                    user.getEntertainmentModule().getSound(),
+                    user.getEntertainmentModule().getImageResource(),
+                    user.getEntertainmentModule().getSoundResource(),
                     new TileAction() {
                         @Override
                         public void act() {
@@ -100,9 +100,8 @@ public class GridPanel extends BaseGridPanel {
 
         if (user.getGameModule().isEnabled()) {
             JPanel gamesPanel = tileCreator.create(user.getGameModule().getName(),
-                    user.getGameModule().getImage(),
-                    user.getGameModule().getImageURL(),
-                    user.getGameModule().getSound(),
+                    user.getGameModule().getImageResource(),
+                    user.getGameModule().getSoundResource(),
                     new TileAction() {
                         @Override
                         public void act() {
@@ -125,7 +124,7 @@ public class GridPanel extends BaseGridPanel {
         fillWithEmpties();
 
         revalidate();
-        repaint();        
+        repaint();
         parent.clearGrid();
         parent.addGrid(this);
         parent.revalidate();
@@ -137,7 +136,7 @@ public class GridPanel extends BaseGridPanel {
 
     private void showCommunication() {
         try {
-            CommunicationPanel communicationPanel = new CommunicationPanel(user, parent);
+            new CommunicationPanel(user, parent);
         } catch (IOException ex) {
             Logger.getLogger(GridPanel.class.getName()).log(Level.SEVERE, null, ex);
             Sentry.capture(ex);
@@ -145,11 +144,21 @@ public class GridPanel extends BaseGridPanel {
     }
 
     private void showEntertainment() {
-        EntertainmentPanel entertainmentPanel = new EntertainmentPanel(user, parent);
+        try {
+            new EntertainmentPanel(user, parent);
+        } catch (Exception ex) {
+            Logger.getLogger(GridPanel.class.getName()).log(Level.SEVERE, null, ex);
+            Sentry.capture(ex);
+        }
     }
 
     private void showGames() {
-        GamesPanel gamesPanel = new GamesPanel(user, parent);
+        try {
+            new GamesPanel(user, parent);
+        } catch (Exception ex) {
+            Logger.getLogger(GridPanel.class.getName()).log(Level.SEVERE, null, ex);
+            Sentry.capture(ex);
+        }
     }
 
     public List<JPanel> getPanelList() {
@@ -168,12 +177,12 @@ public class GridPanel extends BaseGridPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

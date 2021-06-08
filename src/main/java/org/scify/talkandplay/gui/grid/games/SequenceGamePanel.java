@@ -1,24 +1,27 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.scify.talkandplay.gui.grid.games;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.tiles.TileAction;
 import org.scify.talkandplay.models.User;
@@ -32,6 +35,7 @@ import org.scify.talkandplay.services.SensorService;
 public class SequenceGamePanel extends BaseGamePanel {
 
     private SensorService sensorService;
+    protected Message message;
 
     private int correctImages;
 
@@ -39,7 +43,7 @@ public class SequenceGamePanel extends BaseGamePanel {
         super(user, parent, "sequenceGame", null, previousGame);
         this.correctImages = 1;
         this.sensorService = new SensorService(user);
-
+        message = Message.getInstance();
         initComponents();
         initCustomComponents();
     }
@@ -48,7 +52,7 @@ public class SequenceGamePanel extends BaseGamePanel {
         super(user, parent, "sequenceGame", game, "");
         this.correctImages = 1;
         this.sensorService = new SensorService(user);
-
+        message = Message.getInstance();
         initComponents();
         initCustomComponents();
     }
@@ -65,19 +69,19 @@ public class SequenceGamePanel extends BaseGamePanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 518, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 518, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 235, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 235, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void initCustomComponents() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBottomMessage("Ποια εικόνα πρέπει να μπει πρώτη; Πάτα το κουμπί πάνω της!");
-
+        setBottomMessage(rm.getTextOfXMLTag("sequenceGameInfo2"));
+        Random randomGenerator = new Random();
         //draw the images in a random order
         List<GameImage> tmpImages = new ArrayList(game.getEnabledImages());
         int i;
@@ -126,9 +130,14 @@ public class SequenceGamePanel extends BaseGamePanel {
         });
         panel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
-                if (sensorService.shouldSelect(sensor)) {
-                    act(image.getOrder());
+                int keyCode = evt.getKeyCode();
+                if (keyCode == KeyEvent.VK_ESCAPE) {
+                    exit();
+                } else {
+                    Sensor sensor = new KeyboardSensor(keyCode, String.valueOf(evt.getKeyChar()), "keyboard");
+                    if (sensorService.shouldSelect(sensor)) {
+                        act(image.getOrder());
+                    }
                 }
             }
         });
@@ -148,7 +157,7 @@ public class SequenceGamePanel extends BaseGamePanel {
             topPanel.revalidate();
             topPanel.repaint();
         } else if (correctImages == order) {
-            setBottomMessage(Message.getRandomCongrats());
+            setBottomMessage(message.getRandomCongratsMessage());
             selector.cancel();
             correctImages++;
             redrawGamesPanel();
@@ -162,7 +171,7 @@ public class SequenceGamePanel extends BaseGamePanel {
             selector.setList(panelList);
             selector.start();
         } else {
-            setBottomMessage(Message.getRandomError());
+            setBottomMessage(message.getRandomMistakeMessage());
             selector.cancel();
             tileCreator.playAudio(getErrorSound(), new TileAction() {
                 @Override

@@ -18,12 +18,14 @@ package org.scify.talkandplay.utils;
 import io.sentry.Sentry;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
-import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
+import org.scify.talkandplay.gui.MainFrame;
+import org.scify.talkandplay.gui.users.UserFormPanel;
 import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.Configuration;
 import org.scify.talkandplay.models.User;
@@ -33,55 +35,66 @@ import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 
+
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.logging.Level;
 
 /**
  * ConfigurationHandler is responsible for parsing the xml and other xml-related
  * functions.
- *
- * @author christina
  */
 public class XMLConfigurationHandler {
 
-    protected String configurationFilePath;
-    protected String defaultUserConfigurationFilePath;
+    protected File dataDir;
+    protected File localConfFile;
+    protected File globalConfFile;
+    //protected String defaultUserConfigurationFilePath;
     protected Document configurationXmlDocument;
 
     protected List<User> users;
     //for each user we add his files in a hashmap
-    protected Map<String, List<String>> userFiles;
+    protected Map<String, List<MultimediaResource>> userFiles;
     //contains all the image and sound paths that were found in the xml configuration.
     //we use this to check if all the paths exist on hard drive.
-    protected List<String> imageAndSoundFilePaths;
-    //the user that uses the application
-    protected User currentUser;
+    protected List<MultimediaResource> imageAndSoundResources;
     // a hidden user that could be used to create new users
     protected User defaultUser;
     Properties properties;
     static Logger logger = Logger.getLogger(XMLConfigurationHandler.class);
+    protected ResourceManager rm;
 
-    public XMLConfigurationHandler() {
-
+    public XMLConfigurationHandler(File dataDir) {
+        this.dataDir = dataDir;
         properties = Properties.getInstance();
-        configurationFilePath = properties.getApplicationDataFolder() + File.separator + "conf.xml";
-        defaultUserConfigurationFilePath = properties.getApplicationFolder() + File.separator + "defaultUser.xml";
-
+        localConfFile = new File(dataDir, "conf.xml");
+        globalConfFile = new File(properties.getApplicationFolder() + File.separator + "conf.xml");
+        rm = ResourceManager.getInstance();
         initConfigurationFile();
     }
 
     private void initConfigurationFile() {
         try {
-            File configurationFile = new File(configurationFilePath);
-            if (!configurationFile.exists()) {
-                logger.info("Configuration file not found.");
+            double versionOfGlobalConf = getConfVersion(globalConfFile);
+            logger.info("Searching for conf.xml at: " + localConfFile.getAbsolutePath());
+            if (!localConfFile.exists()) {
+                logger.info("Local conf.xml file not found!");
                 createLocalConfigurationFile();
+            } else {
+                logger.info("Loading version of: " + localConfFile.getAbsolutePath());
+                double versionOfLocalConf = getConfVersion(localConfFile.getAbsoluteFile());
+                logger.info("Global version: " + versionOfGlobalConf);
+                logger.info("Local version: " + versionOfLocalConf);
+                if (versionOfLocalConf == versionOfGlobalConf) {
+                    logger.info("Versions match, loading: " + localConfFile.getAbsolutePath());
+                } else {
+                    logger.info("Versions differ creating a new local conf.xml");
+                    createLocalConfigurationFile();
+                }
             }
-            parseConfigurationFileXML();
-            parseDefaultUserXml();
+            if (parseConfigurationFileXML(true))
+                writeToXmlFile();
+
         } catch (Exception e) {
             e.printStackTrace(System.err);
             Sentry.capture(e);
@@ -89,19 +102,8 @@ public class XMLConfigurationHandler {
     }
 
     private void createLocalConfigurationFile() throws IOException {
-        String defaultConfigurationFilePath = properties.getApplicationFolder() + File.separator + "conf.xml";
-        File configurationFile = new File(configurationFilePath);
-        File defaultConfigurationFile = new File(defaultConfigurationFilePath);
-        if (defaultConfigurationFile.exists()) {
-            logger.info("Copying default configuration file from: " + defaultConfigurationFile + " to: " + configurationFilePath);
-            FileUtils.copyFile(defaultConfigurationFile, configurationFile);
-        } else {
-            logger.info("Default configuration file not found. Creating a new empty configuration file at:" + configurationFilePath);
-            PrintWriter writer = new PrintWriter(configurationFilePath, "UTF-8");
-            writer.println("<?xml version=\"1.0\"?>\n"
-                    + "<profiles></profiles>");
-            writer.close();
-        }
+        logger.info("Copying default configuration file from: " + globalConfFile.getAbsolutePath() + " to: " + localConfFile.getAbsolutePath());
+        FileUtils.copyFile(globalConfFile, localConfFile);
     }
 
     public User getDefaultUser() {
@@ -112,30 +114,20 @@ public class XMLConfigurationHandler {
         return users;
     }
 
-    public Element getRootElement() {
-        return configurationXmlDocument.getRootElement();
-    }
-
-    public Element getUserElement(String name) throws Exception {
-        Element userEl = null;
-        List profiles = configurationXmlDocument.getRootElement().getChildren();
-
-        for (int i = 0; i < profiles.size(); i++) {
-
-            userEl = (Element) profiles.get(i);
-
-            if (name.equals(userEl.getChildText("name"))) {
-                break;
-            }
+    public User getUser(String name) {
+        for (User user : users) {
+            if (user.getName().equals(name))
+                return user;
         }
-        return userEl;
+        return null;
     }
 
-    private void parseDefaultUserXml() throws JDOMException, IOException {
+    protected double getConfVersion(File file) throws Exception {
         SAXBuilder builder = new SAXBuilder();
-        Document doc = (Document) builder.build(new File(defaultUserConfigurationFilePath));
-        Element xmlUserElement = (Element) doc.getRootElement().getChildren().get(0);
-        this.defaultUser = parseUserFromXml(xmlUserElement);
+        Document xmlDoc = builder.build(file);
+        Element root = xmlDoc.getRootElement();
+        String version = root.getChild("defaultProfile").getAttributeValue("version");
+        return Double.parseDouble(version);
     }
 
     /**
@@ -144,59 +136,66 @@ public class XMLConfigurationHandler {
      * @return
      * @throws Exception
      */
-    private void parseConfigurationFileXML() throws Exception {
-        File configurationFile = new File(configurationFilePath);
-        SAXBuilder builder = new SAXBuilder();
-        configurationXmlDocument = builder.build(configurationFile);
+    private boolean parseConfigurationFileXML(boolean fromInit) throws Exception {
 
+        boolean needsSave = false;
+
+        SAXBuilder builder = new SAXBuilder();
+        configurationXmlDocument = builder.build(localConfFile);
         userFiles = new HashMap();
         users = new ArrayList();
-        List usersEl = configurationXmlDocument.getRootElement().getChildren();
 
-        for (int i = 0; i < usersEl.size(); i++) {
-            imageAndSoundFilePaths = new ArrayList();
-            User user = parseUserFromXml((Element) usersEl.get(i));
-            currentUser = user;
-            users.add(user);
-            userFiles.put(user.getName(), imageAndSoundFilePaths);
+        Element root = configurationXmlDocument.getRootElement();
+        this.defaultUser = extractUserFromXml(root.getChild("defaultProfile"), true);
+
+        Element userProfilesEl = root.getChild("userProfiles");
+        List<Element> usersEl = userProfilesEl.getChildren();
+        if (usersEl.isEmpty() && fromInit) {
+            Element newUser = createNewProfile(defaultUser.getName());
+            userProfilesEl.addContent(newUser);
+            needsSave = true;
         }
+        for (int i = 0; i < usersEl.size(); i++) {
+            imageAndSoundResources = new ArrayList();
+            User user = extractUserFromXml(usersEl.get(i), false);
+            users.add(user);
+            userFiles.put(user.getName(), imageAndSoundResources);
+        }
+
+        return needsSave;
     }
 
-    private User parseUserFromXml(Element userEl) {
-        imageAndSoundFilePaths = new ArrayList();
+    protected User extractUserFromXml(Element userEl, boolean isDefault) {
+        imageAndSoundResources = new ArrayList();
 
-        User user = new User(userEl.getChildText("name"), userEl.getChildText("image"));
-        currentUser = user;
-        if (userEl.getAttributeValue("preselected") != null) {
-            user.setPreselected(Boolean.parseBoolean(userEl.getAttributeValue("preselected")));
-        } else {
-            user.setPreselected(false);
-        }
+        String userName = userEl.getChildText("name");
+        ImageResource imageResource = extractImageResource(userEl.getChild("image"));
 
-        Element configuration = (Element) userEl.getChild("configuration");
-        user.setConfiguration(getConfiguration(configuration));
+        User user = new User(userName, imageResource);
 
-        Element communication = (Element) userEl.getChild("communication");
-        user.setCommunicationModule(getCommunicationModule(imageAndSoundFilePaths, communication));
+        Element confEl = userEl.getChild("configuration");
+        if (confEl.getChildren().size() > 0)
+            user.setConfiguration(extractConfiguration(confEl));
+        else
+            user.setConfiguration(new Configuration(defaultUser.getConfiguration()));
 
-        Element entertainment = (Element) userEl.getChild("entertainment");
-        user.setEntertainmentModule(getEntertainmentModule(entertainment));
+        Element communication = userEl.getChild("communication");
+        user.setCommunicationModule(extractCommunicationModule(imageAndSoundResources, communication, isDefault));
+        user.getCommunicationModule().setRows(user.getConfiguration().getDefaultGridRow());
+        user.getCommunicationModule().setColumns(user.getConfiguration().getDefaultGridColumn());
 
-        Element games = (Element) userEl.getChild("games");
-        user.setGameModule(getGameModule(games));
+
+        Element entertainment = userEl.getChild("entertainment");
+        user.setEntertainmentModule(extractEntertainmentModule(entertainment, isDefault));
+
+
+        Element games = userEl.getChild("games");
+        user.setGameModule(extractGameModule(games, isDefault));
 
         return user;
     }
 
-    /**
-     * Get the configuration list for a certain user
-     *
-     * @param configurationNode
-     * @param profile
-     * @return
-     * @throws Exception
-     */
-    private Configuration getConfiguration(Element configurationNode) {
+    protected Configuration extractConfiguration(Element configurationNode) {
         Configuration configuration = new Configuration();
         Sensor selectionSensor = null;
         Sensor navigationSensor = null;
@@ -234,461 +233,423 @@ public class XMLConfigurationHandler {
         return configuration;
     }
 
-    private CommunicationModule getCommunicationModule(List<String> imageAndSoundPathsToFill, Element communicationNode) {
-        //set the communication module settings
-        List<Category> categoriesArray = new ArrayList();
-
-        Element categories = (Element) communicationNode.getChild("categories");
-
-        categoriesArray = getCategories(imageAndSoundPathsToFill, categories, categoriesArray, null);
-
+    protected CommunicationModule extractCommunicationModule(List<MultimediaResource> imageAndSoundResources, Element communicationNode, boolean isDefault) {
         CommunicationModule communicationModule = new CommunicationModule();
-        communicationModule.setName(communicationNode.getChildText("name"));
-        /*communicationModule.setRows(Integer.parseInt(communicationNode.getChildText("rows")));
-         communicationModule.setColumns(Integer.parseInt(communicationNode.getChildText("columns")));*/
-        communicationModule.setRows(currentUser.getConfiguration().getDefaultGridRow());
-        communicationModule.setColumns(currentUser.getConfiguration().getDefaultGridColumn());
 
-        if (communicationNode.getChildText("image").isEmpty()) {
-            communicationModule.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/communication_module.png"));
-        } else {
-            communicationModule.setImage(communicationNode.getChildText("image"));
-        }
+        if (isDefault)
+            communicationModule.setName(communicationNode.getChildText("name"));
+        else
+            communicationModule.setName(defaultUser.getCommunicationModule().getNameUnmodified());
 
-        if (communicationNode.getChildText("sound").isEmpty()) {
-            communicationModule.setSound("resources/sounds/Επικοινωνία.mp3");
-        } else {
-            communicationModule.setSound(communicationNode.getChildText("sound"));
-        }
+        communicationModule.setEnabled("true".equals(communicationNode.getAttributeValue("enabled")));
 
-        communicationModule.setEnabled("true".equals(communicationNode.getChildText("enabled")));
-        communicationModule.setCategories(categoriesArray);
+        ImageResource imageResource = extractImageResource(communicationNode.getChild("image"));
+        if (imageResource == null)
+            imageResource = new ImageResource(defaultUser.getCommunicationModule().getImageResource());
+        communicationModule.setImage(imageResource);
+
+
+        SoundResource soundResource = extractSoundResource(communicationNode.getChild("sound"));
+        if (soundResource == null)
+            soundResource = new SoundResource(defaultUser.getCommunicationModule().getSoundResource());
+        communicationModule.setSound(soundResource);
+
+        Element categoriesEl = communicationNode.getChild("categories");
+        extractCommunicationCategories(communicationModule, imageAndSoundResources, categoriesEl);
 
         return communicationModule;
     }
 
-    private EntertainmentModule getEntertainmentModule(Element entertainmentNode) {
-        //set the entertainment module settings
+    protected void extractCommunicationCategories(CommunicationModule communicationModule, List<MultimediaResource> imageAndSoundResources, Element categoriesNode) {
+        List<Element> categories = categoriesNode.getChildren();
+
+        for (Element categoryEl : categories) {
+            String categoryName = categoryEl.getAttributeValue("name");
+
+            if (categoryEl.getChildren().isEmpty()) {//use default
+                Category category = new Category(defaultUser.getCommunicationModule().getCategory(categoryName));
+                HashSet<String> languages = defaultUser.getCommunicationModule().getSupportedLanguages(categoryName);
+                category.setEnabled("true".equals(categoryEl.getAttributeValue("enabled")));
+                communicationModule.addCategory(category, languages);
+            } else {//add new Category
+                Category category = new Category(categoryName);
+                category.setEnabled("true".equals(categoryEl.getAttributeValue("enabled")));
+                String supportedLanguages = categoryEl.getAttributeValue("languages");
+                HashSet<String> languages = new HashSet<>();
+                for (String language : supportedLanguages.trim().split(" "))
+                    languages.add(language);
+                communicationModule.addCategory(category, languages);
+
+                ImageResource image = extractImageResource(categoryEl.getChild("image"));
+                category.setImage(image);
+                imageAndSoundResources.add(image);
+
+                SoundResource sound = extractSoundResource(categoryEl.getChild("sound"));
+                category.setSound(sound);
+                imageAndSoundResources.add(sound);
+
+                //extractCommunicationCategoryFields(category, categoryEl);
+
+                List<Category> subCategories = new ArrayList<>();
+                category.setSubCategories(subCategories);
+                Element subCategoriesEl = categoryEl.getChild("categories");
+                if (subCategoriesEl != null) {
+                    List<Element> subCategoriesChildren = subCategoriesEl.getChildren();
+                    List<Category> subCategoriesList = new ArrayList<>();
+                    for (Element subCategoryEl : subCategoriesChildren) {
+                        categoryName = subCategoryEl.getAttributeValue("name");
+                        Category subCategory = new Category(categoryName);
+                        subCategory.setEnabled("true".equals(subCategoryEl.getAttributeValue("enabled")));
+                        subCategory.setParentCategory(category);
+
+                        ImageResource subCatImage = extractImageResource(subCategoryEl.getChild("image"));
+                        subCategory.setImage(subCatImage);
+                        imageAndSoundResources.add(subCatImage);
+
+                        SoundResource subCatSound = extractSoundResource(subCategoryEl.getChild("sound"));
+                        subCategory.setSound(subCatSound);
+                        imageAndSoundResources.add(subCatSound);
+
+                        //extractCommunicationCategoryFields(subCategory, subCategoryEl);
+                        subCategoriesList.add(subCategory);
+                    }
+                    category.setSubCategories(subCategoriesList);
+                }
+            }
+        }
+    }
+
+    /*protected void extractCommunicationCategoryFields(Category category, Element categoryEl) {
+        if (categoryEl.getChildText("editable") != null) {
+            category.setEditable(Boolean.parseBoolean(categoryEl.getChildText("editable")));
+        } else {
+            category.setEditable(true);
+        }
+
+        if (categoryEl.getChildText("order") != null) {
+            category.setOrder(Integer.parseInt(categoryEl.getChildText("order")));
+        } else {
+            category.setOrder(0);
+        }
+
+        if (categoryEl.getChildText("hasSound") != null) {
+            category.setHasSound("true".equals(categoryEl.getChildText("hasSound")));
+        } else {
+            category.setHasSound(true);
+        }
+
+        if (categoryEl.getChildText("hasImage") != null) {
+            category.setHasImage("true".equals(categoryEl.getChildText("hasImage")));
+        } else {
+            category.setHasImage(true);
+        }
+
+        if (categoryEl.getChildText("hasText") != null) {
+            category.setHasText("true".equals(categoryEl.getChildText("hasText")));
+        } else {
+            category.setHasText(true);
+        }
+    }*/
+
+    protected EntertainmentModule extractEntertainmentModule(Element entertainmentNode, boolean isDefault) {
+
         EntertainmentModule entertainmentModule = new EntertainmentModule();
-        entertainmentModule.setName(entertainmentNode.getChildText("name"));
-        entertainmentModule.setSound(entertainmentNode.getChildText("sound"));
-        entertainmentModule.setEnabled("true".equals(entertainmentNode.getChildText("enabled")));
 
-        if (entertainmentNode.getChildText("image").isEmpty()) {
-            entertainmentModule.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/entertainment_module.png"));
-        } else {
-            entertainmentModule.setImage(entertainmentNode.getChildText("image"));
-        }
+        if (isDefault)
+            entertainmentModule.setName(entertainmentNode.getChildText("name"));
+        else
+            entertainmentModule.setName(defaultUser.getEntertainmentModule().getNameUnmodified());
 
-        if (entertainmentNode.getChildText("sound").isEmpty()) {
-            entertainmentModule.setSound("resources/sounds/Ψυχαγωγία.mp3");
-        } else {
-            entertainmentModule.setSound(entertainmentNode.getChildText("sound"));
-        }
+        entertainmentModule.setEnabled("true".equals(entertainmentNode.getAttributeValue("enabled")));
+
+        ImageResource image = extractImageResource(entertainmentNode.getChild("image"));
+        if (image == null)
+            image = new ImageResource(defaultUser.getEntertainmentModule().getImageResource());
+        entertainmentModule.setImage(image);
+
+        SoundResource sound = extractSoundResource(entertainmentNode.getChild("sound"));
+        if (sound == null)
+            sound = new SoundResource(defaultUser.getEntertainmentModule().getSoundResource());
+        entertainmentModule.setSound(sound);
+
 
         //set the music module
-        Element musicNode = (Element) entertainmentNode.getChild("music");
-        MusicModule musicModule = new MusicModule();
-        musicModule.setName(musicNode.getChildText("name"));
-        musicModule.setSound(musicNode.getChildText("sound"));
-        musicModule.setFolderPath(musicNode.getChildText("path"));
-        musicModule.setPlaylistSize(Integer.parseInt(musicNode.getChildText("playlistSize")));
-        musicModule.setEnabled("true".equals(musicNode.getChildText("name")));
-
-        if (musicNode.getChildText("image").isEmpty()) {
-            musicModule.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/music_module.png"));
+        Element musicNode = entertainmentNode.getChild("music");
+        if (musicNode == null) {
+            entertainmentModule.setMusicModule(new MusicModule(defaultUser.getEntertainmentModule().getMusicModule()));
         } else {
-            musicModule.setImage(musicNode.getChildText("image"));
-        }
+            MusicModule musicModule = new MusicModule();
+            Element musicNameEl = musicNode.getChild("name");
+            if (musicNameEl == null)
+                musicModule.setName(defaultUser.getEntertainmentModule().getMusicModule().getNameUnmodified());
+            else
+                musicModule.setName(musicNameEl.getText());
+            musicModule.setFolderPath(musicNode.getChildText("path"));
+            musicModule.setPlaylistSize(Integer.parseInt(musicNode.getChildText("playlistSize")));
+            musicModule.setEnabled("true".equals(musicNode.getAttributeValue("enabled")));
 
-        if (musicNode.getChildText("sound").isEmpty()) {
-            musicModule.setSound("resources/sounds/Μουσική.mp3");
-        } else {
-            musicModule.setSound(musicNode.getChildText("sound"));
+            ImageResource musicImage = extractImageResource(musicNode.getChild("image"));
+            if (musicImage == null)
+                musicImage = new ImageResource(defaultUser.getEntertainmentModule().getMusicModule().getImageResource());
+            musicModule.setImage(musicImage);
+
+            SoundResource musicSound = extractSoundResource(musicNode.getChild("sound"));
+            if (musicSound == null)
+                musicSound = new SoundResource(defaultUser.getEntertainmentModule().getMusicModule().getSoundResource());
+            musicModule.setSound(musicSound);
+
+            entertainmentModule.setMusicModule(musicModule);
         }
 
         //set the video module
-        Element videoNode = (Element) entertainmentNode.getChild("video");
-        VideoModule videoModule = new VideoModule();
-        videoModule.setName(videoNode.getChildText("name"));
-        videoModule.setSound(videoNode.getChildText("sound"));
-        videoModule.setFolderPath(videoNode.getChildText("path"));
-        videoModule.setPlaylistSize(Integer.parseInt(videoNode.getChildText("playlistSize")));
-        videoModule.setEnabled("true".equals(videoNode.getChildText("name")));
-
-        if (videoNode.getChildText("image").isEmpty()) {
-            videoModule.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/video_module.png"));
+        Element videoNode = entertainmentNode.getChild("video");
+        if (videoNode == null) {
+            entertainmentModule.setVideoModule(new VideoModule(defaultUser.getEntertainmentModule().getVideoModule()));
         } else {
-            videoModule.setImage(videoNode.getChildText("image"));
-        }
+            VideoModule videoModule = new VideoModule();
+            Element videoNameEl = videoNode.getChild("name");
+            if (videoNameEl == null)
+                videoModule.setName(defaultUser.getEntertainmentModule().getVideoModule().getNameUnmodified());
+            else
+                videoModule.setName(videoNameEl.getText());
+            videoModule.setFolderPath(videoNode.getChildText("path"));
+            videoModule.setPlaylistSize(Integer.parseInt(videoNode.getChildText("playlistSize")));
+            videoModule.setEnabled("true".equals(videoNode.getAttributeValue("enabled")));
 
-        if (videoNode.getChildText("sound").isEmpty()) {
-            videoModule.setSound("resources/sounds/Βίντεο.mp3");
-        } else {
-            videoModule.setSound(videoNode.getChildText("sound"));
-        }
+            ImageResource videoImage = extractImageResource(videoNode.getChild("image"));
+            if (videoImage == null)
+                videoImage = new ImageResource(defaultUser.getEntertainmentModule().getVideoModule().getImageResource());
+            videoModule.setImage(videoImage);
 
-        entertainmentModule.setMusicModule(musicModule);
-        entertainmentModule.setVideoModule(videoModule);
+            SoundResource videoSound = extractSoundResource(videoNode.getChild("sound"));
+            if (videoSound == null)
+                videoSound = new SoundResource(defaultUser.getEntertainmentModule().getVideoModule().getSoundResource());
+            videoModule.setSound(videoSound);
+
+            entertainmentModule.setVideoModule(videoModule);
+        }
 
         return entertainmentModule;
     }
 
-    private GameModule getGameModule(Element gameNode) {
-        //set the game module settings
+    protected GameModule extractGameModule(Element gameNode, boolean isDefault) {
         GameModule gameModule = new GameModule();
-        gameModule.setName(gameNode.getChildText("name"));
-        gameModule.setSound(gameNode.getChildText("sound"));
-        gameModule.setEnabled("true".equals(gameNode.getChildText("enabled")));
 
-        if (gameNode.getChildText("image").isEmpty()) {
-            gameModule.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/games_module.png"));
-        } else {
-            gameModule.setImage(gameNode.getChildText("image"));
-        }
+        if (isDefault)
+            gameModule.setName(gameNode.getChildText("name"));
+        else
+            gameModule.setName(defaultUser.getGameModule().getNameUnmodified());
 
-        if (gameNode.getChildText("sound").isEmpty()) {
-            gameModule.setSound("resources/sounds/Παιχνίδια.mp3");
-        } else {
-            gameModule.setSound(gameNode.getChildText("sound"));
-        }
+        gameModule.setEnabled("true".equals(gameNode.getAttributeValue("enabled")));
+
+        ImageResource image = extractImageResource(gameNode.getChild("image"));
+        if (image == null)
+            image = new ImageResource(defaultUser.getGameModule().getImageResource());
+        gameModule.setImage(image);
+
+        SoundResource sound = extractSoundResource(gameNode.getChild("sound"));
+        if (sound == null)
+            sound = new SoundResource(defaultUser.getGameModule().getSoundResource());
+        gameModule.setSound(sound);
 
         //set the stimulus reaction games
         Element stimulusReactionGamesNode = gameNode.getChild("stimulusReactionGames");
         if (stimulusReactionGamesNode != null) {
-            GameType stimulusReactionType = new GameType(stimulusReactionGamesNode.getChildText("name"),
-                    stimulusReactionGamesNode.getChildText("image"),
-                    "true".equals(stimulusReactionGamesNode.getChildText("enabled")),
-                    "stimulusReactionGame");
+            boolean enabled = "true".equals(stimulusReactionGamesNode.getAttributeValue("enabled"));
 
-            if (stimulusReactionGamesNode.getChildText("sound").isEmpty()) {
-                stimulusReactionType.setSound("resources/sounds/Ερέθισμα - Αντίδραση.mp3");
+            String stimulusName = stimulusReactionGamesNode.getChildText("name");
+            GameCollection stimulusReactionType;
+            if (isDefault) {
+                stimulusReactionType = new GameCollection(stimulusName, enabled, "stimulusReactionGame");
+                extractGameCollectionFields(stimulusReactionType, stimulusReactionGamesNode, null);
             } else {
-                stimulusReactionType.setSound(stimulusReactionGamesNode.getChildText("sound"));
+                GameCollection defaultGameCollection = defaultUser.getGameModule().getGameCollection("stimulusReactionGame");
+                stimulusReactionType = new GameCollection(defaultGameCollection.getNameUnmodified(), enabled, "stimulusReactionGame");
+                extractGameCollectionFields(stimulusReactionType, stimulusReactionGamesNode, defaultGameCollection);
             }
 
-            if (stimulusReactionGamesNode.getChildText("image").isEmpty()) {
-                stimulusReactionType.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/stimulus_game.png"));
-            } else {
-                stimulusReactionType.setImage(stimulusReactionGamesNode.getChildText("image"));
-            }
-
-            if (stimulusReactionGamesNode.getChildText("winSound").isEmpty()) {
-                stimulusReactionType.setWinSound(null);
-            } else {
-                stimulusReactionType.setWinSound(stimulusReactionGamesNode.getChildText("winSound"));
-            }
-
-            if (stimulusReactionGamesNode.getChildText("errorSound").isEmpty()) {
-                stimulusReactionType.setErrorSound(null);
-            } else {
-                stimulusReactionType.setErrorSound(stimulusReactionGamesNode.getChildText("errorSound"));
-            }
-
-            List gamesList = stimulusReactionGamesNode.getChild("games").getChildren();
-
-            for (int i = 0; i < gamesList.size(); i++) {
-                StimulusReactionGame game = new StimulusReactionGame(((Element) gamesList.get(i)).getChildText("name"),
-                        "true".equals(((Element) gamesList.get(i)).getChildText("enabled")),
-                        Integer.parseInt(((Element) gamesList.get(i)).getChildText("difficulty")));
-
-                if (((Element) gamesList.get(i)).getChildText("winSound") == null || ((Element) gamesList.get(i)).getChildText("winSound").isEmpty()) {
-                    game.setWinSound(null);
-                } else {
-                    game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
-                }
-
-                if (((Element) gamesList.get(i)).getChildText("errorSound") == null || ((Element) gamesList.get(i)).getChildText("errorSound").isEmpty()) {
-                    game.setErrorSound(null);
-                } else {
-                    game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
-                }
-
-                if (((Element) gamesList.get(i)).getChildText("image").isEmpty()) {
-                    game.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/stimulus_game.png"));
-                } else {
-                    game.setImage(((Element) gamesList.get(i)).getChildText("image"));
-                }
-
-                List imagesList = ((Element) gamesList.get(i)).getChild("gameImages").getChildren();
-
-                for (int j = 0; j < imagesList.size(); j++) {
-                    GameImage image = new GameImage(((Element) imagesList.get(j)).getChildText("path"),
-                            "true".equals(((Element) imagesList.get(j)).getChildText("enabled")),
-                            Integer.parseInt(((Element) imagesList.get(j)).getChildText("order")));
-                    game.getImages().add(image);
-                }
-
-                game.setEnabledImages();
-                stimulusReactionType.getGames().add(game);
-            }
-
-            for (Game game : stimulusReactionType.getGames()) {
-                if (game.isEnabled()) {
-                    stimulusReactionType.getEnabledGames().add((StimulusReactionGame) game);
-                }
-            }
-
+            extractGames(stimulusReactionType, stimulusReactionGamesNode);
             gameModule.getGameTypes().add(stimulusReactionType);
         }
-
         //set the sequence games
         Element sequenceGamesNode = gameNode.getChild("sequenceGames");
         if (sequenceGamesNode != null) {
-            GameType sequenceGameType = new GameType(sequenceGamesNode.getChildText("name"),
-                    sequenceGamesNode.getChildText("image"),
-                    "true".equals(sequenceGamesNode.getChildText("enabled")),
-                    "sequenceGame");
+            boolean enabled = "true".equals(sequenceGamesNode.getChildText("enabled"));
 
-            if (sequenceGamesNode.getChildText("sound").isEmpty()) {
-                sequenceGameType.setSound("resources/sounds/Χρονικής Αλληλουχίας.mp3");
+            String sequenceGamesName = sequenceGamesNode.getChildText("name");
+            GameCollection sequenceGameCollection;
+            if (isDefault) {
+                sequenceGameCollection = new GameCollection(sequenceGamesName, enabled, "sequenceGame");
+                extractGameCollectionFields(sequenceGameCollection, sequenceGamesNode, null);
             } else {
-                sequenceGameType.setSound(sequenceGamesNode.getChildText("sound"));
+                GameCollection defaultGameCollection = defaultUser.getGameModule().getGameCollection("sequenceGame");
+                sequenceGameCollection = new GameCollection(defaultGameCollection.getNameUnmodified(), enabled, "sequenceGame");
+                extractGameCollectionFields(sequenceGameCollection, sequenceGamesNode, defaultGameCollection);
             }
 
-            if (sequenceGamesNode.getChildText("image").isEmpty()) {
-                sequenceGameType.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/sequence_game.png"));
-            } else {
-                sequenceGameType.setImage(sequenceGamesNode.getChildText("image"));
-            }
-
-            if (sequenceGamesNode.getChildText("winSound").isEmpty()) {
-                sequenceGameType.setWinSound(null);
-            } else {
-                sequenceGameType.setWinSound(sequenceGamesNode.getChildText("winSound"));
-            }
-
-            if (sequenceGamesNode.getChildText("errorSound").isEmpty()) {
-                sequenceGameType.setErrorSound(null);
-            } else {
-                sequenceGameType.setErrorSound(sequenceGamesNode.getChildText("errorSound"));
-            }
-
-            List gamesList = sequenceGamesNode.getChild("games").getChildren();
-
-            for (int i = 0; i < gamesList.size(); i++) {
-                SequenceGame game = new SequenceGame(((Element) gamesList.get(i)).getChildText("name"),
-                        "true".equals(((Element) gamesList.get(i)).getChildText("enabled")),
-                        Integer.parseInt(((Element) gamesList.get(i)).getChildText("difficulty")));
-
-                if (((Element) gamesList.get(i)).getChildText("winSound") == null || ((Element) gamesList.get(i)).getChildText("winSound").isEmpty()) {
-                    game.setWinSound(null);
-                } else {
-                    game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
-                }
-
-                if (((Element) gamesList.get(i)).getChildText("errorSound") == null || ((Element) gamesList.get(i)).getChildText("errorSound").isEmpty()) {
-                    game.setErrorSound(null);
-                } else {
-                    game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
-                }
-
-                if (((Element) gamesList.get(i)).getChildText("image").isEmpty()) {
-                    game.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/sequence_game.png"));
-                } else {
-                    game.setImage(((Element) gamesList.get(i)).getChildText("image"));
-                }
-
-                List imagesList = ((Element) gamesList.get(i)).getChild("gameImages").getChildren();
-
-                for (int j = 0; j < imagesList.size(); j++) {
-                    GameImage image = new GameImage(((Element) imagesList.get(j)).getChildText("path"),
-                            "true".equals(((Element) imagesList.get(j)).getChildText("enabled")),
-                            Integer.parseInt(((Element) imagesList.get(j)).getChildText("order")));
-                    game.getImages().add(image);
-                }
-                game.setEnabledImages();
-                sequenceGameType.getGames().add(game);
-            }
-
-            for (Game game : sequenceGameType.getGames()) {
-                if (game.isEnabled()) {
-                    sequenceGameType.getEnabledGames().add((SequenceGame) game);
-                }
-            }
-            gameModule.getGameTypes().add(sequenceGameType);
+            extractGames(sequenceGameCollection, sequenceGamesNode);
+            gameModule.getGameTypes().add(sequenceGameCollection);
         }
 
         //set the similar games
         Element similarGamesNode = gameNode.getChild("similarityGames");
         if (similarGamesNode != null) {
-            GameType similarityGameType = new GameType(similarGamesNode.getChildText("name"),
-                    similarGamesNode.getChildText("image"),
-                    "true".equals(similarGamesNode.getChildText("enabled")),
-                    "similarityGame");
+            boolean enabled = "true".equals(similarGamesNode.getChildText("enabled"));
 
-            if (similarGamesNode.getChildText("sound").isEmpty()) {
-                similarityGameType.setSound("resources/sounds/Βρες το όμοιο.mp3");
+            String similarGamesName = similarGamesNode.getChildText("name");
+            GameCollection similarityGameCollection;
+            if (isDefault) {
+                similarityGameCollection = new GameCollection(similarGamesName, enabled, "similarityGame");
+                extractGameCollectionFields(similarityGameCollection, similarGamesNode, null);
             } else {
-                similarityGameType.setSound(similarGamesNode.getChildText("sound"));
+                GameCollection defaultGameCollection = defaultUser.getGameModule().getGameCollection("similarityGame");
+                similarityGameCollection = new GameCollection(defaultGameCollection.getNameUnmodified(), enabled, "similarityGame");
+                extractGameCollectionFields(similarityGameCollection, similarGamesNode, defaultGameCollection);
             }
-
-            if (similarGamesNode.getChildText("image").isEmpty()) {
-                similarityGameType.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/similarity_game.png"));
-            } else {
-                similarityGameType.setImage(similarGamesNode.getChildText("image"));
-            }
-
-            if (similarGamesNode.getChildText("winSound").isEmpty()) {
-                similarityGameType.setWinSound(null);
-            } else {
-                similarityGameType.setWinSound(similarGamesNode.getChildText("winSound"));
-            }
-
-            if (similarGamesNode.getChildText("errorSound").isEmpty()) {
-                similarityGameType.setErrorSound(null);
-            } else {
-                similarityGameType.setErrorSound(similarGamesNode.getChildText("errorSound"));
-            }
-
-            List gamesList = similarGamesNode.getChild("games").getChildren();
-
-            for (int i = 0; i < gamesList.size(); i++) {
-                SimilarityGame game = new SimilarityGame(((Element) gamesList.get(i)).getChildText("name"),
-                        "true".equals(((Element) gamesList.get(i)).getChildText("enabled")),
-                        Integer.parseInt(((Element) gamesList.get(i)).getChildText("difficulty")));
-
-                if (((Element) gamesList.get(i)).getChildText("winSound") == null || ((Element) gamesList.get(i)).getChildText("winSound").isEmpty()) {
-                    game.setWinSound(null);
-                } else {
-                    game.setWinSound(((Element) gamesList.get(i)).getChildText("winSound"));
-                }
-
-                if (((Element) gamesList.get(i)).getChildText("errorSound") == null || ((Element) gamesList.get(i)).getChildText("errorSound").isEmpty()) {
-                    game.setErrorSound(null);
-                } else {
-                    game.setErrorSound(((Element) gamesList.get(i)).getChildText("errorSound"));
-                }
-
-                if (((Element) gamesList.get(i)).getChildText("image").isEmpty()) {
-                    game.setImageURL(getClass().getResource("/org/scify/talkandplay/resources/defaultImgs/similarity_game.png"));
-                } else {
-                    game.setImage(((Element) gamesList.get(i)).getChildText("image"));
-                }
-
-                List imagesList = ((Element) gamesList.get(i)).getChild("gameImages").getChildren();
-
-                for (int j = 0; j < imagesList.size(); j++) {
-                    GameImage image = new GameImage(((Element) imagesList.get(j)).getChildText("path"),
-                            "true".equals(((Element) imagesList.get(j)).getChildText("enabled")),
-                            Integer.parseInt(((Element) imagesList.get(j)).getChildText("order")));
-                    game.getImages().add(image);
-                }
-                game.setEnabledImages();
-                similarityGameType.getGames().add(game);
-            }
-
-            for (Game game : similarityGameType.getGames()) {
-                if (game.isEnabled()) {
-                    similarityGameType.getEnabledGames().add((SimilarityGame) game);
-                }
-            }
-            gameModule.getGameTypes().add(similarityGameType);
+            extractGames(similarityGameCollection, similarGamesNode);
+            gameModule.getGameTypes().add(similarityGameCollection);
         }
 
         return gameModule;
     }
 
-    /**
-     * Recursive function to get the user categories
-     *
-     * @param categoriesNode
-     * @param categories
-     * @return
-     */
-    private List<Category> getCategories(List<String> imageAndSoundPaths, Element categoriesNode, List<Category> categories, Category parent) {
+    protected void extractGameCollectionFields(GameCollection gameCollection, Element parentNode, GameCollection defGameCollection) {
+        Element imageEl = parentNode.getChild("image");
+        ImageResource image = extractImageResource(imageEl);
+        if (image == null)
+            image = new ImageResource(defGameCollection.getImage());
+        gameCollection.setImage(image);
 
-        if (categoriesNode == null) {
-            return categories;
-        } else {
-            //get the user categories
+        Element soundEl = parentNode.getChild("sound");
+        SoundResource sound = extractSoundResource(soundEl);
+        if (sound == null)
+            sound = new SoundResource(defGameCollection.getSound());
+        gameCollection.setSound(sound);
 
-            for (int i = 0; i < categoriesNode.getChildren().size(); i++) {
+        Element soundWinEl = parentNode.getChild("winSound");
+        SoundResource soundWin = extractSoundResource(soundWinEl);
+        if (soundWin == null)
+            soundWin = new SoundResource(defGameCollection.getWinSound());
+        gameCollection.setWinSound(soundWin);
 
-                Element categoryEl = (Element) categoriesNode.getChildren().get(i);
+        Element soundErrorEl = parentNode.getChild("errorSound");
+        SoundResource soundError = extractSoundResource(soundErrorEl);
+        if (soundError == null)
+            soundError = new SoundResource(defGameCollection.getErrorSound());
+        gameCollection.setErrorSound(soundError);
 
-                Category category = new Category(
-                        categoryEl.getAttributeValue("name"),
-                        categoryEl.getChildText("image"));
 
-                category.setSound(categoryEl.getChildText("sound"));
+    }
 
-                if (categoryEl.getChildText("rows") != null && !categoryEl.getChildText("rows").isEmpty()) {
-                    category.setRows(Integer.parseInt(categoryEl.getChildText("rows")));
-                }
+    protected void extractGames(GameCollection gameCollection, Element parentNode) {
+        Element gamesEl = parentNode.getChild("games");
+        if (gamesEl != null) {
+            List<Element> gamesList = gamesEl.getChildren();
+            for (Element gameEl : gamesList) {
+                String name = gameEl.getAttributeValue("name");
+                String enabled = gameEl.getAttributeValue("enabled");
+                //check if Game has altered data or default should be used
+                if (gameEl.getChildren().isEmpty()) {
 
-                if (categoryEl.getChildText("columns") != null && !categoryEl.getChildText("columns").isEmpty()) {
-                    category.setColumns(Integer.parseInt(categoryEl.getChildText("columns")));
-                }
+                    Game defGame = defaultUser.getGameModule().getGameCollection(gameCollection.getGameType()).getGame(name);
+                    Game game = null;
 
-                if (categoryEl.getChildText("editable") != null) {
-                    category.setEditable(Boolean.parseBoolean(categoryEl.getChildText("editable")));
+                    switch (gameCollection.getGameType()) {
+                        case "stimulusReactionGame":
+                            game = new StimulusReactionGame((StimulusReactionGame) defGame);
+                            break;
+                        case "sequenceGame":
+                            game = new SequenceGame((SequenceGame) defGame);
+                            break;
+                        case "similarityGame":
+                            game = new SimilarityGame((SimilarityGame) defGame);
+                            break;
+                        default:
+                    }
+
+                    if ("true".equals(enabled))
+                        game.setEnabled(true);
+                    else
+                        game.setEnabled(false);
+                    gameCollection.addGame(game);
                 } else {
-                    category.setEditable(true);
+                    int difficulty = Integer.parseInt(gameEl.getChildText("difficulty"));
+
+                    Game game = null;
+                    switch (gameCollection.getGameType()) {
+                        case "stimulusReactionGame":
+                            game = new StimulusReactionGame(name, "true".equals(enabled), difficulty);
+                            break;
+                        case "sequenceGame":
+                            game = new SequenceGame(name, "true".equals(enabled), difficulty);
+                            break;
+                        case "similarityGame":
+                            game = new SimilarityGame(name, "true".equals(enabled), difficulty);
+                            break;
+                        default:
+                    }
+
+                    Element imageEl = gameEl.getChild("image");
+                    ImageResource imageResource = extractImageResource(imageEl);
+                    if (imageResource == null)
+                        imageResource = new ImageResource(gameCollection.getImage());
+                    game.setImage(imageResource);
+
+                    Element soundEl = gameEl.getChild("sound");
+                    SoundResource soundResource = extractSoundResource(soundEl);
+                    if (soundResource == null)
+                        soundResource = new SoundResource(gameCollection.getSound());
+                    game.setSound(soundResource);
+
+                    Element winSoundEl = gameEl.getChild("winSound");
+                    SoundResource winSoundResource = extractSoundResource(winSoundEl);
+                    if (winSoundResource == null)
+                        winSoundResource = new SoundResource(gameCollection.getWinSound());
+                    game.setWinSound(winSoundResource);
+
+                    Element errorSoundEl = gameEl.getChild("errorSoundEl");
+                    SoundResource errorSoundResource = extractSoundResource(errorSoundEl);
+                    if (errorSoundResource == null)
+                        errorSoundResource = new SoundResource(gameCollection.getErrorSound());
+                    game.setErrorSound(errorSoundResource);
+
+
+                    List<Element> gameImages = gameEl.getChild("gameImages").getChildren();
+                    for (Element gameImage : gameImages)
+                        game.getImages().add(extractGameImage(gameImage));
+
+                    gameCollection.addGame(game);
                 }
-
-                if (parent != null) {
-                    category.setParentCategory(new Category(parent.getName()));
-                }
-
-                if (categoryEl.getChildText("editable") != null) {
-                    category.setEditable(Boolean.parseBoolean(categoryEl.getChildText("editable")));
-                } else {
-                    category.setEditable(true);
-                }
-
-                if (categoryEl.getChildText("order") != null) {
-                    category.setOrder(Integer.parseInt(categoryEl.getChildText("order")));
-                } else {
-                    category.setOrder(0);
-                }
-
-                if (categoryEl.getChildText("hasSound") != null) {
-                    category.setHasSound("true".equals(categoryEl.getChildText("hasSound")));
-                } else {
-                    category.setHasSound(true);
-                }
-
-                if (categoryEl.getChildText("hasImage") != null) {
-                    category.setHasImage("true".equals(categoryEl.getChildText("hasImage")));
-                } else {
-                    category.setHasImage(true);
-                }
-
-                if (categoryEl.getChildText("hasText") != null) {
-                    category.setHasText("true".equals(categoryEl.getChildText("hasText")));
-                } else {
-                    category.setHasText(true);
-                }
-
-                if (categoryEl.getChildText("enabled") != null) {
-                    category.setEnabled("true".equals(categoryEl.getChildText("enabled")));
-                } else {
-                    category.setEnabled(true);
-                }
-
-                if (parent != null) {
-                    category.setParentCategory(parent);
-                }
-
-                List<Category> categoriesArray = new ArrayList<>();
-
-                Element subCategories = (Element) categoryEl.getChild("categories");
-                categoriesArray = getCategories(imageAndSoundPaths, subCategories, categoriesArray, category);
-
-                category.setSubCategories((ArrayList<Category>) categoriesArray);
-                categories.add(category);
-
-                if (!categoryEl.getChildText("sound").isEmpty()) {
-                    imageAndSoundPaths.add(categoryEl.getChildText("sound"));
-                }
-                if (!categoryEl.getChildText("image").isEmpty()) {
-                    imageAndSoundPaths.add(categoryEl.getChildText("image"));
-                }
-
             }
-            return categories;
         }
+    }
+
+    protected GameImage extractGameImage(Element element) {
+        boolean enabled = "true".equals(element.getAttributeValue("enabled"));
+        int order = Integer.parseInt(element.getAttributeValue("order"));
+        ResourceType imageResourceType = ResourceType.valueOf(element.getAttributeValue("resourceType"));
+        ImageResource imageResource = new ImageResource(element.getText(), imageResourceType);
+        return new GameImage(imageResource, enabled, order);
+    }
+
+    protected ImageResource extractImageResource(Element imageEl) {
+        if (imageEl == null)
+            return null;
+        String imagePath = imageEl.getText();
+        if (imagePath.isEmpty())
+            return null;
+        ResourceType imageResourceType = ResourceType.valueOf(imageEl.getAttributeValue("resourceType"));
+        return new ImageResource(imagePath, imageResourceType);
+    }
+
+    protected SoundResource extractSoundResource(Element soundEl) {
+        if (soundEl == null)
+            return null;
+        String soundPath = soundEl.getText();
+        if (soundPath.isEmpty())
+            return null;
+        ResourceType resourceType = ResourceType.valueOf(soundEl.getAttributeValue("resourceType"));
+        return new SoundResource(soundPath, resourceType);
     }
 
     /**
@@ -699,10 +660,11 @@ public class XMLConfigurationHandler {
      * @return
      */
     public boolean hasBrokenFiles(String username) {
-        for (Map.Entry<String, List<String>> entry : userFiles.entrySet()) {
+        for (Map.Entry<String, List<MultimediaResource>> entry : userFiles.entrySet()) {
             if (entry.getKey().equals(username)) {
-                for (String path : entry.getValue()) {
-                    if (!(new File(path).isFile())) {
+                for (MultimediaResource resource : entry.getValue()) {
+                    File file = rm.getFileOfResource(resource.getPath(), resource.getResourceType());
+                    if (file == null || !file.isFile()) {
                         return true;
                     }
                 }
@@ -713,17 +675,18 @@ public class XMLConfigurationHandler {
 
     public void update() throws Exception {
         this.writeToXmlFile();
-        this.parseConfigurationFileXML();
+        this.parseConfigurationFileXML(false);
     }
 
     public List<String> getBrokenFiles(String username) {
         List<String> brokenFiles = new ArrayList();
 
-        for (Map.Entry<String, List<String>> entry : userFiles.entrySet()) {
+        for (Map.Entry<String, List<MultimediaResource>> entry : userFiles.entrySet()) {
             if (entry.getKey().equals(username)) {
-                for (String path : entry.getValue()) {
-                    if (!(new File(path).isFile())) {
-                        brokenFiles.add(path);
+                for (MultimediaResource resource : entry.getValue()) {
+                    File file = rm.getFileOfResource(resource.getPath(), resource.getResourceType());
+                    if (file == null || !file.isFile()) {
+                        brokenFiles.add(resource.getPath());
                     }
                 }
             }
@@ -739,7 +702,476 @@ public class XMLConfigurationHandler {
         XMLOutputter xmlOutput = new XMLOutputter();
         xmlOutput.setFormat(Format.getPrettyFormat());
         xmlOutput.output(configurationXmlDocument, new OutputStreamWriter(
-                new FileOutputStream(new File(configurationFilePath)), "UTF-8"));
+                new FileOutputStream(localConfFile), "UTF-8"));
     }
 
+    protected Element createNewProfile(String name) {
+        Element profile = new Element("profile");
+        Element defaultProfile = configurationXmlDocument.getRootElement().getChild("defaultProfile");
+        profile.addContent(new Element("name").setText(name));
+
+        Element imageOfDefaultProfile = defaultProfile.getChild("image");
+        Element image = new Element(imageOfDefaultProfile.getName());
+        image.addContent(imageOfDefaultProfile.getText());
+        Attribute attributeOfDefImage = (Attribute) imageOfDefaultProfile.getAttributes().get(0);
+        image.setAttribute(attributeOfDefImage.getName(), attributeOfDefImage.getValue());
+        profile.addContent(image);
+
+        profile.addContent(new Element("configuration"));
+
+        Element communication = new Element("communication").setAttribute("enabled", "true");
+        Element categories = new Element("categories");
+        CommunicationModule defComModule = defaultUser.getCommunicationModule();
+        for (Category category : defComModule.getCategories()) {
+            String catName = category.getNameUnmodified();
+            Element categoryEl = convertToXMLElement("category", "name", catName, "enabled", category.isEnabled());
+            categories.addContent(categoryEl);
+        }
+        communication.addContent(categories);
+        profile.addContent(communication);
+
+        Element entertainment = new Element("entertainment").setAttribute("enabled", "true");
+
+        profile.addContent(entertainment);
+
+        Element games = new Element("games").setAttribute("enabled", "true");
+
+        games.addContent(createDefaultGameCollectionElement("stimulusReactionGames", defaultUser.getGameModule().getGameCollection("stimulusReactionGame")));
+        games.addContent(createDefaultGameCollectionElement("sequenceGames", defaultUser.getGameModule().getGameCollection("sequenceGame")));
+        games.addContent(createDefaultGameCollectionElement("similarityGames", defaultUser.getGameModule().getGameCollection("similarityGame")));
+
+        profile.addContent(games);
+
+        return profile;
+    }
+
+    protected Element createDefaultGameCollectionElement(String name, GameCollection defGameCollection) {
+        Element gameColEl = convertToXMLElement(name, "enabled", true);
+        gameColEl.addContent(new Element("image"));
+        gameColEl.addContent(new Element("sound"));
+        gameColEl.addContent(new Element("winSound"));
+        gameColEl.addContent(new Element("errorSound"));
+        Element gamesEl = new Element("games");
+        for (Game game : defGameCollection.getGames()) {
+            Element gameEl = convertToXMLElement("game", "name", game.getNameUnmodified(), "enabled", game.isEnabled());
+            gamesEl.addContent(gameEl);
+        }
+        gameColEl.addContent(gamesEl);
+        return gameColEl;
+    }
+
+    public void deleteUser(String name) {
+        List<Element> profiles = configurationXmlDocument.getRootElement().getChild("userProfiles").getChildren();
+        for (Element profile : profiles) {
+            if (profile.getChildText("name").equals(name)) {
+                profile.detach();
+                break;
+            }
+        }
+    }
+
+    public void createNewUser(String name) {
+        Element profile = createNewProfile(name);
+        Element profiles = configurationXmlDocument.getRootElement().getChild("userProfiles");
+        profiles.addContent(profile);
+    }
+
+    public User createNewUser(File profileFile) {
+        SAXBuilder builder = new SAXBuilder();
+        try {
+            Document profileXml = builder.build(profileFile);
+            Element profile = profileXml.getRootElement();
+            return extractUserFromXml(profile, false);
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Sentry.capture(ex);
+            return null;
+        }
+    }
+
+    public void addUser(User user) {
+        Element userProfile = new Element("userProfile");
+        userProfile.addContent(new Element("name").setText(user.getName()));
+        userProfile.addContent(convertToXMLElement("image", user.getImage()));
+        userProfile.addContent(convertToXMLElement(user.getConfiguration(), defaultUser.getConfiguration()));
+        userProfile.addContent(convertToXMLElement(user.getCommunicationModule(), defaultUser.getCommunicationModule()));
+        userProfile.addContent(convertToXMLElement(user.getEntertainmentModule(), defaultUser.getEntertainmentModule()));
+        userProfile.addContent(convertToXMLElement(user.getGameModule(), defaultUser.getGameModule()));
+        configurationXmlDocument.getRootElement().getChild("userProfiles").addContent(userProfile);
+    }
+
+    public Element getUserElement(String name) {
+        List<Element> userProfiles = configurationXmlDocument.getRootElement().getChild("userProfiles").getChildren();
+        for (Element userProfile : userProfiles) {
+            if (userProfile.getChildText("name").equals(name))
+                return userProfile;
+        }
+        return null;
+    }
+
+
+    protected void attachAllElementsOfUser(Element userEl, User user) {
+        userEl.addContent(new Element("name").setText(user.getName()));
+        userEl.addContent(convertToXMLElement("image", user.getImage()));
+        userEl.addContent(convertToXMLElement(user.getConfiguration(), defaultUser.getConfiguration()));
+        userEl.addContent(convertToXMLElement(user.getCommunicationModule(), defaultUser.getCommunicationModule()));
+        userEl.addContent(convertToXMLElement(user.getEntertainmentModule(), defaultUser.getEntertainmentModule()));
+        userEl.addContent(convertToXMLElement(user.getGameModule(), defaultUser.getGameModule()));
+    }
+
+    public void updateUser(User oldUser, User newUser) {
+        Element userEl = getUserElement(oldUser.getName());
+        oldUser.setName(newUser.getName());
+        ImageResource imageResource = newUser.getImage();
+        if (imageResource == null)
+            imageResource = defaultUser.getImage();
+        oldUser.setImage(imageResource);
+        oldUser.setConfiguration(newUser.getConfiguration());
+        userEl.removeContent();
+        attachAllElementsOfUser(userEl, oldUser);
+    }
+
+    public void updateUser(User user) {
+        Element userEl = getUserElement(user.getName());
+        userEl.removeContent();
+        attachAllElementsOfUser(userEl, user);
+    }
+
+    protected Element convertToXMLElement(Configuration configuration, Configuration oldConfiguration) {
+        Element configurationEl = new Element("configuration");
+        if (oldConfiguration == null || oldConfiguration.isAltered(configuration)) {
+            configurationEl.addContent(new Element("rotationSpeed").setText(configuration.getRotationSpeed() + ""));
+            configurationEl.addContent(new Element("defaultGridRow").setText(configuration.getDefaultGridRow() + ""));
+            configurationEl.addContent(new Element("defaultGridColumn").setText(configuration.getDefaultGridColumn() + ""));
+            configurationEl.addContent(convertToXMLElement("sound", configuration.hasSound()));
+            configurationEl.addContent(convertToXMLElement("image", configuration.hasImage()));
+            configurationEl.addContent(convertToXMLElement("text", configuration.hasText()));
+
+            Sensor selectionSensor = configuration.getSelectionSensor();
+            if (selectionSensor != null) {
+                Element selectionSensorEl = new Element("selectionSensor");
+                if (selectionSensor instanceof KeyboardSensor) {
+                    KeyboardSensor keyboardSensor = (KeyboardSensor) selectionSensor;
+                    selectionSensorEl.addContent(new Element("type").setText(keyboardSensor.getName()));
+                    selectionSensorEl.addContent(new Element("keyCode").setText(keyboardSensor.getKeyCode() + ""));
+                    selectionSensorEl.addContent(new Element("keyChar").setText(keyboardSensor.getKeyChar() + ""));
+                } else if (selectionSensor instanceof MouseSensor) {
+                    MouseSensor mouseSensor = (MouseSensor) selectionSensor;
+                    selectionSensorEl.addContent(new Element("type").setText(mouseSensor.getName()));
+                    selectionSensorEl.addContent(new Element("button").setText(mouseSensor.getButton() + ""));
+                    selectionSensorEl.addContent(new Element("clickCount").setText(mouseSensor.getClickCount() + ""));
+                }
+                configurationEl.addContent(selectionSensorEl);
+            }
+
+            Sensor navigationSensor = configuration.getNavigationSensor();
+            if (navigationSensor != null) {
+                Element navigationSensorEl = new Element("navigationSensor");
+                if (navigationSensor instanceof KeyboardSensor) {
+                    KeyboardSensor keyboardSensor = (KeyboardSensor) navigationSensor;
+                    navigationSensorEl.addContent(new Element("type").setText(keyboardSensor.getName()));
+                    navigationSensorEl.addContent(new Element("keyCode").setText(keyboardSensor.getKeyCode() + ""));
+                    navigationSensorEl.addContent(new Element("keyChar").setText(keyboardSensor.getKeyChar() + ""));
+                } else if (navigationSensor instanceof MouseSensor) {
+                    MouseSensor mouseSensor = (MouseSensor) navigationSensor;
+                    navigationSensorEl.addContent(new Element("type").setText(mouseSensor.getName()));
+                    navigationSensorEl.addContent(new Element("button").setText(mouseSensor.getButton() + ""));
+                    navigationSensorEl.addContent(new Element("clickCount").setText(mouseSensor.getClickCount() + ""));
+                }
+                configurationEl.addContent(navigationSensorEl);
+            }
+
+        }
+        return configurationEl;
+    }
+
+    protected Element convertToXMLElement(CommunicationModule communicationModule, CommunicationModule defaultComMod) {
+        Element communicationModuleEl = convertToXMLElement("communication", "enabled", communicationModule.isEnabled());
+
+        Element categoriesEl = new Element("categories");
+        for (Category category : communicationModule.getCategories()) {
+            String catName = category.getNameUnmodified();
+            if (defaultComMod == null || category.isAltered(defaultComMod.getCategory(catName))) {
+                Element categoryEl = convertToXMLElement(category, communicationModule.getSupportedLanguages(catName));
+                categoriesEl.addContent(categoryEl);
+            } else {
+                Element categoryEl = convertToXMLElement("category", "name", catName, "enabled", category.isEnabled());
+                categoriesEl.addContent(categoryEl);
+            }
+        }
+        communicationModuleEl.addContent(categoriesEl);
+
+        return communicationModuleEl;
+    }
+
+    protected Element addLanguageAttribute(Element categoryEl, HashSet<String> languages) {
+        String languagesString = "";
+        for (String language : languages) {
+            languagesString = languagesString + " " + language;
+        }
+        categoryEl.setAttribute("languages", languagesString.trim());
+        return categoryEl;
+    }
+
+    protected Element convertToXMLElement(Category category, HashSet<String> languages) {
+        Element categoryEl = convertToXMLElement(category);
+        if (category.isEnabled())
+            categoryEl.setAttribute("enabled", "true");
+        else
+            categoryEl.setAttribute("enabled", "false");
+        addLanguageAttribute(categoryEl, languages);
+        List<Category> subCategories = category.getSubCategories();
+        if (!subCategories.isEmpty()) {
+            Element categories = new Element("categories");
+            for (Category subCategory : subCategories) {
+                Element subCategoryEl = convertToXMLElement(subCategory);
+                categories.addContent(subCategoryEl);
+            }
+            categoryEl.addContent(categories);
+        }
+        return categoryEl;
+    }
+
+    protected Element convertToXMLElement(Category category) {
+        Element categoryEl = convertToXMLElement("category", "name", category.getNameUnmodified(), "enabled", category.isEnabled());
+        categoryEl.addContent(convertToXMLElement("image", category.getImage()));
+        categoryEl.addContent(convertToXMLElement("sound", category.getSound()));
+        /*categoryEl.addContent(convertToXMLElement("hasSound", category.hasSound()));
+        categoryEl.addContent(convertToXMLElement("hasImage", category.hasImage()));
+        categoryEl.addContent(convertToXMLElement("hasText", category.hasText()));*/
+        return categoryEl;
+    }
+
+    protected Element convertToXMLElement(EntertainmentModule entertainmentModule, EntertainmentModule defaultEntMod) {
+        Element entertainmentModuleEl = convertToXMLElement("entertainment", "enabled", entertainmentModule.isEnabled());
+
+        MusicModule musicModule = entertainmentModule.getMusicModule();
+        if (defaultEntMod == null || musicModule.isAltered(defaultEntMod.getMusicModule())) {
+            Element musicModuleEl = convertToXMLElement("music", "enabled", musicModule.isEnabled());
+            musicModuleEl.addContent(new Element("path").setText(musicModule.getFolderPath()));
+            musicModuleEl.addContent(new Element("playlistSize").setText(musicModule.getPlaylistSize() + ""));
+            entertainmentModuleEl.addContent(musicModuleEl);
+        }
+
+        VideoModule videoModule = entertainmentModule.getVideoModule();
+        if (defaultEntMod == null || videoModule.isAltered(defaultEntMod.getVideoModule())) {
+            Element videoModuleEl = convertToXMLElement("video", "enabled", videoModule.isEnabled());
+            videoModuleEl.addContent(new Element("path").setText(videoModule.getFolderPath()));
+            videoModuleEl.addContent(new Element("playlistSize").setText(videoModule.getPlaylistSize() + ""));
+            entertainmentModuleEl.addContent(videoModuleEl);
+        }
+        return entertainmentModuleEl;
+    }
+
+    protected Element convertToXMLElement(GameModule gameModule, GameModule defaultGameMod) {
+        Element gameModuleEl = convertToXMLElement("games", "enabled", gameModule.isEnabled());
+
+        String gameType = "stimulusReactionGame";
+        Element stimulusReactionGamesEl = convertToXMLElement(gameType, gameModule.getGameCollection(gameType), defaultGameMod);
+        gameModuleEl.addContent(stimulusReactionGamesEl);
+
+        gameType = "sequenceGame";
+        Element sequenceGamesEl = convertToXMLElement(gameType, gameModule.getGameCollection(gameType), defaultGameMod);
+        gameModuleEl.addContent(sequenceGamesEl);
+
+        gameType = "similarityGame";
+        Element similarityGamesEl = convertToXMLElement(gameType, gameModule.getGameCollection(gameType), defaultGameMod);
+        gameModuleEl.addContent(similarityGamesEl);
+
+        return gameModuleEl;
+    }
+
+    protected Element convertToXMLElement(String gameType, GameCollection gameCollection, GameModule defaultGameMod) {
+        Element gameCollectionEl = convertToXMLElement(gameType + "s", "enabled", gameCollection.isEnabled());
+        Element gamesEl = new Element("games");
+        if (defaultGameMod == null) {
+            gameCollectionEl.addContent(convertToXMLElement("image", gameCollection.getImage()));
+            gameCollectionEl.addContent(convertToXMLElement("sound", gameCollection.getSound()));
+            gameCollectionEl.addContent(convertToXMLElement("winSound", gameCollection.getWinSound()));
+            gameCollectionEl.addContent(convertToXMLElement("errorSound", gameCollection.getErrorSound()));
+        } else {
+            GameCollection defGameCollection = defaultGameMod.getGameCollection(gameType);
+
+            ImageResource imageResource = gameCollection.getImage();
+            if (imageResource == null) {
+                gameCollection.setImage(defGameCollection.getImage());
+                gameCollectionEl.addContent(new Element("image"));
+            } else if (imageResource.isAltered(defGameCollection.getImage())) {
+                gameCollectionEl.addContent(convertToXMLElement("image", imageResource));
+            } else {
+                gameCollectionEl.addContent(new Element("image"));
+            }
+
+            SoundResource soundResource = gameCollection.getSound();
+            if (soundResource == null) {
+                gameCollection.setSound(defGameCollection.getSound());
+                gameCollectionEl.addContent(new Element("sound"));
+            } else if (soundResource.isAltered(defGameCollection.getSound())) {
+                gameCollectionEl.addContent(convertToXMLElement("sound", soundResource));
+            } else {
+                gameCollectionEl.addContent(new Element("sound"));
+            }
+
+
+            SoundResource winSoundResource = gameCollection.getWinSound();
+            if (winSoundResource == null) {
+                gameCollection.setWinSound(defGameCollection.getWinSound());
+                gameCollectionEl.addContent(new Element("winSound"));
+            } else if (winSoundResource.isAltered(defGameCollection.getWinSound())) {
+                gameCollectionEl.addContent(convertToXMLElement("winSound", winSoundResource));
+            } else {
+                gameCollectionEl.addContent(new Element("winSound"));
+            }
+
+
+            SoundResource errorSoundResource = gameCollection.getErrorSound();
+            if (errorSoundResource == null) {
+                gameCollection.setErrorSound(defGameCollection.getErrorSound());
+                gameCollectionEl.addContent(new Element("errorSound"));
+            } else if (errorSoundResource.isAltered(defGameCollection.getErrorSound())) {
+                gameCollectionEl.addContent(convertToXMLElement("errorSound", errorSoundResource));
+            } else {
+                gameCollectionEl.addContent(new Element("errorSound"));
+            }
+
+        }
+
+        GameCollection defGameCollection = null;
+        if (defaultGameMod != null) {
+            defGameCollection = defaultGameMod.getGameCollection(gameType);
+        }
+
+
+        for (Game game : gameCollection.getGames()) {
+            String name = game.getNameUnmodified();
+            Element gameEl = convertToXMLElement(game, gameCollection);
+            if (defaultGameMod == null || defGameCollection.getGame(name) == null || defGameCollection.getGame(name).isAltered(game))
+                gamesEl.addContent(gameEl);
+            else
+                gamesEl.addContent(convertToXMLElement("game", "name", game.getNameUnmodified(), "enabled", game.isEnabled()));
+        }
+
+        gameCollectionEl.addContent(gamesEl);
+        return gameCollectionEl;
+    }
+
+    protected Element convertToXMLElement(Game game, GameCollection parent) {
+        Element gameEl = convertToXMLElement("game", "name", game.getNameUnmodified(), "enabled", game.isEnabled());
+        String difficulty = "";
+        switch (parent.getGameType()) {
+            case "stimulusReactionGame":
+                difficulty = ((StimulusReactionGame) game).getDifficulty() + "";
+                break;
+            case "sequenceGame":
+                difficulty = ((SequenceGame) game).getDifficulty() + "";
+                break;
+            case "similarityGame":
+                difficulty = ((SimilarityGame) game).getDifficulty() + "";
+                break;
+            default:
+        }
+        gameEl.addContent(new Element("difficulty").setText(difficulty));
+
+        ImageResource image = game.getImage();
+        if (parent.getImage().isAltered(image))
+            gameEl.addContent(convertToXMLElement("image", image));
+
+        SoundResource sound = game.getSound();
+        if (parent.getSound().isAltered(sound))
+            gameEl.addContent(convertToXMLElement("sound", sound));
+
+        SoundResource winSound = game.getWinSound();
+        if (parent.getWinSound().isAltered(winSound))
+            gameEl.addContent(convertToXMLElement("winSound", winSound));
+
+        SoundResource errorSound = game.getErrorSound();
+        if (parent.getErrorSound().isAltered(errorSound))
+            gameEl.addContent(convertToXMLElement("errorSound", errorSound));
+
+        Element gameImagesEl = new Element("gameImages");
+        for (GameImage gameImage : game.getImages()) {
+            Element gameImageEl = convertToXMLElement("gameImage", gameImage.isEnabled(), gameImage.getImage(), gameImage.getOrder());
+            gameImagesEl.addContent(gameImageEl);
+        }
+        gameEl.addContent(gameImagesEl);
+
+        return gameEl;
+    }
+
+    protected Element convertToXMLElement(String name, boolean value, ImageResource imageResource, int order) {
+        Element e = new Element(name);
+        if (value)
+            e.setAttribute("enabled", "true");
+        else
+            e.setAttribute("enabled", "false");
+        e.setAttribute("resourceType", imageResource.resourceType.name());
+        e.addContent(imageResource.path);
+        e.setAttribute("order", order + "");
+        return e;
+    }
+
+    protected Element convertToXMLElement(String name, boolean value) {
+        if (value)
+            return new Element(name).setText("true");
+        else
+            return new Element(name).setText("false");
+    }
+
+    protected Element convertToXMLElement(String name, String attributeName, boolean value) {
+        if (value)
+            return new Element(name).setAttribute(attributeName, "true");
+        else
+            return new Element(name).setAttribute(attributeName, "false");
+    }
+
+    protected Element convertToXMLElement(String name, String attributeName1, String value1, String attributeName2, boolean value2) {
+        Element e = new Element(name);
+        e.setAttribute(attributeName1, value1);
+        if (value2)
+            return e.setAttribute(attributeName2, "true");
+        else
+            return e.setAttribute(attributeName2, "false");
+    }
+
+    protected Element convertToXMLElement(String name, ImageResource imageResource) {
+        Element e = new Element(name);
+        if (imageResource == null)
+            return e;
+        e.addContent(imageResource.path);
+        e.setAttribute("resourceType", imageResource.resourceType.name());
+        return e;
+    }
+
+    protected Element convertToXMLElement(String name, SoundResource soundResource) {
+        Element e = new Element(name);
+        if (soundResource == null)
+            return e;
+        e.addContent(soundResource.path);
+        e.setAttribute("resourceType", soundResource.resourceType.name());
+        return e;
+    }
+
+    public boolean exportUserToFile(String name, File file) {
+        Element profile = new Element("profile");
+        User user = getUser(name);
+        profile.addContent(new Element("name").setText(name));
+        profile.addContent(convertToXMLElement("image", user.getImage()));
+        profile.addContent(convertToXMLElement(user.getConfiguration(), null));
+        profile.addContent(convertToXMLElement(user.getCommunicationModule(), null));
+        profile.addContent(convertToXMLElement(user.getEntertainmentModule(), null));
+        profile.addContent(convertToXMLElement(user.getGameModule(), null));
+        try {
+            OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
+            osw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+            XMLOutputter xmlout = new XMLOutputter();
+            xmlout.setFormat(Format.getPrettyFormat());
+            xmlout.output(profile, osw);
+            osw.close();
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(UserFormPanel.class.getName()).log(Level.SEVERE, null, ex);
+            Sentry.capture(ex);
+            return false;
+        }
+        return true;
+    }
 }

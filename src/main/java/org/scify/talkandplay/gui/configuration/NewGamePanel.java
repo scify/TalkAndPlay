@@ -1,18 +1,18 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.scify.talkandplay.gui.configuration;
 
 import java.awt.Color;
@@ -33,14 +33,17 @@ import javax.swing.JLabel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
-import org.scify.talkandplay.models.games.Game;
-import org.scify.talkandplay.models.games.GameImage;
+import org.scify.talkandplay.models.games.*;
 import org.scify.talkandplay.services.GameService;
+import org.scify.talkandplay.utils.ImageResource;
+import org.scify.talkandplay.utils.ResourceManager;
+import org.scify.talkandplay.utils.ResourceType;
+import org.scify.talkandplay.utils.SoundResource;
 
 /**
- *
  * @author snik
  */
 public class NewGamePanel extends javax.swing.JPanel {
@@ -54,29 +57,40 @@ public class NewGamePanel extends javax.swing.JPanel {
     private List<JLabel> imgLabels;
     private List<GameImage> gameImages;
     private ImageIcon addIcon, soundIcon, addIconHover, soundIconHover;
-
+    private ResourceManager rm;
     private Font buttonFont;
 
     public NewGamePanel(GamesTab parent, User user, String gameType) {
-        this.game = new Game();
+        switch (gameType) {
+            case "stimulusReactionGame":
+                this.game = new StimulusReactionGame("", true, 4);
+                break;
+            case "sequenceGame":
+                this.game = new SequenceGame("", true, 4);
+                break;
+            case "similarityGame":
+                this.game = new SimilarityGame("", true, 4);
+                break;
+            default:
+        }
         this.gameService = new GameService();
         this.parent = parent;
         this.user = user;
         this.gameType = gameType;
         this.imgLabels = new ArrayList();
         this.gameImages = new ArrayList();
-
+        this.rm = ResourceManager.getInstance();
         initComponents();
         initCustomComponents();
     }
 
     private void initCustomComponents() {
 
-        addIcon = new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
-        soundIcon = new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
-        addIconHover=new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/add-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
-        soundIconHover=new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/sound-icon-hover.png")).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
-        
+        addIcon = new ImageIcon(rm.getImage("add-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+        soundIcon = new ImageIcon(rm.getImage("sound-icon.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+        addIconHover = new ImageIcon(rm.getImage("add-icon-hover.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+        soundIconHover = new ImageIcon(rm.getImage("sound-icon-hover.png", ResourceType.JAR).getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+
         imgLabels.add(img1Label);
         imgLabels.add(img2Label);
         imgLabels.add(img3Label);
@@ -96,13 +110,13 @@ public class NewGamePanel extends javax.swing.JPanel {
         soundLabel.setVerticalTextPosition(JLabel.BOTTOM);
 
         soundLabel.setIcon(addIcon);
-        soundLabel.setText("Προσθήκη ήχου");
-        removeSoundLabel.setVisible(false);        
+        soundLabel.setText(rm.getTextOfXMLTag("addNewSound"));
+        removeSoundLabel.setVisible(false);
 
         errorLabel.setForeground(new java.awt.Color(153, 0, 0));
-        
+
         setSoundListener();
-    }                                       
+    }
 
     private void setImageIcon(JLabel label, String path) {
 
@@ -112,13 +126,13 @@ public class NewGamePanel extends javax.swing.JPanel {
             label.setIcon(new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH)));
         }
     }
-    
+
     private void setImageListener(final JLabel image, final int i) {
         final JFileChooser chooser = new JFileChooser();
 
         image.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
-                chooser.setDialogTitle("Διάλεξε εικόνα");
+                chooser.setDialogTitle(rm.getTextOfXMLTag("selectImage"));
                 chooser.setAcceptAllFileFilterUsed(false);
                 chooser.setFileFilter(new FileNameExtensionFilter("Image Files", "png", "jpg", "jpeg", "JPG", "JPEG", "gif"));
                 chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -130,10 +144,11 @@ public class NewGamePanel extends javax.swing.JPanel {
                             gameImages.remove(j);
                         }
                     }
-                    gameImages.add(new GameImage(path, true, i + 1));
+                    ImageResource imageResource = new ImageResource(path, ResourceType.LOCAL);
+                    gameImages.add(new GameImage(imageResource, true, i + 1));
                 }
             }
-            
+
             @Override
             public void mouseEntered(MouseEvent me) {
                 if (image.getIcon() == addIcon) {
@@ -155,17 +170,17 @@ public class NewGamePanel extends javax.swing.JPanel {
         soundLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent me) {
-                if (game.getWinSound() == null || game.getWinSound().isEmpty()) {
+                if (game.getWinSound() == null) {
                     soundLabel.setIcon(addIconHover);
                 } else {
                     soundLabel.setIcon(soundIconHover);
-                    parent.playMedia(game.getWinSound());
+                    parent.playMedia(rm.getSound(game.getWinSound()).getAbsolutePath());
                 }
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
-                if (game.getWinSound() == null || game.getWinSound().isEmpty()) {
+                if (game.getWinSound() == null) {
                     soundLabel.setIcon(addIcon);
                 } else {
                     soundLabel.setIcon(soundIcon);
@@ -176,12 +191,12 @@ public class NewGamePanel extends javax.swing.JPanel {
             public void mouseClicked(MouseEvent me) {
                 JFileChooser chooser = new JFileChooser();
 
-                chooser.setDialogTitle("Διάλεξε ήχο");
+                chooser.setDialogTitle(rm.getTextOfXMLTag("selectSound"));
                 chooser.setAcceptAllFileFilterUsed(false);
                 chooser.setFileFilter(new FileNameExtensionFilter("Sound Files", "mp3", "wav", "wma", "mid"));
                 chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                    game.setWinSound(chooser.getSelectedFile().getAbsolutePath());
+                    game.setWinSound(new SoundResource(chooser.getSelectedFile().getAbsolutePath(), ResourceType.LOCAL));
                     soundLabel.setIcon(soundIcon);
                     soundLabel.setText("");
                     removeSoundLabel.setVisible(true);
@@ -192,14 +207,14 @@ public class NewGamePanel extends javax.swing.JPanel {
         removeSoundLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                game.setWinSound("");
+                game.setWinSound(null);
                 soundLabel.setIcon(addIconHover);
                 removeSoundLabel.setVisible(false);
-                soundLabel.setText("Προσθήκη ήχου");
+                soundLabel.setText(rm.getTextOfXMLTag("addNewSound"));
             }
         });
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -226,109 +241,109 @@ public class NewGamePanel extends javax.swing.JPanel {
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setAutoscrolls(true);
 
-        img1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/no-photo.png"))); // NOI18N
+        img1Label.setIcon(rm.getImageIcon("no-photo.png", ResourceType.JAR)); // NOI18N
         img1Label.setMaximumSize(new java.awt.Dimension(90, 90));
         img1Label.setMinimumSize(new java.awt.Dimension(90, 90));
         img1Label.setPreferredSize(new java.awt.Dimension(90, 90));
         img1Label.setVerifyInputWhenFocusTarget(false);
 
-        img2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/no-photo.png"))); // NOI18N
+        img2Label.setIcon(rm.getImageIcon("no-photo.png", ResourceType.JAR)); // NOI18N
         img2Label.setMaximumSize(new java.awt.Dimension(90, 90));
         img2Label.setMinimumSize(new java.awt.Dimension(90, 90));
         img2Label.setPreferredSize(new java.awt.Dimension(90, 90));
         img2Label.setVerifyInputWhenFocusTarget(false);
 
-        img3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/no-photo.png"))); // NOI18N
+        img3Label.setIcon(rm.getImageIcon("no-photo.png", ResourceType.JAR)); // NOI18N
         img3Label.setMaximumSize(new java.awt.Dimension(90, 90));
         img3Label.setMinimumSize(new java.awt.Dimension(90, 90));
         img3Label.setPreferredSize(new java.awt.Dimension(90, 90));
         img3Label.setVerifyInputWhenFocusTarget(false);
 
-        img4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/no-photo.png"))); // NOI18N
+        img4Label.setIcon(rm.getImageIcon("no-photo.png", ResourceType.JAR)); // NOI18N
         img4Label.setMaximumSize(new java.awt.Dimension(90, 90));
         img4Label.setMinimumSize(new java.awt.Dimension(90, 90));
         img4Label.setPreferredSize(new java.awt.Dimension(90, 90));
         img4Label.setVerifyInputWhenFocusTarget(false);
 
-        addNewButton.setText("Πρόσθεσέ το");
+        addNewButton.setText(rm.getTextOfXMLTag("add"));
         addNewButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addNewButtonMouseClicked(evt);
             }
         });
 
-        soundLabel.setText("Προσθήκη ήχου");
+        soundLabel.setText(rm.getTextOfXMLTag("addNewSound"));
         soundLabel.setAlignmentY(0.0F);
 
-        removeSoundLabel.setText("Αφαίρεση ήχου");
+        removeSoundLabel.setText(rm.getTextOfXMLTag("removeSound"));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(img1Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(img2Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(img3Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(img4Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addNewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(soundLabel)
-                    .addComponent(removeSoundLabel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(img1Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(img2Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(img3Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(img4Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(addNewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(soundLabel)
+                                        .addComponent(removeSoundLabel))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(img4Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(soundLabel)
-                            .addComponent(addNewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(removeSoundLabel))
-                    .addComponent(img3Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(img2Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(img1Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(img4Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(soundLabel)
+                                                        .addComponent(addNewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(removeSoundLabel))
+                                        .addComponent(img3Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(img2Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(img1Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        instructionLabel.setText("Για να φαίνεται όμορφο και σωστό,  προτιμήστε να ανεβάσετε τετράγωνες εικόνες");
+        instructionLabel.setText(rm.getTextOfXMLTag("uploadImageInfo"));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(instructionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(instructionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(instructionLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(errorLabel)
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(instructionLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(errorLabel)
+                                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -336,7 +351,7 @@ public class NewGamePanel extends javax.swing.JPanel {
         game.setImages(gameImages);
         if (validateGame()) {
             try {
-                gameService.createGame(user.getName(), game, gameType);
+                gameService.createGame(user, game, gameType);
                 parent.showGamesPerType(gameType);
             } catch (Exception ex) {
                 Logger.getLogger(GamesTab.class.getName()).log(Level.SEVERE, null, ex);
@@ -347,13 +362,13 @@ public class NewGamePanel extends javax.swing.JPanel {
     private boolean validateGame() {
         if (game.getImages().size() > 0) {
             errorLabel.setText("");
-            return true; 
+            return true;
         } else {
-            errorLabel.setText("Παρακαλώ δημιουργείστε ένα παιχνίδι για να το προσθέσετε");
+            errorLabel.setText(rm.getTextOfXMLTag("pleaseCreateNewGame"));
             return false;
         }
     }
-    
+
     private void setCheckboxListener(final JCheckBox checkbox, final int i) {
 
         checkbox.addChangeListener(new ChangeListener() {

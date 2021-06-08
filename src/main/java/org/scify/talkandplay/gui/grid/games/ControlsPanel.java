@@ -46,6 +46,7 @@ import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.SensorService;
+import org.scify.talkandplay.utils.ResourceManager;
 
 /**
  *
@@ -58,12 +59,15 @@ public class ControlsPanel extends javax.swing.JPanel {
     private JPanel parent, newGamePanel, playAgainPanel, exitPanel;
     private List<JPanel> controls;
     private Selector selector;
+    protected Message message;
+    protected ResourceManager rm;
     
     public ControlsPanel(User user, JPanel parent) {
         this.sensorService = new SensorService(user);
         this.user = user;
         this.parent = parent;
-        
+        this.rm = ResourceManager.getInstance();
+        this.message = Message.getInstance();
         if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
             this.selector = new MouseSelector(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
         } else if (user.getConfiguration().getNavigationSensor() != null) {
@@ -88,8 +92,7 @@ public class ControlsPanel extends javax.swing.JPanel {
         c.gridy = 0;
         
         controls = new ArrayList();
-        
-        JLabel congratsLabel = new JLabel(Message.getRandomCongrats());
+        JLabel congratsLabel = new JLabel(message.getRandomCongratsMessage());
         congratsLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 30));
         congratsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         congratsLabel.setBorder(new EmptyBorder(0, 0, 20, 0));
@@ -98,9 +101,9 @@ public class ControlsPanel extends javax.swing.JPanel {
         congratsPanel.setLayout(new FlowLayout());
         congratsPanel.add(congratsLabel);
         
-        newGamePanel = drawControl("Νέο παιχνίδι");
-        playAgainPanel = drawControl("Παίξε το ίδιο ξανά");
-        exitPanel = drawControl("Έξοδος");
+        newGamePanel = drawControl(rm.getTextOfXMLTag("newGameButton"));
+        playAgainPanel = drawControl(rm.getTextOfXMLTag("replayGameButton"));
+        exitPanel = drawControl(rm.getTextOfXMLTag("exitButton"));
         
         c.gridwidth=3;
         add(congratsPanel, c);

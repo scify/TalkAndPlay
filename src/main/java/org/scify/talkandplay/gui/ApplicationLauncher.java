@@ -18,32 +18,42 @@ package org.scify.talkandplay.gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
-
+import com.sun.javafx.application.PlatformImpl;
 import io.sentry.Sentry;
+import javafx.application.Platform;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.scify.talkandplay.gui.helpers.UIConstants;
-import org.scify.talkandplay.utils.Properties;
-import org.scify.talkandplay.utils.Updater;
+import org.scify.talkandplay.utils.TalkAndPlayProfileConfiguration;
 
 public class ApplicationLauncher {
     static Logger logger = Logger.getLogger(ApplicationLauncher.class);
+    protected static TalkAndPlayProfileConfiguration talkAndPlayProfileConfiguration;
 
     public static void main(String[] args) {
         //PropertiesConfigurator is used to configure logger from properties file
         PropertyConfigurator.configure("log4j.properties");
         //Log in console in and log file
         logger.debug("Log4j appender configuration is successful !!");
-        Updater updater = new Updater();
-        updater.run();
+
         Sentry.init();
         setUI();
+
+        String dataPath = System.getProperty("user.home") + File.separator + "Talk and Play";
+        File dataDir = new File (dataPath);
+        if (!dataDir.exists())
+            dataDir.mkdir();
+        talkAndPlayProfileConfiguration = new TalkAndPlayProfileConfiguration(dataDir);
+
         MainFrame mainFrame = new MainFrame();
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
+        PlatformImpl.startup(() -> {});
+        Platform.setImplicitExit(false);
     }
 
     /**

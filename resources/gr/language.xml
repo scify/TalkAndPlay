@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<languageTexts>
+    <language>Ελληνικά</language>
+    <createdBy>Δημιουργήθηκε από τη</createdBy>
+    <donationBy>Αποκλειστική δωρεά</donationBy>
+    <updateInProgress1>Γίνεται ενημέρωση της εφαρμογής</updateInProgress1>
+    <updateInProgress2>παρακαλώ περιμένετε...</updateInProgress2>
+    <updateInProgress3>Η διαδικασία μπορεί να διαρκέσει μερικά λεπτά.</updateInProgress3>
+    <updateInProgress4>Mε την ολοκλήρωση θα χρειαστεί να ανοίξετε την εφαρμογή ξανά.</updateInProgress4>
+    <addUser>Πρόσθεσε νέο χρήστη</addUser>
+    <loadUser>Φόρτωσε χρήστη</loadUser>
+    <addUserModePanelTitle>Προσθήκη χρήστη</addUserModePanelTitle>
+    <editUserModePanelTitle>Επεξεργασία χρήστη</editUserModePanelTitle>
+    <writeUserName>Γράψε όνομα χρήστη</writeUserName>
+    <uploadUserImage>Ανέβασε φωτογραφία χρήστη</uploadUserImage>
+    <uploadImage>Ανέβασε φωτογραφία</uploadImage>
+    <uploadImageInfo>Για να φαίνεται όμορφο και σωστό,  προτιμήστε να ανεβάσετε τετράγωνες εικόνες</uploadImageInfo>
+    <uploadSound>Ανέβασε ηχητικό</uploadSound>
+    <uploadSoundWarning>Εάν δεν ανεβάσεις ηχητικό, θα παίζει προκαθορισμένος ήχος.</uploadSoundWarning>
+    <configureNavigationAndSelection>Τρόποι πλοήγησης και επιλογής</configureNavigationAndSelection>
+    <configureMatrixSize>Καθόρισε μέγεθος πίνακα</configureMatrixSize>
+    <configureMatrixSize2>άφησε κενό για προεπιλέγμενο μέγεθος πίνακα</configureMatrixSize2>
+    <configureWords>Εμφάνιση λέξεων</configureWords>
+    <configureWordsExtra>Το πεδίο 5 μπορεί να ρυθμιστεί και ανεξάρτητα για κάθε σύνολο λέξεων σε επόμενο στάδιο.</configureWordsExtra>
+    <sound>Ήχος</sound>
+    <verbal>Λεκτικό</verbal>
+    <image>Εικόνα</image>
+    <automatically>Αυτόματα</automatically>
+    <manually>Χειροκίνητα</manually>
+    <selection>επιλογή</selection>
+    <navigation>πλοήγηση</navigation>
+    <activated>Ενεργοποιημένη</activated>
+    <userNamePlaceholder>Όνομα χρήστη</userNamePlaceholder>
+    <selectRotationSpeed>Επίλεξε ταχύτητα εναλλαγής</selectRotationSpeed>
+    <userNameErrorMessage>Το όνομα χρήστη δεν πρέπει να είναι κενό</userNameErrorMessage>
+    <userNameErrorMessage2>Το όνομα χρήστη υπάρχει ήδη</userNameErrorMessage2>
+    <rawsAndColumnsErrorMessage>Οι κολώνες και οι στήλες του πίνακα πρέπει να είναι ακέραιοι, μεταξύ των ψηφίων 2 και 6.</rawsAndColumnsErrorMessage>
+    <selectionButtonErrorMessage>Το κουμπί επιλογής δεν πρέπει να είναι κενό</selectionButtonErrorMessage>
+    <selectionAndNavigationButtonsErrorMessage>Τα κουμπιά επιλογής και πλοήγησης δεν πρέπει να είναι κενά</selectionAndNavigationButtonsErrorMessage>
+    <selectionAndNavigationButtonsErrorMessage2>Τα κουμπιά επιλογής και πλοήγησης πρέπει να είναι διαφορετικά</selectionAndNavigationButtonsErrorMessage2>
+    <chooseFile>Επίλεξε αρχείο</chooseFile>
+    <profileSavedMessage>Το προφίλ αποθηκεύτηκε.</profileSavedMessage>
+    <profileNotSavedMessage>Το προφίλ δεν αποθηκεύτηκε. Παρακαλώ δοκίμασε ξανά.</profileNotSavedMessage>
+    <selectKey>Όρισε κουμπί επιλογής</selectKey>
+    <key>πλήκτρο</key>
+    <leftClick>αριστερό κλικ</leftClick>
+    <rightClick>δεξί κλικ</rightClick>
+    <middleClick>μεσαία κλικ</middleClick>
+    <preferences>ΠΡΟΤΙΜΗΣΕΙΣ</preferences>
+    <delete>ΔΙΑΓΡΑΦΗ</delete>
+    <filesNotFound>Κάποια αρχεία δεν μπορούν να βρεθούν</filesNotFound>
+    <userDeleteConfirmation>Είσαι σίγουρος/η ότι θες να διαγράψεις το χρήστη;</userDeleteConfirmation>
+    <defaultUserName>Χρήστης</defaultUserName>
+    <communicationName>Επικοινωνία</communicationName>
+    <entertainmentName>Ψυχαγωγία</entertainmentName>
+    <gamesName>Παιχνίδια</gamesName>
+    <newGameButton>Νέο παιχνίδι</newGameButton>
+    <replayGameButton>Παίξε το ίδιο ξανά</replayGameButton>
+    <saveButton>Αποθήκευση</saveButton>
+    <exitButton>Έξοδος</exitButton>
+    <backButton>Πίσω</backButton>
+    <saveAndContinue>Αποθήκευση και συνέχεια</saveAndContinue>
+    <saveAndExit>Αποθήκευση και έξοδος</saveAndExit>
+    <saveToFile>Αποθήκευση σε αρχείο</saveToFile>
+    <saveWord>Αποθήκευση λέξης</saveWord>
+    <congratulationMessage1>Μπράβο!</congratulationMessage1>
+    <congratulationMessage2>Τα κατάφερες!</congratulationMessage2>
+    <congratulationMessage3>Σωστά!</congratulationMessage3>
+    <mistakeMessage1>Λάθος. Προσπάθησε ξανά!</mistakeMessage1>
+    <mistakeMessage2>Προσπάθησε ξανά.</mistakeMessage2>
+    <musicName>Μουσική</musicName>
+    <previousSongs>Προηγούμενα τραγούδια</previousSongs>
+    <nextSongs>Επόμενα τραγούδια</nextSongs>
+    <musicControl>Χειριστήριο μουσικής</musicControl>
+    <playingNow>ΠΑΙΖΕΙ ΤΩΡΑ</playingNow>
+    <previousControl>Προηγούμενο</previousControl>
+    <nextControl>Επόμενο</nextControl>
+    <playControl>Αναπαραγωγή</playControl>
+    <pauseControl>Παύση</pauseControl>
+    <playingListControl>Λίστα</playingListControl>
+    <fullScreenControl>Πλήρης Οθόνη</fullScreenControl>
+    <videoName>Βίντεο</videoName>
+    <previousVideos>Προηγούμενα video</previousVideos>
+    <nextVideos>Επόμενα video</nextVideos>
+    <addNewSound>Προσθήκη ήχου</addNewSound>
+    <selectImage>Διάλεξε εικόνα</selectImage>
+    <selectSound>Διάλεξε ήχο</selectSound>
+    <noFilesFound>Δεν υπάρχουν αρχεία</noFilesFound>
+    <add>Πρόσθεσε</add>
+    <edit>Επεξεργασία</edit>
+    <editText>Κάνε κλικ πάνω σε κάποια λέξη για να την επεξεργαστείς.</editText>
+    <addition>Προσθήκη</addition>
+    <newWordButton>Νέα λέξη</newWordButton>
+    <additionText>Για να προσθέσεις νέα λέξη πάτα το κουμπί:</additionText>
+    <communicationTabFilesNotFoundErrorMessage>Τα παρακάτω αρχεία δεν μπορούν να βρεθούν</communicationTabFilesNotFoundErrorMessage>
+    <selectCategory>Επίλεξε κατηγορία</selectCategory>
+    <selectGameCategory>Επίλεξε κατηγορία παιχνιδιού</selectGameCategory>
+    <configureAvailableImageGroups>Διαχειρίσου τις διαθέσιμες ομάδες εικόνων</configureAvailableImageGroups>
+    <addSoundsForCongratulationsAndMistakes>Βάλε ήχους επιβράβευσης και λάθους</addSoundsForCongratulationsAndMistakes>
+    <addSoundsForCongratulationsAndMistakes2>θα χρησιμοποιηθούν προεπιλεγμένοι ήχοι αν δεν ανεβάσεις ήχο</addSoundsForCongratulationsAndMistakes2>
+    <congratulation>επιβράβευση</congratulation>
+    <mistake>σφάλμα</mistake>
+    <removeSound>Αφαίρεση ήχου</removeSound>
+    <addNewGame>Προσθήκη νέου παιχνιδιού</addNewGame>
+    <selectCategoryText>Επίλεξε κατηγορία για να διαχειριστείς τα παιχνίδια. Οι διαθέσιμες κατηγορίες είναι:</selectCategoryText>
+    <availability>Διαθεσιμότητα</availability>
+    <available>Διαθέσιμο</available>
+    <unavailable>Μη διαθέσιμο</unavailable>
+    <selectAvailabilityText>Επίλεξε ποιά παιχνίδια θα είναι διαθέσιμα στο χρήστη πατώντας “Διαθέσιμο” ή “Μη Διαθέσιμο”, αντίστοιχα.</selectAvailabilityText>
+    <selectAvailabilitySaveText>Στο κάτω μέρος της λίστας των παιχνιδιών βρες το κουμπί “Αποθήκευση” και πάτησέ το για να αποθηκεύσεις τις επιλογές σου.</selectAvailabilitySaveText>
+    <difficultyLevel>Επίπεδο δυσκολίας</difficultyLevel>
+    <selectDifficultyLevelText>Ρύθμισε το επίπεδο δυσκολίας για κάθε παιχνίδι ενεργοποιώντας σε κάθε τετράδα τις εικόνες που επιθυμείς. Για να ενεργοποιήσεις μία εικόνα, κάνε κλικ στο κουτί ακριβώς από κάτω της.</selectDifficultyLevelText>
+    <noGamesInCategory>Δεν υπάρχουν παιχνίδια σε αυτή την κατηγορία</noGamesInCategory>
+    <noGames>Δεν υπάρχουν παιχνίδια</noGames>
+    <pleaseCreateNewGame>Παρακαλώ δημιουργείστε ένα παιχνίδι για να το προσθέσετε</pleaseCreateNewGame>
+    <chooseGame>[-- Επίλεξε παιχνίδι --]</chooseGame>
+    <gameTypeStimulusReaction>Ερέθισμα - Αντίδραση</gameTypeStimulusReaction>
+    <gameTypeTimeSequence>Χρονικής Αλληλουχίας</gameTypeTimeSequence>
+    <gameTypeFindTheSimilar>Βρες το όμοιο</gameTypeFindTheSimilar>
+    <pressTheButtonOnTheSimilar>Πάτα το κουμπί πάνω στο όμοιο!</pressTheButtonOnTheSimilar>
+    <changesSaved>Οι αλλαγές αποθηκεύτηκαν!</changesSaved>
+    <userPreferences>Προτιμήσεις χρήστη</userPreferences>
+    <chooseDirectory>Διάλεξε φάκελο</chooseDirectory>
+    <musicDirectory>Φάκελος μουσικής</musicDirectory>
+    <videoDirectory>Φάκελος βίντεο</videoDirectory>
+    <amount>Πλήθος</amount>
+    <chooseMusicDirectory>Επίλεξε φάκελο μουσικής</chooseMusicDirectory>
+    <errorMusicDirectory>Ο φάκελος μουσικής πρέπει να οριστεί σωστά.</errorMusicDirectory>
+    <chooseVideoDirectory>Επίλεξε φάκελο video</chooseVideoDirectory>
+    <errorVideoDirectory>Ο φάκελος video πρέπει να οριστεί σωστά.</errorVideoDirectory>
+    <defineAmountOfItemsPerPage>Όρισε πλήθος τραγουδιών και video ανά σελίδα</defineAmountOfItemsPerPage>
+    <errorAmountOfSongs>Το πλήθος τραγουδιών πρέπει οριστεί σωστά.</errorAmountOfSongs>
+    <errorAmountOfSongs2>Το πλήθος τραγουδιών πρέπει να είναι μεταξύ 6 και 10.</errorAmountOfSongs2>
+    <chooseWord>[-- Επίλεξε λέξη --]</chooseWord>
+    <word>Λέξη</word>
+    <addNewWord>ΠΡΟΣΘΗΚΗ ΝΕΑΣ ΛΕΞΗΣ</addNewWord>
+    <editWord>ΕΠΕΞΕΡΓΑΣΙΑ ΛΕΞΗΣ</editWord>
+    <writeWord>Γράψε λέξη</writeWord>
+    <wordMustNotBeEmpty>Η λέξη δεν πρέπει να είναι κενή</wordMustNotBeEmpty>
+    <wordMustBeUnique>Η λέξη πρέπει να είναι μοναδική</wordMustBeUnique>
+    <wordMustHaveImage>Η λέξη πρέπει να έχει εικόνα</wordMustHaveImage>
+    <wordBelongsToSelection>Επίλεξε πού ανήκει η λέξη</wordBelongsToSelection>
+    <wordBelongsToSelection2>Επίλεξε τη λέξη πρώτου επιπέδου στην οποία θέλεις να ανήκει η νέα λέξη που προσθέτεις εδώ, ή επίλεξε ‘ΕΠΙΚΟΙΝΩΝΙΑ’ εάν πρόκειται για εντελώς νέα κατηγορία λέξεων.</wordBelongsToSelection2>
+    <showMatrix>Εμφάνιση πίνακα</showMatrix>
+    <wordMustBelongToAnotherWord>Η λέξη πρέπει να ανήκει σε κάποια λέξη πρώτου επιπέδου. (Παράδειγμα Φαγητό -> Μακαρόνια)</wordMustBelongToAnotherWord>
+    <wordDeleteConfirmation>Είσαι σίγουρος/η ότι θες να διαγράψεις τη λέξη;</wordDeleteConfirmation>
+    <wordWasSaved>Η λέξη αποθηκεύτηκε!</wordWasSaved>
+    <more>Περισσότερα</more>
+    <pressTheButton>Πάτα το κουμπί!</pressTheButton>
+    <pressTheButtonToStart>Πάτα το κουμπί για να ξεκινήσεις!</pressTheButtonToStart>
+    <sequenceGameInfo>Βάλε στη σωστή σειρά τις κάρτες.</sequenceGameInfo>
+    <sequenceGameInfo2>Ποια εικόνα πρέπει να μπει πρώτη; Πάτα το κουμπί πάνω της!</sequenceGameInfo2>
+    <communicationCat id="0" subId= "0">Ναι</communicationCat>
+    <communicationCat id="1" subId= "0">Όχι</communicationCat>
+    <communicationCat id="2" subId= "0">Φαγητό</communicationCat>
+    <communicationCat id="2" subId= "1">Μακαρόνια</communicationCat>
+    <communicationCat id="2" subId= "2">Πατάτες τηγανητές</communicationCat>
+    <communicationCat id="2" subId= "3">Μπιφτέκι</communicationCat>
+    <communicationCat id="2" subId= "4">Μπριζόλα</communicationCat>
+    <communicationCat id="2" subId= "5">Κοτόπουλο</communicationCat>
+    <communicationCat id="2" subId= "6">Σούπα</communicationCat>
+    <communicationCat id="2" subId= "7">Ψωμί</communicationCat>
+    <communicationCat id="2" subId= "8">Τοστ</communicationCat>
+    <communicationCat id="2" subId= "9">Γιαούρτι</communicationCat>
+    <communicationCat id="2" subId= "10">Αγγούρι</communicationCat>
+    <communicationCat id="2" subId= "11">Ντομάτα</communicationCat>
+    <communicationCat id="3" subId= "0">Ποτά</communicationCat>
+    <communicationCat id="3" subId= "1">Νερό</communicationCat>
+    <communicationCat id="3" subId= "2">Χυμός</communicationCat>
+    <communicationCat id="3" subId= "3">Γάλα</communicationCat>
+    <communicationCat id="4" subId= "0">Φρούτα</communicationCat>
+    <communicationCat id="4" subId= "1">Μήλο</communicationCat>
+    <communicationCat id="4" subId= "2">Μπανάνα</communicationCat>
+    <communicationCat id="4" subId= "3">Πορτοκάλι</communicationCat>
+    <communicationCat id="4" subId= "4">Ροδάκινο</communicationCat>
+    <communicationCat id="4" subId= "5">Αχλάδι</communicationCat>
+    <communicationCat id="4" subId= "6">Καρπούζι</communicationCat>
+    <communicationCat id="5" subId= "0">Τουαλέτα</communicationCat>
+    <communicationCat id="5" subId= "1">Αλλαγή πάνας</communicationCat>
+    <communicationCat id="6" subId= "0">Συναισθήματα</communicationCat>
+    <communicationCat id="6" subId= "1">Χαρά</communicationCat>
+    <communicationCat id="6" subId= "2">Λύπη</communicationCat>
+    <communicationCat id="6" subId= "3">Θυμός</communicationCat>
+    <communicationCat id="6" subId= "4">Αηδία</communicationCat>
+    <communicationCat id="6" subId= "5">Φόβος</communicationCat>
+	<communicationCat id="6" subId= "6">Αγάπη</communicationCat>
+    <communicationCat id="7" subId= "0">Πόνος</communicationCat>
+    <communicationCat id="7" subId= "1">Πόνος στο κεφάλι</communicationCat>
+    <communicationCat id="7" subId= "2">Πόνος στο πόδι</communicationCat>
+    <communicationCat id="7" subId= "3">Πόνος στο χέρι</communicationCat>
+    <communicationCat id="7" subId= "4">Πόνος στην κοιλιά</communicationCat>
+    <communicationCat id="7" subId= "5">Πόνος στην πλάτη</communicationCat>
+    <communicationCat id="8" subId= "0">Θερμοκρασία</communicationCat>
+    <communicationCat id="8" subId= "1">Κρύο</communicationCat>
+    <communicationCat id="8" subId= "2">Ζεστό</communicationCat>
+    <communicationCat id="8" subId= "3">Καυτό</communicationCat>
+    <communicationCat id="9" subId= "0">Φαγούρα</communicationCat>
+    <communicationCat id="9" subId= "1">Φαγούρα στο πόδι</communicationCat>
+    <communicationCat id="9" subId= "2">Φαγούρα στο κεφάλι</communicationCat>
+    <communicationCat id="9" subId= "3">Φαγούρα στο χέρι</communicationCat>
+    <communicationCat id="9" subId= "4">Φαγούρα στην πλάτη</communicationCat>
+    <communicationCat id="10" subId= "0">Αλλαγή θέσης</communicationCat>
+    <communicationCat id="10" subId= "1">Ανέβασε κεφάλι</communicationCat>
+    <communicationCat id="10" subId= "2">Κατέβασε κεφάλι</communicationCat>
+    <communicationCat id="10" subId= "3">Ανέβασε πόδια</communicationCat>
+    <communicationCat id="10" subId= "4">Κατέβασε πόδια</communicationCat>
+    <communicationCat id="10" subId= "5">Γύρνα με αριστερά</communicationCat>
+    <communicationCat id="10" subId= "6">Γύρνα με δεξιά</communicationCat>
+    <communicationCat id="10" subId= "7">Αναρρόφηση</communicationCat>
+    <communicationCat id="11" subId= "0">Προσωπικό</communicationCat>
+    <communicationCat id="11" subId= "1">Γιατρός</communicationCat>
+    <communicationCat id="11" subId= "2">Νοσοκόμα</communicationCat>
+    <communicationCat id="11" subId= "3">Λογοθεραπευτής</communicationCat>
+    <communicationCat id="11" subId= "4">Φυσιοθεραπευτής</communicationCat>
+    <communicationCat id="12" subId= "0">Συγγενείς</communicationCat>
+    <communicationCat id="12" subId= "1">Αδερφή</communicationCat>
+    <communicationCat id="12" subId= "2">Αδερφός</communicationCat>
+    <communicationCat id="12" subId= "3">Μητέρα</communicationCat>
+    <communicationCat id="12" subId= "4">Πατέρας</communicationCat>
+    <communicationCat id="13" subId= "0">Διασκέδαση</communicationCat>
+    <communicationCat id="13" subId= "1">Μουσική</communicationCat>
+    <communicationCat id="13" subId= "2">Ταινία</communicationCat>
+    <communicationCat id="13" subId= "3">Τηλεόραση</communicationCat>    
+</languageTexts>

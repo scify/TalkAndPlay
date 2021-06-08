@@ -1,18 +1,18 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -27,7 +27,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BoxLayout;
@@ -36,8 +35,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.services.SensorService;
+import org.scify.talkandplay.utils.ResourceManager;
+import org.scify.talkandplay.utils.ResourceType;
 
 /**
  *
@@ -48,11 +50,12 @@ public class PlayerPanel extends javax.swing.JPanel {
     private JPanel prevPanel, playPanel, nextPanel, fullScreenPanel, exitPanel;
     private SensorService sensorService;
     private List<JPanel> controlsList;
+    protected ResourceManager rm;
 
     public PlayerPanel(SensorService sensorService) {
         this.sensorService = sensorService;
         this.controlsList = new ArrayList();
-
+        rm = ResourceManager.getInstance();
         initComponents();
         initCustomComponents();
         initPlayerButtons();
@@ -73,11 +76,11 @@ public class PlayerPanel extends javax.swing.JPanel {
         c.weightx = 1;
         c.weighty = 1;
 
-        prevPanel = drawButton("Προηγούμενο", getClass().getResource("/org/scify/talkandplay/resources/prev-button.png"));
-        playPanel = drawButton("Αναπαραγωγή", getClass().getResource("/org/scify/talkandplay/resources/play-button.png"));
-        nextPanel = drawButton("Επόμενο", getClass().getResource("/org/scify/talkandplay/resources/next-button.png"));
-        fullScreenPanel = drawButton("Πλήρης Οθόνη", getClass().getResource("/org/scify/talkandplay/resources/fullscreen-icon.png"));
-        exitPanel = drawButton("Έξοδος", getClass().getResource("/org/scify/talkandplay/resources/exit-icon.png"));
+        prevPanel = drawButton(rm.getTextOfXMLTag("previousControl"), rm.getImage("prev-button.png", ResourceType.JAR));
+        playPanel = drawButton(rm.getTextOfXMLTag("playControl"), rm.getImage("play-button.png", ResourceType.JAR));
+        nextPanel = drawButton(rm.getTextOfXMLTag("nextControl"), rm.getImage("next-button.png", ResourceType.JAR));
+        fullScreenPanel = drawButton(rm.getTextOfXMLTag("fullScreenControl"), rm.getImage("fullscreen-icon.png", ResourceType.JAR));
+        exitPanel = drawButton(rm.getTextOfXMLTag("exitButton"), rm.getImage("exit-icon.png", ResourceType.JAR));
 
         c.gridwidth = 5;
         add(durationPanel, c);
@@ -100,13 +103,13 @@ public class PlayerPanel extends javax.swing.JPanel {
         controlsList.add(exitPanel);
     }
 
-    private JPanel drawButton(String text, URL imageIcon) {
+    private JPanel drawButton(String text, Image image) {
         JLabel label = new JLabel(text);
         label.setBorder(new EmptyBorder(5, 5, 5, 5));
         label.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel icon = new JLabel(new ImageIcon(new ImageIcon(imageIcon).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+        JLabel icon = new JLabel(new ImageIcon(image.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         icon.setBorder(new EmptyBorder(5, 5, 5, 5));
         icon.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -124,13 +127,13 @@ public class PlayerPanel extends javax.swing.JPanel {
     }
 
     public void setPlayButton() {
-        ((JLabel) playPanel.getComponent(0)).setText("Αναπαραγωγή");
-        ((JLabel) playPanel.getComponent(1)).setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/play-button.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+        ((JLabel) playPanel.getComponent(0)).setText(rm.getTextOfXMLTag("playControl"));
+        ((JLabel) playPanel.getComponent(1)).setIcon(new ImageIcon(rm.getImage("play-button.png", ResourceType.JAR).getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
     }
 
     public void setPauseButton() {
-        ((JLabel) playPanel.getComponent(0)).setText("Παύση");
-        ((JLabel) playPanel.getComponent(1)).setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/pause-button.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+        ((JLabel) playPanel.getComponent(0)).setText(rm.getTextOfXMLTag("pauseControl"));
+        ((JLabel) playPanel.getComponent(1)).setIcon(new ImageIcon(rm.getImage("pause-button.png", ResourceType.JAR).getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
     }
 
     public void setDurationSlider(int iPos) {
@@ -187,12 +190,12 @@ public class PlayerPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 100, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 100, Short.MAX_VALUE)
         );
 
         durationPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -206,37 +209,37 @@ public class PlayerPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout durationPanelLayout = new javax.swing.GroupLayout(durationPanel);
         durationPanel.setLayout(durationPanelLayout);
         durationPanelLayout.setHorizontalGroup(
-            durationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(durationPanelLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(startLabel)
-                .addGap(0, 0, 0)
-                .addComponent(durationSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(endLabel)
-                .addGap(0, 0, 0))
+                durationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(durationPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, 0)
+                                .addComponent(startLabel)
+                                .addGap(0, 0, 0)
+                                .addComponent(durationSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(endLabel)
+                                .addGap(0, 0, 0))
         );
         durationPanelLayout.setVerticalGroup(
-            durationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(durationPanelLayout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addGroup(durationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(endLabel)
-                    .addGroup(durationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(durationSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(startLabel)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                durationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(durationPanelLayout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addGroup(durationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(endLabel)
+                                        .addGroup(durationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(durationSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(startLabel)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(durationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(durationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(durationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(durationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

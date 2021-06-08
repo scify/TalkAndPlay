@@ -18,16 +18,19 @@ package org.scify.talkandplay.gui.grid;
 import java.awt.Color;
 import org.scify.talkandplay.gui.grid.selectors.Selector;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.utils.ResourceManager;
 
 public class BasePanel extends javax.swing.JPanel {
 
     protected GridFrame parent;
     protected User user;
     protected Selector selector;
+    protected ResourceManager rm;
 
     public BasePanel(User user, GridFrame parent) {
         this.user = user;
         this.parent = parent;
+        this.rm = ResourceManager.getInstance();
         setBackground(Color.white);
     }
 

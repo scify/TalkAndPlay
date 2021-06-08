@@ -52,23 +52,25 @@ public class Updater {
     UpdateErrorMessageFrame updateErrorMessageFrame;
     private String zipFilePath;
     static Logger logger = Logger.getLogger(Updater.class);
-    
+
     public Updater() {
         properties = Properties.getInstance();
         int index = properties.getZipUrl().lastIndexOf('/');
         this.zipFilePath = properties.getTmpFolder() + File.separator + properties.getZipUrl().substring(index + 1);
     }
 
-    public void run() {
+    public boolean run() {
         logger.debug("Current user can write to Application directory? " + FileSystemUtils.canWriteToApplicationDir());
         logger.debug("URL: " + properties.getZipUrl());
         logger.debug("Tmp folder: " + properties.getTmpFolder());
         try {
-            if (hasUpdate()) {
-                if (readyForUpdate())
-                    doUpdate();
-                else
-                    showWindowsAdminFrame();
+            if (readyForUpdate()) {
+                doUpdate();
+                return true;
+            }
+            else {
+                showWindowsAdminFrame();
+                return false;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,15 +79,30 @@ public class Updater {
             if (updaterFrame != null)
                 updaterFrame.dispose();
             showUpdateErrorMessageFrame();
+            return false;
         }
     }
 
-    public void doUpdate() throws IOException {
+    public void doUpdate() {
         showFrame();
-        downloadZip();
-        ArrayList<String> tempfilesThatWillReplaceTheExisting = extractZip();
-        overrideFiles(tempfilesThatWillReplaceTheExisting);
-        closeApp();
+        Thread thread = new Thread() {
+            public void run  () {
+                try {
+                    URL url = new URL(properties.getZipUrl());
+                    logger.debug("Tmp folder: " + properties.getTmpFolder());
+                    File file = new File(zipFilePath);
+                    FileUtils.copyURLToFile(url, file);
+                    ArrayList<String> tempfilesThatWillReplaceTheExisting = extractZip();
+                    overrideFiles(tempfilesThatWillReplaceTheExisting);
+                    closeApp();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Sentry.capture(e);
+                    showUpdateErrorMessageFrame();
+                }
+            }
+        };
+        thread.start();
     }
 
     public static boolean readyForUpdate() {
@@ -96,6 +113,8 @@ public class Updater {
         updaterFrame = new UpdaterFrame(properties.getVersion());
         updaterFrame.setLocationRelativeTo(null);
         updaterFrame.setVisible(true);
+        updaterFrame.revalidate();
+        updaterFrame.repaint();
     }
 
     private void showWindowsAdminFrame() {
@@ -105,18 +124,11 @@ public class Updater {
         windowsAdminMessageFrame.setAlwaysOnTop(true);
     }
 
-    private void showUpdateErrorMessageFrame() {
+    public void showUpdateErrorMessageFrame() {
         updateErrorMessageFrame = new UpdateErrorMessageFrame();
         updateErrorMessageFrame.setLocationRelativeTo(null);
         updateErrorMessageFrame.setVisible(true);
         updateErrorMessageFrame.setAlwaysOnTop(true);
-    }
-
-    private void downloadZip() throws IOException {
-        URL url = new URL(properties.getZipUrl());
-        logger.debug("Tmp folder: " + properties.getTmpFolder());
-        File file = new File(zipFilePath);
-        FileUtils.copyURLToFile(url, file);
     }
 
     private ArrayList<String> extractZip() throws IOException {
@@ -175,7 +187,7 @@ public class Updater {
         System.exit(0);
     }
 
-    private boolean hasUpdate() throws IOException, JDOMException {
+    public boolean hasUpdate() throws IOException, JDOMException {
         boolean hasUpdate = false;
 
         URL url = new URL(properties.getVersionFileUrl());

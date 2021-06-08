@@ -20,7 +20,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.net.URL;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -31,31 +30,24 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import org.scify.talkandplay.gui.helpers.UIConstants;
+import org.scify.talkandplay.utils.ImageResource;
+import org.scify.talkandplay.utils.ResourceManager;
+import org.scify.talkandplay.utils.ResourceType;
 
 public class TilePanel extends javax.swing.JPanel {
 
     private String text;
-    private String imageString;
-    private URL imageUrl;
+    private ImageResource image;
     private boolean hasImage;
     private boolean hasText;
+    protected ResourceManager rm;
 
-    public TilePanel(String text, String imageString, boolean hasImage, boolean hasText) {
+    public TilePanel(String text, ImageResource image, boolean hasImage, boolean hasText) {
         this.text = text;
-        this.imageString = imageString;
+        this.image = image;
         this.hasImage = hasImage;
         this.hasText = hasText;
-
-        initComponents();
-        initCustomComponents();
-    }
-
-    public TilePanel(String text, URL imageUrl, boolean hasImage, boolean hasText) {
-        this.text = text;
-        this.imageUrl = imageUrl;
-        this.hasImage = hasImage;
-        this.hasText = hasText;
-
+        this.rm = ResourceManager.getInstance();
         initComponents();
         initCustomComponents();
     }
@@ -83,13 +75,9 @@ public class TilePanel extends javax.swing.JPanel {
 
         Image img;
         if (!hasImage) {
-            img = new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/empty_pixel.png")).getImage();
+            img = rm.getImage("empty_pixel.png", ResourceType.JAR);
         } else {
-            if (imageString != null && !imageString.isEmpty()) {
-                img = new ImageIcon(imageString).getImage();
-            } else {
-                img = new ImageIcon(imageUrl).getImage();
-            }
+            img = rm.getImage(image.getPath(), image.getResourceType());
         }
 
         JLabel image;

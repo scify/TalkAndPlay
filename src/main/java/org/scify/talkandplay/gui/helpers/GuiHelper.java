@@ -1,18 +1,18 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.scify.talkandplay.gui.helpers;
 
 import java.awt.AlphaComposite;
@@ -25,7 +25,6 @@ import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.net.URL;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,8 +32,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+
 import org.scify.talkandplay.gui.grid.tiles.TilePanel;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.utils.ImageResource;
+import org.scify.talkandplay.utils.ResourceManager;
+import org.scify.talkandplay.utils.ResourceType;
 
 /**
  *
@@ -43,14 +46,17 @@ import org.scify.talkandplay.models.User;
 public class GuiHelper {
 
     private User user;
+    private final ResourceManager rm;
 
     private static final int DEFAULT_WIDTH = 150;
     private static final int DEFAULT_HEIGHT = 150;
 
     public GuiHelper() {
+        rm = ResourceManager.getInstance();
     }
 
     public GuiHelper(User user) {
+        rm = ResourceManager.getInstance();
         this.user = user;
     }
 
@@ -68,15 +74,14 @@ public class GuiHelper {
     /**
      * Get the icon for a user, or no photo
      *
-     * @param path
+     * @param image
      * @return
      */
-    public ImageIcon getIcon(String path) {
-        if (path != null && new File(path).isFile()) {
-            return new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
-
+    public ImageIcon getIcon(ImageResource image) {
+        if (image != null) {
+            return new ImageIcon(image.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
         } else {
-            return new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/no-photo.png")).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+            return new ImageIcon(rm.getImage("no-photo.png", ResourceType.JAR).getScaledInstance(150, 150, Image.SCALE_DEFAULT));
         }
     }
 
@@ -107,17 +112,17 @@ public class GuiHelper {
     /**
      * Get a round icon
      *
-     * @param path
+     * @param imageResource
      * @return
      */
-    public ImageIcon getRoundIcon(String path) {
+    public ImageIcon getRoundIcon(ImageResource imageResource) {
         //first scale the image to the desired dimensions
         BufferedImage master = new BufferedImage(DEFAULT_WIDTH, DEFAULT_HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = master.createGraphics();
-        if (path == null || path.isEmpty() || !new File(path).exists()) {
-            g2d.drawImage(new ImageIcon(new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/no-photo.png")).getImage().getScaledInstance(DEFAULT_WIDTH, DEFAULT_WIDTH, Image.SCALE_SMOOTH)).getImage(), 0, 0, null);
+        if (imageResource == null) {
+            g2d.drawImage(new ImageIcon(rm.getImage("no-photo.png", ResourceType.JAR).getScaledInstance(DEFAULT_WIDTH, DEFAULT_WIDTH, Image.SCALE_SMOOTH)).getImage(), 0, 0, null);
         } else {
-            g2d.drawImage(new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(DEFAULT_WIDTH, DEFAULT_WIDTH, Image.SCALE_SMOOTH)).getImage(), 0, 0, null);
+            g2d.drawImage(new ImageIcon(imageResource.getImage().getScaledInstance(DEFAULT_WIDTH, DEFAULT_WIDTH, Image.SCALE_SMOOTH)).getImage(), 0, 0, null);
         }
         g2d.dispose();
 
@@ -156,28 +161,15 @@ public class GuiHelper {
 
     }
 
-    public JPanel createImagePanel(String imagePath, String text) {
-        return decorateImageIcon(imagePath, null, text);
-    }
-
-    public JPanel createImagePanel(URL imagePath, String text) {
-        return decorateImageIcon(null, imagePath, text);
-    }
-
-    private JPanel decorateImageIcon(String image, URL imageURL, String text) {
+    public JPanel createImagePanel(ImageResource image, String text) {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Color.white);
         panel.setBorder(BorderFactory.createLineBorder(Color.white, 5));
-
-        if (image != null) {
-            panel.add(new TilePanel(text, image, user.getConfiguration().hasImage(), user.getConfiguration().hasText()), BorderLayout.CENTER);
-        } else if (imageURL != null) {
-            panel.add(new TilePanel(text, imageURL, user.getConfiguration().hasImage(), user.getConfiguration().hasText()), BorderLayout.CENTER);
-        }/* else {
+        panel.add(new TilePanel(text, image, user.getConfiguration().hasImage(), user.getConfiguration().hasText()), BorderLayout.CENTER);
+        /* else {
          panel.add(new TilePanel(text), BorderLayout.CENTER);
          }*/
 
         return panel;
     }
-
 }

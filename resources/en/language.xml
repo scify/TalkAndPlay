@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<languageTexts>
+    <language>English</language>
+    <createdBy>Created by</createdBy>
+    <donationBy>Exclusive donation</donationBy>
+    <updateInProgress1>The application is updating</updateInProgress1>
+    <updateInProgress2>please wait...</updateInProgress2>
+    <updateInProgress3>This process might take a few minutes.</updateInProgress3>
+    <updateInProgress4>On completion you will need to re-open the application.</updateInProgress4>
+    <addUser>Add a user</addUser>
+    <loadUser>Load user</loadUser>
+    <addUserModePanelTitle>Add new user</addUserModePanelTitle>
+    <editUserModePanelTitle>Processing user</editUserModePanelTitle>
+    <writeUserName>Write user name</writeUserName>
+    <uploadUserImage>Upload user fotograph</uploadUserImage>
+    <uploadImage>Upload image</uploadImage>
+    <uploadImageInfo>To look good and right, prefer uploading square images</uploadImageInfo>
+    <uploadSound>Upload sound</uploadSound>
+    <uploadSoundWarning>If you do not upload a sound file, a predetermined sound will play.</uploadSoundWarning>
+    <configureNavigationAndSelection>Ways to navigate and select</configureNavigationAndSelection>
+    <configureMatrixSize>Set table size</configureMatrixSize>
+    <configureMatrixSize2>Leave space for pre-selected table size</configureMatrixSize2>
+    <configureWords>Word appearance</configureWords>
+    <configureWordsExtra>Field 5 can also be set independantly for every sum of words on a later stage.</configureWordsExtra>
+    <sound>Sound</sound>
+    <verbal>Verbal</verbal>
+    <image>Image</image>
+    <automatically>Automatically</automatically>
+    <manualy>Manually</manualy>
+    <selection>select</selection>
+    <navigation>navigate</navigation>
+    <activated>Activated</activated>
+    <userNamePlaceholder>User name</userNamePlaceholder>
+    <selectRotationSpeed>Select toggle speed</selectRotationSpeed>
+    <userNameErrorMessage>The username must not be empty</userNameErrorMessage>
+    <userNameErrorMessage2>The username already exists</userNameErrorMessage2>
+    <rawsAndColumnsErrorMessage>The columns and raws of the table must be an integer number, between 2 and 6.</rawsAndColumnsErrorMessage>
+    <selectionButtonErrorMessage>The selection button must not be blank</selectionButtonErrorMessage>
+    <selectionAndNavigationButtonsErrorMessage>The selection and navigation buttons must not be blank</selectionAndNavigationButtonsErrorMessage>
+    <selectionAndNavigationButtonsErrorMessage2>The selection and navigation buttons must be different</selectionAndNavigationButtonsErrorMessage2>
+    <chooseFile>Select a file</chooseFile>
+    <profileSavedMessage>The profile was saved.</profileSavedMessage>
+    <profileNotSavedMessage>The profile was not saved. Please try again.</profileNotSavedMessage>
+    <selectKey>Select key</selectKey>
+    <key>key</key>
+    <leftClick>left click</leftClick>
+    <rightClick>right click</rightClick>
+    <middleClick>middle click</middleClick>
+    <preferences>PREFERENCES</preferences>
+    <delete>DELETE</delete>
+    <filesNotFound>Some files can not be found</filesNotFound>
+    <userDeleteConfirmation>Are you sure you want to delete the user?</userDeleteConfirmation>
+    <defaultUserName>User</defaultUserName>
+    <communicationName>Communication</communicationName>
+    <entertainmentName>Entertainment</entertainmentName>
+    <gamesName>Games</gamesName>
+    <newGameButton>New game</newGameButton>
+    <replayGameButton>Play again the same</replayGameButton>
+    <saveButton>Save</saveButton>
+    <exitButton>Exit</exitButton>
+    <backButton>Back</backButton>
+    <saveAndContinue>Save and continue</saveAndContinue>
+    <saveAndExit>Save and exit</saveAndExit>
+    <saveToFile>Save in a file</saveToFile>
+    <saveWord>Save the word</saveWord>
+    <congratulationMessage1>Bravo!</congratulationMessage1>
+    <congratulationMessage2>You made it!</congratulationMessage2>
+    <congratulationMessage3>Correct!</congratulationMessage3>
+    <mistakeMessage1>Wrong. Try again!</mistakeMessage1>
+    <mistakeMessage2>Try again.</mistakeMessage2>
+    <musicName>Music</musicName>
+    <previousSongs>Previous songs</previousSongs>
+    <nextSongs>Next songs</nextSongs>
+    <musicControl>Controller</musicControl>
+    <playingNow>PLAYING NOW</playingNow>
+    <previousControl>Previous</previousControl>
+    <nextControl>Next</nextControl>
+    <playControl>Play</playControl>
+    <pauseControl>Pause</pauseControl>
+    <playingListControl>List</playingListControl>
+    <fullScreenControl>Full Screen</fullScreenControl>
+    <videoName>Video</videoName>
+    <previousVideos>Previous videos</previousVideos>
+    <nextVideos>Next videos</nextVideos>
+    <addNewSound>Add sound</addNewSound>
+    <selectImage>Select an image</selectImage>
+    <selectSound>Select a sound</selectSound>
+    <noFilesFound>No files found</noFilesFound>
+    <add>Add</add>
+    <edit>Edit</edit>
+    <editText>Click on a word to edit it.</editText>
+    <addition>Addition</addition>
+    <newWordButton>New word</newWordButton>
+    <additionText>To add a new word press:</additionText>
+    <communicationTabFilesNotFoundErrorMessage>The following files can not be found</communicationTabFilesNotFoundErrorMessage>
+    <selectCategory>Select category</selectCategory>
+    <selectGameCategory>Select game category</selectGameCategory>
+    <configureAvailableImageGroups>Manage the available image groups</configureAvailableImageGroups>
+    <addSoundsForCongratulationsAndMistakes>Set reward and mistake sounds</addSoundsForCongratulationsAndMistakes>
+    <addSoundsForCongratulationsAndMistakes2>predetermined sounds will be used if you do not upload a sound</addSoundsForCongratulationsAndMistakes2>
+    <congratulation>congratulation</congratulation>
+    <mistake>mistake</mistake>
+    <removeSound>Remove sound</removeSound>
+    <addNewGame>Add new game</addNewGame>
+    <selectCategoryText>Select category to manage games. The available categories are:</selectCategoryText>
+    <availability>Availability</availability>
+    <available>Available</available>
+    <unavailable>Not available</unavailable>
+    <selectAvailabilityText>Select which games will be available to the user by clicking 'Available' or 'Not Available', respectively.</selectAvailabilityText>
+    <selectAvailabilitySaveText>On the bottom of the games' list find the 'Save' button and click it to save your settings.</selectAvailabilitySaveText>
+    <difficultyLevel>Difficulty level</difficultyLevel>
+    <selectDifficultyLevelText>Set the difficulty level for each game by activating in every foursome the images you want. To activate an image, click on the box right below it.</selectDifficultyLevelText>
+    <noGamesInCategory>There are no games in this category</noGamesInCategory>
+    <noGames>No games found</noGames>
+    <pleaseCreateNewGame>Please create a game to add</pleaseCreateNewGame>
+    <chooseGame>[-- Select game --]</chooseGame>
+    <gameTypeStimulusReaction>Stimulus - Reaction</gameTypeStimulusReaction>
+    <gameTypeTimeSequence>Time sequence</gameTypeTimeSequence>
+    <gameTypeFindTheSimilar>Find the similar</gameTypeFindTheSimilar>
+    <pressTheButtonOnTheSimilar>Press the button on the similar!</pressTheButtonOnTheSimilar>
+    <changesSaved>Changes saved successfully!</changesSaved>
+    <userPreferences>User preferences</userPreferences>
+    <chooseDirectory>Select a folder</chooseDirectory>
+    <musicDirectory>Music folder</musicDirectory>
+    <videoDirectory>Video folder</videoDirectory>
+    <amount>Total</amount>
+    <chooseMusicDirectory>Select music folder</chooseMusicDirectory>
+    <errorMusicDirectory>The music folder must be set correctly.</errorMusicDirectory>
+    <chooseVideoDirectory>Choose video folder</chooseVideoDirectory>
+    <errorVideoDirectory>The video folder must be set correctly.</errorVideoDirectory>
+    <defineAmountOfItemsPerPage>Set number of songs and videos per page</defineAmountOfItemsPerPage>
+    <errorAmountOfSongs>The number of songs must be set correctly.</errorAmountOfSongs>
+    <errorAmountOfSongs2>The number of songs must be between 6 and 10.</errorAmountOfSongs2>
+    <chooseWord>[-- Select the word --]</chooseWord>
+    <word>Word</word>
+    <addNewWord>ADD A NEW WORD</addNewWord>
+    <editWord>EDIT WORD</editWord>
+    <writeWord>Write a word</writeWord>
+    <wordMustNotBeEmpty>The word must not be blank</wordMustNotBeEmpty>
+    <wordMustBeUnique>The word must be unique</wordMustBeUnique>
+    <wordMustHaveImage>The word must have an image</wordMustHaveImage>
+    <wordBelongsToSelection>Select where the word belongs</wordBelongsToSelection>
+    <wordMustBelongToAnotherWord>The word must belong to a first level word. (Example Food-> Spaghetti)</wordMustBelongToAnotherWord>
+    <wordBelongsToSelection2>Select the first level word that you want the new word you are adding here to belong to, or select 'COMMUNICATION' if it is about a wholly new word category.</wordBelongsToSelection2>
+    <showMatrix>Show table</showMatrix>
+    <wordDeleteConfirmation>Are you sure you want to erase the word?</wordDeleteConfirmation>
+    <wordWasSaved>The word was saved!</wordWasSaved>
+    <more>More</more>
+    <pressTheButton>Press the button!</pressTheButton>
+    <pressTheButtonToStart>Press the button to start!</pressTheButtonToStart>
+    <sequenceGameInfo>Place the cards in the correct order.</sequenceGameInfo>
+    <sequenceGameInfo2>Which image should go first? Press the button on it!</sequenceGameInfo2>
+    <communicationCat id="0" subId= "0">Yes</communicationCat>
+    <communicationCat id="1" subId= "0">No</communicationCat>
+    <communicationCat id="2" subId= "0">Food</communicationCat>
+    <communicationCat id="2" subId= "1">Pasta</communicationCat>
+    <communicationCat id="2" subId= "2">French fries</communicationCat>
+    <communicationCat id="2" subId= "3">Burger</communicationCat>
+    <communicationCat id="2" subId= "4">Steak</communicationCat>
+    <communicationCat id="2" subId= "5">Chicken</communicationCat>
+    <communicationCat id="2" subId= "6">Soup</communicationCat>
+    <communicationCat id="2" subId= "7">Bread</communicationCat>
+    <communicationCat id="2" subId= "8">Toast</communicationCat>
+    <communicationCat id="2" subId= "9">Yogurt</communicationCat>
+    <communicationCat id="2" subId= "10">Cucumber</communicationCat>
+    <communicationCat id="2" subId= "11">Tomato</communicationCat>
+    <communicationCat id="3" subId= "0">Drinks</communicationCat>
+    <communicationCat id="3" subId= "1">Water</communicationCat>
+    <communicationCat id="3" subId= "2">Juice</communicationCat>
+    <communicationCat id="3" subId= "3">Milk</communicationCat>
+    <communicationCat id="4" subId= "0">Fruits</communicationCat>
+    <communicationCat id="4" subId= "1">Apple</communicationCat>
+    <communicationCat id="4" subId= "2">Banana</communicationCat>
+    <communicationCat id="4" subId= "3">Orange</communicationCat>
+    <communicationCat id="4" subId= "4">Peach</communicationCat>
+    <communicationCat id="4" subId= "5">Pear</communicationCat>
+    <communicationCat id="4" subId= "6">Watermelon</communicationCat>
+    <communicationCat id="5" subId= "0">Toilet</communicationCat>
+    <communicationCat id="5" subId= "1">Diaper change</communicationCat>
+    <communicationCat id="6" subId= "0">Emotions</communicationCat>
+    <communicationCat id="6" subId= "1">Joy</communicationCat>
+    <communicationCat id="6" subId= "2">Sadness</communicationCat>
+    <communicationCat id="6" subId= "3">Anger</communicationCat>
+    <communicationCat id="6" subId= "4">Disgust</communicationCat>
+    <communicationCat id="6" subId= "5">Fear</communicationCat>
+	<communicationCat id="6" subId= "6">Love</communicationCat>
+    <communicationCat id="7" subId= "0">Pain</communicationCat>
+    <communicationCat id="7" subId= "1">Head-pain</communicationCat>
+    <communicationCat id="7" subId= "2">Leg-pain</communicationCat>
+    <communicationCat id="7" subId= "3">Arm-pain</communicationCat>
+    <communicationCat id="7" subId= "4">Stomach-pain</communicationCat>
+    <communicationCat id="7" subId= "5">Back-pain</communicationCat>
+    <communicationCat id="8" subId= "0">Temperature</communicationCat>
+    <communicationCat id="8" subId= "1">Cold</communicationCat>
+    <communicationCat id="8" subId= "2">Warm</communicationCat>
+    <communicationCat id="8" subId= "3">Hot</communicationCat>
+    <communicationCat id="9" subId= "0">Itch</communicationCat>
+    <communicationCat id="9" subId= "1">Itching-leg</communicationCat>
+    <communicationCat id="9" subId= "2">Itching-head</communicationCat>
+    <communicationCat id="9" subId= "3">Itching-hand</communicationCat>
+    <communicationCat id="9" subId= "4">Itching-back</communicationCat>
+    <communicationCat id="10" subId= "0">Repositioning</communicationCat>
+    <communicationCat id="10" subId= "1">Head-up</communicationCat>
+    <communicationCat id="10" subId= "2">Head-down</communicationCat>
+    <communicationCat id="10" subId= "3">Legs-up</communicationCat>
+    <communicationCat id="10" subId= "4">Legs-down</communicationCat>
+    <communicationCat id="10" subId= "5">Turn-left</communicationCat>
+    <communicationCat id="10" subId= "6">Turn-right</communicationCat>
+    <communicationCat id="10" subId= "7">Suction</communicationCat>
+    <communicationCat id="11" subId= "0">Staff</communicationCat>
+    <communicationCat id="11" subId= "1">Doctor</communicationCat>
+    <communicationCat id="11" subId= "2">Nurse</communicationCat>
+    <communicationCat id="11" subId= "3">Speech-therapist</communicationCat>
+    <communicationCat id="11" subId= "4">Physiotherapist</communicationCat>
+    <communicationCat id="12" subId= "0">Relatives</communicationCat>
+    <communicationCat id="12" subId= "1">Sister</communicationCat>
+    <communicationCat id="12" subId= "2">Brother</communicationCat>
+    <communicationCat id="12" subId= "3">Mother</communicationCat>
+    <communicationCat id="12" subId= "4">Father</communicationCat>
+    <communicationCat id="13" subId= "0">Fun</communicationCat>
+    <communicationCat id="13" subId= "1">Music</communicationCat>
+    <communicationCat id="13" subId= "2">Movie</communicationCat>
+    <communicationCat id="13" subId= "3">Television</communicationCat>            
+</languageTexts>

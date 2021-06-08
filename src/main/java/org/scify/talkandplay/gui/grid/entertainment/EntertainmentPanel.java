@@ -22,6 +22,8 @@ import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.tiles.TileAction;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.utils.ImageResource;
+import org.scify.talkandplay.utils.ResourceType;
 
 public class EntertainmentPanel extends BaseGridPanel {
 
@@ -90,9 +92,8 @@ public class EntertainmentPanel extends BaseGridPanel {
 
     private JPanel createMusicItem() {
         JPanel panel = tileCreator.create(user.getEntertainmentModule().getMusicModule().getName(),
-                user.getEntertainmentModule().getMusicModule().getImage(),
-                user.getEntertainmentModule().getMusicModule().getImageURL(),
-                user.getEntertainmentModule().getMusicModule().getSound(),
+                user.getEntertainmentModule().getMusicModule().getImageResource(),
+                user.getEntertainmentModule().getMusicModule().getSoundResource(),
                 new TileAction() {
                     @Override
                     public void act() {
@@ -110,9 +111,8 @@ public class EntertainmentPanel extends BaseGridPanel {
 
     private JPanel createVideoItem() {
         JPanel panel = tileCreator.create(user.getEntertainmentModule().getVideoModule().getName(),
-                user.getEntertainmentModule().getVideoModule().getImage(),
-                user.getEntertainmentModule().getVideoModule().getImageURL(),
-                user.getEntertainmentModule().getVideoModule().getSound(),
+                user.getEntertainmentModule().getVideoModule().getImageResource(),
+                user.getEntertainmentModule().getVideoModule().getSoundResource(),
                 new TileAction() {
                     @Override
                     public void act() {
@@ -129,9 +129,8 @@ public class EntertainmentPanel extends BaseGridPanel {
     }
 
     private JPanel createBackItem() {
-        JPanel panel = tileCreator.create("Πίσω",
-                null,
-                getClass().getResource("/org/scify/talkandplay/resources/back-icon.png"),
+        JPanel panel = tileCreator.create(rm.getTextOfXMLTag("backButton"),
+                new ImageResource("back-icon.png", ResourceType.JAR),
                 null,
                 new TileAction() {
                     @Override

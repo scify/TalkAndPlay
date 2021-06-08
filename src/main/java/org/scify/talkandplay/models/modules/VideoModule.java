@@ -21,6 +21,23 @@ public class VideoModule extends Module {
     private int playlistSize;
 
     public VideoModule() {
+        super();
+    }
+
+    public VideoModule(VideoModule videoModule) {
+        super(videoModule);
+        folderPath = videoModule.folderPath;
+        playlistSize = videoModule.playlistSize;
+    }
+
+    public boolean isAltered(VideoModule module) {
+        if (super.isAltered(module))
+            return true;
+        if (!folderPath.equals(module.folderPath))
+            return true;
+        if (playlistSize != module.playlistSize)
+            return true;
+        return false;
     }
 
     public String getFolderPath() {

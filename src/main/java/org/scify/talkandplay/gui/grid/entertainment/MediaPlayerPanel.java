@@ -16,13 +16,13 @@
 package org.scify.talkandplay.gui.grid.entertainment;
 
 import java.awt.Font;
+import java.io.File;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import javafx.application.Platform;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import org.scify.talkandplay.gui.helpers.Time;
 import org.scify.talkandplay.gui.helpers.UIConstants;
-import uk.co.caprica.vlcj.player.base.MediaPlayer;
-import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
-import uk.co.caprica.vlcj.player.component.AudioPlayerComponent;
 
 /**
  *
@@ -30,48 +30,42 @@ import uk.co.caprica.vlcj.player.component.AudioPlayerComponent;
  */
 public class MediaPlayerPanel extends javax.swing.JPanel {
 
-    private AudioPlayerComponent audioPlayer;
+    private MediaPlayer mediaPlayer;
     private JPanel parent;
 
     public MediaPlayerPanel(JPanel parent) {
         this.parent = parent;
-        this.audioPlayer = new AudioPlayerComponent();
+        this.mediaPlayer = null;
         initComponents();
         initAudioPlayer();
         initCustomComponents();
     }
 
-    private void initAudioPlayer() {
-
-        mediaSlider.setEnabled(false);
-        audioPlayer.mediaPlayer().audio().setMute(false);
-        audioPlayer.mediaPlayer().events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
-
-            @Override
-            public void opening(MediaPlayer mediaPlayer) {
-            }
-
-            @Override
-            public void playing(MediaPlayer mediaPlayer) {
-                audioPlayer.mediaPlayer().audio().setMute(false);
-            }
-
-            @Override
-            public void positionChanged(MediaPlayer mp, float f) {
-                int iPos = (int) (f * 100.0);
-                mediaSlider.setValue(iPos);
-            }
-
-            @Override
-            public void timeChanged(MediaPlayer mediaPlayer, final long newTime) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        startLabel.setText(String.format("%s", Time.formatTime(newTime)));
+    protected void startTimer() {
+        Thread timer = new Thread(() -> {
+            while(mediaPlayer != null) {
+                try {
+                    // running "long" operation not on UI thread
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {}
+                Platform.runLater(()-> {
+                    if (mediaPlayer != null) {
+                        double length = mediaPlayer.getCurrentTime().toMillis();
+                        int secs = (int) (length / 1000) % 60;
+                        int mins = (int) ((length / (1000 * 60)) % 60);
+                        int hrs = (int) ((length / (1000 * 60 * 60)) % 24);
+                        startLabel.setText(Time.getTime(hrs, mins, secs));
+                        int sliderValue = (int) ((length / mediaPlayer.getTotalDuration().toMillis()) * 100.0);
+                        mediaSlider.setValue(sliderValue);
                     }
                 });
             }
         });
+        timer.start();
+    }
+
+    private void initAudioPlayer() {
+        mediaSlider.setEnabled(false);
     }
 
     private void initCustomComponents() {
@@ -80,17 +74,25 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
         endLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 18));
     }
 
-    public void playMedia(String path) {
+    public void playMedia(String path, boolean isVideo) {
         mediaSlider.setValue(0);
-        audioPlayer.mediaPlayer().media().prepare(path);
-        audioPlayer.mediaPlayer().media().parsing().parse();
-        long length = audioPlayer.mediaPlayer().status().length();
-        int secs = (int) (length / 1000) % 60;
-        int mins = (int) ((length / (1000 * 60)) % 60);
-        int hrs = (int) ((length / (1000 * 60 * 60)) % 24);
 
-        endLabel.setText(Time.getTime(hrs, mins, secs));
-        audioPlayer.mediaPlayer().media().play(path);
+        Media media = new Media(new File(path).toURI().toString());
+
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setOnReady(new Runnable() {
+            @Override
+            public void run() {
+                double length = mediaPlayer.getMedia().getDuration().toMillis();
+                int secs = (int) (length / 1000) % 60;
+                int mins = (int) ((length / (1000 * 60)) % 60);
+                int hrs = (int) ((length / (1000 * 60 * 60)) % 24);
+                endLabel.setText(Time.getTime(hrs, mins, secs));
+            }
+        });
+        mediaPlayer.play();
+        if(!isVideo)
+            startTimer();
     }
 
     /**
@@ -152,16 +154,24 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public AudioPlayerComponent getAudioPlayer() {
-        return this.audioPlayer;
+    public MediaPlayer getMediaPlayer() {
+        return this.mediaPlayer;
     }
 
     public boolean isPlaying() {
-        return audioPlayer.mediaPlayer().status().isPlaying();
+        if (mediaPlayer == null)
+            return false;
+        else {
+            return mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING);
+        }
     }
 
     public void stop() {
-        audioPlayer.mediaPlayer().release();
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.dispose();
+            mediaPlayer = null;
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

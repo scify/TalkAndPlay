@@ -26,6 +26,7 @@ import org.scify.talkandplay.gui.MainPanel;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.CategoryService;
 import org.scify.talkandplay.services.UserService;
+import org.scify.talkandplay.utils.ResourceManager;
 
 public class ConfigurationPanel extends javax.swing.JPanel {
 
@@ -37,19 +38,20 @@ public class ConfigurationPanel extends javax.swing.JPanel {
     private GridBagConstraints gbc;
     private CategoryService categoryService;
     private UserService userService;
+    protected ResourceManager rm;
 
     public ConfigurationPanel(String userName, MainFrame parent) {
         this.parent = parent;
         this.categoryService = new CategoryService();
         this.userService = new UserService();
         this.user = userService.getUser(userName);
-
+        this.rm = ResourceManager.getInstance();
         initComponents();
         initCustomComponents();
     }
 
     private void initCustomComponents() {
-        parent.setPanelTitle("Προτιμήσεις χρήστη");
+        parent.setPanelTitle(rm.getTextOfXMLTag("userPreferences"));
         gbc = new GridBagConstraints();
         contentPanel.setLayout(new GridBagLayout());
         gbc.fill = GridBagConstraints.HORIZONTAL;

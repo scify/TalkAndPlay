@@ -1,18 +1,18 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.scify.talkandplay.gui.grid.entertainment;
 
 import java.awt.BorderLayout;
@@ -22,10 +22,13 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import javafx.application.Platform;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import org.scify.talkandplay.gui.grid.selectors.ButtonSelector;
 import org.scify.talkandplay.gui.grid.selectors.ManualButtonSelector;
 import org.scify.talkandplay.gui.grid.selectors.MouseSelector;
@@ -37,9 +40,9 @@ import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.SensorService;
-import uk.co.caprica.vlcj.player.base.MediaPlayer;
-import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
-import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
+import org.scify.talkandplay.utils.ResourceManager;
+import org.scify.talkandplay.utils.ResourceType;
+import javafx.embed.swing.JFXPanel;
 
 /**
  *
@@ -47,7 +50,6 @@ import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
  */
 public class VideoFrame extends javax.swing.JFrame {
 
-    private EmbeddedMediaPlayer mediaPlayer;
     private JPanel emptyPanel;
     private VideoPanel parent;
     private FilesPanel filesPanel;
@@ -56,15 +58,17 @@ public class VideoFrame extends javax.swing.JFrame {
     private Selector selector;
     private PlayerPanel playerPanel;
     private SensorService sensorService;
+    protected ResourceManager rm;
+    protected JFXPanel fxPanel;
 
     public VideoFrame(User user, String currentFile, VideoPanel parent, FilesPanel filesPanel) {
-        this.mediaPlayer = parent.getMediaPlayer();
         this.currentFile = currentFile;
         this.user = user;
         this.parent = parent;
         this.filesPanel = filesPanel;
         this.emptyPanel = new JPanel();
         this.sensorService = new SensorService(user);
+        this.rm = ResourceManager.getInstance();
 
         if (user.getConfiguration().getSelectionSensor() instanceof MouseSensor) {
             this.selector = new MouseSelector(null, user.getConfiguration().getRotationSpeed() * 1000, user.getConfiguration().getRotationSpeed() * 1000);
@@ -78,7 +82,7 @@ public class VideoFrame extends javax.swing.JFrame {
 
         setTitle("Video Player");
         setVisible(false);
-        setIconImage((new ImageIcon(getClass().getResource("/org/scify/talkandplay/resources/tp_logo_mini.png"))).getImage());        
+        setIconImage(rm.getImage("tp_logo_mini.png", ResourceType.JAR));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         initComponents();
@@ -105,96 +109,84 @@ public class VideoFrame extends javax.swing.JFrame {
         javax.swing.GroupLayout wrapperPanelLayout = new javax.swing.GroupLayout(wrapperPanel);
         wrapperPanel.setLayout(wrapperPanelLayout);
         wrapperPanelLayout.setHorizontalGroup(
-            wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+                wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 400, Short.MAX_VALUE)
         );
         wrapperPanelLayout.setVerticalGroup(
-            wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 44, Short.MAX_VALUE)
+                wrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 44, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(videoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-            .addComponent(wrapperPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(videoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                        .addComponent(wrapperPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(videoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(wrapperPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(videoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(wrapperPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void initMediaPlayer() {
-
-        mediaPlayer.events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
-            @Override
-            public void playing(MediaPlayer mediaPlayer) {
-                mediaPlayer.audio().setMute(false);
-                mediaPlayer.audio().setVolume(100);
-                playerPanel.setPauseButton();
-            }
-
-            @Override
-            public void paused(MediaPlayer mediaPlayer) {
-                playerPanel.setPlayButton();
-            }
-
-            @Override
-            public void finished(MediaPlayer mediaPlayer) {
-                playerPanel.setPlayButton();
-            }
-
-            @Override
-            public void positionChanged(MediaPlayer mp, float f) {
-                int iPos = (int) (f * 100.0);
-                playerPanel.setDurationSlider(iPos);
-            }
-
-            @Override
-            public void timeChanged(MediaPlayer mediaPlayer, final long newTime) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        playerPanel.setStartLabelText(String.format("%s", Time.formatTime(newTime)));
+    protected void startTimer() {
+        Thread timer = new Thread(() -> {
+            while(parent.getMediaPlayerPanel().getMediaPlayer() != null) {
+                try {
+                    // running "long" operation not on UI thread
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {}
+                Platform.runLater(()-> {
+                    MediaPlayer mediaPlayer = parent.getMediaPlayerPanel().getMediaPlayer();
+                    if (mediaPlayer != null) {
+                        double length = mediaPlayer.getCurrentTime().toMillis();
+                        double total = mediaPlayer.getTotalDuration().toMillis();
+                        int secs = (int) (length / 1000) % 60;
+                        int mins = (int) ((length / (1000 * 60)) % 60);
+                        int hrs = (int) ((length / (1000 * 60 * 60)) % 24);
+                        playerPanel.setStartLabelText(Time.getTime(hrs, mins, secs));
+                        int sliderValue = (int) ((length / total) * 100.0);
+                        playerPanel.setDurationSlider(sliderValue);
                     }
                 });
             }
         });
+        timer.start();
+    }
 
+    private void initMediaPlayer() {
         videoPanel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor)) {
+                /*if (sensorService.shouldSelect(sensor)) {
                     if (mediaPlayer.fullScreen().isFullScreen()) {
                         mediaPlayer.fullScreen().set(false);
                     }
-                }
+                }*/
             }
         });
         videoPanel.addKeyListener(new KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
-                if (sensorService.shouldSelect(sensor)) {
+                /*if (sensorService.shouldSelect(sensor)) {
                     if (mediaPlayer.fullScreen().isFullScreen()) {
                         mediaPlayer.fullScreen().set(false);
                     }
-                }
+                }*/
             }
         });
     }
 
     private void initCustomComponents() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
-        videoPanel.add(parent.getMediaPlayerComponent(), BorderLayout.CENTER);
-
+        fxPanel = new JFXPanel();
+        videoPanel.add(fxPanel, BorderLayout.CENTER);
         wrapperPanel.setLayout(new BoxLayout(wrapperPanel, BoxLayout.Y_AXIS));
         wrapperPanel.add(playerPanel);
 
@@ -203,24 +195,32 @@ public class VideoFrame extends javax.swing.JFrame {
         addListeners();
     }
 
+    protected void resetMediaPlayer() {
+        parent.disposeMediaPlayer();
+        fxPanel.setVisible(false);
+      }
+
     public void playMedia(String file) {
         currentFile = file;
-        mediaPlayer.media().prepare(file);
-        mediaPlayer.media().parsing().parse();
-
-        long length = mediaPlayer.status().length();
-        int secs = (int) (length / 1000) % 60;
-        int mins = (int) ((length / (1000 * 60)) % 60);
-        int hrs = (int) ((length / (1000 * 60 * 60)) % 24);
-
-        playerPanel.setEndLabel(Time.getTime(hrs, mins, secs));
         playerPanel.setPauseButton();
-        mediaPlayer.media().play(file);
+        parent.getMediaPlayerPanel().playMedia(file, true);
+        MediaView mediaView = new MediaView(parent.getMediaPlayerPanel().getMediaPlayer());
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Group root = new Group();
+                root.getChildren().add(mediaView);
+                Scene scene = new Scene(root);
+                fxPanel.setScene(scene);
+                fxPanel.setVisible(true);
+            }
+        });
         setVisible(true);
 
         selector.setDefaultBackgroundColor(UIConstants.grey);
         selector.setList(playerPanel.getControlPanels());
         selector.start();
+        startTimer();
     }
 
     private void addListeners() {
@@ -262,20 +262,24 @@ public class VideoFrame extends javax.swing.JFrame {
         playerPanel.getPlayPanel().addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor) && mediaPlayer.status().isPlaying()) {
-                    mediaPlayer.controls().pause();
-                } else if (sensorService.shouldSelect(sensor) && !mediaPlayer.status().isPlaying()) {
-                    mediaPlayer.controls().play();
+                if (sensorService.shouldSelect(sensor) && parent.getMediaPlayerPanel().getMediaPlayer().getStatus().equals(MediaPlayer.Status.PLAYING)) {
+                    parent.getMediaPlayerPanel().getMediaPlayer().pause();
+                    playerPanel.setPlayButton();
+                } else if (sensorService.shouldSelect(sensor) && !parent.getMediaPlayerPanel().getMediaPlayer().getStatus().equals(MediaPlayer.Status.PLAYING)) {
+                    parent.getMediaPlayerPanel().getMediaPlayer().play();
+                    playerPanel.setPauseButton();
                 }
             }
         });
         playerPanel.getPlayPanel().addKeyListener(new KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
-                if (sensorService.shouldSelect(sensor) && mediaPlayer.status().isPlaying()) {
-                    mediaPlayer.controls().pause();
-                } else if (sensorService.shouldSelect(sensor) && !mediaPlayer.status().isPlaying()) {
-                    mediaPlayer.controls().play();
+                if (sensorService.shouldSelect(sensor) && parent.getMediaPlayerPanel().getMediaPlayer().getStatus().equals(MediaPlayer.Status.PLAYING)) {
+                    parent.getMediaPlayerPanel().getMediaPlayer().pause();
+                    playerPanel.setPlayButton();
+                } else if (sensorService.shouldSelect(sensor) && !parent.getMediaPlayerPanel().getMediaPlayer().getStatus().equals(MediaPlayer.Status.PLAYING)) {
+                    parent.getMediaPlayerPanel().getMediaPlayer().play();
+                    playerPanel.setPauseButton();
                 }
             }
         });
@@ -284,12 +288,9 @@ public class VideoFrame extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                 if (sensorService.shouldSelect(sensor)) {
-                    if (mediaPlayer.status().isPlaying()) {
-                        mediaPlayer.controls().play();
-                    }
                     selector.cancel();
-                    mediaPlayer.controls().stop();
                     parent.getSelector().start();
+                    parent.disposeMediaPlayer();
                     dispose();
                 }
             }
@@ -298,29 +299,27 @@ public class VideoFrame extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Sensor sensor = new KeyboardSensor(evt.getKeyCode(), String.valueOf(evt.getKeyChar()), "keyboard");
                 if (sensorService.shouldSelect(sensor)) {
-                    if (mediaPlayer.status().isPlaying()) {
-                        mediaPlayer.controls().play();
-                    }                    
                     selector.cancel();
-                    mediaPlayer.controls().stop();
                     parent.getSelector().start();
+                    parent.disposeMediaPlayer();
                     dispose();
                 }
             }
         });
         this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent we) {                 
+            public void windowClosing(WindowEvent we) {
                 selector.cancel();
-                mediaPlayer.controls().stop();
+                parent.disposeMediaPlayer();
                 parent.getSelector().start();
-                dispose();                
+                dispose();
             }
         });
     }
 
     private void getPrevious() {
         selector.cancel();
+        resetMediaPlayer();
         int selected = filesPanel.getSelected();
 
         if (selected != -1) {
@@ -336,6 +335,7 @@ public class VideoFrame extends javax.swing.JFrame {
 
     private void getNext() {
         selector.cancel();
+        resetMediaPlayer();
         int selected = filesPanel.getSelected();
         if (selected != -1) {
             if (selected == filesPanel.getFileList().size() - 1) {

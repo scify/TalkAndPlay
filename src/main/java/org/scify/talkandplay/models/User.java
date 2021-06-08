@@ -18,57 +18,41 @@ package org.scify.talkandplay.models;
 import org.scify.talkandplay.models.modules.CommunicationModule;
 import org.scify.talkandplay.models.modules.EntertainmentModule;
 import org.scify.talkandplay.models.modules.GameModule;
+import org.scify.talkandplay.utils.ImageResource;
+import org.scify.talkandplay.utils.ResourceManager;
 
 public class User {
 
     private String name;
-    private String image;
-    private boolean preselected;
-
+    private ImageResource image;
     private Configuration configuration;
+
     private CommunicationModule communicationModule;
     private EntertainmentModule entertainmentModule;
     private GameModule gameModule;
+    private ResourceManager rm;
 
-    public User() {
-        configuration = new Configuration();
-        communicationModule = new CommunicationModule();
-        entertainmentModule = new EntertainmentModule();
-        gameModule = new GameModule();
-    }
-
-    public User(String name) {
-        this.name = name;
-    }
-
-    public User(String name, String image) {
+    public User(String name, ImageResource image) {
+        rm = ResourceManager.getInstance();
         this.name = name;
         this.image = image;
         configuration = new Configuration();
     }
 
     public String getName() {
-        return name;
+        return rm.decodeTextIfRequired(name);
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getImage() {
+    public ImageResource getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(ImageResource image) {
         this.image = image;
-    }
-
-    public boolean isPreselected() {
-        return preselected;
-    }
-
-    public void setPreselected(boolean preselected) {
-        this.preselected = preselected;
     }
 
     public Configuration getConfiguration() {

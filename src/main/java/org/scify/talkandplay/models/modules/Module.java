@@ -15,7 +15,10 @@
 */
 package org.scify.talkandplay.models.modules;
 
-import java.net.URL;
+import org.scify.talkandplay.utils.ImageResource;
+import org.scify.talkandplay.utils.ResourceManager;
+import org.scify.talkandplay.utils.ResourceType;
+import org.scify.talkandplay.utils.SoundResource;
 
 /**
  * The Module class represents the information of an executable module (function)
@@ -31,38 +34,72 @@ import java.net.URL;
 public class Module {
 
     private String name;
-    private String image;
-    private String sound;
+    private ImageResource imageResource;
+    private SoundResource soundResource;
     private boolean enabled;
-
-    //used only to display default ImageIcons from the app jar
-    private URL imageURL;
+    protected ResourceManager rm;
 
     public Module() {
+        this.rm = ResourceManager.getInstance();
+    }
+
+    public Module(Module module) {
+        name = module.name;
+        enabled = module.enabled;
+        rm = ResourceManager.getInstance();
+
+        imageResource = null;
+        if (module.imageResource != null)
+            imageResource = new ImageResource(module.imageResource);
+
+        soundResource = null;
+        if (module.soundResource != null)
+            soundResource = new SoundResource(module.soundResource);
     }
 
     public String getName() {
+        return rm.decodeTextIfRequired(name);
+    }
+
+    public String getNameUnmodified() {
         return name;
+    }
+
+    public boolean isAltered(Module module) {
+        if (!name.equals(module.name))
+            return true;
+        if ((imageResource != null && module.imageResource != null && imageResource.isAltered(module.imageResource)) ||
+                (imageResource != null && module.imageResource == null) ||
+                (imageResource == null && module.imageResource != null))
+            return true;
+
+        if ((soundResource != null && module.soundResource != null && soundResource.isAltered(module.soundResource)) ||
+                (soundResource != null && module.soundResource == null) ||
+                (soundResource == null && module.soundResource != null))
+            return true;
+        if (enabled != module.enabled)
+            return true;
+        return false;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
+    public ImageResource getImageResource() {
+        return imageResource;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImage(ImageResource imageResource) {
+        this.imageResource = imageResource;
     }
 
-    public String getSound() {
-        return sound;
+    public SoundResource getSoundResource() {
+        return soundResource;
     }
 
-    public void setSound(String sound) {
-        this.sound = sound;
+    public void setSound(SoundResource soundResource) {
+        this.soundResource = soundResource;
     }
 
     public boolean isEnabled() {
@@ -72,13 +109,4 @@ public class Module {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-
-    public URL getImageURL() {
-        return imageURL;
-    }
-
-    public void setImageURL(URL imageURL) {
-        this.imageURL = imageURL;
-    }
-
 }

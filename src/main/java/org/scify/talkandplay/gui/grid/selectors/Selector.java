@@ -1,18 +1,18 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.scify.talkandplay.gui.grid.selectors;
 
 import java.awt.Color;
@@ -21,6 +21,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+
 import org.scify.talkandplay.gui.helpers.UIConstants;
 
 /**
@@ -54,15 +55,16 @@ public class Selector {
             @Override
             public void run() {
                 unselectAll();
-                setSelected(selected);
+                if (selected < panelList.size()) {
+                    setSelected(selected);
+                    panelList.get(selected).setFocusable(true);
+                    panelList.get(selected).grabFocus();
 
-                panelList.get(selected).setFocusable(true);
-                panelList.get(selected).grabFocus();
-
-                if (selected == panelList.size() - 1) {
-                    selected = 0;
-                } else if (selected == 0 || (selected < panelList.size() - 1 && selected > 0)) {
-                    selected++;
+                    if (selected == panelList.size() - 1 || panelList.size() == 1) {
+                        selected = 0;
+                    } else {
+                        selected++;
+                    }
                 }
             }
         }, nextExecutionTime, period);

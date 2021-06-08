@@ -30,6 +30,8 @@
  */
 package org.scify.talkandplay.gui;
 
+import org.scify.talkandplay.utils.ResourceManager;
+
 import java.awt.Component;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -45,9 +47,11 @@ public class UpdaterFrame extends javax.swing.JFrame {
     private JLabel messageLabel2;
     private JLabel messageLabel3;
     private String versionNumber;
+    protected ResourceManager rm;
 
     public UpdaterFrame(String versionNumber) {
         this.versionNumber = versionNumber;
+        this.rm = ResourceManager.getInstance();
         initComponents();
         initCustomComponents();
     }
@@ -56,19 +60,19 @@ public class UpdaterFrame extends javax.swing.JFrame {
         this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
         messageLabel = new JLabel();
-        messageLabel.setText("Γίνεται ενημέρωση της εφαρμογής (v."+versionNumber+"), παρακαλώ περιμένετε...");
+        messageLabel.setText(rm.getTextOfXMLTag("updateInProgress1") +  "(v."+ versionNumber+ "), " + rm.getTextOfXMLTag("updateInProgress2"));
         messageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         messageLabel.setBorder(new EmptyBorder(10, 0, 10, 0));
         this.getContentPane().add(messageLabel);
 
         messageLabel2 = new JLabel();
-        messageLabel2.setText("Η διαδικασία μπορεί να διαρκέσει μερικά λεπτά.");
+        messageLabel2.setText(rm.getTextOfXMLTag("updateInProgress3"));
         messageLabel2.setAlignmentX(Component.CENTER_ALIGNMENT);
         messageLabel2.setBorder(new EmptyBorder(10, 0, 10, 0));
         this.getContentPane().add(messageLabel2);
 
         messageLabel3 = new JLabel();
-        messageLabel3.setText("Mε την ολοκλήρωση θα χρειαστεί να ανοίξετε την εφαρμογή ξανά");
+        messageLabel3.setText(rm.getTextOfXMLTag("updateInProgress4"));
         messageLabel3.setAlignmentX(Component.CENTER_ALIGNMENT);
         messageLabel3.setBorder(new EmptyBorder(10, 0, 10, 0));
         this.getContentPane().add(messageLabel3);

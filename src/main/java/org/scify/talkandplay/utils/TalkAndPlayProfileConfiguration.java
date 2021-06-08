@@ -15,26 +15,25 @@
  */
 package org.scify.talkandplay.utils;
 
-import java.util.List;
-import org.jdom.Element;
-import org.scify.talkandplay.models.User;
+import java.io.File;
 
-// singleton class. There exists only on configuration on the app
-// that holds the user information.
-// its basically a wrapper of the Configuration handler.
 public class TalkAndPlayProfileConfiguration {
 
     protected XMLConfigurationHandler xmlConfigurationHandler;
+    protected File dataDir;
 
-    private static TalkAndPlayProfileConfiguration instance = new TalkAndPlayProfileConfiguration();
+    protected static TalkAndPlayProfileConfiguration instance;
 
-    protected TalkAndPlayProfileConfiguration() {
-        xmlConfigurationHandler = new XMLConfigurationHandler();
-
+    public TalkAndPlayProfileConfiguration(File dataDir) {
+        this.dataDir = dataDir;
+        xmlConfigurationHandler = null;
+        instance = this;
     }
     
     public XMLConfigurationHandler getConfigurationHandler()
     {
+        if (xmlConfigurationHandler == null)
+            xmlConfigurationHandler = new XMLConfigurationHandler(dataDir);
         return xmlConfigurationHandler;
     }
 
