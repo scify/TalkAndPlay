@@ -5,7 +5,6 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 import org.scify.talkandplay.gui.ApplicationLauncher;
-
 import javax.swing.*;
 import java.awt.Image;
 import java.io.File;
@@ -20,7 +19,6 @@ public class ResourceManager {
 
     static Logger logger = Logger.getLogger(ApplicationLauncher.class);
     protected final String JarResourcesPath = "/org/scify/talkandplay/resources/";
-    //protected final URL JarResources = getClass().getResource();
     protected final File dataResources = new File("resources");
     protected List<String> languages;
     protected int selectedLanguageIndex;
@@ -57,7 +55,7 @@ public class ResourceManager {
                     SAXBuilder builder = new SAXBuilder();
                     try {
                         Document languageDoc = builder.build(languageXMLFile);
-                        List languageTexts = languageDoc.getRootElement().getChildren();
+                        List<Element> languageTexts = languageDoc.getRootElement().getChildren();
                         Iterator<Element> iter = languageTexts.iterator();
                         while (iter.hasNext()) {
                             Element e = iter.next();
