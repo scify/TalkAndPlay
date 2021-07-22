@@ -17,6 +17,7 @@ package org.scify.talkandplay.gui.grid.games;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import javax.swing.BoxLayout;
@@ -39,6 +40,8 @@ public class SimilarityGamePanel extends BaseGamePanel {
     private ImageResource correctImage;
     private SensorService sensorService;
     protected Message message;
+    protected long startTime;
+    protected int mistakes;
 
     public SimilarityGamePanel(User user, GridFrame parent, String previousGame) {
         super(user, parent, "similarityGame", null, previousGame);
@@ -79,6 +82,9 @@ public class SimilarityGamePanel extends BaseGamePanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initCustomComponents() {
+
+        startTime = new Date().getTime();
+        mistakes = 0;
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setTopMessage(rm.getTextOfXMLTag("pressTheButtonOnTheSimilar"));
@@ -161,6 +167,7 @@ public class SimilarityGamePanel extends BaseGamePanel {
         if (image.equals(correctImage.getPath())) {
             congratulate();
         } else {
+            mistakes ++;
             setBottomMessage(message.getRandomMistakeMessage());
             selector.cancel();
             tileCreator.playAudio(getErrorSound(), new TileAction() {
@@ -180,8 +187,14 @@ public class SimilarityGamePanel extends BaseGamePanel {
     }
 
     private void congratulate() {
+        long currentTime = new Date().getTime();
+        long seconds = (currentTime - startTime) / 1000;
         setBottomMessage("");
-        setTopMessage("");
+        setTopMessage("<html>" +
+                rm.getTextOfXMLTag("playingTime") + ": " + seconds +
+                "<br>" +
+                rm.getTextOfXMLTag("numberOfMistakes") + ": " + mistakes +
+                "</html>");
 
         final ControlsPanel controls = new ControlsPanel(user, this);
         

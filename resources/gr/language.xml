@@ -150,6 +150,8 @@
     <pressTheButtonToStart>Πάτα το κουμπί για να ξεκινήσεις!</pressTheButtonToStart>
     <sequenceGameInfo>Βάλε στη σωστή σειρά τις κάρτες.</sequenceGameInfo>
     <sequenceGameInfo2>Ποια εικόνα πρέπει να μπει πρώτη; Πάτα το κουμπί πάνω της!</sequenceGameInfo2>
+    <playingTime>Χρόνος παιξίματος (σε δευτερόλεπτα)</playingTime>
+    <numberOfMistakes>Αριθμός λαθών</numberOfMistakes>
     <communicationCat id="0" subId= "0">Ναι</communicationCat>
     <communicationCat id="1" subId= "0">Όχι</communicationCat>
     <communicationCat id="2" subId= "0">Φαγητό</communicationCat>

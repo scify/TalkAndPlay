@@ -521,7 +521,7 @@
             <similarityGames enabled="true">
                 <name>{{ gameTypeFindTheSimilar }}</name>
                 <image resourceType="JAR">defaultImgs/similarity_game.png</image>
-                <sound resourceType="BUNDLE">sounds/games/stimulus_reaction.mp3</sound>
+                <sound resourceType="BUNDLE">sounds/games/find_the_similar.mp3</sound>
                 <winSound resourceType="BUNDLE">sounds/winSound.mp3</winSound>
                 <errorSound resourceType="BUNDLE">sounds/errorSound.mp3</errorSound>
                 <games>

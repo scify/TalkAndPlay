@@ -15,15 +15,17 @@
 */
 package org.scify.talkandplay.gui.grid.games;
 
-import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.MatteBorder;
+
 import org.scify.talkandplay.gui.grid.BaseGridPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.grid.tiles.TileAction;
@@ -43,6 +45,8 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
     private int selected;
     private JPanel gamePanel, controlsPanel;
     private String previousGame;
+    protected long startTime;
+    protected JPanel topMsgPanel;
 
     public StimulusReactionGamePanel(User user, GridFrame parent, String previousGame) {
         super(user, parent);
@@ -83,8 +87,17 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void initCustomComponents() {        
+    private void initCustomComponents() {
+
+        startTime = new Date().getTime();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        topMsgPanel = new JPanel();
+        topMsgPanel.setBackground(Color.white);
+        topMsgPanel.setBorder(new MatteBorder(0, 0, 2, 0, Color.decode(UIConstants.grey)));
+        topMsgPanel.setVisible(false);
+        add(topMsgPanel);
+
 
         gamePanel = new JPanel();
         gamePanel.setBackground(Color.white);
@@ -186,7 +199,23 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
         return panel;
     }
 
+    protected void setTopMessage(String text) {
+        topMsgPanel.setVisible(true);
+        topMsgPanel.removeAll();
+        JLabel msgLabel = new JLabel(text);
+        msgLabel.setFont(new Font(UIConstants.mainFont, Font.PLAIN, 20));
+        msgLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        topMsgPanel.add(msgLabel);
+        topMsgPanel.revalidate();
+        topMsgPanel.repaint();
+    }
+
     private void congratulate(GameImage image) {
+
+        long currentTime = new Date().getTime();
+        long seconds = (currentTime - startTime) / 1000;
+        setTopMessage(rm.getTextOfXMLTag("playingTime") + ": " + seconds);
+
 
         tileCreator.playAudio(getWinSound().getSound().getAbsolutePath());
 

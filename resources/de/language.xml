@@ -150,6 +150,8 @@
     <pressTheButtonToStart>Drücken Sie die Taste zum Starten!</pressTheButtonToStart>
     <sequenceGameInfo>Ordnen Sie die Karten in der richtigen Reihenfolge an.</sequenceGameInfo>
     <sequenceGameInfo2>Welches Bild soll zuerst kommen? Drücken Sie die entsprechende Taste.</sequenceGameInfo2>
+    <playingTime>Playing time (in seconds)</playingTime>
+    <numberOfMistakes>Number of mistakes</numberOfMistakes>
     <communicationCat id="0" subId= "0">Ja</communicationCat>
     <communicationCat id="1" subId= "0">Nein</communicationCat>
     <communicationCat id="2" subId= "0">Essen</communicationCat>

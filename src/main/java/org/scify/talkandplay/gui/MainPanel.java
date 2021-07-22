@@ -24,6 +24,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,9 +56,20 @@ public class MainPanel extends javax.swing.JPanel {
     private List<UserPanel> userPanelList;
     private MainFrame parent;
     private final ResourceManager rm;
+    protected long timeOfInit;
+
+    public MainPanel(MainFrame parent, long timeOfInit) {
+        this.talkAndPlayProfilesConfig = TalkAndPlayProfileConfiguration.getInstance();
+        this.timeOfInit = timeOfInit;
+        this.parent = parent;
+        rm = ResourceManager.getInstance();
+        initComponents();
+        initCustomComponents();
+    }
 
     public MainPanel(MainFrame parent) {
         this.talkAndPlayProfilesConfig = TalkAndPlayProfileConfiguration.getInstance();
+        this.timeOfInit = 0;
         this.parent = parent;
         rm = ResourceManager.getInstance();
         initComponents();
@@ -107,7 +119,8 @@ public class MainPanel extends javax.swing.JPanel {
 
             userPanel.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    if (evt.getClickCount() == 2) {
+                    long timeOfClick = (new Date()).getTime();
+                    if (timeOfClick - timeOfInit > 500 && evt.getClickCount() == 2) {
                         GridFrame imagesFrame;
                         try {
                             imagesFrame = new GridFrame(user.getName());
@@ -177,6 +190,7 @@ public class MainPanel extends javax.swing.JPanel {
                     Sentry.capture(ex);
                 }
             }
+
         });
     }
 

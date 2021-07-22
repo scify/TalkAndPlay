@@ -17,6 +17,7 @@ package org.scify.talkandplay.gui.grid.games;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import javax.swing.BoxLayout;
@@ -36,8 +37,9 @@ public class SequenceGamePanel extends BaseGamePanel {
 
     private SensorService sensorService;
     protected Message message;
-
     private int correctImages;
+    protected long startTime;
+    protected int mistakes;
 
     public SequenceGamePanel(User user, GridFrame parent, String previousGame) {
         super(user, parent, "sequenceGame", null, previousGame);
@@ -79,6 +81,8 @@ public class SequenceGamePanel extends BaseGamePanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initCustomComponents() {
+        startTime = new Date().getTime();
+        mistakes = 0;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBottomMessage(rm.getTextOfXMLTag("sequenceGameInfo2"));
         Random randomGenerator = new Random();
@@ -171,6 +175,7 @@ public class SequenceGamePanel extends BaseGamePanel {
             selector.setList(panelList);
             selector.start();
         } else {
+            mistakes ++;
             setBottomMessage(message.getRandomMistakeMessage());
             selector.cancel();
             tileCreator.playAudio(getErrorSound(), new TileAction() {
@@ -230,6 +235,14 @@ public class SequenceGamePanel extends BaseGamePanel {
     }
 
     private void congratulate() {
+        long currentTime = new Date().getTime();
+        long seconds = (currentTime - startTime) / 1000;
+        setBottomMessage("");
+        setTopMessage("<html>" +
+                rm.getTextOfXMLTag("playingTime") + ": " + seconds +
+                "<br>" +
+                rm.getTextOfXMLTag("numberOfMistakes") + ": " + mistakes +
+                "</html>");
         final ControlsPanel controls = new ControlsPanel(user, this);
 
         bottomMsgPanel.setVisible(false);

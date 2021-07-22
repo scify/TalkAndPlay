@@ -2,7 +2,7 @@ package org.scify.talkandplay.gui;
 
 import org.scify.talkandplay.utils.ResourceManager;
 import org.scify.talkandplay.utils.ResourceType;
-
+import java.util.Date;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -81,9 +81,10 @@ public class LanguageSelector extends javax.swing.JPanel {
                         flagPanel.setBorder(selectedBorder);
                         selectedFlagPanel = flagPanel;
                         rm.setLanguage(languageId);
+
                     } else {
-                        parent.languageSelected();
-                    }
+                        parent.languageSelected((new Date ()).getTime());
+                                            }
                 }
             });
         }
@@ -104,7 +105,7 @@ public class LanguageSelector extends javax.swing.JPanel {
         closePanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                parent.languageSelected();
+                parent.languageSelected((new Date ()).getTime());
             }
         });
 

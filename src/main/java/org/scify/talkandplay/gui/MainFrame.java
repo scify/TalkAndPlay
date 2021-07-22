@@ -211,7 +211,7 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }
 
-    public void languageSelected() {
+    public void languageSelected(long timeOfInit) {
         boolean willUpdate = false;
         try {
             if (updater.hasUpdate()) {
@@ -227,7 +227,7 @@ public class MainFrame extends javax.swing.JFrame {
             contentPanel.removeAll();
             jLabel2.setText(rm.getTextOfXMLTag("createdBy"));
             jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
-            contentPanel.add(new MainPanel(this), BorderLayout.CENTER);
+            contentPanel.add(new MainPanel(this, timeOfInit), BorderLayout.CENTER);
             revalidate();
             repaint();
         }

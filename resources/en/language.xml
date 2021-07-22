@@ -150,6 +150,8 @@
     <pressTheButtonToStart>Press the button to start!</pressTheButtonToStart>
     <sequenceGameInfo>Place the cards in the correct order.</sequenceGameInfo>
     <sequenceGameInfo2>Which image should go first? Press the button on it!</sequenceGameInfo2>
+    <playingTime>Playing time (in seconds)</playingTime>
+    <numberOfMistakes>Number of mistakes</numberOfMistakes>
     <communicationCat id="0" subId= "0">Yes</communicationCat>
     <communicationCat id="1" subId= "0">No</communicationCat>
     <communicationCat id="2" subId= "0">Food</communicationCat>
