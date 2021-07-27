@@ -57,7 +57,9 @@ public class XMLConfigurationHandler {
     protected CommunicationModule downloadedCommunicationModule;
     protected File downloadedCommunicationCardsFile;
 
-    protected GameModule downloadedGameModule;
+    protected List<Game> downloadedStimulusReactionGames;
+    protected List<Game> downloadedSequenceGames;
+    protected List<Game> downloadedSimilarityGames;
     protected File downloadedGameCardsFile;
 
     //for each user we add his files in a hashmap
@@ -89,6 +91,7 @@ public class XMLConfigurationHandler {
         initConfigurationFile();
         try {
             loadDownloadedCommunicationCards();
+            loadDownloadedGameCards();
         } catch (Exception e) {
             logger.error(e);
         }
@@ -469,6 +472,81 @@ public class XMLConfigurationHandler {
         return entertainmentModule;
     }
 
+    protected void loadDownloadedGameCards() throws Exception {
+        downloadedStimulusReactionGames = new ArrayList<>();
+        downloadedSequenceGames = new ArrayList<>();
+        downloadedSimilarityGames = new ArrayList<>();
+
+        for (File gameCardFolder: downloadedGameCardsFile.listFiles()) {
+            if (gameCardFolder.isDirectory()) {
+                File structureFile = new File(gameCardFolder, "structure.xml");
+                SAXBuilder builder = new SAXBuilder();
+                Element root = builder.build(structureFile).getRootElement();
+
+                String gameName = root.getAttributeValue("name");
+                boolean enabled = "true".equals(root.getAttributeValue("enabled"));
+                String gameType = root.getAttributeValue("gameType");
+
+                Game game;
+                GameCollection gameCollection;
+                if (gameType.equals("stimulusReactionGame")) {
+                    int difficulty = Integer.parseInt(root.getChildText("difficulty"));
+                    game = new StimulusReactionGame(gameName, enabled, difficulty);
+                    gameCollection = defaultUser.getGameModule().getGameCollection("stimulusReactionGame");
+                    downloadedStimulusReactionGames.add(game);
+                } else if (gameType.equals("sequenceGame")) {
+                    int difficulty = Integer.parseInt(root.getChildText("difficulty"));
+                    game = new SequenceGame(gameName, enabled, difficulty);
+                    gameCollection = defaultUser.getGameModule().getGameCollection("sequenceGame");
+                    downloadedSequenceGames.add(game);
+                } else {
+                    int difficulty = Integer.parseInt(root.getChildText("difficulty"));
+                    game = new SimilarityGame(gameName, enabled, difficulty);
+                    gameCollection = defaultUser.getGameModule().getGameCollection("similarityGame");
+                    downloadedSimilarityGames.add(game);
+                }
+
+                Element imageEl = root.getChild("image");
+                if (imageEl == null)
+                    game.setImage(gameCollection.getImage());
+                else {
+                    String fullPath = new File(gameCardFolder, imageEl.getValue()).getAbsolutePath();
+                    game.setImage(new ImageResource(fullPath, ResourceType.LOCAL));
+                }
+
+                Element soundEl = root.getChild("sound");
+                if (soundEl == null)
+                    game.setSound(gameCollection.getSound());
+                else {
+                    String fullPath = new File(gameCardFolder, soundEl.getValue()).getAbsolutePath();
+                    game.setSound(new SoundResource(fullPath, ResourceType.LOCAL));
+                }
+
+                Element winSoundEl = root.getChild("winSound");
+                if (winSoundEl == null)
+                    game.setWinSound(gameCollection.getWinSound());
+                else {
+                    String fullPath = new File(gameCardFolder, winSoundEl.getValue()).getAbsolutePath();
+                    game.setWinSound(new SoundResource(fullPath, ResourceType.LOCAL));
+                }
+
+                Element errorSoundEl = root.getChild("errorSoundEl");
+                if (errorSoundEl == null)
+                    game.setErrorSound(gameCollection.getErrorSound());
+                else {
+                    String fullPath = new File(gameCardFolder, errorSoundEl.getValue()).getAbsolutePath();
+                    game.setErrorSound(new SoundResource(fullPath, ResourceType.LOCAL));
+                }
+
+                List<Element> gameImages = root.getChild("gameImages").getChildren();
+                for (Element gameImage : gameImages)
+                    game.getImages().add(extractGameImage(gameImage, gameCardFolder));
+
+            }
+        }
+
+    }
+
     protected GameModule extractGameModule(Element gameNode, boolean isDefault) {
         GameModule gameModule = new GameModule();
 
@@ -666,6 +744,14 @@ public class XMLConfigurationHandler {
         int order = Integer.parseInt(element.getAttributeValue("order"));
         ResourceType imageResourceType = ResourceType.valueOf(element.getAttributeValue("resourceType"));
         ImageResource imageResource = new ImageResource(element.getText(), imageResourceType);
+        return new GameImage(imageResource, enabled, order);
+    }
+
+    protected GameImage extractGameImage(Element element, File pathToDownloadedGame) {
+        boolean enabled = "true".equals(element.getAttributeValue("enabled"));
+        int order = Integer.parseInt(element.getAttributeValue("order"));
+        String fullPath = new File(pathToDownloadedGame, element.getText()).getAbsolutePath();
+        ImageResource imageResource = new ImageResource(fullPath, ResourceType.LOCAL);
         return new GameImage(imageResource, enabled, order);
     }
 
@@ -1213,7 +1299,15 @@ public class XMLConfigurationHandler {
         return downloadedCommunicationModule;
     }
 
-    public GameModule getDownloadedGameModule() {
-        return downloadedGameModule;
+    public List<Game> getDownloadedStimulusReactionGames() {
+        return downloadedStimulusReactionGames;
+    }
+
+    public List<Game> getDownloadedSequenceGames (){
+        return downloadedSequenceGames;
+    }
+
+    public List<Game> getDownloadedSimilarityGames() {
+        return downloadedSimilarityGames;
     }
 }
