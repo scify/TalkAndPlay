@@ -21,6 +21,7 @@ import java.util.List;
 import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.utils.TalkAndPlayProfileConfiguration;
+import org.scify.talkandplay.utils.XMLConfigurationHandler;
 
 public class CategoryService {
 
@@ -37,12 +38,17 @@ public class CategoryService {
                 user.getCommunicationModule().getImageResource());
 
         List<Category> subCategories = user.getCommunicationModule().getCategoriesOfSelectedLanguage();
-
         for (Category category : subCategories) {
             category.setParentCategory(communication);
         }
 
-        communication.setSubCategories(subCategories);
+        XMLConfigurationHandler ch = TalkAndPlayProfileConfiguration.getInstance().getConfigurationHandler();
+        List<Category> categoriesOfDownloadedComModule = ch.getDownloadedCommunicationModule().getCategoriesOfSelectedLanguage();
+        for (Category category : categoriesOfDownloadedComModule) {
+            category.setParentCategory(communication);
+        }
+        categoriesOfDownloadedComModule.addAll(subCategories);
+        communication.setSubCategories(categoriesOfDownloadedComModule);
 
         return communication;
     }
@@ -58,17 +64,6 @@ public class CategoryService {
 
         return categories;
     }
-
-    /*private void getLinearCategories(List<Category> categories, List<Category> subCategories) {
-        if (subCategories.size() == 0) {
-            return;
-        } else {
-            for (Category category : subCategories) {
-                categories.add(category);
-                getLinearCategories(categories, category.getSubCategories());
-            }
-        }
-    }*/
 
     protected void insertAsNewCategory(Category newCategory, User user) {
         Category parent = newCategory.getParentCategory();

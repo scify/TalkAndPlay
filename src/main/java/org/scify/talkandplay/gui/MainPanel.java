@@ -32,7 +32,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -52,6 +51,7 @@ import org.scify.talkandplay.utils.TalkAndPlayProfileConfiguration;
  */
 public class MainPanel extends javax.swing.JPanel {
 
+    protected final int INTERVAL_AFTER_LOGIN = 1000;
     private TalkAndPlayProfileConfiguration talkAndPlayProfilesConfig;
     private List<UserPanel> userPanelList;
     private MainFrame parent;
@@ -115,12 +115,12 @@ public class MainPanel extends javax.swing.JPanel {
         userPanelList = new ArrayList<>();
         for (final User user : users) {
 
-            UserPanel userPanel = new UserPanel(parent, user);
+            UserPanel userPanel = new UserPanel(parent, user, timeOfInit);
 
             userPanel.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     long timeOfClick = (new Date()).getTime();
-                    if (timeOfClick - timeOfInit > 500 && evt.getClickCount() == 2) {
+                    if (timeOfClick - timeOfInit > INTERVAL_AFTER_LOGIN && evt.getClickCount() == 2) {
                         GridFrame imagesFrame;
                         try {
                             imagesFrame = new GridFrame(user.getName());
@@ -181,13 +181,16 @@ public class MainPanel extends javax.swing.JPanel {
 
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                UserService us = new UserService();
-                try {
-                    us.createUserAsCopyOfDefaultUser();
-                    parent.changePanel(new MainPanel(parent));
-                } catch (Exception ex) {
-                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                    Sentry.capture(ex);
+                long timeOfClick = (new Date()).getTime();
+                if (timeOfClick - timeOfInit > INTERVAL_AFTER_LOGIN) {
+                    UserService us = new UserService();
+                    try {
+                        us.createUserAsCopyOfDefaultUser();
+                        parent.changePanel(new MainPanel(parent));
+                    } catch (Exception ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        Sentry.capture(ex);
+                    }
                 }
             }
 
@@ -224,23 +227,26 @@ public class MainPanel extends javax.swing.JPanel {
 
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                JFileChooser chooser = new JFileChooser();
-                chooser.setDialogTitle(rm.getTextOfXMLTag("chooseFile"));
-                chooser.setAcceptAllFileFilterUsed(false);
-                chooser.setFileFilter(new FileNameExtensionFilter("XML files", "xml"));
-                chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                    File file = chooser.getSelectedFile();
-                    UserService us = new UserService();
-                    boolean result = us.uploadUserFromFile(file);
-                    //on success
-                    if (result) {
-                        /**
-                         * redirect to the main page [it is the same page but
-                         * used to refresh content and display the newly
-                         * uploaded user]
-                         */
-                        parent.changePanel(new MainPanel(parent));
+                long timeOfClick = (new Date()).getTime();
+                if (timeOfClick - timeOfInit > INTERVAL_AFTER_LOGIN) {
+                    JFileChooser chooser = new JFileChooser();
+                    chooser.setDialogTitle(rm.getTextOfXMLTag("chooseFile"));
+                    chooser.setAcceptAllFileFilterUsed(false);
+                    chooser.setFileFilter(new FileNameExtensionFilter("XML files", "xml"));
+                    chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                        File file = chooser.getSelectedFile();
+                        UserService us = new UserService();
+                        boolean result = us.uploadUserFromFile(file);
+                        //on success
+                        if (result) {
+                            /**
+                             * redirect to the main page [it is the same page but
+                             * used to refresh content and display the newly
+                             * uploaded user]
+                             */
+                            parent.changePanel(new MainPanel(parent));
+                        }
                     }
                 }
             }

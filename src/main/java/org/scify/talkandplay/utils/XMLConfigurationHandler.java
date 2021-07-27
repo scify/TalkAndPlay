@@ -53,6 +53,13 @@ public class XMLConfigurationHandler {
     protected Document configurationXmlDocument;
 
     protected List<User> users;
+
+    protected CommunicationModule downloadedCommunicationModule;
+    protected File downloadedCommunicationCardsFile;
+
+    protected GameModule downloadedGameModule;
+    protected File downloadedGameCardsFile;
+
     //for each user we add his files in a hashmap
     protected Map<String, List<MultimediaResource>> userFiles;
     //contains all the image and sound paths that were found in the xml configuration.
@@ -66,11 +73,26 @@ public class XMLConfigurationHandler {
 
     public XMLConfigurationHandler(File dataDir) {
         this.dataDir = dataDir;
+
+        downloadedCommunicationCardsFile = new File(dataDir, "communicationCards");
+        if (!downloadedCommunicationCardsFile.exists())
+            downloadedCommunicationCardsFile.mkdir();
+
+        downloadedGameCardsFile = new File(dataDir, "gameCards");
+        if (!downloadedGameCardsFile.exists())
+            downloadedGameCardsFile.mkdir();
+
         properties = Properties.getInstance();
         localConfFile = new File(dataDir, "conf.xml");
         globalConfFile = new File(properties.getApplicationFolder() + File.separator + "conf.xml");
         rm = ResourceManager.getInstance();
         initConfigurationFile();
+        try {
+            loadDownloadedCommunicationCards();
+        } catch (Exception e) {
+            logger.error(e);
+        }
+
     }
 
     private void initConfigurationFile() {
@@ -233,6 +255,56 @@ public class XMLConfigurationHandler {
         return configuration;
     }
 
+    protected void loadDownloadedCommunicationCards() throws Exception {
+        downloadedCommunicationModule = new CommunicationModule();
+        for (File communicationCardFolder: downloadedCommunicationCardsFile.listFiles()) {
+            if (communicationCardFolder.isDirectory()) {
+                File structureFile = new File(communicationCardFolder, "structure.xml");
+                SAXBuilder builder = new SAXBuilder();
+                Element root = builder.build(structureFile).getRootElement();
+                String catName = root.getAttributeValue("name");
+                Category category = new Category(catName);
+                category.setEnabled("true".equals(root.getAttributeValue("enabled")));
+                String supportedLanguages = root.getAttributeValue("languages");
+                HashSet<String> languages = new HashSet<>();
+                languages.add(supportedLanguages);
+                downloadedCommunicationModule.addCategory(category, languages);
+
+                String image = root.getChild("image").getValue();
+                File imageFile = new File (communicationCardFolder, image);
+                category.setImage(new ImageResource(imageFile.getAbsolutePath(),ResourceType.LOCAL));
+
+                String sound = root.getChild("sound").getValue();
+                File soundFile = new File (communicationCardFolder, sound);
+                category.setSound(new SoundResource(soundFile.getAbsolutePath(), ResourceType.LOCAL));
+
+                Element subCategoriesEl = root.getChild("categories");
+                if (subCategoriesEl != null) {
+                    List<Element> subCategoriesChildren = subCategoriesEl.getChildren();
+                    List<Category> subCategoriesList = new ArrayList<>();
+                    for (Element subCategoryEl : subCategoriesChildren) {
+                        String categoryName = subCategoryEl.getAttributeValue("name");
+                        Category subCategory = new Category(categoryName);
+                        subCategory.setEnabled("true".equals(subCategoryEl.getAttributeValue("enabled")));
+                        subCategory.setParentCategory(category);
+
+                        image = subCategoryEl.getChild("image").getValue();
+                        imageFile = new File (communicationCardFolder, image);
+                        subCategory.setImage(new ImageResource(imageFile.getAbsolutePath(), ResourceType.LOCAL));
+
+
+                        sound = subCategoryEl.getChild("sound").getValue();
+                        soundFile = new File(communicationCardFolder, sound);
+                        subCategory.setSound(new SoundResource(soundFile.getAbsolutePath(), ResourceType.LOCAL));
+                        subCategoriesList.add(subCategory);
+                    }
+                    category.setSubCategories(subCategoriesList);
+                }
+            }
+        }
+
+    }
+
     protected CommunicationModule extractCommunicationModule(List<MultimediaResource> imageAndSoundResources, Element communicationNode, boolean isDefault) {
         CommunicationModule communicationModule = new CommunicationModule();
 
@@ -288,8 +360,6 @@ public class XMLConfigurationHandler {
                 category.setSound(sound);
                 imageAndSoundResources.add(sound);
 
-                //extractCommunicationCategoryFields(category, categoryEl);
-
                 List<Category> subCategories = new ArrayList<>();
                 category.setSubCategories(subCategories);
                 Element subCategoriesEl = categoryEl.getChild("categories");
@@ -310,7 +380,6 @@ public class XMLConfigurationHandler {
                         subCategory.setSound(subCatSound);
                         imageAndSoundResources.add(subCatSound);
 
-                        //extractCommunicationCategoryFields(subCategory, subCategoryEl);
                         subCategoriesList.add(subCategory);
                     }
                     category.setSubCategories(subCategoriesList);
@@ -318,38 +387,6 @@ public class XMLConfigurationHandler {
             }
         }
     }
-
-    /*protected void extractCommunicationCategoryFields(Category category, Element categoryEl) {
-        if (categoryEl.getChildText("editable") != null) {
-            category.setEditable(Boolean.parseBoolean(categoryEl.getChildText("editable")));
-        } else {
-            category.setEditable(true);
-        }
-
-        if (categoryEl.getChildText("order") != null) {
-            category.setOrder(Integer.parseInt(categoryEl.getChildText("order")));
-        } else {
-            category.setOrder(0);
-        }
-
-        if (categoryEl.getChildText("hasSound") != null) {
-            category.setHasSound("true".equals(categoryEl.getChildText("hasSound")));
-        } else {
-            category.setHasSound(true);
-        }
-
-        if (categoryEl.getChildText("hasImage") != null) {
-            category.setHasImage("true".equals(categoryEl.getChildText("hasImage")));
-        } else {
-            category.setHasImage(true);
-        }
-
-        if (categoryEl.getChildText("hasText") != null) {
-            category.setHasText("true".equals(categoryEl.getChildText("hasText")));
-        } else {
-            category.setHasText(true);
-        }
-    }*/
 
     protected EntertainmentModule extractEntertainmentModule(Element entertainmentNode, boolean isDefault) {
 
@@ -936,9 +973,6 @@ public class XMLConfigurationHandler {
         Element categoryEl = convertToXMLElement("category", "name", category.getNameUnmodified(), "enabled", category.isEnabled());
         categoryEl.addContent(convertToXMLElement("image", category.getImage()));
         categoryEl.addContent(convertToXMLElement("sound", category.getSound()));
-        /*categoryEl.addContent(convertToXMLElement("hasSound", category.hasSound()));
-        categoryEl.addContent(convertToXMLElement("hasImage", category.hasImage()));
-        categoryEl.addContent(convertToXMLElement("hasText", category.hasText()));*/
         return categoryEl;
     }
 
@@ -1173,5 +1207,13 @@ public class XMLConfigurationHandler {
             return false;
         }
         return true;
+    }
+
+    public CommunicationModule getDownloadedCommunicationModule() {
+        return downloadedCommunicationModule;
+    }
+
+    public GameModule getDownloadedGameModule() {
+        return downloadedGameModule;
     }
 }

@@ -47,6 +47,7 @@ public class ApplicationLauncher {
         File dataDir = new File (dataPath);
         if (!dataDir.exists())
             dataDir.mkdir();
+
         talkAndPlayProfileConfiguration = new TalkAndPlayProfileConfiguration(dataDir);
 
         MainFrame mainFrame = new MainFrame();

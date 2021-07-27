@@ -19,6 +19,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Box;
@@ -45,6 +46,8 @@ public class UserPanel extends javax.swing.JPanel {
     private GuiHelper guiHelper;
     private UserService userService;
     private final ResourceManager rm;
+    protected long timeOfInit;
+    protected final int INTERVAL_AFTER_LOGIN = 1000;
 
     /**
      * Creates new form ProfilePanel
@@ -53,17 +56,13 @@ public class UserPanel extends javax.swing.JPanel {
         return user;
     }
 
-    public UserPanel() {
-        rm = ResourceManager.getInstance();
-        initComponents();
-    }
-
-    public UserPanel(MainFrame mainFrame, User user) {
+    public UserPanel(MainFrame mainFrame, User user, long timeOfInit) {
         this.parent = mainFrame;
         this.user = user;
         rm = ResourceManager.getInstance();
         this.guiHelper = new GuiHelper();
         this.userService = new UserService();
+        this.timeOfInit = timeOfInit;
         initComponents();
         initCustomComponents();
     }
@@ -125,20 +124,26 @@ public class UserPanel extends javax.swing.JPanel {
 
         editLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                parent.changePanel(new UserFormPanel(parent, user));
+                long timeOfClick = (new Date()).getTime();
+                if (timeOfClick - timeOfInit > INTERVAL_AFTER_LOGIN) {
+                    parent.changePanel(new UserFormPanel(parent, user));
+                }
             }
         });
 
         deleteLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                int dialogResult = JOptionPane.showConfirmDialog(null, rm.getTextOfXMLTag("userDeleteConfirmation"), "Warning", 0);
-                if (dialogResult == JOptionPane.YES_OPTION) {
-                    try {
-                        userService.delete(user);
-                        parent.changePanel(new MainPanel(parent));
-                    } catch (Exception ex) {
-                        Logger.getLogger(UserPanel.class.getName()).log(Level.SEVERE, null, ex);
-                        Sentry.capture(ex);
+                long timeOfClick = (new Date()).getTime();
+                if (timeOfClick - timeOfInit > INTERVAL_AFTER_LOGIN) {
+                    int dialogResult = JOptionPane.showConfirmDialog(null, rm.getTextOfXMLTag("userDeleteConfirmation"), "Warning", 0);
+                    if (dialogResult == JOptionPane.YES_OPTION) {
+                        try {
+                            userService.delete(user);
+                            parent.changePanel(new MainPanel(parent));
+                        } catch (Exception ex) {
+                            Logger.getLogger(UserPanel.class.getName()).log(Level.SEVERE, null, ex);
+                            Sentry.capture(ex);
+                        }
                     }
                 }
             }
@@ -160,11 +165,6 @@ public class UserPanel extends javax.swing.JPanel {
         profilePanel.add(imageLabel);
         profilePanel.add(nameLabel);
         profilePanel.add(controlsPanel);
-    }
-
-    public void repaintPanel(User user) {
-        /* nameLabel.setText(user.getName());
-         imageLabel.setIcon(guiHelper.getIcon((user.getImage())));*/
     }
 
     public User getProfile() {
