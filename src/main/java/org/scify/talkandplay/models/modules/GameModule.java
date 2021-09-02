@@ -47,10 +47,9 @@ public class GameModule extends Module {
         return null;
     }
 
-    public Game getRandomGame(String gameType, String previousGame) {
+    public List<Game> getGames(String gameType) {
         GameCollection gameCollection = getGameCollection(gameType);
         List<Game> enabledGames = gameCollection.getEnabledGames();
-
         XMLConfigurationHandler ch = TalkAndPlayProfileConfiguration.getInstance().getConfigurationHandler();
         if (gameType.equals("stimulusReactionGame")) {
             for (Game game : ch.getDownloadedStimulusReactionGames()) {
@@ -65,8 +64,12 @@ public class GameModule extends Module {
                 enabledGames.add(game);
             }
         }
+        return enabledGames;
+    }
 
+    public Game getRandomGame(String gameType, String previousGame) {
 
+        List<Game> enabledGames = getGames(gameType);
         int randomInput = enabledGames.size();
         if (randomInput == 0)
             return null;

@@ -16,10 +16,7 @@
 package org.scify.talkandplay.gui.grid.games;
 
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import org.scify.talkandplay.gui.grid.GridFrame;
@@ -93,7 +90,7 @@ public class SimilarityGamePanel extends BaseGamePanel {
 
         int i = randomGenerator.nextInt(game.getEnabledImages().size());
         correctImage = game.getEnabledImages().get(i).getImage();
-        bottomPanel.add(createGameItem(game.getEnabledImages().get(i)));
+        bottomPanel.add(createGameItem(game.getEnabledImages().get(i), false));
 
         List<GameImage> tmpImages = new ArrayList(game.getEnabledImages());
         while (!tmpImages.isEmpty()) {
@@ -103,7 +100,7 @@ public class SimilarityGamePanel extends BaseGamePanel {
         }
 
         for (GameImage image : randomImages) {
-            JPanel panel = createGameItem(image);
+            JPanel panel = createGameItem(image, true);
             topPanel.add(panel, c1);
             panelList.add(panel);
             c1.gridx++;
@@ -130,34 +127,36 @@ public class SimilarityGamePanel extends BaseGamePanel {
         selector.start();
     }
 
-    private JPanel createGameItem(final GameImage image) {
+    private JPanel createGameItem(final GameImage image, boolean hasListeners) {
 
         final JPanel panel = tileCreator.create("",
                 image.getImage(),
                 null);
 
-        panel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
-                if (sensorService.shouldSelect(sensor)) {
-                    act(image.getImage().getPath());
-                }
-            }
-        });
-        panel.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                int keyCode = evt.getKeyCode();
-                if (keyCode == KeyEvent.VK_ESCAPE) {
-                    exit();
-                } else {
-                    Sensor sensor = new KeyboardSensor(keyCode, String.valueOf(evt.getKeyChar()), "keyboard");
-
+        if (hasListeners) {
+            panel.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    Sensor sensor = new MouseSensor(evt.getButton(), evt.getClickCount(), "mouse");
                     if (sensorService.shouldSelect(sensor)) {
                         act(image.getImage().getPath());
                     }
                 }
-            }
-        });
+            });
+            panel.addKeyListener(new java.awt.event.KeyAdapter() {
+                public void keyPressed(java.awt.event.KeyEvent evt) {
+                    int keyCode = evt.getKeyCode();
+                    if (keyCode == KeyEvent.VK_ESCAPE) {
+                        exit();
+                    } else {
+                        Sensor sensor = new KeyboardSensor(keyCode, String.valueOf(evt.getKeyChar()), "keyboard");
+
+                        if (sensorService.shouldSelect(sensor)) {
+                            act(image.getImage().getPath());
+                        }
+                    }
+                }
+            });
+        }
 
         return panel;
     }
