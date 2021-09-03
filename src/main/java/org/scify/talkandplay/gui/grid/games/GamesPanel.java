@@ -26,6 +26,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BoxLayout;
@@ -44,9 +45,7 @@ import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.Tile;
 import org.scify.talkandplay.models.User;
-import org.scify.talkandplay.models.games.Game;
-import org.scify.talkandplay.models.games.GameCollection;
-import org.scify.talkandplay.models.games.StimulusReactionGame;
+import org.scify.talkandplay.models.games.*;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
@@ -218,20 +217,27 @@ public class GamesPanel extends BaseGridPanel {
     }
 
     private JPanel createGameItem(final Game game, final String gamesType) {
+        String name = game.getName();
+        ImageResource image = game.getImage();
+        if (image.getResourceType().equals(ResourceType.JAR)) {
+            List<GameImage> images = game.getImages();
+            Random randomGenerator = new Random();
+            image = images.get(randomGenerator.nextInt(images.size())).getImage();
+        }
 
-        JPanel panel = tileCreator.create(game.getName(),
-                game.getImage(),
+        JPanel panel = tileCreator.create(name,
+                image,
                 game.getSound(),
                 new TileAction() {
                     @Override
                     public void act() {
                         selector.cancel();
                         if (gamesType.equals("stimulusReactionGame"))
-                            showStimulusReactionGame();
+                            showStimulusReactionGame((StimulusReactionGame) game);
                         else if (gamesType.equals("sequenceGame"))
-                            showSequenceGame();
+                            showSequenceGame((SequenceGame) game);
                         else if (gamesType.equals("similarityGame"))
-                            showSimilarityGame();
+                            showSimilarityGame((SimilarityGame) game);
                     }
 
                     @Override
@@ -306,7 +312,7 @@ public class GamesPanel extends BaseGridPanel {
         return panel;
     }
 
-    private void showStimulusReactionGame() {
+    private void showStimulusReactionGame(StimulusReactionGame game) {
         final SensorService sensorService = new SensorService(user);
 
         if (hasGames("stimulusReactionGame")) {
@@ -317,7 +323,7 @@ public class GamesPanel extends BaseGridPanel {
                 public void mouseClicked(MouseEvent me) {
                     Sensor sensor = new MouseSensor(me.getButton(), me.getClickCount(), "mouse");
                     if (sensorService.shouldSelect(sensor)) {
-                        StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent, "");
+                        StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent, game);
                     }
                 }
             });
@@ -325,7 +331,7 @@ public class GamesPanel extends BaseGridPanel {
                 public void keyPressed(KeyEvent ke) {
                     Sensor sensor = new KeyboardSensor(ke.getKeyCode(), String.valueOf(ke.getKeyChar()), "keyboard");
                     if (sensorService.shouldSelect(sensor)) {
-                        StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent, "");
+                        StimulusReactionGamePanel gamePanel = new StimulusReactionGamePanel(user, parent, game);
                     }
                 }
             });
@@ -377,7 +383,7 @@ public class GamesPanel extends BaseGridPanel {
         }
     }
 
-    private void showSequenceGame() {
+    private void showSequenceGame(SequenceGame game) {
         final SensorService sensorService = new SensorService(user);
 
         if (hasGames("sequenceGame")) {
@@ -389,7 +395,7 @@ public class GamesPanel extends BaseGridPanel {
                 public void mouseClicked(MouseEvent me) {
                     Sensor sensor = new MouseSensor(me.getButton(), me.getClickCount(), "mouse");
                     if (sensorService.shouldSelect(sensor)) {
-                        SequenceGamePanel gamePanel = new SequenceGamePanel(user, parent, "");
+                        SequenceGamePanel gamePanel = new SequenceGamePanel(user, parent, game);
                     }
                 }
             });
@@ -397,7 +403,7 @@ public class GamesPanel extends BaseGridPanel {
                 public void keyPressed(KeyEvent ke) {
                     Sensor sensor = new KeyboardSensor(ke.getKeyCode(), String.valueOf(ke.getKeyChar()), "keyboard");
                     if (sensorService.shouldSelect(sensor)) {
-                        SequenceGamePanel gamePanel = new SequenceGamePanel(user, parent, "");
+                        SequenceGamePanel gamePanel = new SequenceGamePanel(user, parent, game);
                     }
                 }
             });
@@ -449,7 +455,7 @@ public class GamesPanel extends BaseGridPanel {
         }
     }
 
-    private void showSimilarityGame() {
+    private void showSimilarityGame(SimilarityGame game) {
         final SensorService sensorService = new SensorService(user);
 
         if (hasGames("similarityGame")) {
@@ -459,7 +465,7 @@ public class GamesPanel extends BaseGridPanel {
                 public void mouseClicked(MouseEvent me) {
                     Sensor sensor = new MouseSensor(me.getButton(), me.getClickCount(), "mouse");
                     if (sensorService.shouldSelect(sensor)) {
-                        SimilarityGamePanel gamePanel = new SimilarityGamePanel(user, parent, "");
+                        SimilarityGamePanel gamePanel = new SimilarityGamePanel(user, parent, game);
                     }
                 }
             });
@@ -467,7 +473,7 @@ public class GamesPanel extends BaseGridPanel {
                 public void keyPressed(KeyEvent ke) {
                     Sensor sensor = new KeyboardSensor(ke.getKeyCode(), String.valueOf(ke.getKeyChar()), "keyboard");
                     if (sensorService.shouldSelect(sensor)) {
-                        SimilarityGamePanel gamePanel = new SimilarityGamePanel(user, parent, "");
+                        SimilarityGamePanel gamePanel = new SimilarityGamePanel(user, parent, game);
                     }
                 }
             });
