@@ -202,7 +202,7 @@ public class Updater {
 
             String version = configurationFile.getRootElement().getChildText("version");
 
-            logger.debug("Remote version:\t" + version);
+            logger.debug("Remote version("+ properties.getVersionFileUrl() + "):\t" + version);
             logger.debug("Local version:\t" + properties.getVersion());
 
             if (!properties.getVersion().equals(version)) {
