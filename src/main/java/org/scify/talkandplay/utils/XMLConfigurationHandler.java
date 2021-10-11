@@ -16,6 +16,7 @@
 package org.scify.talkandplay.utils;
 
 import io.sentry.Sentry;
+import net.lingala.zip4j.ZipFile;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.jdom.Attribute;
@@ -75,7 +76,9 @@ public class XMLConfigurationHandler {
 
     public XMLConfigurationHandler(File dataDir) {
         this.dataDir = dataDir;
-
+        downloadedStimulusReactionGames = new ArrayList<>();
+        downloadedSequenceGames = new ArrayList<>();
+        downloadedSimilarityGames = new ArrayList<>();
         downloadedCommunicationCardsFile = new File(dataDir, "communicationCards");
         if (!downloadedCommunicationCardsFile.exists())
             downloadedCommunicationCardsFile.mkdir();
@@ -91,9 +94,15 @@ public class XMLConfigurationHandler {
         initConfigurationFile();
         try {
             loadDownloadedCommunicationCards();
+        } catch (Exception e) {
+            logger.error(e);
+            Sentry.capture(e);
+        }
+        try {
             loadDownloadedGameCards();
         } catch (Exception e) {
             logger.error(e);
+            Sentry.capture(e);
         }
 
     }
@@ -260,6 +269,13 @@ public class XMLConfigurationHandler {
 
     protected void loadDownloadedCommunicationCards() throws Exception {
         downloadedCommunicationModule = new CommunicationModule();
+        //extract all zip files
+        for (File communicationCardFile: downloadedCommunicationCardsFile.listFiles()) {
+            if (communicationCardFile.isFile() && communicationCardFile.getName().endsWith(".zip")) {
+                new ZipFile(communicationCardFile).extractAll(communicationCardFile.getParent());
+            }
+        }
+        //load all folders
         for (File communicationCardFolder: downloadedCommunicationCardsFile.listFiles()) {
             if (communicationCardFolder.isDirectory()) {
                 File structureFile = new File(communicationCardFolder, "structure.xml");
@@ -473,10 +489,16 @@ public class XMLConfigurationHandler {
     }
 
     protected void loadDownloadedGameCards() throws Exception {
-        downloadedStimulusReactionGames = new ArrayList<>();
-        downloadedSequenceGames = new ArrayList<>();
-        downloadedSimilarityGames = new ArrayList<>();
-
+        downloadedStimulusReactionGames.clear();
+        downloadedSequenceGames.clear();
+        downloadedSimilarityGames.clear();
+        //extract all zip files
+        for (File gameCardFile: downloadedGameCardsFile.listFiles()) {
+            if (gameCardFile.isFile() && gameCardFile.getName().endsWith(".zip")) {
+                new ZipFile(gameCardFile).extractAll(gameCardFile.getParent());
+            }
+        }
+        //load all folders
         for (File gameCardFolder: downloadedGameCardsFile.listFiles()) {
             if (gameCardFolder.isDirectory()) {
                 File structureFile = new File(gameCardFolder, "structure.xml");
