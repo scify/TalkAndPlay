@@ -7,6 +7,16 @@
     <updateInProgress2>παρακαλώ περιμένετε...</updateInProgress2>
     <updateInProgress3>Η διαδικασία μπορεί να διαρκέσει μερικά λεπτά.</updateInProgress3>
     <updateInProgress4>Mε την ολοκλήρωση θα χρειαστεί να ανοίξετε την εφαρμογή ξανά.</updateInProgress4>
+    <emailLabel>Email</emailLabel>
+    <passwordLabel>Κωδικός πρόσβασης</passwordLabel>
+    <passwordConfirmationLabel>Επαλήθευση κωδικού πρόσβασης</passwordConfirmationLabel>
+    <loginButton>Σύνδεση</loginButton>
+    <logoutButton>Αποσύνδεση</logoutButton>
+    <registerButton>Εγγραφή χρήστη</registerButton>
+    <noAccountLabel>Δεν έχεις ακόμη λογαριασμό;</noAccountLabel>
+    <wrongCredentialsMsg>Ο κωδικός ή το email είναι λάθος, δοκίμασε ξανά.</wrongCredentialsMsg>
+    <successfulRegistrationMsg>Η εγγραφή σου ολοκληρώθηκε, δοκιμασε να συνδεθείς!</successfulRegistrationMsg>
+    <cannotAccessServerMessage>Η σύνδεση φαίνεται να έχει πρόβλημα, έλεγξε τη σύνδεσή σου στο διαδίκτυο!</cannotAccessServerMessage>
     <addUser>Πρόσθεσε νέο χρήστη</addUser>
     <loadUser>Φόρτωσε χρήστη</loadUser>
     <addUserModePanelTitle>Προσθήκη χρήστη</addUserModePanelTitle>

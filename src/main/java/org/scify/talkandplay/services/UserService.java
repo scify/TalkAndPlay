@@ -108,6 +108,11 @@ public class UserService {
         xmlConfHandler.update();
     }
 
+    public void createUserAsCopyOfDefaultUser(String name) throws Exception{
+        xmlConfHandler.createNewUser(name);
+        xmlConfHandler.update();
+    }
+
 
     public void update(User oldUser, User newUser) throws Exception {
         xmlConfHandler.updateUser(oldUser, newUser);

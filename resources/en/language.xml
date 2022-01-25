@@ -7,6 +7,16 @@
     <updateInProgress2>please wait...</updateInProgress2>
     <updateInProgress3>This process might take a few minutes.</updateInProgress3>
     <updateInProgress4>On completion you will need to re-open the application.</updateInProgress4>
+    <emailLabel>Email</emailLabel>
+    <passwordLabel>Password</passwordLabel>
+    <passwordConfirmationLabel>Confirm password</passwordConfirmationLabel>
+    <loginButton>Login</loginButton>
+    <logoutButton>Logout</logoutButton>
+    <registerButton>Register</registerButton>
+    <noAccountLabel>Do not have an account yet?</noAccountLabel>
+    <wrongCredentialsMsg>Your credentials are wrong, please try again.</wrongCredentialsMsg>
+    <successfulRegistrationMsg>Your registration was successful, you may login now!</successfulRegistrationMsg>
+    <cannotAccessServerMessage>Cannot access server, check your internet connection!</cannotAccessServerMessage>
     <addUser>Add a user</addUser>
     <loadUser>Load user</loadUser>
     <addUserModePanelTitle>Add new user</addUserModePanelTitle>

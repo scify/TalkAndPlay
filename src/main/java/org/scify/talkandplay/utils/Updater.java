@@ -188,7 +188,8 @@ public class Updater {
     }
 
     public boolean hasUpdate() throws IOException, JDOMException {
-        boolean hasUpdate = false;
+        return false;
+        /*boolean hasUpdate = false;
 
         URL url = new URL(properties.getVersionFileUrl());
         File file = new File(properties.getTmpFolder() + File.separator + properties.getPropertiesFile());
@@ -200,16 +201,16 @@ public class Updater {
             SAXBuilder builder = new SAXBuilder();
             Document configurationFile = builder.build(file);
 
-            String version = configurationFile.getRootElement().getChildText("version");
+            String serverVersion = configurationFile.getRootElement().getChildText("version");
 
-            logger.debug("Remote version("+ properties.getVersionFileUrl() + "):\t" + version);
+            logger.debug("Remote version("+ properties.getVersionFileUrl() + "):\t" + serverVersion);
             logger.debug("Local version:\t" + properties.getVersion());
 
-            if (!properties.getVersion().equals(version)) {
+            if (Double.parseDouble(properties.getVersion()) < Double.parseDouble(serverVersion)) {
                 hasUpdate = true;
             }
         }
 
-        return hasUpdate;
+        return hasUpdate;*/
     }
 }

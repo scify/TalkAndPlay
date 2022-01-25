@@ -19,8 +19,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
+import java.io.IOException;
 import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,23 +28,28 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.scify.talkandplay.models.User;
+import org.scify.talkandplay.services.UserService;
 import io.sentry.Sentry;
+import org.scify.talkandplay.gui.grid.GridFrame;
 import org.scify.talkandplay.gui.helpers.UIConstants;
-import org.scify.talkandplay.utils.Properties;
-import org.scify.talkandplay.utils.ResourceManager;
-import org.scify.talkandplay.utils.ResourceType;
-import org.scify.talkandplay.utils.Updater;
+import org.scify.talkandplay.utils.*;
 
 public class MainFrame extends javax.swing.JFrame {
 
     private final Properties prop;
     protected final Updater updater;
     private final ResourceManager rm;
+    protected boolean inLoginMode;
+    protected GridFrame registeredUserFrame;
+    protected static String REGISTEREDUSERNAME = "registeredUserTMP";
     
     public MainFrame() {
+        deleteRegisteredUserFromXML();
         updater = new Updater();
         prop = Properties.getInstance();
         rm = ResourceManager.getInstance();
+        inLoginMode = TalkAndPlayProfileConfiguration.getInstance().getConfigurationHandler().isInLoginMode();
         initComponents();
         initCustomComponents();
         openLinkToBrowser();
@@ -210,6 +215,69 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }
 
+    public void loginAsRegisteredUser(Login login) {
+        try {
+            UserService us = new UserService();
+            try {
+                us.createUserAsCopyOfDefaultUser(REGISTEREDUSERNAME);
+            } catch (Exception ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                Sentry.capture(ex);
+            }
+            registeredUserFrame = new GridFrame(REGISTEREDUSERNAME);
+            registeredUserFrame.setLocationRelativeTo(null);
+            registeredUserFrame.setTitle("Talk&Play");
+            registeredUserFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            registeredUserFrame.setVisible(true);
+            registeredUserFrame.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    super.windowClosing(e);
+                    login.switchToLogInMode();
+                    logoutAsRegisteredUser();
+                }
+            });
+        } catch (IOException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    protected void deleteRegisteredUserFromXML() {
+        try {
+            UserService us = new UserService();
+            User registeredUser = us.getUser(REGISTEREDUSERNAME);
+            if (registeredUser != null)
+                us.delete(registeredUser);
+        } catch (Exception ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Sentry.capture(ex);
+        }
+    }
+
+    public void logoutAsRegisteredUser() {
+        deleteRegisteredUserFromXML();
+        registeredUserFrame.setVisible(false);
+        registeredUserFrame.dispose();
+    }
+
+    public void goToLogin() {
+        contentPanel.removeAll();
+        jLabel2.setText(rm.getTextOfXMLTag("createdBy"));
+        jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
+        contentPanel.add(new Login(this), BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+
+    public void goToRegister() {
+        contentPanel.removeAll();
+        jLabel2.setText(rm.getTextOfXMLTag("createdBy"));
+        jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
+        contentPanel.add(new Register(this), BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+
     public void languageSelected(long timeOfInit) {
         boolean willUpdate = false;
         try {
@@ -226,7 +294,10 @@ public class MainFrame extends javax.swing.JFrame {
             contentPanel.removeAll();
             jLabel2.setText(rm.getTextOfXMLTag("createdBy"));
             jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
-            contentPanel.add(new MainPanel(this, timeOfInit), BorderLayout.CENTER);
+            if (inLoginMode)
+                contentPanel.add(new Login(this), BorderLayout.CENTER);
+            else
+                contentPanel.add(new MainPanel(this, timeOfInit), BorderLayout.CENTER);
             revalidate();
             repaint();
         }

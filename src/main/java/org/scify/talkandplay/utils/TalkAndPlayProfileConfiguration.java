@@ -21,11 +21,12 @@ public class TalkAndPlayProfileConfiguration {
 
     protected XMLConfigurationHandler xmlConfigurationHandler;
     protected File dataDir;
-
+    protected LoginManager loginManager;
     protected static TalkAndPlayProfileConfiguration instance;
 
     public TalkAndPlayProfileConfiguration(File dataDir) {
         this.dataDir = dataDir;
+        loginManager = new DummyLoginManager();
         xmlConfigurationHandler = null;
         instance = this;
     }
@@ -39,5 +40,9 @@ public class TalkAndPlayProfileConfiguration {
 
     public static TalkAndPlayProfileConfiguration getInstance() {
         return instance;
+    }
+
+    public LoginManager getLoginManager() {
+        return loginManager;
     }
 }

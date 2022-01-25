@@ -68,7 +68,7 @@ public class MainPanel extends javax.swing.JPanel {
     }
 
     public MainPanel(MainFrame parent) {
-        this.talkAndPlayProfilesConfig = TalkAndPlayProfileConfiguration.getInstance();
+        talkAndPlayProfilesConfig = TalkAndPlayProfileConfiguration.getInstance();
         this.timeOfInit = 0;
         this.parent = parent;
         rm = ResourceManager.getInstance();
