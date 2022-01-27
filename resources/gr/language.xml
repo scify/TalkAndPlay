@@ -9,11 +9,14 @@
     <updateInProgress4>Mε την ολοκλήρωση θα χρειαστεί να ανοίξετε την εφαρμογή ξανά.</updateInProgress4>
     <emailLabel>Email</emailLabel>
     <passwordLabel>Κωδικός πρόσβασης</passwordLabel>
-    <passwordConfirmationLabel>Επαλήθευση κωδικού πρόσβασης</passwordConfirmationLabel>
+    <passwordConfirmationLabel>Επαλήθευση κωδικού πρόσβασης</passwordConfirmationLabel>    
+    <forgotPasswordLabel>Δεν θυμάσαι τον κωδικό σου;</forgotPasswordLabel> 
+    <forgotPasswordButton>Πάτα εδώ</forgotPasswordButton>
     <loginButton>Σύνδεση</loginButton>
     <logoutButton>Αποσύνδεση</logoutButton>
     <registerButton>Εγγραφή χρήστη</registerButton>
     <noAccountLabel>Δεν έχεις ακόμη λογαριασμό;</noAccountLabel>
+    <accountAlreadyExists>Λογαριασμός με αυτό το email υπάρχει ήδη!</accountAlreadyExists>
     <wrongCredentialsMsg>Ο κωδικός ή το email είναι λάθος, δοκίμασε ξανά.</wrongCredentialsMsg>
     <successfulRegistrationMsg>Η εγγραφή σου ολοκληρώθηκε, δοκιμασε να συνδεθείς!</successfulRegistrationMsg>
     <cannotAccessServerMessage>Η σύνδεση φαίνεται να έχει πρόβλημα, έλεγξε τη σύνδεσή σου στο διαδίκτυο!</cannotAccessServerMessage>

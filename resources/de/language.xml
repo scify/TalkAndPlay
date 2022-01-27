@@ -10,10 +10,13 @@
     <emailLabel>Email</emailLabel>
     <passwordLabel>Password</passwordLabel>
     <passwordConfirmationLabel>Confirm password</passwordConfirmationLabel>
+    <forgotPasswordLabel>Forgot password?</forgotPasswordLabel> 
+    <forgotPasswordButton>Click here</forgotPasswordButton>
     <loginButton>Login</loginButton>
     <logoutButton>Logout</logoutButton>
     <registerButton>Register</registerButton>
     <noAccountLabel>Do not have an account yet?</noAccountLabel>
+    <accountAlreadyExists>An account with this email already exists!</accountAlreadyExists>
     <wrongCredentialsMsg>Your credentials are wrong, please try again.</wrongCredentialsMsg>
     <successfulRegistrationMsg>Your registration was successful, you may login now!</successfulRegistrationMsg>
     <cannotAccessServerMessage>Cannot access server, check your internet connection!</cannotAccessServerMessage>

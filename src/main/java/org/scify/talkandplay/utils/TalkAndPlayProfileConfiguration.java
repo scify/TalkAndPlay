@@ -26,7 +26,7 @@ public class TalkAndPlayProfileConfiguration {
 
     public TalkAndPlayProfileConfiguration(File dataDir) {
         this.dataDir = dataDir;
-        loginManager = new DummyLoginManager();
+        loginManager = new ShapesLoginManager();
         xmlConfigurationHandler = null;
         instance = this;
     }
