@@ -10,10 +10,10 @@
     <emailLabel>Email</emailLabel>
     <passwordLabel>Passwort</passwordLabel>
     <passwordConfirmationLabel>Passwort wiederholen</passwordConfirmationLabel>
-    <passwordInstructionsLabel1>Minimum length 8</passwordInstructionsLabel1>
-    <passwordInstructionsLabel2>Contains Uppercase case letter (e.g. ABC)</passwordInstructionsLabel2>
-    <passwordInstructionsLabel3>Contains number (e.g. 123)</passwordInstructionsLabel3>
-    <passwordInstructionsLabel4>Contains symbol (e.g. @#$%^+=)</passwordInstructionsLabel4>
+    <passwordInstructionsLabel1>Minimale Länge 8</passwordInstructionsLabel1>
+    <passwordInstructionsLabel2>Großbuchstabe (ABC)</passwordInstructionsLabel2>
+    <passwordInstructionsLabel3>Nummer (123)</passwordInstructionsLabel3>
+    <passwordInstructionsLabel4>Symbol (!@#$%+=)</passwordInstructionsLabel4>
     <forgotPasswordLabel>Passwort vergessen</forgotPasswordLabel> 
     <forgotPasswordButton>Hier klicken </forgotPasswordButton>
     <loginButton>Anmelden</loginButton>

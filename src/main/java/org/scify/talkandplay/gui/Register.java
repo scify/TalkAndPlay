@@ -27,10 +27,10 @@ public class Register extends JPanel {
     private JLabel containsSymbolLabel;
     private final ResourceManager rm;
     private LoginManager loginManager;
-    protected String passwordPattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
+    protected String passwordPattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%+=])(?=\\S+$).{8,}";
     protected String containsNumberPattern = "(?=.*[0-9]).{1,}";
     protected String containsUpperCasePattern = "(?=.*[A-Z]).{1,}";
-    protected String containsSymbolPattern = "(?=.*[@#$%^&+=]).{1,}";
+    protected String containsSymbolPattern = "(?=.*[!@#$%+=]).{1,}";
 
     public Register(MainFrame parent) {
         loginManager = TalkAndPlayProfileConfiguration.getInstance().getLoginManager();
