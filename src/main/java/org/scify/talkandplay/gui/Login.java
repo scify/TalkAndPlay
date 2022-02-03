@@ -93,7 +93,7 @@ public class Login extends JPanel {
         if (loginMode) {
             String email = emailField.getText().trim();
             String password = String.valueOf(passwordField.getPassword()).trim();
-            if (email.length() <= 3 || !email.contains("@") || password.length() < 4)
+            if (email.length() <= 3 || !email.contains("@") || !email.contains(".") || password.length() < 3)
                 buttonSignIn.setEnabled(false);
             else
                 buttonSignIn.setEnabled(true);

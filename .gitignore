@@ -8,5 +8,6 @@ talkandplay.iml
 classes/
 *.log
 sentry.properties
+firebase.properties
 *.exe
 old/

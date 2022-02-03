@@ -237,6 +237,7 @@ public class MainFrame extends javax.swing.JFrame {
                     logoutAsRegisteredUser();
                 }
             });
+            FirebaseRestAPI.getInstance().postShapesLogin();
         } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -255,6 +256,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     public void logoutAsRegisteredUser() {
+        FirebaseRestAPI.getInstance().postShapesLogout();
         deleteRegisteredUserFromXML();
         registeredUserFrame.setVisible(false);
         registeredUserFrame.dispose();

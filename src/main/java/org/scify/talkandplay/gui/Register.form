@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.scify.talkandplay.gui.Register">
-  <grid id="27dc6" binding="loginPanel" layout-manager="GridLayoutManager" row-count="5" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="loginPanel" layout-manager="GridLayoutManager" row-count="8" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="1000" height="500"/>
@@ -29,14 +29,6 @@
           <text value="Label"/>
         </properties>
       </component>
-      <component id="c5021" class="javax.swing.JPasswordField" binding="passwordField1" default-binding="true">
-        <constraints>
-          <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="300" height="30"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
       <component id="53757" class="javax.swing.JLabel" binding="passwordLabel">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
@@ -47,28 +39,6 @@
           <doubleBuffered value="true"/>
           <font size="20" style="1"/>
           <text value="Label"/>
-        </properties>
-      </component>
-      <component id="9128e" class="javax.swing.JTextField" binding="emailField">
-        <constraints>
-          <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="300" height="30"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="239af" class="javax.swing.JButton" binding="buttonRegister">
-        <constraints>
-          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="200" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <background color="-11820731"/>
-          <doubleBuffered value="true"/>
-          <font size="16" style="1"/>
-          <foreground color="-1"/>
-          <text value="Button"/>
         </properties>
       </component>
       <component id="8323a" class="javax.swing.JLabel" binding="passwordLabel2">
@@ -91,9 +61,85 @@
         </constraints>
         <properties/>
       </component>
+      <component id="9128e" class="javax.swing.JTextField" binding="emailField">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="300" height="30"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="c5021" class="javax.swing.JPasswordField" binding="passwordField1" default-binding="true">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="300" height="30"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="239af" class="javax.swing.JButton" binding="buttonRegister">
+        <constraints>
+          <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="200" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-11820731"/>
+          <doubleBuffered value="true"/>
+          <font size="16" style="1"/>
+          <foreground color="-1"/>
+          <text value="Button"/>
+        </properties>
+      </component>
+      <component id="34b3d" class="javax.swing.JLabel" binding="minLengthLabel">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="300" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-1"/>
+          <text value="Label"/>
+        </properties>
+      </component>
+      <component id="7e959" class="javax.swing.JLabel" binding="containsUppercaseLabel">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="300" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-1"/>
+          <text value="Label"/>
+        </properties>
+      </component>
+      <component id="31b40" class="javax.swing.JLabel" binding="containsNumberLabel">
+        <constraints>
+          <grid row="5" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="300" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-1"/>
+          <text value="Label"/>
+        </properties>
+      </component>
+      <component id="6612" class="javax.swing.JLabel" binding="containsSymbolLabel">
+        <constraints>
+          <grid row="6" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="300" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-1"/>
+          <text value="Label"/>
+        </properties>
+      </component>
       <component id="90729" class="javax.swing.JButton" binding="buttonBack">
         <constraints>
-          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="200" height="30"/>
+          </grid>
         </constraints>
         <properties>
           <background color="-11820731"/>

@@ -10,6 +10,10 @@
     <emailLabel>Email</emailLabel>
     <passwordLabel>Κωδικός πρόσβασης</passwordLabel>
     <passwordConfirmationLabel>Επαλήθευση κωδικού πρόσβασης</passwordConfirmationLabel>    
+    <passwordInstructionsLabel1>Minimum length 8</passwordInstructionsLabel1>
+    <passwordInstructionsLabel2>Contains Uppercase case letter (e.g. ABC)</passwordInstructionsLabel2>
+    <passwordInstructionsLabel3>Contains number (e.g. 123)</passwordInstructionsLabel3>
+    <passwordInstructionsLabel4>Contains symbol (e.g. @#$%^+=)</passwordInstructionsLabel4>
     <forgotPasswordLabel>Δεν θυμάσαι τον κωδικό σου;</forgotPasswordLabel> 
     <forgotPasswordButton>Πάτα εδώ</forgotPasswordButton>
     <loginButton>Σύνδεση</loginButton>

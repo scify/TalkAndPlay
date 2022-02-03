@@ -55,6 +55,7 @@ public class ApplicationLauncher {
         mainFrame.setVisible(true);
         PlatformImpl.startup(() -> {});
         Platform.setImplicitExit(false);
+
     }
 
     /**

@@ -5,18 +5,19 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 public class ShapesLoginManager extends LoginManager {
 
     protected Gson g;
     protected final ResourceManager rm;
     protected String token;
+    protected Logger logger;
 
     public ShapesLoginManager() {
         g = new Gson();
         rm = ResourceManager.getInstance();
+        logger = org.apache.log4j.Logger.getLogger(ShapesLoginManager.class);
     }
 
     public String getToken() {
@@ -48,7 +49,7 @@ public class ShapesLoginManager extends LoginManager {
                     return new OperationMessage(false, rm.getTextOfXMLTag("wrongCredentialsMsg"));
 
             } catch (Exception e) {
-                Logger.getLogger(ShapesLoginManager.class.getName()).log(Level.SEVERE, null, e);
+                logger.error(e);
                 return new OperationMessage(false, rm.getTextOfXMLTag("cannotAccessServerMessage"));
             }
         }
@@ -84,7 +85,7 @@ public class ShapesLoginManager extends LoginManager {
                     }
                 }
             } catch (Exception e) {
-                Logger.getLogger(ShapesLoginManager.class.getName()).log(Level.SEVERE, null, e);
+                logger.error(e);
                 return new OperationMessage(false, rm.getTextOfXMLTag("cannotAccessServerMessage"));
             }
         }

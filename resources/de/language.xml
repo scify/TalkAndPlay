@@ -8,18 +8,22 @@
     <updateInProgress3>Dieser Vorgang kann einige Minuten dauern.</updateInProgress3>
     <updateInProgress4>Nach Fertigstellung müssen Sie die Anwendung erneut starten.</updateInProgress4>
     <emailLabel>Email</emailLabel>
-    <passwordLabel>Password</passwordLabel>
-    <passwordConfirmationLabel>Confirm password</passwordConfirmationLabel>
-    <forgotPasswordLabel>Forgot password?</forgotPasswordLabel> 
-    <forgotPasswordButton>Click here</forgotPasswordButton>
-    <loginButton>Login</loginButton>
-    <logoutButton>Logout</logoutButton>
-    <registerButton>Register</registerButton>
-    <noAccountLabel>Do not have an account yet?</noAccountLabel>
-    <accountAlreadyExists>An account with this email already exists!</accountAlreadyExists>
-    <wrongCredentialsMsg>Your credentials are wrong, please try again.</wrongCredentialsMsg>
-    <successfulRegistrationMsg>Your registration was successful, you may login now!</successfulRegistrationMsg>
-    <cannotAccessServerMessage>Cannot access server, check your internet connection!</cannotAccessServerMessage>
+    <passwordLabel>Passwort</passwordLabel>
+    <passwordConfirmationLabel>Passwort wiederholen</passwordConfirmationLabel>
+    <passwordInstructionsLabel1>Minimum length 8</passwordInstructionsLabel1>
+    <passwordInstructionsLabel2>Contains Uppercase case letter (e.g. ABC)</passwordInstructionsLabel2>
+    <passwordInstructionsLabel3>Contains number (e.g. 123)</passwordInstructionsLabel3>
+    <passwordInstructionsLabel4>Contains symbol (e.g. @#$%^+=)</passwordInstructionsLabel4>
+    <forgotPasswordLabel>Passwort vergessen</forgotPasswordLabel> 
+    <forgotPasswordButton>Hier klicken </forgotPasswordButton>
+    <loginButton>Anmelden</loginButton>
+    <logoutButton>Ausloggen</logoutButton>
+    <registerButton>Konto erstellen</registerButton>
+    <noAccountLabel>Erstellen Sie Ihr Konto</noAccountLabel>
+    <accountAlreadyExists>Die E-Mail ist bereits vergeben.!</accountAlreadyExists>
+    <wrongCredentialsMsg>Diese Angaben stimmen nicht mit unseren Aufzeichnungen überein.</wrongCredentialsMsg>
+    <successfulRegistrationMsg>Mit Ihrem Konto anmelden!</successfulRegistrationMsg>
+    <cannotAccessServerMessage>Bitte überprüfe deine Internetverbindung!</cannotAccessServerMessage>
     <addUser>Neuen Benutzer hinzufügen</addUser>
     <loadUser>einen Benutzer laden</loadUser>
     <addUserModePanelTitle>Benutzer hinzufügen</addUserModePanelTitle>
