@@ -50,6 +50,7 @@ import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.SensorService;
+import org.scify.talkandplay.utils.FirebaseRestAPI;
 import org.scify.talkandplay.utils.ImageResource;
 import org.scify.talkandplay.utils.ResourceType;
 
@@ -238,6 +239,7 @@ public class GamesPanel extends BaseGridPanel {
                             showSequenceGame((SequenceGame) game);
                         else if (gamesType.equals("similarityGame"))
                             showSimilarityGame((SimilarityGame) game);
+
                     }
 
                     @Override

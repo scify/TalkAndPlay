@@ -7,6 +7,8 @@ import org.scify.talkandplay.utils.ResourceManager;
 import org.scify.talkandplay.utils.TalkAndPlayProfileConfiguration;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -54,11 +56,48 @@ public class Login extends JPanel {
         initRegisterButton();
         initForgotPasswordButton();
         buttonSignIn.setEnabled(false);
+        emailField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent documentEvent) {
+                validateButtonSignIn();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent documentEvent) {
+                validateButtonSignIn();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent documentEvent) {
+                validateButtonSignIn();
+            }
+        });
         emailField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 super.keyPressed(e);
+            }
+        });
+        passwordField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent documentEvent) {
                 validateButtonSignIn();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent documentEvent) {
+                validateButtonSignIn();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent documentEvent) {
+                validateButtonSignIn();
+            }
+        });
+        emailField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                super.keyPressed(e);
             }
         });
 
@@ -66,7 +105,6 @@ public class Login extends JPanel {
             @Override
             public void keyReleased(KeyEvent e) {
                 super.keyPressed(e);
-                validateButtonSignIn();
             }
         });
     }

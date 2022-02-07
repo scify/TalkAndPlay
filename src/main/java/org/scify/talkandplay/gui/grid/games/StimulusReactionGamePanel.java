@@ -36,6 +36,7 @@ import org.scify.talkandplay.models.games.GameCollection;
 import org.scify.talkandplay.models.games.StimulusReactionGame;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
+import org.scify.talkandplay.utils.FirebaseRestAPI;
 import org.scify.talkandplay.utils.ResourceType;
 import org.scify.talkandplay.utils.SoundResource;
 
@@ -52,7 +53,6 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
         super(user, parent);
         this.selected = 0;
         this.previousGame = previousGame;
-
         initComponents();
         initCustomComponents();
     }
@@ -61,7 +61,6 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
         super(user, parent);
         this.selected = 0;
         this.game = game;
-
         initComponents();        
         initCustomComponents();
     }
@@ -187,6 +186,9 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 int keyCode = evt.getKeyCode();
                 if (keyCode == KeyEvent.VK_ESCAPE) {
+                    long currentTime = new Date().getTime();
+                    long seconds = (currentTime - startTime) / 1000;
+                    FirebaseRestAPI.getInstance().postGameSelection(game.getName(), "stimulusReactionGame", seconds, -1);
                     exit();
                 }
             }
@@ -215,7 +217,7 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
         long currentTime = new Date().getTime();
         long seconds = (currentTime - startTime) / 1000;
         setTopMessage(rm.getTextOfXMLTag("playingTime") + ": " + seconds);
-
+        FirebaseRestAPI.getInstance().postGameSelection(game.getName(), "stimulusReactionGame", seconds, 0);
 
         tileCreator.playAudio(getWinSound().getSound().getAbsolutePath());
 

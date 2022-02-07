@@ -20,6 +20,7 @@ public class FirebaseRestAPI {
     protected static String SHAPESLOGINEVENT = "\"eventType\": \"SHAPES_LOGIN\", ";
     protected static String SHAPESLOGOUTEVENT = "\"eventType\": \"SHAPES_LOGOUT\", ";
     protected static String COMMUNICATIONCATEGORYEVENT = "\"eventType\": \"COMMUNICATION_CATEGORY_EVENT\", ";
+    protected static String GAMESELECTIONEVENT = "\"eventType\": \"GAME_SELECTION_EVENT\", ";
 
 
     public FirebaseRestAPI() {
@@ -43,7 +44,6 @@ public class FirebaseRestAPI {
                 String line = reader.readLine().trim();
                 String[] s = line.split("firebaseUrl=");
                 firebaseUrl = s[1].trim();
-                logger.info(firebaseUrl);
             } catch (Exception e) {
                 logger.error("Error in firebase.properties file");
                 Sentry.capture("Error in firebase.properties file: (" + e.getMessage() + ")");
@@ -64,7 +64,7 @@ public class FirebaseRestAPI {
         if (firebaseUrl.length() > 0) {
             String jsonBody = "{";
             jsonBody += "\"language\": \"" + rm.getSelectedLanguage() + "\", ";
-            if (shapesToken.length() > 0)
+            if (shapesToken != null && shapesToken.length() > 0)
                 jsonBody += "\"authToken\": \"" + shapesToken + "\", ";
             jsonBody += SHAPESLOGINEVENT;
             jsonBody += "\"timestamp\":{\".sv\": \"timestamp\"}}";
@@ -84,7 +84,7 @@ public class FirebaseRestAPI {
         if (firebaseUrl.length() > 0) {
             String jsonBody = "{";
             jsonBody += "\"language\": \"" + rm.getSelectedLanguage() + "\", ";
-            if (shapesToken.length() > 0)
+            if (shapesToken != null && shapesToken.length() > 0)
                 jsonBody += "\"authToken\": \"" + shapesToken + "\", ";
             jsonBody += SHAPESLOGOUTEVENT;
             jsonBody += "\"timestamp\":{\".sv\": \"timestamp\"}}";
@@ -103,7 +103,7 @@ public class FirebaseRestAPI {
     public void postCommunicationCategorySelection(String categoryName, String parentCategoryName) {
         String jsonBody = "{";
         jsonBody += "\"language\": \"" + rm.getSelectedLanguage() + "\", ";
-        if (shapesToken.length() > 0)
+        if (shapesToken != null && shapesToken.length() > 0)
             jsonBody += "\"authToken\": \"" + shapesToken + "\", ";
         jsonBody += COMMUNICATIONCATEGORYEVENT;
         jsonBody += "\"categoryName\": \"" + categoryName + "\", ";
@@ -121,34 +121,27 @@ public class FirebaseRestAPI {
         }
     }
 
-    /*@Override
-    public OperationMessage signIn(String email, String password) {
-        String emailCleaned = email.trim();
-        String passwordCleaned = password.trim();
-        if (emailCleaned.length() <= 3 || !emailCleaned.contains("@") || passwordCleaned.length() < 4) {
-            return new OperationMessage(false, rm.getTextOfXMLTag("wrongCredentialsMsg"));
-        } else {
-            try {
-                Unirest.setTimeouts(100000, 100000);
-                HttpResponse<String> response = Unirest.post("https://kubernetes.pasiphae.eu/shapes/asapa/auth/login")
-                        .header("Accept", "application/json")
-                        .header("X-Shapes-Key", "7Msbb3w^SjVG%j")
-                        .header("Content-Type", "application/json")
-                        .body("{ \"email\" : \"" + emailCleaned + "\", \"password\": \"" + passwordCleaned + "\" }")
-                        .asString();
-                JsonObject jsonObject = JsonParser.parseString(response.getBody()).getAsJsonObject();
-                int count = jsonObject.get("count").getAsInt();
-                Unirest.shutdown();
-                if (count == 1) {
-                    token = jsonObject.get("items").getAsJsonArray().get(0).getAsJsonObject().get("token").getAsString();
-                    return new OperationMessage(true);
-                } else
-                    return new OperationMessage(false, rm.getTextOfXMLTag("wrongCredentialsMsg"));
+    public void postGameSelection(String gameName, String gameType, long duration, int mistakes) {
+        String jsonBody = "{";
+        jsonBody += "\"language\": \"" + rm.getSelectedLanguage() + "\", ";
+        if (shapesToken != null && shapesToken.length() > 0)
+            jsonBody += "\"authToken\": \"" + shapesToken + "\", ";
+        jsonBody += GAMESELECTIONEVENT;
+        jsonBody += "\"gameName\": \"" + gameName + "\", ";
+        jsonBody += "\"gameType\": \"" + gameType + "\", ";
+        jsonBody += "\"duration\": " + duration + ", ";
+        jsonBody += "\"mistakes\": " + mistakes + ", ";
+        jsonBody += "\"timestamp\":{\".sv\": \"timestamp\"}}";
 
-            } catch (Exception e) {
-                Logger.getLogger(FirebaseRestAPI.class.getName()).log(Level.SEVERE, null, e);
-                return new OperationMessage(false, rm.getTextOfXMLTag("cannotAccessServerMessage"));
-            }
+        try {
+            Unirest.setTimeouts(100000, 100000);
+            HttpResponse<String> response = Unirest.post(firebaseUrl)
+                    .header("Content-Type", "application/json")
+                    .body(jsonBody).asString();
+        } catch (Exception e) {
+            logger.error(e);
+            Sentry.capture(e);
         }
-    }*/
+    }
+
 }

@@ -6,6 +6,8 @@ import org.scify.talkandplay.utils.ResourceManager;
 import org.scify.talkandplay.utils.TalkAndPlayProfileConfiguration;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -63,11 +65,64 @@ public class Register extends JPanel {
         initButtonBack();
         buttonRegister.setEnabled(false);
 
+        emailField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent documentEvent) {
+                validateButtonRegister();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent documentEvent) {
+                validateButtonRegister();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent documentEvent) {
+                validateButtonRegister();
+            }
+        });
+
+        passwordField1.setTransferHandler(null);
+        passwordField2.setTransferHandler(null);
+
+        passwordField1.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent documentEvent) {
+                validateButtonRegister();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent documentEvent) {
+                validateButtonRegister();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent documentEvent) {
+                validateButtonRegister();
+            }
+        });
+
+        passwordField2.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent documentEvent) {
+                validateButtonRegister();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent documentEvent) {
+                validateButtonRegister();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent documentEvent) {
+                validateButtonRegister();
+            }
+        });
+
         emailField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 super.keyPressed(e);
-                validateButtonRegister();
             }
         });
 
@@ -75,7 +130,6 @@ public class Register extends JPanel {
             @Override
             public void keyReleased(KeyEvent e) {
                 super.keyPressed(e);
-                validateButtonRegister();
             }
         });
 
@@ -83,7 +137,6 @@ public class Register extends JPanel {
             @Override
             public void keyReleased(KeyEvent e) {
                 super.keyPressed(e);
-                validateButtonRegister();
             }
         });
     }
@@ -92,7 +145,7 @@ public class Register extends JPanel {
         String email = emailField.getText().trim();
         String password = String.valueOf(passwordField1.getPassword()).trim();
         String passwordConfirmation = String.valueOf(passwordField2.getPassword()).trim();
-        if (email.length() <= 3 || !email.contains("@") || !password.equals(passwordConfirmation) || !password.matches(passwordPattern))
+        if (email.length() <= 5 || !email.contains("@") || !email.contains(".") || !password.equals(passwordConfirmation) || !password.matches(passwordPattern))
             buttonRegister.setEnabled(false);
         else
             buttonRegister.setEnabled(true);
