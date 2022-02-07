@@ -290,19 +290,24 @@ public class MainFrame extends javax.swing.JFrame {
             e.printStackTrace();
             Sentry.capture(e);
             // show frame that something went wrong and OK button to continue to the app
-            updater.showUpdateErrorMessageFrame();
+            //updater.showUpdateErrorMessageFrame();
+            continueWithoutUpdate(timeOfInit);
         }
         if (!willUpdate) {
-            contentPanel.removeAll();
-            jLabel2.setText(rm.getTextOfXMLTag("createdBy"));
-            jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
-            if (inLoginMode)
-                contentPanel.add(new Login(this), BorderLayout.CENTER);
-            else
-                contentPanel.add(new MainPanel(this, timeOfInit), BorderLayout.CENTER);
-            revalidate();
-            repaint();
+            continueWithoutUpdate(timeOfInit);
         }
+    }
+
+    protected void continueWithoutUpdate(long timeOfInit) {
+        contentPanel.removeAll();
+        jLabel2.setText(rm.getTextOfXMLTag("createdBy"));
+        jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
+        if (inLoginMode)
+            contentPanel.add(new Login(this), BorderLayout.CENTER);
+        else
+            contentPanel.add(new MainPanel(this, timeOfInit), BorderLayout.CENTER);
+        revalidate();
+        repaint();
     }
 
     public void changePanel(JPanel newPanel) {

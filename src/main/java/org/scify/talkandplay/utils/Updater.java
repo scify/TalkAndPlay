@@ -187,9 +187,8 @@ public class Updater {
         System.exit(0);
     }
 
-    public boolean hasUpdate() throws IOException, JDOMException {
-        return false;
-        /*boolean hasUpdate = false;
+    public boolean hasUpdate() throws Exception {
+        boolean hasUpdate = false;
 
         URL url = new URL(properties.getVersionFileUrl());
         File file = new File(properties.getTmpFolder() + File.separator + properties.getPropertiesFile());
@@ -203,14 +202,14 @@ public class Updater {
 
             String serverVersion = configurationFile.getRootElement().getChildText("version");
 
-            logger.debug("Remote version("+ properties.getVersionFileUrl() + "):\t" + serverVersion);
-            logger.debug("Local version:\t" + properties.getVersion());
+            logger.info("Remote version("+ properties.getVersionFileUrl() + "):\t" + serverVersion);
+            logger.info("Local version:\t" + properties.getVersion());
 
             if (Double.parseDouble(properties.getVersion()) < Double.parseDouble(serverVersion)) {
                 hasUpdate = true;
             }
         }
 
-        return hasUpdate;*/
+        return hasUpdate;
     }
 }
