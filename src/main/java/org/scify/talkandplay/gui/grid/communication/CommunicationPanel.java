@@ -32,6 +32,7 @@ import org.scify.talkandplay.models.Tile;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.CategoryService;
 import org.scify.talkandplay.services.SensorService;
+import org.scify.talkandplay.utils.FirebaseRestAPI;
 import org.scify.talkandplay.utils.ImageResource;
 import org.scify.talkandplay.utils.ResourceType;
 
@@ -186,12 +187,17 @@ public class CommunicationPanel extends BaseGridPanel {
      * @throws IOException
      */
     private JPanel createCategoryItem(final Category category) throws IOException {
-        JPanel panel = tileCreator.create(category.getName(),
+        String categoryName = category.getName();
+        String parentCategoryName = category.getParentCategory().getName();
+
+
+        JPanel panel = tileCreator.create(categoryName,
                 category.getImage(),
                 category.getSound(),
                 new TileAction() {
                     @Override
                     public void act() {
+                        FirebaseRestAPI.getInstance().postCommunicationCategorySelection(categoryName, parentCategoryName);
                         selector.cancel();
                         currentCategory = category;
                     }

@@ -19,6 +19,7 @@ public class FirebaseRestAPI {
     protected Logger logger = Logger.getLogger(FirebaseRestAPI.class);
     protected static String SHAPESLOGINEVENT = "\"eventType\": \"SHAPES_LOGIN\", ";
     protected static String SHAPESLOGOUTEVENT = "\"eventType\": \"SHAPES_LOGOUT\", ";
+    protected static String COMMUNICATIONCATEGORYEVENT = "\"eventType\": \"COMMUNICATION_CATEGORY_EVENT\", ";
 
 
     public FirebaseRestAPI() {
@@ -96,6 +97,27 @@ public class FirebaseRestAPI {
                 logger.error(e);
                 Sentry.capture(e);
             }
+        }
+    }
+
+    public void postCommunicationCategorySelection(String categoryName, String parentCategoryName) {
+        String jsonBody = "{";
+        jsonBody += "\"language\": \"" + rm.getSelectedLanguage() + "\", ";
+        if (shapesToken.length() > 0)
+            jsonBody += "\"authToken\": \"" + shapesToken + "\", ";
+        jsonBody += COMMUNICATIONCATEGORYEVENT;
+        jsonBody += "\"categoryName\": \"" + categoryName + "\", ";
+        jsonBody += "\"parentCategoryName\": \"" + parentCategoryName + "\", ";
+        jsonBody += "\"timestamp\":{\".sv\": \"timestamp\"}}";
+
+        try {
+            Unirest.setTimeouts(100000, 100000);
+            HttpResponse<String> response = Unirest.post(firebaseUrl)
+                    .header("Content-Type", "application/json")
+                    .body(jsonBody).asString();
+        } catch (Exception e) {
+            logger.error(e);
+            Sentry.capture(e);
         }
     }
 
