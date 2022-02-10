@@ -5,19 +5,63 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
+import io.sentry.Sentry;
 import org.apache.log4j.Logger;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 
 public class ShapesLoginManager extends LoginManager {
 
     protected Gson g;
     protected final ResourceManager rm;
     protected String token;
+    protected String signInUrl;
+    protected String signUpUrl;
+    protected String XShapesKey;
+    protected boolean inShapesMode;
     protected Logger logger;
 
     public ShapesLoginManager() {
         g = new Gson();
         rm = ResourceManager.getInstance();
         logger = org.apache.log4j.Logger.getLogger(ShapesLoginManager.class);
+        loadPropertiesFile();
+    }
+
+    protected void loadPropertiesFile() {
+        File shapesPropertiesFile = new File("shapes.properties");
+        if (shapesPropertiesFile.exists()) {
+            inShapesMode = true;
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(shapesPropertiesFile));
+                String line = reader.readLine().trim();
+                String[] s = line.split("signIn=");
+                signInUrl = s[1].trim();
+
+                line = reader.readLine().trim();
+                s = line.split("signUp=");
+                signUpUrl = s[1].trim();
+
+                line = reader.readLine().trim();
+                s = line.split("X-Shapes-Key=");
+                XShapesKey = s[1].trim();
+                logger.info("Starting in SHAPES mode");
+
+            } catch (Exception e) {
+                String msg = "Error in shapes.properties file: (" + e.getMessage() + ")";
+                logger.error(msg);
+                Sentry.capture(msg);
+            }
+        } else {
+            logger.info("Starting in NORMAL mode");
+            inShapesMode = false;
+        }
+    }
+
+    public boolean isInShapesMode() {
+        return inShapesMode;
     }
 
     public String getToken() {
@@ -33,9 +77,9 @@ public class ShapesLoginManager extends LoginManager {
         } else {
             try {
                 Unirest.setTimeouts(100000, 100000);
-                HttpResponse<String> response = Unirest.post("https://kubernetes.pasiphae.eu/shapes/asapa/auth/login")
+                HttpResponse<String> response = Unirest.post(signInUrl)
                         .header("Accept", "application/json")
-                        .header("X-Shapes-Key", "7Msbb3w^SjVG%j")
+                        .header("X-Shapes-Key", XShapesKey)
                         .header("Content-Type", "application/json")
                         .body("{ \"email\" : \"" + emailCleaned + "\", \"password\": \"" + passwordCleaned + "\" }")
                         .asString();
@@ -65,9 +109,9 @@ public class ShapesLoginManager extends LoginManager {
         } else {
             try {
                 Unirest.setTimeouts(0, 0);
-                HttpResponse<String> response = Unirest.post("https://kubernetes.pasiphae.eu/shapes/asapa/auth/register")
+                HttpResponse<String> response = Unirest.post(signUpUrl)
                         .header("Accept", "application/json")
-                        .header("X-Shapes-Key", "7Msbb3w^SjVG%j")
+                        .header("X-Shapes-Key", XShapesKey)
                         .header("Content-Type", "application/json")
                         .body("{ \"email\" : \"" + emailCleaned + "\", \"password\": \"" + passwordCleaned + "\" }")
                         .asString();

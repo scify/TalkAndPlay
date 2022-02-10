@@ -49,7 +49,7 @@ public class MainFrame extends javax.swing.JFrame {
         updater = new Updater();
         prop = Properties.getInstance();
         rm = ResourceManager.getInstance();
-        inLoginMode = TalkAndPlayProfileConfiguration.getInstance().getConfigurationHandler().isInLoginMode();
+        inLoginMode = TalkAndPlayProfileConfiguration.getInstance().isInShapesMode();
         initComponents();
         initCustomComponents();
         openLinkToBrowser();

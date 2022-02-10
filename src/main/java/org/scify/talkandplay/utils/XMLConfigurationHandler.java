@@ -55,12 +55,6 @@ public class XMLConfigurationHandler {
 
     protected List<User> users;
 
-    public boolean isInLoginMode() {
-        return isInLoginMode;
-    }
-
-    protected boolean isInLoginMode;
-
     protected CommunicationModule downloadedCommunicationModule;
     protected File downloadedCommunicationCardsFile;
 
@@ -82,7 +76,6 @@ public class XMLConfigurationHandler {
 
     public XMLConfigurationHandler(File dataDir) {
         this.dataDir = dataDir;
-        this.isInLoginMode = false;
         downloadedStimulusReactionGames = new ArrayList<>();
         downloadedSequenceGames = new ArrayList<>();
         downloadedSimilarityGames = new ArrayList<>();
@@ -190,7 +183,6 @@ public class XMLConfigurationHandler {
         this.defaultUser = extractUserFromXml(root.getChild("defaultProfile"), true);
 
         Element userProfilesEl = root.getChild("userProfiles");
-        isInLoginMode = "true".equals(userProfilesEl.getAttributeValue("runInLoginMode"));
         List<Element> usersEl = userProfilesEl.getChildren();
         if (usersEl.isEmpty() && fromInit) {
             Element newUser = createNewProfile(defaultUser.getName());

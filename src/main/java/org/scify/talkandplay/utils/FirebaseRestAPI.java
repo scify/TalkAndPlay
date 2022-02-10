@@ -45,8 +45,9 @@ public class FirebaseRestAPI {
                 String[] s = line.split("firebaseUrl=");
                 firebaseUrl = s[1].trim();
             } catch (Exception e) {
-                logger.error("Error in firebase.properties file");
-                Sentry.capture("Error in firebase.properties file: (" + e.getMessage() + ")");
+                String msg = "Error in firebase.properties file: (" + e.getMessage() + ")";
+                logger.error(msg);
+                Sentry.capture(msg);
             }
         } else {
             String message = "firebase.properties file missing!";

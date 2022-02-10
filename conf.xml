@@ -632,7 +632,7 @@
             </similarityGames>
         </games>
     </defaultProfile>
-    <userProfiles runInLoginMode="false">
+    <userProfiles>
     </userProfiles>
 </profiles>
 

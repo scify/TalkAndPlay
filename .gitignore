@@ -9,5 +9,6 @@ classes/
 *.log
 sentry.properties
 firebase.properties
+shapes.properties
 *.exe
 old/

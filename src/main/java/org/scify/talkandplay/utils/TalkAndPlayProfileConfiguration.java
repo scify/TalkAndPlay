@@ -24,11 +24,22 @@ public class TalkAndPlayProfileConfiguration {
     protected LoginManager loginManager;
     protected static TalkAndPlayProfileConfiguration instance;
 
+    public boolean isShapesMode() {
+        return shapesMode;
+    }
+
+    protected boolean shapesMode;
+
     public TalkAndPlayProfileConfiguration(File dataDir) {
         this.dataDir = dataDir;
         loginManager = new ShapesLoginManager();
+        shapesMode = ((ShapesLoginManager)loginManager).isInShapesMode();
         xmlConfigurationHandler = null;
         instance = this;
+    }
+
+    public boolean isInShapesMode() {
+        return shapesMode;
     }
     
     public XMLConfigurationHandler getConfigurationHandler()
