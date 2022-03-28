@@ -78,6 +78,12 @@ public class CategoryService {
     public void save(Category oldCategory, Category newCategory, User user) throws Exception {
         if (oldCategory == null) {
             insertAsNewCategory(newCategory, user);
+        } else if (oldCategory.getParentCategory() == null && newCategory.getParentCategory() == null) {
+            user.getCommunicationModule().alterCategoryName(oldCategory.getNameUnmodified(), newCategory.getNameUnmodified());
+            oldCategory.setName(newCategory.getNameUnmodified());
+            oldCategory.setEnabled(newCategory.isEnabled());
+            oldCategory.setImage(newCategory.getImage());
+            oldCategory.setSound(newCategory.getSound());
         } else if ((oldCategory.getParentCategory() == null && newCategory.getParentCategory() != null) ||
                 (oldCategory.getParentCategory() != null && newCategory.getParentCategory() == null) ||
                 (!oldCategory.getParentCategory().getNameUnmodified().equals(newCategory.getParentCategory().getNameUnmodified()))) {

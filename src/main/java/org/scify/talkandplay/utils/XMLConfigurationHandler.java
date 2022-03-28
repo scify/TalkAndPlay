@@ -189,18 +189,22 @@ public class XMLConfigurationHandler {
             userProfilesEl.addContent(newUser);
             needsSave = true;
         }
+        imageAndSoundResources = new ArrayList();
         for (int i = 0; i < usersEl.size(); i++) {
-            imageAndSoundResources = new ArrayList();
+
             User user = extractUserFromXml(usersEl.get(i), false);
             users.add(user);
-            userFiles.put(user.getName(), imageAndSoundResources);
+            List<MultimediaResource> userImageAndSoundResources = userFiles.get(user.getName());
+            for (MultimediaResource resource: userImageAndSoundResources) {
+                imageAndSoundResources.add(resource);
+            }
         }
 
         return needsSave;
     }
 
     protected User extractUserFromXml(Element userEl, boolean isDefault) {
-        imageAndSoundResources = new ArrayList();
+        ArrayList<MultimediaResource> imageAndSoundResources = new ArrayList();
 
         String userName = userEl.getChildText("name");
         ImageResource imageResource = extractImageResource(userEl.getChild("image"));
@@ -225,7 +229,8 @@ public class XMLConfigurationHandler {
 
         Element games = userEl.getChild("games");
         user.setGameModule(extractGameModule(games, isDefault));
-
+        if (!isDefault)
+            userFiles.put(user.getName(), imageAndSoundResources);
         return user;
     }
 
@@ -808,6 +813,8 @@ public class XMLConfigurationHandler {
         for (Map.Entry<String, List<MultimediaResource>> entry : userFiles.entrySet()) {
             if (entry.getKey().equals(username)) {
                 for (MultimediaResource resource : entry.getValue()) {
+                    if (resource == null)
+                        return true;
                     File file = rm.getFileOfResource(resource.getPath(), resource.getResourceType());
                     if (file == null || !file.isFile()) {
                         return true;
@@ -829,9 +836,11 @@ public class XMLConfigurationHandler {
         for (Map.Entry<String, List<MultimediaResource>> entry : userFiles.entrySet()) {
             if (entry.getKey().equals(username)) {
                 for (MultimediaResource resource : entry.getValue()) {
-                    File file = rm.getFileOfResource(resource.getPath(), resource.getResourceType());
-                    if (file == null || !file.isFile()) {
-                        brokenFiles.add(resource.getPath());
+                    if (resource != null) {
+                        File file = rm.getFileOfResource(resource.getPath(), resource.getResourceType());
+                        if (file == null || !file.isFile()) {
+                            brokenFiles.add(resource.getPath());
+                        }
                     }
                 }
             }
