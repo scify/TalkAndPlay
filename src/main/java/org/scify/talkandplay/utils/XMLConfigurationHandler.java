@@ -96,13 +96,13 @@ public class XMLConfigurationHandler {
             loadDownloadedCommunicationCards();
         } catch (Exception e) {
             logger.error(e);
-            Sentry.capture(e);
+            Sentry.captureMessage(e.getMessage());
         }
         try {
             loadDownloadedGameCards();
         } catch (Exception e) {
             logger.error(e);
-            Sentry.capture(e);
+            Sentry.captureMessage(e.getMessage());
         }
 
     }
@@ -131,7 +131,7 @@ public class XMLConfigurationHandler {
 
         } catch (Exception e) {
             e.printStackTrace(System.err);
-            Sentry.capture(e);
+            Sentry.captureMessage(e.getMessage());
         }
     }
 
@@ -938,7 +938,7 @@ public class XMLConfigurationHandler {
             return extractUserFromXml(profile, false);
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            Sentry.capture(ex);
+            Sentry.captureMessage(ex.getMessage());
             return null;
         }
     }
@@ -1320,7 +1320,7 @@ public class XMLConfigurationHandler {
             osw.close();
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(UserFormPanel.class.getName()).log(Level.SEVERE, null, ex);
-            Sentry.capture(ex);
+            Sentry.captureMessage(ex.getMessage());
             return false;
         }
         return true;

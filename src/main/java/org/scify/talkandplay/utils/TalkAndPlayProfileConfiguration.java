@@ -30,10 +30,16 @@ public class TalkAndPlayProfileConfiguration {
 
     protected boolean shapesMode;
 
-    public TalkAndPlayProfileConfiguration(File dataDir) {
+    public TalkAndPlayProfileConfiguration(File dataDir, ParametersFromRestAPI parametersFromRestAPI) {
         this.dataDir = dataDir;
         loginManager = new ShapesLoginManager();
         shapesMode = ((ShapesLoginManager)loginManager).isInShapesMode();
+        if (shapesMode && parametersFromRestAPI != null) {
+            ((ShapesLoginManager) loginManager).setSignInUrl(parametersFromRestAPI.shapesSignInUrl);
+            ((ShapesLoginManager) loginManager).setSignUpUrl(parametersFromRestAPI.shapesSignUpUrl);
+            ((ShapesLoginManager) loginManager).setXShapesKey(parametersFromRestAPI.shapesKey);
+
+        }
         xmlConfigurationHandler = null;
         instance = this;
     }

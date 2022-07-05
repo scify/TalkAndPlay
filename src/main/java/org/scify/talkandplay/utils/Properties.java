@@ -18,6 +18,10 @@ package org.scify.talkandplay.utils;
 import java.io.File;
 import java.net.URLDecoder;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
 import io.sentry.Sentry;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -27,7 +31,7 @@ import org.apache.log4j.PropertyConfigurator;
 
 /**
  * import org.jdom.input.SAXBuilder;
- *
+ * <p>
  * /**
  * Holds the properties of the application
  *
@@ -41,13 +45,21 @@ public class Properties {
     private String propertiesFile;
     private String applicationFolder;
 
+    private String environment;
+
+    private String restAPIParametersUrl;
+
+    private String restAPIStorageUrl;
+
     private Document configurationFile;
 
     protected static Properties instance;
+
+    protected static ParametersFromRestAPI parametersFromRestAPI;
     static Logger logger = Logger.getLogger(Properties.class);
 
     public static Properties getInstance() {
-        if(instance == null)
+        if (instance == null)
             instance = new Properties();
         return instance;
     }
@@ -65,7 +77,6 @@ public class Properties {
             parseXML();
         } catch (Exception e) {
             e.printStackTrace(System.err);
-            Sentry.capture(e);
         }
     }
 
@@ -76,6 +87,36 @@ public class Properties {
         setVersionFileUrl(properties.getChildText("versionFileUrl"));
         setPropertiesFile(properties.getChildText("propertiesFile"));
         setZipUrl(properties.getChildText("zipUrl"));
+        environment = properties.getChildText("environment");
+        restAPIParametersUrl = properties.getChildText("restAPIParametersUrl");
+        restAPIStorageUrl = properties.getChildText("restAPIStorageUrl");
+        parametersFromRestAPI = null;
+    }
+
+    public ParametersFromRestAPI getParametersFromRestAPI() {
+        if (parametersFromRestAPI != null)
+            return parametersFromRestAPI;
+
+        try {
+            Unirest.setTimeouts(100000, 100000);
+            HttpResponse<String> response = Unirest.get(restAPIParametersUrl)
+                    .header("Accept", "application/json")
+                    .header("Content-Type", "application/json")
+                    .asString();
+            JsonObject jsonObject = JsonParser.parseString(response.getBody()).getAsJsonObject();
+            String shapesSignInUrl = jsonObject.get("shapes_auth_url_login").getAsString();
+            String shapesSignUpUrl = jsonObject.get("shapes_auth_url_register").getAsString();
+            String shapesKey = jsonObject.get("shapes_x_key").getAsString();
+            String sentryDSN = jsonObject.get("sentry_dsn").getAsString();
+            String firebaseUrl = jsonObject.get("firebase_url").getAsString();
+
+            ParametersFromRestAPI ret = new ParametersFromRestAPI(shapesSignInUrl, shapesSignUpUrl, shapesKey, sentryDSN, firebaseUrl);
+            parametersFromRestAPI = ret;
+            return ret;
+        } catch (Exception e) {
+            logger.error("Retrieving parameters from rest API failed with error: (" + e.getMessage() + ")");
+            return null;
+        }
     }
 
     public String getVersion() {
@@ -116,5 +157,13 @@ public class Properties {
 
     public String getApplicationFolder() {
         return applicationFolder;
+    }
+
+    public String getEnvironment() {
+        return environment;
+    }
+
+    public String getRestAPIStorageUrl() {
+        return restAPIStorageUrl;
     }
 }

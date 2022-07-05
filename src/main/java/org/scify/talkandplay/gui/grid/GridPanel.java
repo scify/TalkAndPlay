@@ -139,7 +139,7 @@ public class GridPanel extends BaseGridPanel {
             new CommunicationPanel(user, parent);
         } catch (IOException ex) {
             Logger.getLogger(GridPanel.class.getName()).log(Level.SEVERE, null, ex);
-            Sentry.capture(ex);
+            Sentry.captureMessage(ex.getMessage());
         }
     }
 
@@ -148,7 +148,7 @@ public class GridPanel extends BaseGridPanel {
             new EntertainmentPanel(user, parent);
         } catch (Exception ex) {
             Logger.getLogger(GridPanel.class.getName()).log(Level.SEVERE, null, ex);
-            Sentry.capture(ex);
+            Sentry.captureMessage(ex.getMessage());
         }
     }
 
@@ -157,7 +157,7 @@ public class GridPanel extends BaseGridPanel {
             new GamesPanel(user, parent);
         } catch (Exception ex) {
             Logger.getLogger(GridPanel.class.getName()).log(Level.SEVERE, null, ex);
-            Sentry.capture(ex);
+            Sentry.captureMessage(ex.getMessage());
         }
     }
 

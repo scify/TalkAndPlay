@@ -28,6 +28,8 @@ import javafx.application.Platform;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.scify.talkandplay.gui.helpers.UIConstants;
+import org.scify.talkandplay.utils.ParametersFromRestAPI;
+import org.scify.talkandplay.utils.Properties;
 import org.scify.talkandplay.utils.TalkAndPlayProfileConfiguration;
 
 public class ApplicationLauncher {
@@ -38,9 +40,20 @@ public class ApplicationLauncher {
         //PropertiesConfigurator is used to configure logger from properties file
         PropertyConfigurator.configure("log4j.properties");
         //Log in console in and log file
-        logger.debug("Log4j appender configuration is successful !!");
+        logger.debug("Log4j appender configuration is successful !");
 
-        Sentry.init();
+        Properties prop = Properties.getInstance();
+        ParametersFromRestAPI parametersFromRestAPI = prop.getParametersFromRestAPI();
+
+        //Sentry Init
+        Sentry.init(options -> {
+            if (parametersFromRestAPI == null) {
+                options.setDsn("https://64881e33d91649799226177f572b5e16@sentry.scify.org/15");
+            } else
+                options.setDsn(parametersFromRestAPI.sentryDSN);
+            options.setEnvironment(prop.getEnvironment());
+            options.setRelease(prop.getVersion());
+        });
         setUI();
 
         String dataPath = System.getProperty("user.home") + File.separator + "Talk and Play";
@@ -48,7 +61,7 @@ public class ApplicationLauncher {
         if (!dataDir.exists())
             dataDir.mkdir();
 
-        talkAndPlayProfileConfiguration = new TalkAndPlayProfileConfiguration(dataDir);
+        talkAndPlayProfileConfiguration = new TalkAndPlayProfileConfiguration(dataDir, parametersFromRestAPI);
 
         MainFrame mainFrame = new MainFrame();
         mainFrame.setLocationRelativeTo(null);

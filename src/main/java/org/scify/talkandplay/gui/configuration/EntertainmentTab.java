@@ -299,7 +299,7 @@ public class EntertainmentTab extends javax.swing.JPanel {
                 parent.displayMessage(rm.getTextOfXMLTag("changesSaved"));
             } catch (Exception ex) {
                 Logger.getLogger(EntertainmentTab.class.getName()).log(Level.SEVERE, null, ex);
-                Sentry.capture(ex);
+                Sentry.captureMessage(ex.getMessage());
             }
         }
     }//GEN-LAST:event_saveButtonMouseClicked

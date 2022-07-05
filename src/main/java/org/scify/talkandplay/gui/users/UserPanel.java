@@ -142,7 +142,7 @@ public class UserPanel extends javax.swing.JPanel {
                             parent.changePanel(new MainPanel(parent));
                         } catch (Exception ex) {
                             Logger.getLogger(UserPanel.class.getName()).log(Level.SEVERE, null, ex);
-                            Sentry.capture(ex);
+                            Sentry.captureMessage(ex.getMessage());
                         }
                     }
                 }

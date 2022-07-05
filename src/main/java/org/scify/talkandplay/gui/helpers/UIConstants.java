@@ -86,7 +86,7 @@ public class UIConstants {
             return new File(UIConstants.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getAbsolutePath() + File.separator;
         } catch (URISyntaxException ex) {
             Logger.getLogger(UIConstants.class.getName()).log(Level.SEVERE, null, ex);
-            Sentry.capture(ex);
+            Sentry.captureMessage(ex.getMessage());
             return "";
         }
     }

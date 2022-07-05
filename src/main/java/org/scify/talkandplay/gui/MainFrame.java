@@ -27,7 +27,6 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.UserService;
 import io.sentry.Sentry;
@@ -45,11 +44,13 @@ public class MainFrame extends javax.swing.JFrame {
     protected static String REGISTEREDUSERNAME = "registeredUserTMP";
     
     public MainFrame() {
-        deleteRegisteredUserFromXML();
         updater = new Updater();
         prop = Properties.getInstance();
         rm = ResourceManager.getInstance();
         inLoginMode = TalkAndPlayProfileConfiguration.getInstance().isInShapesMode();
+        if (prop.getParametersFromRestAPI() != null)
+            new FirebaseRestAPI(prop.getParametersFromRestAPI().firebaseUrl, prop.getRestAPIStorageUrl(), prop.getVersion());
+
         initComponents();
         initCustomComponents();
         openLinkToBrowser();
@@ -222,7 +223,7 @@ public class MainFrame extends javax.swing.JFrame {
                 us.createUserAsCopyOfDefaultUser(REGISTEREDUSERNAME);
             } catch (Exception ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                Sentry.capture(ex);
+                Sentry.captureMessage(ex.getMessage());
             }
             registeredUserFrame = new GridFrame(REGISTEREDUSERNAME);
             registeredUserFrame.setLocationRelativeTo(null);
@@ -237,6 +238,7 @@ public class MainFrame extends javax.swing.JFrame {
                     logoutAsRegisteredUser();
                 }
             });
+            FirebaseRestAPI.getInstance().updateShapesToken();
             FirebaseRestAPI.getInstance().postShapesLogin();
         } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -251,7 +253,7 @@ public class MainFrame extends javax.swing.JFrame {
                 us.delete(registeredUser);
         } catch (Exception ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            Sentry.capture(ex);
+            Sentry.captureMessage(ex.getMessage());
         }
     }
 
@@ -288,7 +290,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Sentry.capture(e);
+            Sentry.captureMessage(e.getMessage());
             // show frame that something went wrong and OK button to continue to the app
             //updater.showUpdateErrorMessageFrame();
             continueWithoutUpdate(timeOfInit);
@@ -302,6 +304,7 @@ public class MainFrame extends javax.swing.JFrame {
         contentPanel.removeAll();
         jLabel2.setText(rm.getTextOfXMLTag("createdBy"));
         jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
+        deleteRegisteredUserFromXML();
         if (inLoginMode)
             contentPanel.add(new Login(this), BorderLayout.CENTER);
         else
@@ -344,7 +347,7 @@ public class MainFrame extends javax.swing.JFrame {
                         Desktop.getDesktop().browse(new URI("http://scify.org"));
                     } catch (Exception ex) {
                         Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        Sentry.capture(ex);
+                        Sentry.captureMessage(ex.getMessage());
                     }
                 }
             }
@@ -358,7 +361,7 @@ public class MainFrame extends javax.swing.JFrame {
                         Desktop.getDesktop().browse(new URI("http://www.snf.org/"));
                     } catch (Exception ex) {
                         Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        Sentry.capture(ex);
+                        Sentry.captureMessage(ex.getMessage());
                     }
                 }
             }

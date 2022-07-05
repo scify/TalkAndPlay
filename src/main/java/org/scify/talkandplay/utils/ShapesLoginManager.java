@@ -17,8 +17,12 @@ public class ShapesLoginManager extends LoginManager {
     protected Gson g;
     protected final ResourceManager rm;
     protected String token;
+
+
+
     protected String signInUrl;
     protected String signUpUrl;
+
     protected String XShapesKey;
     protected boolean inShapesMode;
     protected Logger logger;
@@ -31,10 +35,11 @@ public class ShapesLoginManager extends LoginManager {
     }
 
     protected void loadPropertiesFile() {
-        File shapesPropertiesFile = new File("shapes.properties");
+        File shapesPropertiesFile = new File("shapes.mode");
         if (shapesPropertiesFile.exists()) {
             inShapesMode = true;
-            try {
+            logger.info("Starting in SHAPES mode");
+            /*try {
                 BufferedReader reader = new BufferedReader(new FileReader(shapesPropertiesFile));
                 String line = reader.readLine().trim();
                 String[] s = line.split("signIn=");
@@ -47,13 +52,12 @@ public class ShapesLoginManager extends LoginManager {
                 line = reader.readLine().trim();
                 s = line.split("X-Shapes-Key=");
                 XShapesKey = s[1].trim();
-                logger.info("Starting in SHAPES mode");
 
             } catch (Exception e) {
                 String msg = "Error in shapes.properties file: (" + e.getMessage() + ")";
                 logger.error(msg);
-                Sentry.capture(msg);
-            }
+                Sentry.captureMessage(msg);
+            }*/
         } else {
             logger.info("Starting in NORMAL mode");
             inShapesMode = false;
@@ -134,5 +138,16 @@ public class ShapesLoginManager extends LoginManager {
             }
         }
 
+    }
+
+    public void setXShapesKey(String XShapesKey) {
+        this.XShapesKey = XShapesKey;
+    }
+    public void setSignInUrl(String signInUrl) {
+        this.signInUrl = signInUrl;
+    }
+
+    public void setSignUpUrl(String signUpUrl) {
+        this.signUpUrl = signUpUrl;
     }
 }

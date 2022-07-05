@@ -74,7 +74,7 @@ public class Updater {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Sentry.capture(e);
+            Sentry.captureMessage(e.getMessage());
             // show frame that something went wrong and OK button to continue to the app
             if (updaterFrame != null)
                 updaterFrame.dispose();
@@ -97,7 +97,7 @@ public class Updater {
                     closeApp();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Sentry.capture(e);
+                    Sentry.captureMessage(e.getMessage());
                     showUpdateErrorMessageFrame();
                 }
             }
