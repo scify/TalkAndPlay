@@ -238,8 +238,11 @@ public class MainFrame extends javax.swing.JFrame {
                     logoutAsRegisteredUser();
                 }
             });
-            FirebaseRestAPI.getInstance().updateShapesToken();
-            FirebaseRestAPI.getInstance().postShapesLogin();
+            FirebaseRestAPI firebaseRestAPI = FirebaseRestAPI.getInstance();
+            if (firebaseRestAPI != null) {
+                firebaseRestAPI.updateShapesToken();
+                firebaseRestAPI.postShapesLogin();
+            }
         } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -258,7 +261,9 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     public void logoutAsRegisteredUser() {
-        FirebaseRestAPI.getInstance().postShapesLogout();
+        FirebaseRestAPI firebaseRestAPI = FirebaseRestAPI.getInstance();
+        if (firebaseRestAPI != null)
+            firebaseRestAPI.postShapesLogout();
         deleteRegisteredUserFromXML();
         registeredUserFrame.setVisible(false);
         registeredUserFrame.dispose();

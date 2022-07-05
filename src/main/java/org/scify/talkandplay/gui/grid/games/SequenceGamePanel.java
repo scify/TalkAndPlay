@@ -139,7 +139,9 @@ public class SequenceGamePanel extends BaseGamePanel {
                 if (keyCode == KeyEvent.VK_ESCAPE) {
                     long currentTime = new Date().getTime();
                     long seconds = (currentTime - startTime) / 1000;
-                    FirebaseRestAPI.getInstance().postGameSelection(game.getName(), gameType, seconds, -1);
+                    FirebaseRestAPI firebaseRestAPI = FirebaseRestAPI.getInstance();
+                    if (firebaseRestAPI != null)
+                        firebaseRestAPI.postGameSelection(game.getName(), gameType, seconds, -1);
                     exit();
                 } else {
                     Sensor sensor = new KeyboardSensor(keyCode, String.valueOf(evt.getKeyChar()), "keyboard");
@@ -248,7 +250,9 @@ public class SequenceGamePanel extends BaseGamePanel {
                 rm.getTextOfXMLTag("numberOfMistakes") + ": " + mistakes +
                 "</html>");
         final ControlsPanel controls = new ControlsPanel(user, this);
-        FirebaseRestAPI.getInstance().postGameSelection(game.getName(), gameType, seconds, mistakes);
+        FirebaseRestAPI firebaseRestAPI = FirebaseRestAPI.getInstance();
+        if (firebaseRestAPI != null)
+            firebaseRestAPI.postGameSelection(game.getName(), gameType, seconds, mistakes);
         bottomMsgPanel.setVisible(false);
         tileCreator.playAudio(getWinSound(), new TileAction() {
             @Override

@@ -197,7 +197,9 @@ public class CommunicationPanel extends BaseGridPanel {
                 new TileAction() {
                     @Override
                     public void act() {
-                        FirebaseRestAPI.getInstance().postCommunicationCategorySelection(categoryName, parentCategoryName);
+                        FirebaseRestAPI firebaseRestAPI = FirebaseRestAPI.getInstance();
+                        if (firebaseRestAPI != null)
+                            firebaseRestAPI.postCommunicationCategorySelection(categoryName, parentCategoryName);
                         selector.cancel();
                         currentCategory = category;
                     }

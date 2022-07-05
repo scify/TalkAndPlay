@@ -188,7 +188,9 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
                 if (keyCode == KeyEvent.VK_ESCAPE) {
                     long currentTime = new Date().getTime();
                     long seconds = (currentTime - startTime) / 1000;
-                    FirebaseRestAPI.getInstance().postGameSelection(game.getName(), "stimulusReactionGame", seconds, -1);
+                    FirebaseRestAPI firebaseRestAPI = FirebaseRestAPI.getInstance();
+                    if (firebaseRestAPI != null)
+                        firebaseRestAPI.postGameSelection(game.getName(), "stimulusReactionGame", seconds, -1);
                     exit();
                 }
             }
@@ -217,7 +219,9 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
         long currentTime = new Date().getTime();
         long seconds = (currentTime - startTime) / 1000;
         setTopMessage(rm.getTextOfXMLTag("playingTime") + ": " + seconds);
-        FirebaseRestAPI.getInstance().postGameSelection(game.getName(), "stimulusReactionGame", seconds, 0);
+        FirebaseRestAPI firebaseRestAPI = FirebaseRestAPI.getInstance();
+        if (firebaseRestAPI != null)
+            firebaseRestAPI.postGameSelection(game.getName(), "stimulusReactionGame", seconds, 0);
 
         tileCreator.playAudio(getWinSound().getSound().getAbsolutePath());
 
