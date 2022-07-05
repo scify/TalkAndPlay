@@ -187,29 +187,33 @@ public class Updater {
         System.exit(0);
     }
 
-    public boolean hasUpdate() throws Exception {
+    public boolean hasUpdate() {
         boolean hasUpdate = false;
 
-        URL url = new URL(properties.getVersionFileUrl());
-        File file = new File(properties.getTmpFolder() + File.separator + properties.getPropertiesFile());
+        try {
+            URL url = new URL(properties.getVersionFileUrl());
+            File file = new File(properties.getTmpFolder() + File.separator + properties.getPropertiesFile());
 
-        FileUtils.copyURLToFile(url, file);
+            FileUtils.copyURLToFile(url, file);
 
-        if (file.exists() && !file.isDirectory()) {
+            if (file.exists() && !file.isDirectory()) {
 
-            SAXBuilder builder = new SAXBuilder();
-            Document configurationFile = builder.build(file);
+                SAXBuilder builder = new SAXBuilder();
+                Document configurationFile = builder.build(file);
 
-            String serverVersion = configurationFile.getRootElement().getChildText("version");
+                String serverVersion = configurationFile.getRootElement().getChildText("version");
 
-            logger.info("Remote version("+ properties.getVersionFileUrl() + "):\t" + serverVersion);
-            logger.info("Local version:\t" + properties.getVersion());
+                logger.info("Remote version(" + properties.getVersionFileUrl() + "):\t" + serverVersion);
+                logger.info("Local version:\t" + properties.getVersion());
 
-            if (Double.parseDouble(properties.getVersion()) < Double.parseDouble(serverVersion)) {
-                hasUpdate = true;
+                if (Double.parseDouble(properties.getVersion()) < Double.parseDouble(serverVersion)) {
+                    hasUpdate = true;
+                }
             }
+            return hasUpdate;
+        } catch (Exception e) {
+            logger.info("Could not connect to updater");
+            return false;
         }
-
-        return hasUpdate;
     }
 }
