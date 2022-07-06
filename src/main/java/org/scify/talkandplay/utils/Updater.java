@@ -20,15 +20,12 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.jdom.Document;
-import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.scify.talkandplay.gui.UpdateErrorMessageFrame;
 import org.scify.talkandplay.gui.UpdaterFrame;
 import org.scify.talkandplay.gui.WindowsAdminMessageFrame;
-
 import java.io.*;
 import java.net.URL;
-import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.attribute.PosixFilePermission;
 import java.util.ArrayList;
@@ -180,8 +177,9 @@ public class Updater {
                 logger.debug("Overriding: " + targetFileName + "\twith:\t" + source_file);
 
                 if (source.isFile()) {
-                    FileUtils.deleteQuietly(dest);
-                    FileUtils.copyFile(source, dest);
+                    //FileUtils.deleteQuietly(dest);
+                    //FileUtils.copyFile(source, dest);
+                    copyFile(source, dest);
                     if (dest.getName().contains("run.sh")) {
                         Set<PosixFilePermission> perms = new HashSet<>();
                         perms.add(PosixFilePermission.OWNER_READ);
@@ -191,12 +189,6 @@ public class Updater {
                     }
                 }
             }
-            try {
-                Thread.sleep(4000);
-            } catch (Exception e) {
-
-            }
-
         }
 
     }
@@ -232,6 +224,23 @@ public class Updater {
         } catch (Exception e) {
             logger.info("Could not connect to updater");
             return false;
+        }
+    }
+
+    protected void copyFile(File source, File dest) {
+        try {
+            InputStream is = new FileInputStream(source);
+            OutputStream os = new FileOutputStream(dest, false);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = is.read(buffer)) > 0) {
+                os.write(buffer, 0, length);
+            }
+            is.close();
+            os.close();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            Sentry.captureMessage(e.getMessage());
         }
     }
 }
