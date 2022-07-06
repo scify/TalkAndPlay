@@ -28,7 +28,12 @@ import org.scify.talkandplay.gui.WindowsAdminMessageFrame;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.nio.file.attribute.PosixFilePermission;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -177,8 +182,21 @@ public class Updater {
                 if (source.isFile()) {
                     FileUtils.deleteQuietly(dest);
                     FileUtils.copyFile(source, dest);
+                    if (dest.getName().contains("run.sh")) {
+                        Set<PosixFilePermission> perms = new HashSet<>();
+                        perms.add(PosixFilePermission.OWNER_READ);
+                        perms.add(PosixFilePermission.OWNER_WRITE);
+                        perms.add(PosixFilePermission.OWNER_EXECUTE);
+                        Files.setPosixFilePermissions(dest.toPath(), perms);
+                    }
                 }
             }
+            try {
+                Thread.sleep(4000);
+            } catch (Exception e) {
+
+            }
+
         }
 
     }
