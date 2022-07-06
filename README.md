@@ -22,7 +22,7 @@ In order to build the executable files, run:
 mvn clean package
 ```
 
-This will generate a `target/talkandplay-1.0-SNAPSHOT-jar-with-dependencies.jar` file.
+This will generate a `target/talkandplay-X.Y-SNAPSHOT-jar-with-dependencies.jar` file.
 
 In order to run the file, the **active working directory** must have the following configuration files, as well as the `resources` directory:
 
@@ -31,7 +31,6 @@ resources/
 conf.xml
 log4j.properties
 properties.xml
-sentry.properties
 ```
 
 ## Updater
