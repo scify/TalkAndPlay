@@ -18,6 +18,8 @@ package org.scify.talkandplay.utils;
 import java.io.File;
 import java.net.URLDecoder;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mashape.unirest.http.HttpResponse;
@@ -110,7 +112,26 @@ public class Properties {
             String sentryDSN = jsonObject.get("sentry_dsn").getAsString();
             String firebaseUrl = jsonObject.get("firebase_url").getAsString();
 
-            ParametersFromRestAPI ret = new ParametersFromRestAPI(shapesSignInUrl, shapesSignUpUrl, shapesKey, sentryDSN, firebaseUrl);
+            Announcement announcement = null;
+            if (jsonObject.has("announcement")) {
+                JsonObject announcementJson = jsonObject.get("announcement").getAsJsonObject();
+                int severity = announcementJson.get("severity").getAsInt();
+                String type = announcementJson.get("type").getAsString();
+                String updated_at = announcementJson.get("updated_at").getAsString();
+                announcement = new Announcement(severity, type, updated_at);
+                JsonArray translationsJson = announcementJson.get("translations").getAsJsonArray();
+                for (JsonElement translation: translationsJson) {
+                    JsonObject translationJson = translation.getAsJsonObject();
+                    String title = translationJson.get("title").getAsString();
+                    String message = translationJson.get("message").getAsString();
+                    String link = translationJson.get("link").getAsString();
+                    String language = translationJson.get("language").getAsString();
+                    AnnouncementTranslation announcementTranslation = new AnnouncementTranslation(title, message, link, language);
+                    announcement.addAnnouncementTranslation(language, announcementTranslation);
+                }
+            }
+
+            ParametersFromRestAPI ret = new ParametersFromRestAPI(shapesSignInUrl, shapesSignUpUrl, shapesKey, sentryDSN, firebaseUrl, announcement);
             parametersFromRestAPI = ret;
             return ret;
         } catch (Exception e) {

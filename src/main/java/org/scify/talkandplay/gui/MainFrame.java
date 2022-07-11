@@ -24,9 +24,8 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
+
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.UserService;
 import io.sentry.Sentry;
@@ -387,4 +386,19 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel titlePanel;
     // End of variables declaration//GEN-END:variables
 
+    protected void showInfoBox() {
+        if (prop.getParametersFromRestAPI() != null) {
+            Announcement announcement = prop.getParametersFromRestAPI().announcement;
+            if (announcement != null) {
+                String lang = rm.getSelectedLanguage();
+                if (lang.equals("gr"))
+                    lang = "el";
+                AnnouncementTranslation announcementTranslation = announcement.getAnnouncementTranslation(lang);
+                String infoMessage = announcementTranslation.message;
+                String title = announcementTranslation.title;
+                JOptionPane.showMessageDialog(null, infoMessage, title, JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+
+    }
 }

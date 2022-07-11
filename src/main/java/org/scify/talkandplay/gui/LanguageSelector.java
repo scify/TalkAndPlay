@@ -83,8 +83,8 @@ public class LanguageSelector extends JPanel {
                         flagPanel.setBorder(selectedBorder);
                         selectedFlagPanel = flagPanel;
                         rm.setLanguage(languageId);
-
                     } else {
+                        parent.showInfoBox();
                         parent.languageSelected((new Date()).getTime());
                     }
                 }

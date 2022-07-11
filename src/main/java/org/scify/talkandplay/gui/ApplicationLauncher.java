@@ -44,16 +44,14 @@ public class ApplicationLauncher {
 
         Properties prop = Properties.getInstance();
         ParametersFromRestAPI parametersFromRestAPI = prop.getParametersFromRestAPI();
-
-        //Sentry Init
-        Sentry.init(options -> {
-            if (parametersFromRestAPI == null) {
-                options.setDsn("https://64881e33d91649799226177f572b5e16@sentry.scify.org/15");
-            } else
+        if (parametersFromRestAPI != null) {
+            //Sentry Init
+            Sentry.init(options -> {
                 options.setDsn(parametersFromRestAPI.sentryDSN);
-            options.setEnvironment(prop.getEnvironment());
-            options.setRelease(prop.getVersion());
-        });
+                options.setEnvironment(prop.getEnvironment());
+                options.setRelease(prop.getVersion());
+            });
+        }
         setUI();
 
         String dataPath = System.getProperty("user.home") + File.separator + "Talk and Play";
