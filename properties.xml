@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <properties>
 	<version>4.0</version>
-	<versionFileUrl>https://talkandplay.scify.org/storage/application/properties.xml</versionFileUrl>
+	<versionFileUrl>https://go.scify.gr/talkandplaydownloadproperties</versionFileUrl>
 	<propertiesFile>properties.xml</propertiesFile>
-	<zipUrl>https://go.scify.gr/talkandplaydownloadl</zipUrl>
+	<zipUrl>https://go.scify.gr/talkandplaydownloadzip</zipUrl>
 	<environment>production</environment>
 	<restAPIParametersUrl>https://talkandplay.scify.org/api/desktop-app/options</restAPIParametersUrl>
 	<restAPIStorageUrl>https://talkandplay.scify.org/api/analytics/store</restAPIStorageUrl>
