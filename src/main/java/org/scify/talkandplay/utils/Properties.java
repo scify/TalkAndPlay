@@ -17,6 +17,8 @@ package org.scify.talkandplay.utils;
 
 import java.io.File;
 import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -104,6 +106,7 @@ public class Properties {
             HttpResponse<String> response = Unirest.get(restAPIParametersUrl)
                     .header("Accept", "application/json")
                     .header("Content-Type", "application/json")
+                    .queryString("version", version)
                     .asString();
             JsonObject jsonObject = JsonParser.parseString(response.getBody()).getAsJsonObject();
             String shapesSignInUrl = jsonObject.get("shapes_auth_url_login").getAsString();
@@ -112,26 +115,46 @@ public class Properties {
             String sentryDSN = jsonObject.get("sentry_dsn").getAsString();
             String firebaseUrl = jsonObject.get("firebase_url").getAsString();
 
-            Announcement announcement = null;
-            if (jsonObject.has("announcement")) {
-                JsonObject announcementJson = jsonObject.get("announcement").getAsJsonObject();
-                int severity = announcementJson.get("severity").getAsInt();
-                String type = announcementJson.get("type").getAsString();
-                String updated_at = announcementJson.get("updated_at").getAsString();
-                announcement = new Announcement(severity, type, updated_at);
-                JsonArray translationsJson = announcementJson.get("translations").getAsJsonArray();
-                for (JsonElement translation: translationsJson) {
-                    JsonObject translationJson = translation.getAsJsonObject();
-                    String title = translationJson.get("title").getAsString();
-                    String message = translationJson.get("message").getAsString();
-                    String link = translationJson.get("link").getAsString();
-                    String language = translationJson.get("language").getAsString();
-                    AnnouncementTranslation announcementTranslation = new AnnouncementTranslation(title, message, link, language);
-                    announcement.addAnnouncementTranslation(language, announcementTranslation);
+            List<Announcement> announcements = new ArrayList<>();
+            if (jsonObject.has("announcements")) {
+                JsonArray announcementsJson = jsonObject.get("announcements").getAsJsonArray();
+                for (JsonElement announcementElement: announcementsJson) {
+                    JsonObject announcementJson = announcementElement.getAsJsonObject();
+                    int severity = announcementJson.get("severity").getAsInt();
+                    String type = announcementJson.get("type").getAsString();
+                    String updated_at = announcementJson.get("updated_at").getAsString();
+                    Announcement announcement = new Announcement(severity, type, updated_at);
+                    JsonArray translationsJson = announcementJson.get("translations").getAsJsonArray();
+                    for (JsonElement translation : translationsJson) {
+                        JsonObject translationJson = translation.getAsJsonObject();
+                        String title = "";
+                        JsonElement value = translationJson.get("title");
+                        if (!value.isJsonNull())
+                            title = value.getAsString();
+
+                        String message = "";
+                        value = translationJson.get("message");
+                        if (!value.isJsonNull())
+                            message = value.getAsString();
+
+                        String link = "";
+                        value = translationJson.get("link");
+                        if (!value.isJsonNull())
+                            link = value.getAsString();
+
+                        String language =  "";
+                        value = translationJson.get("language");
+                        if (!value.isJsonNull())
+                            language = value.getAsString();
+
+                        AnnouncementTranslation announcementTranslation = new AnnouncementTranslation(title, message, link, language);
+                        announcement.addAnnouncementTranslation(language, announcementTranslation);
+                    }
+                    announcements.add(announcement);
                 }
             }
 
-            ParametersFromRestAPI ret = new ParametersFromRestAPI(shapesSignInUrl, shapesSignUpUrl, shapesKey, sentryDSN, firebaseUrl, announcement);
+            ParametersFromRestAPI ret = new ParametersFromRestAPI(shapesSignInUrl, shapesSignUpUrl, shapesKey, sentryDSN, firebaseUrl, announcements);
             parametersFromRestAPI = ret;
             return ret;
         } catch (Exception e) {

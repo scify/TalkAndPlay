@@ -388,17 +388,17 @@ public class MainFrame extends javax.swing.JFrame {
 
     protected void showInfoBox() {
         if (prop.getParametersFromRestAPI() != null) {
-            Announcement announcement = prop.getParametersFromRestAPI().announcement;
-            if (announcement != null) {
-                String lang = rm.getSelectedLanguage();
-                if (lang.equals("gr"))
-                    lang = "el";
-                AnnouncementTranslation announcementTranslation = announcement.getAnnouncementTranslation(lang);
-                String infoMessage = announcementTranslation.message;
-                String title = announcementTranslation.title;
-                JOptionPane.showMessageDialog(null, infoMessage, title, JOptionPane.INFORMATION_MESSAGE);
+            if (!prop.getParametersFromRestAPI().announcements.isEmpty()) {
+                for (Announcement announcement: prop.getParametersFromRestAPI().announcements) {
+                    String lang = rm.getSelectedLanguage();
+                    if (lang.equals("gr"))
+                        lang = "el";
+                    AnnouncementTranslation announcementTranslation = announcement.getAnnouncementTranslation(lang);
+                    String infoMessage = announcementTranslation.message;
+                    String title = announcementTranslation.title;
+                    JOptionPane.showMessageDialog(null, infoMessage, title, JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         }
-
     }
 }
