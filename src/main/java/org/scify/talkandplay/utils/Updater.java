@@ -21,6 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.jdom.Document;
 import org.jdom.input.SAXBuilder;
+import org.scify.talkandplay.gui.MainFrame;
 import org.scify.talkandplay.gui.UpdateErrorMessageFrame;
 import org.scify.talkandplay.gui.UpdaterFrame;
 import org.scify.talkandplay.gui.WindowsAdminMessageFrame;
@@ -31,6 +32,10 @@ import java.nio.file.attribute.PosixFilePermission;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -61,34 +66,26 @@ public class Updater {
         this.zipFilePath = properties.getTmpFolder() + File.separator + properties.getZipUrl().substring(index + 1);
     }
 
-    public boolean run() {
+    public void run(MainFrame mainFrame) {
         logger.debug("Current user can write to Application directory? " + FileSystemUtils.canWriteToApplicationDir());
         logger.debug("URL: " + properties.getZipUrl());
         logger.debug("Tmp folder: " + properties.getTmpFolder());
-        try {
-            if (readyForUpdate()) {
-                doUpdate();
-                return true;
-            }
-            else {
-                showWindowsAdminFrame();
-                return false;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Sentry.captureMessage(e.getMessage());
-            // show frame that something went wrong and OK button to continue to the app
-            if (updaterFrame != null)
-                updaterFrame.dispose();
-            showUpdateErrorMessageFrame();
-            return false;
+        /*if (readyForUpdate()) {
+            return doUpdate(mainFrame);
         }
+        else {
+            showWindowsAdminFrame();
+            return false;
+        }*/
+        doUpdate(mainFrame);
+
     }
 
-    public void doUpdate() {
+    public void doUpdate(MainFrame mainFrame) {
         showFrame();
-        Thread thread = new Thread() {
-            public void run  () {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
                 try {
                     URL url = new URL(properties.getZipUrl());
                     logger.debug("Tmp folder: " + properties.getTmpFolder());
@@ -101,9 +98,11 @@ public class Updater {
                     e.printStackTrace();
                     Sentry.captureMessage(e.getMessage());
                     showUpdateErrorMessageFrame();
+                    updaterFrame.dispose();
+                    mainFrame.continueWithoutUpdate();
                 }
             }
-        };
+        });
         thread.start();
     }
 

@@ -7,6 +7,8 @@
     <updateInProgress2>παρακαλώ περιμένετε...</updateInProgress2>
     <updateInProgress3>Η διαδικασία μπορεί να διαρκέσει μερικά λεπτά.</updateInProgress3>
     <updateInProgress4>Mε την ολοκλήρωση θα χρειαστεί να ανοίξετε την εφαρμογή ξανά.</updateInProgress4>
+	<updateError1>Συνέβη ένα λάθος κατά την ενημέρωση της εφαρμογής.</updateError1>
+	<updateError2>Για να συνεχίσετε στην εφαρμογή, παρακαλώ πατήστε ΟΚ.</updateError2>
     <emailLabel>Email</emailLabel>
     <passwordLabel>Κωδικός πρόσβασης</passwordLabel>
     <passwordConfirmationLabel>Επαλήθευση κωδικού πρόσβασης</passwordConfirmationLabel>    

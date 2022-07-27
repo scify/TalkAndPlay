@@ -7,6 +7,8 @@
     <updateInProgress2>Bitte warten...</updateInProgress2>
     <updateInProgress3>Dieser Vorgang kann einige Minuten dauern.</updateInProgress3>
     <updateInProgress4>Nach Fertigstellung müssen Sie die Anwendung erneut starten.</updateInProgress4>
+	<updateError1>There was an error while updating.</updateError1>
+	<updateError2>To continue using previous version, press ΟΚ.</updateError2>
     <emailLabel>Email</emailLabel>
     <passwordLabel>Passwort</passwordLabel>
     <passwordConfirmationLabel>Passwort wiederholen</passwordConfirmationLabel>

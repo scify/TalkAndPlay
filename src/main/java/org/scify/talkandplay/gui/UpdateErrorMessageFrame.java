@@ -30,6 +30,8 @@
  */
 package org.scify.talkandplay.gui;
 
+import org.scify.talkandplay.utils.ResourceManager;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -40,7 +42,10 @@ import java.awt.*;
  */
 public class UpdateErrorMessageFrame extends JFrame {
 
+    protected ResourceManager rm;
+
     public UpdateErrorMessageFrame() {
+        rm = ResourceManager.getInstance();
         initComponents();
         initCustomComponents();
     }
@@ -49,13 +54,13 @@ public class UpdateErrorMessageFrame extends JFrame {
         this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
         JLabel messageLabel = new JLabel();
-        messageLabel.setText("Συνέβη ένα λάθος κατά την ενημέρωση της εφαρμογής.");
+        messageLabel.setText(rm.getTextOfXMLTag("updateError1"));
         messageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         messageLabel.setBorder(new EmptyBorder(10, 0, 10, 0));
         this.getContentPane().add(messageLabel);
 
         JLabel messageLabel2 = new JLabel();
-        messageLabel2.setText("Για να συνεχίσετε στην εφαρμογή, παρακαλώ πατήστε ΟΚ.");
+        messageLabel2.setText(rm.getTextOfXMLTag("updateError2"));
         messageLabel2.setAlignmentX(Component.CENTER_ALIGNMENT);
         messageLabel2.setBorder(new EmptyBorder(10, 0, 10, 0));
         this.getContentPane().add(messageLabel2);

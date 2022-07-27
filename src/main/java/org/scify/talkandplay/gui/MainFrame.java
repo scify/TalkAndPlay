@@ -286,22 +286,19 @@ public class MainFrame extends javax.swing.JFrame {
         repaint();
     }
 
+    protected long timeOfLanguageSelection;
+
     public void languageSelected(long timeOfInit) {
-        boolean willUpdate = false;
-        try {
-            if (updater.hasUpdate()) {
-                willUpdate = updater.run();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Sentry.captureMessage(e.getMessage());
-            // show frame that something went wrong and OK button to continue to the app
-            //updater.showUpdateErrorMessageFrame();
-            continueWithoutUpdate(timeOfInit);
-        }
-        if (!willUpdate) {
-            continueWithoutUpdate(timeOfInit);
-        }
+        timeOfLanguageSelection = timeOfInit;
+        if (updater.hasUpdate())
+            updater.run(this);
+        else
+            continueWithoutUpdate();
+
+    }
+
+    public void continueWithoutUpdate() {
+        continueWithoutUpdate(timeOfLanguageSelection);
     }
 
     protected void continueWithoutUpdate(long timeOfInit) {
