@@ -121,10 +121,6 @@ public class VideoPanel extends BaseMediaPanel {
 
     }
 
-    /*public EmbeddedMediaPlayerComponent getMediaPlayerComponent() {
-        return this.mediaPlayerComponent;
-    }*/
-
     public MediaPlayerPanel getMediaPlayerPanel() {
         return this.mediaPlayerPanel;
     }

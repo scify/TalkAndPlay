@@ -127,7 +127,7 @@ public class Login extends JPanel {
                         Desktop.getDesktop().browse(new URI("http://kubernetes.pasiphae.eu/shapes/asapa/auth/password/recovery"));
                     } catch (Exception ex) {
                         Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        Sentry.captureMessage(ex.getMessage());
+                        Sentry.capture(ex.getMessage());
                     }
                 }
             }

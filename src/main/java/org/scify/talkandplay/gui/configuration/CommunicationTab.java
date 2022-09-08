@@ -247,7 +247,7 @@ public class CommunicationTab extends javax.swing.JPanel {
                             parent.redrawCategoriesDropDown();
                         } catch (Exception ex) {
                             Logger.getLogger(UserPanel.class.getName()).log(Level.SEVERE, null, ex);
-                            Sentry.captureMessage(ex.getMessage());
+                            Sentry.capture(ex.getMessage());
                         }
                     }
                 }

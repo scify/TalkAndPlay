@@ -42,10 +42,7 @@ import org.scify.talkandplay.models.Category;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.services.CategoryService;
 import org.scify.talkandplay.services.UserService;
-import org.scify.talkandplay.utils.ImageResource;
-import org.scify.talkandplay.utils.ResourceManager;
-import org.scify.talkandplay.utils.ResourceType;
-import org.scify.talkandplay.utils.SoundResource;
+import org.scify.talkandplay.utils.*;
 
 public class WordFormPanel extends javax.swing.JPanel {
 
@@ -554,17 +551,19 @@ public class WordFormPanel extends javax.swing.JPanel {
                         audioPlayer.dispose();
                         audioPlayer = null;
                     }
-                    audioPlayer = new MediaPlayer(media);
-                    audioPlayer.setOnEndOfMedia(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (audioPlayer != null) {
-                                audioPlayer.dispose();
-                                audioPlayer = null;
+                    audioPlayer = AudioPlayer.getInstance().getMediaPlayer(media);
+                    if (audioPlayer != null) {
+                        audioPlayer.setOnEndOfMedia(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (audioPlayer != null) {
+                                    audioPlayer.dispose();
+                                    audioPlayer = null;
+                                }
                             }
-                        }
-                    });
-                    audioPlayer.play();
+                        });
+                        audioPlayer.play();
+                    }
                 }
             }
 

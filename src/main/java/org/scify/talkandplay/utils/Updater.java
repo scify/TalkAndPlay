@@ -96,7 +96,7 @@ public class Updater {
                     closeApp();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Sentry.captureMessage(e.getMessage());
+                    Sentry.capture(e.getMessage());
                     showUpdateErrorMessageFrame();
                     updaterFrame.dispose();
                     mainFrame.continueWithoutUpdate();
@@ -239,7 +239,7 @@ public class Updater {
             os.close();
         } catch (Exception e) {
             logger.error(e.getMessage());
-            Sentry.captureMessage(e.getMessage());
+            Sentry.capture(e.getMessage());
         }
     }
 }

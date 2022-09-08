@@ -9,6 +9,7 @@
     <updateInProgress4>On completion you will need to re-open the application.</updateInProgress4>
 	<updateError1>There was an error while updating.</updateError1>
 	<updateError2>To continue using previous version, press ΟΚ.</updateError2>
+    <audioError>Your computer is missing an important file that allows sound to be played. See the installation instructions to easily solve the problem.</audioError>
     <emailLabel>Email</emailLabel>
     <passwordLabel>Password</passwordLabel>
     <passwordConfirmationLabel>Confirm password</passwordConfirmationLabel>

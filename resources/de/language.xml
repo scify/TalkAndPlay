@@ -9,6 +9,7 @@
     <updateInProgress4>Nach Fertigstellung müssen Sie die Anwendung erneut starten.</updateInProgress4>
 	<updateError1>There was an error while updating.</updateError1>
 	<updateError2>To continue using previous version, press ΟΚ.</updateError2>
+    <audioError>Ihrem Computer fehlt eine wichtige Datei, die die Tonwiedergabe ermöglicht. Sehen Sie sich die Installationsanweisungen an, um das Problem einfach zu lösen.</audioError>
     <emailLabel>Email</emailLabel>
     <passwordLabel>Passwort</passwordLabel>
     <passwordConfirmationLabel>Passwort wiederholen</passwordConfirmationLabel>

@@ -9,6 +9,7 @@
     <updateInProgress4>Mε την ολοκλήρωση θα χρειαστεί να ανοίξετε την εφαρμογή ξανά.</updateInProgress4>
 	<updateError1>Συνέβη ένα λάθος κατά την ενημέρωση της εφαρμογής.</updateError1>
 	<updateError2>Για να συνεχίσετε στην εφαρμογή, παρακαλώ πατήστε ΟΚ.</updateError2>
+    <audioError>Από τον υπολογιστή σας λείπει ένα σημαντικό αρχείο Που επιτρέπει να ακούγεται ο ήχος.  Δείτε τις οδηγίες εγκατάστασης για να λύσετε εύκολα το πρόβλημα.</audioError>
     <emailLabel>Email</emailLabel>
     <passwordLabel>Κωδικός πρόσβασης</passwordLabel>
     <passwordConfirmationLabel>Επαλήθευση κωδικού πρόσβασης</passwordConfirmationLabel>    

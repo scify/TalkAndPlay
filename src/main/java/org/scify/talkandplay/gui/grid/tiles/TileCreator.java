@@ -23,16 +23,9 @@ import org.scify.talkandplay.models.sensors.KeyboardSensor;
 import org.scify.talkandplay.models.sensors.MouseSensor;
 import org.scify.talkandplay.models.sensors.Sensor;
 import org.scify.talkandplay.services.SensorService;
-import org.scify.talkandplay.utils.ImageResource;
-import org.scify.talkandplay.utils.ResourceManager;
-import org.scify.talkandplay.utils.ResourceType;
-import org.scify.talkandplay.utils.SoundResource;
+import org.scify.talkandplay.utils.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-
-//import uk.co.caprica.vlcj.player.base.MediaPlayer;
-//import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
-//import uk.co.caprica.vlcj.player.component.AudioPlayerComponent;
 
 /**
  * Creates the panel that holds a name and an image. Adds the mouse and keyboard
@@ -46,7 +39,6 @@ public class TileCreator {
     private TileAction tileAction;
     private SensorService sensorService;
     private GuiHelper guiHelper;
-    //private AudioPlayerComponent audioPlayer;
     private MediaPlayer audioPlayer;
     private static String DEFAULT_SOUND;
     protected final ResourceManager rm;
@@ -60,29 +52,9 @@ public class TileCreator {
         this.sensorService = new SensorService(user);
         this.guiHelper = new GuiHelper(user);
         audioPlayer = null;
-        //this.audioPlayer = new AudioPlayerComponent();
-        //initAudioPlayer();
     }
 
-    /**
-     * Initialize the audio player and set the action that will be performed
-     * after the player finishes
-     *
-     */
-    /*private void initAudioPlayer() {
 
-        audioPlayer.mediaPlayer().events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
-            @Override
-            public void playing(MediaPlayer mediaPlayer) {
-                audioPlayer.mediaPlayer().audio().setMute(false);
-            }
-
-            @Override
-            public void finished(MediaPlayer mediaPlayer) {
-                tileAction.audioFinished();
-            }
-        });
-    }*/
 
     /**
      * Draw the panel with its name and image and add the mouse and key
@@ -164,15 +136,19 @@ public class TileCreator {
         if (sound != null && !sound.isEmpty()) {
             media = new Media(new File(sound).toURI().toString());
         }
-        audioPlayer = new MediaPlayer(media);
-        audioPlayer.setOnEndOfMedia(new Runnable() {
-            @Override
-            public void run() {
-                audioPlayer.dispose();
-                tileAction.audioFinished();
-            }
-        });
-        audioPlayer.play();
+        audioPlayer = AudioPlayer.getInstance().getMediaPlayer(media);
+        if (audioPlayer != null) {
+            audioPlayer.setOnEndOfMedia(new Runnable() {
+                @Override
+                public void run() {
+                    audioPlayer.dispose();
+                    tileAction.audioFinished();
+                }
+            });
+            audioPlayer.play();
+        } else {
+            tileAction.audioFinished();
+        }
     }
 
     public void playAudio(String sound, TileAction tileAction) {

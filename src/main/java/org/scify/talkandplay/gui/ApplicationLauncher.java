@@ -45,13 +45,17 @@ public class ApplicationLauncher {
         Properties prop = Properties.getInstance();
         ParametersFromRestAPI parametersFromRestAPI = prop.getParametersFromRestAPI();
         if (parametersFromRestAPI != null) {
-            //Sentry Init
-            Sentry.init(options -> {
+            //Sentry Init for non-legacy sentry. We will use it if we may update sentry server
+            /*Sentry.init(options -> {
                 options.setDsn(parametersFromRestAPI.sentryDSN);
                 options.setEnvironment(prop.getEnvironment());
                 options.setRelease(prop.getVersion());
-            });
+            });*/
+            String dsnWithParameters = parametersFromRestAPI.sentryDSN + "?environment=" + prop.getEnvironment() + "&release=" + prop.getVersion();
+            Sentry.init(dsnWithParameters);
+
         }
+
         setUI();
 
         String dataPath = System.getProperty("user.home") + File.separator + "Talk and Play";

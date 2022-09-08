@@ -240,14 +240,14 @@ public class CommunicationPanel extends BaseGridPanel {
                                 drawImages(rootCategory);
                             } catch (IOException ex) {
                                 Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
-                                Sentry.captureMessage(ex.getMessage());
+                                Sentry.capture(ex.getMessage());
                             }
                         } else {
                             try {
                                 drawImages(category.getParentCategory());
                             } catch (IOException ex) {
                                 Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
-                                Sentry.captureMessage(ex.getMessage());
+                                Sentry.capture(ex.getMessage());
                             }
                         }
                     }
@@ -285,7 +285,7 @@ public class CommunicationPanel extends BaseGridPanel {
                             drawImages(category);
                         } catch (IOException ex) {
                             Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
-                            Sentry.captureMessage(ex.getMessage());
+                            Sentry.capture(ex.getMessage());
                         }
                     }
 
@@ -308,7 +308,7 @@ public class CommunicationPanel extends BaseGridPanel {
             drawImages(category);
         } catch (IOException ex) {
             Logger.getLogger(CommunicationPanel.class.getName()).log(Level.SEVERE, null, ex);
-            Sentry.captureMessage(ex.getMessage());
+            Sentry.capture(ex.getMessage());
         }
     }
 

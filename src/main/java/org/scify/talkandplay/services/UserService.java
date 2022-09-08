@@ -139,7 +139,7 @@ public class UserService {
             xmlConfHandler.update();
         } catch (Exception exception) {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, exception);
-            Sentry.captureMessage(exception.getMessage());
+            Sentry.capture(exception.getMessage());
             return false;
         }
         return true;

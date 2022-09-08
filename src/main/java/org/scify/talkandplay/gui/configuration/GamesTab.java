@@ -486,8 +486,9 @@ public class GamesTab extends javax.swing.JPanel {
 
     public void playMedia(String path) {
         Media media = new Media(new File(path).toURI().toString());
-        audioPlayer = new MediaPlayer(media);
-        audioPlayer.play();
+        audioPlayer = AudioPlayer.getInstance().getMediaPlayer(media);
+        if (audioPlayer != null)
+            audioPlayer.play();
     }
 
     public void stopPlayer() {

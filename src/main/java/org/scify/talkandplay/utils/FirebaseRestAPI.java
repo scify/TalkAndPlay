@@ -146,7 +146,7 @@ public class FirebaseRestAPI {
                     logger.debug(responseMessage);
                 } catch (Exception e) {
                     logger.error(e);
-                    Sentry.captureMessage(e.getMessage());
+                    Sentry.capture(e.getMessage());
                 }
             }
         });
@@ -166,7 +166,7 @@ public class FirebaseRestAPI {
                     logger.debug(responseMessage);
                 } catch (Exception e) {
                     logger.error(e);
-                    Sentry.captureMessage(e.getMessage());
+                    Sentry.capture(e.getMessage());
                 }
             }
         });

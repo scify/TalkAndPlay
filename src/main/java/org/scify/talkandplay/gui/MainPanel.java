@@ -189,7 +189,7 @@ public class MainPanel extends javax.swing.JPanel {
                         parent.changePanel(new MainPanel(parent));
                     } catch (Exception ex) {
                         Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        Sentry.captureMessage(ex.getMessage());
+                        Sentry.capture(ex.getMessage());
                     }
                 }
             }

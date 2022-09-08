@@ -56,7 +56,7 @@ public class ShapesLoginManager extends LoginManager {
             } catch (Exception e) {
                 String msg = "Error in shapes.properties file: (" + e.getMessage() + ")";
                 logger.error(msg);
-                Sentry.captureMessage(msg);
+                Sentry.capture(msg);
             }*/
         } else {
             logger.info("Starting in NORMAL mode");

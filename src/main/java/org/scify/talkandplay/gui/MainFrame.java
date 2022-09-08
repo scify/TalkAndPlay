@@ -222,7 +222,7 @@ public class MainFrame extends javax.swing.JFrame {
                 us.createUserAsCopyOfDefaultUser(REGISTEREDUSERNAME);
             } catch (Exception ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                Sentry.captureMessage(ex.getMessage());
+                Sentry.capture(ex.getMessage());
             }
             registeredUserFrame = new GridFrame(REGISTEREDUSERNAME);
             registeredUserFrame.setLocationRelativeTo(null);
@@ -255,7 +255,7 @@ public class MainFrame extends javax.swing.JFrame {
                 us.delete(registeredUser);
         } catch (Exception ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            Sentry.captureMessage(ex.getMessage());
+            Sentry.capture(ex.getMessage());
         }
     }
 
@@ -348,7 +348,7 @@ public class MainFrame extends javax.swing.JFrame {
                         Desktop.getDesktop().browse(new URI("http://scify.org"));
                     } catch (Exception ex) {
                         Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        Sentry.captureMessage(ex.getMessage());
+                        Sentry.capture(ex.getMessage());
                     }
                 }
             }
@@ -362,7 +362,7 @@ public class MainFrame extends javax.swing.JFrame {
                         Desktop.getDesktop().browse(new URI("http://www.snf.org/"));
                     } catch (Exception ex) {
                         Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        Sentry.captureMessage(ex.getMessage());
+                        Sentry.capture(ex.getMessage());
                     }
                 }
             }
