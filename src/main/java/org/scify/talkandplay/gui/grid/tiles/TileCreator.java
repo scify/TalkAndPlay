@@ -16,7 +16,10 @@
 package org.scify.talkandplay.gui.grid.tiles;
 
 import java.io.File;
-import javax.swing.JPanel;
+import javax.swing.*;
+
+import io.sentry.Sentry;
+import org.apache.log4j.Logger;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.models.User;
 import org.scify.talkandplay.models.sensors.KeyboardSensor;
@@ -43,6 +46,8 @@ public class TileCreator {
     private static String DEFAULT_SOUND;
     protected final ResourceManager rm;
     protected Media defaultMedia;
+
+    protected Logger logger = Logger.getLogger(TileCreator.class);
 
     public TileCreator(User user, int rows, int columns) {
         rm = ResourceManager.getInstance();
@@ -143,6 +148,17 @@ public class TileCreator {
                 public void run() {
                     audioPlayer.dispose();
                     tileAction.audioFinished();
+                }
+            });
+            audioPlayer.setOnError(new Runnable() {
+                @Override
+                public void run() {
+                    JOptionPane.showMessageDialog(null, rm.getTextOfXMLTag("audioError"), "Error", JOptionPane.ERROR_MESSAGE);
+                    logger.error("Media player could not play audio");
+                    Sentry.capture("Media player could not play audio");
+                    audioPlayer.dispose();
+                    tileAction.audioFinished();
+
                 }
             });
             audioPlayer.play();

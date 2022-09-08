@@ -27,13 +27,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import io.sentry.Sentry;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import jdk.jfr.MemoryAddress;
@@ -58,6 +56,7 @@ public class GamesTab extends javax.swing.JPanel {
     private ResourceManager rm;
     MediaPlayer audioPlayer;
 
+    protected org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(GamesTab.class);
     public GamesTab(User user, ConfigurationPanel parent) {
         this.user = user;
         this.guiHelper = new GuiHelper();
@@ -487,8 +486,18 @@ public class GamesTab extends javax.swing.JPanel {
     public void playMedia(String path) {
         Media media = new Media(new File(path).toURI().toString());
         audioPlayer = AudioPlayer.getInstance().getMediaPlayer(media);
-        if (audioPlayer != null)
+        if (audioPlayer != null) {
+            audioPlayer.setOnError(new Runnable() {
+                @Override
+                public void run() {
+                    JOptionPane.showMessageDialog(null, rm.getTextOfXMLTag("audioError"), "Error", JOptionPane.ERROR_MESSAGE);
+                    logger.error("Media player could not play audio");
+                    Sentry.capture("Media player could not play audio");
+                    audioPlayer.dispose();
+                }
+            });
             audioPlayer.play();
+        }
     }
 
     public void stopPlayer() {

@@ -26,16 +26,14 @@ import java.io.File;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import io.sentry.Sentry;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import org.scify.talkandplay.gui.grid.tiles.TileCreator;
 import org.scify.talkandplay.gui.helpers.GuiHelper;
 import org.scify.talkandplay.gui.helpers.UIConstants;
 import org.scify.talkandplay.models.Category;
@@ -57,6 +55,9 @@ public class WordFormPanel extends javax.swing.JPanel {
     private ConfigurationPanel parent;
     private MediaPlayer audioPlayer;
     private File currentDirectory;
+
+    protected org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(WordFormPanel.class);
+
     protected ResourceManager rm;
 
     public WordFormPanel(User user, Category category, ConfigurationPanel parent) {
@@ -560,6 +561,19 @@ public class WordFormPanel extends javax.swing.JPanel {
                                     audioPlayer.dispose();
                                     audioPlayer = null;
                                 }
+                            }
+                        });
+                        audioPlayer.setOnError(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (audioPlayer != null) {
+                                    JOptionPane.showMessageDialog(null, rm.getTextOfXMLTag("audioError"), "Error", JOptionPane.ERROR_MESSAGE);
+                                    logger.error("Media player could not play audio");
+                                    Sentry.capture("Media player could not play audio");
+                                    audioPlayer.dispose();
+                                    audioPlayer = null;
+                                }
+
                             }
                         });
                         audioPlayer.play();

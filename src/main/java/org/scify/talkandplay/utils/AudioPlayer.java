@@ -5,12 +5,11 @@ import io.sentry.Sentry;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import org.apache.log4j.Logger;
-
 import javax.swing.*;
 
 public class AudioPlayer {
     protected static AudioPlayer instance;
-    protected Logger logger = Logger.getLogger(FirebaseRestAPI.class);
+    protected Logger logger = Logger.getLogger(AudioPlayer.class);
     protected ResourceManager rm = ResourceManager.getInstance();
 
     public static AudioPlayer getInstance() {
