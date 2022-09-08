@@ -4,7 +4,7 @@
 	<versionFileUrl>https://go.scify.gr/talkandplaydownloadproperties</versionFileUrl>
 	<propertiesFile>properties.xml</propertiesFile>
 	<zipUrl>https://go.scify.gr/talkandplaydownloadzip</zipUrl>
-	<environment>staging</environment>
+	<environment>production</environment>
 	<restAPIParametersUrl>https://talkandplay.scify.org/api/desktop-app/options</restAPIParametersUrl>
 	<restAPIStorageUrl>https://talkandplay.scify.org/api/analytics/store</restAPIStorageUrl>
 </properties>
