@@ -23,6 +23,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import org.scify.talkandplay.gui.helpers.Time;
 import org.scify.talkandplay.gui.helpers.UIConstants;
+import org.scify.talkandplay.utils.AudioPlayer;
 
 /**
  *
@@ -79,20 +80,22 @@ public class MediaPlayerPanel extends javax.swing.JPanel {
 
         Media media = new Media(new File(path).toURI().toString());
 
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setOnReady(new Runnable() {
-            @Override
-            public void run() {
-                double length = mediaPlayer.getMedia().getDuration().toMillis();
-                int secs = (int) (length / 1000) % 60;
-                int mins = (int) ((length / (1000 * 60)) % 60);
-                int hrs = (int) ((length / (1000 * 60 * 60)) % 24);
-                endLabel.setText(Time.getTime(hrs, mins, secs));
-            }
-        });
-        mediaPlayer.play();
-        if(!isVideo)
-            startTimer();
+        mediaPlayer = AudioPlayer.getInstance().getMediaPlayer(media);
+        if (mediaPlayer != null) {
+            mediaPlayer.setOnReady(new Runnable() {
+                @Override
+                public void run() {
+                    double length = mediaPlayer.getMedia().getDuration().toMillis();
+                    int secs = (int) (length / 1000) % 60;
+                    int mins = (int) ((length / (1000 * 60)) % 60);
+                    int hrs = (int) ((length / (1000 * 60 * 60)) % 24);
+                    endLabel.setText(Time.getTime(hrs, mins, secs));
+                }
+            });
+            mediaPlayer.play();
+            if (!isVideo)
+                startTimer();
+        }
     }
 
     /**

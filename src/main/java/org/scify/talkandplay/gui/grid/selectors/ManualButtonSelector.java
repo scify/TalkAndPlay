@@ -68,9 +68,12 @@ public class ManualButtonSelector extends ButtonSelector {
     }
 
     public void act() {
-        if (selected == 0 || (selected < panelList.size() - 1 && selected > 0)) {
+        if (selected == 0) {
+            if (panelList.size() > 1)
+                selected ++;
+        }else if (selected < panelList.size() - 1) {
             selected++;
-        } else if (selected == panelList.size() - 1) {
+        } else  {
             selected = 0;
         }
 

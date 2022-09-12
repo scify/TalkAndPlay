@@ -21,9 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.MatteBorder;
 
 import org.scify.talkandplay.gui.grid.BaseGridPanel;
@@ -61,8 +59,9 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
         super(user, parent);
         this.selected = 0;
         this.game = game;
-        initComponents();        
+
         initCustomComponents();
+        initComponents();
     }
 
     /**
@@ -77,25 +76,25 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 327, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 327, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void initCustomComponents() {
 
         startTime = new Date().getTime();
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        //setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
         topMsgPanel = new JPanel();
         topMsgPanel.setBackground(Color.white);
         topMsgPanel.setBorder(new MatteBorder(0, 0, 2, 0, Color.decode(UIConstants.grey)));
         topMsgPanel.setVisible(false);
-        add(topMsgPanel);
+        //add(topMsgPanel);
 
 
         gamePanel = new JPanel();
@@ -103,7 +102,7 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
         controlsPanel = new JPanel();
         controlsPanel.setBackground(Color.white);
         add(gamePanel);
-        add(controlsPanel);
+        //add(controlsPanel);
 
         gamePanel.setLayout(new FlowLayout());
 
@@ -245,15 +244,27 @@ public class StimulusReactionGamePanel extends BaseGridPanel {
 
         ControlsPanel controls = new ControlsPanel(user, this);
         controlsPanel.add(controls);
-        
-        controls.showControls();
-        controls.getSelector().setList(controls.getControls());
-        controls.getSelector().start();
 
         parent.clearGrid();
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                        .addComponent(topMsgPanel).addGroup(layout.createSequentialGroup().addComponent(gamePanel).addComponent(controlsPanel))
+        );
+        layout.setVerticalGroup(
+                layout.createSequentialGroup().addComponent(topMsgPanel).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(gamePanel).addComponent(controlsPanel))
+        );
+        controls.showControls();
+        controls.getSelector().setList(controls.getControls());
         parent.addGrid(this);
         parent.revalidate();
         parent.repaint();
+
+
+        controls.getSelector().start();
     }
 
     public void setGame(StimulusReactionGame game) {
