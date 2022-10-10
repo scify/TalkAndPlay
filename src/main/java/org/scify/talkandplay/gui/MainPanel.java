@@ -51,7 +51,7 @@ import org.scify.talkandplay.utils.TalkAndPlayProfileConfiguration;
  */
 public class MainPanel extends javax.swing.JPanel {
 
-    protected final int INTERVAL_AFTER_LOGIN = 1000;
+    protected final int INTERVAL_AFTER_LOGIN = 2000;
     private TalkAndPlayProfileConfiguration talkAndPlayProfilesConfig;
     private List<UserPanel> userPanelList;
     private MainFrame parent;

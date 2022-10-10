@@ -47,7 +47,7 @@ public class UserPanel extends javax.swing.JPanel {
     private UserService userService;
     private final ResourceManager rm;
     protected long timeOfInit;
-    protected final int INTERVAL_AFTER_LOGIN = 1000;
+    protected final int INTERVAL_AFTER_LOGIN = 2000;
 
     /**
      * Creates new form ProfilePanel
@@ -125,6 +125,7 @@ public class UserPanel extends javax.swing.JPanel {
         editLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 long timeOfClick = (new Date()).getTime();
+                //System.out.println("interval: " + timeOfClick + "\tdiff: " + (timeOfClick - timeOfInit));
                 if (timeOfClick - timeOfInit > INTERVAL_AFTER_LOGIN) {
                     parent.changePanel(new UserFormPanel(parent, user));
                 }
@@ -134,6 +135,7 @@ public class UserPanel extends javax.swing.JPanel {
         deleteLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 long timeOfClick = (new Date()).getTime();
+                //System.out.println("interval: " + timeOfClick + "\tdiff: " + (timeOfClick - timeOfInit));
                 if (timeOfClick - timeOfInit > INTERVAL_AFTER_LOGIN) {
                     int dialogResult = JOptionPane.showConfirmDialog(null, rm.getTextOfXMLTag("userDeleteConfirmation"), "Warning", 0);
                     if (dialogResult == JOptionPane.YES_OPTION) {

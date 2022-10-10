@@ -228,6 +228,10 @@ public class Updater {
 
     protected void copyFile(File source, File dest) {
         try {
+            File parent = dest.getParentFile();
+            if (!parent.exists()) {
+                parent.mkdir();
+            }
             InputStream is = new FileInputStream(source);
             OutputStream os = new FileOutputStream(dest, false);
             byte[] buffer = new byte[1024];
