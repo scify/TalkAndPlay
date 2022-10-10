@@ -96,7 +96,7 @@ public class ConfigurationPanel extends javax.swing.JPanel {
 
     public void goBack() {
         tabsPanel.stopPlayer();
-        parent.changePanel(new MainPanel(parent));
+        parent.changePanel(new MainPanel(parent, user.getUserOfAccount()));
     }
 
     public void showInfoPanel() {

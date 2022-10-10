@@ -43,6 +43,8 @@ public class UserService {
     protected XMLConfigurationHandler xmlConfHandler;
     protected ResourceManager rm;
 
+    static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(UserService.class);
+
     public UserService() {
         this.rm = ResourceManager.getInstance();
         this.talkAndPlayProfileconfiguration = TalkAndPlayProfileConfiguration.getInstance();
@@ -50,7 +52,7 @@ public class UserService {
     }
 
     public User getUser(String name) {
-        for (User user : xmlConfHandler.getUsers()) {
+        for (User user : xmlConfHandler.getAllUsers()) {
             if (user.getName().equals(name)) {
                 return user;
             }
@@ -59,7 +61,7 @@ public class UserService {
     }
 
     public List<User> getUsers() {
-        List<User> users = talkAndPlayProfileconfiguration.getConfigurationHandler().getUsers();
+        List<User> users = talkAndPlayProfileconfiguration.getConfigurationHandler().getAllUsers();
         return users;
     }
 
@@ -96,7 +98,7 @@ public class UserService {
         return tempName;
     }
 
-    public void createUserAsCopyOfDefaultUser() throws Exception {
+    public void createUserAsCopyOfDefaultUser(String userOfAccount) throws Exception {
         String name = xmlConfHandler.getDefaultUser().getName();
         if (nameIsUsed(name)) {
             String uniqueName = getUniqueUserName(name);
@@ -104,13 +106,17 @@ public class UserService {
                 name = uniqueName;
             }
         }
-        xmlConfHandler.createNewUser(name);
+        xmlConfHandler.createNewUser(name, userOfAccount);
         xmlConfHandler.update();
     }
 
-    public void createUserAsCopyOfDefaultUser(String name) throws Exception{
-        xmlConfHandler.createNewUser(name);
-        xmlConfHandler.update();
+    public void createUserAsCopyOfDefaultUser(String name, String userOfAccount) throws Exception {
+        if (xmlConfHandler.getUser(name) == null) {
+            logger.info("User: " + name + " does not exist locally, creating new user...");
+            xmlConfHandler.createNewUser(name, userOfAccount);
+            xmlConfHandler.update();
+        } else
+            logger.info("User: " + name + " exists locally.");
     }
 
 

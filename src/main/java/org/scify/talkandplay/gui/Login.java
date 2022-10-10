@@ -3,6 +3,7 @@ package org.scify.talkandplay.gui;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import io.sentry.Sentry;
+import org.scify.talkandplay.services.UserService;
 import org.scify.talkandplay.utils.LoginManager;
 import org.scify.talkandplay.utils.OperationMessage;
 import org.scify.talkandplay.utils.ResourceManager;
@@ -173,10 +174,18 @@ public class Login extends JPanel {
             public void mouseClicked(MouseEvent arg0) {
                 if (loginMode) {
                     if (buttonSignIn.isEnabled()) {
-                        OperationMessage operationMessage = loginManager.signIn(emailField.getText(), String.valueOf(passwordField.getPassword()));
+                        String userNameBasedOnEMail = emailField.getText();
+                        OperationMessage operationMessage = loginManager.signIn(userNameBasedOnEMail, String.valueOf(passwordField.getPassword()));
                         if (operationMessage.isSuccess()) {
                             switchToLogOutMode();
-                            parent.loginAsRegisteredUser(login);
+                            UserService us = new UserService();
+                            try {
+                                us.createUserAsCopyOfDefaultUser(userNameBasedOnEMail, userNameBasedOnEMail);
+                            } catch (Exception ex) {
+                                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                                Sentry.capture(ex.getMessage());
+                            }
+                            parent.loginAsRegisteredUser(userNameBasedOnEMail);
                         } else {
                             passwordField.setText("");
                             JOptionPane.showMessageDialog(null, operationMessage.getError(), "", JOptionPane.ERROR_MESSAGE);

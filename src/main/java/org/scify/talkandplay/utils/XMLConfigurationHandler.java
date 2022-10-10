@@ -144,7 +144,16 @@ public class XMLConfigurationHandler {
         return defaultUser;
     }
 
-    public List<User> getUsers() {
+    public List<User> getUsers(String usersOfAccount) {
+        List<User> ret = new ArrayList<>();
+        for (User user: users) {
+            if (user.getUserOfAccount().equals(usersOfAccount))
+                ret.add(user);
+        }
+        return ret;
+    }
+
+    public List<User> getAllUsers() {
         return users;
     }
 
@@ -185,7 +194,7 @@ public class XMLConfigurationHandler {
         Element userProfilesEl = root.getChild("userProfiles");
         List<Element> usersEl = userProfilesEl.getChildren();
         if (usersEl.isEmpty() && fromInit) {
-            Element newUser = createNewProfile(defaultUser.getName());
+            Element newUser = createNewProfile(defaultUser.getName(), "");
             userProfilesEl.addContent(newUser);
             needsSave = true;
         }
@@ -204,12 +213,18 @@ public class XMLConfigurationHandler {
     }
 
     protected User extractUserFromXml(Element userEl, boolean isDefault) {
+
+        Attribute userOfAccount = userEl.getAttribute("userOfAccount");
+
+
         ArrayList<MultimediaResource> imageAndSoundResources = new ArrayList();
 
         String userName = userEl.getChildText("name");
         ImageResource imageResource = extractImageResource(userEl.getChild("image"));
 
         User user = new User(userName, imageResource);
+        if (userOfAccount != null)
+            user.setUserOfAccount(userOfAccount.getValue());
 
         Element confEl = userEl.getChild("configuration");
         if (confEl.getChildren().size() > 0)
@@ -859,8 +874,10 @@ public class XMLConfigurationHandler {
                 new FileOutputStream(localConfFile), "UTF-8"));
     }
 
-    protected Element createNewProfile(String name) {
+    protected Element createNewProfile(String name, String userOfAccount) {
         Element profile = new Element("profile");
+        if (!userOfAccount.equals(""))
+            profile.setAttribute("userOfAccount", userOfAccount);
         Element defaultProfile = configurationXmlDocument.getRootElement().getChild("defaultProfile");
         profile.addContent(new Element("name").setText(name));
 
@@ -924,8 +941,8 @@ public class XMLConfigurationHandler {
         }
     }
 
-    public void createNewUser(String name) {
-        Element profile = createNewProfile(name);
+    public void createNewUser(String name, String userOfAccount) {
+        Element profile = createNewProfile(name, userOfAccount);
         Element profiles = configurationXmlDocument.getRootElement().getChild("userProfiles");
         profiles.addContent(profile);
     }

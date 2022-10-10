@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <profiles>
-    <defaultProfile version="4.0">
+    <defaultProfile version="4.1">
         <name>{{ defaultUserName }}</name>
         <image resourceType="BUNDLE">users/default.png</image>
         <configuration>

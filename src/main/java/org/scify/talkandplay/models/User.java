@@ -24,6 +24,9 @@ import org.scify.talkandplay.utils.ResourceManager;
 public class User {
 
     private String name;
+
+    private String userOfAccount;
+
     private ImageResource image;
     private Configuration configuration;
 
@@ -36,7 +39,16 @@ public class User {
         rm = ResourceManager.getInstance();
         this.name = name;
         this.image = image;
+        this.userOfAccount = "";
         configuration = new Configuration();
+    }
+
+    public String getUserOfAccount() {
+        return userOfAccount;
+    }
+
+    public void setUserOfAccount(String name) {
+        userOfAccount = name;
     }
 
     public String getName() {

@@ -58,7 +58,10 @@ public class MainPanel extends javax.swing.JPanel {
     private final ResourceManager rm;
     protected long timeOfInit;
 
-    public MainPanel(MainFrame parent, long timeOfInit) {
+    protected String userOfAccount;
+
+    public MainPanel(MainFrame parent, long timeOfInit, String userOfAccount) {
+        this.userOfAccount = userOfAccount;
         this.talkAndPlayProfilesConfig = TalkAndPlayProfileConfiguration.getInstance();
         this.timeOfInit = timeOfInit;
         this.parent = parent;
@@ -67,7 +70,8 @@ public class MainPanel extends javax.swing.JPanel {
         initCustomComponents();
     }
 
-    public MainPanel(MainFrame parent) {
+    public MainPanel(MainFrame parent, String userOfAccount) {
+        this.userOfAccount = userOfAccount;
         talkAndPlayProfilesConfig = TalkAndPlayProfileConfiguration.getInstance();
         this.timeOfInit = 0;
         this.parent = parent;
@@ -104,7 +108,7 @@ public class MainPanel extends javax.swing.JPanel {
 
     private void initCustomComponents() {
 
-        List<User> users = talkAndPlayProfilesConfig.getConfigurationHandler().getUsers();
+        List<User> users = talkAndPlayProfilesConfig.getConfigurationHandler().getUsers(userOfAccount);
 
         if (users.size() > 4) {
             usersPanel.setLayout(new GridLayout(0, 6));
@@ -185,8 +189,8 @@ public class MainPanel extends javax.swing.JPanel {
                 if (timeOfClick - timeOfInit > INTERVAL_AFTER_LOGIN) {
                     UserService us = new UserService();
                     try {
-                        us.createUserAsCopyOfDefaultUser();
-                        parent.changePanel(new MainPanel(parent));
+                        us.createUserAsCopyOfDefaultUser(userOfAccount);
+                        parent.changePanel(new MainPanel(parent, userOfAccount));
                     } catch (Exception ex) {
                         Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
                         Sentry.capture(ex.getMessage());
@@ -245,7 +249,7 @@ public class MainPanel extends javax.swing.JPanel {
                              * used to refresh content and display the newly
                              * uploaded user]
                              */
-                            parent.changePanel(new MainPanel(parent));
+                            parent.changePanel(new MainPanel(parent, userOfAccount));
                         }
                     }
                 }

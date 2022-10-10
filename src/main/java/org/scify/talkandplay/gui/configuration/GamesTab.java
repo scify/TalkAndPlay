@@ -106,7 +106,7 @@ public class GamesTab extends javax.swing.JPanel {
     public void showGamesPerType(String type) {
         //refresh user from configuration file
         XMLConfigurationHandler ch = TalkAndPlayProfileConfiguration.getInstance().getConfigurationHandler();
-        for (User temp : ch.getUsers()) {
+        for (User temp : ch.getAllUsers()) {
             if (temp.getName().equals(user.getName())) {
                 user = temp;
                 break;

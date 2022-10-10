@@ -602,7 +602,7 @@ public class UserFormPanel extends javax.swing.JPanel {
 
             try {
                 userService.update(user, newUser);
-                parent.changePanel(new MainPanel(parent));
+                parent.changePanel(new MainPanel(parent, user.getUserOfAccount()));
             } catch (Exception ex) {
                 Logger.getLogger(UserFormPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -690,7 +690,7 @@ public class UserFormPanel extends javax.swing.JPanel {
 
         backButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
-                parent.changePanel(new MainPanel(parent));
+                parent.changePanel(new MainPanel(parent, user.getUserOfAccount()));
             }
         });
 

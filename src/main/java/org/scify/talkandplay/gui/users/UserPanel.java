@@ -139,7 +139,7 @@ public class UserPanel extends javax.swing.JPanel {
                     if (dialogResult == JOptionPane.YES_OPTION) {
                         try {
                             userService.delete(user);
-                            parent.changePanel(new MainPanel(parent));
+                            parent.changePanel(new MainPanel(parent, user.getUserOfAccount()));
                         } catch (Exception ex) {
                             Logger.getLogger(UserPanel.class.getName()).log(Level.SEVERE, null, ex);
                             Sentry.capture(ex.getMessage());

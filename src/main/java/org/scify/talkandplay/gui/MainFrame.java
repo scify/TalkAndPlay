@@ -1,18 +1,18 @@
 /**
-* Copyright 2016 SciFY
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2016 SciFY
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.scify.talkandplay.gui;
 
 import java.awt.BorderLayout;
@@ -40,8 +40,7 @@ public class MainFrame extends javax.swing.JFrame {
     private final ResourceManager rm;
     protected boolean inLoginMode;
     protected GridFrame registeredUserFrame;
-    protected static String REGISTEREDUSERNAME = "registeredUserTMP";
-    
+
     public MainFrame() {
         updater = new Updater();
         prop = Properties.getInstance();
@@ -96,12 +95,12 @@ public class MainFrame extends javax.swing.JFrame {
         javax.swing.GroupLayout titlePanelLayout = new javax.swing.GroupLayout(titlePanel);
         titlePanel.setLayout(titlePanelLayout);
         titlePanelLayout.setHorizontalGroup(
-            titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+                titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
         );
         titlePanelLayout.setVerticalGroup(
-            titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+                titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jScrollPane1.setBorder(null);
@@ -133,59 +132,59 @@ public class MainFrame extends javax.swing.JFrame {
         javax.swing.GroupLayout contentPaneLayout = new javax.swing.GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
-            contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentPaneLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(logoLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(titlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(contentPaneLayout.createSequentialGroup()
-                .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(contentPaneLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                        .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(contentPaneLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(contentPaneLayout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addComponent(scifyLogoLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(contentPaneLayout.createSequentialGroup()
+                contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(contentPaneLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(niarchosLogoLabel))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(8, 8, 8)))))
-                .addContainerGap())
+                                .addComponent(logoLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(titlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(jScrollPane1))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                                                .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                                                .addContainerGap()
+                                                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                                                .addGap(47, 47, 47)
+                                                                .addComponent(scifyLogoLabel)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                                .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                                                .addGap(6, 6, 6)
+                                                                .addComponent(niarchosLogoLabel))
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                                                                .addComponent(jLabel4)
+                                                                .addGap(8, 8, 8)))))
+                                .addContainerGap())
         );
         contentPaneLayout.setVerticalGroup(
-            contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentPaneLayout.createSequentialGroup()
-                .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(contentPaneLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(logoLabel))
-                    .addComponent(titlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(41, 41, 41)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scifyLogoLabel)
-                    .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(niarchosLogoLabel)
-                        .addComponent(jLabel1)))
-                .addContainerGap())
+                contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(logoLabel))
+                                        .addComponent(titlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(41, 41, 41)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(scifyLogoLabel)
+                                        .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(niarchosLogoLabel)
+                                                .addComponent(jLabel1)))
+                                .addContainerGap())
         );
 
         jLabel2.getAccessibleContext().setAccessibleName("createdByLabel");
@@ -193,12 +192,12 @@ public class MainFrame extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contentPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(contentPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contentPane, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(contentPane, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
         );
 
         pack();
@@ -215,15 +214,29 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }
 
-    public void loginAsRegisteredUser(Login login) {
-        try {
-            UserService us = new UserService();
-            try {
-                us.createUserAsCopyOfDefaultUser(REGISTEREDUSERNAME);
-            } catch (Exception ex) {
-                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                Sentry.capture(ex.getMessage());
+    public void loginAsRegisteredUser(String userOfAccount) {
+        contentPanel.removeAll();
+        jLabel2.setText(rm.getTextOfXMLTag("createdBy"));
+        jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
+        MainPanel mainPanel = new MainPanel(this, userOfAccount);
+        mainPanel.userOfAccount = userOfAccount;
+        contentPanel.add(mainPanel, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                logoutAsRegisteredUser();
             }
+        });
+        FirebaseRestAPI firebaseRestAPI = FirebaseRestAPI.getInstance();
+        if (firebaseRestAPI != null) {
+            firebaseRestAPI.updateShapesToken();
+            firebaseRestAPI.postShapesLogin();
+        }
+
+        /*try {
             registeredUserFrame = new GridFrame(REGISTEREDUSERNAME);
             registeredUserFrame.setLocationRelativeTo(null);
             registeredUserFrame.setTitle("Talk&Play");
@@ -244,10 +257,10 @@ public class MainFrame extends javax.swing.JFrame {
             }
         } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }
 
-    protected void deleteRegisteredUserFromXML() {
+    /*protected void deleteRegisteredUserFromXML() {
         try {
             UserService us = new UserService();
             User registeredUser = us.getUser(REGISTEREDUSERNAME);
@@ -257,15 +270,15 @@ public class MainFrame extends javax.swing.JFrame {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             Sentry.capture(ex.getMessage());
         }
-    }
+    }*/
 
     public void logoutAsRegisteredUser() {
         FirebaseRestAPI firebaseRestAPI = FirebaseRestAPI.getInstance();
         if (firebaseRestAPI != null)
             firebaseRestAPI.postShapesLogout();
-        deleteRegisteredUserFromXML();
-        registeredUserFrame.setVisible(false);
-        registeredUserFrame.dispose();
+        //deleteRegisteredUserFromXML();
+        //registeredUserFrame.setVisible(false);
+        //registeredUserFrame.dispose();
     }
 
     public void goToLogin() {
@@ -305,11 +318,11 @@ public class MainFrame extends javax.swing.JFrame {
         contentPanel.removeAll();
         jLabel2.setText(rm.getTextOfXMLTag("createdBy"));
         jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
-        deleteRegisteredUserFromXML();
+        //deleteRegisteredUserFromXML();
         if (inLoginMode)
             contentPanel.add(new Login(this), BorderLayout.CENTER);
         else
-            contentPanel.add(new MainPanel(this, timeOfInit), BorderLayout.CENTER);
+            contentPanel.add(new MainPanel(this, timeOfInit, ""), BorderLayout.CENTER);
         revalidate();
         repaint();
     }
@@ -338,7 +351,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         titlePanel.add(titleLabel, BorderLayout.CENTER);
     }
-    
+
     private void openLinkToBrowser() {
         scifyLogoLabel.addMouseListener(new MouseAdapter() {
             @Override
@@ -353,7 +366,7 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             }
         });
-        
+
         niarchosLogoLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
@@ -368,7 +381,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPane;
     private javax.swing.JPanel contentPanel;
@@ -386,7 +399,7 @@ public class MainFrame extends javax.swing.JFrame {
     protected void showInfoBox() {
         if (prop.getParametersFromRestAPI() != null) {
             if (!prop.getParametersFromRestAPI().announcements.isEmpty()) {
-                for (Announcement announcement: prop.getParametersFromRestAPI().announcements) {
+                for (Announcement announcement : prop.getParametersFromRestAPI().announcements) {
                     String lang = rm.getSelectedLanguage();
                     if (lang.equals("gr"))
                         lang = "el";
