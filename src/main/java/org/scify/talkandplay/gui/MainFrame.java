@@ -124,11 +124,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
-        if (inLoginMode)
+
+        if (inLoginMode) {
+            jLabel4.setText("");
             niarchosLogoLabel.setIcon(rm.getImageIcon("logos/SHAPES_logo.png", ResourceType.JAR)); // NOI18N
-        else
+        } else {
+            jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
             niarchosLogoLabel.setIcon(rm.getImageIcon("logos/snf_lg.png", ResourceType.JAR)); // NOI18N
+        }
         niarchosLogoLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout contentPaneLayout = new javax.swing.GroupLayout(contentPane);
@@ -219,7 +222,10 @@ public class MainFrame extends javax.swing.JFrame {
     public void loginAsRegisteredUser(String userOfAccount) {
         contentPanel.removeAll();
         jLabel2.setText(rm.getTextOfXMLTag("createdBy"));
-        jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
+        if (inLoginMode)
+            jLabel4.setText("");
+        else
+            jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
         MainPanel mainPanel = new MainPanel(this, userOfAccount);
         mainPanel.userOfAccount = userOfAccount;
         contentPanel.add(mainPanel, BorderLayout.CENTER);
@@ -286,7 +292,10 @@ public class MainFrame extends javax.swing.JFrame {
     public void goToLogin() {
         contentPanel.removeAll();
         jLabel2.setText(rm.getTextOfXMLTag("createdBy"));
-        jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
+        if (inLoginMode)
+            jLabel4.setText("");
+        else
+            jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
         contentPanel.add(new Login(this), BorderLayout.CENTER);
         revalidate();
         repaint();
@@ -295,7 +304,10 @@ public class MainFrame extends javax.swing.JFrame {
     public void goToRegister() {
         contentPanel.removeAll();
         jLabel2.setText(rm.getTextOfXMLTag("createdBy"));
-        jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
+        if (inLoginMode)
+            jLabel4.setText("");
+        else
+            jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
         contentPanel.add(new Register(this), BorderLayout.CENTER);
         revalidate();
         repaint();
@@ -319,7 +331,10 @@ public class MainFrame extends javax.swing.JFrame {
     protected void continueWithoutUpdate(long timeOfInit) {
         contentPanel.removeAll();
         jLabel2.setText(rm.getTextOfXMLTag("createdBy"));
-        jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
+        if (inLoginMode)
+            jLabel4.setText("");
+        else
+            jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
         //deleteRegisteredUserFromXML();
         if (inLoginMode)
             contentPanel.add(new Login(this), BorderLayout.CENTER);
