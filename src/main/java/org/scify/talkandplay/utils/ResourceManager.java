@@ -5,6 +5,7 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 import org.scify.talkandplay.gui.ApplicationLauncher;
+
 import javax.swing.*;
 import java.awt.Image;
 import java.io.File;
@@ -40,6 +41,7 @@ public class ResourceManager {
         languages = new ArrayList<>();
         languageDirs = new ArrayList<>();
         languageTexts = new ArrayList<>();
+        int enIndex = -1;
         for (int i = 0; i < filesInDir.length; i++) {
             File file = filesInDir[i];
             if (file.isDirectory()) {
@@ -48,10 +50,12 @@ public class ResourceManager {
                     defaultDir = file;
                 } else {
                     languages.add(dirName);
+                    if (dirName.equals("en"))
+                        enIndex = languages.size()-1;
                     languageDirs.add(file);
                     HashMap<String, String> texts = new HashMap<String, String>();
                     languageTexts.add(texts);
-                    File languageXMLFile = new File(file,"language.xml");
+                    File languageXMLFile = new File(file, "language.xml");
                     SAXBuilder builder = new SAXBuilder();
                     try {
                         Document languageDoc = builder.build(languageXMLFile);
@@ -72,7 +76,7 @@ public class ResourceManager {
                 }
             }
         }
-        selectedLanguageIndex = 0;
+        selectedLanguageIndex = enIndex;
     }
 
     public void setLanguage(int languageIndex) {
@@ -167,7 +171,7 @@ public class ResourceManager {
                 ret = getJarImage(path);
                 break;
             case BUNDLE:
-                ret =  getImageOfLanguage(path);
+                ret = getImageOfLanguage(path);
                 break;
             case LOCAL:
                 ret = getFullPathImage(path);
@@ -191,7 +195,7 @@ public class ResourceManager {
                 ret = getJarImageIcon(path);
                 break;
             case BUNDLE:
-                ret =  getImageIconOfLanguage(path);
+                ret = getImageIconOfLanguage(path);
                 break;
             case LOCAL:
                 ret = getFullPathImageIcon(path);
@@ -225,18 +229,18 @@ public class ResourceManager {
         String s = string.trim();
         if (s.startsWith("{{") && s.endsWith("}}")) {
             s = s.substring(2);
-            s = s.substring(0, s.length()-2);
+            s = s.substring(0, s.length() - 2);
             s = s.trim();
             s = getTextOfXMLTag(s);
         }
         return s;
     }
 
-    public File getFileOfResource (String path, ResourceType resourceType) {
+    public File getFileOfResource(String path, ResourceType resourceType) {
         File ret = null;
         switch (resourceType) {
             case BUNDLE:
-                ret =  getFile(path, selectedLanguageIndex);
+                ret = getFile(path, selectedLanguageIndex);
                 break;
             case LOCAL:
                 ret = new File(path);

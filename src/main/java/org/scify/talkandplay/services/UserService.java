@@ -43,9 +43,19 @@ public class UserService {
     protected XMLConfigurationHandler xmlConfHandler;
     protected ResourceManager rm;
 
+    protected String userOfAccount;
+
     static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(UserService.class);
 
+    public UserService(String userOfAccount) {
+        this.userOfAccount = userOfAccount;
+        this.rm = ResourceManager.getInstance();
+        this.talkAndPlayProfileconfiguration = TalkAndPlayProfileConfiguration.getInstance();
+        this.xmlConfHandler = talkAndPlayProfileconfiguration.getConfigurationHandler(userOfAccount);
+    }
+
     public UserService() {
+        this.userOfAccount = "";
         this.rm = ResourceManager.getInstance();
         this.talkAndPlayProfileconfiguration = TalkAndPlayProfileConfiguration.getInstance();
         this.xmlConfHandler = talkAndPlayProfileconfiguration.getConfigurationHandler();
@@ -110,13 +120,10 @@ public class UserService {
         xmlConfHandler.update();
     }
 
-    public void createUserAsCopyOfDefaultUser(String name, String userOfAccount) throws Exception {
-        if (xmlConfHandler.getUser(name) == null) {
-            logger.info("User: " + name + " does not exist locally, creating new user...");
-            xmlConfHandler.createNewUser(name, userOfAccount);
-            xmlConfHandler.update();
-        } else
-            logger.info("User: " + name + " exists locally.");
+    public void createFirstUserForSHAPESMode(String userOfAccount) throws Exception {
+        if (xmlConfHandler.getUsers(userOfAccount).size() == 0) {
+            createUserAsCopyOfDefaultUser(userOfAccount);
+        }
     }
 
 

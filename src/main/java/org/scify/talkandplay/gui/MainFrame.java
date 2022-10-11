@@ -87,7 +87,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel1.setFont(jLabel1.getFont());
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("SciFY 2021 - version: " + prop.getVersion());
+        jLabel1.setText("SciFY 2022 - version: " + prop.getVersion());
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         titlePanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -125,8 +125,10 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(153, 153, 153));
         jLabel4.setText(rm.getTextOfXMLTag("donationBy"));
-
-        niarchosLogoLabel.setIcon(rm.getImageIcon("logos/snf_lg.png", ResourceType.JAR)); // NOI18N
+        if (inLoginMode)
+            niarchosLogoLabel.setIcon(rm.getImageIcon("logos/SHAPES_logo.png", ResourceType.JAR)); // NOI18N
+        else
+            niarchosLogoLabel.setIcon(rm.getImageIcon("logos/snf_lg.png", ResourceType.JAR)); // NOI18N
         niarchosLogoLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout contentPaneLayout = new javax.swing.GroupLayout(contentPane);
@@ -372,7 +374,10 @@ public class MainFrame extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent arg0) {
                 if (Desktop.isDesktopSupported()) {
                     try {
-                        Desktop.getDesktop().browse(new URI("http://www.snf.org/"));
+                        if (inLoginMode)
+                            Desktop.getDesktop().browse(new URI("https://shapes2020.eu/"));
+                        else
+                            Desktop.getDesktop().browse(new URI("http://www.snf.org/"));
                     } catch (Exception ex) {
                         Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
                         Sentry.capture(ex.getMessage());

@@ -167,7 +167,6 @@ public class Login extends JPanel {
     }
 
     protected void initLoginButton() {
-        Login login = this;
         buttonSignIn.setText(rm.getTextOfXMLTag("loginButton"));
         buttonSignIn.addMouseListener(new MouseAdapter() {
             @Override
@@ -178,13 +177,14 @@ public class Login extends JPanel {
                         OperationMessage operationMessage = loginManager.signIn(userNameBasedOnEMail, String.valueOf(passwordField.getPassword()));
                         if (operationMessage.isSuccess()) {
                             switchToLogOutMode();
-                            UserService us = new UserService();
-                            try {
-                                us.createUserAsCopyOfDefaultUser(userNameBasedOnEMail, userNameBasedOnEMail);
+                            UserService us = new UserService(userNameBasedOnEMail);
+                            /*try {
+
+                                us.createFirstUserForSHAPESMode(userNameBasedOnEMail);
                             } catch (Exception ex) {
                                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
                                 Sentry.capture(ex.getMessage());
-                            }
+                            }*/
                             parent.loginAsRegisteredUser(userNameBasedOnEMail);
                         } else {
                             passwordField.setText("");

@@ -48,10 +48,15 @@ public class TalkAndPlayProfileConfiguration {
         return shapesMode;
     }
     
-    public XMLConfigurationHandler getConfigurationHandler()
-    {
+    public XMLConfigurationHandler getConfigurationHandler() {
         if (xmlConfigurationHandler == null)
-            xmlConfigurationHandler = new XMLConfigurationHandler(dataDir);
+            xmlConfigurationHandler = new XMLConfigurationHandler(dataDir, "");
+        return xmlConfigurationHandler;
+    }
+
+    public XMLConfigurationHandler getConfigurationHandler(String userOfAccount) {
+        if (xmlConfigurationHandler == null)
+            xmlConfigurationHandler = new XMLConfigurationHandler(dataDir, userOfAccount);
         return xmlConfigurationHandler;
     }
 

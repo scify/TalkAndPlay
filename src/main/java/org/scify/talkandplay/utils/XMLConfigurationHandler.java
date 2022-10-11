@@ -74,8 +74,11 @@ public class XMLConfigurationHandler {
     static Logger logger = Logger.getLogger(XMLConfigurationHandler.class);
     protected ResourceManager rm;
 
-    public XMLConfigurationHandler(File dataDir) {
+    protected String userOfAccount;
+
+    public XMLConfigurationHandler(File dataDir, String userOfAccount) {
         this.dataDir = dataDir;
+        this.userOfAccount = userOfAccount;
         downloadedStimulusReactionGames = new ArrayList<>();
         downloadedSequenceGames = new ArrayList<>();
         downloadedSimilarityGames = new ArrayList<>();
@@ -193,11 +196,6 @@ public class XMLConfigurationHandler {
 
         Element userProfilesEl = root.getChild("userProfiles");
         List<Element> usersEl = userProfilesEl.getChildren();
-        if (usersEl.isEmpty() && fromInit) {
-            Element newUser = createNewProfile(defaultUser.getName(), "");
-            userProfilesEl.addContent(newUser);
-            needsSave = true;
-        }
         imageAndSoundResources = new ArrayList();
         for (int i = 0; i < usersEl.size(); i++) {
 
@@ -209,7 +207,30 @@ public class XMLConfigurationHandler {
             }
         }
 
+
+        if (getUsersOfAccount().isEmpty() && fromInit) {
+            Element newUser = createNewProfile(defaultUser.getName(), userOfAccount);
+            userProfilesEl.addContent(newUser);
+            needsSave = true;
+            usersEl = userProfilesEl.getChildren();
+            User user = extractUserFromXml(usersEl.get(usersEl.size()-1), false);
+            users.add(user);
+            List<MultimediaResource> userImageAndSoundResources = userFiles.get(user.getName());
+            for (MultimediaResource resource: userImageAndSoundResources) {
+                imageAndSoundResources.add(resource);
+            }
+        }
+
         return needsSave;
+    }
+
+    protected List<User> getUsersOfAccount() {
+        List<User> ret = new ArrayList<>();
+        for (User user: users) {
+            if (user.getUserOfAccount().equals(userOfAccount))
+                ret.add(user);
+        }
+        return ret;
     }
 
     protected User extractUserFromXml(Element userEl, boolean isDefault) {
